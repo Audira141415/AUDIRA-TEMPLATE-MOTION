@@ -30,7 +30,12 @@ if (-not (Test-Path "node_modules")) {
 
 # 3. Determine start mode (production start if .next exists, else dev)
 $useProd = Test-Path ".next"
-$startCmd = if ($useProd) { "pnpm start" } else { "pnpm dev" }
+$nextBin = Join-Path $ProjectDir "node_modules\.bin\next.cmd"
+$startCmd = if (Test-Path $nextBin) {
+    if ($useProd) { "`"$nextBin`" start -p $Port" } else { "`"$nextBin`" dev -p $Port" }
+} else {
+    if ($useProd) { "pnpm start" } else { "pnpm dev" }
+}
 $modeLabel = if ($useProd) { "Production Server" } else { "Development Server" }
 
 Write-Host "[*] Menjalankan $modeLabel pada port $Port..." -ForegroundColor Cyan
@@ -38,7 +43,7 @@ Write-Host "[*] Menjalankan $modeLabel pada port $Port..." -ForegroundColor Cyan
 # 4. Start process in a new window with title
 $startProcessInfo = New-Object System.Diagnostics.ProcessStartInfo
 $startProcessInfo.FileName = "cmd.exe"
-$startProcessInfo.Arguments = "/c title AUDIRA-MOTION-PORT-$Port && $startCmd"
+$startProcessInfo.Arguments = "/k title AUDIRA-MOTION-PORT-$Port && $startCmd"
 $startProcessInfo.WorkingDirectory = $ProjectDir
 $startProcessInfo.UseShellExecute = $true
 
