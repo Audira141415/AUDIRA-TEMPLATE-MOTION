@@ -2,162 +2,710 @@
 
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Check, Copy } from 'lucide-react';
+import {
+  ArrowRight,
+  Bot,
+  Box,
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  Copy,
+  Cpu,
+  Dices,
+  Download,
+  FileCode,
+  Flame,
+  Globe,
+  Layers,
+  MessageSquare,
+  Search,
+  Sparkles,
+  Terminal,
+  User,
+  Wand2,
+  Zap,
+} from 'lucide-react';
 import { MoodType, MotionFormat } from '@/types/motion';
 import { MOODS, moodById } from '@/lib/moods';
-import { buildCopyPrompt, IDEA_STARTERS } from '@/lib/script-prompts';
+import {
+  buildAdvancedPrompt,
+  DurationTarget,
+  IDEA_STARTERS,
+  SlangStyle,
+  TargetAIModel,
+} from '@/lib/script-prompts';
+import { generateStoryboardFromIdea } from '@/lib/script-generator';
 import { FORMAT_CARDS } from '@/components/landing/reels';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { PasteChecker } from '@/components/site/PasteChecker';
 
-const CopyButton: React.FC<{ text: string; label: string }> = ({ text, label }) => {
-  const [done, setDone] = useState(false);
-  const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setDone(true);
-    setTimeout(() => setDone(false), 1600);
-  };
-  return (
-    <button
-      type="button"
-      onClick={copy}
-      className="inline-flex items-center gap-2 rounded-xl bg-[#ea580c] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#f06a1f]"
-    >
-      {done ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-      {done ? 'Tersalin' : label}
-    </button>
-  );
+// Category filtering groups
+type CategoryFilter = 'all' | 'gaming' | 'banter' | 'explainer' | 'story';
+
+const CATEGORIES: Array<{ id: CategoryFilter; label: string; count: number; icon: React.ReactNode }> = [
+  { id: 'all', label: 'Semua Format', count: 21, icon: <Layers className="w-3.5 h-3.5" /> },
+  { id: 'gaming', label: 'Gaming & Roblox', count: 4, icon: <Box className="w-3.5 h-3.5" /> },
+  { id: 'banter', label: 'Banter & Debat', count: 4, icon: <Flame className="w-3.5 h-3.5" /> },
+  { id: 'explainer', label: 'Edukasi & Data', count: 5, icon: <FileCode className="w-3.5 h-3.5" /> },
+  { id: 'story', label: 'Story & Drama', count: 8, icon: <MessageSquare className="w-3.5 h-3.5" /> },
+];
+
+const FORMAT_CATEGORY_MAP: Record<MotionFormat, CategoryFilter> = {
+  roblox_story: 'gaming',
+  pixel_rpg: 'gaming',
+  terminal_hack: 'gaming',
+  comic_strip: 'gaming',
+
+  character_banter: 'banter',
+  versus: 'banter',
+  chat_story: 'banter',
+  podcast_clip: 'banter',
+
+  clean_explainer: 'explainer',
+  whiteboard: 'explainer',
+  top_list: 'explainer',
+  quiz: 'explainer',
+  sticky_notes: 'explainer',
+
+  breaking_news: 'story',
+  docu_story: 'story',
+  social_post: 'story',
+  kinetic_type: 'story',
+  receipt: 'story',
+  retro_vhs: 'story',
+  map_journey: 'story',
+  recipe_steps: 'story',
 };
 
+const VIRAL_INDONESIAN_IDEAS = [
+  'Noob minta 1000 Robux ke Pro demi beli gamepass di Obby tersulit',
+  'Drama kepleset lava di stage 99 Tower of Hell padahal dikit lagi tamat',
+  'Tipe-tipe player Roblox saat ketemu hacker terbang di server publik',
+  'Ash mau resign jadi streamer padahal followers-nya baru 40 orang',
+  'Dita mau liburan ke Bali cuma modal 1,5 juta dan nol rencana cadangan',
+  'Bima beli kopi 45 ribu tiap hari tapi curhat tabungan rumah nggak pernah cukup',
+  'Fenomena "aku OTW" padahal baru selesai mandi dan masih pakai handuk',
+  'Boss fight RPG: Meeting dadakan jam 4.58 sore saat tas sudah rapi di punggung',
+  'Kenapa cicilan paylater nol persen tetap bikin boncos di akhir bulan',
+  'Debat panas: Tim bubur diaduk vs tim bubur rapi di depan gerobak mang ujang',
+  'Teman lama tiba-tiba chat "P" jam 2 pagi, ternyata mau pinjam seratus ribu',
+  'Hari pertama diet ketat tapi jam 11 malam tercium aroma martabak manis tetangga',
+  'Mencari file skripsi yang benar-benar final di antara 14 varian revisi dosen',
+  'Struk belanja bulanan yang membengkak gara-gara barang diskon yang sebenarnya nggak butuh',
+  '3 angka algoritma reels yang menentukan video lo tembus 1 juta views',
+  'Kisah penemu WiFi asal Kediri yang patennya dipakai seluruh smartphone dunia',
+  '6 cara tetap fokus kerja dari rumah tanpa tergoda rebahan di kasur',
+  'Interview kerja yang berakhir canggung gara-gara salah sebut nama pimpinan perusahaan',
+  'Road trip Jakarta ke Jogja lewat jalur darat modal nekat dan playlist galau',
+  'Resep mie goreng telur 10 menit penyelamat anak kos di tanggal tua',
+];
+
 export default function PromptsPage() {
+  // Format, category & search
   const [format, setFormat] = useState<MotionFormat>('character_banter');
+  const [category, setCategory] = useState<CategoryFilter>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Prompt configuration parameters
+  const [model, setModel] = useState<TargetAIModel>('claude');
+  const [duration, setDuration] = useState<DurationTarget>('30s');
+  const [slang, setSlang] = useState<SlangStyle>('jakarta_gaul');
   const [mood, setMood] = useState<MoodType>('hyped');
   const [idea, setIdea] = useState(IDEA_STARTERS.character_banter[0]);
 
-  const prompt = useMemo(() => buildCopyPrompt(format, moodById(mood), idea), [format, mood, idea]);
+  // Optional custom characters
+  const [showCustomChars, setShowCustomChars] = useState(false);
+  const [charA, setCharA] = useState('');
+  const [charB, setCharB] = useState('');
+
+  // Instant testing / paste checker sync
+  const [pastedJson, setPastedJson] = useState('');
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<string | null>(null);
+
+  // Filtered formats
+  const filteredCards = useMemo(() => {
+    return FORMAT_CARDS.filter((card) => {
+      const cardCat = FORMAT_CATEGORY_MAP[card.reel.format];
+      const matchCat = category === 'all' || cardCat === category;
+      const query = searchQuery.toLowerCase().trim();
+      const matchQuery =
+        !query ||
+        card.name.toLowerCase().includes(query) ||
+        card.pitch.toLowerCase().includes(query) ||
+        card.reel.format.toLowerCase().includes(query) ||
+        card.topics.some((t) => t.toLowerCase().includes(query));
+      return matchCat && matchQuery;
+    });
+  }, [category, searchQuery]);
+
+  // Selected format card metadata
+  const currentCard = useMemo(() => {
+    return FORMAT_CARDS.find((c) => c.reel.format === format) || FORMAT_CARDS[0];
+  }, [format]);
+
+  // Build the specialized AI prompt
+  const prompt = useMemo(() => {
+    return buildAdvancedPrompt({
+      format,
+      mood: moodById(mood),
+      idea,
+      targetModel: model,
+      duration,
+      slang,
+      charAName: charA.trim() || undefined,
+      charBName: charB.trim() || undefined,
+    });
+  }, [format, mood, idea, model, duration, slang, charA, charB]);
+
   const command = 'node engine/build-reel.mjs reel.json --out renders/reel-saya';
 
   const pickFormat = (f: MotionFormat) => {
     setFormat(f);
-    setIdea(IDEA_STARTERS[f][0]);
+    const starters = IDEA_STARTERS[f] || IDEA_STARTERS.character_banter;
+    setIdea(starters[0] || 'Ide konten viral');
+    if (f === 'roblox_story') {
+      setCharA('Noob Blox');
+      setCharB('Pro Bacon');
+    } else if (f === 'pixel_rpg') {
+      setCharA('Player 1');
+      setCharB('Reality Boss');
+    } else {
+      setCharA('');
+      setCharB('');
+    }
+  };
+
+  const handleRandomizeViralIdea = () => {
+    const randomPick = VIRAL_INDONESIAN_IDEAS[Math.floor(Math.random() * VIRAL_INDONESIAN_IDEAS.length)];
+    setIdea(randomPick);
+  };
+
+  const handleCopyPrompt = async () => {
+    await navigator.clipboard.writeText(prompt);
+    setCopyStatus('Prompt Tersalin!');
+    setTimeout(() => setCopyStatus(null), 1800);
+  };
+
+  const handleDownloadPrompt = () => {
+    const blob = new Blob([prompt], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `audira-prompt-${format}-${model}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleInstantSynthesisTest = async () => {
+    setIsSynthesizing(true);
+    try {
+      const generatedSb = await generateStoryboardFromIdea(idea, format, mood);
+      const formattedJson = JSON.stringify(generatedSb, null, 2);
+      setPastedJson(formattedJson);
+
+      // Smooth scroll to PasteChecker section
+      setTimeout(() => {
+        const el = document.getElementById('paste-checker-section');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } finally {
+      setIsSynthesizing(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#141413] font-display text-[#f4f3f0]">
+    <div className="min-h-screen bg-[#141413] font-display text-[#f4f3f0] antialiased">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1200px] px-4 py-14 md:px-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#8a8780]">Prompt siap salin · {FORMAT_CARDS.length} format · 7 mood</p>
-        <h1 className="mt-4 max-w-[820px] text-[44px] font-extrabold leading-[0.98] tracking-[-0.05em] sm:text-[68px]">
-          Pilih format. Salin prompt. <span className="text-[#ea580c]">Render.</span>
+      <main className="mx-auto max-w-[1240px] px-4 py-12 md:px-8">
+        {/* Top Header & Breadcrumbs */}
+        <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.12em] text-[#8a8780]">
+          <span className="px-2.5 py-0.5 rounded-full bg-orange-600/20 text-[#ea580c] border border-orange-500/30 font-bold">
+            21 Format Aktif
+          </span>
+          <span>•</span>
+          <span>Multi-LLM Prompt Engineering Hub</span>
+          <span>•</span>
+          <span className="text-emerald-400">Instant Storyboard Synthesizer</span>
+        </div>
+
+        <h1 className="mt-4 max-w-[900px] text-[38px] font-extrabold leading-[1.02] tracking-[-0.04em] sm:text-[62px]">
+          Pilih Format. Sesuaikan AI. <span className="text-[#ea580c]">Render Naskah Viral.</span>
         </h1>
-        <p className="mt-5 max-w-[620px] text-[17px] leading-relaxed text-[#b9b6ae]">
-          Setiap prompt di sini menghasilkan storyboard JSON yang langsung bisa dirender mesin AUDIRA MOTION. Tempel ke Claude
-          atau asisten AI lain, simpan jawabannya sebagai <code className="font-mono text-[#f4f3f0]">reel.json</code>, lalu render.
+        <p className="mt-4 max-w-[700px] text-[16px] leading-relaxed text-[#b9b6ae]">
+          Rancang prompt presisi tinggi yang dioptimalkan untuk Claude 3.5, ChatGPT 4o, Gemini 1.5, dan DeepSeek R1.
+          Hasilkan storyboard JSON berstruktur ketat yang langsung dipahami mesin AUDIRA MOTION.
         </p>
 
-        {/* 1. Format */}
-        <section className="mt-12">
-          <h2 className="text-[22px] font-extrabold tracking-[-0.02em]">1. Pilih format</h2>
-          <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-7">
-            {FORMAT_CARDS.map((c) => {
+        {/* 1. Category Filter Tabs & Search Bar */}
+        <section className="mt-12 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+                1
+              </span>
+              <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                Pilih Format Video ({FORMAT_CARDS.length} Pilihan)
+              </h2>
+            </div>
+
+            {/* Instant Search Bar */}
+            <div className="relative min-w-[240px] sm:w-[280px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8780]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari format (Roblox, Kuis...)"
+                className="w-full pl-9 pr-3 py-2 rounded-xl border border-[#2c2b28] bg-[#141413] text-xs text-[#f4f3f0] placeholder:text-[#6f6c66] focus:border-[#ea580c] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Category Pills */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {CATEGORIES.map((cat) => {
+              const active = category === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setCategory(cat.id)}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+                    active
+                      ? 'bg-[#ea580c] text-white shadow-md'
+                      : 'bg-[#141413] border border-[#2c2b28] text-[#b9b6ae] hover:border-[#4a4843] hover:text-white'
+                  }`}
+                >
+                  {cat.icon}
+                  <span>{cat.label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${active ? 'bg-black/30' : 'bg-[#2c2b28]'}`}>
+                    {cat.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Format Cards Grid */}
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7">
+            {filteredCards.map((c) => {
               const active = c.reel.format === format;
+              const isRoblox = c.reel.format === 'roblox_story';
               return (
                 <button
                   key={c.reel.format}
                   type="button"
                   onClick={() => pickFormat(c.reel.format)}
                   aria-pressed={active}
-                  className={`overflow-hidden rounded-2xl border-2 text-left transition-colors ${
-                    active ? 'border-[#ea580c]' : 'border-[#2c2b28] hover:border-[#4a4843]'
+                  className={`group relative overflow-hidden rounded-2xl border-2 text-left transition-all ${
+                    active
+                      ? 'border-[#ea580c] ring-2 ring-[#ea580c]/50 scale-[1.02] shadow-lg shadow-orange-950/30'
+                      : 'border-[#2c2b28] hover:border-[#4a4843] hover:scale-[1.01]'
                   }`}
                 >
-                  <img src={`/reels/${c.reel.file}.jpg`} alt="" className="aspect-[9/12] w-full object-cover object-top" />
-                  <span className={`block px-3 py-2 text-[13px] font-bold ${active ? 'bg-[#ea580c] text-white' : 'bg-[#1c1c1a]'}`}>
-                    {c.name}
-                  </span>
+                  {isRoblox && (
+                    <span className="absolute top-1.5 left-1.5 z-10 px-2 py-0.5 rounded-md bg-yellow-400 text-black text-[9px] font-black tracking-wider uppercase shadow">
+                      BARU
+                    </span>
+                  )}
+                  <div className="relative aspect-[9/12] w-full overflow-hidden bg-[#0f0f0e]">
+                    <img
+                      src={`/reels/${c.reel.file}.jpg`}
+                      alt={c.name}
+                      className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      onError={(e) => {
+                        // Fallback image if file not yet on disk
+                        (e.target as HTMLImageElement).src = '/reels/banter.jpg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+                  </div>
+                  <div className={`p-2.5 transition-colors ${active ? 'bg-[#ea580c] text-white' : 'bg-[#141413]'}`}>
+                    <span className="block text-[12px] font-extrabold truncate">{c.name}</span>
+                    <span className={`block text-[10px] truncate ${active ? 'text-white/80' : 'text-[#8a8780]'}`}>
+                      {c.pitch}
+                    </span>
+                  </div>
                 </button>
               );
             })}
           </div>
-        </section>
 
-        {/* 2. Mood + idea */}
-        <section className="mt-10 grid gap-8 md:grid-cols-2">
-          <div>
-            <h2 className="text-[22px] font-extrabold tracking-[-0.02em]">2. Pilih mood</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {MOODS.map((m) => (
-                <button
-                  key={m.id}
-                  type="button"
-                  aria-pressed={mood === m.id}
-                  onClick={() => setMood(m.id)}
-                  className={`rounded-lg border px-3.5 py-2 text-sm font-semibold transition-colors ${
-                    mood === m.id ? 'border-[#ea580c] bg-[#ea580c] text-white' : 'border-[#2c2b28] bg-[#1c1c1a] text-[#d6d3cc] hover:border-[#4a4843]'
-                  }`}
-                >
-                  {m.label}
-                </button>
+          {filteredCards.length === 0 && (
+            <div className="mt-6 p-8 text-center border border-dashed border-[#2c2b28] rounded-2xl text-xs text-[#8a8780]">
+              Format tidak ditemukan dengan kata kunci &quot;{searchQuery}&quot;. Coba ganti kata pencarian atau pilih tab &quot;Semua Format&quot;.
+            </div>
+          )}
+
+          {/* Current Selection Summary */}
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#141413] p-4 border border-[#2c2b28]">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-mono uppercase text-[#ea580c] font-bold">Terpilih:</span>
+              <span className="text-sm font-extrabold text-white">{currentCard.name}</span>
+              <span className="hidden sm:inline text-xs text-[#8a8780]">— {currentCard.pitch}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-[#8a8780]">Topik populer:</span>
+              {currentCard.topics.map((t) => (
+                <span key={t} className="rounded-lg bg-[#1c1c1a] border border-[#2c2b28] px-2 py-0.5 text-[11px] text-[#d6d3cc]">
+                  {t}
+                </span>
               ))}
             </div>
-            <p className="mt-3 text-[14px] text-[#8a8780]">{moodById(mood).tagline}</p>
           </div>
-          <div>
-            <h2 className="text-[22px] font-extrabold tracking-[-0.02em]">3. Tulis idenya</h2>
-            <input
+        </section>
+
+        {/* 2. Interactive AI & Parameter Tuning Matrix */}
+        <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
+          <div className="flex items-center gap-2 pb-4 border-b border-[#2c2b28]">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+              2
+            </span>
+            <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+              Konfigurasi Model AI & Parameter Naskah
+            </h2>
+          </div>
+
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Target AI Model */}
+            <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-4">
+              <label className="flex items-center gap-2 text-xs font-mono uppercase text-[#ea580c] font-bold">
+                <Bot className="w-3.5 h-3.5" /> Target Mesin AI
+              </label>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {[
+                  { id: 'claude', name: 'Claude 3.5', badge: 'Anthropic XML' },
+                  { id: 'chatgpt', name: 'ChatGPT 4o', badge: 'OpenAI JSON' },
+                  { id: 'gemini', name: 'Gemini 1.5', badge: 'Google Direct' },
+                  { id: 'deepseek', name: 'DeepSeek R1', badge: 'No-Think Raw' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setModel(item.id as TargetAIModel)}
+                    className={`p-2.5 rounded-xl border text-left transition-all ${
+                      model === item.id
+                        ? 'border-[#ea580c] bg-[#ea580c]/15 text-white'
+                        : 'border-[#2c2b28] bg-[#1c1c1a] text-[#b9b6ae] hover:border-[#4a4843]'
+                    }`}
+                  >
+                    <span className="block text-xs font-bold text-white">{item.name}</span>
+                    <span className="block text-[10px] text-[#8a8780]">{item.badge}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Target Video Duration */}
+            <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-4">
+              <label className="flex items-center gap-2 text-xs font-mono uppercase text-[#ea580c] font-bold">
+                <Clock className="w-3.5 h-3.5" /> Target Durasi & Pacing
+              </label>
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {[
+                  { id: '15s', label: '15s', desc: 'Ultra Hook' },
+                  { id: '30s', label: '30s', desc: 'Standard Viral' },
+                  { id: '45s', label: '45s', desc: 'Deep Narrative' },
+                ].map((d) => (
+                  <button
+                    key={d.id}
+                    type="button"
+                    onClick={() => setDuration(d.id as DurationTarget)}
+                    className={`p-2.5 rounded-xl border text-center transition-all ${
+                      duration === d.id
+                        ? 'border-[#ea580c] bg-[#ea580c]/15 text-white'
+                        : 'border-[#2c2b28] bg-[#1c1c1a] text-[#b9b6ae] hover:border-[#4a4843]'
+                    }`}
+                  >
+                    <span className="block text-xs font-black">{d.label}</span>
+                    <span className="block text-[10px] text-[#8a8780] truncate">{d.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Slang & Language Tone */}
+            <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-4">
+              <label className="flex items-center gap-2 text-xs font-mono uppercase text-[#ea580c] font-bold">
+                <Globe className="w-3.5 h-3.5" /> Gaya Bahasa & Slang
+              </label>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {[
+                  { id: 'jakarta_gaul', label: 'Jakarta Gaul', desc: 'Lo/Gue Natural' },
+                  { id: 'profesional', label: 'Profesional', desc: 'Formal B2B / Edukasi' },
+                  { id: 'genz_slang', label: 'Gen-Z Internet', desc: 'Spill, Rizz, OOF' },
+                  { id: 'english_viral', label: 'English Viral', desc: 'TikTok / Global' },
+                ].map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setSlang(s.id as SlangStyle)}
+                    className={`p-2.5 rounded-xl border text-left transition-all ${
+                      slang === s.id
+                        ? 'border-[#ea580c] bg-[#ea580c]/15 text-white'
+                        : 'border-[#2c2b28] bg-[#1c1c1a] text-[#b9b6ae] hover:border-[#4a4843]'
+                    }`}
+                  >
+                    <span className="block text-xs font-bold text-white">{s.label}</span>
+                    <span className="block text-[10px] text-[#8a8780]">{s.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mood Selector (7 Archetypes) */}
+          <div className="mt-6 pt-5 border-t border-[#2c2b28]">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <label className="text-xs font-mono uppercase text-[#ea580c] font-bold">
+                Pilih Emosi / Mood Utama ({MOODS.length} Mood)
+              </label>
+              <span className="text-xs text-[#8a8780] italic">{moodById(mood).tagline}</span>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {MOODS.map((m) => {
+                const active = mood === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => setMood(m.id)}
+                    className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                      active
+                        ? 'border-[#ea580c] bg-[#ea580c] text-white shadow-md'
+                        : 'border-[#2c2b28] bg-[#141413] text-[#d6d3cc] hover:border-[#4a4843]'
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Collapsible Custom Character Names */}
+          <div className="mt-5">
+            <button
+              type="button"
+              onClick={() => setShowCustomChars((v) => !v)}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-[#8a8780] hover:text-[#d6d3cc] transition-colors"
+            >
+              {showCustomChars ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+              <span>Kustomisasi Nama Karakter (Opsional)</span>
+            </button>
+            {showCustomChars && (
+              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-2xl bg-[#141413] p-4 border border-[#2c2b28]">
+                <div>
+                  <label className="block text-xs text-[#8a8780] mb-1.5 flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5 text-orange-400" />
+                    Karakter A (Inisiator / Pembuka)
+                  </label>
+                  <input
+                    type="text"
+                    value={charA}
+                    onChange={(e) => setCharA(e.target.value)}
+                    placeholder={format === 'roblox_story' ? 'Noob Blox' : 'Ash'}
+                    className="w-full rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-3 py-2 text-xs text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[#8a8780] mb-1.5 flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5 text-cyan-400" />
+                    Karakter B (Counterpart / Penanggap)
+                  </label>
+                  <input
+                    type="text"
+                    value={charB}
+                    onChange={(e) => setCharB(e.target.value)}
+                    placeholder={format === 'roblox_story' ? 'Pro Bacon' : 'Nara'}
+                    className="w-full rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-3 py-2 text-xs text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* 3. Viral Idea Input & Indonesian Randomizer */}
+        <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+                3
+              </span>
+              <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                Tulis atau Acak Ide Naskah
+              </h2>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleRandomizeViralIdea}
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-brutal border-2 border-black transition-transform active:translate-y-0.5"
+            >
+              <Dices className="h-4 w-4" /> Acak Ide Viral 🇮🇩
+            </button>
+          </div>
+
+          <div className="mt-4">
+            <textarea
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
               maxLength={600}
-              aria-label="Ide reel"
-              className="mt-4 w-full rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-4 py-3 text-[15px] focus:border-[#ea580c] focus:outline-none"
+              rows={3}
+              placeholder="Tulis ide premis reels lo di sini... Contoh: Noob minta 1000 Robux ke Pro demi beli gamepass obby"
+              className="w-full rounded-2xl border-2 border-[#2c2b28] bg-[#0f0f0e] p-4 text-[14px] leading-relaxed text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none transition-colors"
             />
-            <div className="mt-3 flex flex-wrap gap-2">
-              {IDEA_STARTERS[format].map((s) => (
+            <div className="mt-2 flex items-center justify-between text-xs text-[#8a8780]">
+              <span>Karakter: {idea.length}/600</span>
+              <span className="text-orange-400/80">Tips: Buat premis dengan konflik tajam dan eskalasi lucu.</span>
+            </div>
+          </div>
+
+          {/* Quick starter chips for this format */}
+          <div className="mt-4">
+            <p className="text-xs font-mono uppercase text-[#8a8780] font-bold mb-2">
+              Ide Bawaan Format {currentCard.name}:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {(IDEA_STARTERS[format] || []).map((starter) => (
                 <button
-                  key={s}
+                  key={starter}
                   type="button"
-                  onClick={() => setIdea(s)}
-                  className="rounded-lg border border-[#2c2b28] px-3 py-1.5 text-left text-[13px] text-[#b9b6ae] hover:border-[#4a4843] hover:text-white"
+                  onClick={() => setIdea(starter)}
+                  className="rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2 text-left text-xs text-[#b9b6ae] hover:border-[#ea580c] hover:text-white transition-colors"
                 >
-                  {s}
+                  &ldquo;{starter}&rdquo;
                 </button>
               ))}
             </div>
           </div>
         </section>
 
-        {/* 3. Prompt */}
-        <section className="mt-10">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-[22px] font-extrabold tracking-[-0.02em]">4. Salin prompt ini</h2>
-            <CopyButton text={prompt} label="Salin prompt" />
+        {/* 4. Generated Prompt Console & Action Bar */}
+        <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+                4
+              </span>
+              <div>
+                <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                  Prompt Siap Salin untuk {model.toUpperCase()}
+                </h2>
+                <p className="text-xs text-[#8a8780]">
+                  Format terspesifikasi · Schema JSON terikat · Bebas basa-basi AI
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Action Bar */}
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={handleCopyPrompt}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#ea580c] px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#f06a1f] active:scale-95"
+              >
+                {copyStatus ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                {copyStatus ? copyStatus : 'Salin Prompt'}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleDownloadPrompt}
+                title="Unduh file teks prompt"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2.5 text-xs font-semibold text-[#d6d3cc] hover:border-[#4a4843] hover:text-white transition-colors"
+              >
+                <Download className="h-3.5 w-3.5" /> Unduh .txt
+              </button>
+
+              <Link
+                href={`/studio?format=${format}&mood=${mood}&idea=${encodeURIComponent(idea)}`}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-orange-500/40 bg-orange-950/20 px-3.5 py-2.5 text-xs font-bold text-orange-300 hover:bg-orange-900/40 hover:text-white transition-colors"
+              >
+                <Zap className="h-3.5 w-3.5" /> Buka di Studio
+              </Link>
+
+              <button
+                type="button"
+                onClick={handleInstantSynthesisTest}
+                disabled={isSynthesizing}
+                title="Jalankan generator storyboard simulasi langsung di browser"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md border-2 border-black transition-transform active:translate-y-0.5 disabled:opacity-50"
+              >
+                <Wand2 className="h-3.5 w-3.5" />
+                {isSynthesizing ? 'Menyusun...' : '🤖 Uji Naskah Instan'}
+              </button>
+            </div>
           </div>
-          <pre className="mt-4 max-h-[460px] overflow-auto whitespace-pre-wrap rounded-2xl border border-[#2c2b28] bg-[#0f0f0e] p-5 font-mono text-[13px] leading-relaxed text-[#d6d3cc]">
-            {prompt}
-          </pre>
+
+          <div className="relative mt-4">
+            <pre className="max-h-[440px] overflow-auto whitespace-pre-wrap rounded-2xl border-2 border-[#2c2b28] bg-[#0c0c0b] p-5 font-mono text-[12px] leading-relaxed text-[#d6d3cc] selection:bg-[#ea580c] selection:text-white">
+              {prompt}
+            </pre>
+          </div>
         </section>
 
-        {/* 5. Paste, check, render */}
-        <PasteChecker selectedFormat={format} />
+        {/* 5. Live Paste, Check & 9:16 Preview Engine */}
+        <PasteChecker
+          selectedFormat={format}
+          externalRaw={pastedJson}
+          onRawChange={setPastedJson}
+        />
 
-        <details className="mt-6 rounded-2xl border border-[#2c2b28] p-5 text-[15px] text-[#b9b6ae]">
-          <summary className="cursor-pointer font-semibold text-[#f4f3f0]">Render lewat terminal (opsional)</summary>
-          <p className="mt-3">
-            Simpan JSON jawaban AI sebagai <code className="font-mono text-[#f4f3f0]">reel.json</code> di folder proyek, lalu jalankan
-            perintah ini. Hasilnya ada di <code className="font-mono text-[#f4f3f0]">renders/reel-saya/reel.mp4</code>.
-          </p>
-          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <code className="flex-1 overflow-x-auto rounded-xl bg-[#0f0f0e] px-4 py-3 font-mono text-[13px]">{command}</code>
-            <CopyButton text={command} label="Salin perintah" />
+        {/* 6. CLI Terminal Instructions */}
+        <details className="mt-8 rounded-3xl border border-[#2c2b28] bg-[#141413] p-6 text-[14px] text-[#b9b6ae] transition-colors">
+          <summary className="cursor-pointer font-bold text-[#f4f3f0] flex items-center justify-between">
+            <span className="flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-orange-400" />
+              Render Batch Video via Terminal (Opsional / Headless Mode)
+            </span>
+            <span className="text-xs text-[#8a8780] font-normal">Klik untuk buka panduan CLI</span>
+          </summary>
+          <div className="mt-4 pt-4 border-t border-[#2c2b28] space-y-3">
+            <p>
+              Simpan naskah JSON dari AI sebagai file <code className="font-mono text-xs text-[#ea580c] bg-black/40 px-1.5 py-0.5 rounded">reel.json</code> di root proyek ini, lalu jalankan mesin render:
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <code className="flex-1 overflow-x-auto rounded-xl bg-[#0a0a09] px-4 py-3 font-mono text-xs text-emerald-400 border border-[#2c2b28]">
+                {command}
+              </code>
+              <button
+                type="button"
+                onClick={async () => {
+                  await navigator.clipboard.writeText(command);
+                  alert('Perintah terminal tersalin!');
+                }}
+                className="inline-flex items-center gap-2 rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-4 py-3 text-xs font-bold text-white hover:border-[#4a4843]"
+              >
+                <Copy className="h-3.5 w-3.5" /> Salin Perintah
+              </button>
+            </div>
+            <p className="text-xs text-[#8a8780]">
+              File MP4 final Full HD 1080x1920 akan otomatis dihasilkan di folder <code className="font-mono text-zinc-300">renders/reel-saya/reel.mp4</code> lengkap dengan timing audio TTS.
+            </p>
           </div>
         </details>
-        <p className="mt-6 text-[14px] text-[#8a8780]">
-          Lebih praktis? Di <Link href="/studio" className="text-white underline underline-offset-2">studio</Link>, naskah dibuat langsung dari
-          ide yang sama tanpa salin-tempel.
-        </p>
+
+        {/* Footer Navigation Link */}
+        <div className="mt-8 flex items-center justify-between rounded-2xl bg-[#1c1c1a] p-4 border border-[#2c2b28] text-xs text-[#8a8780]">
+          <span>Ingin edit naskah langsung tanpa salin-tempel?</span>
+          <Link
+            href="/studio"
+            className="inline-flex items-center gap-1 font-bold text-orange-400 hover:text-orange-300 transition-colors"
+          >
+            <span>Buka AUDIRA Studio Editor</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </main>
+
       <SiteFooter />
     </div>
   );

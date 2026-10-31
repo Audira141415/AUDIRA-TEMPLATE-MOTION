@@ -25,7 +25,31 @@ export default function StudioPage() {
     const params = new URLSearchParams(window.location.search);
     const idea = params.get('idea');
     const format = params.get('format') as MotionFormat | null;
+    const mood = params.get('mood') as MoodType | null;
+    const isImport = params.get('import') === 'latest';
+
+    if (isImport) {
+      try {
+        const stored = sessionStorage.getItem('audira_imported_storyboard');
+        if (stored) {
+          const parsed = JSON.parse(stored) as Storyboard;
+          if (parsed && Array.isArray(parsed.lines) && parsed.format) {
+            setStoryboard(parsed);
+            setSelectedFormat(parsed.format);
+            if (parsed.mood) setSelectedMood(parsed.mood);
+            if (parsed.concept) setIdeaInput(parsed.concept);
+            return;
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load imported storyboard:', err);
+      }
+    }
+
     if (idea) setIdeaInput(idea.slice(0, 600));
+    if (mood && ['hyped', 'warm', 'calm', 'motivational', 'frustrated', 'angry', 'rude'].includes(mood)) {
+      setSelectedMood(mood);
+    }
     if (format && format in DEMO_STORYBOARDS) {
       setSelectedFormat(format);
       setStoryboard(DEMO_STORYBOARDS[format]);

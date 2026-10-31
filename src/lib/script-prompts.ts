@@ -276,5 +276,157 @@ Balas HANYA dengan satu blok JSON valid (tanpa penjelasan) dengan bentuk persis 
   "lines": [
     { "id": "l1", "speaker": "<nama A atau B, sama persis>", "speakerRole": "<${roleA} untuk A, ${roleB} untuk B>", "text": "<maks 16 kata>", "emotion": "<neutral|hyped|angry|shocked|smug|thoughtful|sarcastic>", "startSec": 0, "durationSec": 0, "words": [] }
   ]
+}
+`;
+}
+
+export type TargetAIModel = 'claude' | 'chatgpt' | 'gemini' | 'deepseek';
+export type DurationTarget = '15s' | '30s' | '45s';
+export type SlangStyle = 'jakarta_gaul' | 'profesional' | 'genz_slang' | 'english_viral';
+
+export interface AdvancedPromptOptions {
+  format: MotionFormat;
+  mood: { id: string; label: string; direction: string };
+  idea: string;
+  targetModel: TargetAIModel;
+  duration: DurationTarget;
+  slang: SlangStyle;
+  charAName?: string;
+  charBName?: string;
+}
+
+export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
+  const [roleA, roleB] = FORMAT_BRIEF[opts.format].roles;
+  const theme = FORMAT_THEMES[opts.format];
+  const charA = opts.charAName?.trim() || (opts.format === 'roblox_story' ? 'Noob Blox' : opts.format === 'pixel_rpg' ? 'Player Hero' : 'Ash');
+  const charB = opts.charBName?.trim() || (opts.format === 'roblox_story' ? 'Pro Bacon' : opts.format === 'pixel_rpg' ? 'Reality Boss' : 'Nara');
+
+  const lineCountGuide = opts.duration === '15s' 
+    ? 'Tepat 4-5 baris dialog singkat, total durasi 14 detik.' 
+    : opts.duration === '45s' 
+    ? '10-14 baris dialog mendalam dengan 2 eskalasi dan twist.' 
+    : '7-9 baris dialog natural, total durasi 25-30 detik.';
+
+  let toneInstruction = '';
+  if (opts.slang === 'profesional') {
+    toneInstruction = 'Gunakan Bahasa Indonesia baku, santun, lugas, dan profesional (Anda/Saya atau penuturan formal, cocok untuk B2B/Edukasi).';
+  } else if (opts.slang === 'genz_slang') {
+    toneInstruction = 'Gunakan Bahasa Gen-Z kekinian campur slang internet (POV, skill issue, rizz, spill, no counter, OOF, gacor).';
+  } else if (opts.slang === 'english_viral') {
+    toneInstruction = 'Use English (conversational viral TikTok/Reels slang, witty, punchy, no filler words).';
+  } else {
+    toneInstruction = 'Gunakan Bahasa Indonesia gaul santai khas Jakarta/anak muda (lo/gue, ceplas-ceplos, natural).';
+  }
+
+  const cleanIdea = (opts.idea || 'Ide cerita viral').replace(/"/g, '\\"');
+  const schemaExample = `{
+  "id": "reel-${Date.now()}",
+  "title": "<judul maks 8 kata>",
+  "concept": "${cleanIdea}",
+  "format": "${opts.format}",
+  "mood": "${opts.mood.id}",
+  "fps": 30,
+  "durationSec": 0,
+  "locationName": "<latar tempat maks 4 kata>",
+  "characters": {
+    "characterA": { "name": "${charA}", "title": "<label profesi/karakter>", "avatar": "a" },
+    "characterB": { "name": "${charB}", "title": "<label profesi/karakter>", "avatar": "b" }
+  },
+  "visualTheme": ${JSON.stringify(theme)},
+  "commentMagnetHook": "<pertanyaan penutup memicu debat di komentar maks 12 kata>",
+  "lines": [
+    {
+      "id": "line-1",
+      "speaker": "${charA}",
+      "speakerRole": "${roleA}",
+      "text": "<kalimat hook pembuka maksimal 14 kata>",
+      "emotion": "hyped",
+      "startSec": 0,
+      "durationSec": 0,
+      "words": []
+    }
+  ]
 }`;
+
+  if (opts.targetModel === 'claude') {
+    return `<system_instructions>
+Kamu adalah Viral Reel Scriptwriter kelas dunia di studio AUDIRA MOTION.
+${SYSTEM}
+Aturan Gaya Bahasa: ${toneInstruction}
+Pedoman Panjang: ${lineCountGuide}
+</system_instructions>
+
+<format_specification>
+${FORMAT_BRIEF[opts.format].cast}
+Karakter A: ${charA}
+Karakter B: ${charB}
+Mood Utama: ${opts.mood.label} (${opts.mood.direction})
+</format_specification>
+
+<user_idea>
+${opts.idea.trim() || 'Buat reel viral tentang dilema hidup sehari-hari'}
+</user_idea>
+
+<output_constraint>
+Kembalikan HANYA satu blok kode JSON valid sesuai skema berikut. DILARANG menambahkan teks pembuka ("Tentu ini naskahnya..."), dilarang menambahkan teks penutup, dan jangan gunakan markdown di luar \`\`\`json.
+
+${schemaExample}
+</output_constraint>`;
+  }
+
+  if (opts.targetModel === 'chatgpt') {
+    return `[SYSTEM: JSON MODE ACTIVATED]
+You are a senior vertical video retention architect for AUDIRA MOTION reels.
+Language & Tone: ${toneInstruction}
+Length Target: ${lineCountGuide}
+
+[FORMAT RULES]
+${FORMAT_BRIEF[opts.format].cast}
+Character A: ${charA}
+Character B: ${charB}
+Mood: ${opts.mood.label} - ${opts.mood.direction}
+
+[REEL IDEA]
+${opts.idea.trim() || 'Buat reel viral tentang dilema hidup sehari-hari'}
+
+[OUTPUT FORMAT]
+Respond ONLY with a single JSON object. No explanation, no markdown text outside the JSON object:
+${schemaExample}`;
+  }
+
+  if (opts.targetModel === 'deepseek') {
+    return `[NO_THINK] Output ONLY raw valid JSON starting with { and ending with }. Do NOT generate <think> reasoning tags, do NOT add introductory pleasantries.
+
+Task: Generate a viral 9:16 vertical video script for AUDIRA MOTION.
+Format: ${FORMAT_BRIEF[opts.format].cast}
+Character A: ${charA}
+Character B: ${charB}
+Tone: ${toneInstruction}
+Length: ${lineCountGuide}
+Mood: ${opts.mood.label} (${opts.mood.direction})
+User Idea: ${opts.idea.trim() || 'Dilema hidup sehari-hari'}
+
+JSON Schema to follow:
+${schemaExample}`;
+  }
+
+  // Gemini / Default
+  return `[SYSTEM DIRECTIVE: AUDIRA MOTION PROMPT GENERATOR]
+${SYSTEM}
+
+Tones: ${toneInstruction}
+Duration: ${lineCountGuide}
+
+FORMAT:
+${FORMAT_BRIEF[opts.format].cast}
+Speaker A: ${charA}
+Speaker B: ${charB}
+Mood: ${opts.mood.label} (${opts.mood.direction})
+
+IDE:
+${opts.idea.trim() || 'Buat reel viral tentang dilema hidup sehari-hari'}
+
+OUTPUT:
+Balas HANYA dengan JSON valid (tanpa percakapan ramah-tamah):
+${schemaExample}`;
 }
