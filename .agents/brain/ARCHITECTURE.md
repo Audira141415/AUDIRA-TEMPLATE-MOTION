@@ -68,6 +68,7 @@ AUDIRA TEMPLATE MOTION dirancang dengan pendekatan modular berbasis Next.js 15, 
 | `character_banter` | 1080x1920 | 30 | 25 - 60s | 2D vector avatars, speaker zoom, reactive mouth sync, 27 background scenes |
 | `whiteboard` | 1080x1920 | 30 | 30 - 90s | Animated SVG paths (`stroke-dashoffset`), dynamic marker cursor, paper texture |
 | `pixel_rpg` | 1080x1920 | 30 | 20 - 45s | 16-bit pixel art canvas, retro HP bar, bitmap dialogue box, 8-bit SFX |
+| `roblox_story` | 1080x1920 | 30 | 15 - 45s | 3D blocky Noob/Pro avatars, Obby parkour, bubble chat, R$ balance, OOF! SFX |
 | `breaking_news` | 1080x1920 | 30 | 20 - 45s | Breaking news red banner, scrolling bottom ticker, floating chat bubbles |
 | `clean_explainer`| 1080x1920 | 30 | 30 - 60s | Sleek kinetic cards, progress steps, animated data charts, source citations |
 | `docu_story` | 1080x1920 | 30 | 30 - 75s | Ken Burns zoom/pan on photos, analog film grain, audio wavebars |
