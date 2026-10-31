@@ -21,13 +21,13 @@ export const WordByWordCaptions: React.FC<Props> = ({
   const words = currentLine.words && currentLine.words.length > 0
     ? currentLine.words
     : currentLine.text.split(' ').map((w, i, arr) => {
-        const step = currentLine.durationSec / Math.max(arr.length, 1);
-        return {
-          word: w,
-          start: currentLine.startSec + i * step,
-          end: currentLine.startSec + (i + 1) * step,
-        };
-      });
+      const step = currentLine.durationSec / Math.max(arr.length, 1);
+      return {
+        word: w,
+        start: currentLine.startSec + i * step,
+        end: currentLine.startSec + (i + 1) * step,
+      };
+    });
 
   return (
     <div className={`absolute ${topPercent} inset-x-4 z-40 flex flex-col items-center justify-center pointer-events-none select-none`}>
@@ -45,13 +45,12 @@ export const WordByWordCaptions: React.FC<Props> = ({
           return (
             <span
               key={`${currentLine.id}-${idx}`}
-              className={`inline-block transition-transform duration-75 font-black text-xl sm:text-2xl tracking-tight ${
-                isActive
+              className={`inline-block transition-transform duration-75 font-black text-xl sm:text-2xl tracking-tight ${isActive
                   ? 'scale-115 z-10'
                   : isPassed
-                  ? 'opacity-90 scale-100'
-                  : 'opacity-35 scale-95'
-              }`}
+                    ? 'opacity-90 scale-100'
+                    : 'opacity-35 scale-95'
+                }`}
               style={{
                 color: isActive ? highlightColor : '#ffffff',
                 textShadow: isActive

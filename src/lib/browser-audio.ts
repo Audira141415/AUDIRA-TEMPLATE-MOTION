@@ -1,13 +1,55 @@
 'use client';
 
+let userHasInteracted = false;
+
+if (typeof window !== 'undefined') {
+  const markGesture = () => {
+    userHasInteracted = true;
+    window.removeEventListener('click', markGesture, true);
+    window.removeEventListener('keydown', markGesture, true);
+    window.removeEventListener('pointerdown', markGesture, true);
+    window.removeEventListener('touchstart', markGesture, true);
+  };
+  window.addEventListener('click', markGesture, { capture: true, passive: true });
+  window.addEventListener('keydown', markGesture, { capture: true, passive: true });
+  window.addEventListener('pointerdown', markGesture, { capture: true, passive: true });
+  window.addEventListener('touchstart', markGesture, { capture: true, passive: true });
+}
+
+export function isAudioInteractionAllowed(): boolean {
+  return userHasInteracted;
+}
+
 class BrowserAudioEngine {
   private ctx: AudioContext | null = null;
   private isMuted: boolean = false;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
   private lastSpokenLineId: string | null = null;
 
+  public async unlock(): Promise<boolean> {
+    if (typeof window === 'undefined') return false;
+    userHasInteracted = true;
+
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (AudioCtx) {
+        this.ctx = new AudioCtx();
+      }
+    }
+
+    if (this.ctx && this.ctx.state === 'suspended') {
+      try {
+        await this.ctx.resume();
+      } catch {
+        // ignore
+      }
+    }
+
+    return this.ctx ? this.ctx.state === 'running' : false;
+  }
+
   private getContext(): AudioContext | null {
-    if (typeof window === 'undefined') return null;
+    if (typeof window === 'undefined' || !userHasInteracted) return null;
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioCtx) {
@@ -17,7 +59,7 @@ class BrowserAudioEngine {
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume().catch(() => {});
     }
-    return this.ctx;
+    return this.ctx && this.ctx.state === 'running' ? this.ctx : null;
   }
 
   public setMuted(muted: boolean) {
@@ -156,7 +198,7 @@ class BrowserAudioEngine {
       const osc2 = ctx.createOscillator();
       const gain = ctx.createGain();
 
-      // Pitch drop from 330Hz down to 110Hz
+      // Pitch drop from 340Hz down to 120Hz
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(340, t);
       osc.frequency.exponentialRampToValueAtTime(120, t + 0.18);
@@ -213,7 +255,7 @@ class BrowserAudioEngine {
 
   // Speech Synthesis Voiceover
   public speakLine(lineId: string, text: string, role: 'human' | 'ai' | string) {
-    if (this.isMuted || typeof window === 'undefined' || !window.speechSynthesis) return;
+    if (this.isMuted || !userHasInteracted || typeof window === 'undefined' || !window.speechSynthesis) return;
     if (this.lastSpokenLineId === lineId) return;
 
     this.lastSpokenLineId = lineId;
@@ -225,13 +267,13 @@ class BrowserAudioEngine {
       
       // Adjust pitch and rate for character role
       if (role === 'ai') {
-        utterance.pitch = 1.35; // slightly robotic/higher pitch
+        utterance.pitch = 1.35;
         utterance.rate = 1.15;
       } else if (role === 'boss') {
-        utterance.pitch = 0.7; // deep boss voice
+        utterance.pitch = 0.7;
         utterance.rate = 0.95;
       } else {
-        utterance.pitch = 1.0; // natural human voice
+        utterance.pitch = 1.0;
         utterance.rate = 1.05;
       }
 

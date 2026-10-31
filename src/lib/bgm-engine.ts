@@ -1,5 +1,7 @@
 'use client';
 
+import { isAudioInteractionAllowed } from './browser-audio';
+
 export type BGMTrack = 'lofi_chill' | 'news_pulse' | 'retro_arcade' | 'cyber_synth' | 'none';
 
 class BGMEngine {
@@ -12,8 +14,37 @@ class BGMEngine {
   private isMuted: boolean = false;
   private volume: number = 0.4;
 
+  public async unlock(): Promise<boolean> {
+    if (typeof window === 'undefined') return false;
+
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (AudioCtx) {
+        this.ctx = new AudioCtx();
+        this.masterGain = this.ctx.createGain();
+        this.duckGain = this.ctx.createGain();
+
+        this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+        this.duckGain.gain.setValueAtTime(1.0, this.ctx.currentTime);
+
+        this.duckGain.connect(this.masterGain);
+        this.masterGain.connect(this.ctx.destination);
+      }
+    }
+
+    if (this.ctx && this.ctx.state === 'suspended') {
+      try {
+        await this.ctx.resume();
+      } catch {
+        // ignore
+      }
+    }
+
+    return this.ctx ? this.ctx.state === 'running' : false;
+  }
+
   private getContext(): AudioContext | null {
-    if (typeof window === 'undefined') return null;
+    if (typeof window === 'undefined' || !isAudioInteractionAllowed()) return null;
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioCtx) {
@@ -31,7 +62,7 @@ class BGMEngine {
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume().catch(() => {});
     }
-    return this.ctx;
+    return this.ctx && this.ctx.state === 'running' ? this.ctx : null;
   }
 
   public setTrack(track: BGMTrack) {
@@ -79,7 +110,7 @@ class BGMEngine {
   }
 
   public start() {
-    if (this.currentTrack === 'none') return;
+    if (this.currentTrack === 'none' || !isAudioInteractionAllowed()) return;
     const ctx = this.getContext();
     if (!ctx || !this.duckGain) return;
 
@@ -159,4 +190,3 @@ class BGMEngine {
 }
 
 export const bgmEngine = new BGMEngine();
-

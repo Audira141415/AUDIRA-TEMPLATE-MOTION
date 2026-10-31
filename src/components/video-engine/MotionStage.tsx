@@ -14,9 +14,9 @@ import { EnginePreview } from './EnginePreview';
 import { 
   Play, Pause, RotateCcw, ShieldCheck, Download, Volume2, VolumeX, 
   Gauge, Music, Smartphone, MonitorPlay, Sparkles, Heart, MessageCircle, 
-  Bookmark, Share2, Maximize2 
+  Bookmark, Share2 
 } from 'lucide-react';
-import { browserAudio } from '@/lib/browser-audio';
+import { browserAudio, isAudioInteractionAllowed } from '@/lib/browser-audio';
 import { bgmEngine, BGMTrack } from '@/lib/bgm-engine';
 
 interface Props {
@@ -45,6 +45,7 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [bgmTrack, setBgmTrack] = useState<BGMTrack>('lofi_chill');
   const [showBgmMenu, setShowBgmMenu] = useState(false);
+  const [audioUnlocked, setAudioUnlocked] = useState(false);
 
   const duration = storyboard.durationSec || 13;
   const animRef = useRef<number | null>(null);
@@ -64,12 +65,22 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
     bgmEngine.setTrack(defaultTrack);
   }, [storyboard.format]);
 
+  const handleUnlockAudio = async () => {
+    const ok = await browserAudio.unlock();
+    await bgmEngine.unlock();
+    setAudioUnlocked(ok || isAudioInteractionAllowed());
+    if (!isMuted && isPlaying && (ok || isAudioInteractionAllowed())) {
+      bgmEngine.start();
+    }
+  };
+
   // Keyboard Shortcuts (Space, R, M, S)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement).tagName)) {
         return;
       }
+      handleUnlockAudio();
       if (e.code === 'Space') {
         e.preventDefault();
         setIsPlaying((p) => !p);
@@ -95,7 +106,8 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const toggleMute = () => {
+  const toggleMute = async () => {
+    await handleUnlockAudio();
     setIsMuted((prev) => {
       const next = !prev;
       browserAudio.setMuted(next);
@@ -104,7 +116,8 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
     });
   };
 
-  const handleSelectBgm = (t: BGMTrack) => {
+  const handleSelectBgm = async (t: BGMTrack) => {
+    await handleUnlockAudio();
     setBgmTrack(t);
     bgmEngine.setTrack(t);
     setShowBgmMenu(false);
@@ -115,9 +128,9 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
     (l) => currentTime >= l.startSec && currentTime < l.startSec + l.durationSec
   ) || null;
 
-  // Audio Voiceover & SFX & BGM Auto-Ducking
+  // Audio Voiceover & SFX & BGM Auto-Ducking (Only triggers when user has allowed audio)
   useEffect(() => {
-    if (!isPlaying || isMuted) {
+    if (!isPlaying || isMuted || !isAudioInteractionAllowed()) {
       browserAudio.stopSpeech();
       bgmEngine.stop();
       return;
@@ -229,7 +242,10 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
           <div className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800">
             <button
               type="button"
-              onClick={() => setEngineMode('interactive')}
+              onClick={() => {
+                handleUnlockAudio();
+                setEngineMode('interactive');
+              }}
               className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 ${
                 engineMode === 'interactive' && hasNativeTemplate
                   ? 'bg-orange-600 text-white shadow-sm'
@@ -242,7 +258,10 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
             </button>
             <button
               type="button"
-              onClick={() => setEngineMode('gsap')}
+              onClick={() => {
+                handleUnlockAudio();
+                setEngineMode('gsap');
+              }}
               className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 ${
                 engineMode === 'gsap' || !hasNativeTemplate
                   ? 'bg-orange-600 text-white shadow-sm'
@@ -304,7 +323,8 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
 
       {/* 9:16 VERTICAL VIDEO PLAYER CONTAINER */}
       <div 
-        className={`relative w-full aspect-[9/16] bg-black overflow-hidden transition-all duration-300 ${
+        onClick={handleUnlockAudio}
+        className={`relative w-full aspect-[9/16] bg-black overflow-hidden transition-all duration-300 cursor-pointer ${
           frameMode === 'phone'
             ? 'rounded-[44px] border-[10px] border-[#202022] ring-1 ring-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
             : 'rounded-3xl border-4 border-zinc-800 shadow-2xl'
@@ -398,7 +418,10 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
         {/* Quick Audio Mute Toggle on Video Canvas */}
         <div className="absolute top-4 right-4 z-40">
           <button
-            onClick={toggleMute}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMute();
+            }}
             className={`p-2 rounded-full backdrop-blur-md border text-xs font-bold transition-all shadow-md ${
               !isMuted 
                 ? 'bg-orange-600 text-white border-orange-500' 
@@ -409,6 +432,14 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
             {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 animate-pulse" />}
           </button>
         </div>
+
+        {/* Prompt to Tap to Unmute on First Load */}
+        {!audioUnlocked && !isMuted && (
+          <div className="absolute bottom-5 left-4 z-40 bg-black/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-orange-500/60 shadow-lg text-white flex items-center gap-1.5 animate-pulse transition-transform active:scale-95">
+            <Volume2 className="w-3.5 h-3.5 text-orange-400" />
+            <span className="text-[10px] font-bold text-orange-300">Klik video untuk audio</span>
+          </div>
+        )}
 
         {/* Phone Bottom Home Indicator */}
         {frameMode === 'phone' && (
@@ -430,6 +461,7 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
             step={0.05}
             value={currentTime}
             onChange={(e) => {
+              handleUnlockAudio();
               setCurrentTime(parseFloat(e.target.value));
               if (isPlaying) setIsPlaying(false);
               browserAudio.stopSpeech();
@@ -446,7 +478,10 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
           <div className="flex items-center gap-1.5">
             {/* Play/Pause */}
             <button
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={() => {
+                handleUnlockAudio();
+                setIsPlaying(!isPlaying);
+              }}
               className="p-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-black shadow-brutal-sm transition-transform active:translate-y-0.5"
               title="Play/Pause (Space)"
             >
@@ -456,6 +491,7 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
             {/* Replay */}
             <button
               onClick={() => {
+                handleUnlockAudio();
                 setCurrentTime(0);
                 lastLineIdRef.current = null;
                 browserAudio.stopSpeech();
@@ -484,7 +520,10 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
             <div className="relative">
               <button
                 type="button"
-                onClick={() => setShowBgmMenu(!showBgmMenu)}
+                onClick={() => {
+                  handleUnlockAudio();
+                  setShowBgmMenu(!showBgmMenu);
+                }}
                 className="px-2 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 text-[11px] font-bold flex items-center gap-1 transition-colors"
                 title="Pilih Musik Latar (BGM)"
               >
