@@ -1,0 +1,235 @@
+{
+  "id": "demo-receipt",
+  "title": "Belanja Bulanan yang Bocor",
+  "concept": "Rincian belanja yang tanpa sadar membengkak",
+  "format": "receipt",
+  "mood": "frustrated",
+  "durationSec": 16.4,
+  "fps": 30,
+  "locationName": "Minimarket 24 Jam",
+  "characters": {
+    "characterA": {
+      "name": "Narator",
+      "title": "Kasir",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Narator",
+      "title": "Kasir",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "receipt-1",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Niatnya cuma beli sabun, Rp 25.000.",
+      "startSec": 0.08,
+      "durationSec": 2.52,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Niatnya",
+          "start": 0.08,
+          "end": 0.58
+        },
+        {
+          "word": "cuma",
+          "start": 0.61,
+          "end": 0.95
+        },
+        {
+          "word": "beli",
+          "start": 0.98,
+          "end": 1.32
+        },
+        {
+          "word": "sabun,",
+          "start": 1.35,
+          "end": 1.75
+        },
+        {
+          "word": "Rp",
+          "start": 1.78,
+          "end": 2.01
+        },
+        {
+          "word": "25.000.",
+          "start": 2.04,
+          "end": 2.44
+        }
+      ]
+    },
+    {
+      "id": "receipt-2",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Lalu camilan yang lagi promo, 45 ribu.",
+      "startSec": 2.6,
+      "durationSec": 2.84,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Lalu",
+          "start": 2.6,
+          "end": 2.94
+        },
+        {
+          "word": "camilan",
+          "start": 2.98,
+          "end": 3.48
+        },
+        {
+          "word": "yang",
+          "start": 3.51,
+          "end": 3.85
+        },
+        {
+          "word": "lagi",
+          "start": 3.88,
+          "end": 4.22
+        },
+        {
+          "word": "promo,",
+          "start": 4.25,
+          "end": 4.64
+        },
+        {
+          "word": "45",
+          "start": 4.67,
+          "end": 4.9
+        },
+        {
+          "word": "ribu.",
+          "start": 4.93,
+          "end": 5.27
+        }
+      ]
+    },
+    {
+      "id": "receipt-3",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Minuman dingin karena haus, 18 ribu.",
+      "startSec": 5.44,
+      "durationSec": 2.64,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Minuman",
+          "start": 5.44,
+          "end": 5.95
+        },
+        {
+          "word": "dingin",
+          "start": 5.98,
+          "end": 6.43
+        },
+        {
+          "word": "karena",
+          "start": 6.46,
+          "end": 6.91
+        },
+        {
+          "word": "haus,",
+          "start": 6.94,
+          "end": 7.28
+        },
+        {
+          "word": "18",
+          "start": 7.31,
+          "end": 7.54
+        },
+        {
+          "word": "ribu.",
+          "start": 7.57,
+          "end": 7.91
+        }
+      ]
+    },
+    {
+      "id": "receipt-4",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Kaos kaki yang kebetulan lucu, 35 ribu.",
+      "startSec": 8.08,
+      "durationSec": 2.89,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Kaos",
+          "start": 8.08,
+          "end": 8.42
+        },
+        {
+          "word": "kaki",
+          "start": 8.45,
+          "end": 8.79
+        },
+        {
+          "word": "yang",
+          "start": 8.82,
+          "end": 9.16
+        },
+        {
+          "word": "kebetulan",
+          "start": 9.19,
+          "end": 9.8
+        },
+        {
+          "word": "lucu,",
+          "start": 9.83,
+          "end": 10.17
+        },
+        {
+          "word": "35",
+          "start": 10.2,
+          "end": 10.43
+        },
+        {
+          "word": "ribu.",
+          "start": 10.46,
+          "end": 10.8
+        }
+      ]
+    },
+    {
+      "id": "receipt-5",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Dan sabunnya? Lupa diambil.",
+      "startSec": 10.97,
+      "durationSec": 1.95,
+      "emotion": "shocked",
+      "words": [
+        {
+          "word": "Dan",
+          "start": 10.97,
+          "end": 11.26
+        },
+        {
+          "word": "sabunnya?",
+          "start": 11.29,
+          "end": 11.85
+        },
+        {
+          "word": "Lupa",
+          "start": 11.88,
+          "end": 12.22
+        },
+        {
+          "word": "diambil.",
+          "start": 12.25,
+          "end": 12.75
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Barang apa yang selalu ikut masuk keranjang kamu?",
+  "visualTheme": {
+    "primaryColor": "#dc2626",
+    "accentColor": "#78716c",
+    "backgroundColor": "#1c1917"
+  }
+}

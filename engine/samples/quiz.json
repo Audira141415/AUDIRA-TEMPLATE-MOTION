@@ -1,0 +1,245 @@
+{
+  "id": "demo-quiz",
+  "title": "Kuis: Planet Paling Panas",
+  "concept": "Trivia tentang tata surya",
+  "format": "quiz",
+  "mood": "hyped",
+  "durationSec": 18.7,
+  "fps": 30,
+  "locationName": "Ruang Kuis",
+  "characters": {
+    "characterA": {
+      "name": "Host",
+      "title": "Pembawa Kuis",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Host",
+      "title": "Pembawa Kuis",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "quiz-1",
+      "speaker": "Host",
+      "speakerRole": "narrator",
+      "text": "Planet mana yang paling panas di tata surya?",
+      "startSec": 0.08,
+      "durationSec": 3.32,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Planet",
+          "start": 0.08,
+          "end": 0.53
+        },
+        {
+          "word": "mana",
+          "start": 0.56,
+          "end": 0.9
+        },
+        {
+          "word": "yang",
+          "start": 0.93,
+          "end": 1.27
+        },
+        {
+          "word": "paling",
+          "start": 1.3,
+          "end": 1.75
+        },
+        {
+          "word": "panas",
+          "start": 1.78,
+          "end": 2.17
+        },
+        {
+          "word": "di",
+          "start": 2.21,
+          "end": 2.44
+        },
+        {
+          "word": "tata",
+          "start": 2.46,
+          "end": 2.8
+        },
+        {
+          "word": "surya?",
+          "start": 2.83,
+          "end": 3.23
+        }
+      ]
+    },
+    {
+      "id": "quiz-2",
+      "speaker": "Host",
+      "speakerRole": "narrator",
+      "text": "Merkurius, paling dekat dengan Matahari.",
+      "startSec": 3.4,
+      "durationSec": 2.76,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Merkurius,",
+          "start": 3.4,
+          "end": 4.01
+        },
+        {
+          "word": "paling",
+          "start": 4.04,
+          "end": 4.5
+        },
+        {
+          "word": "dekat",
+          "start": 4.53,
+          "end": 4.92
+        },
+        {
+          "word": "dengan",
+          "start": 4.95,
+          "end": 5.4
+        },
+        {
+          "word": "Matahari.",
+          "start": 5.43,
+          "end": 5.99
+        }
+      ]
+    },
+    {
+      "id": "quiz-3",
+      "speaker": "Host",
+      "speakerRole": "narrator",
+      "text": "Venus, yang diselimuti awan tebal.",
+      "startSec": 6.16,
+      "durationSec": 2.43,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Venus,",
+          "start": 6.16,
+          "end": 6.55
+        },
+        {
+          "word": "yang",
+          "start": 6.58,
+          "end": 6.92
+        },
+        {
+          "word": "diselimuti",
+          "start": 6.95,
+          "end": 7.62
+        },
+        {
+          "word": "awan",
+          "start": 7.65,
+          "end": 7.99
+        },
+        {
+          "word": "tebal.",
+          "start": 8.02,
+          "end": 8.42
+        }
+      ]
+    },
+    {
+      "id": "quiz-4",
+      "speaker": "Host",
+      "speakerRole": "narrator",
+      "text": "Mars, si planet merah.",
+      "startSec": 8.59,
+      "durationSec": 1.68,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Mars,",
+          "start": 8.59,
+          "end": 8.93
+        },
+        {
+          "word": "si",
+          "start": 8.96,
+          "end": 9.19
+        },
+        {
+          "word": "planet",
+          "start": 9.22,
+          "end": 9.67
+        },
+        {
+          "word": "merah.",
+          "start": 9.7,
+          "end": 10.09
+        }
+      ]
+    },
+    {
+      "id": "quiz-5",
+      "speaker": "Host",
+      "speakerRole": "narrator",
+      "text": "Jawabannya Venus. Efek rumah kacanya bikin lebih panas dari Merkurius.",
+      "startSec": 10.27,
+      "durationSec": 4.89,
+      "emotion": "shocked",
+      "words": [
+        {
+          "word": "Jawabannya",
+          "start": 10.27,
+          "end": 10.94
+        },
+        {
+          "word": "Venus.",
+          "start": 10.96,
+          "end": 11.36
+        },
+        {
+          "word": "Efek",
+          "start": 11.39,
+          "end": 11.73
+        },
+        {
+          "word": "rumah",
+          "start": 11.76,
+          "end": 12.15
+        },
+        {
+          "word": "kacanya",
+          "start": 12.19,
+          "end": 12.69
+        },
+        {
+          "word": "bikin",
+          "start": 12.72,
+          "end": 13.12
+        },
+        {
+          "word": "lebih",
+          "start": 13.15,
+          "end": 13.54
+        },
+        {
+          "word": "panas",
+          "start": 13.57,
+          "end": 13.97
+        },
+        {
+          "word": "dari",
+          "start": 14,
+          "end": 14.34
+        },
+        {
+          "word": "Merkurius.",
+          "start": 14.37,
+          "end": 14.98
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Jawaban kamu tadi apa? Jujur di komentar!",
+  "visualTheme": {
+    "primaryColor": "#8b5cf6",
+    "accentColor": "#facc15",
+    "backgroundColor": "#140b2e"
+  }
+}

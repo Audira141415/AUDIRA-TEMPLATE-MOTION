@@ -1,0 +1,233 @@
+{
+  "id": "demo-news-1",
+  "title": "Laporan Khusus: Fenomena \"Aku OTW\" Padahal Baru Mandi",
+  "concept": "Penyelidikan mendalam kasus penipuan persahabatan paling umum di Indonesia",
+  "format": "breaking_news",
+  "mood": "rude",
+  "durationSec": 12,
+  "fps": 30,
+  "locationName": "News Studio Live",
+  "characters": {
+    "characterA": {
+      "name": "Anchor",
+      "title": "Senior News Investigator",
+      "avatar": "news-anchor"
+    },
+    "characterB": {
+      "name": "Victim",
+      "title": "Menunggu di Cafe",
+      "avatar": "chat-bubble"
+    }
+  },
+  "visualTheme": {
+    "primaryColor": "#ef4444",
+    "accentColor": "#fee2e2",
+    "backgroundColor": "#0f172a"
+  },
+  "commentMagnetHook": "Tag temen lo yang hobi bilang OTW padahal masih rebahan!",
+  "lines": [
+    {
+      "id": "news-1",
+      "speaker": "Anchor",
+      "speakerRole": "human",
+      "text": "BREAKING NEWS: Kasus penipuan \"Gue udah di jalan\" kembali memakan korban.",
+      "startSec": 0,
+      "durationSec": 3.6,
+      "emotion": "angry",
+      "words": [
+        {
+          "word": "BREAKING",
+          "start": 0,
+          "end": 0.33
+        },
+        {
+          "word": "NEWS:",
+          "start": 0.33,
+          "end": 0.65
+        },
+        {
+          "word": "Kasus",
+          "start": 0.65,
+          "end": 0.98
+        },
+        {
+          "word": "penipuan",
+          "start": 0.98,
+          "end": 1.31
+        },
+        {
+          "word": "\"Gue",
+          "start": 1.31,
+          "end": 1.64
+        },
+        {
+          "word": "udah",
+          "start": 1.64,
+          "end": 1.96
+        },
+        {
+          "word": "di",
+          "start": 1.96,
+          "end": 2.29
+        },
+        {
+          "word": "jalan\"",
+          "start": 2.29,
+          "end": 2.62
+        },
+        {
+          "word": "kembali",
+          "start": 2.62,
+          "end": 2.95
+        },
+        {
+          "word": "memakan",
+          "start": 2.95,
+          "end": 3.27
+        },
+        {
+          "word": "korban.",
+          "start": 3.27,
+          "end": 3.6
+        }
+      ]
+    },
+    {
+      "id": "news-2",
+      "speaker": "Anchor",
+      "speakerRole": "human",
+      "text": "Bukti forensik menunjukkan pesan WA dikirim saat pelaku masih mengenakan handuk.",
+      "startSec": 3.7,
+      "durationSec": 3.8,
+      "emotion": "shocked",
+      "words": [
+        {
+          "word": "Bukti",
+          "start": 3.7,
+          "end": 4.05
+        },
+        {
+          "word": "forensik",
+          "start": 4.05,
+          "end": 4.39
+        },
+        {
+          "word": "menunjukkan",
+          "start": 4.39,
+          "end": 4.74
+        },
+        {
+          "word": "pesan",
+          "start": 4.74,
+          "end": 5.08
+        },
+        {
+          "word": "WA",
+          "start": 5.08,
+          "end": 5.43
+        },
+        {
+          "word": "dikirim",
+          "start": 5.43,
+          "end": 5.77
+        },
+        {
+          "word": "saat",
+          "start": 5.77,
+          "end": 6.12
+        },
+        {
+          "word": "pelaku",
+          "start": 6.12,
+          "end": 6.46
+        },
+        {
+          "word": "masih",
+          "start": 6.46,
+          "end": 6.81
+        },
+        {
+          "word": "mengenakan",
+          "start": 6.81,
+          "end": 7.15
+        },
+        {
+          "word": "handuk.",
+          "start": 7.15,
+          "end": 7.5
+        }
+      ]
+    },
+    {
+      "id": "news-3",
+      "speaker": "Anchor",
+      "speakerRole": "human",
+      "text": "Korban dilaporkan telah menghabiskan dua gelas es teh manis sambil menatap kosong.",
+      "startSec": 7.6,
+      "durationSec": 4.4,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Korban",
+          "start": 7.6,
+          "end": 7.97
+        },
+        {
+          "word": "dilaporkan",
+          "start": 7.97,
+          "end": 8.33
+        },
+        {
+          "word": "telah",
+          "start": 8.33,
+          "end": 8.7
+        },
+        {
+          "word": "menghabiskan",
+          "start": 8.7,
+          "end": 9.07
+        },
+        {
+          "word": "dua",
+          "start": 9.07,
+          "end": 9.43
+        },
+        {
+          "word": "gelas",
+          "start": 9.43,
+          "end": 9.8
+        },
+        {
+          "word": "es",
+          "start": 9.8,
+          "end": 10.17
+        },
+        {
+          "word": "teh",
+          "start": 10.17,
+          "end": 10.53
+        },
+        {
+          "word": "manis",
+          "start": 10.53,
+          "end": 10.9
+        },
+        {
+          "word": "sambil",
+          "start": 10.9,
+          "end": 11.27
+        },
+        {
+          "word": "menatap",
+          "start": 11.27,
+          "end": 11.63
+        },
+        {
+          "word": "kosong.",
+          "start": 11.63,
+          "end": 12
+        }
+      ]
+    }
+  ]
+}

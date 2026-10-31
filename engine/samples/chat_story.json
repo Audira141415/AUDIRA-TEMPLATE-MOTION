@@ -1,0 +1,240 @@
+{
+  "id": "demo-chat_story",
+  "title": "Pinjam Seratus, Katanya",
+  "concept": "Teman pinjam uang dengan alasan yang makin aneh",
+  "format": "chat_story",
+  "mood": "frustrated",
+  "durationSec": 17.1,
+  "fps": 30,
+  "locationName": "WhatsApp",
+  "characters": {
+    "characterA": {
+      "name": "Kamu",
+      "title": "Pemilik Saldo",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Doni",
+      "title": "Teman SMA",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "chat_story-1",
+      "speaker": "Doni",
+      "speakerRole": "human",
+      "text": "Bro, pinjam seratus dulu dong. Darurat banget.",
+      "startSec": 0.08,
+      "durationSec": 3.23,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Bro,",
+          "start": 0.08,
+          "end": 0.37
+        },
+        {
+          "word": "pinjam",
+          "start": 0.4,
+          "end": 0.85
+        },
+        {
+          "word": "seratus",
+          "start": 0.88,
+          "end": 1.38
+        },
+        {
+          "word": "dulu",
+          "start": 1.41,
+          "end": 1.75
+        },
+        {
+          "word": "dong.",
+          "start": 1.78,
+          "end": 2.12
+        },
+        {
+          "word": "Darurat",
+          "start": 2.15,
+          "end": 2.66
+        },
+        {
+          "word": "banget.",
+          "start": 2.69,
+          "end": 3.14
+        }
+      ]
+    },
+    {
+      "id": "chat_story-2",
+      "speaker": "Kamu",
+      "speakerRole": "human",
+      "text": "Darurat apa? Minggu lalu juga darurat.",
+      "startSec": 3.31,
+      "durationSec": 2.75,
+      "emotion": "sarcastic",
+      "words": [
+        {
+          "word": "Darurat",
+          "start": 3.31,
+          "end": 3.81
+        },
+        {
+          "word": "apa?",
+          "start": 3.84,
+          "end": 4.13
+        },
+        {
+          "word": "Minggu",
+          "start": 4.16,
+          "end": 4.61
+        },
+        {
+          "word": "lalu",
+          "start": 4.64,
+          "end": 4.98
+        },
+        {
+          "word": "juga",
+          "start": 5.01,
+          "end": 5.35
+        },
+        {
+          "word": "darurat.",
+          "start": 5.38,
+          "end": 5.88
+        }
+      ]
+    },
+    {
+      "id": "chat_story-3",
+      "speaker": "Doni",
+      "speakerRole": "human",
+      "text": "Kucing gue ulang tahun. Harus ada kue.",
+      "startSec": 6.05,
+      "durationSec": 2.84,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Kucing",
+          "start": 6.05,
+          "end": 6.5
+        },
+        {
+          "word": "gue",
+          "start": 6.53,
+          "end": 6.82
+        },
+        {
+          "word": "ulang",
+          "start": 6.85,
+          "end": 7.24
+        },
+        {
+          "word": "tahun.",
+          "start": 7.27,
+          "end": 7.67
+        },
+        {
+          "word": "Harus",
+          "start": 7.7,
+          "end": 8.09
+        },
+        {
+          "word": "ada",
+          "start": 8.12,
+          "end": 8.41
+        },
+        {
+          "word": "kue.",
+          "start": 8.44,
+          "end": 8.72
+        }
+      ]
+    },
+    {
+      "id": "chat_story-4",
+      "speaker": "Kamu",
+      "speakerRole": "human",
+      "text": "Lo nggak punya kucing, Don.",
+      "startSec": 8.89,
+      "durationSec": 2.05,
+      "emotion": "shocked",
+      "words": [
+        {
+          "word": "Lo",
+          "start": 8.89,
+          "end": 9.12
+        },
+        {
+          "word": "nggak",
+          "start": 9.15,
+          "end": 9.54
+        },
+        {
+          "word": "punya",
+          "start": 9.58,
+          "end": 9.97
+        },
+        {
+          "word": "kucing,",
+          "start": 10,
+          "end": 10.45
+        },
+        {
+          "word": "Don.",
+          "start": 10.48,
+          "end": 10.77
+        }
+      ]
+    },
+    {
+      "id": "chat_story-5",
+      "speaker": "Doni",
+      "speakerRole": "human",
+      "text": "Makanya. Gue mau beli kucingnya juga.",
+      "startSec": 10.94,
+      "durationSec": 2.69,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Makanya.",
+          "start": 10.94,
+          "end": 11.44
+        },
+        {
+          "word": "Gue",
+          "start": 11.47,
+          "end": 11.76
+        },
+        {
+          "word": "mau",
+          "start": 11.79,
+          "end": 12.07
+        },
+        {
+          "word": "beli",
+          "start": 12.1,
+          "end": 12.44
+        },
+        {
+          "word": "kucingnya",
+          "start": 12.47,
+          "end": 13.09
+        },
+        {
+          "word": "juga.",
+          "start": 13.12,
+          "end": 13.46
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Kasih pinjam lagi atau blokir sekarang?",
+  "visualTheme": {
+    "primaryColor": "#25d366",
+    "accentColor": "#e9edef",
+    "backgroundColor": "#0b141a"
+  }
+}

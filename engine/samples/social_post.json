@@ -1,0 +1,244 @@
+{
+  "id": "demo-social_post",
+  "title": "Utas: Gaji Pertama Habis di Hari Ketiga",
+  "concept": "Cerita gaji pertama yang cepat habis",
+  "format": "social_post",
+  "mood": "frustrated",
+  "durationSec": 18.9,
+  "fps": 30,
+  "locationName": "Utas",
+  "characters": {
+    "characterA": {
+      "name": "Nadia",
+      "title": "Fresh Graduate",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Bayu",
+      "title": "Teman Kantor",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "social_post-1",
+      "speaker": "Nadia",
+      "speakerRole": "human",
+      "text": "Utas: gaji pertama gue habis di hari ketiga. Begini ceritanya.",
+      "startSec": 0.08,
+      "durationSec": 4.39,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Utas:",
+          "start": 0.08,
+          "end": 0.42
+        },
+        {
+          "word": "gaji",
+          "start": 0.45,
+          "end": 0.79
+        },
+        {
+          "word": "pertama",
+          "start": 0.82,
+          "end": 1.33
+        },
+        {
+          "word": "gue",
+          "start": 1.35,
+          "end": 1.64
+        },
+        {
+          "word": "habis",
+          "start": 1.67,
+          "end": 2.06
+        },
+        {
+          "word": "di",
+          "start": 2.09,
+          "end": 2.32
+        },
+        {
+          "word": "hari",
+          "start": 2.35,
+          "end": 2.69
+        },
+        {
+          "word": "ketiga.",
+          "start": 2.72,
+          "end": 3.17
+        },
+        {
+          "word": "Begini",
+          "start": 3.2,
+          "end": 3.65
+        },
+        {
+          "word": "ceritanya.",
+          "start": 3.68,
+          "end": 4.3
+        }
+      ]
+    },
+    {
+      "id": "social_post-2",
+      "speaker": "Nadia",
+      "speakerRole": "human",
+      "text": "Hari pertama traktir keluarga. Wajar, kan?",
+      "startSec": 4.47,
+      "durationSec": 2.91,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Hari",
+          "start": 4.47,
+          "end": 4.81
+        },
+        {
+          "word": "pertama",
+          "start": 4.84,
+          "end": 5.34
+        },
+        {
+          "word": "traktir",
+          "start": 5.38,
+          "end": 5.88
+        },
+        {
+          "word": "keluarga.",
+          "start": 5.91,
+          "end": 6.47
+        },
+        {
+          "word": "Wajar,",
+          "start": 6.5,
+          "end": 6.89
+        },
+        {
+          "word": "kan?",
+          "start": 6.92,
+          "end": 7.21
+        }
+      ]
+    },
+    {
+      "id": "social_post-3",
+      "speaker": "Nadia",
+      "speakerRole": "human",
+      "text": "Hari kedua beli sepatu karena katanya investasi penampilan.",
+      "startSec": 7.38,
+      "durationSec": 4.15,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Hari",
+          "start": 7.38,
+          "end": 7.72
+        },
+        {
+          "word": "kedua",
+          "start": 7.75,
+          "end": 8.14
+        },
+        {
+          "word": "beli",
+          "start": 8.18,
+          "end": 8.52
+        },
+        {
+          "word": "sepatu",
+          "start": 8.54,
+          "end": 8.99
+        },
+        {
+          "word": "karena",
+          "start": 9.03,
+          "end": 9.47
+        },
+        {
+          "word": "katanya",
+          "start": 9.51,
+          "end": 10.01
+        },
+        {
+          "word": "investasi",
+          "start": 10.04,
+          "end": 10.66
+        },
+        {
+          "word": "penampilan.",
+          "start": 10.69,
+          "end": 11.36
+        }
+      ]
+    },
+    {
+      "id": "social_post-4",
+      "speaker": "Bayu",
+      "speakerRole": "human",
+      "text": "Hari ketiga lo pinjam uang ke gue buat makan siang.",
+      "startSec": 11.53,
+      "durationSec": 3.89,
+      "emotion": "sarcastic",
+      "words": [
+        {
+          "word": "Hari",
+          "start": 11.53,
+          "end": 11.87
+        },
+        {
+          "word": "ketiga",
+          "start": 11.89,
+          "end": 12.34
+        },
+        {
+          "word": "lo",
+          "start": 12.38,
+          "end": 12.61
+        },
+        {
+          "word": "pinjam",
+          "start": 12.63,
+          "end": 13.08
+        },
+        {
+          "word": "uang",
+          "start": 13.12,
+          "end": 13.46
+        },
+        {
+          "word": "ke",
+          "start": 13.48,
+          "end": 13.71
+        },
+        {
+          "word": "gue",
+          "start": 13.74,
+          "end": 14.03
+        },
+        {
+          "word": "buat",
+          "start": 14.06,
+          "end": 14.4
+        },
+        {
+          "word": "makan",
+          "start": 14.43,
+          "end": 14.82
+        },
+        {
+          "word": "siang.",
+          "start": 14.85,
+          "end": 15.25
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Gaji pertama kamu habis buat apa?",
+  "visualTheme": {
+    "primaryColor": "#0ea5e9",
+    "accentColor": "#8b5cf6",
+    "backgroundColor": "#f5f5f4"
+  }
+}

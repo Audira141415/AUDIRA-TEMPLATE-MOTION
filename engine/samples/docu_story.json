@@ -1,0 +1,309 @@
+{
+  "id": "demo-docu-1",
+  "title": "Kisah Penemu WiFi Asal Indonesia yang Terlupakan",
+  "concept": "Dokumenter mini dengan foto arsip sejarah dan twist ending mengharukan",
+  "format": "docu_story",
+  "mood": "calm",
+  "durationSec": 13,
+  "fps": 30,
+  "locationName": "Archive Archive Vault",
+  "characters": {
+    "characterA": {
+      "name": "Historian",
+      "title": "Documentary Narrator",
+      "avatar": "docu-voice"
+    },
+    "characterB": {
+      "name": "Archive",
+      "title": "Photo Memory",
+      "avatar": "photo-frame"
+    }
+  },
+  "visualTheme": {
+    "primaryColor": "#d97706",
+    "accentColor": "#fef3c7",
+    "backgroundColor": "#111110"
+  },
+  "commentMagnetHook": "Apakah lo baru tahu fakta ini hari ini?",
+  "lines": [
+    {
+      "id": "doc-1",
+      "speaker": "Historian",
+      "speakerRole": "narrator",
+      "text": "Tahun 1993, sebuah paten transmisi sinyal cepat didaftarkan di Tokyo.",
+      "startSec": 0,
+      "durationSec": 3.6,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Tahun",
+          "start": 0,
+          "end": 0.36
+        },
+        {
+          "word": "1993,",
+          "start": 0.36,
+          "end": 0.72
+        },
+        {
+          "word": "sebuah",
+          "start": 0.72,
+          "end": 1.08
+        },
+        {
+          "word": "paten",
+          "start": 1.08,
+          "end": 1.44
+        },
+        {
+          "word": "transmisi",
+          "start": 1.44,
+          "end": 1.8
+        },
+        {
+          "word": "sinyal",
+          "start": 1.8,
+          "end": 2.16
+        },
+        {
+          "word": "cepat",
+          "start": 2.16,
+          "end": 2.52
+        },
+        {
+          "word": "didaftarkan",
+          "start": 2.52,
+          "end": 2.88
+        },
+        {
+          "word": "di",
+          "start": 2.88,
+          "end": 3.24
+        },
+        {
+          "word": "Tokyo.",
+          "start": 3.24,
+          "end": 3.6
+        }
+      ]
+    },
+    {
+      "id": "doc-2",
+      "speaker": "Historian",
+      "speakerRole": "narrator",
+      "text": "Paten ini menjadi fondasi transmisi 4G dan WiFi yang kamu pakai detik ini.",
+      "startSec": 3.7,
+      "durationSec": 3.8,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Paten",
+          "start": 3.7,
+          "end": 3.99
+        },
+        {
+          "word": "ini",
+          "start": 3.99,
+          "end": 4.28
+        },
+        {
+          "word": "menjadi",
+          "start": 4.28,
+          "end": 4.58
+        },
+        {
+          "word": "fondasi",
+          "start": 4.58,
+          "end": 4.87
+        },
+        {
+          "word": "transmisi",
+          "start": 4.87,
+          "end": 5.16
+        },
+        {
+          "word": "4G",
+          "start": 5.16,
+          "end": 5.45
+        },
+        {
+          "word": "dan",
+          "start": 5.45,
+          "end": 5.75
+        },
+        {
+          "word": "WiFi",
+          "start": 5.75,
+          "end": 6.04
+        },
+        {
+          "word": "yang",
+          "start": 6.04,
+          "end": 6.33
+        },
+        {
+          "word": "kamu",
+          "start": 6.33,
+          "end": 6.62
+        },
+        {
+          "word": "pakai",
+          "start": 6.62,
+          "end": 6.92
+        },
+        {
+          "word": "detik",
+          "start": 6.92,
+          "end": 7.21
+        },
+        {
+          "word": "ini.",
+          "start": 7.21,
+          "end": 7.5
+        }
+      ]
+    },
+    {
+      "id": "doc-3",
+      "speaker": "Historian",
+      "speakerRole": "narrator",
+      "text": "Ditemukan oleh Prof. Khoirul Anwar, pria asal Kediri yang dulunya anak petani sederhana.",
+      "startSec": 7.6,
+      "durationSec": 4.2,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Ditemukan",
+          "start": 7.6,
+          "end": 7.92
+        },
+        {
+          "word": "oleh",
+          "start": 7.92,
+          "end": 8.25
+        },
+        {
+          "word": "Prof.",
+          "start": 8.25,
+          "end": 8.57
+        },
+        {
+          "word": "Khoirul",
+          "start": 8.57,
+          "end": 8.89
+        },
+        {
+          "word": "Anwar,",
+          "start": 8.89,
+          "end": 9.22
+        },
+        {
+          "word": "pria",
+          "start": 9.22,
+          "end": 9.54
+        },
+        {
+          "word": "asal",
+          "start": 9.54,
+          "end": 9.86
+        },
+        {
+          "word": "Kediri",
+          "start": 9.86,
+          "end": 10.18
+        },
+        {
+          "word": "yang",
+          "start": 10.18,
+          "end": 10.51
+        },
+        {
+          "word": "dulunya",
+          "start": 10.51,
+          "end": 10.83
+        },
+        {
+          "word": "anak",
+          "start": 10.83,
+          "end": 11.15
+        },
+        {
+          "word": "petani",
+          "start": 11.15,
+          "end": 11.48
+        },
+        {
+          "word": "sederhana.",
+          "start": 11.48,
+          "end": 11.8
+        }
+      ]
+    },
+    {
+      "id": "doc-4",
+      "speaker": "Historian",
+      "speakerRole": "narrator",
+      "text": "Inovasi terbesar dunia sering lahir dari tempat yang tak pernah diduga.",
+      "startSec": 11.9,
+      "durationSec": 1.1,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Inovasi",
+          "start": 11.9,
+          "end": 12
+        },
+        {
+          "word": "terbesar",
+          "start": 12,
+          "end": 12.1
+        },
+        {
+          "word": "dunia",
+          "start": 12.1,
+          "end": 12.2
+        },
+        {
+          "word": "sering",
+          "start": 12.2,
+          "end": 12.3
+        },
+        {
+          "word": "lahir",
+          "start": 12.3,
+          "end": 12.4
+        },
+        {
+          "word": "dari",
+          "start": 12.4,
+          "end": 12.5
+        },
+        {
+          "word": "tempat",
+          "start": 12.5,
+          "end": 12.6
+        },
+        {
+          "word": "yang",
+          "start": 12.6,
+          "end": 12.7
+        },
+        {
+          "word": "tak",
+          "start": 12.7,
+          "end": 12.8
+        },
+        {
+          "word": "pernah",
+          "start": 12.8,
+          "end": 12.9
+        },
+        {
+          "word": "diduga.",
+          "start": 12.9,
+          "end": 13
+        }
+      ]
+    }
+  ]
+}

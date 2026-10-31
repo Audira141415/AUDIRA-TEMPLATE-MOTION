@@ -1,0 +1,274 @@
+{
+  "id": "demo-whiteboard-1",
+  "title": "Kenapa Otak Kita Suka Menunda Pekerjaan",
+  "concept": "Eksplanasi ilmiah kenapa kita suka procrastinate dengan visual papan tulis spidol",
+  "format": "whiteboard",
+  "mood": "warm",
+  "durationSec": 12,
+  "fps": 30,
+  "locationName": "Clean Studio Board",
+  "characters": {
+    "characterA": {
+      "name": "Narrator",
+      "title": "Cognitive Science Voice",
+      "avatar": "narrator"
+    },
+    "characterB": {
+      "name": "Mind",
+      "title": "Limbic System",
+      "avatar": "brain-sketch"
+    }
+  },
+  "visualTheme": {
+    "primaryColor": "#0284c7",
+    "accentColor": "#38bdf8",
+    "backgroundColor": "#fbfbfb"
+  },
+  "commentMagnetHook": "Berapa tab browser yang kebuka di laptop lo sekarang?",
+  "lines": [
+    {
+      "id": "wb-1",
+      "speaker": "Narrator",
+      "speakerRole": "narrator",
+      "text": "Otak manusia punya dua bos: Prefrontal Cortex dan Sistem Limbik.",
+      "startSec": 0,
+      "durationSec": 3.5,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Otak",
+          "start": 0,
+          "end": 0.35
+        },
+        {
+          "word": "manusia",
+          "start": 0.35,
+          "end": 0.7
+        },
+        {
+          "word": "punya",
+          "start": 0.7,
+          "end": 1.05
+        },
+        {
+          "word": "dua",
+          "start": 1.05,
+          "end": 1.4
+        },
+        {
+          "word": "bos:",
+          "start": 1.4,
+          "end": 1.75
+        },
+        {
+          "word": "Prefrontal",
+          "start": 1.75,
+          "end": 2.1
+        },
+        {
+          "word": "Cortex",
+          "start": 2.1,
+          "end": 2.45
+        },
+        {
+          "word": "dan",
+          "start": 2.45,
+          "end": 2.8
+        },
+        {
+          "word": "Sistem",
+          "start": 2.8,
+          "end": 3.15
+        },
+        {
+          "word": "Limbik.",
+          "start": 3.15,
+          "end": 3.5
+        }
+      ]
+    },
+    {
+      "id": "wb-2",
+      "speaker": "Narrator",
+      "speakerRole": "narrator",
+      "text": "Prefrontal ingin kamu bikin masa depan sukses dengan kerja keras.",
+      "startSec": 3.6,
+      "durationSec": 3.2,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Prefrontal",
+          "start": 3.6,
+          "end": 3.92
+        },
+        {
+          "word": "ingin",
+          "start": 3.92,
+          "end": 4.24
+        },
+        {
+          "word": "kamu",
+          "start": 4.24,
+          "end": 4.56
+        },
+        {
+          "word": "bikin",
+          "start": 4.56,
+          "end": 4.88
+        },
+        {
+          "word": "masa",
+          "start": 4.88,
+          "end": 5.2
+        },
+        {
+          "word": "depan",
+          "start": 5.2,
+          "end": 5.52
+        },
+        {
+          "word": "sukses",
+          "start": 5.52,
+          "end": 5.84
+        },
+        {
+          "word": "dengan",
+          "start": 5.84,
+          "end": 6.16
+        },
+        {
+          "word": "kerja",
+          "start": 6.16,
+          "end": 6.48
+        },
+        {
+          "word": "keras.",
+          "start": 6.48,
+          "end": 6.8
+        }
+      ]
+    },
+    {
+      "id": "wb-3",
+      "speaker": "Narrator",
+      "speakerRole": "narrator",
+      "text": "Tapi Sistem Limbik cuma teriak satu hal: rebahan dan scroll video lucu.",
+      "startSec": 6.9,
+      "durationSec": 3.8,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Tapi",
+          "start": 6.9,
+          "end": 7.22
+        },
+        {
+          "word": "Sistem",
+          "start": 7.22,
+          "end": 7.53
+        },
+        {
+          "word": "Limbik",
+          "start": 7.53,
+          "end": 7.85
+        },
+        {
+          "word": "cuma",
+          "start": 7.85,
+          "end": 8.17
+        },
+        {
+          "word": "teriak",
+          "start": 8.17,
+          "end": 8.48
+        },
+        {
+          "word": "satu",
+          "start": 8.48,
+          "end": 8.8
+        },
+        {
+          "word": "hal:",
+          "start": 8.8,
+          "end": 9.12
+        },
+        {
+          "word": "rebahan",
+          "start": 9.12,
+          "end": 9.43
+        },
+        {
+          "word": "dan",
+          "start": 9.43,
+          "end": 9.75
+        },
+        {
+          "word": "scroll",
+          "start": 9.75,
+          "end": 10.07
+        },
+        {
+          "word": "video",
+          "start": 10.07,
+          "end": 10.38
+        },
+        {
+          "word": "lucu.",
+          "start": 10.38,
+          "end": 10.7
+        }
+      ]
+    },
+    {
+      "id": "wb-4",
+      "speaker": "Narrator",
+      "speakerRole": "narrator",
+      "text": "Tebak siapa yang selalu menang jam 2 pagi?",
+      "startSec": 10.8,
+      "durationSec": 1.2,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Tebak",
+          "start": 10.8,
+          "end": 10.95
+        },
+        {
+          "word": "siapa",
+          "start": 10.95,
+          "end": 11.1
+        },
+        {
+          "word": "yang",
+          "start": 11.1,
+          "end": 11.25
+        },
+        {
+          "word": "selalu",
+          "start": 11.25,
+          "end": 11.4
+        },
+        {
+          "word": "menang",
+          "start": 11.4,
+          "end": 11.55
+        },
+        {
+          "word": "jam",
+          "start": 11.55,
+          "end": 11.7
+        },
+        {
+          "word": "2",
+          "start": 11.7,
+          "end": 11.85
+        },
+        {
+          "word": "pagi?",
+          "start": 11.85,
+          "end": 12
+        }
+      ]
+    }
+  ]
+}

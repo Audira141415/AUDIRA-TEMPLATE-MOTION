@@ -1,0 +1,189 @@
+{
+  "id": "demo-comic_strip",
+  "title": "Hari Pertama Diet",
+  "concept": "Niat diet yang runtuh dalam satu hari",
+  "format": "comic_strip",
+  "mood": "hyped",
+  "durationSec": 14,
+  "fps": 30,
+  "locationName": "Dapur Kos",
+  "characters": {
+    "characterA": {
+      "name": "Bima",
+      "title": "Pejuang Diet",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Martabak",
+      "title": "Godaan",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "comic_strip-1",
+      "speaker": "Bima",
+      "speakerRole": "human",
+      "text": "Mulai hari ini gue diet. Serius.",
+      "startSec": 0.08,
+      "durationSec": 2.42,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Mulai",
+          "start": 0.08,
+          "end": 0.48
+        },
+        {
+          "word": "hari",
+          "start": 0.51,
+          "end": 0.84
+        },
+        {
+          "word": "ini",
+          "start": 0.88,
+          "end": 1.16
+        },
+        {
+          "word": "gue",
+          "start": 1.19,
+          "end": 1.48
+        },
+        {
+          "word": "diet.",
+          "start": 1.5,
+          "end": 1.84
+        },
+        {
+          "word": "Serius.",
+          "start": 1.88,
+          "end": 2.33
+        }
+      ]
+    },
+    {
+      "id": "comic_strip-2",
+      "speaker": "Martabak",
+      "speakerRole": "human",
+      "text": "Martabak keju setengah porsi lagi promo.",
+      "startSec": 2.5,
+      "durationSec": 2.91,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Martabak",
+          "start": 2.5,
+          "end": 3.06
+        },
+        {
+          "word": "keju",
+          "start": 3.08,
+          "end": 3.42
+        },
+        {
+          "word": "setengah",
+          "start": 3.46,
+          "end": 4.02
+        },
+        {
+          "word": "porsi",
+          "start": 4.04,
+          "end": 4.44
+        },
+        {
+          "word": "lagi",
+          "start": 4.47,
+          "end": 4.81
+        },
+        {
+          "word": "promo.",
+          "start": 4.84,
+          "end": 5.23
+        }
+      ]
+    },
+    {
+      "id": "comic_strip-3",
+      "speaker": "Bima",
+      "speakerRole": "human",
+      "text": "Setengah porsi itu hampir sama dengan nol.",
+      "startSec": 5.4,
+      "durationSec": 3.12,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Setengah",
+          "start": 5.4,
+          "end": 5.96
+        },
+        {
+          "word": "porsi",
+          "start": 5.99,
+          "end": 6.39
+        },
+        {
+          "word": "itu",
+          "start": 6.42,
+          "end": 6.7
+        },
+        {
+          "word": "hampir",
+          "start": 6.73,
+          "end": 7.18
+        },
+        {
+          "word": "sama",
+          "start": 7.21,
+          "end": 7.55
+        },
+        {
+          "word": "dengan",
+          "start": 7.58,
+          "end": 8.04
+        },
+        {
+          "word": "nol.",
+          "start": 8.06,
+          "end": 8.35
+        }
+      ]
+    },
+    {
+      "id": "comic_strip-4",
+      "speaker": "Bima",
+      "speakerRole": "human",
+      "text": "Kok tinggal kotaknya doang?!",
+      "startSec": 8.52,
+      "durationSec": 2.01,
+      "emotion": "shocked",
+      "words": [
+        {
+          "word": "Kok",
+          "start": 8.52,
+          "end": 8.8
+        },
+        {
+          "word": "tinggal",
+          "start": 8.83,
+          "end": 9.34
+        },
+        {
+          "word": "kotaknya",
+          "start": 9.37,
+          "end": 9.93
+        },
+        {
+          "word": "doang?!",
+          "start": 9.96,
+          "end": 10.35
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Diet kamu biasanya tumbang di jam berapa?",
+  "visualTheme": {
+    "primaryColor": "#f472b6",
+    "accentColor": "#67e8f9",
+    "backgroundColor": "#f4efe1"
+  }
+}

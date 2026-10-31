@@ -1,0 +1,199 @@
+{
+  "id": "demo-kinetic_type",
+  "title": "Berhenti Nunggu Mood",
+  "concept": "Opini keras soal menunggu motivasi",
+  "format": "kinetic_type",
+  "mood": "motivational",
+  "durationSec": 15.5,
+  "fps": 30,
+  "locationName": "Studio Tipografi",
+  "characters": {
+    "characterA": {
+      "name": "Narator",
+      "title": "Suara Utama",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Narator",
+      "title": "Suara Utama",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "kinetic_type-1",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Motivasi itu bukan bensin.",
+      "startSec": 0.08,
+      "durationSec": 1.95,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Motivasi",
+          "start": 0.08,
+          "end": 0.64
+        },
+        {
+          "word": "itu",
+          "start": 0.67,
+          "end": 0.96
+        },
+        {
+          "word": "bukan",
+          "start": 0.99,
+          "end": 1.38
+        },
+        {
+          "word": "bensin.",
+          "start": 1.41,
+          "end": 1.86
+        }
+      ]
+    },
+    {
+      "id": "kinetic_type-2",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Motivasi itu bonus yang datang setelah kamu mulai.",
+      "startSec": 2.03,
+      "durationSec": 3.65,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Motivasi",
+          "start": 2.03,
+          "end": 2.59
+        },
+        {
+          "word": "itu",
+          "start": 2.62,
+          "end": 2.91
+        },
+        {
+          "word": "bonus",
+          "start": 2.94,
+          "end": 3.33
+        },
+        {
+          "word": "yang",
+          "start": 3.36,
+          "end": 3.7
+        },
+        {
+          "word": "datang",
+          "start": 3.73,
+          "end": 4.18
+        },
+        {
+          "word": "setelah",
+          "start": 4.21,
+          "end": 4.72
+        },
+        {
+          "word": "kamu",
+          "start": 4.75,
+          "end": 5.09
+        },
+        {
+          "word": "mulai.",
+          "start": 5.12,
+          "end": 5.51
+        }
+      ]
+    },
+    {
+      "id": "kinetic_type-3",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Orang yang menunggu mood akan menunggu selamanya.",
+      "startSec": 5.68,
+      "durationSec": 3.5,
+      "emotion": "angry",
+      "words": [
+        {
+          "word": "Orang",
+          "start": 5.68,
+          "end": 6.08
+        },
+        {
+          "word": "yang",
+          "start": 6.11,
+          "end": 6.45
+        },
+        {
+          "word": "menunggu",
+          "start": 6.48,
+          "end": 7.04
+        },
+        {
+          "word": "mood",
+          "start": 7.07,
+          "end": 7.41
+        },
+        {
+          "word": "akan",
+          "start": 7.44,
+          "end": 7.78
+        },
+        {
+          "word": "menunggu",
+          "start": 7.81,
+          "end": 8.37
+        },
+        {
+          "word": "selamanya.",
+          "start": 8.4,
+          "end": 9.01
+        }
+      ]
+    },
+    {
+      "id": "kinetic_type-4",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Mulai lima menit. Sisanya ikut sendiri.",
+      "startSec": 9.18,
+      "durationSec": 2.8,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Mulai",
+          "start": 9.18,
+          "end": 9.58
+        },
+        {
+          "word": "lima",
+          "start": 9.61,
+          "end": 9.95
+        },
+        {
+          "word": "menit.",
+          "start": 9.98,
+          "end": 10.37
+        },
+        {
+          "word": "Sisanya",
+          "start": 10.4,
+          "end": 10.91
+        },
+        {
+          "word": "ikut",
+          "start": 10.94,
+          "end": 11.28
+        },
+        {
+          "word": "sendiri.",
+          "start": 11.31,
+          "end": 11.81
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Kamu tim nunggu mood atau tim jalan dulu?",
+  "visualTheme": {
+    "primaryColor": "#ea580c",
+    "accentColor": "#facc15",
+    "backgroundColor": "#0b0b0b"
+  }
+}

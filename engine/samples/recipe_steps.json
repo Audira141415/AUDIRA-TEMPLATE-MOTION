@@ -1,0 +1,240 @@
+{
+  "id": "demo-recipe_steps",
+  "title": "Mie Goreng Telur 10 Menit",
+  "concept": "Resep cepat mie goreng ala anak kos",
+  "format": "recipe_steps",
+  "mood": "hyped",
+  "durationSec": 18.1,
+  "fps": 30,
+  "locationName": "Dapur Kos",
+  "characters": {
+    "characterA": {
+      "name": "Chef",
+      "title": "Anak Kos",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Chef",
+      "title": "Anak Kos",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "recipe_steps-1",
+      "speaker": "Chef",
+      "speakerRole": "narrator",
+      "text": "Rebus mie dua menit saja, jangan sampai lembek.",
+      "startSec": 0.08,
+      "durationSec": 3.43,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Rebus",
+          "start": 0.08,
+          "end": 0.48
+        },
+        {
+          "word": "mie",
+          "start": 0.51,
+          "end": 0.79
+        },
+        {
+          "word": "dua",
+          "start": 0.82,
+          "end": 1.1
+        },
+        {
+          "word": "menit",
+          "start": 1.14,
+          "end": 1.53
+        },
+        {
+          "word": "saja,",
+          "start": 1.56,
+          "end": 1.9
+        },
+        {
+          "word": "jangan",
+          "start": 1.93,
+          "end": 2.38
+        },
+        {
+          "word": "sampai",
+          "start": 2.41,
+          "end": 2.86
+        },
+        {
+          "word": "lembek.",
+          "start": 2.89,
+          "end": 3.34
+        }
+      ]
+    },
+    {
+      "id": "recipe_steps-2",
+      "speaker": "Chef",
+      "speakerRole": "narrator",
+      "text": "Tumis bawang putih sampai harum.",
+      "startSec": 3.51,
+      "durationSec": 2.37,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Tumis",
+          "start": 3.51,
+          "end": 3.91
+        },
+        {
+          "word": "bawang",
+          "start": 3.94,
+          "end": 4.39
+        },
+        {
+          "word": "putih",
+          "start": 4.42,
+          "end": 4.81
+        },
+        {
+          "word": "sampai",
+          "start": 4.84,
+          "end": 5.29
+        },
+        {
+          "word": "harum.",
+          "start": 5.32,
+          "end": 5.71
+        }
+      ]
+    },
+    {
+      "id": "recipe_steps-3",
+      "speaker": "Chef",
+      "speakerRole": "narrator",
+      "text": "Masukkan telur, orak-arik cepat.",
+      "startSec": 5.88,
+      "durationSec": 2.17,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Masukkan",
+          "start": 5.88,
+          "end": 6.45
+        },
+        {
+          "word": "telur,",
+          "start": 6.47,
+          "end": 6.87
+        },
+        {
+          "word": "orak-arik",
+          "start": 6.9,
+          "end": 7.46
+        },
+        {
+          "word": "cepat.",
+          "start": 7.49,
+          "end": 7.88
+        }
+      ]
+    },
+    {
+      "id": "recipe_steps-4",
+      "speaker": "Chef",
+      "speakerRole": "narrator",
+      "text": "Campur mie, kecap, dan sedikit saus sambal.",
+      "startSec": 8.05,
+      "durationSec": 3.06,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Campur",
+          "start": 8.05,
+          "end": 8.5
+        },
+        {
+          "word": "mie,",
+          "start": 8.54,
+          "end": 8.82
+        },
+        {
+          "word": "kecap,",
+          "start": 8.85,
+          "end": 9.24
+        },
+        {
+          "word": "dan",
+          "start": 9.28,
+          "end": 9.56
+        },
+        {
+          "word": "sedikit",
+          "start": 9.59,
+          "end": 10.1
+        },
+        {
+          "word": "saus",
+          "start": 10.13,
+          "end": 10.46
+        },
+        {
+          "word": "sambal.",
+          "start": 10.49,
+          "end": 10.94
+        }
+      ]
+    },
+    {
+      "id": "recipe_steps-5",
+      "speaker": "Chef",
+      "speakerRole": "narrator",
+      "text": "Taburi bawang goreng. Selesai dalam sepuluh menit.",
+      "startSec": 11.12,
+      "durationSec": 3.5,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Taburi",
+          "start": 11.12,
+          "end": 11.56
+        },
+        {
+          "word": "bawang",
+          "start": 11.6,
+          "end": 12.04
+        },
+        {
+          "word": "goreng.",
+          "start": 12.08,
+          "end": 12.53
+        },
+        {
+          "word": "Selesai",
+          "start": 12.56,
+          "end": 13.06
+        },
+        {
+          "word": "dalam",
+          "start": 13.09,
+          "end": 13.49
+        },
+        {
+          "word": "sepuluh",
+          "start": 13.52,
+          "end": 14.02
+        },
+        {
+          "word": "menit.",
+          "start": 14.05,
+          "end": 14.45
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Kamu tim telur dicampur atau telur ceplok?",
+  "visualTheme": {
+    "primaryColor": "#ea580c",
+    "accentColor": "#facc15",
+    "backgroundColor": "#fff7ed"
+  }
+}

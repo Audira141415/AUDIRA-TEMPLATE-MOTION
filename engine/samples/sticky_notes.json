@@ -1,0 +1,261 @@
+{
+  "id": "demo-sticky_notes",
+  "title": "6 Cara Fokus Saat Kerja dari Rumah",
+  "concept": "Tips fokus kerja di rumah",
+  "format": "sticky_notes",
+  "mood": "calm",
+  "durationSec": 17.8,
+  "fps": 30,
+  "locationName": "Meja Kerja",
+  "characters": {
+    "characterA": {
+      "name": "Narator",
+      "title": "Pemandu",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Narator",
+      "title": "Pemandu",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "sticky_notes-1",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Pakai baju kerja walau di rumah.",
+      "startSec": 0.08,
+      "durationSec": 2.47,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Pakai",
+          "start": 0.08,
+          "end": 0.48
+        },
+        {
+          "word": "baju",
+          "start": 0.51,
+          "end": 0.84
+        },
+        {
+          "word": "kerja",
+          "start": 0.88,
+          "end": 1.27
+        },
+        {
+          "word": "walau",
+          "start": 1.3,
+          "end": 1.7
+        },
+        {
+          "word": "di",
+          "start": 1.73,
+          "end": 1.96
+        },
+        {
+          "word": "rumah.",
+          "start": 1.99,
+          "end": 2.38
+        }
+      ]
+    },
+    {
+      "id": "sticky_notes-2",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Taruh HP di ruangan lain.",
+      "startSec": 2.55,
+      "durationSec": 1.99,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Taruh",
+          "start": 2.55,
+          "end": 2.95
+        },
+        {
+          "word": "HP",
+          "start": 2.98,
+          "end": 3.21
+        },
+        {
+          "word": "di",
+          "start": 3.24,
+          "end": 3.47
+        },
+        {
+          "word": "ruangan",
+          "start": 3.5,
+          "end": 4
+        },
+        {
+          "word": "lain.",
+          "start": 4.03,
+          "end": 4.37
+        }
+      ]
+    },
+    {
+      "id": "sticky_notes-3",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Kerjakan tugas tersulit di pagi hari.",
+      "startSec": 4.54,
+      "durationSec": 2.74,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Kerjakan",
+          "start": 4.54,
+          "end": 5.1
+        },
+        {
+          "word": "tugas",
+          "start": 5.13,
+          "end": 5.53
+        },
+        {
+          "word": "tersulit",
+          "start": 5.55,
+          "end": 6.12
+        },
+        {
+          "word": "di",
+          "start": 6.14,
+          "end": 6.38
+        },
+        {
+          "word": "pagi",
+          "start": 6.4,
+          "end": 6.74
+        },
+        {
+          "word": "hari.",
+          "start": 6.77,
+          "end": 7.11
+        }
+      ]
+    },
+    {
+      "id": "sticky_notes-4",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Istirahat lima menit setiap jam.",
+      "startSec": 7.28,
+      "durationSec": 2.38,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Istirahat",
+          "start": 7.28,
+          "end": 7.9
+        },
+        {
+          "word": "lima",
+          "start": 7.93,
+          "end": 8.27
+        },
+        {
+          "word": "menit",
+          "start": 8.3,
+          "end": 8.69
+        },
+        {
+          "word": "setiap",
+          "start": 8.72,
+          "end": 9.17
+        },
+        {
+          "word": "jam.",
+          "start": 9.21,
+          "end": 9.49
+        }
+      ]
+    },
+    {
+      "id": "sticky_notes-5",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Tutup tab yang tidak dipakai.",
+      "startSec": 9.66,
+      "durationSec": 2.21,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Tutup",
+          "start": 9.66,
+          "end": 10.05
+        },
+        {
+          "word": "tab",
+          "start": 10.09,
+          "end": 10.37
+        },
+        {
+          "word": "yang",
+          "start": 10.4,
+          "end": 10.74
+        },
+        {
+          "word": "tidak",
+          "start": 10.77,
+          "end": 11.16
+        },
+        {
+          "word": "dipakai.",
+          "start": 11.2,
+          "end": 11.7
+        }
+      ]
+    },
+    {
+      "id": "sticky_notes-6",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Matikan laptop di jam yang sama.",
+      "startSec": 11.87,
+      "durationSec": 2.47,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Matikan",
+          "start": 11.87,
+          "end": 12.38
+        },
+        {
+          "word": "laptop",
+          "start": 12.41,
+          "end": 12.86
+        },
+        {
+          "word": "di",
+          "start": 12.89,
+          "end": 13.12
+        },
+        {
+          "word": "jam",
+          "start": 13.15,
+          "end": 13.43
+        },
+        {
+          "word": "yang",
+          "start": 13.46,
+          "end": 13.8
+        },
+        {
+          "word": "sama.",
+          "start": 13.83,
+          "end": 14.17
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Tips mana yang paling susah kamu jalani?",
+  "visualTheme": {
+    "primaryColor": "#dc2626",
+    "accentColor": "#fde047",
+    "backgroundColor": "#b88552"
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "id": "demo-explainer-1",
+  "title": "3 Rumus Rahasia Algoritma Video Pendek 2026",
+  "concept": "Penjelasan berbasis data bagaimana video vertikal mendapatkan 1 juta views",
+  "format": "clean_explainer",
+  "mood": "hyped",
+  "durationSec": 13,
+  "fps": 30,
+  "locationName": "Tech Kinetic Grid",
+  "characters": {
+    "characterA": {
+      "name": "Analyst",
+      "title": "Retention Scientist",
+      "avatar": "tech-guru"
+    },
+    "characterB": {
+      "name": "Chart",
+      "title": "Data Stream",
+      "avatar": "metric-card"
+    }
+  },
+  "visualTheme": {
+    "primaryColor": "#6366f1",
+    "accentColor": "#c7d2fe",
+    "backgroundColor": "#09090b"
+  },
+  "commentMagnetHook": "Simpan video ini biar lo inget langkah nomor duanya!",
+  "lines": [
+    {
+      "id": "ex-1",
+      "speaker": "Analyst",
+      "speakerRole": "narrator",
+      "text": "Algoritma Reels tidak peduli followers lo. Yang dipedulikan cuma tiga angka ini.",
+      "startSec": 0,
+      "durationSec": 3.8,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Algoritma",
+          "start": 0,
+          "end": 0.32
+        },
+        {
+          "word": "Reels",
+          "start": 0.32,
+          "end": 0.63
+        },
+        {
+          "word": "tidak",
+          "start": 0.63,
+          "end": 0.95
+        },
+        {
+          "word": "peduli",
+          "start": 0.95,
+          "end": 1.27
+        },
+        {
+          "word": "followers",
+          "start": 1.27,
+          "end": 1.58
+        },
+        {
+          "word": "lo.",
+          "start": 1.58,
+          "end": 1.9
+        },
+        {
+          "word": "Yang",
+          "start": 1.9,
+          "end": 2.22
+        },
+        {
+          "word": "dipedulikan",
+          "start": 2.22,
+          "end": 2.53
+        },
+        {
+          "word": "cuma",
+          "start": 2.53,
+          "end": 2.85
+        },
+        {
+          "word": "tiga",
+          "start": 2.85,
+          "end": 3.17
+        },
+        {
+          "word": "angka",
+          "start": 3.17,
+          "end": 3.48
+        },
+        {
+          "word": "ini.",
+          "start": 3.48,
+          "end": 3.8
+        }
+      ]
+    },
+    {
+      "id": "ex-2",
+      "speaker": "Analyst",
+      "speakerRole": "narrator",
+      "text": "Langkah 1: Retention Rate detik pertama harus di atas 70%. Potong nafas.",
+      "startSec": 3.9,
+      "durationSec": 3.8,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Langkah",
+          "start": 3.9,
+          "end": 4.22
+        },
+        {
+          "word": "1:",
+          "start": 4.22,
+          "end": 4.53
+        },
+        {
+          "word": "Retention",
+          "start": 4.53,
+          "end": 4.85
+        },
+        {
+          "word": "Rate",
+          "start": 4.85,
+          "end": 5.17
+        },
+        {
+          "word": "detik",
+          "start": 5.17,
+          "end": 5.48
+        },
+        {
+          "word": "pertama",
+          "start": 5.48,
+          "end": 5.8
+        },
+        {
+          "word": "harus",
+          "start": 5.8,
+          "end": 6.12
+        },
+        {
+          "word": "di",
+          "start": 6.12,
+          "end": 6.43
+        },
+        {
+          "word": "atas",
+          "start": 6.43,
+          "end": 6.75
+        },
+        {
+          "word": "70%.",
+          "start": 6.75,
+          "end": 7.07
+        },
+        {
+          "word": "Potong",
+          "start": 7.07,
+          "end": 7.38
+        },
+        {
+          "word": "nafas.",
+          "start": 7.38,
+          "end": 7.7
+        }
+      ]
+    },
+    {
+      "id": "ex-3",
+      "speaker": "Analyst",
+      "speakerRole": "narrator",
+      "text": "Langkah 2: Visual change setiap 2 detik agar mata tidak terbiasa bosan.",
+      "startSec": 7.8,
+      "durationSec": 3.4,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Langkah",
+          "start": 7.8,
+          "end": 8.08
+        },
+        {
+          "word": "2:",
+          "start": 8.08,
+          "end": 8.37
+        },
+        {
+          "word": "Visual",
+          "start": 8.37,
+          "end": 8.65
+        },
+        {
+          "word": "change",
+          "start": 8.65,
+          "end": 8.93
+        },
+        {
+          "word": "setiap",
+          "start": 8.93,
+          "end": 9.22
+        },
+        {
+          "word": "2",
+          "start": 9.22,
+          "end": 9.5
+        },
+        {
+          "word": "detik",
+          "start": 9.5,
+          "end": 9.78
+        },
+        {
+          "word": "agar",
+          "start": 9.78,
+          "end": 10.07
+        },
+        {
+          "word": "mata",
+          "start": 10.07,
+          "end": 10.35
+        },
+        {
+          "word": "tidak",
+          "start": 10.35,
+          "end": 10.63
+        },
+        {
+          "word": "terbiasa",
+          "start": 10.63,
+          "end": 10.92
+        },
+        {
+          "word": "bosan.",
+          "start": 10.92,
+          "end": 11.2
+        }
+      ]
+    },
+    {
+      "id": "ex-4",
+      "speaker": "Analyst",
+      "speakerRole": "narrator",
+      "text": "Dan langkah 3: Buat outro yang memicu debat sengit di kolom komentar.",
+      "startSec": 11.3,
+      "durationSec": 1.7,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Dan",
+          "start": 11.3,
+          "end": 11.44
+        },
+        {
+          "word": "langkah",
+          "start": 11.44,
+          "end": 11.58
+        },
+        {
+          "word": "3:",
+          "start": 11.58,
+          "end": 11.73
+        },
+        {
+          "word": "Buat",
+          "start": 11.73,
+          "end": 11.87
+        },
+        {
+          "word": "outro",
+          "start": 11.87,
+          "end": 12.01
+        },
+        {
+          "word": "yang",
+          "start": 12.01,
+          "end": 12.15
+        },
+        {
+          "word": "memicu",
+          "start": 12.15,
+          "end": 12.29
+        },
+        {
+          "word": "debat",
+          "start": 12.29,
+          "end": 12.43
+        },
+        {
+          "word": "sengit",
+          "start": 12.43,
+          "end": 12.58
+        },
+        {
+          "word": "di",
+          "start": 12.58,
+          "end": 12.72
+        },
+        {
+          "word": "kolom",
+          "start": 12.72,
+          "end": 12.86
+        },
+        {
+          "word": "komentar.",
+          "start": 12.86,
+          "end": 13
+        }
+      ]
+    }
+  ]
+}

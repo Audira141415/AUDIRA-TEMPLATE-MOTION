@@ -1,0 +1,220 @@
+{
+  "id": "demo-top_list",
+  "title": "5 Kebiasaan yang Diam-diam Bikin Boros",
+  "concept": "Peringkat kebiasaan kecil yang menguras dompet",
+  "format": "top_list",
+  "mood": "warm",
+  "durationSec": 17.1,
+  "fps": 30,
+  "locationName": "Dompet Kita",
+  "characters": {
+    "characterA": {
+      "name": "Narator",
+      "title": "Pemandu",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Narator",
+      "title": "Pemandu",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "top_list-1",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Langganan aplikasi yang lupa kamu pakai.",
+      "startSec": 0.08,
+      "durationSec": 2.91,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Langganan",
+          "start": 0.08,
+          "end": 0.69
+        },
+        {
+          "word": "aplikasi",
+          "start": 0.72,
+          "end": 1.29
+        },
+        {
+          "word": "yang",
+          "start": 1.31,
+          "end": 1.65
+        },
+        {
+          "word": "lupa",
+          "start": 1.69,
+          "end": 2.02
+        },
+        {
+          "word": "kamu",
+          "start": 2.06,
+          "end": 2.4
+        },
+        {
+          "word": "pakai.",
+          "start": 2.43,
+          "end": 2.82
+        }
+      ]
+    },
+    {
+      "id": "top_list-2",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Ongkir kecil yang dibayar berkali-kali.",
+      "startSec": 2.99,
+      "durationSec": 2.7,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Ongkir",
+          "start": 2.99,
+          "end": 3.44
+        },
+        {
+          "word": "kecil",
+          "start": 3.47,
+          "end": 3.87
+        },
+        {
+          "word": "yang",
+          "start": 3.9,
+          "end": 4.24
+        },
+        {
+          "word": "dibayar",
+          "start": 4.27,
+          "end": 4.77
+        },
+        {
+          "word": "berkali-kali.",
+          "start": 4.8,
+          "end": 5.53
+        }
+      ]
+    },
+    {
+      "id": "top_list-3",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Kopi kekinian setiap hari kerja.",
+      "startSec": 5.7,
+      "durationSec": 2.38,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Kopi",
+          "start": 5.7,
+          "end": 6.04
+        },
+        {
+          "word": "kekinian",
+          "start": 6.07,
+          "end": 6.63
+        },
+        {
+          "word": "setiap",
+          "start": 6.66,
+          "end": 7.11
+        },
+        {
+          "word": "hari",
+          "start": 7.13,
+          "end": 7.47
+        },
+        {
+          "word": "kerja.",
+          "start": 7.5,
+          "end": 7.9
+        }
+      ]
+    },
+    {
+      "id": "top_list-4",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Checkout tengah malam karena diskon.",
+      "startSec": 8.07,
+      "durationSec": 2.6,
+      "emotion": "shocked",
+      "words": [
+        {
+          "word": "Checkout",
+          "start": 8.07,
+          "end": 8.63
+        },
+        {
+          "word": "tengah",
+          "start": 8.66,
+          "end": 9.11
+        },
+        {
+          "word": "malam",
+          "start": 9.14,
+          "end": 9.54
+        },
+        {
+          "word": "karena",
+          "start": 9.57,
+          "end": 10.02
+        },
+        {
+          "word": "diskon.",
+          "start": 10.05,
+          "end": 10.5
+        }
+      ]
+    },
+    {
+      "id": "top_list-5",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Belanja tanpa daftar, cuma ikut perasaan.",
+      "startSec": 10.67,
+      "durationSec": 2.91,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Belanja",
+          "start": 10.67,
+          "end": 11.17
+        },
+        {
+          "word": "tanpa",
+          "start": 11.2,
+          "end": 11.6
+        },
+        {
+          "word": "daftar,",
+          "start": 11.63,
+          "end": 12.08
+        },
+        {
+          "word": "cuma",
+          "start": 12.11,
+          "end": 12.45
+        },
+        {
+          "word": "ikut",
+          "start": 12.48,
+          "end": 12.82
+        },
+        {
+          "word": "perasaan.",
+          "start": 12.85,
+          "end": 13.41
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Nomor berapa yang paling kamu banget?",
+  "visualTheme": {
+    "primaryColor": "#f43f5e",
+    "accentColor": "#fda4af",
+    "backgroundColor": "#12060a"
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "id": "demo-terminal_hack",
+  "title": "Mencari File Skripsi Final",
+  "concept": "Mahasiswa mencari file skripsi yang benar-benar final",
+  "format": "terminal_hack",
+  "mood": "frustrated",
+  "durationSec": 14,
+  "fps": 30,
+  "locationName": "Laptop Kampus",
+  "characters": {
+    "characterA": {
+      "name": "Dita",
+      "title": "Mahasiswi",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "SISTEM",
+      "title": "Terminal",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "terminal_hack-1",
+      "speaker": "Dita",
+      "speakerRole": "human",
+      "text": "cari skripsi final",
+      "startSec": 0.08,
+      "durationSec": 1.47,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "cari",
+          "start": 0.08,
+          "end": 0.42
+        },
+        {
+          "word": "skripsi",
+          "start": 0.45,
+          "end": 0.96
+        },
+        {
+          "word": "final",
+          "start": 0.99,
+          "end": 1.38
+        }
+      ]
+    },
+    {
+      "id": "terminal_hack-2",
+      "speaker": "SISTEM",
+      "speakerRole": "ai",
+      "text": "Ditemukan 14 file bernama final.",
+      "startSec": 1.55,
+      "durationSec": 2.38,
+      "emotion": "smug",
+      "words": [
+        {
+          "word": "Ditemukan",
+          "start": 1.55,
+          "end": 2.17
+        },
+        {
+          "word": "14",
+          "start": 2.2,
+          "end": 2.43
+        },
+        {
+          "word": "file",
+          "start": 2.46,
+          "end": 2.79
+        },
+        {
+          "word": "bernama",
+          "start": 2.83,
+          "end": 3.33
+        },
+        {
+          "word": "final.",
+          "start": 3.36,
+          "end": 3.76
+        }
+      ]
+    },
+    {
+      "id": "terminal_hack-3",
+      "speaker": "Dita",
+      "speakerRole": "human",
+      "text": "tampilkan yang paling final",
+      "startSec": 3.93,
+      "durationSec": 2.06,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "tampilkan",
+          "start": 3.93,
+          "end": 4.54
+        },
+        {
+          "word": "yang",
+          "start": 4.57,
+          "end": 4.91
+        },
+        {
+          "word": "paling",
+          "start": 4.94,
+          "end": 5.39
+        },
+        {
+          "word": "final",
+          "start": 5.42,
+          "end": 5.81
+        }
+      ]
+    },
+    {
+      "id": "terminal_hack-4",
+      "speaker": "SISTEM",
+      "speakerRole": "ai",
+      "text": "skripsi_final_revisi_beneran_final_v9.docx",
+      "startSec": 5.98,
+      "durationSec": 2.27,
+      "emotion": "sarcastic",
+      "words": [
+        {
+          "word": "skripsi_final_revisi_beneran_final_v9.docx",
+          "start": 5.98,
+          "end": 8.08
+        }
+      ]
+    },
+    {
+      "id": "terminal_hack-5",
+      "speaker": "Dita",
+      "speakerRole": "human",
+      "text": "hapus semua kecuali yang itu",
+      "startSec": 8.25,
+      "durationSec": 2.21,
+      "emotion": "angry",
+      "words": [
+        {
+          "word": "hapus",
+          "start": 8.25,
+          "end": 8.65
+        },
+        {
+          "word": "semua",
+          "start": 8.68,
+          "end": 9.07
+        },
+        {
+          "word": "kecuali",
+          "start": 9.11,
+          "end": 9.61
+        },
+        {
+          "word": "yang",
+          "start": 9.64,
+          "end": 9.98
+        },
+        {
+          "word": "itu",
+          "start": 10.01,
+          "end": 10.29
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Nama file final kamu biasanya apa?",
+  "visualTheme": {
+    "primaryColor": "#4ade80",
+    "accentColor": "#fbbf24",
+    "backgroundColor": "#030703"
+  }
+}

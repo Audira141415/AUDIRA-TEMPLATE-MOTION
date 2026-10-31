@@ -1,0 +1,234 @@
+{
+  "id": "demo-map_journey",
+  "title": "3 Hari Keliling Yogyakarta",
+  "concept": "Rute liburan hemat tiga hari di Jogja",
+  "format": "map_journey",
+  "mood": "warm",
+  "durationSec": 18.3,
+  "fps": 30,
+  "locationName": "Yogyakarta",
+  "characters": {
+    "characterA": {
+      "name": "Narator",
+      "title": "Pemandu",
+      "avatar": "a"
+    },
+    "characterB": {
+      "name": "Narator",
+      "title": "Pemandu",
+      "avatar": "b"
+    }
+  },
+  "lines": [
+    {
+      "id": "map_journey-1",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Hari pertama mulai dari Malioboro saat pagi masih sepi.",
+      "startSec": 0.08,
+      "durationSec": 4.02,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Hari",
+          "start": 0.08,
+          "end": 0.42
+        },
+        {
+          "word": "pertama",
+          "start": 0.45,
+          "end": 0.96
+        },
+        {
+          "word": "mulai",
+          "start": 0.99,
+          "end": 1.38
+        },
+        {
+          "word": "dari",
+          "start": 1.41,
+          "end": 1.75
+        },
+        {
+          "word": "Malioboro",
+          "start": 1.78,
+          "end": 2.4
+        },
+        {
+          "word": "saat",
+          "start": 2.43,
+          "end": 2.77
+        },
+        {
+          "word": "pagi",
+          "start": 2.8,
+          "end": 3.14
+        },
+        {
+          "word": "masih",
+          "start": 3.17,
+          "end": 3.56
+        },
+        {
+          "word": "sepi.",
+          "start": 3.59,
+          "end": 3.93
+        }
+      ]
+    },
+    {
+      "id": "map_journey-2",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Siangnya jalan ke Keraton dan Taman Sari.",
+      "startSec": 4.1,
+      "durationSec": 3.06,
+      "emotion": "neutral",
+      "words": [
+        {
+          "word": "Siangnya",
+          "start": 4.1,
+          "end": 4.66
+        },
+        {
+          "word": "jalan",
+          "start": 4.69,
+          "end": 5.09
+        },
+        {
+          "word": "ke",
+          "start": 5.12,
+          "end": 5.35
+        },
+        {
+          "word": "Keraton",
+          "start": 5.38,
+          "end": 5.88
+        },
+        {
+          "word": "dan",
+          "start": 5.91,
+          "end": 6.2
+        },
+        {
+          "word": "Taman",
+          "start": 6.23,
+          "end": 6.62
+        },
+        {
+          "word": "Sari.",
+          "start": 6.65,
+          "end": 6.99
+        }
+      ]
+    },
+    {
+      "id": "map_journey-3",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Hari kedua kejar matahari terbit di Candi Prambanan.",
+      "startSec": 7.16,
+      "durationSec": 3.76,
+      "emotion": "thoughtful",
+      "words": [
+        {
+          "word": "Hari",
+          "start": 7.16,
+          "end": 7.5
+        },
+        {
+          "word": "kedua",
+          "start": 7.53,
+          "end": 7.93
+        },
+        {
+          "word": "kejar",
+          "start": 7.96,
+          "end": 8.35
+        },
+        {
+          "word": "matahari",
+          "start": 8.38,
+          "end": 8.94
+        },
+        {
+          "word": "terbit",
+          "start": 8.97,
+          "end": 9.42
+        },
+        {
+          "word": "di",
+          "start": 9.45,
+          "end": 9.68
+        },
+        {
+          "word": "Candi",
+          "start": 9.71,
+          "end": 10.11
+        },
+        {
+          "word": "Prambanan.",
+          "start": 10.14,
+          "end": 10.75
+        }
+      ]
+    },
+    {
+      "id": "map_journey-4",
+      "speaker": "Narator",
+      "speakerRole": "narrator",
+      "text": "Hari ketiga tutup dengan sunset di Pantai Parangtritis.",
+      "startSec": 10.92,
+      "durationSec": 3.93,
+      "emotion": "hyped",
+      "words": [
+        {
+          "word": "Hari",
+          "start": 10.92,
+          "end": 11.26
+        },
+        {
+          "word": "ketiga",
+          "start": 11.29,
+          "end": 11.74
+        },
+        {
+          "word": "tutup",
+          "start": 11.77,
+          "end": 12.17
+        },
+        {
+          "word": "dengan",
+          "start": 12.2,
+          "end": 12.65
+        },
+        {
+          "word": "sunset",
+          "start": 12.68,
+          "end": 13.13
+        },
+        {
+          "word": "di",
+          "start": 13.16,
+          "end": 13.39
+        },
+        {
+          "word": "Pantai",
+          "start": 13.42,
+          "end": 13.87
+        },
+        {
+          "word": "Parangtritis.",
+          "start": 13.9,
+          "end": 14.68
+        }
+      ]
+    }
+  ],
+  "commentMagnetHook": "Kalau ke Jogja, tempat wajib kamu apa?",
+  "visualTheme": {
+    "primaryColor": "#dc2626",
+    "accentColor": "#0ea5e9",
+    "backgroundColor": "#e9e3d2"
+  }
+}

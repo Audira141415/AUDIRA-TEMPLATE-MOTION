@@ -1,0 +1,80 @@
+{
+  "id": "sample-banter",
+  "title": "Ash Mau Resign Jadi Streamer",
+  "concept": "Ash ingin resign demi jadi streamer padahal baru punya 40 followers",
+  "format": "character_banter",
+  "mood": "rude",
+  "durationSec": 14,
+  "fps": 30,
+  "locationName": "Warung Kopi 24 Jam",
+  "characters": {
+    "characterA": {
+      "name": "Ash",
+      "title": "Calon Streamer",
+      "avatar": "human-ash"
+    },
+    "characterB": {
+      "name": "Nara",
+      "title": "AI Paling Jujur",
+      "avatar": "ai-bubble"
+    }
+  },
+  "visualTheme": {
+    "primaryColor": "#c2410c",
+    "accentColor": "#ffe9df",
+    "backgroundColor": "#141413"
+  },
+  "commentMagnetHook": "Empat puluh followers, cukup buat resign nggak?",
+  "lines": [
+    {
+      "id": "l1",
+      "speaker": "Ash",
+      "speakerRole": "human",
+      "text": "Nara, gue mau resign besok. Gue mau full-time streaming game!",
+      "startSec": 0,
+      "durationSec": 3,
+      "emotion": "hyped",
+      "words": []
+    },
+    {
+      "id": "l2",
+      "speaker": "Nara",
+      "speakerRole": "ai",
+      "text": "Pertanyaan cepat. Followers lo sekarang berapa?",
+      "startSec": 0,
+      "durationSec": 3,
+      "emotion": "smug",
+      "words": []
+    },
+    {
+      "id": "l3",
+      "speaker": "Ash",
+      "speakerRole": "human",
+      "text": "Empat puluh orang. Tapi mereka loyal banget!",
+      "startSec": 0,
+      "durationSec": 3,
+      "emotion": "hyped",
+      "words": []
+    },
+    {
+      "id": "l4",
+      "speaker": "Nara",
+      "speakerRole": "ai",
+      "text": "Tiga puluh sembilan itu akun bot. Satunya lagi nyokap lo.",
+      "startSec": 0,
+      "durationSec": 3,
+      "emotion": "sarcastic",
+      "words": []
+    },
+    {
+      "id": "l5",
+      "speaker": "Ash",
+      "speakerRole": "human",
+      "text": "Tapi nyokap gue selalu ngetik GG di chat...",
+      "startSec": 0,
+      "durationSec": 3,
+      "emotion": "thoughtful",
+      "words": []
+    }
+  ]
+}
