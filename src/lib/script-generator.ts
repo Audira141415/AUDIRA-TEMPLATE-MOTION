@@ -51,6 +51,11 @@ export async function generateStoryboardFromIdea(
     speakerBName = 'Archive Memory';
     location = 'Documentary Vault';
     commentHook = 'Pernahkah lo ngerasain hal yang sama? Tulis di bawah!';
+  } else if (format === 'roblox_story') {
+    speakerAName = 'Noob Blox';
+    speakerBName = 'Pro Bacon';
+    location = 'Tower of Hell (Obby)';
+    commentHook = 'Kalo lo punya 100.000 Robux, gamepass apa yang langsung lo beli?';
   }
 
   const lines: StoryboardLine[] = [

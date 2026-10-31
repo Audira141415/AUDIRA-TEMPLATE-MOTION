@@ -23,6 +23,7 @@ export const REELS: ReelSample[] = [
   { file: 'receipt', format: 'receipt', kind: 'Struk', title: 'Belanja bulanan yang bocor' },
   { file: 'retro_vhs', format: 'retro_vhs', kind: 'Retro VHS', title: 'Liburan keluarga 90-an' },
   { file: 'sticky_notes', format: 'sticky_notes', kind: 'Catatan', title: '6 cara fokus kerja di rumah' },
+  { file: 'roblox_story', format: 'roblox_story', kind: 'Roblox Obby', title: 'Noob minta 1000 Robux' },
 ];
 
 export const FORMAT_CARDS: Array<{ reel: ReelSample; name: string; pitch: string; topics: string[] }> = [
@@ -76,6 +77,7 @@ export const FORMAT_CARDS: Array<{ reel: ReelSample; name: string; pitch: string
   { reel: REELS[17], name: 'Struk belanja', pitch: 'Struk tercetak baris demi baris, total dihitung otomatis.', topics: ['Keuangan', 'Belanja'] },
   { reel: REELS[18], name: 'Retro VHS', pitch: 'Rekaman rumahan era 90-an: PLAY, jam berjalan, subtitle kuning.', topics: ['Nostalgia', 'Kenangan'] },
   { reel: REELS[19], name: 'Papan catatan', pitch: 'Catatan tempel dipaku ke papan gabus, satu catatan per tips.', topics: ['Tips', 'Checklist'] },
+  { reel: REELS[20], name: 'Roblox Obby & Skits', pitch: 'Karakter Noob vs Pro di lintasan obby parkour, dilengkapi bubble chat Roblox, Robux R$, dan efek suara OOF!', topics: ['Obby Parkour', 'Noob vs Pro', 'Robux Drama'] },
 ];
 
 export const MOOD_SAMPLES: Record<MoodType, { line: string; verdict: string }> = {

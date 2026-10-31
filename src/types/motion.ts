@@ -18,7 +18,8 @@ export type MotionFormat =
   | 'social_post'
   | 'receipt'
   | 'retro_vhs'
-  | 'sticky_notes';
+  | 'sticky_notes'
+  | 'roblox_story';
 
 export type CaptionStyle = 'auto' | 'pop' | 'box' | 'karaoke' | 'bounce' | 'neon' | 'typewriter' | 'minimal' | 'outline';
 export type TransitionStyle = 'auto' | 'flash' | 'wipe' | 'zoom' | 'glitch' | 'shutter' | 'whip' | 'iris';

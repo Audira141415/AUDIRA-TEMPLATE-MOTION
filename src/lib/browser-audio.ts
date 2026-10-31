@@ -144,6 +144,73 @@ class BrowserAudioEngine {
     }
   }
 
+  // Iconic Roblox "OOF!" Death / Impact Sound
+  public playOofSound() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      // Pitch drop from 330Hz down to 110Hz
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(340, t);
+      osc.frequency.exponentialRampToValueAtTime(120, t + 0.18);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(170, t);
+      osc2.frequency.exponentialRampToValueAtTime(60, t + 0.18);
+
+      gain.gain.setValueAtTime(0.25, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+      osc.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc2.start(t);
+      osc.stop(t + 0.22);
+      osc2.stop(t + 0.22);
+    } catch {
+      // ignore
+    }
+  }
+
+  // Roblox Obby Jump / Item Collect Chime
+  public playRobloxChime() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, t); // C5
+      osc.frequency.setValueAtTime(659.25, t + 0.05); // E5
+      osc.frequency.setValueAtTime(783.99, t + 0.1); // G5
+      osc.frequency.setValueAtTime(1046.50, t + 0.15); // C6
+
+      gain.gain.setValueAtTime(0.12, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.25);
+    } catch {
+      // ignore
+    }
+  }
+
   // Speech Synthesis Voiceover
   public speakLine(lineId: string, text: string, role: 'human' | 'ai' | string) {
     if (this.isMuted || typeof window === 'undefined' || !window.speechSynthesis) return;
@@ -184,4 +251,3 @@ class BrowserAudioEngine {
 }
 
 export const browserAudio = new BrowserAudioEngine();
-

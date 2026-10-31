@@ -104,6 +104,11 @@ export const FORMAT_BRIEF: Record<MotionFormat, { cast: string; roles: [Role, Ro
       'PAPAN CATATAN. A = narator. Setiap baris adalah SATU tips singkat (maks 8 kata) yang ditulis di catatan tempel, langsung bisa dipraktikkan. 4-6 baris, speaker selalu A.',
     roles: ['narrator', 'narrator'],
   },
+  roblox_story: {
+    cast:
+      'ROBLOX OBBY & SKITS. A = Noob (pemain pemula kocak yang sering gagal obby), B = Pro (pemain jago/bacon hair yang suka roasting). Gunakan istilah Roblox: "OOF", "Robux", "Tower of Hell", "Speed coil", "Gamepass", "Skill issue", "Stage". Bergantian A dan B, 5-8 baris.',
+    roles: ['human', 'human'],
+  },
 };
 
 export const SYSTEM = `Kamu penulis naskah reels vertikal (Instagram Reels, TikTok, Shorts) untuk studio AUDIRA MOTION, berbahasa Indonesia gaul yang natural (lo/gue boleh kalau cocok dengan karakter).
@@ -227,6 +232,11 @@ export const IDEA_STARTERS: Record<MotionFormat, string[]> = {
     '6 cara fokus saat kerja dari rumah',
     '5 kebiasaan pagi yang bikin hari lebih ringan',
     '4 tips hemat belanja bulanan',
+  ],
+  roblox_story: [
+    'Noob minta 1000 Robux ke Pro demi beli gamepass di Obby tersulit',
+    'Drama kepleset lava di stage 99 Tower of Hell padahal dikit lagi tamat',
+    'Tipe-tipe player Roblox saat ketemu hacker di server publik',
   ],
 };
 

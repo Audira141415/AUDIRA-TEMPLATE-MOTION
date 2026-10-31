@@ -9,6 +9,7 @@ import { PixelRpgTemplate } from './PixelRpgTemplate';
 import { BreakingNewsTemplate } from './BreakingNewsTemplate';
 import { CleanExplainerTemplate } from './CleanExplainerTemplate';
 import { DocuStoryTemplate } from './DocuStoryTemplate';
+import { RobloxTemplate } from './RobloxTemplate';
 import { Play, Pause, RotateCcw, ShieldCheck, Download, Volume2, VolumeX, Gauge, Music } from 'lucide-react';
 import { browserAudio } from '@/lib/browser-audio';
 import { bgmEngine, BGMTrack } from '@/lib/bgm-engine';
@@ -35,7 +36,7 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
   // Sync BGM according to format default
   useEffect(() => {
     let defaultTrack: BGMTrack = 'lofi_chill';
-    if (storyboard.format === 'pixel_rpg') defaultTrack = 'retro_arcade';
+    if (storyboard.format === 'pixel_rpg' || storyboard.format === 'roblox_story') defaultTrack = 'retro_arcade';
     else if (storyboard.format === 'breaking_news') defaultTrack = 'news_pulse';
     else if (storyboard.format === 'clean_explainer') defaultTrack = 'cyber_synth';
 
@@ -114,6 +115,12 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
       // Format-specific sound effects
       if (storyboard.format === 'pixel_rpg') {
         browserAudio.playChiptuneBlip();
+      } else if (storyboard.format === 'roblox_story') {
+        if (currentLine.emotion === 'shocked' || currentLine.emotion === 'angry') {
+          browserAudio.playOofSound();
+        } else {
+          browserAudio.playRobloxChime();
+        }
       } else if (storyboard.format === 'breaking_news') {
         browserAudio.playNewsAlert();
       } else if (storyboard.format === 'whiteboard') {
@@ -170,6 +177,8 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
     switch (storyboard.format) {
       case 'character_banter':
         return <CharacterBanterTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
+      case 'roblox_story':
+        return <RobloxTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'whiteboard':
         return <WhiteboardTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'pixel_rpg':
@@ -181,7 +190,7 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
       case 'docu_story':
         return <DocuStoryTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       default:
-        return <CharacterBanterTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
+        return <RobloxTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
     }
   };
 
@@ -196,7 +205,15 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
         <WordByWordCaptions
           currentLine={currentLine}
           currentTime={currentTime}
-          highlightColor={storyboard.format === 'pixel_rpg' ? '#10b981' : storyboard.format === 'breaking_news' ? '#facc15' : '#ff7849'}
+          highlightColor={
+            storyboard.format === 'pixel_rpg'
+              ? '#10b981'
+              : storyboard.format === 'roblox_story'
+              ? '#00a2ff'
+              : storyboard.format === 'breaking_news'
+              ? '#facc15'
+              : '#ff7849'
+          }
         />
 
         {/* Social Media 9:16 Safe Zone Overlay (Toggleable) */}
@@ -325,9 +342,9 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
                     Pilih Musik Latar:
                   </div>
                   {[
+                    { id: 'retro_arcade', label: '👾 Roblox 8-bit Beat' },
                     { id: 'lofi_chill', label: '☕ Lofi Chill Beat' },
                     { id: 'news_pulse', label: '🚨 News Pulse' },
-                    { id: 'retro_arcade', label: '👾 Retro 8-bit' },
                     { id: 'cyber_synth', label: '⚡ Cyber Synth' },
                     { id: 'none', label: '🔇 Tanpa BGM' },
                   ].map((track) => (

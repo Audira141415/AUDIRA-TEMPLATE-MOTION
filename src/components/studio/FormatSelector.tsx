@@ -3,7 +3,11 @@
 import React from 'react';
 import { FORMAT_CATALOG } from '@/lib/templates';
 import { MotionFormat } from '@/types/motion';
-import { Users, PenTool, Gamepad2, Radio, Layers, Film, Type, MessageCircle, ListOrdered, HelpCircle, Mic, BookOpen, Terminal, Swords, Map, ChefHat, AtSign, Receipt, Tv, StickyNote } from 'lucide-react';
+import { 
+  Users, PenTool, Gamepad2, Radio, Layers, Film, Type, MessageCircle, 
+  ListOrdered, HelpCircle, Mic, BookOpen, Terminal, Swords, Map, 
+  ChefHat, AtSign, Receipt, Tv, StickyNote, Box 
+} from 'lucide-react';
 
 interface Props {
   selectedFormat: MotionFormat;
@@ -31,6 +35,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Receipt: <Receipt className="w-5 h-5" />,
   Tv: <Tv className="w-5 h-5" />,
   StickyNote: <StickyNote className="w-5 h-5" />,
+  Box: <Box className="w-5 h-5 text-cyan-400" />,
 };
 
 export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) => {
@@ -84,4 +89,3 @@ export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) =>
     </div>
   );
 };
-

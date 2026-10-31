@@ -397,5 +397,109 @@ export function extraFormats({ esc, short, wordSpans }) {
           });`,
       };
     },
+
+    roblox_story(sb, beats) {
+      const lines = linesOf(beats);
+      const a = sb.characters.characterA;
+      const b = sb.characters.characterB;
+      const bubbles = lines
+        .map((l, i) => {
+          const isA = l.speaker === a.name;
+          return `<div class="rbx-bub ${isA ? "rbx-a" : "rbx-b"}" id="rbxb${i}">
+            <div class="rbx-who">[${esc(l.speaker)}]</div>
+            <div class="rbx-say">${wordSpans(l.words, "rbx" + i)}</div>
+            <div class="rbx-tail"></div>
+          </div>`;
+        })
+        .join("");
+
+      return {
+        captions: false,
+        css: `
+          #bg { background:radial-gradient(circle at 50% 30%, #0d1e3d 0%, #070b19 75%); }
+          #rbx-hud { position:absolute; left:40px; right:40px; top:160px; display:flex; justify-content:space-between; align-items:center; }
+          #rbx-menu { display:flex; gap:12px; }
+          .rbx-btn { background:rgba(0,0,0,.7); border:3px solid rgba(255,255,255,.2); color:#fff; border-radius:12px; padding:10px 18px; font:900 24px/1 'Space Mono', monospace; }
+          #rbx-stage-tag { background:#0284c7; border:3px solid #38bdf8; color:#fff; border-radius:12px; padding:10px 20px; font:900 24px/1 'Archivo Black', sans-serif; letter-spacing:.05em; }
+          #rbx-robux { background:rgba(6,78,59,.8); border:3px solid #10b981; color:#6ee7b7; border-radius:12px; padding:10px 20px; font:900 24px/1 'Archivo Black', sans-serif; }
+          .rbx-actor { position:absolute; bottom:360px; width:340px; height:500px; }
+          #actor-noob { left:60px; }
+          #actor-pro { right:60px; }
+          .rbx-actor svg { width:100%; height:100%; overflow:visible; }
+          .rbx-bub { position:absolute; bottom:880px; width:520px; padding:24px 28px; background:#fff; border:7px solid #000; border-radius:28px; box-shadow:8px 8px 0 #000; opacity:0; }
+          .rbx-a { left:80px; }
+          .rbx-b { right:80px; }
+          .rbx-who { font:900 24px/1 'Archivo Black', sans-serif; color:#0284c7; margin-bottom:8px; }
+          .rbx-say { font:800 36px/1.25 Inter, sans-serif; color:#000; }
+          .rbx-say .pw { opacity:.15; }
+          .rbx-tail { position:absolute; bottom:-28px; left:60px; width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:28px solid #000; }
+          .rbx-b .rbx-tail { left:auto; right:60px; }
+          #rbx-oof { position:absolute; left:50%; top:50%; margin-left:-200px; margin-top:-60px; width:400px; padding:20px; background:#dc2626; border:8px solid #000; border-radius:24px; text-align:center; font:900 68px/1 'Archivo Black', sans-serif; color:#facc15; box-shadow:12px 12px 0 #000; opacity:0; transform:rotate(-8deg); z-index:90; }
+          #rbx-lava { position:absolute; left:0; right:0; bottom:0; height:240px; background:linear-gradient(0deg, #ef4444 0%, #b91c1c 80%, transparent); }
+        `,
+        bg: `
+          <div id="rbx-lava"></div>
+          <svg viewBox="0 0 1080 1920" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+            <polygon points="120,1350 480,1350 510,1400 150,1400" fill="#0284c7" stroke="#000" stroke-width="4"/>
+            <rect x="120" y="1300" width="360" height="50" rx="8" fill="#38bdf8" stroke="#000" stroke-width="5"/>
+            <polygon points="600,1350 960,1350 990,1400 630,1400" fill="#15803d" stroke="#000" stroke-width="4"/>
+            <rect x="600" y="1300" width="360" height="50" rx="8" fill="#22c55e" stroke="#000" stroke-width="5"/>
+          </svg>
+        `,
+        stage: `
+          <div id="rbx-hud">
+            <div id="rbx-menu"><span class="rbx-btn">☰</span><span id="rbx-stage-tag">STAGE 42</span></div>
+            <div id="rbx-robux">R$ 999,999</div>
+          </div>
+          <div class="rbx-actor" id="actor-noob">
+            <svg viewBox="0 0 200 320">
+              <rect x="65" y="30" width="70" height="70" rx="12" fill="#ffd900" stroke="#000" stroke-width="6"/>
+              <ellipse cx="88" cy="62" rx="5" ry="7" fill="#000"/>
+              <ellipse cx="112" cy="62" rx="5" ry="7" fill="#000"/>
+              <path d="M88 78 Q100 88 112 78" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+              <rect x="55" y="98" width="90" height="100" rx="6" fill="#0055bf" stroke="#000" stroke-width="6"/>
+              <rect x="25" y="98" width="32" height="95" rx="6" fill="#ffd900" stroke="#000" stroke-width="5"/>
+              <rect x="143" y="98" width="32" height="95" rx="6" fill="#ffd900" stroke="#000" stroke-width="5"/>
+              <rect x="58" y="196" width="40" height="100" rx="4" fill="#00a850" stroke="#000" stroke-width="5"/>
+              <rect x="102" y="196" width="40" height="100" rx="4" fill="#00a850" stroke="#000" stroke-width="5"/>
+            </svg>
+          </div>
+          <div class="rbx-actor" id="actor-pro">
+            <svg viewBox="0 0 200 320">
+              <rect x="60" y="15" width="80" height="30" rx="6" fill="#633b1e" stroke="#000" stroke-width="4"/>
+              <rect x="65" y="35" width="70" height="70" rx="12" fill="#f5d0a9" stroke="#000" stroke-width="6"/>
+              <rect x="75" y="58" width="50" height="15" rx="3" fill="#000" stroke="#71717a" stroke-width="2"/>
+              <rect x="55" y="103" width="90" height="100" rx="6" fill="#111827" stroke="#000" stroke-width="6"/>
+              <circle cx="100" cy="140" r="16" fill="#dc2626"/>
+              <rect x="25" y="103" width="32" height="95" rx="6" fill="#1f2937" stroke="#000" stroke-width="5"/>
+              <rect x="143" y="103" width="32" height="95" rx="6" fill="#1f2937" stroke="#000" stroke-width="5"/>
+              <rect x="58" y="201" width="40" height="100" rx="4" fill="#374151" stroke="#000" stroke-width="5"/>
+              <rect x="102" y="201" width="40" height="100" rx="4" fill="#374151" stroke="#000" stroke-width="5"/>
+            </svg>
+          </div>
+          ${bubbles}
+          <div id="rbx-oof">💥 OOF!</div>
+        `,
+        script: `
+          const A = ${JSON.stringify(a.name)};
+          lines.forEach((ln, i) => {
+            const isA = ln.speaker === A;
+            const me = isA ? "#actor-noob" : "#actor-pro";
+            const other = isA ? "#actor-pro" : "#actor-noob";
+            const t0 = Math.max(0, ln.start - 0.08);
+            if (i > 0) tl.set("#rbxb" + (i - 1), { opacity: 0 }, t0);
+            tl.set("#rbxb" + i, { opacity: 1 }, t0);
+            reveal("rbx" + i, ln.words, 0.2);
+            tl.to(me, { y: -30, scale: 1.06, duration: 0.18, yoyo: true, repeat: 3, ease: "power2.out" }, t0);
+            tl.to(other, { y: 0, scale: 0.95, duration: 0.2 }, t0);
+            if (ln.emotion === 'shocked' || ln.emotion === 'angry') {
+              tl.fromTo("#rbx-oof", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1.2, duration: 0.2, ease: "back.out(3)" }, t0 + 0.1);
+              tl.to("#rbx-oof", { opacity: 0, duration: 0.2 }, t0 + 0.9);
+              tl.fromTo("#cam", { x: -14 }, { x: 14, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, t0 + 0.1);
+            }
+          });
+        `,
+      };
+    },
   };
 }

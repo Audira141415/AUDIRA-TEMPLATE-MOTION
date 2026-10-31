@@ -77,3 +77,4 @@ if ($ready) {
 
 Write-Host ""
 Write-Host "Untuk menghentikan web, jalankan stop_web.bat" -ForegroundColor Gray
+

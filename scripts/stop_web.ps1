@@ -39,3 +39,4 @@ if (-not $check) {
 } else {
     Write-Host "[!] Peringatan: Masih ada koneksi menggantung di port $Port." -ForegroundColor Red
 }
+

@@ -14,7 +14,8 @@ export type ExtraFormat =
   | 'social_post'
   | 'receipt'
   | 'retro_vhs'
-  | 'sticky_notes';
+  | 'sticky_notes'
+  | 'roblox_story';
 
 type Cast = { name: string; title: string };
 type RawLine = [speaker: 'A' | 'B', text: string, emotion: SpeakerEmotion];
@@ -86,6 +87,7 @@ export const EXTRA_THEMES: Record<ExtraFormat, Storyboard['visualTheme']> = {
   receipt: { primaryColor: '#dc2626', accentColor: '#78716c', backgroundColor: '#1c1917' },
   retro_vhs: { primaryColor: '#fde047', accentColor: '#22d3ee', backgroundColor: '#000000' },
   sticky_notes: { primaryColor: '#dc2626', accentColor: '#fde047', backgroundColor: '#b88552' },
+  roblox_story: { primaryColor: '#00a2ff', accentColor: '#facc15', backgroundColor: '#070b19' },
 };
 
 export const EXTRA_CATALOG: Array<{
@@ -97,6 +99,7 @@ export const EXTRA_CATALOG: Array<{
   description: string;
   previewColor: string;
 }> = [
+  { id: 'roblox_story', name: 'Roblox Obby & Skits', tagline: 'Blocky 3D Avatars, Obby Parkour & OOF! Sounds', badge: '🔥 Viral Gen-Z', iconName: 'Box', description: 'Format mega-viral Roblox: Karakter kotak Noob vs Pro berlaga di rintangan Obby parkour, dilengkapi Roblox bubble chat, leaderboard Robux R$, dan sound effect OOF legendaris.', previewColor: '#00a2ff' },
   { id: 'kinetic_type', name: 'Kinetic Typography', tagline: 'Big Bold Words Slamming the Screen', badge: 'Paling Simpel', iconName: 'Type', description: 'Kata-kata raksasa menghantam layar mengikuti suara, latar berganti warna tiap kalimat. Cocok untuk quote dan opini panas.', previewColor: '#ea580c' },
   { id: 'chat_story', name: 'Chat Story', tagline: 'Drama Told Through a Chat Screen', badge: 'Storytime', iconName: 'MessageCircle', description: 'Cerita disampaikan lewat layar chat: bubble masuk satu per satu, status "sedang mengetik", dan notifikasi.', previewColor: '#25d366' },
   { id: 'top_list', name: 'Top List', tagline: 'Countdown From #N to #1', badge: 'Disimpan Orang', iconName: 'ListOrdered', description: 'Hitung mundur peringkat dengan angka raksasa dan baris progres, dari nomor terbesar ke juara.', previewColor: '#f43f5e' },
@@ -114,6 +117,24 @@ export const EXTRA_CATALOG: Array<{
 ];
 
 export const EXTRA_DEMOS: Record<ExtraFormat, Storyboard> = {
+  roblox_story: demo('roblox_story', {
+    title: 'Noob Minta 1000 Robux Buat Gamepass',
+    concept: 'Noob merengek minta Robux ke Pro demi beli gamepass di Obby tersulit',
+    mood: 'hyped',
+    locationName: 'Tower of Hell (Stage 42)',
+    a: { name: 'Noob Blox', title: 'Level 1 Obby Player' },
+    b: { name: 'Pro Bacon', title: 'Top 1 Global Obby' },
+    roles: ['human', 'human'],
+    theme: EXTRA_THEMES.roblox_story,
+    hook: 'Kalo lo punya 100.000 Robux, gamepass apa yang langsung lo beli?',
+    lines: [
+      ['A', 'Bro, bagi 1000 Robux dong! Gue mau beli speed coil di Obby ini!', 'hyped'],
+      ['B', 'Skill issue, bro. Di Tower of Hell pake skill murni, bukan Robux!', 'smug'],
+      ['A', 'Tapi lava merah di stage empat puluh dua ini nggak ngotak!', 'angry'],
+      ['B', 'Loncat pas laser muter, bukan pas lagi bengong. OOF!', 'sarcastic'],
+      ['A', 'Yah... kepleset lagi. Suara OOF gue udah seratus kali hari ini!', 'shocked'],
+    ],
+  }),
   kinetic_type: demo('kinetic_type', {
     title: 'Berhenti Nunggu Mood',
     concept: 'Opini keras soal menunggu motivasi',
