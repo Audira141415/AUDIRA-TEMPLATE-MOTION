@@ -14,7 +14,7 @@ export const WordByWordCaptions: React.FC<Props> = ({
   currentLine,
   currentTime,
   highlightColor = '#facc15',
-  topPercent = 'top-[25%]',
+  topPercent = 'top-[15%]',
 }) => {
   if (!currentLine) return null;
 

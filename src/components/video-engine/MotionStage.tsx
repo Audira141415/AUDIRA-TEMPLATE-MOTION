@@ -415,32 +415,6 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
           </div>
         )}
 
-        {/* Quick Audio Mute Toggle on Video Canvas */}
-        <div className="absolute top-4 right-4 z-40">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleMute();
-            }}
-            className={`p-2 rounded-full backdrop-blur-md border text-xs font-bold transition-all shadow-md ${
-              !isMuted 
-                ? 'bg-orange-600 text-white border-orange-500' 
-                : 'bg-black/70 text-zinc-400 border-white/10 hover:bg-black/90'
-            }`}
-            title={isMuted ? 'Nyalakan Suara (M)' : 'Bisukan Suara (M)'}
-          >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 animate-pulse" />}
-          </button>
-        </div>
-
-        {/* Prompt to Tap to Unmute on First Load */}
-        {!audioUnlocked && !isMuted && (
-          <div className="absolute bottom-5 left-4 z-40 bg-black/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-orange-500/60 shadow-lg text-white flex items-center gap-1.5 animate-pulse transition-transform active:scale-95">
-            <Volume2 className="w-3.5 h-3.5 text-orange-400" />
-            <span className="text-[10px] font-bold text-orange-300">Klik video untuk audio</span>
-          </div>
-        )}
-
         {/* Phone Bottom Home Indicator */}
         {frameMode === 'phone' && (
           <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/40 rounded-full z-50 pointer-events-none" />
