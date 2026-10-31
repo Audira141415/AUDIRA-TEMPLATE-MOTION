@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { FormatSelector } from '@/components/studio/FormatSelector';
 import { IdeaInputPanel } from '@/components/studio/IdeaInputPanel';
@@ -14,12 +15,19 @@ import { generateStoryboardFromIdea } from '@/lib/script-generator';
 import { rebalanceLines } from '@/lib/storyboard-utils';
 import { HUMAN_CAST, AI_CAST, SCENE_LOCATIONS, CastMember, LocationScene } from '@/lib/cast-catalog';
 import { MotionFormat, MoodType, Storyboard, SpeakerEmotion, StoryboardLine } from '@/types/motion';
-import { Sparkles, Zap, Award } from 'lucide-react';
+import { 
+  Sparkles, Zap, Award, Palette, Wand2, FileText, Share2, 
+  Layers, Clock, MessageSquare, ArrowUpRight 
+} from 'lucide-react';
+
+type StudioTab = 'format' | 'idea' | 'script' | 'social';
 
 export default function StudioPage() {
   const [selectedFormat, setSelectedFormat] = useState<MotionFormat>('character_banter');
   const [selectedMood, setSelectedMood] = useState<MoodType>('hyped');
   const [ideaInput, setIdeaInput] = useState<string>('Ash mau resign jadi streamer padahal baru punya 40 followers');
+  const [activeTab, setActiveTab] = useState<StudioTab>('script');
+  const [expandAllPanels, setExpandAllPanels] = useState<boolean>(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -67,7 +75,7 @@ export default function StudioPage() {
     setStoryboard(DEMO_STORYBOARDS[format]);
   };
 
-  // Generate new script from prompt (with seamless local fallback for guests)
+  // Generate new script from prompt
   const handleGenerate = async () => {
     setIsGenerating(true);
     setScriptNotice(null);
@@ -80,10 +88,12 @@ export default function StudioPage() {
       const data = await res.json();
       if (res.ok) {
         setStoryboard(data.storyboard);
+        setActiveTab('script');
         return;
       }
       const fallbackStoryboard = await generateStoryboardFromIdea(ideaInput, selectedFormat, selectedMood);
       setStoryboard(fallbackStoryboard);
+      setActiveTab('script');
       if (res.status === 401) {
         setScriptNotice({ tone: 'info', text: 'Mode Tamu: Naskah otomatis diracik di browser. Masuk untuk akses Claude API.' });
       } else {
@@ -92,6 +102,7 @@ export default function StudioPage() {
     } catch {
       const fallback = await generateStoryboardFromIdea(ideaInput, selectedFormat, selectedMood);
       setStoryboard(fallback);
+      setActiveTab('script');
       setScriptNotice({ tone: 'info', text: 'Naskah lokal aktif (Offline fallback).' });
     } finally {
       setIsGenerating(false);
@@ -239,132 +250,209 @@ export default function StudioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0e0e11] text-[#f4f3f0] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#0e0e11] text-[#f4f3f0] flex flex-col font-sans antialiased">
       {/* Header */}
       <SiteHeader />
 
       {/* Main Studio Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
-        {/* Top Hero Banner */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
+      <main className="flex-1 max-w-[1400px] w-full mx-auto p-4 sm:p-6 lg:p-8">
+        {/* Top Control Bar with Quick Metadata */}
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="px-3 py-1 rounded-full bg-orange-600/20 text-orange-400 border border-orange-500/30 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                Formula Viral BanterReels
+            <div className="flex flex-wrap items-center gap-2 mb-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-orange-600/20 text-orange-400 border border-orange-500/30 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                <Sparkles className="w-3 h-3" />
+                AUDIRA Studio Pro
               </span>
               <span className="text-zinc-500 text-xs">•</span>
-              <span className="text-xs font-medium text-zinc-400">9:16 Vertical Video Suite</span>
+              <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800 uppercase">
+                {selectedFormat}
+              </span>
+              <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
+                <Clock className="w-3 h-3 text-orange-400" />
+                {storyboard.durationSec.toFixed(1)}s
+              </span>
+              <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
+                <MessageSquare className="w-3 h-3 text-yellow-400" />
+                {storyboard.lines.length} Baris
+              </span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              Satu Ide. Satu Reel Motion Jadi.
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              {storyboard.title || 'Studio Motion Reel'}
             </h1>
-            <p className="text-sm text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
-              Karakter berdebat, papan tulis spidol, game retro 16-bit, berita darurat, explainer modern, hingga kisah sejarah dokumenter. Semua otomatis dengan naskah dan animasi teks per kata.
-            </p>
           </div>
 
-          <div className="flex items-center gap-2 sm:self-center shrink-0">
+          <div className="flex items-center gap-2.5 shrink-0">
+            <Link
+              href={`/prompts?format=${selectedFormat}`}
+              className="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-bold text-zinc-300 flex items-center gap-1.5 transition-colors"
+            >
+              <span>Hub Prompt</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+            </Link>
+
             <button
               onClick={() => setIsExportModalOpen(true)}
-              className="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-black text-xs uppercase tracking-wider shadow-brutal flex items-center gap-2 border-2 border-black transition-transform active:translate-y-0.5"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-black text-xs uppercase tracking-wider shadow-brutal flex items-center gap-2 border-2 border-black transition-transform active:translate-y-0.5"
             >
               <Award className="w-4 h-4" />
-              <span>Export Video MP4</span>
+              <span>Export MP4</span>
             </button>
           </div>
         </div>
 
         {/* 2-Column Responsive Studio Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT COLUMN: Controls, Formats, Cast, Script Editor & Viral Toolkit (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-6 order-2 lg:order-1">
-            {/* 1. Format Archetypes Selector */}
-            <FormatSelector
-              selectedFormat={selectedFormat}
-              onSelect={handleSelectFormat}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* LEFT COLUMN: Clean Studio Workflow Tabs & Panels (7 Cols) */}
+          <div className="lg:col-span-7 flex flex-col gap-4 order-2 lg:order-1">
+            {/* Workflow Navigation Tabs */}
+            <div className="flex items-center justify-between gap-2 p-1.5 rounded-2xl bg-[#141413] border-2 border-zinc-800">
+              <div className="flex flex-wrap items-center gap-1">
+                {[
+                  { id: 'script', label: 'Editor Naskah', icon: <FileText className="w-3.5 h-3.5" /> },
+                  { id: 'idea', label: 'Ide & AI', icon: <Wand2 className="w-3.5 h-3.5" /> },
+                  { id: 'format', label: 'Format & Cast', icon: <Palette className="w-3.5 h-3.5" /> },
+                  { id: 'social', label: 'Viral Kit', icon: <Share2 className="w-3.5 h-3.5" /> },
+                ].map((tab) => {
+                  const isActive = activeTab === tab.id && !expandAllPanels;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => {
+                        setActiveTab(tab.id as StudioTab);
+                        setExpandAllPanels(false);
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                        isActive
+                          ? 'bg-orange-600 text-white shadow-sm'
+                          : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                      }`}
+                    >
+                      {tab.icon}
+                      <span>{tab.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
 
-            {/* 2. Cast & Location Picker (For Character Banter) */}
-            {selectedFormat === 'character_banter' && (
-              <CastPicker
-                selectedHuman={storyboard.characters.characterA.name}
-                selectedAi={storyboard.characters.characterB.name}
-                selectedLocation={storyboard.locationName}
-                onSelectHuman={handleSelectHuman}
-                onSelectAi={handleSelectAi}
-                onSelectLocation={handleSelectLocation}
-                onShuffle={handleShuffleCast}
-              />
-            )}
-
-            {/* 3. Idea Input & Mood Selector */}
-            <IdeaInputPanel
-              idea={ideaInput}
-              onChangeIdea={setIdeaInput}
-              selectedMood={selectedMood}
-              onChangeMood={setSelectedMood}
-              onGenerate={handleGenerate}
-              isGenerating={isGenerating}
-              selectedFormat={selectedFormat}
-            />
-            {scriptNotice && (
-              <div
-                className={`-mt-3 px-4 py-3 rounded-2xl border text-xs font-semibold ${
-                  scriptNotice.tone === 'error'
-                    ? 'bg-red-950/60 border-red-800 text-red-200'
-                    : 'bg-amber-950/50 border-amber-800 text-amber-200'
+              {/* Toggle to expand all panels for power users */}
+              <button
+                type="button"
+                onClick={() => setExpandAllPanels(!expandAllPanels)}
+                className={`hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-xl text-[10px] font-bold border transition-colors ${
+                  expandAllPanels
+                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    : 'text-zinc-500 border-zinc-800 hover:text-zinc-300'
                 }`}
+                title="Buka semua modul sekaligus"
               >
-                {scriptNotice.text}
+                <Layers className="w-3 h-3" />
+                <span>{expandAllPanels ? 'Mode Tab' : 'Lihat Semua'}</span>
+              </button>
+            </div>
+
+            {/* TAB CONTENT: 1. FORMAT & CAST */}
+            {(activeTab === 'format' || expandAllPanels) && (
+              <div className="flex flex-col gap-4 animate-in fade-in duration-200">
+                <FormatSelector
+                  selectedFormat={selectedFormat}
+                  onSelect={handleSelectFormat}
+                />
+
+                {selectedFormat === 'character_banter' && (
+                  <CastPicker
+                    selectedHuman={storyboard.characters.characterA.name}
+                    selectedAi={storyboard.characters.characterB.name}
+                    selectedLocation={storyboard.locationName}
+                    onSelectHuman={handleSelectHuman}
+                    onSelectAi={handleSelectAi}
+                    onSelectLocation={handleSelectLocation}
+                    onShuffle={handleShuffleCast}
+                  />
+                )}
               </div>
             )}
 
-            {/* 4. Interactive Script Editor */}
-            <ScriptEditorPanel
-              storyboard={storyboard}
-              onUpdateLine={handleUpdateLine}
-              onAddLine={handleAddLine}
-              onDeleteLine={handleDeleteLine}
-              onSwapSpeaker={handleSwapSpeaker}
-              onMoveLine={handleMoveLine}
-              onUpdateHook={handleUpdateHook}
-            />
+            {/* TAB CONTENT: 2. IDEA & AI SCRIPT GENERATOR */}
+            {(activeTab === 'idea' || expandAllPanels) && (
+              <div className="flex flex-col gap-4 animate-in fade-in duration-200">
+                <IdeaInputPanel
+                  idea={ideaInput}
+                  onChangeIdea={setIdeaInput}
+                  selectedMood={selectedMood}
+                  onChangeMood={setSelectedMood}
+                  onGenerate={handleGenerate}
+                  isGenerating={isGenerating}
+                  selectedFormat={selectedFormat}
+                />
+                {scriptNotice && (
+                  <div
+                    className={`px-4 py-2.5 rounded-2xl border text-xs font-semibold ${
+                      scriptNotice.tone === 'error'
+                        ? 'bg-red-950/60 border-red-800 text-red-200'
+                        : 'bg-amber-950/50 border-amber-800 text-amber-200'
+                    }`}
+                  >
+                    {scriptNotice.text}
+                  </div>
+                )}
+              </div>
+            )}
 
-            {/* 5. Viral Social Toolkit (Siap Posting) */}
-            <ViralToolkit storyboard={storyboard} />
+            {/* TAB CONTENT: 3. INTERACTIVE SCRIPT EDITOR */}
+            {(activeTab === 'script' || expandAllPanels) && (
+              <div className="flex flex-col gap-4 animate-in fade-in duration-200">
+                <ScriptEditorPanel
+                  storyboard={storyboard}
+                  onUpdateLine={handleUpdateLine}
+                  onAddLine={handleAddLine}
+                  onDeleteLine={handleDeleteLine}
+                  onSwapSpeaker={handleSwapSpeaker}
+                  onMoveLine={handleMoveLine}
+                  onUpdateHook={handleUpdateHook}
+                />
+              </div>
+            )}
 
-            {/* Banter Secret Formula Insights */}
-            <div className="bg-[#141413] p-5 rounded-3xl border-2 border-zinc-800 flex flex-col gap-3">
-              <h4 className="text-xs font-black uppercase text-orange-400 tracking-wider flex items-center gap-2">
-                <Zap className="w-4 h-4" />
-                Rahasia Retensi BanterReels (Under The Hood)
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-zinc-300">
-                <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
-                  <span className="font-mono font-bold text-orange-400 block mb-1">00:00.4 Detik</span>
-                  <p className="text-[11px] text-zinc-400">
-                    Hook audio pembuka meledak dalam 0.4s pertama untuk mengunci jempol penonton.
-                  </p>
-                </div>
-                <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
-                  <span className="font-mono font-bold text-yellow-400 block mb-1">Word Pop Captions</span>
-                  <p className="text-[11px] text-zinc-400">
-                    Teks menyala per kata tepat saat diucapkan untuk menjaga fokus mata penonton.
-                  </p>
-                </div>
-                <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
-                  <span className="font-mono font-bold text-cyan-400 block mb-1">Comment Magnet</span>
-                  <p className="text-[11px] text-zinc-400">
-                    Outro diakhiri pertanyaan pemicu debat agar algoritma melipatgandakan views.
-                  </p>
+            {/* TAB CONTENT: 4. VIRAL TOOLKIT & SECRETS */}
+            {(activeTab === 'social' || expandAllPanels) && (
+              <div className="flex flex-col gap-4 animate-in fade-in duration-200">
+                <ViralToolkit storyboard={storyboard} />
+
+                {/* Banter Secret Formula Insights */}
+                <div className="bg-[#141413] p-5 rounded-3xl border-2 border-zinc-800 flex flex-col gap-3">
+                  <h4 className="text-xs font-black uppercase text-orange-400 tracking-wider flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    Rahasia Retensi BanterReels (Under The Hood)
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-zinc-300">
+                    <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
+                      <span className="font-mono font-bold text-orange-400 block mb-1">00:00.4 Detik</span>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed">
+                        Hook audio pembuka meledak dalam 0.4s pertama untuk mengunci jempol penonton.
+                      </p>
+                    </div>
+                    <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
+                      <span className="font-mono font-bold text-yellow-400 block mb-1">Word Pop Captions</span>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed">
+                        Teks menyala per kata tepat saat diucapkan untuk menjaga fokus mata penonton.
+                      </p>
+                    </div>
+                    <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
+                      <span className="font-mono font-bold text-cyan-400 block mb-1">Comment Magnet</span>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed">
+                        Outro diakhiri pertanyaan pemicu debat agar algoritma melipatgandakan views.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
-          {/* RIGHT COLUMN: 9:16 Vertical Live Preview Stage (5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col items-center order-1 lg:order-2 sticky top-24">
+          {/* RIGHT COLUMN: 9:16 Vertical Live Preview Stage (5 Cols - Sticky & Centered) */}
+          <div className="lg:col-span-5 flex flex-col items-center order-1 lg:order-2 sticky top-20 z-30">
             <MotionStage
               storyboard={storyboard}
               onExportClick={() => setIsExportModalOpen(true)}
