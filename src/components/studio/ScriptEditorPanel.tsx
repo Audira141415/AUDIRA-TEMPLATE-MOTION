@@ -6,9 +6,10 @@ import {
   Edit3, MessageSquare, Clock, Plus, Trash2, ArrowUpDown, 
   ChevronUp, ChevronDown, User, Bot, Type, MapPin, Volume2, Square, 
   Loader2, Zap, Sparkles, Undo2, Redo2, Image as ImageIcon, CheckCircle2,
-  Wand2, Music
+  Wand2, Music, UploadCloud
 } from 'lucide-react';
 import { browserAudio } from '@/lib/browser-audio';
+import { MediaUploaderModal } from './MediaUploaderModal';
 
 interface Props {
   storyboard: Storyboard;
@@ -84,9 +85,9 @@ export const ScriptEditorPanel: React.FC<Props> = ({
   const [isBatchSyncing, setIsBatchSyncing] = useState(false);
   const [syncProgress, setSyncProgress] = useState<{ cur: number; total: number } | null>(null);
   const [mediaNotice, setMediaNotice] = useState<string | null>(null);
+  const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
 
   const audioPreviewRef = useRef<HTMLAudioElement | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Keyboard shortcut listeners for Ctrl+Z and Ctrl+Y
   useEffect(() => {
@@ -321,22 +322,15 @@ export const ScriptEditorPanel: React.FC<Props> = ({
 
         {/* Tool 3: Upload Screenshot / B-Roll */}
         <div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleMediaUpload}
-            className="hidden"
-          />
           <button
             type="button"
-            onClick={() => fileInputRef.current?.click()}
+            onClick={() => setIsMediaModalOpen(true)}
             className="w-full px-3 py-2 rounded-xl text-xs font-bold bg-cyan-600/15 hover:bg-cyan-600/25 text-cyan-300 border border-cyan-500/40 hover:border-cyan-500 transition-all flex items-center justify-center gap-1.5 truncate"
-            title="Upload screenshot bukti chat, logo, atau foto produk kustom untuk canvas"
+            title="Buka pengunggah bukti screenshot chat, logo, atau grafik b-roll"
           >
             <ImageIcon className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
             <span className="truncate">
-              {storyboard.visualLayout?.customMediaLabel ? 'Ganti Media' : 'Upload Bukti'}
+              {storyboard.visualLayout?.customMediaLabel ? 'Kelola Media Bukti' : 'Upload Bukti'}
             </span>
           </button>
         </div>
@@ -551,6 +545,16 @@ export const ScriptEditorPanel: React.FC<Props> = ({
           className="w-full bg-[#141413] text-sm text-white px-3.5 py-2.5 rounded-xl border border-zinc-800 focus:border-orange-500 focus:outline-none font-medium"
         />
       </div>
+
+      {/* Media Uploader Modal */}
+      <MediaUploaderModal
+        isOpen={isMediaModalOpen}
+        onClose={() => setIsMediaModalOpen(false)}
+        visualLayout={storyboard.visualLayout}
+        onUpdateVisualLayout={(layout) => {
+          if (onUpdateVisualLayout) onUpdateVisualLayout(layout);
+        }}
+      />
     </div>
   );
 };

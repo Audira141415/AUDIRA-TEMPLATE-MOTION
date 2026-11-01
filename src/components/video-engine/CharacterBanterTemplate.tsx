@@ -96,6 +96,23 @@ export const CharacterBanterTemplate: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Floating Custom Evidence / B-Roll Screen if attached */}
+      {storyboard.visualLayout?.customMediaUrl && (
+        <div className="absolute top-24 inset-x-6 z-20 flex flex-col items-center animate-in fade-in zoom-in-95 pointer-events-none">
+          <div className="w-full max-w-[280px] rounded-2xl overflow-hidden border-2 border-cyan-400 bg-black/90 shadow-[4px_4px_0px_0px_#06b6d4]">
+            <div className="bg-cyan-950/90 px-3 py-1 text-[9px] font-mono text-cyan-300 font-black border-b border-cyan-800 flex items-center justify-between">
+              <span>BUKTI: {storyboard.visualLayout.customMediaLabel || 'DOKUMEN A1'}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+            </div>
+            <img
+              src={storyboard.visualLayout.customMediaUrl}
+              alt="Bukti Visual"
+              className="w-full max-h-[140px] object-cover"
+            />
+          </div>
+        </div>
+      )}
+
       {/* CHARACTER A (Left Side - Modular Multi-Archetype) */}
       <div className="absolute bottom-20 left-2 sm:left-4 w-[46%] max-w-[190px]">
         <ModularCharacter

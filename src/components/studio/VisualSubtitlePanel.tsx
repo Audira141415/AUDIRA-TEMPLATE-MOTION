@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Storyboard, 
   SubtitleConfig, 
@@ -13,8 +13,10 @@ import {
   Sliders, AlignVerticalJustifyCenter, Eye, EyeOff, Type, 
   Sparkles, Palette, Layers, Box, CheckCircle2, LayoutTemplate, 
   BarChart3, Heading, MessageSquareQuote, Lightbulb, Radio, Tv,
-  Smartphone, Mic, Video, AlertTriangle, Flame, ShieldAlert, MapPin
+  Smartphone, Mic, Video, AlertTriangle, Flame, ShieldAlert, MapPin,
+  Image as ImageIcon, UploadCloud, Trash2
 } from 'lucide-react';
+import { MediaUploaderModal } from './MediaUploaderModal';
 
 interface Props {
   storyboard: Storyboard;
@@ -52,6 +54,8 @@ export const VisualSubtitlePanel: React.FC<Props> = ({
   onUpdateSubtitleConfig,
   onUpdateVisualLayout,
 }) => {
+  const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
+
   const currentSubConfig: SubtitleConfig = storyboard.subtitleConfig || {
     enabled: true,
     position: 'lower_mid',
@@ -530,7 +534,94 @@ export const VisualSubtitlePanel: React.FC<Props> = ({
         )}
       </div>
 
-      {/* SECTION 2: CANVAS VISUAL LAYERS INSPECTOR ("Visualnya Apa Saja") */}
+      {/* SECTION 2: B-ROLL & BUKTI VISUAL CANVAS */}
+      <div className="bg-[#141413] p-5 rounded-3xl border-2 border-zinc-800 shadow-brutal flex flex-col gap-4">
+        <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
+              <ImageIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-black text-white uppercase tracking-wider">
+                B-Roll & Bukti Visual Video
+              </h3>
+              <p className="text-[11px] text-zinc-400">
+                Sematkan screenshot chat WA, grafik data, foto bukti, atau dokumen forensik
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsMediaModalOpen(true)}
+            className="px-3.5 py-1.5 rounded-xl text-xs font-black bg-cyan-600 hover:bg-cyan-500 text-white flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <UploadCloud className="w-3.5 h-3.5" />
+            <span>{currentLayout.customMediaUrl ? 'Kelola Media' : 'Unggah Bukti'}</span>
+          </button>
+        </div>
+
+        {/* Active Media Status Card */}
+        {currentLayout.customMediaUrl ? (
+          <div className="flex items-center justify-between p-3.5 rounded-2xl bg-cyan-950/40 border-2 border-cyan-800/80">
+            <div className="flex items-center gap-3 truncate">
+              <div className="w-16 h-16 rounded-xl overflow-hidden bg-black border border-cyan-700/60 shrink-0 relative">
+                <img
+                  src={currentLayout.customMediaUrl}
+                  alt="Active Bukti"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="truncate">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-white">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Terpasang di Canvas Video</span>
+                </div>
+                <div className="text-xs font-mono font-bold text-cyan-300 mt-0.5 truncate">
+                  Label Tag: [{currentLayout.customMediaLabel || 'BUKTI A1'}]
+                </div>
+                <div className="text-[10px] text-zinc-400 mt-0.5">
+                  Tampil otomatis pada scene grafik & dokumen
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0 ml-2">
+              <button
+                type="button"
+                onClick={() => setIsMediaModalOpen(true)}
+                className="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-bold border border-zinc-700"
+              >
+                Ganti
+              </button>
+              <button
+                type="button"
+                onClick={() => onUpdateVisualLayout({ ...currentLayout, customMediaUrl: undefined, customMediaLabel: undefined })}
+                className="px-3 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900 text-red-300 text-xs font-bold border border-red-800"
+              >
+                Hapus
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div 
+            onClick={() => setIsMediaModalOpen(true)}
+            className="p-5 rounded-2xl border-2 border-dashed border-zinc-800 hover:border-cyan-500/70 bg-zinc-900/40 hover:bg-zinc-900/70 cursor-pointer transition-all flex flex-col items-center justify-center text-center gap-2"
+          >
+            <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center text-cyan-400 border border-zinc-700">
+              <UploadCloud className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white">Belum Ada Media Bukti Terpasang</p>
+              <p className="text-[11px] text-zinc-400 mt-0.5">
+                Klik di sini untuk upload screenshot percakapan WhatsApp, bukti transaksi, atau grafik
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* SECTION 3: CANVAS VISUAL LAYERS INSPECTOR ("Visualnya Apa Saja") */}
       <div className="bg-[#141413] p-5 rounded-3xl border-2 border-zinc-800 shadow-brutal flex flex-col gap-4">
         <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
           <div className="flex items-center gap-2">
@@ -695,6 +786,14 @@ export const VisualSubtitlePanel: React.FC<Props> = ({
           </div>
         </div>
       </div>
+
+      {/* Modal Pengunggah Media & B-Roll */}
+      <MediaUploaderModal
+        isOpen={isMediaModalOpen}
+        onClose={() => setIsMediaModalOpen(false)}
+        visualLayout={currentLayout}
+        onUpdateVisualLayout={onUpdateVisualLayout}
+      />
     </div>
   );
 };
