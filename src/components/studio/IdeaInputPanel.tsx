@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { MoodType, MotionFormat } from '@/types/motion';
-import { Sparkles, Wand2, ArrowRight } from 'lucide-react';
+import { Sparkles, Wand2, ArrowRight, Cpu, Settings } from 'lucide-react';
 import { MOODS, moodById } from '@/lib/moods';
 
 interface Props {
@@ -13,8 +14,9 @@ interface Props {
   onGenerate: () => void;
   isGenerating: boolean;
   selectedFormat: MotionFormat;
+  selectedProvider?: string;
+  onChangeProvider?: (provider: string) => void;
 }
-
 
 const STARTER_PROMPTS = [
   'Ash mau resign jadi streamer padahal baru punya 40 followers',
@@ -25,6 +27,17 @@ const STARTER_PROMPTS = [
   'Kisah penemu teknologi 4G dan WiFi asal Kediri yang mendunia',
 ];
 
+const PROVIDER_OPTIONS = [
+  { id: 'auto', label: '🤖 Auto (Sesuai Konfigurasi Admin)' },
+  { id: 'audira_route', label: '🚀 Audira Route (9Router Gateway)' },
+  { id: 'ollama', label: '🏠 Ollama Local (100% Offline & Gratis)' },
+  { id: 'gemini', label: '⚡ Google Gemini (3.8 Flash)' },
+  { id: 'claude', label: '🧠 Anthropic Claude (3.5 Sonnet)' },
+  { id: 'openai', label: '🌐 OpenAI (GPT-4o / Omni)' },
+  { id: 'deepseek', label: '🔥 DeepSeek (V3 / R1)' },
+  { id: 'groq', label: '⚡ Groq (Llama 3.3 Ultra Fast)' },
+];
+
 export const IdeaInputPanel: React.FC<Props> = ({
   idea,
   onChangeIdea,
@@ -33,16 +46,43 @@ export const IdeaInputPanel: React.FC<Props> = ({
   onGenerate,
   isGenerating,
   selectedFormat,
+  selectedProvider = 'auto',
+  onChangeProvider,
 }) => {
   return (
     <div className="bg-zinc-900/90 p-5 rounded-3xl border-2 border-zinc-800 shadow-brutal flex flex-col gap-4">
-      {/* Title */}
-      <div className="flex items-center justify-between">
+      {/* Title & Engine Selector Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
         <label className="text-xs font-black uppercase tracking-wider text-zinc-300 flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-orange-500" />
           <span>Ketik Ide Cerita Kamu</span>
         </label>
-        <span className="text-[11px] text-zinc-500 font-mono">1 Kalimat = 1 Reel Jadi</span>
+
+        {/* AI Model Badge / Selector */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 bg-[#141413] px-2.5 py-1 rounded-xl border border-zinc-700/80">
+            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+            <select
+              value={selectedProvider}
+              onChange={(e) => onChangeProvider && onChangeProvider(e.target.value)}
+              className="bg-transparent text-[11px] font-bold text-zinc-200 focus:outline-none cursor-pointer"
+            >
+              {PROVIDER_OPTIONS.map((opt) => (
+                <option key={opt.id} value={opt.id} className="bg-zinc-900 text-white">
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <Link
+            href="/admin"
+            title="Buka Pengaturan API Key di Admin"
+            className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white border border-zinc-700 transition-colors"
+          >
+            <Settings className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
 
       {/* Textarea */}
@@ -130,4 +170,3 @@ export const IdeaInputPanel: React.FC<Props> = ({
     </div>
   );
 };
-

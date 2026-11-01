@@ -6,7 +6,8 @@ import { MotionFormat } from '@/types/motion';
 import { 
   Users, PenTool, Gamepad2, Radio, Layers, Film, Type, MessageCircle, 
   ListOrdered, HelpCircle, Mic, BookOpen, Terminal, Swords, Map, 
-  ChefHat, AtSign, Receipt, Tv, StickyNote, Box, Search, Sparkles
+  ChefHat, AtSign, Receipt, Tv, StickyNote, Box, Search, Sparkles,
+  Globe, Shield, Compass, Cuboid
 } from 'lucide-react';
 
 interface Props {
@@ -36,12 +37,17 @@ const iconMap: Record<string, React.ReactNode> = {
   Tv: <Tv className="w-4 h-4" />,
   StickyNote: <StickyNote className="w-4 h-4" />,
   Box: <Box className="w-4 h-4 text-cyan-400" />,
+  Globe: <Globe className="w-4 h-4 text-sky-400" />,
+  Shield: <Shield className="w-4 h-4 text-emerald-400" />,
+  Compass: <Compass className="w-4 h-4 text-indigo-400" />,
+  Cuboid: <Cuboid className="w-4 h-4 text-amber-400" />,
 };
 
-type CategoryFilter = 'all' | 'gaming' | 'banter' | 'explainer' | 'story';
+type CategoryFilter = 'all' | 'simulation' | 'gaming' | 'banter' | 'explainer' | 'story';
 
 const CATEGORY_TABS: Array<{ id: CategoryFilter; label: string; count: number }> = [
-  { id: 'all', label: 'Semua', count: 21 },
+  { id: 'all', label: 'Semua', count: 25 },
+  { id: 'simulation', label: '3D Simulation', count: 4 },
   { id: 'gaming', label: 'Gaming & Roblox', count: 4 },
   { id: 'banter', label: 'Banter & Debat', count: 4 },
   { id: 'explainer', label: 'Edukasi & Data', count: 5 },
@@ -49,6 +55,11 @@ const CATEGORY_TABS: Array<{ id: CategoryFilter; label: string; count: number }>
 ];
 
 const FORMAT_CATEGORY_MAP: Record<MotionFormat, CategoryFilter> = {
+  what_if_3d: 'simulation',
+  zombie_survival: 'simulation',
+  how_its_built: 'simulation',
+  cosmic_voyage: 'simulation',
+
   roblox_story: 'gaming',
   pixel_rpg: 'gaming',
   terminal_hack: 'gaming',

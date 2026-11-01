@@ -12,7 +12,9 @@ class BGMEngine {
   private currentTrack: BGMTrack = 'lofi_chill';
   private isPlaying: boolean = false;
   private isMuted: boolean = false;
-  private volume: number = 0.4;
+  private volume: number = 0.35;
+  private customAudio: HTMLAudioElement | null = null;
+  private customTrackName: string | null = null;
 
   public async unlock(): Promise<boolean> {
     if (typeof window === 'undefined') return false;
@@ -67,6 +69,11 @@ class BGMEngine {
 
   public setTrack(track: BGMTrack) {
     this.currentTrack = track;
+    if (this.customAudio) {
+      this.customAudio.pause();
+      this.customAudio = null;
+      this.customTrackName = null;
+    }
     if (this.isPlaying) {
       this.stop();
       if (track !== 'none') {
@@ -75,11 +82,37 @@ class BGMEngine {
     }
   }
 
+  public loadCustomTrack(url: string, name: string) {
+    this.stop();
+    this.currentTrack = 'none';
+    if (this.customAudio) {
+      this.customAudio.pause();
+    }
+    this.customAudio = new Audio(url);
+    this.customAudio.loop = true;
+    this.customAudio.volume = this.isMuted ? 0 : this.volume;
+    this.customTrackName = name;
+    if (this.isPlaying) {
+      this.customAudio.play().catch(() => {});
+    }
+  }
+
+  public getCustomTrackName(): string | null {
+    return this.customTrackName;
+  }
+
+  public getVolume(): number {
+    return this.volume;
+  }
+
   public setVolume(vol: number) {
     this.volume = Math.max(0, Math.min(1, vol));
     const ctx = this.getContext();
     if (ctx && this.masterGain) {
       this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : this.volume, ctx.currentTime);
+    }
+    if (this.customAudio) {
+      this.customAudio.volume = this.isMuted ? 0 : this.volume;
     }
   }
 
@@ -89,10 +122,16 @@ class BGMEngine {
     if (ctx && this.masterGain) {
       this.masterGain.gain.setValueAtTime(muted ? 0 : this.volume, ctx.currentTime);
     }
+    if (this.customAudio) {
+      this.customAudio.volume = muted ? 0 : this.volume;
+    }
   }
 
   // Smooth Auto-Ducking when speech is active
   public duck() {
+    if (this.customAudio) {
+      this.customAudio.volume = (this.isMuted ? 0 : this.volume) * 0.2;
+    }
     const ctx = this.getContext();
     if (!ctx || !this.duckGain) return;
     const t = ctx.currentTime;
@@ -102,6 +141,9 @@ class BGMEngine {
 
   // Restore volume when speech pauses
   public unduck() {
+    if (this.customAudio) {
+      this.customAudio.volume = this.isMuted ? 0 : this.volume;
+    }
     const ctx = this.getContext();
     if (!ctx || !this.duckGain) return;
     const t = ctx.currentTime;
@@ -110,6 +152,12 @@ class BGMEngine {
   }
 
   public start() {
+    if (this.customAudio) {
+      this.isPlaying = true;
+      this.customAudio.volume = this.isMuted ? 0 : this.volume;
+      this.customAudio.play().catch(() => {});
+      return;
+    }
     if (this.currentTrack === 'none' || !isAudioInteractionAllowed()) return;
     const ctx = this.getContext();
     if (!ctx || !this.duckGain) return;
@@ -182,6 +230,9 @@ class BGMEngine {
 
   public stop() {
     this.isPlaying = false;
+    if (this.customAudio) {
+      this.customAudio.pause();
+    }
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;

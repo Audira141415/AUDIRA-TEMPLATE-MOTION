@@ -24,7 +24,31 @@ class BrowserAudioEngine {
   private ctx: AudioContext | null = null;
   private isMuted: boolean = false;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
+  private currentAudioElement: HTMLAudioElement | null = null;
   private lastSpokenLineId: string | null = null;
+  private audioCache: Map<string, string> = new Map();
+  private prefetchingIds: Set<string> = new Set();
+  private voiceVolume: number = 1.0;
+  private sfxVolume: number = 0.6;
+
+  public setVoiceVolume(vol: number) {
+    this.voiceVolume = Math.max(0, Math.min(1, vol));
+    if (this.currentAudioElement) {
+      this.currentAudioElement.volume = this.isMuted ? 0 : this.voiceVolume;
+    }
+  }
+
+  public getVoiceVolume(): number {
+    return this.voiceVolume;
+  }
+
+  public setSfxVolume(vol: number) {
+    this.sfxVolume = Math.max(0, Math.min(1, vol));
+  }
+
+  public getSfxVolume(): number {
+    return this.sfxVolume;
+  }
 
   public async unlock(): Promise<boolean> {
     if (typeof window === 'undefined') return false;
@@ -253,38 +277,177 @@ class BrowserAudioEngine {
     }
   }
 
-  // Speech Synthesis Voiceover
-  public speakLine(lineId: string, text: string, role: 'human' | 'ai' | string) {
-    if (this.isMuted || !userHasInteracted || typeof window === 'undefined' || !window.speechSynthesis) return;
+  // 100% Authentic Indonesian AI Voiceover (Cartesia AI First with strict Indonesian SpeechSynthesis guard)
+  public async speakLine(
+    lineId: string, 
+    text: string, 
+    role: 'human' | 'ai' | string, 
+    emotion?: string
+  ) {
+    if (this.isMuted || !userHasInteracted || typeof window === 'undefined') return;
     if (this.lastSpokenLineId === lineId) return;
 
     this.lastSpokenLineId = lineId;
-    window.speechSynthesis.cancel();
+    this.stopSpeech();
 
+    // Priority 1: Check in-memory Cartesia Indonesian Audio Cache
+    const cachedDataUrl = this.audioCache.get(lineId);
+    if (cachedDataUrl) {
+      this.playCachedAudio(cachedDataUrl);
+      return;
+    }
+
+    // Priority 2: Fetch native Indonesian Cartesia voice from /api/voiceover
+    const voiceKey = role === 'ai' ? 'safira' : role === 'narrator' ? 'galang' : role === 'boss' ? 'citra' : 'andi';
+    
     try {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'id-ID';
-      
-      // Adjust pitch and rate for character role
-      if (role === 'ai') {
-        utterance.pitch = 1.35;
-        utterance.rate = 1.15;
-      } else if (role === 'boss') {
-        utterance.pitch = 0.7;
-        utterance.rate = 0.95;
-      } else {
-        utterance.pitch = 1.0;
-        utterance.rate = 1.05;
+      const res = await fetch('/api/voiceover', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text,
+          voiceKey,
+          emotion: emotion || 'neutral',
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.audioBase64) {
+        this.audioCache.set(lineId, data.audioBase64);
+        if (this.lastSpokenLineId === lineId && !this.isMuted) {
+          this.playCachedAudio(data.audioBase64);
+        }
+        return;
       }
+    } catch {
+      // ignore network errors and fallback safely
+    }
 
-      this.currentUtterance = utterance;
-      window.speechSynthesis.speak(utterance);
+    // Priority 3: Fallback to browser SpeechSynthesis ONLY IF native Indonesian voice exists!
+    // NEVER use an American English voice (e.g. Microsoft David) for Indonesian text!
+    if (window.speechSynthesis) {
+      try {
+        const voices = window.speechSynthesis.getVoices();
+        const indonesianVoice = voices.find((v) => 
+          v.lang.toLowerCase().startsWith('id') || 
+          v.name.toLowerCase().includes('indonesia') ||
+          v.name.toLowerCase().includes('gadis') ||
+          v.name.toLowerCase().includes('andika')
+        );
+
+        // Strict Guard: Only speak if authentic Indonesian voice is available in browser
+        if (indonesianVoice) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = indonesianVoice;
+          utterance.lang = 'id-ID';
+          if (role === 'ai') {
+            utterance.pitch = 1.35;
+            utterance.rate = 1.15;
+          } else if (role === 'boss') {
+            utterance.pitch = 0.7;
+            utterance.rate = 0.95;
+          } else {
+            utterance.pitch = 1.0;
+            utterance.rate = 1.05;
+          }
+          this.currentUtterance = utterance;
+          window.speechSynthesis.speak(utterance);
+        }
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  private playCachedAudio(dataUrl: string) {
+    try {
+      if (this.currentAudioElement) {
+        this.currentAudioElement.pause();
+        this.currentAudioElement = null;
+      }
+      const audio = new Audio(dataUrl);
+      audio.volume = this.isMuted ? 0 : this.voiceVolume;
+      this.currentAudioElement = audio;
+      audio.play().catch(() => {});
     } catch {
       // ignore
     }
   }
 
+  // Batch synthesize all storyboard lines via Cartesia AI and return exact duration and word timestamps
+  public async batchSynthesizeLines(
+    lines: Array<{ id: string; text: string; speakerRole: string; emotion?: string }>,
+    onProgress?: (index: number, total: number) => void
+  ): Promise<Map<string, { durationSec: number; words: Array<{ word: string; start: number; end: number }> }>> {
+    const results = new Map<string, { durationSec: number; words: Array<{ word: string; start: number; end: number }> }>();
+    if (typeof window === 'undefined') return results;
+
+    let idx = 0;
+    for (const line of lines) {
+      idx++;
+      if (onProgress) onProgress(idx, lines.length);
+
+      const voiceKey = line.speakerRole === 'ai' ? 'safira' : line.speakerRole === 'narrator' ? 'galang' : line.speakerRole === 'boss' ? 'citra' : 'andi';
+      try {
+        const res = await fetch('/api/voiceover', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: line.text,
+            voiceKey,
+            emotion: line.emotion || 'neutral',
+          }),
+        });
+        const data = await res.json();
+        if (res.ok && data.audioBase64) {
+          this.audioCache.set(line.id, data.audioBase64);
+          results.set(line.id, {
+            durationSec: data.durationSec || 3.0,
+            words: data.words || [],
+          });
+        }
+      } catch (err) {
+        console.error('Batch voice synthesis failed for line:', line.id, err);
+      }
+    }
+
+    return results;
+  }
+
+  // Prefetch all storyboard lines in Indonesian Cartesia voice on load
+  public async prefetchLines(lines: Array<{ id: string; text: string; speakerRole: string; emotion?: string }>) {
+    if (typeof window === 'undefined') return;
+    for (const line of lines) {
+      if (this.audioCache.has(line.id) || this.prefetchingIds.has(line.id)) continue;
+      this.prefetchingIds.add(line.id);
+
+      const voiceKey = line.speakerRole === 'ai' ? 'safira' : line.speakerRole === 'narrator' ? 'galang' : line.speakerRole === 'boss' ? 'citra' : 'andi';
+      fetch('/api/voiceover', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: line.text,
+          voiceKey,
+          emotion: line.emotion || 'neutral',
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.ok && data.audioBase64) {
+            this.audioCache.set(line.id, data.audioBase64);
+          }
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.prefetchingIds.delete(line.id);
+        });
+    }
+  }
+
   public stopSpeech() {
+    if (this.currentAudioElement) {
+      this.currentAudioElement.pause();
+      this.currentAudioElement = null;
+    }
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }

@@ -6,7 +6,7 @@ export type Role = StoryboardLine['speakerRole'];
 export const FORMAT_BRIEF: Record<MotionFormat, { cast: string; roles: [Role, Role] }> = {
   character_banter: {
     cast:
-      'CHARACTER REEL. A = manusia dengan ide/masalah. B = karakter AI orisinal (nama buatan sendiri, misalnya Nara, Bubo, Kiko; jangan pakai nama produk/merek AI nyata) yang menanggapi sesuai mood. Dialog bergantian A dan B, 8-12 baris.',
+      'CHARACTER REEL. A = manusia dengan ide/masalah. B = karakter AI orisinal (nama buatan sendiri, misalnya Audira, Bubo, Kiko; jangan pakai nama produk/merek AI nyata) yang menanggapi sesuai mood. Dialog bergantian A dan B, 8-12 baris.',
     roles: ['human', 'ai'],
   },
   whiteboard: {
@@ -108,6 +108,26 @@ export const FORMAT_BRIEF: Record<MotionFormat, { cast: string; roles: [Role, Ro
     cast:
       'ROBLOX OBBY & SKITS. A = Noob (pemain pemula kocak yang sering gagal obby), B = Pro (pemain jago/bacon hair yang suka roasting). Gunakan istilah Roblox: "OOF", "Robux", "Tower of Hell", "Speed coil", "Gamepass", "Skill issue", "Stage". Bergantian A dan B, 5-8 baris.',
     roles: ['human', 'human'],
+  },
+  what_if_3d: {
+    cast:
+      'WHAT IF 3D (SIMULATION). A = Narator fisika/sains simulasi dengan gaya hipotesis epik ala Kurzgesagt. Sebutkan angka counter raksasa (liter gas, energi joule, populasi manusia), efek bencana, dan simulasi kerumunan 3D. 4-6 baris, speaker selalu A.',
+    roles: ['narrator', 'narrator'],
+  },
+  zombie_survival: {
+    cast:
+      'ZOMBIE SURVIVAL MAP. A = Narator komandan bunker survival ladang. Catat log harian "HARI KE-X", radar pergerakan zombie di batas pohon perkebunan, kondisi barikade, dan keputusan taktis. 4-6 baris, speaker selalu A.',
+    roles: ['narrator', 'narrator'],
+  },
+  how_its_built: {
+    cast:
+      'HOW IT\'S BUILT (3D CUTAWAY). A = Narator bedah arsitektur. Ungkap rahasia struktur bawah tanah di balik bangunan permukaan biasa: kedalaman meter, lapisan tanah, sistem ventilasi, dan bunker hidroponik step by step. 4-6 baris, speaker selalu A.',
+    roles: ['narrator', 'narrator'],
+  },
+  cosmic_voyage: {
+    cast:
+      'LONG-FORM 3D FILMS (COSMIC VOYAGE). A = Narator kosmis filosofis. Ceritakan skala luar angkasa, rotasi planet bumi, orbit khatulistiwa, dan perspektif peradaban manusia dari kejauhan kosmik. 4-6 baris, speaker selalu A.',
+    roles: ['narrator', 'narrator'],
   },
 };
 
@@ -238,6 +258,26 @@ export const IDEA_STARTERS: Record<MotionFormat, string[]> = {
     'Drama kepleset lava di stage 99 Tower of Hell padahal dikit lagi tamat',
     'Tipe-tipe player Roblox saat ketemu hacker di server publik',
   ],
+  what_if_3d: [
+    'Bagaimana kalau seluruh 8.2 miliar manusia kentut pada detik yang sama',
+    'Apa yang terjadi jika gravitasi bumi mati selama 5 detik',
+    'Bagaimana kalau asteroid emas seukuran Monas jatuh di samudra pasifik',
+  ],
+  zombie_survival: [
+    'Hari ke-42 bertahan hidup: zombie menembus batas pohon perkebunan',
+    'Membangun barikade listrik darurat di bunker ladang terisolasi',
+    'Serbuan kawanan zombie mutan di malam badai petir tanpa pasokan surya',
+  ],
+  how_its_built: [
+    'Bongkar rahasia bunker rumah kaca hidroponik 12 meter di bawah rumah pinggiran kota',
+    'Bedah arsitektur 3D shelter anti-radiasi dengan ventilasi oksigen mandiri',
+    'Bagaimana ruangan bawah tanah rahasia dibangun tanpa terdeteksi tetangga',
+  ],
+  cosmic_voyage: [
+    'Perjalanan mengelilingi khatulistiwa bumi dengan skala waktu kosmik 8 bulan',
+    'Melihat satu abad sejarah peradaban manusia dari orbit luar angkasa',
+    'Berapa lama waktu yang dibutuhkan cahaya untuk melintasi batas tata surya',
+  ],
 };
 
 // A self-contained prompt for any chat assistant: it returns storyboard JSON that
@@ -298,8 +338,36 @@ export interface AdvancedPromptOptions {
 export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
   const [roleA, roleB] = FORMAT_BRIEF[opts.format].roles;
   const theme = FORMAT_THEMES[opts.format];
-  const charA = opts.charAName?.trim() || (opts.format === 'roblox_story' ? 'Noob Blox' : opts.format === 'pixel_rpg' ? 'Player Hero' : 'Ash');
-  const charB = opts.charBName?.trim() || (opts.format === 'roblox_story' ? 'Pro Bacon' : opts.format === 'pixel_rpg' ? 'Reality Boss' : 'Nara');
+  const charA =
+    opts.charAName?.trim() ||
+    (opts.format === 'roblox_story'
+      ? 'Noob Blox'
+      : opts.format === 'pixel_rpg'
+      ? 'Player Hero'
+      : opts.format === 'what_if_3d'
+      ? 'Dr. Simulasi'
+      : opts.format === 'zombie_survival'
+      ? 'Survivor Ray'
+      : opts.format === 'how_its_built'
+      ? 'Arch-Builder'
+      : opts.format === 'cosmic_voyage'
+      ? 'Cosmic Voice'
+      : 'Ash');
+  const charB =
+    opts.charBName?.trim() ||
+    (opts.format === 'roblox_story'
+      ? 'Pro Bacon'
+      : opts.format === 'pixel_rpg'
+      ? 'Reality Boss'
+      : opts.format === 'what_if_3d'
+      ? 'Atmosphere HUD'
+      : opts.format === 'zombie_survival'
+      ? 'Radar Defense'
+      : opts.format === 'how_its_built'
+      ? 'Subsurface HUD'
+      : opts.format === 'cosmic_voyage'
+      ? 'Orbital Tracker'
+      : 'Audira');
 
   const lineCountGuide = opts.duration === '15s' 
     ? 'Tepat 4-5 baris dialog singkat, total durasi 14 detik.' 
@@ -321,7 +389,7 @@ export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
   const cleanIdea = (opts.idea || 'Ide cerita viral').replace(/"/g, '\\"');
   const schemaExample = `{
   "id": "reel-${Date.now()}",
-  "title": "<judul maks 8 kata>",
+  "title": "<judul reel maks 8 kata>",
   "concept": "${cleanIdea}",
   "format": "${opts.format}",
   "mood": "${opts.mood.id}",
@@ -329,8 +397,8 @@ export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
   "durationSec": 0,
   "locationName": "<latar tempat maks 4 kata>",
   "characters": {
-    "characterA": { "name": "${charA}", "title": "<label profesi/karakter>", "avatar": "a" },
-    "characterB": { "name": "${charB}", "title": "<label profesi/karakter>", "avatar": "b" }
+    "characterA": { "name": "${charA}", "title": "<label profesi/karakter A>", "avatar": "a" },
+    "characterB": { "name": "${charB}", "title": "<label profesi/karakter B>", "avatar": "b" }
   },
   "visualTheme": ${JSON.stringify(theme)},
   "commentMagnetHook": "<pertanyaan penutup memicu debat di komentar maks 12 kata>",
@@ -339,8 +407,18 @@ export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
       "id": "line-1",
       "speaker": "${charA}",
       "speakerRole": "${roleA}",
-      "text": "<kalimat hook pembuka maksimal 14 kata>",
+      "text": "<kalimat hook pembuka langsung ke inti masalah, maks 14 kata>",
       "emotion": "hyped",
+      "startSec": 0,
+      "durationSec": 0,
+      "words": []
+    },
+    {
+      "id": "line-2",
+      "speaker": "${charB}",
+      "speakerRole": "${roleB}",
+      "text": "<tanggapan atau eskalasi konflik balik dari lawan bicara, maks 14 kata>",
+      "emotion": "sarcastic",
       "startSec": 0,
       "durationSec": 0,
       "words": []
@@ -354,6 +432,7 @@ Kamu adalah Viral Reel Scriptwriter kelas dunia di studio AUDIRA MOTION.
 ${SYSTEM}
 Aturan Gaya Bahasa: ${toneInstruction}
 Pedoman Panjang: ${lineCountGuide}
+Pastikan naskah memiliki alur pembuka (hook), eskalasi, dan punchline sebelum outro. Buat seluruh dialog lengkap di dalam array "lines".
 </system_instructions>
 
 <format_specification>
@@ -368,17 +447,18 @@ ${opts.idea.trim() || 'Buat reel viral tentang dilema hidup sehari-hari'}
 </user_idea>
 
 <output_constraint>
-Kembalikan HANYA satu blok kode JSON valid sesuai skema berikut. DILARANG menambahkan teks pembuka ("Tentu ini naskahnya..."), dilarang menambahkan teks penutup, dan jangan gunakan markdown di luar \`\`\`json.
+Kembalikan HANYA satu blok kode JSON valid sesuai skema berikut. DILARANG menambahkan teks pembuka ("Tentu ini naskahnya..."), dilarang menambahkan teks penutup, dan jangan gunakan markdown di luar \`\`\`json. Tuliskan dialog lengkap di dalam array lines (jangan hanya 2 baris contoh).
 
 ${schemaExample}
 </output_constraint>`;
   }
 
   if (opts.targetModel === 'chatgpt') {
-    return `[SYSTEM: JSON MODE ACTIVATED]
+    return `[SYSTEM: STRICT JSON OUTPUT MODE ACTIVATED]
 You are a senior vertical video retention architect for AUDIRA MOTION reels.
 Language & Tone: ${toneInstruction}
 Length Target: ${lineCountGuide}
+Rules: Provide the full dialog inside the "lines" array (do not stop at 2 lines). Ensure high tension hook in line 1.
 
 [FORMAT RULES]
 ${FORMAT_BRIEF[opts.format].cast}
@@ -390,12 +470,13 @@ Mood: ${opts.mood.label} - ${opts.mood.direction}
 ${opts.idea.trim() || 'Buat reel viral tentang dilema hidup sehari-hari'}
 
 [OUTPUT FORMAT]
-Respond ONLY with a single JSON object. No explanation, no markdown text outside the JSON object:
+Respond ONLY with a single valid JSON object. No explanation, no intro, no conversational text:
 ${schemaExample}`;
   }
 
   if (opts.targetModel === 'deepseek') {
     return `[NO_THINK] Output ONLY raw valid JSON starting with { and ending with }. Do NOT generate <think> reasoning tags, do NOT add introductory pleasantries.
+Do NOT truncate JSON. Provide complete dialog in "lines" array.
 
 Task: Generate a viral 9:16 vertical video script for AUDIRA MOTION.
 Format: ${FORMAT_BRIEF[opts.format].cast}
@@ -416,6 +497,7 @@ ${SYSTEM}
 
 Tones: ${toneInstruction}
 Duration: ${lineCountGuide}
+Requirement: Provide the full complete dialog script in the "lines" array. Ensure punchy conversational cadence.
 
 FORMAT:
 ${FORMAT_BRIEF[opts.format].cast}
@@ -427,6 +509,158 @@ IDE:
 ${opts.idea.trim() || 'Buat reel viral tentang dilema hidup sehari-hari'}
 
 OUTPUT:
-Balas HANYA dengan JSON valid (tanpa percakapan ramah-tamah):
+Balas HANYA dengan JSON valid (tanpa percakapan ramah-tamah, tanpa pengantar, dan tanpa penutup):
 ${schemaExample}`;
 }
+
+export type VideoAIPlatform = 'kling' | 'runway' | 'midjourney' | 'sora';
+export type CameraMovement = 'dolly_in' | 'drone_orbit' | 'pan_right' | 'top_down_crane' | 'static_tripod';
+export type VisualAesthetic =
+  | 'unreal_engine_5'
+  | 'octane_3d_render'
+  | 'cyberpunk_neon'
+  | 'documentary_35mm'
+  | 'roblox_gameplay';
+
+export interface VisualPromptOptions {
+  format: MotionFormat;
+  idea: string;
+  platform: VideoAIPlatform;
+  camera: CameraMovement;
+  aesthetic: VisualAesthetic;
+}
+
+export const VISUAL_BASE_PROMPTS: Record<MotionFormat, string> = {
+  character_banter:
+    'Cozy modern aesthetic cafe interior at night, warm amber ambient lighting, cinematic depth of field, neon city skyline outside large rain-streaked window, steaming ceramic mug on dark wooden table, realistic interior atmosphere',
+  what_if_3d:
+    'Massive crowd of thousands of low-poly 3D citizens standing on a coastal wooden harbor pier gazing towards the open sea, dramatic turbulent turquoise ocean waves crashing against concrete pylons, an airliner flying across deep blue sky leaving realistic contrails, an enormous semi-transparent expanding shockwave of green methane vapor rippling across the ocean horizon, live atmospheric physics calculation aesthetic, 8.2 billion humans scale, cinematic photorealism',
+  zombie_survival:
+    'Top-down tactical aerial bird-eye view of an isolated farm perimeter, concentric rings of dense protective green pine trees forming a circular shield, mowed green lawn grid tiles, glowing neon green circular radar sweep scanning the zone, central fortified red farmhouse with solar panels, multiple red glowing infected blips breaching the outer dark forest line, tactical survival map HUD aesthetic, clean tilt-shift miniature realism',
+  how_its_built:
+    'Architectural 3D cross-section cutaway X-ray view of a modern suburban house with blue shutters on the surface, vertical slice revealing multi-layered brown geological earth strata, deep subterranean hydroponic greenhouse chamber 12 meters underground, glowing warm UV grow lights illuminating rows of fresh green cabbage and lettuce planter beds, water filtration barrels, transparent ventilation pipe with animated airflow particles connecting to surface, blueprint architectural diagram aesthetic',
+  cosmic_voyage:
+    'Cinematic deep-space journey, high-definition photorealistic 3D planet Earth floating in cosmic void surrounded by starry nebula, vibrant glowing blue atmospheric halo rim, dynamic day and night terminator line casting deep shadows over continents, orbital flight telemetry trail at 350km altitude, BBC Earth IMAX space documentary cinematography, ultra-detailed cloud swirls and continent topography',
+  roblox_story:
+    'Roblox 3D animation, blocky yellow Noob character with classic blue shirt and green pants jumping across floating neon pink and cyan obstacle blocks over molten glowing red lava, bacon hair pro character watching from elevated platform, classic Roblox bubble chat overhead, colorful vibrant blocky aesthetic, Roblox studio game screenshot style',
+  pixel_rpg:
+    '16-bit retro RPG battle screen, pixel art hero sprite facing a giant monstrous personified corporate task boss in a dark dungeon, retro HP energy bar, 90s SNES JRPG aesthetic, nostalgic scanlines, vibrant 16-color palette',
+  breaking_news:
+    'Modern television news broadcast studio, professional anchor desk with LED monitors, dramatic red and gold lower-third breaking news ticker, live studio cameras, sleek broadcast journalism lighting, high production value',
+  whiteboard:
+    'Clean overhead whiteboard animation aesthetic, hand drawing sleek black marker sketches, minimalist vector icons, smooth erase and draw motion, clean educational visual explanation, high contrast on matte white surface',
+  clean_explainer:
+    'Futuristic fintech motion graphics studio, floating 3D glassmorphic metric cards, glowing data charts and percentages hovering in mid-air, dark sleek obsidian grid floor with subtle neon blue accents, Apple keynote aesthetic',
+  docu_story:
+    'Cinematic archival documentary footage, sepia and monochrome film grain, historic vintage photographs coming to life with 2.5D parallax depth map projection, dust particles drifting in moody amber projector light beam',
+  kinetic_type:
+    'High-impact kinetic typography motion reel, bold oversized brutalist typography slamming onto the screen, dynamic contrast switches between matte black and electric orange, sharp geometric motion design, Swiss style',
+  chat_story:
+    'Macro close-up of a modern dark-mode smartphone chat interface, glowing chat bubbles sliding in with tactile haptic bounce, typing indicator animation with three pulsing dots, realistic OLED screen reflection',
+  top_list:
+    'Dynamic countdown leaderboard motion graphic, giant bold numerals with metallic bevels slamming into center screen, progress bars filling up with gold particles, sleek top-tier ranking presentation',
+  quiz:
+    'Engaging game show quiz interface, glowing four-option trivia cards, floating countdown timer bar ticking down, explosive colorful confetti burst and neon checkmark reveal on winning choice',
+  podcast_clip:
+    'Cozy broadcast podcast studio, two warm microphone boom arms, floating responsive sound waveform bars pulsing between speakers, warm Edison bulb background lighting, acoustic foam panel backdrop',
+  comic_strip:
+    'Dynamic webtoon comic strip panels sliding vertically, bold pop-art ink lines, halftone dot patterns, explosive BOOM and WHAM sound effect text bubbles with comic impact lines, vibrant modern manga aesthetic',
+  terminal_hack:
+    'Retro CRT computer terminal screen, glowing phosphor green monospace code cascading down black monitor, blinking amber cursor, scanline distortion with occasional digital chromatic glitch artifacts',
+  versus:
+    'High-voltage split screen versus showdown, left side electric blue energy glow vs right side fiery crimson red sparks, giant metallic VS badge in center with impact shockwave, competitive arena aesthetic',
+  map_journey:
+    'Illustrated 3D travel terrain map, glowing dotted GPS route tracing across scenic topographic landscape, 3D location pin dropping with ripple shockwave, road trip cinematic flyover perspective',
+  recipe_steps:
+    'Bright appetizing culinary stop-motion aesthetic, ingredients gracefully falling into a simmering cast iron skillet, floating recipe cards with step-by-step cooking progress, warm kitchen lighting',
+  social_post:
+    'Sleek social media carousel cards floating in 3D isometric space, live animated heart like counters rapidly climbing, notification bells ringing with bouncy micro-interactions, clean modern UI aesthetic',
+  receipt:
+    'Thermal cash register receipt printing downwards in real-time, jagged paper edge, thermal ink typography, barcode and vintage rubber stamp slamming onto paper with ink splatter',
+  retro_vhs:
+    'Authentic 1990s VHS home video tape aesthetic, glowing green PLAY indicator and OSD timestamp in top left corner, magnetic tracking tape lines distortion, warm nostalgic film colors, CRT glow',
+  sticky_notes:
+    'Warm textured cork bulletin board, colorful pastel sticky notes pinned with wooden push pins, realistic paper shadow and curl, hand-drawn checklist markings appearing in stop-motion',
+};
+
+export function buildVisualPrompt(opts: VisualPromptOptions): {
+  prompt: string;
+  negativePrompt: string;
+  recommendedSettings: {
+    aspectRatio: string;
+    duration: string;
+    fps: number;
+    motionStrength: number;
+  };
+} {
+  const base = VISUAL_BASE_PROMPTS[opts.format] || VISUAL_BASE_PROMPTS.character_banter;
+  const userContext = opts.idea?.trim() ? `Concept focus: ${opts.idea.trim()}.` : '';
+
+  let cameraDesc = '';
+  switch (opts.camera) {
+    case 'dolly_in':
+      cameraDesc = 'Slow dramatic cinematic dolly-in pushing forward toward subject, steady gimbal motion';
+      break;
+    case 'drone_orbit':
+      cameraDesc = 'Sweeping drone orbit shot circling 360 degrees around the focal scene, panoramic parallax';
+      break;
+    case 'pan_right':
+      cameraDesc = 'Smooth horizontal tracking pan moving right to reveal environment scale';
+      break;
+    case 'top_down_crane':
+      cameraDesc = 'High-angle aerial crane shot moving slowly overhead looking straight down, god-eye view';
+      break;
+    case 'static_tripod':
+    default:
+      cameraDesc = 'Locked-off tripod wide shot with rich internal micro-motion and environmental movement';
+      break;
+  }
+
+  let aestheticDesc = '';
+  switch (opts.aesthetic) {
+    case 'octane_3d_render':
+      aestheticDesc = 'Octane 3D render, subsurface scattering, ray-traced reflections, studio lighting, hyper-clean C4D style';
+      break;
+    case 'cyberpunk_neon':
+      aestheticDesc = 'Cyberpunk neo-brutalist aesthetic, volumetric neon illumination, dark metallic textures, anamorphic lens flare';
+      break;
+    case 'documentary_35mm':
+      aestheticDesc = 'Shot on 35mm Arri Alexa camera, natural film grain, shallow depth of field, documentary color grading';
+      break;
+    case 'roblox_gameplay':
+      aestheticDesc = 'Roblox physics engine screenshot, plastic smooth studs texture, vibrant saturated lighting, blocky voxel rendering';
+      break;
+    case 'unreal_engine_5':
+    default:
+      aestheticDesc = 'Unreal Engine 5.4 Lumen global illumination, Nanite micro-geometry, cinematic post-processing, 8k resolution';
+      break;
+  }
+
+  const negativePrompt =
+    'blurry, low resolution, bad anatomy, deformed limbs, floating artifacts, distorted faces, watermark, logo, text overlay, oversaturated, stuttering motion, flickers, compression artifacts';
+
+  let finalPrompt = '';
+
+  if (opts.platform === 'midjourney') {
+    finalPrompt = `${base}. ${userContext} ${cameraDesc}. ${aestheticDesc} --ar 9:16 --v 6.1 --style raw --q 2`;
+  } else if (opts.platform === 'runway') {
+    finalPrompt = `[Camera: ${cameraDesc}] ${base}. ${userContext} Visual aesthetic: ${aestheticDesc}. 9:16 vertical video ratio.`;
+  } else if (opts.platform === 'kling') {
+    finalPrompt = `Vertical 9:16, 1080x1920. ${base}. ${userContext} Camera Movement: ${cameraDesc}. Render style: ${aestheticDesc}. Highly detailed, seamless motion.`;
+  } else {
+    // Sora / General
+    finalPrompt = `A 9:16 vertical cinematic video. ${base}. ${userContext} The camera performs a ${cameraDesc}. Rendered in ${aestheticDesc}. Realistic physical dynamics and lighting interaction.`;
+  }
+
+  return {
+    prompt: finalPrompt,
+    negativePrompt,
+    recommendedSettings: {
+      aspectRatio: '9:16 (1080x1920)',
+      duration: opts.platform === 'kling' ? '5s or 10s (High Quality mode)' : opts.platform === 'runway' ? '5s or 10s Gen-3 Alpha' : 'N/A (Image Base)',
+      fps: 30,
+      motionStrength: opts.platform === 'runway' ? 5 : 6,
+    },
+  };
+}
+

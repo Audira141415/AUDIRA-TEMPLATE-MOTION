@@ -15,14 +15,18 @@ import {
   Dices,
   Download,
   FileCode,
+  Film,
   Flame,
   Globe,
   Layers,
   MessageSquare,
   Search,
+  Shield,
+  Sliders,
   Sparkles,
   Terminal,
   User,
+  Video,
   Wand2,
   Zap,
 } from 'lucide-react';
@@ -30,10 +34,14 @@ import { MoodType, MotionFormat } from '@/types/motion';
 import { MOODS, moodById } from '@/lib/moods';
 import {
   buildAdvancedPrompt,
+  buildVisualPrompt,
+  CameraMovement,
   DurationTarget,
   IDEA_STARTERS,
   SlangStyle,
   TargetAIModel,
+  VideoAIPlatform,
+  VisualAesthetic,
 } from '@/lib/script-prompts';
 import { generateStoryboardFromIdea } from '@/lib/script-generator';
 import { FORMAT_CARDS } from '@/components/landing/reels';
@@ -42,10 +50,11 @@ import { SiteHeader } from '@/components/site/SiteHeader';
 import { PasteChecker } from '@/components/site/PasteChecker';
 
 // Category filtering groups
-type CategoryFilter = 'all' | 'gaming' | 'banter' | 'explainer' | 'story';
+type CategoryFilter = 'all' | 'simulation' | 'gaming' | 'banter' | 'explainer' | 'story';
 
 const CATEGORIES: Array<{ id: CategoryFilter; label: string; count: number; icon: React.ReactNode }> = [
-  { id: 'all', label: 'Semua Format', count: 21, icon: <Layers className="w-3.5 h-3.5" /> },
+  { id: 'all', label: 'Semua Format', count: 25, icon: <Layers className="w-3.5 h-3.5" /> },
+  { id: 'simulation', label: '3D Simulation', count: 4, icon: <Globe className="w-3.5 h-3.5" /> },
   { id: 'gaming', label: 'Gaming & Roblox', count: 4, icon: <Box className="w-3.5 h-3.5" /> },
   { id: 'banter', label: 'Banter & Debat', count: 4, icon: <Flame className="w-3.5 h-3.5" /> },
   { id: 'explainer', label: 'Edukasi & Data', count: 5, icon: <FileCode className="w-3.5 h-3.5" /> },
@@ -53,6 +62,11 @@ const CATEGORIES: Array<{ id: CategoryFilter; label: string; count: number; icon
 ];
 
 const FORMAT_CATEGORY_MAP: Record<MotionFormat, CategoryFilter> = {
+  what_if_3d: 'simulation',
+  zombie_survival: 'simulation',
+  how_its_built: 'simulation',
+  cosmic_voyage: 'simulation',
+
   roblox_story: 'gaming',
   pixel_rpg: 'gaming',
   terminal_hack: 'gaming',
@@ -125,6 +139,14 @@ export default function PromptsPage() {
   const [isSynthesizing, setIsSynthesizing] = useState(false);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
+  // Dual-Pass Engine: 'script' (LLM Storyboard) vs 'visual' (Video AI Prompt for Kling/Runway/Midjourney/Sora)
+  const [promptTab, setPromptTab] = useState<'script' | 'visual'>('script');
+  const [visualPlatform, setVisualPlatform] = useState<VideoAIPlatform>('kling');
+  const [cameraMovement, setCameraMovement] = useState<CameraMovement>('drone_orbit');
+  const [visualAesthetic, setVisualAesthetic] = useState<VisualAesthetic>('octane_3d_render');
+  const [copyVisualStatus, setCopyVisualStatus] = useState<string | null>(null);
+  const [copyNegativeStatus, setCopyNegativeStatus] = useState<string | null>(null);
+
   // Filtered formats
   const filteredCards = useMemo(() => {
     return FORMAT_CARDS.filter((card) => {
@@ -160,6 +182,29 @@ export default function PromptsPage() {
     });
   }, [format, mood, idea, model, duration, slang, charA, charB]);
 
+  // Build the specialized Visual Video AI prompt (Kling / Runway / Midjourney / Sora)
+  const visualPromptData = useMemo(() => {
+    return buildVisualPrompt({
+      format,
+      idea,
+      platform: visualPlatform,
+      camera: cameraMovement,
+      aesthetic: visualAesthetic,
+    });
+  }, [format, idea, visualPlatform, cameraMovement, visualAesthetic]);
+
+  const handleCopyVisualPrompt = async () => {
+    await navigator.clipboard.writeText(visualPromptData.prompt);
+    setCopyVisualStatus('Prompt Visual Tersalin!');
+    setTimeout(() => setCopyVisualStatus(null), 1800);
+  };
+
+  const handleCopyNegativePrompt = async () => {
+    await navigator.clipboard.writeText(visualPromptData.negativePrompt);
+    setCopyNegativeStatus('Negative Prompt Tersalin!');
+    setTimeout(() => setCopyNegativeStatus(null), 1800);
+  };
+
   const command = 'node engine/build-reel.mjs reel.json --out renders/reel-saya';
 
   const pickFormat = (f: MotionFormat) => {
@@ -172,6 +217,18 @@ export default function PromptsPage() {
     } else if (f === 'pixel_rpg') {
       setCharA('Player 1');
       setCharB('Reality Boss');
+    } else if (f === 'what_if_3d') {
+      setCharA('Dr. Simulasi');
+      setCharB('Atmosphere HUD');
+    } else if (f === 'zombie_survival') {
+      setCharA('Survivor Ray');
+      setCharB('Radar Defense');
+    } else if (f === 'how_its_built') {
+      setCharA('Arch-Builder');
+      setCharB('Subsurface HUD');
+    } else if (f === 'cosmic_voyage') {
+      setCharA('Cosmic Voice');
+      setCharB('Orbital Tracker');
     } else {
       setCharA('');
       setCharB('');
@@ -226,7 +283,7 @@ export default function PromptsPage() {
         {/* Top Header & Breadcrumbs */}
         <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.12em] text-[#8a8780]">
           <span className="px-2.5 py-0.5 rounded-full bg-orange-600/20 text-[#ea580c] border border-orange-500/30 font-bold">
-            21 Format Aktif
+            25 Format Aktif
           </span>
           <span>•</span>
           <span>Multi-LLM Prompt Engineering Hub</span>
@@ -523,7 +580,7 @@ export default function PromptsPage() {
                     type="text"
                     value={charB}
                     onChange={(e) => setCharB(e.target.value)}
-                    placeholder={format === 'roblox_story' ? 'Pro Bacon' : 'Nara'}
+                    placeholder={format === 'roblox_story' ? 'Pro Bacon' : 'Audira'}
                     className="w-full rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-3 py-2 text-xs text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
                   />
                 </div>
@@ -588,68 +645,304 @@ export default function PromptsPage() {
           </div>
         </section>
 
-        {/* 4. Generated Prompt Console & Action Bar */}
+        {/* 4. Generated Prompt Console & Action Bar (Dual-Pass Engine) */}
         <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
-                4
+          {/* Dual-Pass Tab Switcher */}
+          <div className="flex border-b border-[#2c2b28] pb-4 mb-6 gap-3">
+            <button
+              type="button"
+              onClick={() => setPromptTab('script')}
+              className={`px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm tracking-tight flex items-center gap-2 transition-all ${
+                promptTab === 'script'
+                  ? 'bg-[#ea580c] text-white shadow-md'
+                  : 'bg-[#141413] border border-[#2c2b28] text-[#8a8780] hover:text-[#d6d3cc]'
+              }`}
+            >
+              <FileCode className="w-4 h-4" />
+              <span>1. Naskah & Storyboard JSON ({model.toUpperCase()})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setPromptTab('visual')}
+              className={`px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm tracking-tight flex items-center gap-2 transition-all ${
+                promptTab === 'visual'
+                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md'
+                  : 'bg-[#141413] border border-[#2c2b28] text-[#8a8780] hover:text-[#d6d3cc]'
+              }`}
+            >
+              <Film className="w-4 h-4 text-cyan-300" />
+              <span>2. Visual Video Prompt (AI Video 9:16)</span>
+              <span className="px-2 py-0.5 rounded-full bg-cyan-400/20 text-cyan-200 text-[10px] uppercase font-mono hidden sm:inline">
+                Kling / Runway / Sora
               </span>
-              <div>
-                <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
-                  Prompt Siap Salin untuk {model.toUpperCase()}
-                </h2>
-                <p className="text-xs text-[#8a8780]">
-                  Format terspesifikasi · Schema JSON terikat · Bebas basa-basi AI
-                </p>
+            </button>
+          </div>
+
+          {promptTab === 'script' ? (
+            /* TAB 1: SCRIPT & STORYBOARD JSON PROMPT */
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+                    4
+                  </span>
+                  <div>
+                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                      Prompt Naskah untuk {model.toUpperCase()}
+                    </h2>
+                    <p className="text-xs text-[#8a8780]">
+                      Format terspesifikasi · Schema JSON terikat · Bebas basa-basi AI
+                    </p>
+                  </div>
+                </div>
+
+                {/* Quick Action Bar */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopyPrompt}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-[#ea580c] px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#f06a1f] active:scale-95"
+                  >
+                    {copyStatus ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    {copyStatus ? copyStatus : 'Salin Prompt'}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleDownloadPrompt}
+                    title="Unduh file teks prompt"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2.5 text-xs font-semibold text-[#d6d3cc] hover:border-[#4a4843] hover:text-white transition-colors"
+                  >
+                    <Download className="h-3.5 w-3.5" /> Unduh .txt
+                  </button>
+
+                  <Link
+                    href={`/studio?format=${format}&mood=${mood}&idea=${encodeURIComponent(idea)}`}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-orange-500/40 bg-orange-950/20 px-3.5 py-2.5 text-xs font-bold text-orange-300 hover:bg-orange-900/40 hover:text-white transition-colors"
+                  >
+                    <Zap className="h-3.5 w-3.5" /> Buka di Studio
+                  </Link>
+
+                  <Link
+                    href="/admin"
+                    title="Kelola Kunci API di Admin"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-cyan-500/40 bg-cyan-950/20 px-3 py-2.5 text-xs font-bold text-cyan-300 hover:bg-cyan-900/40 hover:text-white transition-colors"
+                  >
+                    <Cpu className="h-3.5 w-3.5" /> Kunci API Admin
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={handleInstantSynthesisTest}
+                    disabled={isSynthesizing}
+                    title="Jalankan generator storyboard simulasi langsung di browser"
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md border-2 border-black transition-transform active:translate-y-0.5 disabled:opacity-50"
+                  >
+                    <Wand2 className="h-3.5 w-3.5" />
+                    {isSynthesizing ? 'Menyusun...' : '🤖 Uji Naskah Instan'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative mt-4">
+                <pre className="max-h-[440px] overflow-auto whitespace-pre-wrap rounded-2xl border-2 border-[#2c2b28] bg-[#0c0c0b] p-5 font-mono text-[12px] leading-relaxed text-[#d6d3cc] selection:bg-[#ea580c] selection:text-white">
+                  {prompt}
+                </pre>
               </div>
             </div>
+          ) : (
+            /* TAB 2: VISUAL VIDEO AI PROMPT (KLING, RUNWAY, MIDJOURNEY, SORA) */
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-600 text-white font-bold text-xs">
+                    4B
+                  </span>
+                  <div>
+                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                      Prompt Video Sinematik untuk {visualPlatform.toUpperCase()}
+                    </h2>
+                    <p className="text-xs text-[#8a8780]">
+                      Dioptimalkan untuk video backdrop vertikal 9:16 · Fisika simulasi realistis · Kontrol kamera presisi
+                    </p>
+                  </div>
+                </div>
 
-            {/* Quick Action Bar */}
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={handleCopyPrompt}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#ea580c] px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#f06a1f] active:scale-95"
-              >
-                {copyStatus ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                {copyStatus ? copyStatus : 'Salin Prompt'}
-              </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopyVisualPrompt}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 px-4 py-2.5 text-xs font-black text-white shadow-md border border-cyan-400/40 transition-transform active:translate-y-0.5"
+                  >
+                    {copyVisualStatus ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    <span>{copyVisualStatus ? copyVisualStatus : 'Salin Visual Prompt'}</span>
+                  </button>
 
-              <button
-                type="button"
-                onClick={handleDownloadPrompt}
-                title="Unduh file teks prompt"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2.5 text-xs font-semibold text-[#d6d3cc] hover:border-[#4a4843] hover:text-white transition-colors"
-              >
-                <Download className="h-3.5 w-3.5" /> Unduh .txt
-              </button>
+                  <button
+                    type="button"
+                    onClick={handleCopyNegativePrompt}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2.5 text-xs font-semibold text-[#d6d3cc] hover:border-cyan-500 hover:text-white transition-colors"
+                  >
+                    {copyNegativeStatus ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Shield className="h-3.5 w-3.5 text-zinc-400" />}
+                    <span>{copyNegativeStatus ? copyNegativeStatus : 'Salin Negative'}</span>
+                  </button>
+                </div>
+              </div>
 
-              <Link
-                href={`/studio?format=${format}&mood=${mood}&idea=${encodeURIComponent(idea)}`}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-orange-500/40 bg-orange-950/20 px-3.5 py-2.5 text-xs font-bold text-orange-300 hover:bg-orange-900/40 hover:text-white transition-colors"
-              >
-                <Zap className="h-3.5 w-3.5" /> Buka di Studio
-              </Link>
+              {/* Sub-parameters for Visual AI */}
+              <div className="grid gap-4 sm:grid-cols-3">
+                {/* 1. Target Video AI Platform */}
+                <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-3.5">
+                  <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-cyan-400 font-bold mb-2.5">
+                    <Video className="w-3.5 h-3.5" /> Target Platform AI
+                  </label>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {[
+                      { id: 'kling', name: 'Kling 1.5', badge: 'High Physics' },
+                      { id: 'runway', name: 'Runway Gen-3', badge: 'Director Mode' },
+                      { id: 'midjourney', name: 'Midjourney', badge: 'Photoreal 9:16' },
+                      { id: 'sora', name: 'OpenAI Sora', badge: 'Complex 3D' },
+                    ].map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setVisualPlatform(item.id as VideoAIPlatform)}
+                        className={`p-2 rounded-xl border text-left transition-all ${
+                          visualPlatform === item.id
+                            ? 'border-cyan-500 bg-cyan-950/30 text-white shadow-sm'
+                            : 'border-[#2c2b28] bg-[#1c1c1a] text-[#8a8780] hover:text-white'
+                        }`}
+                      >
+                        <span className="block text-xs font-bold text-white">{item.name}</span>
+                        <span className="block text-[9px] text-zinc-400">{item.badge}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-              <button
-                type="button"
-                onClick={handleInstantSynthesisTest}
-                disabled={isSynthesizing}
-                title="Jalankan generator storyboard simulasi langsung di browser"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md border-2 border-black transition-transform active:translate-y-0.5 disabled:opacity-50"
-              >
-                <Wand2 className="h-3.5 w-3.5" />
-                {isSynthesizing ? 'Menyusun...' : '🤖 Uji Naskah Instan'}
-              </button>
+                {/* 2. Camera Movement Directive */}
+                <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-3.5">
+                  <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-cyan-400 font-bold mb-2.5">
+                    <Sliders className="w-3.5 h-3.5" /> Gerakan Kamera
+                  </label>
+                  <div className="flex flex-col gap-1.5">
+                    {[
+                      { id: 'drone_orbit', label: 'Drone Orbit 360°', desc: 'Melingkari panggung utama' },
+                      { id: 'dolly_in', label: 'Cinematic Dolly-In', desc: 'Maju perlahan ke objek' },
+                      { id: 'pan_right', label: 'Pan Tracking Right', desc: 'Geser horizontal sinematik' },
+                      { id: 'top_down_crane', label: 'Top-Down Aerial Crane', desc: 'Pandangan mata elang' },
+                      { id: 'static_tripod', label: 'Static Locked Tripod', desc: 'Kamera diam fokus gerak' },
+                    ].map((cam) => (
+                      <button
+                        key={cam.id}
+                        type="button"
+                        onClick={() => setCameraMovement(cam.id as CameraMovement)}
+                        className={`px-2.5 py-1.5 rounded-lg border text-left flex items-center justify-between text-xs transition-all ${
+                          cameraMovement === cam.id
+                            ? 'border-cyan-500 bg-cyan-950/30 text-white font-bold'
+                            : 'border-[#2c2b28] bg-[#1c1c1a] text-[#8a8780] hover:text-white'
+                        }`}
+                      >
+                        <span>{cam.label}</span>
+                        <span className="text-[9px] text-zinc-500">{cam.desc}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3. Visual Aesthetic Render Engine */}
+                <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-3.5">
+                  <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-cyan-400 font-bold mb-2.5">
+                    <Sparkles className="w-3.5 h-3.5" /> Gaya & Render Engine
+                  </label>
+                  <div className="flex flex-col gap-1.5">
+                    {[
+                      { id: 'octane_3d_render', label: 'Octane 3D Ray-Traced', desc: 'C4D hyper-clean' },
+                      { id: 'unreal_engine_5', label: 'Unreal Engine 5.4 Lumen', desc: 'Nanite 8k lighting' },
+                      { id: 'cyberpunk_neon', label: 'Cyberpunk Neo-Brutalist', desc: 'Volumetrik & flare' },
+                      { id: 'documentary_35mm', label: '35mm Arri Film', desc: 'Cinematic documentary' },
+                      { id: 'roblox_gameplay', label: 'Roblox Physics Voxel', desc: 'Plastic studs saturated' },
+                    ].map((aes) => (
+                      <button
+                        key={aes.id}
+                        type="button"
+                        onClick={() => setVisualAesthetic(aes.id as VisualAesthetic)}
+                        className={`px-2.5 py-1.5 rounded-lg border text-left flex items-center justify-between text-xs transition-all ${
+                          visualAesthetic === aes.id
+                            ? 'border-cyan-500 bg-cyan-950/30 text-white font-bold'
+                            : 'border-[#2c2b28] bg-[#1c1c1a] text-[#8a8780] hover:text-white'
+                        }`}
+                      >
+                        <span>{aes.label}</span>
+                        <span className="text-[9px] text-zinc-500">{aes.desc}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Recommended Generation Settings Pills */}
+              <div className="flex flex-wrap items-center gap-2 bg-[#0c0c0b] p-3 rounded-2xl border border-[#2c2b28] text-xs font-mono text-zinc-300">
+                <span className="text-cyan-400 font-bold uppercase text-[10px]">Parameter Rekomendasi:</span>
+                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                  Rasio: <strong className="text-white">{visualPromptData.recommendedSettings.aspectRatio}</strong>
+                </span>
+                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                  Durasi: <strong className="text-white">{visualPromptData.recommendedSettings.duration}</strong>
+                </span>
+                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                  FPS: <strong className="text-white">{visualPromptData.recommendedSettings.fps}</strong>
+                </span>
+                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                  Motion Strength: <strong className="text-white">{visualPromptData.recommendedSettings.motionStrength}</strong>
+                </span>
+              </div>
+
+              {/* Main Positive Prompt Output */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono uppercase text-cyan-400 font-bold">
+                    Prompt Positif (Salin ke {visualPlatform.toUpperCase()}):
+                  </span>
+                  <span className="text-xs text-zinc-500">Rasio 9:16 Vertikal</span>
+                </div>
+                <pre className="max-h-[220px] overflow-auto whitespace-pre-wrap rounded-2xl border-2 border-cyan-900/50 bg-[#070b14] p-4 font-mono text-[13px] leading-relaxed text-cyan-100 selection:bg-cyan-500 selection:text-black">
+                  {visualPromptData.prompt}
+                </pre>
+              </div>
+
+              {/* Negative Prompt Output */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono uppercase text-red-400 font-bold">
+                    Negative Prompt (Anti-Artifacts & Anti-Deformity):
+                  </span>
+                  <span className="text-xs text-zinc-500">Otomatis menyaring cacat anatomi</span>
+                </div>
+                <div className="p-3 bg-[#110808] border border-red-950/60 rounded-xl font-mono text-xs text-red-200">
+                  {visualPromptData.negativePrompt}
+                </div>
+              </div>
+
+              {/* Pro-Tip: Seamless AUDIRA MOTION Integration */}
+              <div className="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 text-xs text-cyan-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <span className="font-black text-cyan-400 uppercase tracking-wide flex items-center gap-1.5">
+                    💡 Cara Pasang Video AI ke Mesin AUDIRA MOTION:
+                  </span>
+                  <p className="text-cyan-100/80 leading-relaxed">
+                    Render prompt di atas di Kling / Runway, unduh video 9:16 berdurasi 5s-10s, lalu letakkan di folder <code className="bg-black/40 px-1 py-0.5 rounded text-white font-mono">public/reels/{format}.mp4</code>. Mesin template akan otomatis memutar video tersebut sebagai background, lengkap dengan live HUD, simulasi, dan voiceover TTS!
+                  </p>
+                </div>
+                <Link
+                  href={`/studio?format=${format}&mood=${mood}&idea=${encodeURIComponent(idea)}`}
+                  className="shrink-0 px-3 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-md transition-colors"
+                >
+                  Buka Studio Live
+                </Link>
+              </div>
             </div>
-          </div>
-
-          <div className="relative mt-4">
-            <pre className="max-h-[440px] overflow-auto whitespace-pre-wrap rounded-2xl border-2 border-[#2c2b28] bg-[#0c0c0b] p-5 font-mono text-[12px] leading-relaxed text-[#d6d3cc] selection:bg-[#ea580c] selection:text-white">
-              {prompt}
-            </pre>
-          </div>
+          )}
         </section>
 
         {/* 5. Live Paste, Check & 9:16 Preview Engine */}

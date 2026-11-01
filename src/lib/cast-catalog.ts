@@ -1,3 +1,5 @@
+import { CharacterArchetype } from '@/types/motion';
+
 export interface CastMember {
   id: string;
   name: string;
@@ -6,6 +8,7 @@ export interface CastMember {
   avatarColor: string;
   hoodieColor?: string;
   botAccentColor?: string;
+  archetype?: CharacterArchetype;
 }
 
 export interface LocationScene {
@@ -17,20 +20,23 @@ export interface LocationScene {
 }
 
 export const HUMAN_CAST: CastMember[] = [
-  { id: 'ash', name: 'Ash', role: 'human', title: 'Aspiring Streamer', avatarColor: '#fbcfe8', hoodieColor: '#c2410c' },
-  { id: 'noob', name: 'Noob Blox', role: 'human', title: 'Level 1 Obby Player', avatarColor: '#ffd900', hoodieColor: '#0055bf' },
-  { id: 'kai', name: 'Kai', role: 'human', title: 'Tech Developer', avatarColor: '#fed7aa', hoodieColor: '#2563eb' },
-  { id: 'june', name: 'June', role: 'human', title: 'Creative Designer', avatarColor: '#fef08a', hoodieColor: '#9333ea' },
-  { id: 'nara', name: 'Nara', role: 'human', title: 'Sharp Analyst', avatarColor: '#e2e8f0', hoodieColor: '#059669' },
-  { id: 'reza', name: 'Reza', role: 'human', title: 'Corporate Hustler', avatarColor: '#fdba74', hoodieColor: '#475569' },
+  { id: 'ash', name: 'Ash', role: 'human', title: 'Aspiring Streamer', avatarColor: '#fbcfe8', hoodieColor: '#c2410c', archetype: 'vector_expressive' },
+  { id: 'noob', name: 'Noob Blox', role: 'human', title: 'Level 1 Obby Player', avatarColor: '#ffd900', hoodieColor: '#0055bf', archetype: 'roblox_blocky' },
+  { id: 'doc_sim', name: 'Dr. Simulasi', role: 'human', title: 'Simulasi Fisika 3D', avatarColor: '#fed7aa', hoodieColor: '#0ea5e9', archetype: 'lowpoly_humanoid' },
+  { id: 'survivor_ray', name: 'Survivor Ray', role: 'human', title: 'Tactical Outbreak Guard', avatarColor: '#84cc16', hoodieColor: '#15803d', archetype: 'tactical_survivor' },
+  { id: 'kai', name: 'Kai', role: 'human', title: 'Tech Developer', avatarColor: '#fed7aa', hoodieColor: '#2563eb', archetype: 'vector_expressive' },
+  { id: 'june', name: 'June', role: 'human', title: 'Creative Designer', avatarColor: '#fef08a', hoodieColor: '#9333ea', archetype: 'vector_expressive' },
+  { id: 'audira', name: 'Audira', role: 'human', title: 'Sharp Analyst', avatarColor: '#e2e8f0', hoodieColor: '#059669', archetype: 'vector_expressive' },
+  { id: 'reza', name: 'Reza', role: 'human', title: 'Corporate Hustler', avatarColor: '#fdba74', hoodieColor: '#475569', archetype: 'vector_expressive' },
 ];
 
 export const AI_CAST: CastMember[] = [
-  { id: 'bacon', name: 'Pro Bacon', role: 'ai', title: 'Top 1 Global Obby', avatarColor: '#f5d0a9', botAccentColor: '#dc2626' },
-  { id: 'claude', name: 'Claude', role: 'ai', title: 'Brutally Honest AI', avatarColor: '#f4f3f0', botAccentColor: '#c2410c' },
-  { id: 'bubble', name: 'Bubble', role: 'ai', title: 'Curious ChatGPT Bot', avatarColor: '#ffffff', botAccentColor: '#06b6d4' },
-  { id: 'cyber', name: 'CyberCore', role: 'ai', title: 'High-Tech Supercomputer', avatarColor: '#18181b', botAccentColor: '#a855f7' },
-  { id: 'pixel', name: 'BitBot', role: 'ai', title: 'Retro 8-bit Sprite', avatarColor: '#052e16', botAccentColor: '#10b981' },
+  { id: 'bacon', name: 'Pro Bacon', role: 'ai', title: 'Top 1 Global Obby', avatarColor: '#f5d0a9', botAccentColor: '#dc2626', archetype: 'roblox_blocky' },
+  { id: 'claude', name: 'Claude', role: 'ai', title: 'Brutally Honest AI', avatarColor: '#f4f3f0', botAccentColor: '#c2410c', archetype: 'cyber_hologram' },
+  { id: 'bubble', name: 'Bubble', role: 'ai', title: 'Curious ChatGPT Bot', avatarColor: '#ffffff', botAccentColor: '#06b6d4', archetype: 'cyber_hologram' },
+  { id: 'cosmic_bot', name: 'Orbital HUD', role: 'ai', title: 'Cosmic Telemetry AI', avatarColor: '#0284c7', botAccentColor: '#38bdf8', archetype: 'cyber_hologram' },
+  { id: 'cyber', name: 'CyberCore', role: 'ai', title: 'High-Tech Supercomputer', avatarColor: '#18181b', botAccentColor: '#a855f7', archetype: 'cyber_hologram' },
+  { id: 'pixel', name: 'BitBot', role: 'ai', title: 'Retro 8-bit Sprite', avatarColor: '#052e16', botAccentColor: '#10b981', archetype: 'lowpoly_humanoid' },
 ];
 
 export const SCENE_LOCATIONS: LocationScene[] = [

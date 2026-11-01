@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Storyboard, MotionFormat } from '@/types/motion';
+import { 
+  Storyboard, 
+  MotionFormat, 
+  SubtitleConfig, 
+  VisualLayoutConfig, 
+  SubtitlePositionPreset, 
+  SubtitleSize, 
+  SubtitleBoxStyle,
+  SubtitleAnimationStyle,
+  SubtitleFontFamily 
+} from '@/types/motion';
 import { WordByWordCaptions } from './WordByWordCaptions';
 import { CharacterBanterTemplate } from './CharacterBanterTemplate';
 import { WhiteboardTemplate } from './WhiteboardTemplate';
@@ -10,23 +20,53 @@ import { BreakingNewsTemplate } from './BreakingNewsTemplate';
 import { CleanExplainerTemplate } from './CleanExplainerTemplate';
 import { DocuStoryTemplate } from './DocuStoryTemplate';
 import { RobloxTemplate } from './RobloxTemplate';
+import { WhatIf3DTemplate } from './WhatIf3DTemplate';
+import { ZombieSurvivalTemplate } from './ZombieSurvivalTemplate';
+import { HowItsBuiltTemplate } from './HowItsBuiltTemplate';
+import { CosmicVoyageTemplate } from './CosmicVoyageTemplate';
 import { EnginePreview } from './EnginePreview';
+import { RenderHistoryModal } from '@/components/studio/RenderHistoryModal';
 import { 
   Play, Pause, RotateCcw, ShieldCheck, Download, Volume2, VolumeX, 
   Gauge, Music, Smartphone, MonitorPlay, Sparkles, Heart, MessageCircle, 
-  Bookmark, Share2 
+  Bookmark, Share2, Sliders, Layers, Eye, EyeOff, Type, Palette, 
+  CheckCircle2, X, ChevronUp, ChevronDown, AlignVerticalJustifyCenter, 
+  Radio, Tv, BarChart3, Heading, AlertTriangle, Shield, Check,
+  FolderOpen, Upload, Wand2
 } from 'lucide-react';
 import { browserAudio, isAudioInteractionAllowed } from '@/lib/browser-audio';
 import { bgmEngine, BGMTrack } from '@/lib/bgm-engine';
 
+const ANIMATION_PRESETS: { id: SubtitleAnimationStyle; label: string; desc: string }[] = [
+  { id: 'pop_bounce', label: 'Bounce Pop', desc: 'Gaya MrBeast melonjak dinamis' },
+  { id: 'karaoke', label: 'Karaoke Sweep', desc: 'Gaya Ali Abdaal menyapu halus' },
+  { id: 'flash_word', label: 'Single Flash', desc: '1-2 kata cepat pemicu retensi' },
+  { id: 'hormozi_box', label: 'Hormozi Box', desc: 'Blok kuning solid Alex Hormozi' },
+  { id: 'highlight', label: 'Highlight Standar', desc: 'Warna menyala kata aktif' },
+];
+
+const FONT_PRESETS: { id: SubtitleFontFamily; label: string; desc: string }[] = [
+  { id: 'montserrat', label: 'Montserrat', desc: 'Tebal modern edukasi & bisnis' },
+  { id: 'impact', label: 'Impact', desc: 'Huruf tebal klasik video viral' },
+  { id: 'the_bold_font', label: 'The Bold', desc: 'Heavy podcast & motivasi' },
+  { id: 'komika', label: 'Komika', desc: 'Gaya gaming & komedi santai' },
+  { id: 'inter', label: 'Inter', desc: 'Minimalis bersih tech SaaS' },
+];
+
 interface Props {
   storyboard: Storyboard;
   onExportClick?: () => void;
+  onUpdateSubtitleConfig?: (config: SubtitleConfig) => void;
+  onUpdateVisualLayout?: (layout: VisualLayoutConfig) => void;
 }
 
 const NATIVE_TEMPLATES: MotionFormat[] = [
   'character_banter',
   'roblox_story',
+  'what_if_3d',
+  'zombie_survival',
+  'how_its_built',
+  'cosmic_voyage',
   'whiteboard',
   'pixel_rpg',
   'breaking_news',
@@ -34,7 +74,37 @@ const NATIVE_TEMPLATES: MotionFormat[] = [
   'docu_story',
 ];
 
-export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
+const POSITION_PRESETS: { id: SubtitlePositionPreset; label: string; desc: string; val: number }[] = [
+  { id: 'top', label: 'Atas (14%)', desc: 'Di bawah notch', val: 14 },
+  { id: 'upper_mid', label: 'Atas-Tengah (26%)', desc: 'Di atas grafik', val: 26 },
+  { id: 'center', label: 'Tengah (48%)', desc: 'Tengah layar', val: 48 },
+  { id: 'lower_mid', label: 'Bawah-Tengah (68%)', desc: 'Safe Reels Bebas Tabrakan', val: 68 },
+  { id: 'bottom', label: 'Bawah (82%)', desc: 'Di atas tombol', val: 82 },
+];
+
+const HIGHLIGHT_COLORS = [
+  { hex: '#facc15', label: 'Emas' },
+  { hex: '#ea580c', label: 'Oranye' },
+  { hex: '#10b981', label: 'Emerald' },
+  { hex: '#06b6d4', label: 'Cyan' },
+  { hex: '#a855f7', label: 'Ungu' },
+  { hex: '#ffffff', label: 'Putih' },
+];
+
+const THEME_OPTIONS = [
+  { id: 'default', label: 'Obsidian Slate', bg: '#09090b', accent: '#6366f1' },
+  { id: 'cyber_grid', label: 'Cyber Matrix', bg: '#030914', accent: '#06b6d4' },
+  { id: 'indigo_glow', label: 'Indigo Bloom', bg: '#0c071b', accent: '#a855f7' },
+  { id: 'amber_studio', label: 'Amber Studio', bg: '#120b05', accent: '#f59e0b' },
+  { id: 'neon_bloom', label: 'Neon Cyber', bg: '#14051d', accent: '#ec4899' },
+];
+
+export const MotionStage: React.FC<Props> = ({ 
+  storyboard, 
+  onExportClick,
+  onUpdateSubtitleConfig,
+  onUpdateVisualLayout
+}) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
   const [speed, setSpeed] = useState(1);
@@ -46,6 +116,74 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
   const [bgmTrack, setBgmTrack] = useState<BGMTrack>('lofi_chill');
   const [showBgmMenu, setShowBgmMenu] = useState(false);
   const [audioUnlocked, setAudioUnlocked] = useState(false);
+  const [voiceVol, setVoiceVol] = useState<number>(1.0);
+  const [bgmVol, setBgmVol] = useState<number>(0.35);
+  const [sfxVol, setSfxVol] = useState<number>(0.6);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const phoneContainerRef = useRef<HTMLDivElement>(null);
+  const customBgmInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Active HUD Panel: 'none' | 'subtitle' | 'layers' | 'audio' (Default 'subtitle')
+  const [activeHudTab, setActiveHudTab] = useState<'none' | 'subtitle' | 'layers' | 'audio'>('subtitle');
+
+  const handleVoiceVolChange = (v: number) => {
+    setVoiceVol(v);
+    browserAudio.setVoiceVolume(v);
+  };
+
+  const handleBgmVolChange = (v: number) => {
+    setBgmVol(v);
+    bgmEngine.setVolume(v);
+  };
+
+  const handleSfxVolChange = (v: number) => {
+    setSfxVol(v);
+    browserAudio.setSfxVolume(v);
+  };
+
+  const handleCustomBgmUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    bgmEngine.loadCustomTrack(url, file.name);
+    setBgmTrack('none');
+  };
+
+  const currentSubConfig: SubtitleConfig = storyboard.subtitleConfig || {
+    enabled: true,
+    position: 'lower_mid',
+    customY: 68,
+    size: 'md',
+    boxStyle: 'glass',
+    highlightColor: '#facc15',
+    showSpeakerTag: true,
+  };
+
+  const currentLayout: VisualLayoutConfig = storyboard.visualLayout || {
+    showHeader: true,
+    showGraphic: true,
+    showCallout: true,
+    graphicScale: 'normal',
+    canvasTheme: 'default',
+  };
+
+  const updateSubtitle = (patch: Partial<SubtitleConfig>) => {
+    if (onUpdateSubtitleConfig) {
+      onUpdateSubtitleConfig({
+        ...currentSubConfig,
+        ...patch,
+      });
+    }
+  };
+
+  const updateLayout = (patch: Partial<VisualLayoutConfig>) => {
+    if (onUpdateVisualLayout) {
+      onUpdateVisualLayout({
+        ...currentLayout,
+        ...patch,
+      });
+    }
+  };
 
   const duration = storyboard.durationSec || 13;
   const animRef = useRef<number | null>(null);
@@ -57,13 +195,20 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
   // Sync BGM according to format default
   useEffect(() => {
     let defaultTrack: BGMTrack = 'lofi_chill';
-    if (storyboard.format === 'pixel_rpg' || storyboard.format === 'roblox_story') defaultTrack = 'retro_arcade';
+    if (storyboard.format === 'pixel_rpg' || storyboard.format === 'roblox_story' || storyboard.format === 'zombie_survival') defaultTrack = 'retro_arcade';
     else if (storyboard.format === 'breaking_news') defaultTrack = 'news_pulse';
-    else if (storyboard.format === 'clean_explainer') defaultTrack = 'cyber_synth';
+    else if (storyboard.format === 'clean_explainer' || storyboard.format === 'what_if_3d' || storyboard.format === 'cosmic_voyage') defaultTrack = 'cyber_synth';
 
     setBgmTrack(defaultTrack);
     bgmEngine.setTrack(defaultTrack);
   }, [storyboard.format]);
+
+  // Prefetch natural Indonesian Cartesia voiceover for all storyboard lines
+  useEffect(() => {
+    if (storyboard?.lines?.length) {
+      browserAudio.prefetchLines(storyboard.lines);
+    }
+  }, [storyboard?.lines]);
 
   const handleUnlockAudio = async () => {
     const ok = await browserAudio.unlock();
@@ -162,8 +307,8 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
         browserAudio.playPop();
       }
 
-      // Voiceover Speech synthesis
-      browserAudio.speakLine(currentLine.id, currentLine.text, currentLine.speakerRole);
+      // Voiceover Speech synthesis (Authentic Indonesian Cartesia AI)
+      browserAudio.speakLine(currentLine.id, currentLine.text, currentLine.speakerRole, currentLine.emotion);
     } else if (!currentLine) {
       // Restore BGM during pauses between dialogue
       bgmEngine.unduck();
@@ -218,6 +363,14 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
         return <CharacterBanterTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'roblox_story':
         return <RobloxTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
+      case 'what_if_3d':
+        return <WhatIf3DTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
+      case 'zombie_survival':
+        return <ZombieSurvivalTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
+      case 'how_its_built':
+        return <HowItsBuiltTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
+      case 'cosmic_voyage':
+        return <CosmicVoyageTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'whiteboard':
         return <WhiteboardTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'pixel_rpg':
@@ -233,11 +386,23 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
     }
   };
 
+  const isSimulationOrCustomHud = [
+    'roblox_story',
+    'what_if_3d',
+    'zombie_survival',
+    'how_its_built',
+    'cosmic_voyage',
+  ].includes(storyboard.format);
+
+  const currentRatio = currentLayout.aspectRatio || '9:16';
+  const maxWidthClass = currentRatio === '16:9' ? 'max-w-[500px]' : currentRatio === '1:1' ? 'max-w-[420px]' : 'max-w-[390px]';
+  const aspectClass = currentRatio === '1:1' ? 'aspect-square' : currentRatio === '16:9' ? 'aspect-video' : 'aspect-[9/16]';
+
   return (
-    <div className="flex flex-col items-center w-full max-w-[390px] mx-auto select-none">
+    <div className={`flex flex-col items-center w-full ${maxWidthClass} mx-auto select-none transition-all duration-300`}>
       {/* TOP CANVAS CONTROL BAR */}
-      <div className="w-full flex items-center justify-between pb-3 text-xs">
-        <div className="flex items-center gap-1.5">
+      <div className="w-full flex items-center justify-between pb-3 text-xs flex-wrap gap-2">
+        <div className="flex items-center gap-1.5 flex-wrap">
           {/* Mode Switcher: Interactive vs GSAP Engine */}
           <div className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800">
             <button
@@ -273,6 +438,36 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
               <span>GSAP 1080p</span>
             </button>
           </div>
+
+          {/* Aspek Rasio Switcher */}
+          <div className="flex items-center p-0.5 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono">
+            {(['9:16', '1:1', '16:9'] as const).map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => updateLayout({ aspectRatio: r })}
+                className={`px-1.5 py-0.5 rounded-lg font-bold transition-all ${
+                  currentRatio === r
+                    ? 'bg-orange-600 text-white shadow-sm'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+                title={`Ubah Aspek Rasio Kanvas ke ${r}`}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+
+          {/* Vault Riwayat Render Button */}
+          <button
+            type="button"
+            onClick={() => setIsHistoryOpen(true)}
+            className="px-2 py-1 rounded-xl border text-[10px] font-bold bg-zinc-900 hover:bg-zinc-800 text-amber-300 border-amber-500/40 hover:border-amber-400 transition-all flex items-center gap-1 shadow-sm"
+            title="Buka Vault Arsip Hasil Render MP4"
+          >
+            <FolderOpen className="w-3 h-3 text-amber-400" />
+            <span className="hidden sm:inline">Vault</span>
+          </button>
         </div>
 
         {/* Viewport & Overlay Toggles */}
@@ -323,18 +518,32 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
 
       {/* 9:16 VERTICAL VIDEO PLAYER CONTAINER */}
       <div 
+        ref={phoneContainerRef}
         onClick={handleUnlockAudio}
-        className={`relative w-full aspect-[9/16] bg-black overflow-hidden transition-all duration-300 cursor-pointer ${
-          frameMode === 'phone'
+        className={`relative w-full ${aspectClass} bg-black overflow-hidden transition-all duration-300 cursor-pointer ${
+          frameMode === 'phone' && currentRatio === '9:16'
             ? 'rounded-[44px] border-[10px] border-[#202022] ring-1 ring-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
             : 'rounded-3xl border-4 border-zinc-800 shadow-2xl'
         }`}
       >
         {/* Phone Dynamic Island Notch */}
-        {frameMode === 'phone' && (
+        {frameMode === 'phone' && currentRatio === '9:16' && (
           <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-50 flex items-center justify-between px-2.5 pointer-events-none shadow-md">
             <div className="w-2 h-2 rounded-full bg-[#111] ring-1 ring-white/10" />
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 animate-pulse" />
+          </div>
+        )}
+
+        {/* Live Subtitle Height Guide Line when adjusting Subtitle */}
+        {activeHudTab === 'subtitle' && currentSubConfig.enabled && (
+          <div
+            className="absolute inset-x-0 z-50 pointer-events-none flex items-center transition-all duration-150"
+            style={{ top: `${currentSubConfig.customY ?? 68}%` }}
+          >
+            <div className="w-full border-t border-dashed border-yellow-400/80 shadow-[0_0_8px_rgba(250,204,21,0.6)]" />
+            <span className="absolute right-2 -translate-y-1/2 px-1.5 py-0.5 rounded bg-yellow-400 text-black text-[9px] font-mono font-black shadow">
+              Y: {currentSubConfig.customY ?? 68}%
+            </span>
           </div>
         )}
 
@@ -342,16 +551,21 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
         {renderActiveCanvas()}
 
         {/* Word-By-Word Subtitles Overlay (for native interactive templates) */}
-        {engineMode === 'interactive' && hasNativeTemplate && storyboard.format !== 'roblox_story' && (
+        {engineMode === 'interactive' && hasNativeTemplate && !isSimulationOrCustomHud && (
           <WordByWordCaptions
             currentLine={currentLine}
             currentTime={currentTime}
+            format={storyboard.format}
+            config={currentSubConfig}
+            phoneContainerRef={phoneContainerRef}
+            onUpdatePosition={(newY) => updateSubtitle({ customY: newY, position: undefined })}
             highlightColor={
-              storyboard.format === 'pixel_rpg'
+              currentSubConfig?.highlightColor ||
+              (storyboard.format === 'pixel_rpg'
                 ? '#10b981'
                 : storyboard.format === 'breaking_news'
                 ? '#facc15'
-                : '#ff7849'
+                : '#ff7849')
             }
           />
         )}
@@ -420,6 +634,663 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
           <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/40 rounded-full z-50 pointer-events-none" />
         )}
       </div>
+
+      {/* CANVAS DOCK SELECTOR BAR (PROMINENT RIGHT UNDER PHONE) */}
+      <div className="w-full mt-3 flex items-center justify-between p-1.5 rounded-2xl bg-[#141417] border-2 border-zinc-800 shadow-md">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <button
+            type="button"
+            onClick={() => setActiveHudTab(activeHudTab === 'subtitle' ? 'none' : 'subtitle')}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all ${
+              activeHudTab === 'subtitle'
+                ? 'bg-orange-600 text-white shadow-md'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+            }`}
+          >
+            <Sliders className="w-3.5 h-3.5 text-orange-400" />
+            <span>Subtitle & Font</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-black/50 text-orange-300">
+              {currentSubConfig.enabled ? `${currentSubConfig.customY ?? 68}%` : 'OFF'}
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveHudTab(activeHudTab === 'layers' ? 'none' : 'layers')}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all ${
+              activeHudTab === 'layers'
+                ? 'bg-cyan-600 text-white shadow-md'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Lapisan Visual</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveHudTab(activeHudTab === 'audio' ? 'none' : 'audio')}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all ${
+              activeHudTab === 'audio'
+                ? 'bg-emerald-600 text-white shadow-md'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+            }`}
+          >
+            <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Mixer Audio</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setActiveHudTab(activeHudTab === 'none' ? 'subtitle' : 'none')}
+          className="text-zinc-500 hover:text-zinc-300 p-1.5 rounded-lg text-[10px] font-bold flex items-center gap-1"
+          title={activeHudTab === 'none' ? 'Buka Pengaturan Canvas' : 'Tutup Pengaturan Canvas'}
+        >
+          <span>{activeHudTab === 'none' ? 'Buka' : 'Tutup'}</span>
+          {activeHudTab !== 'none' ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+        </button>
+      </div>
+
+      {/* INTERACTIVE HUD PANEL: SUBTITLE DOCK OR VISUAL LAYERS INSPECTOR */}
+      {activeHudTab === 'subtitle' && (
+        <div className="w-full mt-3 bg-[#121215] p-3.5 sm:p-4 rounded-3xl border-2 border-orange-500/80 shadow-[4px_4px_0px_#000] flex flex-col gap-3 animate-in fade-in duration-200">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2">
+              <Sliders className="w-4 h-4 text-orange-500" />
+              <span className="text-xs font-black uppercase tracking-wider text-white">
+                Atur Posisi & Tampilan Subtitle
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveHudTab('none')}
+              className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* 1. Posisi Cepat (Presets) */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[10px] font-black uppercase text-zinc-400">
+              Posisi Vertikal di Layar:
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+              {POSITION_PRESETS.map((p) => {
+                const isSelected = currentSubConfig.position === p.id || currentSubConfig.customY === p.val;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => updateSubtitle({ position: p.id, customY: p.val })}
+                    className={`px-2 py-1.5 rounded-xl text-left border text-[11px] font-bold transition-all flex flex-col ${
+                      isSelected
+                        ? 'bg-orange-600 text-white border-orange-400 shadow-sm'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-300 hover:border-zinc-700'
+                    }`}
+                  >
+                    <span>{p.label}</span>
+                    <span className="text-[9px] opacity-75 font-normal truncate">{p.desc}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 2. Slider Ketinggian Y Bebas */}
+          <div className="flex flex-col gap-1.5 bg-zinc-900/80 p-2.5 rounded-2xl border border-zinc-800">
+            <div className="flex justify-between items-center text-[10px]">
+              <span className="font-bold text-zinc-300">Presisi Ketinggian (Y Axis):</span>
+              <span className="font-mono font-bold text-orange-400">{currentSubConfig.customY ?? 68}%</span>
+            </div>
+            <input
+              type="range"
+              min={12}
+              max={86}
+              value={currentSubConfig.customY ?? 68}
+              onChange={(e) => updateSubtitle({ customY: Number(e.target.value), position: undefined })}
+              className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-orange-500 focus:outline-none"
+            />
+          </div>
+
+          {/* 3. Ukuran & Box Backdrop Style */}
+          <div className="grid grid-cols-2 gap-2">
+            {/* Ukuran Subtitle */}
+            <div className="flex flex-col gap-1">
+              <span className="text-[10px] font-black uppercase text-zinc-400">Ukuran Font:</span>
+              <div className="flex items-center gap-1">
+                {(['sm', 'md', 'lg'] as SubtitleSize[]).map((sz) => (
+                  <button
+                    key={sz}
+                    type="button"
+                    onClick={() => updateSubtitle({ size: sz })}
+                    className={`flex-1 py-1 rounded-xl text-xs font-black uppercase border transition-all ${
+                      currentSubConfig.size === sz
+                        ? 'bg-orange-600 text-white border-orange-400'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    {sz.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Gaya Box Anti-Tabrakan */}
+            <div className="flex flex-col gap-1">
+              <span className="text-[10px] font-black uppercase text-zinc-400">Backdrop Box:</span>
+              <div className="grid grid-cols-2 gap-1">
+                {[
+                  { id: 'glass', label: 'Pill Gelap' },
+                  { id: 'solid', label: 'Solid Box' },
+                  { id: 'neon', label: 'Neon' },
+                  { id: 'shadow', label: 'Shadow' },
+                ].map((bx) => (
+                  <button
+                    key={bx.id}
+                    type="button"
+                    onClick={() => updateSubtitle({ boxStyle: bx.id as SubtitleBoxStyle })}
+                    className={`py-1 px-1 rounded-xl text-[10px] font-bold border truncate transition-all ${
+                      currentSubConfig.boxStyle === bx.id
+                        ? 'bg-orange-600 text-white border-orange-400'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    {bx.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 4. Warna Kata Aktif (Highlight) & Toggles */}
+          <div className="flex items-center justify-between pt-1 border-t border-zinc-800 flex-wrap gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-bold text-zinc-400 mr-1">Highlight:</span>
+              {HIGHLIGHT_COLORS.map((c) => (
+                <button
+                  key={c.hex}
+                  type="button"
+                  onClick={() => updateSubtitle({ highlightColor: c.hex })}
+                  style={{ backgroundColor: c.hex }}
+                  className={`w-5 h-5 rounded-full border-2 transition-transform ${
+                    currentSubConfig.highlightColor === c.hex
+                      ? 'border-white scale-125 shadow-md'
+                      : 'border-black hover:scale-110'
+                  }`}
+                  title={c.label}
+                />
+              ))}
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              {/* Toggle Subtitle */}
+              <button
+                type="button"
+                onClick={() => updateSubtitle({ enabled: !currentSubConfig.enabled })}
+                className={`px-2 py-1 rounded-lg border text-[10px] font-bold flex items-center gap-1 ${
+                  currentSubConfig.enabled
+                    ? 'bg-emerald-600/20 text-emerald-400 border-emerald-500/50'
+                    : 'bg-zinc-800 text-zinc-500 border-zinc-700'
+                }`}
+              >
+                {currentSubConfig.enabled ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
+                <span>{currentSubConfig.enabled ? 'Aktif' : 'Mati'}</span>
+              </button>
+
+              {/* Toggle Speaker Tag */}
+              <button
+                type="button"
+                onClick={() => updateSubtitle({ showSpeakerTag: !currentSubConfig.showSpeakerTag })}
+                className={`px-2 py-1 rounded-lg border text-[10px] font-bold ${
+                  currentSubConfig.showSpeakerTag !== false
+                    ? 'bg-zinc-800 text-zinc-200 border-zinc-700'
+                    : 'bg-zinc-900 text-zinc-500 border-zinc-800'
+                }`}
+              >
+                Tag: {currentSubConfig.showSpeakerTag !== false ? 'ON' : 'OFF'}
+              </button>
+            </div>
+          </div>
+
+          {/* 5. Gaya Animasi Teks Kinetik */}
+          <div className="flex flex-col gap-1.5 pt-2 border-t border-zinc-800">
+            <span className="text-[10px] font-black uppercase text-zinc-400 flex items-center gap-1.5">
+              <Sparkles className="w-3 h-3 text-yellow-400" />
+              <span>Gaya Animasi Teks Kinetik:</span>
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+              {ANIMATION_PRESETS.map((an) => {
+                const isSelected = (currentSubConfig.animationStyle || 'pop_bounce') === an.id;
+                return (
+                  <button
+                    key={an.id}
+                    type="button"
+                    onClick={() => updateSubtitle({ animationStyle: an.id })}
+                    className={`p-2 rounded-xl border text-left text-xs transition-all flex flex-col ${
+                      isSelected
+                        ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500 shadow-sm font-bold'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>{an.label}</span>
+                    <span className="text-[9px] opacity-75 font-normal truncate mt-0.5">{an.desc}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 6. Pilihan Font Kreator */}
+          <div className="flex flex-col gap-1.5 pt-2 border-t border-zinc-800">
+            <span className="text-[10px] font-black uppercase text-zinc-400 flex items-center gap-1.5">
+              <Type className="w-3 h-3 text-cyan-400" />
+              <span>Font Kreator Populer:</span>
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+              {FONT_PRESETS.map((fn) => {
+                const isSelected = (currentSubConfig.fontFamily || 'montserrat') === fn.id;
+                return (
+                  <button
+                    key={fn.id}
+                    type="button"
+                    onClick={() => updateSubtitle({ fontFamily: fn.id })}
+                    className={`p-2 rounded-xl border text-left text-xs transition-all flex flex-col ${
+                      isSelected
+                        ? 'bg-cyan-600/20 text-cyan-300 border-cyan-500 shadow-sm font-bold'
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>{fn.label}</span>
+                    <span className="text-[9px] opacity-75 font-normal truncate mt-0.5">{fn.desc}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* INTERACTIVE HUD PANEL: VISUAL LAYERS INSPECTOR ("visualnya apa saja dll") */}
+      {activeHudTab === 'layers' && (
+        <div className="w-full mt-3 bg-[#121215] p-3.5 sm:p-4 rounded-3xl border-2 border-cyan-500/80 shadow-[4px_4px_0px_#000] flex flex-col gap-3 animate-in fade-in duration-200">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2">
+              <Layers className="w-4 h-4 text-cyan-400" />
+              <div>
+                <span className="text-xs font-black uppercase tracking-wider text-white block">
+                  Daftar Lapisan Visual (Scene Layers)
+                </span>
+                <span className="text-[10px] text-zinc-400">
+                  Format: {storyboard.format} • Bebas atur setiap elemen
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveHudTab('none')}
+              className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* Layer List */}
+          <div className="flex flex-col gap-2">
+            {/* Layer 1: Tema Background */}
+            <div className="p-2.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="font-bold text-white flex items-center gap-1.5">
+                  <Palette className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Layer 1: Tema Latar Kanvas</span>
+                </span>
+                <span className="text-[10px] text-zinc-400 font-mono">
+                  {currentLayout.canvasTheme || 'default'}
+                </span>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-1 pt-1">
+                {THEME_OPTIONS.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => updateLayout({ canvasTheme: t.id })}
+                    className={`px-2 py-1 rounded-xl text-[10px] font-bold border truncate transition-all ${
+                      (currentLayout.canvasTheme || 'default') === t.id
+                        ? 'bg-cyan-600 text-white border-cyan-400 shadow-sm'
+                        : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    {t.label.split(' ')[0]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Layer 2: Header & Judul Topik */}
+            <div className="p-2.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-xs text-white flex items-center gap-1.5">
+                  <Heading className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Layer 2: Header & Topik Video</span>
+                </div>
+                <div className="text-[10px] text-zinc-400">
+                  {currentLayout.showHeader !== false ? 'Menampilkan judul & label referensi' : 'Disembunyikan (Mode Fokus)'}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => updateLayout({ showHeader: currentLayout.showHeader === false })}
+                className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold ${
+                  currentLayout.showHeader !== false
+                    ? 'bg-emerald-600/20 text-emerald-400 border-emerald-500/50'
+                    : 'bg-zinc-800 text-zinc-500 border-zinc-700'
+                }`}
+              >
+                {currentLayout.showHeader !== false ? 'Tampil' : 'Sembunyi'}
+              </button>
+            </div>
+
+            {/* Layer 3: Visual Utama & Grafik */}
+            <div className="p-2.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-xs text-white flex items-center gap-1.5">
+                    <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Layer 3: Visual Utama / Chart / 3D</span>
+                  </div>
+                  <div className="text-[10px] text-zinc-400">
+                    Kartu visual interaktif atau animasi diagram
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => updateLayout({ showGraphic: currentLayout.showGraphic === false })}
+                  className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold ${
+                    currentLayout.showGraphic !== false
+                      ? 'bg-emerald-600/20 text-emerald-400 border-emerald-500/50'
+                      : 'bg-zinc-800 text-zinc-500 border-zinc-700'
+                  }`}
+                >
+                  {currentLayout.showGraphic !== false ? 'Tampil' : 'Sembunyi'}
+                </button>
+              </div>
+
+              {currentLayout.showGraphic !== false && (
+                <div className="flex items-center justify-between pt-1 border-t border-zinc-800 text-[10px]">
+                  <span className="text-zinc-400 font-bold">Skala Ukuran Visual:</span>
+                  <div className="flex items-center gap-1">
+                    {[
+                      { id: 'compact', label: 'Kompak (90%)' },
+                      { id: 'normal', label: 'Normal' },
+                      { id: 'large', label: 'Besar (105%)' },
+                    ].map((sc) => (
+                      <button
+                        key={sc.id}
+                        type="button"
+                        onClick={() => updateLayout({ graphicScale: sc.id as any })}
+                        className={`px-2 py-0.5 rounded-lg border text-[9px] font-bold ${
+                          (currentLayout.graphicScale || 'normal') === sc.id
+                            ? 'bg-cyan-600 text-white border-cyan-400'
+                            : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-white'
+                        }`}
+                      >
+                        {sc.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Layer 4: Subtitle Layer */}
+            <div className="p-2.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-xs text-white flex items-center gap-1.5">
+                  <Type className="w-3.5 h-3.5 text-orange-400" />
+                  <span>Layer 4: Subtitle Teks Kinetik</span>
+                </div>
+                <div className="text-[10px] text-zinc-400">
+                  Posisi: {currentSubConfig.customY ?? 68}% • Ukuran: {currentSubConfig.size}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveHudTab('subtitle')}
+                className="px-2.5 py-1 rounded-xl bg-orange-600 text-white text-[10px] font-bold shadow-sm hover:bg-orange-500"
+              >
+                Atur Subtitle
+              </button>
+            </div>
+
+            {/* Layer 5: Actionable Tip / Outro Callout */}
+            <div className="p-2.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-xs text-white flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
+                  <span>Layer 5: Outro Callout & Hook Magnet</span>
+                </div>
+                <div className="text-[10px] text-zinc-400">
+                  Kartu tips pemicu share atau debat komentar di akhir
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => updateLayout({ showCallout: currentLayout.showCallout === false })}
+                className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold ${
+                  currentLayout.showCallout !== false
+                    ? 'bg-emerald-600/20 text-emerald-400 border-emerald-500/50'
+                    : 'bg-zinc-800 text-zinc-500 border-zinc-700'
+                }`}
+              >
+                {currentLayout.showCallout !== false ? 'Tampil' : 'Sembunyi'}
+              </button>
+            </div>
+
+            {/* Breaking News Special Customizer */}
+            {storyboard.format === 'breaking_news' && (
+              <div className="p-2.5 rounded-2xl bg-red-950/30 border border-red-900/50 flex flex-col gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider text-red-400 flex items-center gap-1">
+                  <Radio className="w-3 h-3 animate-pulse" />
+                  <span>Pengaturan Siaran Breaking News TV</span>
+                </span>
+                
+                {/* Urgency Badge */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
+                  {[
+                    { id: 'breaking', label: 'BREAKING' },
+                    { id: 'flash', label: 'FLASH' },
+                    { id: 'investigasi', label: 'INVESTIGASI' },
+                    { id: 'special', label: 'KHUSUS' },
+                  ].map((u) => (
+                    <button
+                      key={u.id}
+                      type="button"
+                      onClick={() => updateLayout({ newsUrgency: u.id as any })}
+                      className={`py-1 rounded-lg text-[9px] font-black uppercase border ${
+                        (currentLayout.newsUrgency || 'breaking') === u.id
+                          ? 'bg-red-600 text-white border-red-400'
+                          : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      {u.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* News Mode */}
+                <div className="grid grid-cols-3 gap-1 pt-1">
+                  {[
+                    { id: 'forensic_leak', label: 'Chat Leak' },
+                    { id: 'anchor_studio', label: 'Studio 3D' },
+                    { id: 'field_live_cam', label: 'Field Cam' },
+                  ].map((m) => (
+                    <button
+                      key={m.id}
+                      type="button"
+                      onClick={() => updateLayout({ newsMode: m.id as any })}
+                      className={`py-1 rounded-lg text-[9px] font-bold border ${
+                        (currentLayout.newsMode || 'forensic_leak') === m.id
+                          ? 'bg-orange-600 text-white border-orange-400'
+                          : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      {m.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* INTERACTIVE HUD PANEL: AUDIO MIXER STUDIO */}
+      {activeHudTab === 'audio' && (
+        <div className="w-full mt-3 bg-[#121215] p-3.5 sm:p-4 rounded-3xl border-2 border-emerald-500/80 shadow-[4px_4px_0px_#000] flex flex-col gap-3 animate-in fade-in duration-200">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2">
+              <Volume2 className="w-4 h-4 text-emerald-400" />
+              <div>
+                <span className="text-xs font-black uppercase tracking-wider text-white block">
+                  Mixer Volume & Musik Latar (BGM)
+                </span>
+                <span className="text-[10px] text-zinc-400">
+                  Atur keseimbangan suara AI, musik latar, efek suara, atau upload lagu
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveHudTab('none')}
+              className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* 1. Volume Sliders Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            {/* Voice Volume */}
+            <div className="bg-zinc-900 p-2.5 rounded-2xl border border-zinc-800 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-bold text-orange-400 flex items-center gap-1">
+                  <span>🎙️ Suara AI</span>
+                </span>
+                <span className="font-mono text-[10px] text-zinc-400">{Math.round(voiceVol * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={voiceVol}
+                onChange={(e) => handleVoiceVolChange(parseFloat(e.target.value))}
+                className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
+              />
+            </div>
+
+            {/* BGM Volume */}
+            <div className="bg-zinc-900 p-2.5 rounded-2xl border border-zinc-800 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-bold text-cyan-400 flex items-center gap-1">
+                  <span>🎵 Musik BGM</span>
+                </span>
+                <span className="font-mono text-[10px] text-zinc-400">{Math.round(bgmVol * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={bgmVol}
+                onChange={(e) => handleBgmVolChange(parseFloat(e.target.value))}
+                className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+              />
+            </div>
+
+            {/* SFX Volume */}
+            <div className="bg-zinc-900 p-2.5 rounded-2xl border border-zinc-800 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-bold text-yellow-400 flex items-center gap-1">
+                  <span>💥 Efek SFX</span>
+                </span>
+                <span className="font-mono text-[10px] text-zinc-400">{Math.round(sfxVol * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={sfxVol}
+                onChange={(e) => handleSfxVolChange(parseFloat(e.target.value))}
+                className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-yellow-500"
+              />
+            </div>
+          </div>
+
+          {/* 2. Track BGM Selection */}
+          <div className="flex flex-col gap-1.5 pt-1 border-t border-zinc-800">
+            <span className="text-[10px] font-black uppercase text-zinc-400">Pilih Trek Musik Latar (BGM):</span>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+              {[
+                { id: 'lofi_chill', label: 'Lofi Chill' },
+                { id: 'news_pulse', label: 'News Pulse' },
+                { id: 'retro_arcade', label: 'Retro 8-Bit' },
+                { id: 'cyber_synth', label: 'Cyber Synth' },
+                { id: 'none', label: 'Mute BGM' },
+              ].map((trk) => (
+                <button
+                  key={trk.id}
+                  type="button"
+                  onClick={() => handleSelectBgm(trk.id as BGMTrack)}
+                  className={`py-1.5 px-2 rounded-xl text-xs font-bold border transition-colors truncate ${
+                    bgmTrack === trk.id
+                      ? 'bg-emerald-600 text-white border-emerald-400'
+                      : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {trk.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 3. Custom BGM Upload & SFX Audition */}
+          <div className="flex items-center justify-between pt-2 border-t border-zinc-800 flex-wrap gap-2">
+            <div>
+              <input
+                ref={customBgmInputRef}
+                type="file"
+                accept="audio/*"
+                onChange={handleCustomBgmUpload}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => customBgmInputRef.current?.click()}
+                className="px-3 py-1.5 rounded-xl border border-dashed border-emerald-500/60 bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-all"
+              >
+                <Upload className="w-3.5 h-3.5 text-emerald-400" />
+                <span>
+                  {bgmEngine.getCustomTrackName() ? `Lagu: ${bgmEngine.getCustomTrackName()}` : 'Upload Lagu Sendiri (.mp3 / .wav)'}
+                </span>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                handleUnlockAudio();
+                browserAudio.playPop();
+              }}
+              className="px-2.5 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold border border-zinc-700 flex items-center gap-1"
+            >
+              <span>🔊 Tes SFX Pop</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* TIMELINE SCRUBBER & DOCK CONTROLS */}
       <div className="w-full mt-4 bg-zinc-900/90 backdrop-blur-md p-3.5 sm:p-4 rounded-3xl border-2 border-zinc-800 shadow-brutal flex flex-col gap-2.5">
@@ -566,6 +1437,12 @@ export const MotionStage: React.FC<Props> = ({ storyboard, onExportClick }) => {
           )}
         </div>
       </div>
+
+      {/* Vault Riwayat Render Modal */}
+      <RenderHistoryModal
+        isOpen={isHistoryOpen}
+        onClose={() => setIsHistoryOpen(false)}
+      />
     </div>
   );
 };

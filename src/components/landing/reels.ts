@@ -24,6 +24,10 @@ export const REELS: ReelSample[] = [
   { file: 'retro_vhs', format: 'retro_vhs', kind: 'Retro VHS', title: 'Liburan keluarga 90-an' },
   { file: 'sticky_notes', format: 'sticky_notes', kind: 'Catatan', title: '6 cara fokus kerja di rumah' },
   { file: 'roblox_story', format: 'roblox_story', kind: 'Roblox Obby', title: 'Noob minta 1000 Robux' },
+  { file: 'what_if_3d', format: 'what_if_3d', kind: 'What If 3D', title: 'Kentut 8.2 Miliar Manusia' },
+  { file: 'zombie_survival', format: 'zombie_survival', kind: 'Zombie Survival', title: 'Hari ke-42 Zombie Farm' },
+  { file: 'how_its_built', format: 'how_its_built', kind: 'How It\'s Built', title: 'Bunker Rumah Kaca 3D' },
+  { file: 'cosmic_voyage', format: 'cosmic_voyage', kind: '3D Cosmic Film', title: 'Mengelilingi Khatulistiwa' },
 ];
 
 export const FORMAT_CARDS: Array<{ reel: ReelSample; name: string; pitch: string; topics: string[] }> = [
@@ -78,14 +82,18 @@ export const FORMAT_CARDS: Array<{ reel: ReelSample; name: string; pitch: string
   { reel: REELS[18], name: 'Retro VHS', pitch: 'Rekaman rumahan era 90-an: PLAY, jam berjalan, subtitle kuning.', topics: ['Nostalgia', 'Kenangan'] },
   { reel: REELS[19], name: 'Papan catatan', pitch: 'Catatan tempel dipaku ke papan gabus, satu catatan per tips.', topics: ['Tips', 'Checklist'] },
   { reel: REELS[20], name: 'Roblox Obby & Skits', pitch: 'Karakter Noob vs Pro di lintasan obby parkour, dilengkapi bubble chat Roblox, Robux R$, dan efek suara OOF!', topics: ['Obby Parkour', 'Noob vs Pro', 'Robux Drama'] },
+  { reel: REELS[21], name: 'What If 3D (Simulation)', pitch: 'Simulasi kerumunan 3D dan bencana global dengan ticker volume gas & dampak atmosferik raksasa.', topics: ['Crowd Physics', 'Global What-If', 'Disaster Scale'] },
+  { reel: REELS[22], name: 'Zombie Survival', pitch: 'Peta taktikal top-down bertahan hidup di ladang dengan radar deteksi dan perimeter pohon pelindung.', topics: ['Survival Base', 'Radar Defense', 'Day by Day'] },
+  { reel: REELS[23], name: 'How It\'s Built (3D Cutaway)', pitch: 'Potongan melintang 3D arsitektur bawah tanah: rumah dibelah mengungkap bunker hidroponik rahasia.', topics: ['Architecture 3D', 'Underground Bunker', 'Step by Step'] },
+  { reel: REELS[24], name: 'Long-Form 3D Films', pitch: 'Perjalanan 3D kosmis sinematik: planet bumi berputar megah di ruang hampa dengan skala astronomi.', topics: ['Planetary Science', 'Space Odyssey', 'Cinematic Earth'] },
 ];
 
 export const MOOD_SAMPLES: Record<MoodType, { line: string; verdict: string }> = {
-  calm: { line: 'Empat puluh followers itu awal yang baik. Tapi belum cukup buat bayar kos.', verdict: 'Nara yang kalem. Pelan, tapi kena.' },
-  warm: { line: 'Gue dukung mimpi lo. Gimana kalau streaming malam dulu, kerja tetap jalan?', verdict: 'Nara yang hangat. Kayak sahabat sendiri.' },
-  motivational: { line: 'Semua streamer besar mulai dari nol. Bedanya, mereka nggak resign di hari pertama.', verdict: 'Nara yang memotivasi. Dorong, tapi realistis.' },
-  hyped: { line: 'Empat puluh?! Itu satu kelas penuh! Ayo bikin jadwal streaming sekarang juga!', verdict: 'Nara yang hyped. All in, mungkin kebablasan.' },
-  frustrated: { line: 'Ya ampun, ini ketiga kalinya bulan ini lo mau resign. Cek dulu saldo lo.', verdict: 'Nara yang frustrasi. Capek, tapi tetap nyimak.' },
-  angry: { line: 'Resign besok?! Cicilan motor lo siapa yang bayar, followers lo?!', verdict: 'Nara yang marah. Nada tinggi, fakta tajam.' },
-  rude: { line: 'Tiga puluh sembilan itu bot. Satunya lagi nyokap lo.', verdict: 'Nara yang nyolot. Roasting tanpa rem.' },
+  calm: { line: 'Empat puluh followers itu awal yang baik. Tapi belum cukup buat bayar kos.', verdict: 'Audira yang kalem. Pelan, tapi kena.' },
+  warm: { line: 'Gue dukung mimpi lo. Gimana kalau streaming malam dulu, kerja tetap jalan?', verdict: 'Audira yang hangat. Kayak sahabat sendiri.' },
+  motivational: { line: 'Semua streamer besar mulai dari nol. Bedanya, mereka nggak resign di hari pertama.', verdict: 'Audira yang memotivasi. Dorong, tapi realistis.' },
+  hyped: { line: 'Empat puluh?! Itu satu kelas penuh! Ayo bikin jadwal streaming sekarang juga!', verdict: 'Audira yang hyped. All in, mungkin kebablasan.' },
+  frustrated: { line: 'Ya ampun, ini ketiga kalinya bulan ini lo mau resign. Cek dulu saldo lo.', verdict: 'Audira yang frustrasi. Capek, tapi tetap nyimak.' },
+  angry: { line: 'Resign besok?! Cicilan motor lo siapa yang bayar, followers lo?!', verdict: 'Audira yang marah. Nada tinggi, fakta tajam.' },
+  rude: { line: 'Tiga puluh sembilan itu bot. Satunya lagi nyokap lo.', verdict: 'Audira yang nyolot. Roasting tanpa rem.' },
 };

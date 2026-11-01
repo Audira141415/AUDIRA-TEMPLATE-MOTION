@@ -2,7 +2,15 @@
 
 import React from 'react';
 import { HUMAN_CAST, AI_CAST, SCENE_LOCATIONS, CastMember, LocationScene } from '@/lib/cast-catalog';
-import { Users, Sparkles, Shuffle, MapPin, Bot, User } from 'lucide-react';
+import { Users, Sparkles, Shuffle, MapPin, Bot, User, Box, Globe, Shield, Terminal } from 'lucide-react';
+
+const ARCHETYPE_BADGES: Record<string, { label: string; color: string }> = {
+  roblox_blocky: { label: 'Roblox', color: 'bg-yellow-400 text-black' },
+  lowpoly_humanoid: { label: '3D Sim', color: 'bg-sky-500 text-white' },
+  cyber_hologram: { label: 'Holo AI', color: 'bg-cyan-500 text-black' },
+  tactical_survivor: { label: 'Tactical', color: 'bg-emerald-500 text-black' },
+  vector_expressive: { label: '2D Vector', color: 'bg-orange-500 text-white' },
+};
 
 interface Props {
   selectedHuman: string;
@@ -52,6 +60,7 @@ export const CastPicker: React.FC<Props> = ({
           <div className="flex flex-wrap gap-1.5">
             {HUMAN_CAST.map((c) => {
               const isSelected = selectedHuman.toLowerCase() === c.name.toLowerCase();
+              const badge = ARCHETYPE_BADGES[c.archetype || 'vector_expressive'];
               return (
                 <button
                   key={c.id}
@@ -65,6 +74,11 @@ export const CastPicker: React.FC<Props> = ({
                 >
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: c.hoodieColor }} />
                   <span>{c.name}</span>
+                  {badge && (
+                    <span className={`text-[9px] px-1 py-0.2 rounded font-black uppercase ${badge.color}`}>
+                      {badge.label}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -80,6 +94,7 @@ export const CastPicker: React.FC<Props> = ({
           <div className="flex flex-wrap gap-1.5">
             {AI_CAST.map((c) => {
               const isSelected = selectedAi.toLowerCase() === c.name.toLowerCase();
+              const badge = ARCHETYPE_BADGES[c.archetype || 'cyber_hologram'];
               return (
                 <button
                   key={c.id}
@@ -93,6 +108,11 @@ export const CastPicker: React.FC<Props> = ({
                 >
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: c.botAccentColor }} />
                   <span>{c.name}</span>
+                  {badge && (
+                    <span className={`text-[9px] px-1 py-0.2 rounded font-black uppercase ${badge.color}`}>
+                      {badge.label}
+                    </span>
+                  )}
                 </button>
               );
             })}

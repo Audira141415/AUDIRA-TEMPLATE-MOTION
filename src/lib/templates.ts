@@ -97,6 +97,22 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
       accentColor: '#ffe9df',
       backgroundColor: '#141413',
     },
+    subtitleConfig: {
+      enabled: true,
+      position: 'lower_mid',
+      customY: 68,
+      size: 'md',
+      boxStyle: 'glass',
+      highlightColor: '#ea580c',
+      showSpeakerTag: true,
+    },
+    visualLayout: {
+      showHeader: true,
+      showGraphic: true,
+      showCallout: true,
+      graphicScale: 'normal',
+      canvasTheme: 'default',
+    },
     commentMagnetHook: 'Ketik di komentar: apakah 40 followers cukup buat resign?',
     lines: [
       {
@@ -170,6 +186,22 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
       accentColor: '#38bdf8',
       backgroundColor: '#fbfbfb',
     },
+    subtitleConfig: {
+      enabled: true,
+      position: 'lower_mid',
+      customY: 72,
+      size: 'md',
+      boxStyle: 'glass',
+      highlightColor: '#0284c7',
+      showSpeakerTag: true,
+    },
+    visualLayout: {
+      showHeader: true,
+      showGraphic: true,
+      showCallout: true,
+      graphicScale: 'normal',
+      canvasTheme: 'default',
+    },
     commentMagnetHook: 'Berapa tab browser yang kebuka di laptop lo sekarang?',
     lines: [
       {
@@ -232,6 +264,22 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
       primaryColor: '#10b981',
       accentColor: '#34d399',
       backgroundColor: '#0a0d14',
+    },
+    subtitleConfig: {
+      enabled: true,
+      position: 'lower_mid',
+      customY: 68,
+      size: 'md',
+      boxStyle: 'solid',
+      highlightColor: '#10b981',
+      showSpeakerTag: true,
+    },
+    visualLayout: {
+      showHeader: true,
+      showGraphic: true,
+      showCallout: true,
+      graphicScale: 'normal',
+      canvasTheme: 'default',
     },
     commentMagnetHook: 'Reaksi lo kalo diajak meeting jam 4:59 sore?',
     lines: [
@@ -296,6 +344,24 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
       accentColor: '#fee2e2',
       backgroundColor: '#0f172a',
     },
+    subtitleConfig: {
+      enabled: true,
+      position: 'center',
+      customY: 56,
+      size: 'md',
+      boxStyle: 'glass',
+      highlightColor: '#facc15',
+      showSpeakerTag: true,
+    },
+    visualLayout: {
+      showHeader: true,
+      showGraphic: true,
+      showCallout: true,
+      graphicScale: 'normal',
+      canvasTheme: 'default',
+      newsUrgency: 'breaking',
+      newsMode: 'forensic_leak',
+    },
     commentMagnetHook: 'Tag temen lo yang hobi bilang OTW padahal masih rebahan!',
     lines: [
       {
@@ -348,6 +414,22 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
       primaryColor: '#6366f1',
       accentColor: '#c7d2fe',
       backgroundColor: '#09090b',
+    },
+    subtitleConfig: {
+      enabled: true,
+      position: 'lower_mid',
+      customY: 68,
+      size: 'md',
+      boxStyle: 'glass',
+      highlightColor: '#facc15',
+      showSpeakerTag: true,
+    },
+    visualLayout: {
+      showHeader: true,
+      showGraphic: true,
+      showCallout: true,
+      graphicScale: 'normal',
+      canvasTheme: 'default',
     },
     commentMagnetHook: 'Simpan video ini biar lo inget langkah nomor duanya!',
     lines: [
@@ -412,6 +494,22 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
       accentColor: '#fef3c7',
       backgroundColor: '#111110',
     },
+    subtitleConfig: {
+      enabled: true,
+      position: 'lower_mid',
+      customY: 68,
+      size: 'md',
+      boxStyle: 'glass',
+      highlightColor: '#facc15',
+      showSpeakerTag: true,
+    },
+    visualLayout: {
+      showHeader: true,
+      showGraphic: true,
+      showCallout: true,
+      graphicScale: 'normal',
+      canvasTheme: 'default',
+    },
     commentMagnetHook: 'Apakah lo baru tahu fakta ini hari ini?',
     lines: [
       {
@@ -459,4 +557,3 @@ const BASE_DEMOS: Record<Exclude<MotionFormat, ExtraFormat>, Storyboard> = {
 };
 
 export const DEMO_STORYBOARDS: Record<MotionFormat, Storyboard> = { ...BASE_DEMOS, ...EXTRA_DEMOS };
-

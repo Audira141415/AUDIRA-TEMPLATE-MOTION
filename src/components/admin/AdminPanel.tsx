@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Download, Loader2, RefreshCw } from 'lucide-react';
+import { Download, Loader2, RefreshCw, Cpu, Users, Video, Mic } from 'lucide-react';
+import { AiInterconnectionTab } from '@/components/admin/AiInterconnectionTab';
+import { VoiceOverTab } from '@/components/admin/VoiceOverTab';
 
 type AdminUser = {
   id: string;
@@ -32,7 +34,7 @@ const STATE_STYLE: Record<string, string> = {
 };
 
 export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
-  const [tab, setTab] = useState<'users' | 'renders'>('users');
+  const [tab, setTab] = useState<'ai' | 'voice' | 'users' | 'renders'>('ai');
   const [users, setUsers] = useState<AdminUser[] | null>(null);
   const [renders, setRenders] = useState<AdminRender[] | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -85,23 +87,31 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
       </div>
 
       <div className="flex items-center justify-between gap-3">
-        <div role="tablist" className="flex gap-1 rounded-xl border border-[#2c2b28] bg-[#1c1c1a] p-1">
-          {(['users', 'renders'] as const).map((t) => (
+        <div role="tablist" className="flex flex-wrap gap-1 rounded-2xl border border-[#2c2b28] bg-[#1c1c1a] p-1.5">
+          {[
+            { id: 'ai' as const, label: 'Interkoneksi AI (Gemini, Claude, GPT)', icon: <Cpu className="h-4 w-4" /> },
+            { id: 'voice' as const, label: 'Voice Over & TTS (Cartesia)', icon: <Mic className="h-4 w-4" /> },
+            { id: 'users' as const, label: 'Pengguna', icon: <Users className="h-4 w-4" /> },
+            { id: 'renders' as const, label: 'Render Video', icon: <Video className="h-4 w-4" /> },
+          ].map((t) => (
             <button
-              key={t}
+              key={t.id}
               role="tab"
-              aria-selected={tab === t}
-              onClick={() => setTab(t)}
-              className={`rounded-lg px-4 py-2 text-sm font-semibold ${tab === t ? 'bg-[#f4f3f0] text-[#141413]' : 'text-[#b9b6ae] hover:text-white'}`}
+              aria-selected={tab === t.id}
+              onClick={() => setTab(t.id)}
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all ${
+                tab === t.id ? 'bg-[#ea580c] text-white shadow-sm' : 'text-[#b9b6ae] hover:text-white hover:bg-zinc-800'
+              }`}
             >
-              {t === 'users' ? 'Pengguna' : 'Render'}
+              {t.icon}
+              <span>{t.label}</span>
             </button>
           ))}
         </div>
         <button
           type="button"
           onClick={load}
-          className="inline-flex items-center gap-2 rounded-xl border border-[#2c2b28] px-3 py-2 text-sm text-[#d6d3cc] hover:text-white"
+          className="inline-flex items-center gap-2 rounded-xl border border-[#2c2b28] px-3.5 py-2 text-xs font-bold text-[#d6d3cc] hover:text-white transition-colors"
         >
           <RefreshCw className="h-4 w-4" /> Muat ulang
         </button>
@@ -116,6 +126,14 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         >
           {message.text}
         </p>
+      )}
+
+      {tab === 'ai' && (
+        <AiInterconnectionTab />
+      )}
+
+      {tab === 'voice' && (
+        <VoiceOverTab />
       )}
 
       {tab === 'users' && (

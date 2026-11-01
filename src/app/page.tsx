@@ -5,13 +5,14 @@ import { LazyVideo } from '@/components/landing/LazyVideo';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { MoodDemo } from '@/components/landing/MoodDemo';
+import { SimulationShowcase } from '@/components/landing/SimulationShowcase';
 import { FORMAT_CARDS, REELS, ReelSample } from '@/components/landing/reels';
 
 const SCRIPT_PREVIEW = [
-  { who: 'Ash', me: false, text: 'Nara, gue mau resign besok. Gue mau full-time streaming game!' },
-  { who: 'Nara', me: true, text: 'Pertanyaan cepat. Followers lo sekarang berapa?' },
+  { who: 'Ash', me: false, text: 'Audira, gue mau resign besok. Gue mau full-time streaming game!' },
+  { who: 'Audira', me: true, text: 'Pertanyaan cepat. Followers lo sekarang berapa?' },
   { who: 'Ash', me: false, text: 'Empat puluh orang. Tapi mereka loyal banget!' },
-  { who: 'Nara', me: true, text: 'Tiga puluh sembilan itu akun bot. Satunya lagi nyokap lo.' },
+  { who: 'Audira', me: true, text: 'Tiga puluh sembilan itu akun bot. Satunya lagi nyokap lo.' },
 ];
 
 const HOOKS = [
@@ -41,7 +42,7 @@ const FAQ = [
   },
   {
     q: 'Apakah karakter AI-nya dari perusahaan AI tertentu?',
-    a: 'Tidak. Nara dan karakter lain adalah tokoh orisinal AUDIRA, bukan produk atau merek perusahaan mana pun.',
+    a: 'Tidak. Audira dan karakter lain adalah tokoh orisinal AUDIRA, bukan produk atau merek perusahaan mana pun.',
   },
   {
     q: 'Bahasa apa yang didukung?',
@@ -104,8 +105,11 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* 3D Simulation & What-If Hero Showcase ("One membership. Every format.") */}
+        <SimulationShowcase />
+
         {/* Reel gallery */}
-        <section aria-label="Contoh reel" className="flex flex-col gap-4 overflow-hidden pb-20">
+        <section aria-label="Contoh reel" className="flex flex-col gap-4 overflow-hidden py-16">
           <div className="reel-row flex w-max gap-4">
             {rowA.map((r, i) => (
               <ReelTile key={`a${i}`} reel={r} />

@@ -51,26 +51,39 @@ export const DocuStoryTemplate: React.FC<Props> = ({
             transform: `scale(${kenBurnsScale}) translate(${kenBurnsPanX}px, ${kenBurnsPanY}px)`,
           }}
         >
-          {/* Vintage Archival Illustration / Photo Placeholder */}
-          <svg viewBox="0 0 1080 1920" className="w-full h-full object-cover">
-            <defs>
-              <filter id="sepiaTone">
-                <feColorMatrix type="matrix" values="0.393 0.769 0.189 0 0  0.349 0.686 0.168 0 0  0.272 0.534 0.131 0 0  0 0 0 1 0" />
-              </filter>
-            </defs>
-            {/* Dark sepia vintage background */}
-            <rect width="1080" height="1920" fill="#292524" />
-            <circle cx="540" cy="960" r="420" fill="#44403c" opacity="0.6" />
-            
-            {/* Scientific diagram / Patent schematic in vintage archival style */}
-            <path d="M 240 700 L 840 700 M 540 500 L 540 1300" stroke="#d97706" strokeWidth="6" opacity="0.4" />
-            <circle cx="540" cy="700" r="180" fill="none" stroke="#f59e0b" strokeWidth="8" opacity="0.5" strokeDasharray="12 12" />
-            <circle cx="540" cy="960" r="260" fill="none" stroke="#d97706" strokeWidth="6" opacity="0.4" />
-            
-            {/* Waveform signal waves */}
-            <path d="M 200 960 Q 370 820 540 960 T 880 960" fill="none" stroke="#fef3c7" strokeWidth="12" opacity="0.7" />
-            <path d="M 200 1020 Q 370 1140 540 1020 T 880 1020" fill="none" stroke="#f59e0b" strokeWidth="8" opacity="0.5" />
-          </svg>
+          {storyboard.visualLayout?.customMediaUrl ? (
+            <div className="relative w-full h-full flex items-center justify-center bg-stone-950">
+              <img
+                src={storyboard.visualLayout.customMediaUrl}
+                alt={storyboard.visualLayout.customMediaLabel || 'Dokumenter Media'}
+                className="w-full h-full object-cover filter contrast-125 sepia-[0.35] brightness-90"
+              />
+              <div className="absolute bottom-28 left-6 px-2.5 py-1 rounded bg-black/80 border border-amber-500/40 text-[10px] font-mono text-amber-200 tracking-wider">
+                {storyboard.visualLayout.customMediaLabel || 'ARSIP DOKUMEN HISTORIS'}
+              </div>
+            </div>
+          ) : (
+            /* Vintage Archival Illustration / Photo Placeholder */
+            <svg viewBox="0 0 1080 1920" className="w-full h-full object-cover">
+              <defs>
+                <filter id="sepiaTone">
+                  <feColorMatrix type="matrix" values="0.393 0.769 0.189 0 0  0.349 0.686 0.168 0 0  0.272 0.534 0.131 0 0  0 0 0 1 0" />
+                </filter>
+              </defs>
+              {/* Dark sepia vintage background */}
+              <rect width="1080" height="1920" fill="#292524" />
+              <circle cx="540" cy="960" r="420" fill="#44403c" opacity="0.6" />
+              
+              {/* Scientific diagram / Patent schematic in vintage archival style */}
+              <path d="M 240 700 L 840 700 M 540 500 L 540 1300" stroke="#d97706" strokeWidth="6" opacity="0.4" />
+              <circle cx="540" cy="700" r="180" fill="none" stroke="#f59e0b" strokeWidth="8" opacity="0.5" strokeDasharray="12 12" />
+              <circle cx="540" cy="960" r="260" fill="none" stroke="#d97706" strokeWidth="6" opacity="0.4" />
+              
+              {/* Waveform signal waves */}
+              <path d="M 200 960 Q 370 820 540 960 T 880 960" fill="none" stroke="#fef3c7" strokeWidth="12" opacity="0.7" />
+              <path d="M 200 1020 Q 370 1140 540 1020 T 880 1020" fill="none" stroke="#f59e0b" strokeWidth="8" opacity="0.5" />
+            </svg>
+          )}
         </div>
       </div>
 

@@ -14,7 +14,7 @@
       "avatar": "human-ash"
     },
     "characterB": {
-      "name": "Nara",
+      "name": "Audira",
       "title": "AI Paling Jujur",
       "avatar": "ai-bubble"
     }
@@ -30,7 +30,7 @@
       "id": "l1",
       "speaker": "Ash",
       "speakerRole": "human",
-      "text": "Nara, gue mau resign besok. Gue mau full-time streaming game!",
+      "text": "Audira, gue mau resign besok. Gue mau full-time streaming game!",
       "startSec": 0,
       "durationSec": 3,
       "emotion": "hyped",
@@ -38,7 +38,7 @@
     },
     {
       "id": "l2",
-      "speaker": "Nara",
+      "speaker": "Audira",
       "speakerRole": "ai",
       "text": "Pertanyaan cepat. Followers lo sekarang berapa?",
       "startSec": 0,
@@ -58,7 +58,7 @@
     },
     {
       "id": "l4",
-      "speaker": "Nara",
+      "speaker": "Audira",
       "speakerRole": "ai",
       "text": "Tiga puluh sembilan itu akun bot. Satunya lagi nyokap lo.",
       "startSec": 0,

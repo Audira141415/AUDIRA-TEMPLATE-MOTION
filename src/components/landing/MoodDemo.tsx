@@ -14,10 +14,10 @@ export const MoodDemo: React.FC = () => {
       <div className="flex flex-col gap-6">
         <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#8a8780]">Ide sama · 7 mood</p>
         <h2 className="font-display text-[44px] font-extrabold leading-[0.98] tracking-[-0.04em] sm:text-[64px]">
-          Atur cara Nara <span className="text-[#ea580c]">bereaksi.</span>
+          Atur cara Audira <span className="text-[#ea580c]">bereaksi.</span>
         </h2>
         <p className="max-w-[460px] text-[17px] leading-relaxed text-[#b9b6ae]">
-          Ash mau resign demi jadi streamer. Followers-nya empat puluh. Idenya selalu sama, yang berubah hanya Nara: kata-katanya,
+          Ash mau resign demi jadi streamer. Followers-nya empat puluh. Idenya selalu sama, yang berubah hanya Audira: kata-katanya,
           ekspresinya, suaranya, dan temponya.
         </p>
         <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Pilih mood">
@@ -54,7 +54,7 @@ export const MoodDemo: React.FC = () => {
           className="absolute inset-0 h-full w-full object-cover opacity-45"
         />
         <div className="absolute inset-x-4 bottom-6 rounded-2xl border-2 border-black bg-[#f4f3f0] p-4 text-[#141413] shadow-[6px_6px_0_#ea580c]">
-          <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-[#ea580c]">Nara · {MOODS.find((m) => m.id === mood)?.label}</p>
+          <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-[#ea580c]">Audira · {MOODS.find((m) => m.id === mood)?.label}</p>
           <p key={mood} className="text-[17px] font-bold leading-snug">
             {sample.line}
           </p>

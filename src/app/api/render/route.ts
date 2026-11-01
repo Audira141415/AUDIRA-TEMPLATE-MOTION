@@ -4,11 +4,18 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { Storyboard } from '@/types/motion';
 import { currentUser } from '@/lib/auth';
-import { RENDERS_DIR, setJobOwner } from '@/lib/render-jobs';
+import { RENDERS_DIR, setJobOwner, listJobs } from '@/lib/render-jobs';
 
 export const runtime = 'nodejs';
 
 const QUALITIES = new Set(['draft', 'looks', 'delivery']);
+
+export async function GET() {
+  const user = await currentUser();
+  const all = listJobs();
+  const renders = user ? all.filter((j) => !j.ownerId || j.ownerId === user.id) : all;
+  return NextResponse.json({ renders });
+}
 
 export async function POST(req: Request) {
   const user = await currentUser();

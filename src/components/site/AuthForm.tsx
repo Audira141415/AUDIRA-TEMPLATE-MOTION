@@ -138,6 +138,34 @@ export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
           {copy.submit}
           {!busy && <ArrowRight className="h-4 w-4" />}
         </button>
+
+        {process.env.NODE_ENV !== 'production' && (
+          <button
+            type="button"
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              setError(null);
+              try {
+                const res = await fetch('/api/auth/dev-login', { method: 'POST' });
+                const data = await res.json();
+                if (res.ok) {
+                  router.push(next);
+                  router.refresh();
+                } else {
+                  setError(data.error || 'Gagal masuk dev superadmin');
+                }
+              } catch {
+                setError('Koneksi dev login gagal');
+              } finally {
+                setBusy(false);
+              }
+            }}
+            className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl border border-dashed border-[#ea580c]/50 bg-[#ea580c]/10 px-4 py-2.5 text-[13px] font-bold text-[#f08a4b] hover:bg-[#ea580c]/20 transition-all"
+          >
+            ⚡ Masuk Instan Superadmin (Local Dev)
+          </button>
+        )}
       </form>
 
       <p className="mt-6 text-center text-[14px] text-[#8a8780]">
