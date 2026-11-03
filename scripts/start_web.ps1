@@ -28,15 +28,16 @@ if (-not (Test-Path "node_modules")) {
     pnpm install
 }
 
-# 3. Determine start mode (production start if .next exists, else dev)
-$useProd = Test-Path ".next"
+# 3. Determine start mode (production start if .next\BUILD_ID exists, else dev)
+$buildIdFile = Join-Path $ProjectDir ".next\BUILD_ID"
+$useProd = Test-Path $buildIdFile
 $nextBin = Join-Path $ProjectDir "node_modules\.bin\next.cmd"
 $startCmd = if (Test-Path $nextBin) {
     if ($useProd) { "`"$nextBin`" start -p $Port" } else { "`"$nextBin`" dev -p $Port" }
 } else {
     if ($useProd) { "pnpm start" } else { "pnpm dev" }
 }
-$modeLabel = if ($useProd) { "Production Server" } else { "Development Server" }
+$modeLabel = if ($useProd) { "Production Server" } else { "Development Server (Hot-Reload)" }
 
 Write-Host "[*] Menjalankan $modeLabel pada port $Port..." -ForegroundColor Cyan
 
