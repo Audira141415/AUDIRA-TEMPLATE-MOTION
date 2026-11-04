@@ -19,11 +19,7 @@ export type MotionFormat =
   | 'receipt'
   | 'retro_vhs'
   | 'sticky_notes'
-  | 'roblox_story'
-  | 'what_if_3d'
-  | 'zombie_survival'
-  | 'how_its_built'
-  | 'cosmic_voyage';
+  | 'roblox_story';
 
 export type CharacterArchetype =
   | 'roblox_blocky'

@@ -20,10 +20,6 @@ import { BreakingNewsTemplate } from './BreakingNewsTemplate';
 import { CleanExplainerTemplate } from './CleanExplainerTemplate';
 import { DocuStoryTemplate } from './DocuStoryTemplate';
 import { RobloxTemplate } from './RobloxTemplate';
-import { WhatIf3DTemplate } from './WhatIf3DTemplate';
-import { ZombieSurvivalTemplate } from './ZombieSurvivalTemplate';
-import { HowItsBuiltTemplate } from './HowItsBuiltTemplate';
-import { CosmicVoyageTemplate } from './CosmicVoyageTemplate';
 import { EnginePreview } from './EnginePreview';
 import { RenderHistoryModal } from '@/components/studio/RenderHistoryModal';
 import { 
@@ -63,10 +59,6 @@ interface Props {
 const NATIVE_TEMPLATES: MotionFormat[] = [
   'character_banter',
   'roblox_story',
-  'what_if_3d',
-  'zombie_survival',
-  'how_its_built',
-  'cosmic_voyage',
   'whiteboard',
   'pixel_rpg',
   'breaking_news',
@@ -195,9 +187,9 @@ export const MotionStage: React.FC<Props> = ({
   // Sync BGM according to format default
   useEffect(() => {
     let defaultTrack: BGMTrack = 'lofi_chill';
-    if (storyboard.format === 'pixel_rpg' || storyboard.format === 'roblox_story' || storyboard.format === 'zombie_survival') defaultTrack = 'retro_arcade';
+    if (storyboard.format === 'pixel_rpg' || storyboard.format === 'roblox_story') defaultTrack = 'retro_arcade';
     else if (storyboard.format === 'breaking_news') defaultTrack = 'news_pulse';
-    else if (storyboard.format === 'clean_explainer' || storyboard.format === 'what_if_3d' || storyboard.format === 'cosmic_voyage') defaultTrack = 'cyber_synth';
+    else if (storyboard.format === 'clean_explainer') defaultTrack = 'cyber_synth';
 
     setBgmTrack(defaultTrack);
     bgmEngine.setTrack(defaultTrack);
@@ -363,14 +355,6 @@ export const MotionStage: React.FC<Props> = ({
         return <CharacterBanterTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'roblox_story':
         return <RobloxTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
-      case 'what_if_3d':
-        return <WhatIf3DTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
-      case 'zombie_survival':
-        return <ZombieSurvivalTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
-      case 'how_its_built':
-        return <HowItsBuiltTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
-      case 'cosmic_voyage':
-        return <CosmicVoyageTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'whiteboard':
         return <WhiteboardTemplate storyboard={storyboard} currentTime={currentTime} currentLine={currentLine} />;
       case 'pixel_rpg':
@@ -388,10 +372,6 @@ export const MotionStage: React.FC<Props> = ({
 
   const isSimulationOrCustomHud = [
     'roblox_story',
-    'what_if_3d',
-    'zombie_survival',
-    'how_its_built',
-    'cosmic_voyage',
   ].includes(storyboard.format);
 
   const currentRatio = currentLayout.aspectRatio || '9:16';

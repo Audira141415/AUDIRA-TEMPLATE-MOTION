@@ -50,11 +50,10 @@ import { SiteHeader } from '@/components/site/SiteHeader';
 import { PasteChecker } from '@/components/site/PasteChecker';
 
 // Category filtering groups
-type CategoryFilter = 'all' | 'simulation' | 'gaming' | 'banter' | 'explainer' | 'story';
+type CategoryFilter = 'all' | 'gaming' | 'banter' | 'explainer' | 'story';
 
 const CATEGORIES: Array<{ id: CategoryFilter; label: string; count: number; icon: React.ReactNode }> = [
-  { id: 'all', label: 'Semua Format', count: 25, icon: <Layers className="w-3.5 h-3.5" /> },
-  { id: 'simulation', label: '3D Simulation', count: 4, icon: <Globe className="w-3.5 h-3.5" /> },
+  { id: 'all', label: 'Semua Format', count: 21, icon: <Layers className="w-3.5 h-3.5" /> },
   { id: 'gaming', label: 'Gaming & Roblox', count: 4, icon: <Box className="w-3.5 h-3.5" /> },
   { id: 'banter', label: 'Banter & Debat', count: 4, icon: <Flame className="w-3.5 h-3.5" /> },
   { id: 'explainer', label: 'Edukasi & Data', count: 5, icon: <FileCode className="w-3.5 h-3.5" /> },
@@ -62,11 +61,6 @@ const CATEGORIES: Array<{ id: CategoryFilter; label: string; count: number; icon
 ];
 
 const FORMAT_CATEGORY_MAP: Record<MotionFormat, CategoryFilter> = {
-  what_if_3d: 'simulation',
-  zombie_survival: 'simulation',
-  how_its_built: 'simulation',
-  cosmic_voyage: 'simulation',
-
   roblox_story: 'gaming',
   pixel_rpg: 'gaming',
   terminal_hack: 'gaming',
@@ -217,18 +211,6 @@ export default function PromptsPage() {
     } else if (f === 'pixel_rpg') {
       setCharA('Player 1');
       setCharB('Reality Boss');
-    } else if (f === 'what_if_3d') {
-      setCharA('Dr. Simulasi');
-      setCharB('Atmosphere HUD');
-    } else if (f === 'zombie_survival') {
-      setCharA('Survivor Ray');
-      setCharB('Radar Defense');
-    } else if (f === 'how_its_built') {
-      setCharA('Arch-Builder');
-      setCharB('Subsurface HUD');
-    } else if (f === 'cosmic_voyage') {
-      setCharA('Cosmic Voice');
-      setCharB('Orbital Tracker');
     } else {
       setCharA('');
       setCharB('');
@@ -283,7 +265,7 @@ export default function PromptsPage() {
         {/* Top Header & Breadcrumbs */}
         <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.12em] text-[#8a8780]">
           <span className="px-2.5 py-0.5 rounded-full bg-orange-600/20 text-[#ea580c] border border-orange-500/30 font-bold">
-            25 Format Aktif
+            21 Format Aktif
           </span>
           <span>•</span>
           <span>Multi-LLM Prompt Engineering Hub</span>

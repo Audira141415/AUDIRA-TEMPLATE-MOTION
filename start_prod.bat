@@ -27,3 +27,4 @@ start "AUDIRA MOTION PROD [PORT 3788]" cmd /k "cd /d ""%~dp0"" && pnpm start"
 powershell -NoProfile -ExecutionPolicy Bypass -Command "& { $port = 3788; Start-Sleep -Seconds 2; Start-Process ('http://localhost:' + $port + '/studio') }"
 
 exit /b 0
+

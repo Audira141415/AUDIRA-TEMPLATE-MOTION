@@ -109,26 +109,6 @@ export const FORMAT_BRIEF: Record<MotionFormat, { cast: string; roles: [Role, Ro
       'ROBLOX OBBY & SKITS. A = Noob (pemain pemula kocak yang sering gagal obby), B = Pro (pemain jago/bacon hair yang suka roasting). Gunakan istilah Roblox: "OOF", "Robux", "Tower of Hell", "Speed coil", "Gamepass", "Skill issue", "Stage". Bergantian A dan B, 5-8 baris.',
     roles: ['human', 'human'],
   },
-  what_if_3d: {
-    cast:
-      'WHAT IF 3D (SIMULATION). A = Narator fisika/sains simulasi dengan gaya hipotesis epik ala Kurzgesagt. Sebutkan angka counter raksasa (liter gas, energi joule, populasi manusia), efek bencana, dan simulasi kerumunan 3D. 4-6 baris, speaker selalu A.',
-    roles: ['narrator', 'narrator'],
-  },
-  zombie_survival: {
-    cast:
-      'ZOMBIE SURVIVAL MAP. A = Narator komandan bunker survival ladang. Catat log harian "HARI KE-X", radar pergerakan zombie di batas pohon perkebunan, kondisi barikade, dan keputusan taktis. 4-6 baris, speaker selalu A.',
-    roles: ['narrator', 'narrator'],
-  },
-  how_its_built: {
-    cast:
-      'HOW IT\'S BUILT (3D CUTAWAY). A = Narator bedah arsitektur. Ungkap rahasia struktur bawah tanah di balik bangunan permukaan biasa: kedalaman meter, lapisan tanah, sistem ventilasi, dan bunker hidroponik step by step. 4-6 baris, speaker selalu A.',
-    roles: ['narrator', 'narrator'],
-  },
-  cosmic_voyage: {
-    cast:
-      'LONG-FORM 3D FILMS (COSMIC VOYAGE). A = Narator kosmis filosofis. Ceritakan skala luar angkasa, rotasi planet bumi, orbit khatulistiwa, dan perspektif peradaban manusia dari kejauhan kosmik. 4-6 baris, speaker selalu A.',
-    roles: ['narrator', 'narrator'],
-  },
 };
 
 export const SYSTEM = `Kamu penulis naskah reels vertikal (Instagram Reels, TikTok, Shorts) untuk studio AUDIRA MOTION, berbahasa Indonesia gaul yang natural (lo/gue boleh kalau cocok dengan karakter).
@@ -258,26 +238,6 @@ export const IDEA_STARTERS: Record<MotionFormat, string[]> = {
     'Drama kepleset lava di stage 99 Tower of Hell padahal dikit lagi tamat',
     'Tipe-tipe player Roblox saat ketemu hacker di server publik',
   ],
-  what_if_3d: [
-    'Bagaimana kalau seluruh 8.2 miliar manusia kentut pada detik yang sama',
-    'Apa yang terjadi jika gravitasi bumi mati selama 5 detik',
-    'Bagaimana kalau asteroid emas seukuran Monas jatuh di samudra pasifik',
-  ],
-  zombie_survival: [
-    'Hari ke-42 bertahan hidup: zombie menembus batas pohon perkebunan',
-    'Membangun barikade listrik darurat di bunker ladang terisolasi',
-    'Serbuan kawanan zombie mutan di malam badai petir tanpa pasokan surya',
-  ],
-  how_its_built: [
-    'Bongkar rahasia bunker rumah kaca hidroponik 12 meter di bawah rumah pinggiran kota',
-    'Bedah arsitektur 3D shelter anti-radiasi dengan ventilasi oksigen mandiri',
-    'Bagaimana ruangan bawah tanah rahasia dibangun tanpa terdeteksi tetangga',
-  ],
-  cosmic_voyage: [
-    'Perjalanan mengelilingi khatulistiwa bumi dengan skala waktu kosmik 8 bulan',
-    'Melihat satu abad sejarah peradaban manusia dari orbit luar angkasa',
-    'Berapa lama waktu yang dibutuhkan cahaya untuk melintasi batas tata surya',
-  ],
 };
 
 // A self-contained prompt for any chat assistant: it returns storyboard JSON that
@@ -344,14 +304,6 @@ export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
       ? 'Noob Blox'
       : opts.format === 'pixel_rpg'
       ? 'Player Hero'
-      : opts.format === 'what_if_3d'
-      ? 'Dr. Simulasi'
-      : opts.format === 'zombie_survival'
-      ? 'Survivor Ray'
-      : opts.format === 'how_its_built'
-      ? 'Arch-Builder'
-      : opts.format === 'cosmic_voyage'
-      ? 'Cosmic Voice'
       : 'Ash');
   const charB =
     opts.charBName?.trim() ||
@@ -359,14 +311,6 @@ export function buildAdvancedPrompt(opts: AdvancedPromptOptions): string {
       ? 'Pro Bacon'
       : opts.format === 'pixel_rpg'
       ? 'Reality Boss'
-      : opts.format === 'what_if_3d'
-      ? 'Atmosphere HUD'
-      : opts.format === 'zombie_survival'
-      ? 'Radar Defense'
-      : opts.format === 'how_its_built'
-      ? 'Subsurface HUD'
-      : opts.format === 'cosmic_voyage'
-      ? 'Orbital Tracker'
       : 'Audira');
 
   const lineCountGuide = opts.duration === '15s' 
@@ -533,14 +477,6 @@ export interface VisualPromptOptions {
 export const VISUAL_BASE_PROMPTS: Record<MotionFormat, string> = {
   character_banter:
     'Cozy modern aesthetic cafe interior at night, warm amber ambient lighting, cinematic depth of field, neon city skyline outside large rain-streaked window, steaming ceramic mug on dark wooden table, realistic interior atmosphere',
-  what_if_3d:
-    'Massive crowd of thousands of low-poly 3D citizens standing on a coastal wooden harbor pier gazing towards the open sea, dramatic turbulent turquoise ocean waves crashing against concrete pylons, an airliner flying across deep blue sky leaving realistic contrails, an enormous semi-transparent expanding shockwave of green methane vapor rippling across the ocean horizon, live atmospheric physics calculation aesthetic, 8.2 billion humans scale, cinematic photorealism',
-  zombie_survival:
-    'Top-down tactical aerial bird-eye view of an isolated farm perimeter, concentric rings of dense protective green pine trees forming a circular shield, mowed green lawn grid tiles, glowing neon green circular radar sweep scanning the zone, central fortified red farmhouse with solar panels, multiple red glowing infected blips breaching the outer dark forest line, tactical survival map HUD aesthetic, clean tilt-shift miniature realism',
-  how_its_built:
-    'Architectural 3D cross-section cutaway X-ray view of a modern suburban house with blue shutters on the surface, vertical slice revealing multi-layered brown geological earth strata, deep subterranean hydroponic greenhouse chamber 12 meters underground, glowing warm UV grow lights illuminating rows of fresh green cabbage and lettuce planter beds, water filtration barrels, transparent ventilation pipe with animated airflow particles connecting to surface, blueprint architectural diagram aesthetic',
-  cosmic_voyage:
-    'Cinematic deep-space journey, high-definition photorealistic 3D planet Earth floating in cosmic void surrounded by starry nebula, vibrant glowing blue atmospheric halo rim, dynamic day and night terminator line casting deep shadows over continents, orbital flight telemetry trail at 350km altitude, BBC Earth IMAX space documentary cinematography, ultra-detailed cloud swirls and continent topography',
   roblox_story:
     'Roblox 3D animation, blocky yellow Noob character with classic blue shirt and green pants jumping across floating neon pink and cyan obstacle blocks over molten glowing red lava, bacon hair pro character watching from elevated platform, classic Roblox bubble chat overhead, colorful vibrant blocky aesthetic, Roblox studio game screenshot style',
   pixel_rpg:

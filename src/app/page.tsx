@@ -5,7 +5,6 @@ import { LazyVideo } from '@/components/landing/LazyVideo';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { MoodDemo } from '@/components/landing/MoodDemo';
-import { SimulationShowcase } from '@/components/landing/SimulationShowcase';
 import { FORMAT_CARDS, REELS, ReelSample } from '@/components/landing/reels';
 
 const SCRIPT_PREVIEW = [
@@ -104,9 +103,6 @@ export default function LandingPage() {
             <IdeaForm variant={0} />
           </div>
         </section>
-
-        {/* 3D Simulation & What-If Hero Showcase ("One membership. Every format.") */}
-        <SimulationShowcase />
 
         {/* Reel gallery */}
         <section aria-label="Contoh reel" className="flex flex-col gap-4 overflow-hidden py-16">

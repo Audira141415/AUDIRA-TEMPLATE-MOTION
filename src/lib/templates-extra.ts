@@ -15,11 +15,7 @@ export type ExtraFormat =
   | 'receipt'
   | 'retro_vhs'
   | 'sticky_notes'
-  | 'roblox_story'
-  | 'what_if_3d'
-  | 'zombie_survival'
-  | 'how_its_built'
-  | 'cosmic_voyage';
+  | 'roblox_story';
 
 type Cast = { name: string; title: string };
 type RawLine = [speaker: 'A' | 'B', text: string, emotion: SpeakerEmotion];
@@ -92,10 +88,6 @@ export const EXTRA_THEMES: Record<ExtraFormat, Storyboard['visualTheme']> = {
   retro_vhs: { primaryColor: '#fde047', accentColor: '#22d3ee', backgroundColor: '#000000' },
   sticky_notes: { primaryColor: '#dc2626', accentColor: '#fde047', backgroundColor: '#b88552' },
   roblox_story: { primaryColor: '#00a2ff', accentColor: '#facc15', backgroundColor: '#070b19' },
-  what_if_3d: { primaryColor: '#38bdf8', accentColor: '#f59e0b', backgroundColor: '#050c18' },
-  zombie_survival: { primaryColor: '#84cc16', accentColor: '#ef4444', backgroundColor: '#0b1307' },
-  how_its_built: { primaryColor: '#f59e0b', accentColor: '#10b981', backgroundColor: '#130d07' },
-  cosmic_voyage: { primaryColor: '#60a5fa', accentColor: '#e0f2fe', backgroundColor: '#02040a' },
 };
 
 export const EXTRA_CATALOG: Array<{
@@ -108,10 +100,6 @@ export const EXTRA_CATALOG: Array<{
   previewColor: string;
 }> = [
   { id: 'roblox_story', name: 'Roblox Obby & Skits', tagline: 'Blocky 3D Avatars, Obby Parkour & OOF! Sounds', badge: '🔥 Viral Gen-Z', iconName: 'Box', description: 'Format mega-viral Roblox: Karakter kotak Noob vs Pro berlaga di rintangan Obby parkour, dilengkapi Roblox bubble chat, leaderboard Robux R$, dan sound effect OOF legendaris.', previewColor: '#00a2ff' },
-  { id: 'what_if_3d', name: 'What If 3D (Simulation)', tagline: 'Massive Crowd Physics & Disaster Hypotheses', badge: '3.1M TikTok', iconName: 'Users', description: 'Satu pertanyaan hipotetis mustahil dimainkan dalam simulasi 3D berskala epik: kerumunan orang, perhitungan gas/energi live ticker, dan visual sinematik.', previewColor: '#38bdf8' },
-  { id: 'zombie_survival', name: 'Zombie Survival', tagline: 'Top-down Tactical Outbreak Map', badge: '260.2K TikTok', iconName: 'Shield', description: 'Simulasi pertahanan bunker top-down hari demi hari: radar infeksi, perimeter lingkaran pohon pelindung, dan survival strategis di ladang terisolasi.', previewColor: '#84cc16' },
-  { id: 'how_its_built', name: 'How It\'s Built (3D Cutaway)', tagline: 'Underground Cross-Section Architectural X-Ray', badge: '300K Views', iconName: 'Layers', description: 'Potongan melintang 3D arsitektur: rumah permukaan dibelah mengungkap bunker hidroponik bawah tanah dengan lapisan tanah, pipa udara, dan sayuran segar.', previewColor: '#f59e0b' },
-  { id: 'cosmic_voyage', name: 'Long-Form 3D Films', tagline: 'Planetary Science & Cosmic Earth Odyssey', badge: '1.58M YouTube', iconName: 'Compass', description: 'Perjalanan 3D kosmis sinematik: bumi berputar megah di ruang hampa, atmosfer bercahaya, dan skala waktu astronomi yang memukau.', previewColor: '#60a5fa' },
   { id: 'kinetic_type', name: 'Kinetic Typography', tagline: 'Big Bold Words Slamming the Screen', badge: 'Paling Simpel', iconName: 'Type', description: 'Kata-kata raksasa menghantam layar mengikuti suara, latar berganti warna tiap kalimat. Cocok untuk quote dan opini panas.', previewColor: '#ea580c' },
   { id: 'chat_story', name: 'Chat Story', tagline: 'Drama Told Through a Chat Screen', badge: 'Storytime', iconName: 'MessageCircle', description: 'Cerita disampaikan lewat layar chat: bubble masuk satu per satu, status "sedang mengetik", dan notifikasi.', previewColor: '#25d366' },
   { id: 'top_list', name: 'Top List', tagline: 'Countdown From #N to #1', badge: 'Disimpan Orang', iconName: 'ListOrdered', description: 'Hitung mundur peringkat dengan angka raksasa dan baris progres, dari nomor terbesar ke juara.', previewColor: '#f43f5e' },
@@ -391,78 +379,6 @@ export const EXTRA_DEMOS: Record<ExtraFormat, Storyboard> = {
       ['A', 'Istirahat lima menit setiap jam.', 'thoughtful'],
       ['A', 'Tutup tab yang tidak dipakai.', 'neutral'],
       ['A', 'Matikan laptop di jam yang sama.', 'thoughtful'],
-    ],
-  }),
-  what_if_3d: demo('what_if_3d', {
-    title: 'Bagaimana Kalau Seluruh Manusia Kentut Serentak?',
-    concept: 'Simulasi fisika 3D hipotetis menghitung volume gas dan dampaknya ke atmosfer bumi',
-    mood: 'hyped',
-    locationName: 'Ocean Pier 3D Crowd',
-    a: { name: 'Dr. Simulasi', title: 'Physics Engine Voice' },
-    b: { name: 'Atmosphere HUD', title: 'Live Metric Ticker' },
-    roles: ['narrator', 'narrator'],
-    theme: EXTRA_THEMES.what_if_3d,
-    hook: 'Kalo lo ada di dermaga itu, lo bakal nahan atau ikut ngelepasin?',
-    lines: [
-      ['A', 'GAS RELEASED: 696.857.638 Liter gas dilepas serentak oleh 8,2 miliar manusia.', 'hyped'],
-      ['A', 'Satu pertanyaan mustahil dimainkan dalam simulasi 3D berskala global.', 'thoughtful'],
-      ['A', 'Gelombang kejut metana setara 1.500 ton TNT menghantam garis pantai.', 'shocked'],
-      ['A', 'Awan gas hijau menyelimuti samudra dan burung camar berhamburan panik.', 'angry'],
-      ['A', 'Pertanyaannya: apakah atmosfer bumi bisa selamat dari ledakan ini?', 'smug'],
-    ],
-  }),
-  zombie_survival: demo('zombie_survival', {
-    title: 'Hari ke-42: Bertahan dari Serbuan Zombie Farm',
-    concept: 'Log survival harian bertahan dari wabah zombie di bunker ladang terisolasi',
-    mood: 'frustrated',
-    locationName: 'Isolated Farm Perimeter',
-    a: { name: 'Survivor Ray', title: 'Base Commander' },
-    b: { name: 'Radar Defense', title: 'Detection Grid' },
-    roles: ['narrator', 'narrator'],
-    theme: EXTRA_THEMES.zombie_survival,
-    hook: 'Berapa hari kira-kira lo bisa bertahan di ladang zombie kayak gini?',
-    lines: [
-      ['A', 'HARI KE-42: Radar mendeteksi 1.420 pergerakan di batas luar perkebunan.', 'angry'],
-      ['A', 'Selama kamu tetap berada di dalam zona hijau pohon pelindung, bunker masih aman.', 'thoughtful'],
-      ['A', 'Tapi pagar barikade barat mulai retak oleh dorongan kawanan zombie.', 'shocked'],
-      ['A', 'Genset listrik tenaga surya hanya tersisa untuk tiga puluh enam jam ke depan.', 'angry'],
-      ['A', 'PILIH: Perbaiki barikade malam ini, atau kabur menembus hutan rimba?', 'hyped'],
-    ],
-  }),
-  how_its_built: demo('how_its_built', {
-    title: 'Bongkar Rahasia Rumah Kaca Bawah Tanah',
-    concept: 'Bedah arsitektur 3D cross-section bunker pertanian bawah tanah anti kiamat',
-    mood: 'warm',
-    locationName: 'Underground Greenhouse Cutaway',
-    a: { name: 'Arch-Builder', title: 'Architectural Analyst' },
-    b: { name: 'Subsurface HUD', title: 'Geology & Oxygen Sensor' },
-    roles: ['narrator', 'narrator'],
-    theme: EXTRA_THEMES.how_its_built,
-    hook: 'Kalo lo punya bunker rahasia di bawah rumah, mau diisi apa?',
-    lines: [
-      ['A', 'Dari permukaan tampak seperti rumah pinggiran kota biasa yang damai.', 'neutral'],
-      ['A', 'Tapi tepat dua belas meter di bawah tanah, ada fasilitas pertanian rahasia.', 'hyped'],
-      ['A', 'Potongan melintang memperlihatkan tiga lapisan tanah dan filtrasi udara mandiri.', 'thoughtful'],
-      ['A', 'Rak hidroponik menghasilkan sayuran segar tanpa perlu seberkas pun sinar matahari.', 'smug'],
-      ['A', 'Struktur ini sanggup menyuplai oksigen dan makanan selama lima tahun berturut-turut.', 'hyped'],
-    ],
-  }),
-  cosmic_voyage: demo('cosmic_voyage', {
-    title: 'Perjalanan Mengelilingi Khatulistiwa Bumi (Long-Form)',
-    concept: 'Odyssey sinematik 3D menghitung kecepatan orbit dan skala waktu kosmik mengelilingi planet bumi',
-    mood: 'calm',
-    locationName: 'Low Earth Orbit (350km)',
-    a: { name: 'Cosmic Voice', title: 'Deep Space Odyssey' },
-    b: { name: 'Orbital Tracker', title: 'Telemetry Node' },
-    roles: ['narrator', 'narrator'],
-    theme: EXTRA_THEMES.cosmic_voyage,
-    hook: 'Pernahkah lo ngerasa betapa kerdilnya masalah kita di alam semesta?',
-    lines: [
-      ['A', 'Keliling khatulistiwa bumi membentang sejauh 40.075 kilometer.', 'thoughtful'],
-      ['A', 'Dalam skala film kosmik delapan bulan, perjalanan ini bergerak lebih lambat dari sepeda.', 'neutral'],
-      ['A', 'Dari orbit luar angkasa, atmosfer bumi terlihat setipis lapisan kelereng kaca.', 'thoughtful'],
-      ['A', 'Semua peradaban, perang, dan jejak cinta manusia berada di titik biru pucat ini.', 'thoughtful'],
-      ['A', 'Sejauh apa pun kita melangkah, bumi tetap satu-satunya rumah yang kita punya.', 'thoughtful'],
     ],
   }),
 };

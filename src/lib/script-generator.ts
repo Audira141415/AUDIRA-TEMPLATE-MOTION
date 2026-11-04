@@ -54,51 +54,7 @@ export async function generateStoryboardFromIdea(
   let commentHook = 'Ketik pendapat lo di kolom komentar: Tim Setuju atau Tim Nolak?';
   let lines: StoryboardLine[] = [];
 
-  if (format === 'what_if_3d') {
-    speakerAName = 'Dr. Simulasi';
-    speakerBName = 'Atmosphere HUD';
-    location = 'Ocean Pier (3D Crowd)';
-    commentHook = 'Kalo simulasi ini terjadi nyata besok, lo bakal lari ke mana?';
-    lines = [
-      makeLine('gen-1', speakerAName, 'narrator', `GAS RELEASED: 696.857.638 Liter gas dilepas serentak oleh 8,2 miliar manusia.`, 0, 3.2, 'hyped'),
-      makeLine('gen-2', speakerAName, 'narrator', `Satu pertanyaan mustahil dimainkan dalam simulasi 3D berskala global: ${cleanIdea}.`, 3.4, 3.5, 'thoughtful'),
-      makeLine('gen-3', speakerAName, 'narrator', `Gelombang kejut setara 1.500 ton TNT menghantam garis pantai dan memicu badai metana.`, 7.0, 3.2, 'shocked'),
-      makeLine('gen-4', speakerAName, 'narrator', `Pertanyaannya: apakah atmosfer bumi sanggup menahan ledakan gas sebesar ini?`, 10.3, 3.0, 'smug'),
-    ];
-  } else if (format === 'zombie_survival') {
-    speakerAName = 'Survivor Ray';
-    speakerBName = 'Radar Defense';
-    location = 'Isolated Farm Perimeter';
-    commentHook = 'Berapa hari kira-kira lo bisa bertahan hidup di ladang zombie kayak gini?';
-    lines = [
-      makeLine('gen-1', speakerAName, 'narrator', `HARI KE-42: Radar mendeteksi 1.420 pergerakan aktif di batas luar perkebunan.`, 0, 3.2, 'angry'),
-      makeLine('gen-2', speakerAName, 'narrator', `Selama kamu tetap berada di dalam perimeter pohon pelindung, bunker masih aman.`, 3.4, 3.5, 'thoughtful'),
-      makeLine('gen-3', speakerAName, 'narrator', `Tapi pagar barikade barat mulai retak oleh desakan gerombolan zombie mutan.`, 7.0, 3.2, 'shocked'),
-      makeLine('gen-4', speakerAName, 'narrator', `PILIH: Perbaiki barikade malam ini, atau kabur menembus hutan rimba?`, 10.3, 3.0, 'hyped'),
-    ];
-  } else if (format === 'how_its_built') {
-    speakerAName = 'Arch-Builder';
-    speakerBName = 'Subsurface HUD';
-    location = 'Underground Greenhouse Cutaway';
-    commentHook = 'Kalo lo punya bunker rahasia di bawah rumah, ruangan apa yang bakal lo buat?';
-    lines = [
-      makeLine('gen-1', speakerAName, 'narrator', `Dari permukaan tanah tampak seperti rumah pinggiran kota biasa yang damai.`, 0, 3.2, 'neutral'),
-      makeLine('gen-2', speakerAName, 'narrator', `Tapi tepat dua belas meter di bawah tanah, tersembunyi struktur rahasia: ${cleanIdea}.`, 3.4, 3.6, 'hyped'),
-      makeLine('gen-3', speakerAName, 'narrator', `Potongan melintang memperlihatkan tiga lapisan tanah dan sistem hidroponik mandiri.`, 7.1, 3.2, 'thoughtful'),
-      makeLine('gen-4', speakerAName, 'narrator', `Fasilitas ini sanggup menyuplai oksigen dan tanaman segar selama lima tahun berturut-turut.`, 10.4, 3.0, 'smug'),
-    ];
-  } else if (format === 'cosmic_voyage') {
-    speakerAName = 'Cosmic Voice';
-    speakerBName = 'Orbital Tracker';
-    location = 'Low Earth Orbit (350km)';
-    commentHook = 'Pernahkah lo ngerasa betapa kerdilnya masalah kita di alam semesta?';
-    lines = [
-      makeLine('gen-1', speakerAName, 'narrator', `Keliling khatulistiwa bumi membentang sejauh 40.075 kilometer di ruang hampa.`, 0, 3.2, 'thoughtful'),
-      makeLine('gen-2', speakerAName, 'narrator', `Dalam skala perjalanan kosmik delapan bulan, perjalanan ini lebih lambat dari sepeda: ${cleanIdea}.`, 3.4, 3.6, 'neutral'),
-      makeLine('gen-3', speakerAName, 'narrator', `Dari orbit luar angkasa, atmosfer bumi terlihat setipis lapisan kelereng kaca.`, 7.1, 3.2, 'thoughtful'),
-      makeLine('gen-4', speakerAName, 'narrator', `Semua peradaban dan jejak sejarah manusia berada di titik biru pucat ini.`, 10.4, 3.0, 'hyped'),
-    ];
-  } else if (format === 'roblox_story') {
+  if (format === 'roblox_story') {
     speakerAName = 'Noob Blox';
     speakerBName = 'Pro Bacon';
     location = 'Tower of Hell (Obby)';
