@@ -54,7 +54,7 @@ export const SiteFooter: React.FC = () => (
             href="/#bundle"
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm sm:text-base font-bold text-ink shadow-lg shadow-orange-950/50 hover:bg-orange-500 transition-all"
           >
-            <span>Ambil Creator Lab — Rp109.000</span>
+            <span>Ambil Creator Lab : Rp109.000</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link

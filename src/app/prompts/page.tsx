@@ -258,13 +258,13 @@ export default function PromptsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#141413] font-display text-[#f4f3f0] antialiased">
+    <div className="min-h-screen bg-ink font-display text-paper antialiased selection:bg-accent selection:text-ink">
       <SiteHeader />
 
       <main className="mx-auto max-w-[1240px] px-4 py-12 md:px-8">
         {/* Top Header & Breadcrumbs */}
-        <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.12em] text-[#8a8780]">
-          <span className="px-2.5 py-0.5 rounded-full bg-orange-600/20 text-[#ea580c] border border-orange-500/30 font-bold">
+        <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.12em] text-dim">
+          <span className="px-2.5 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/30 font-bold">
             21 Format Aktif
           </span>
           <span>•</span>
@@ -273,35 +273,35 @@ export default function PromptsPage() {
           <span className="text-emerald-400">Instant Storyboard Synthesizer</span>
         </div>
 
-        <h1 className="mt-4 max-w-[900px] text-[38px] font-extrabold leading-[1.02] tracking-[-0.04em] sm:text-[62px]">
-          Pilih Format. Sesuaikan AI. <span className="text-[#ea580c]">Render Naskah Viral.</span>
+        <h1 className="mt-4 max-w-[900px] text-[38px] font-extrabold leading-[1.02] tracking-[-0.04em] sm:text-[62px] text-paper font-display">
+          Pilih Format. Sesuaikan AI. <span className="text-accent">Render Naskah Viral.</span>
         </h1>
-        <p className="mt-4 max-w-[700px] text-[16px] leading-relaxed text-[#b9b6ae]">
+        <p className="mt-4 max-w-[700px] text-[16px] leading-relaxed text-muted">
           Rancang prompt presisi tinggi yang dioptimalkan untuk Claude 3.5, ChatGPT 4o, Gemini 1.5, dan DeepSeek R1.
           Hasilkan storyboard JSON berstruktur ketat yang langsung dipahami mesin AUDIRA MOTION.
         </p>
 
         {/* 1. Category Filter Tabs & Search Bar */}
-        <section className="mt-12 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+        <section className="mt-12 rounded-3xl border border-line bg-card p-6 shadow-card-warm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
             <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-ink font-bold text-xs">
                 1
               </span>
-              <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+              <h2 className="text-[20px] font-black tracking-[-0.02em] text-paper font-display">
                 Pilih Format Video ({FORMAT_CARDS.length} Pilihan)
               </h2>
             </div>
 
             {/* Instant Search Bar */}
             <div className="relative min-w-[240px] sm:w-[280px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8780]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dim" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari format (Roblox, Kuis...)"
-                className="w-full pl-9 pr-3 py-2 rounded-xl border border-[#2c2b28] bg-[#141413] text-xs text-[#f4f3f0] placeholder:text-[#6f6c66] focus:border-[#ea580c] focus:outline-none"
+                className="w-full pl-9 pr-3 py-2 rounded-xl border border-line bg-tile text-xs text-paper placeholder:text-dim focus:border-accent focus:outline-none"
               />
             </div>
           </div>
@@ -315,15 +315,15 @@ export default function PromptsPage() {
                   key={cat.id}
                   type="button"
                   onClick={() => setCategory(cat.id)}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95 ${
                     active
-                      ? 'bg-[#ea580c] text-white shadow-md'
-                      : 'bg-[#141413] border border-[#2c2b28] text-[#b9b6ae] hover:border-[#4a4843] hover:text-white'
+                      ? 'bg-accent text-ink shadow-md'
+                      : 'bg-tile border border-edge text-muted hover:border-line-strong hover:text-paper'
                   }`}
                 >
                   {cat.icon}
                   <span>{cat.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${active ? 'bg-black/30' : 'bg-[#2c2b28]'}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${active ? 'bg-black/20 text-ink' : 'bg-ink border border-line text-dim'}`}>
                     {cat.count}
                   </span>
                 </button>
@@ -342,10 +342,10 @@ export default function PromptsPage() {
                   type="button"
                   onClick={() => pickFormat(c.reel.format)}
                   aria-pressed={active}
-                  className={`group relative overflow-hidden rounded-2xl border-2 text-left transition-all ${
+                  className={`group relative overflow-hidden rounded-2xl border text-left transition-all active:scale-95 ${
                     active
-                      ? 'border-[#ea580c] ring-2 ring-[#ea580c]/50 scale-[1.02] shadow-lg shadow-orange-950/30'
-                      : 'border-[#2c2b28] hover:border-[#4a4843] hover:scale-[1.01]'
+                      ? 'border-accent ring-2 ring-accent/50 scale-[1.02] shadow-lg shadow-orange-950/30'
+                      : 'border-line hover:border-line-strong hover:scale-[1.01]'
                   }`}
                 >
                   {isRoblox && (
@@ -353,7 +353,7 @@ export default function PromptsPage() {
                       BARU
                     </span>
                   )}
-                  <div className="relative aspect-[9/12] w-full overflow-hidden bg-[#0f0f0e]">
+                  <div className="relative aspect-[9/12] w-full overflow-hidden bg-ink">
                     <img
                       src={`/reels/${c.reel.file}.jpg`}
                       alt={c.name}
@@ -365,9 +365,9 @@ export default function PromptsPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
                   </div>
-                  <div className={`p-2.5 transition-colors ${active ? 'bg-[#ea580c] text-white' : 'bg-[#141413]'}`}>
+                  <div className={`p-2.5 transition-colors ${active ? 'bg-accent text-ink' : 'bg-tile'}`}>
                     <span className="block text-[12px] font-extrabold truncate">{c.name}</span>
-                    <span className={`block text-[10px] truncate ${active ? 'text-white/80' : 'text-[#8a8780]'}`}>
+                    <span className={`block text-[10px] truncate ${active ? 'text-ink/80 font-medium' : 'text-dim'}`}>
                       {c.pitch}
                     </span>
                   </div>
@@ -377,22 +377,22 @@ export default function PromptsPage() {
           </div>
 
           {filteredCards.length === 0 && (
-            <div className="mt-6 p-8 text-center border border-dashed border-[#2c2b28] rounded-2xl text-xs text-[#8a8780]">
+            <div className="mt-6 p-8 text-center border border-dashed border-line rounded-2xl text-xs text-dim">
               Format tidak ditemukan dengan kata kunci &quot;{searchQuery}&quot;. Coba ganti kata pencarian atau pilih tab &quot;Semua Format&quot;.
             </div>
           )}
 
           {/* Current Selection Summary */}
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#141413] p-4 border border-[#2c2b28]">
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-tile p-4 border border-line">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono uppercase text-[#ea580c] font-bold">Terpilih:</span>
-              <span className="text-sm font-extrabold text-white">{currentCard.name}</span>
-              <span className="hidden sm:inline text-xs text-[#8a8780]">— {currentCard.pitch}</span>
+              <span className="text-xs font-mono uppercase text-accent font-bold">Terpilih:</span>
+              <span className="text-sm font-extrabold text-paper">{currentCard.name}</span>
+              <span className="hidden sm:inline text-xs text-muted">- {currentCard.pitch}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#8a8780]">Topik populer:</span>
+              <span className="text-xs text-dim">Topik populer:</span>
               {currentCard.topics.map((t) => (
-                <span key={t} className="rounded-lg bg-[#1c1c1a] border border-[#2c2b28] px-2 py-0.5 text-[11px] text-[#d6d3cc]">
+                <span key={t} className="rounded-lg bg-card border border-line px-2 py-0.5 text-[11px] text-muted">
                   {t}
                 </span>
               ))}
@@ -401,20 +401,20 @@ export default function PromptsPage() {
         </section>
 
         {/* 2. Interactive AI & Parameter Tuning Matrix */}
-        <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
-          <div className="flex items-center gap-2 pb-4 border-b border-[#2c2b28]">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
+        <section className="mt-8 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-card-warm">
+          <div className="flex items-center gap-2 pb-4 border-b border-line">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-ink font-bold text-xs">
               2
             </span>
-            <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+            <h2 className="text-[20px] font-black tracking-[-0.02em] text-paper font-display">
               Konfigurasi Model AI & Parameter Naskah
             </h2>
           </div>
 
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* Target AI Model */}
-            <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-4">
-              <label className="flex items-center gap-2 text-xs font-mono uppercase text-[#ea580c] font-bold">
+            <div className="rounded-2xl border border-line bg-tile p-4">
+              <label className="flex items-center gap-2 text-xs font-mono uppercase text-accent font-bold">
                 <Bot className="w-3.5 h-3.5" /> Target Mesin AI
               </label>
               <div className="mt-3 grid grid-cols-2 gap-2">
@@ -431,19 +431,19 @@ export default function PromptsPage() {
                     className={`p-2.5 rounded-xl border text-left transition-all ${
                       model === item.id
                         ? 'border-[#ea580c] bg-[#ea580c]/15 text-white'
-                        : 'border-[#2c2b28] bg-[#1c1c1a] text-[#b9b6ae] hover:border-[#4a4843]'
+                        : 'border-line bg-card text-muted hover:border-line-strong'
                     }`}
                   >
                     <span className="block text-xs font-bold text-white">{item.name}</span>
-                    <span className="block text-[10px] text-[#8a8780]">{item.badge}</span>
+                    <span className="block text-[10px] text-dim">{item.badge}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Target Video Duration */}
-            <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-4">
-              <label className="flex items-center gap-2 text-xs font-mono uppercase text-[#ea580c] font-bold">
+            <div className="rounded-2xl border border-line bg-tile p-4">
+              <label className="flex items-center gap-2 text-xs font-mono uppercase text-accent font-bold">
                 <Clock className="w-3.5 h-3.5" /> Target Durasi & Pacing
               </label>
               <div className="mt-3 grid grid-cols-3 gap-2">
@@ -459,19 +459,19 @@ export default function PromptsPage() {
                     className={`p-2.5 rounded-xl border text-center transition-all ${
                       duration === d.id
                         ? 'border-[#ea580c] bg-[#ea580c]/15 text-white'
-                        : 'border-[#2c2b28] bg-[#1c1c1a] text-[#b9b6ae] hover:border-[#4a4843]'
+                        : 'border-line bg-card text-muted hover:border-line-strong'
                     }`}
                   >
                     <span className="block text-xs font-black">{d.label}</span>
-                    <span className="block text-[10px] text-[#8a8780] truncate">{d.desc}</span>
+                    <span className="block text-[10px] text-dim truncate">{d.desc}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Slang & Language Tone */}
-            <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-4">
-              <label className="flex items-center gap-2 text-xs font-mono uppercase text-[#ea580c] font-bold">
+            <div className="rounded-2xl border border-line bg-tile p-4">
+              <label className="flex items-center gap-2 text-xs font-mono uppercase text-accent font-bold">
                 <Globe className="w-3.5 h-3.5" /> Gaya Bahasa & Slang
               </label>
               <div className="mt-3 grid grid-cols-2 gap-2">
@@ -488,11 +488,11 @@ export default function PromptsPage() {
                     className={`p-2.5 rounded-xl border text-left transition-all ${
                       slang === s.id
                         ? 'border-[#ea580c] bg-[#ea580c]/15 text-white'
-                        : 'border-[#2c2b28] bg-[#1c1c1a] text-[#b9b6ae] hover:border-[#4a4843]'
+                        : 'border-line bg-card text-muted hover:border-line-strong'
                     }`}
                   >
                     <span className="block text-xs font-bold text-white">{s.label}</span>
-                    <span className="block text-[10px] text-[#8a8780]">{s.desc}</span>
+                    <span className="block text-[10px] text-dim">{s.desc}</span>
                   </button>
                 ))}
               </div>
@@ -500,12 +500,12 @@ export default function PromptsPage() {
           </div>
 
           {/* Mood Selector (7 Archetypes) */}
-          <div className="mt-6 pt-5 border-t border-[#2c2b28]">
+          <div className="mt-6 pt-5 border-t border-line">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <label className="text-xs font-mono uppercase text-[#ea580c] font-bold">
+              <label className="text-xs font-mono uppercase text-accent font-bold">
                 Pilih Emosi / Mood Utama ({MOODS.length} Mood)
               </label>
-              <span className="text-xs text-[#8a8780] italic">{moodById(mood).tagline}</span>
+              <span className="text-xs text-dim italic">{moodById(mood).tagline}</span>
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {MOODS.map((m) => {
@@ -518,7 +518,7 @@ export default function PromptsPage() {
                     className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all ${
                       active
                         ? 'border-[#ea580c] bg-[#ea580c] text-white shadow-md'
-                        : 'border-[#2c2b28] bg-[#141413] text-[#d6d3cc] hover:border-[#4a4843]'
+                        : 'border-line bg-tile text-fg-2 hover:border-line-strong'
                     }`}
                   >
                     {m.label}
@@ -533,15 +533,15 @@ export default function PromptsPage() {
             <button
               type="button"
               onClick={() => setShowCustomChars((v) => !v)}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#8a8780] hover:text-[#d6d3cc] transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-dim hover:text-fg-2 transition-colors"
             >
               {showCustomChars ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               <span>Kustomisasi Nama Karakter (Opsional)</span>
             </button>
             {showCustomChars && (
-              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-2xl bg-[#141413] p-4 border border-[#2c2b28]">
+              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-2xl bg-tile p-4 border border-line">
                 <div>
-                  <label className="block text-xs text-[#8a8780] mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs text-dim mb-1.5 flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-orange-400" />
                     Karakter A (Inisiator / Pembuka)
                   </label>
@@ -550,11 +550,11 @@ export default function PromptsPage() {
                     value={charA}
                     onChange={(e) => setCharA(e.target.value)}
                     placeholder={format === 'roblox_story' ? 'Noob Blox' : 'Ash'}
-                    className="w-full rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-3 py-2 text-xs text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
+                    className="w-full rounded-xl border border-line bg-card px-3 py-2 text-xs text-paper placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-[#8a8780] mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs text-dim mb-1.5 flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-cyan-400" />
                     Karakter B (Counterpart / Penanggap)
                   </label>
@@ -563,7 +563,7 @@ export default function PromptsPage() {
                     value={charB}
                     onChange={(e) => setCharB(e.target.value)}
                     placeholder={format === 'roblox_story' ? 'Pro Bacon' : 'Audira'}
-                    className="w-full rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-3 py-2 text-xs text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
+                    className="w-full rounded-xl border border-line bg-card px-3 py-2 text-xs text-paper placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none"
                   />
                 </div>
               </div>
@@ -572,13 +572,13 @@ export default function PromptsPage() {
         </section>
 
         {/* 3. Viral Idea Input & Indonesian Randomizer */}
-        <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+        <section className="mt-8 rounded-3xl border-2 border-line bg-card p-6 sm:p-8 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
             <div className="flex items-center gap-2">
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
                 3
               </span>
-              <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+              <h2 className="text-[20px] font-black tracking-[-0.02em] text-paper">
                 Tulis atau Acak Ide Naskah
               </h2>
             </div>
@@ -599,9 +599,9 @@ export default function PromptsPage() {
               maxLength={600}
               rows={3}
               placeholder="Tulis ide premis reels lo di sini... Contoh: Noob minta 1000 Robux ke Pro demi beli gamepass obby"
-              className="w-full rounded-2xl border-2 border-[#2c2b28] bg-[#0f0f0e] p-4 text-[14px] leading-relaxed text-[#f4f3f0] placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none transition-colors"
+              className="w-full rounded-2xl border-2 border-line bg-ink p-4 text-[14px] leading-relaxed text-paper placeholder:text-[#5f5c56] focus:border-[#ea580c] focus:outline-none transition-colors"
             />
-            <div className="mt-2 flex items-center justify-between text-xs text-[#8a8780]">
+            <div className="mt-2 flex items-center justify-between text-xs text-dim">
               <span>Karakter: {idea.length}/600</span>
               <span className="text-orange-400/80">Tips: Buat premis dengan konflik tajam dan eskalasi lucu.</span>
             </div>
@@ -609,7 +609,7 @@ export default function PromptsPage() {
 
           {/* Quick starter chips for this format */}
           <div className="mt-4">
-            <p className="text-xs font-mono uppercase text-[#8a8780] font-bold mb-2">
+            <p className="text-xs font-mono uppercase text-dim font-bold mb-2">
               Ide Bawaan Format {currentCard.name}:
             </p>
             <div className="flex flex-wrap gap-2">
@@ -618,7 +618,7 @@ export default function PromptsPage() {
                   key={starter}
                   type="button"
                   onClick={() => setIdea(starter)}
-                  className="rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2 text-left text-xs text-[#b9b6ae] hover:border-[#ea580c] hover:text-white transition-colors"
+                  className="rounded-xl border border-line bg-tile px-3.5 py-2 text-left text-xs text-muted hover:border-[#ea580c] hover:text-white transition-colors"
                 >
                   &ldquo;{starter}&rdquo;
                 </button>
@@ -628,16 +628,16 @@ export default function PromptsPage() {
         </section>
 
         {/* 4. Generated Prompt Console & Action Bar (Dual-Pass Engine) */}
-        <section className="mt-8 rounded-3xl border-2 border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8 shadow-xl">
+        <section className="mt-8 rounded-3xl border-2 border-line bg-card p-6 sm:p-8 shadow-xl">
           {/* Dual-Pass Tab Switcher */}
-          <div className="flex border-b border-[#2c2b28] pb-4 mb-6 gap-3">
+          <div className="flex border-b border-line pb-4 mb-6 gap-3">
             <button
               type="button"
               onClick={() => setPromptTab('script')}
               className={`px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm tracking-tight flex items-center gap-2 transition-all ${
                 promptTab === 'script'
                   ? 'bg-[#ea580c] text-white shadow-md'
-                  : 'bg-[#141413] border border-[#2c2b28] text-[#8a8780] hover:text-[#d6d3cc]'
+                  : 'bg-tile border border-line text-dim hover:text-fg-2'
               }`}
             >
               <FileCode className="w-4 h-4" />
@@ -649,7 +649,7 @@ export default function PromptsPage() {
               className={`px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm tracking-tight flex items-center gap-2 transition-all ${
                 promptTab === 'visual'
                   ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md'
-                  : 'bg-[#141413] border border-[#2c2b28] text-[#8a8780] hover:text-[#d6d3cc]'
+                  : 'bg-tile border border-line text-dim hover:text-fg-2'
               }`}
             >
               <Film className="w-4 h-4 text-cyan-300" />
@@ -663,16 +663,16 @@ export default function PromptsPage() {
           {promptTab === 'script' ? (
             /* TAB 1: SCRIPT & STORYBOARD JSON PROMPT */
             <div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
                 <div className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#ea580c] text-white font-bold text-xs">
                     4
                   </span>
                   <div>
-                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-paper">
                       Prompt Naskah untuk {model.toUpperCase()}
                     </h2>
-                    <p className="text-xs text-[#8a8780]">
+                    <p className="text-xs text-dim">
                       Format terspesifikasi · Schema JSON terikat · Bebas basa-basi AI
                     </p>
                   </div>
@@ -693,7 +693,7 @@ export default function PromptsPage() {
                     type="button"
                     onClick={handleDownloadPrompt}
                     title="Unduh file teks prompt"
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2.5 text-xs font-semibold text-[#d6d3cc] hover:border-[#4a4843] hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-tile px-3.5 py-2.5 text-xs font-semibold text-fg-2 hover:border-line-strong hover:text-white transition-colors"
                   >
                     <Download className="h-3.5 w-3.5" /> Unduh .txt
                   </button>
@@ -727,7 +727,7 @@ export default function PromptsPage() {
               </div>
 
               <div className="relative mt-4">
-                <pre className="max-h-[440px] overflow-auto whitespace-pre-wrap rounded-2xl border-2 border-[#2c2b28] bg-[#0c0c0b] p-5 font-mono text-[12px] leading-relaxed text-[#d6d3cc] selection:bg-[#ea580c] selection:text-white">
+                <pre className="max-h-[440px] overflow-auto whitespace-pre-wrap rounded-2xl border-2 border-line bg-ink p-5 font-mono text-[12px] leading-relaxed text-fg-2 selection:bg-[#ea580c] selection:text-white">
                   {prompt}
                 </pre>
               </div>
@@ -735,16 +735,16 @@ export default function PromptsPage() {
           ) : (
             /* TAB 2: VISUAL VIDEO AI PROMPT (KLING, RUNWAY, MIDJOURNEY, SORA) */
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2c2b28]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
                 <div className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-600 text-white font-bold text-xs">
                     4B
                   </span>
                   <div>
-                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-[#f4f3f0]">
+                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-paper">
                       Prompt Video Sinematik untuk {visualPlatform.toUpperCase()}
                     </h2>
-                    <p className="text-xs text-[#8a8780]">
+                    <p className="text-xs text-dim">
                       Dioptimalkan untuk video backdrop vertikal 9:16 · Fisika simulasi realistis · Kontrol kamera presisi
                     </p>
                   </div>
@@ -763,7 +763,7 @@ export default function PromptsPage() {
                   <button
                     type="button"
                     onClick={handleCopyNegativePrompt}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-[#2c2b28] bg-[#141413] px-3.5 py-2.5 text-xs font-semibold text-[#d6d3cc] hover:border-cyan-500 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-tile px-3.5 py-2.5 text-xs font-semibold text-fg-2 hover:border-cyan-500 hover:text-white transition-colors"
                   >
                     {copyNegativeStatus ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Shield className="h-3.5 w-3.5 text-zinc-400" />}
                     <span>{copyNegativeStatus ? copyNegativeStatus : 'Salin Negative'}</span>
@@ -774,7 +774,7 @@ export default function PromptsPage() {
               {/* Sub-parameters for Visual AI */}
               <div className="grid gap-4 sm:grid-cols-3">
                 {/* 1. Target Video AI Platform */}
-                <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-3.5">
+                <div className="rounded-2xl border border-line bg-tile p-3.5">
                   <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-cyan-400 font-bold mb-2.5">
                     <Video className="w-3.5 h-3.5" /> Target Platform AI
                   </label>
@@ -792,7 +792,7 @@ export default function PromptsPage() {
                         className={`p-2 rounded-xl border text-left transition-all ${
                           visualPlatform === item.id
                             ? 'border-cyan-500 bg-cyan-950/30 text-white shadow-sm'
-                            : 'border-[#2c2b28] bg-[#1c1c1a] text-[#8a8780] hover:text-white'
+                            : 'border-line bg-card text-dim hover:text-white'
                         }`}
                       >
                         <span className="block text-xs font-bold text-white">{item.name}</span>
@@ -803,7 +803,7 @@ export default function PromptsPage() {
                 </div>
 
                 {/* 2. Camera Movement Directive */}
-                <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-3.5">
+                <div className="rounded-2xl border border-line bg-tile p-3.5">
                   <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-cyan-400 font-bold mb-2.5">
                     <Sliders className="w-3.5 h-3.5" /> Gerakan Kamera
                   </label>
@@ -822,7 +822,7 @@ export default function PromptsPage() {
                         className={`px-2.5 py-1.5 rounded-lg border text-left flex items-center justify-between text-xs transition-all ${
                           cameraMovement === cam.id
                             ? 'border-cyan-500 bg-cyan-950/30 text-white font-bold'
-                            : 'border-[#2c2b28] bg-[#1c1c1a] text-[#8a8780] hover:text-white'
+                            : 'border-line bg-card text-dim hover:text-white'
                         }`}
                       >
                         <span>{cam.label}</span>
@@ -833,7 +833,7 @@ export default function PromptsPage() {
                 </div>
 
                 {/* 3. Visual Aesthetic Render Engine */}
-                <div className="rounded-2xl border border-[#2c2b28] bg-[#141413] p-3.5">
+                <div className="rounded-2xl border border-line bg-tile p-3.5">
                   <label className="flex items-center gap-1.5 text-xs font-mono uppercase text-cyan-400 font-bold mb-2.5">
                     <Sparkles className="w-3.5 h-3.5" /> Gaya & Render Engine
                   </label>
@@ -852,7 +852,7 @@ export default function PromptsPage() {
                         className={`px-2.5 py-1.5 rounded-lg border text-left flex items-center justify-between text-xs transition-all ${
                           visualAesthetic === aes.id
                             ? 'border-cyan-500 bg-cyan-950/30 text-white font-bold'
-                            : 'border-[#2c2b28] bg-[#1c1c1a] text-[#8a8780] hover:text-white'
+                            : 'border-line bg-card text-dim hover:text-white'
                         }`}
                       >
                         <span>{aes.label}</span>
@@ -864,18 +864,18 @@ export default function PromptsPage() {
               </div>
 
               {/* Recommended Generation Settings Pills */}
-              <div className="flex flex-wrap items-center gap-2 bg-[#0c0c0b] p-3 rounded-2xl border border-[#2c2b28] text-xs font-mono text-zinc-300">
+              <div className="flex flex-wrap items-center gap-2 bg-ink p-3 rounded-2xl border border-line text-xs font-mono text-zinc-300">
                 <span className="text-cyan-400 font-bold uppercase text-[10px]">Parameter Rekomendasi:</span>
-                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                <span className="bg-card px-2.5 py-1 rounded-lg border border-line">
                   Rasio: <strong className="text-white">{visualPromptData.recommendedSettings.aspectRatio}</strong>
                 </span>
-                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                <span className="bg-card px-2.5 py-1 rounded-lg border border-line">
                   Durasi: <strong className="text-white">{visualPromptData.recommendedSettings.duration}</strong>
                 </span>
-                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                <span className="bg-card px-2.5 py-1 rounded-lg border border-line">
                   FPS: <strong className="text-white">{visualPromptData.recommendedSettings.fps}</strong>
                 </span>
-                <span className="bg-[#1c1c1a] px-2.5 py-1 rounded-lg border border-[#2c2b28]">
+                <span className="bg-card px-2.5 py-1 rounded-lg border border-line">
                   Motion Strength: <strong className="text-white">{visualPromptData.recommendedSettings.motionStrength}</strong>
                 </span>
               </div>
@@ -935,20 +935,20 @@ export default function PromptsPage() {
         />
 
         {/* 6. CLI Terminal Instructions */}
-        <details className="mt-8 rounded-3xl border border-[#2c2b28] bg-[#141413] p-6 text-[14px] text-[#b9b6ae] transition-colors">
-          <summary className="cursor-pointer font-bold text-[#f4f3f0] flex items-center justify-between">
+        <details className="mt-8 rounded-3xl border border-line bg-tile p-6 text-[14px] text-muted transition-colors">
+          <summary className="cursor-pointer font-bold text-paper flex items-center justify-between">
             <span className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-orange-400" />
               Render Batch Video via Terminal (Opsional / Headless Mode)
             </span>
-            <span className="text-xs text-[#8a8780] font-normal">Klik untuk buka panduan CLI</span>
+            <span className="text-xs text-dim font-normal">Klik untuk buka panduan CLI</span>
           </summary>
-          <div className="mt-4 pt-4 border-t border-[#2c2b28] space-y-3">
+          <div className="mt-4 pt-4 border-t border-line space-y-3">
             <p>
-              Simpan naskah JSON dari AI sebagai file <code className="font-mono text-xs text-[#ea580c] bg-black/40 px-1.5 py-0.5 rounded">reel.json</code> di root proyek ini, lalu jalankan mesin render:
+              Simpan naskah JSON dari AI sebagai file <code className="font-mono text-xs text-accent bg-black/40 px-1.5 py-0.5 rounded">reel.json</code> di root proyek ini, lalu jalankan mesin render:
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <code className="flex-1 overflow-x-auto rounded-xl bg-[#0a0a09] px-4 py-3 font-mono text-xs text-emerald-400 border border-[#2c2b28]">
+              <code className="flex-1 overflow-x-auto rounded-xl bg-[#0a0a09] px-4 py-3 font-mono text-xs text-emerald-400 border border-line">
                 {command}
               </code>
               <button
@@ -957,19 +957,19 @@ export default function PromptsPage() {
                   await navigator.clipboard.writeText(command);
                   alert('Perintah terminal tersalin!');
                 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-[#2c2b28] bg-[#1c1c1a] px-4 py-3 text-xs font-bold text-white hover:border-[#4a4843]"
+                className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-3 text-xs font-bold text-white hover:border-line-strong"
               >
                 <Copy className="h-3.5 w-3.5" /> Salin Perintah
               </button>
             </div>
-            <p className="text-xs text-[#8a8780]">
+            <p className="text-xs text-dim">
               File MP4 final Full HD 1080x1920 akan otomatis dihasilkan di folder <code className="font-mono text-zinc-300">renders/reel-saya/reel.mp4</code> lengkap dengan timing audio TTS.
             </p>
           </div>
         </details>
 
         {/* Footer Navigation Link */}
-        <div className="mt-8 flex items-center justify-between rounded-2xl bg-[#1c1c1a] p-4 border border-[#2c2b28] text-xs text-[#8a8780]">
+        <div className="mt-8 flex items-center justify-between rounded-2xl bg-card p-4 border border-line text-xs text-dim">
           <span>Ingin edit naskah langsung tanpa salin-tempel?</span>
           <Link
             href="/studio"

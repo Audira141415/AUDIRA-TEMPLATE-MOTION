@@ -349,34 +349,34 @@ export default function StudioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0e0e11] text-[#f4f3f0] flex flex-col font-sans antialiased">
+    <div className="min-h-screen bg-ink text-paper flex flex-col font-sans antialiased selection:bg-accent selection:text-ink">
       {/* Header */}
       <SiteHeader />
 
       {/* Main Studio Workspace */}
       <main className="flex-1 max-w-[1400px] w-full mx-auto p-4 sm:p-6 lg:p-8">
         {/* Top Control Bar with Quick Metadata */}
-        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2.5 py-0.5 rounded-full bg-orange-600/20 text-orange-400 border border-orange-500/30 text-[10px] font-black uppercase tracking-wider flex items-center gap-1 font-mono">
+              <span className="px-2.5 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/30 text-[10px] font-black uppercase tracking-wider flex items-center gap-1 font-mono">
                 <Sparkles className="w-3 h-3" />
                 AUDIRA Studio Pro
               </span>
-              <span className="text-zinc-500 text-xs">•</span>
-              <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800 uppercase">
+              <span className="text-dim text-xs">•</span>
+              <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/80 uppercase">
                 {selectedFormat}
               </span>
-              <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
-                <Clock className="w-3 h-3 text-orange-400" />
+              <span className="text-xs font-mono text-muted flex items-center gap-1">
+                <Clock className="w-3 h-3 text-accent" />
                 {storyboard.durationSec.toFixed(1)}s
               </span>
-              <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
+              <span className="text-xs font-mono text-muted flex items-center gap-1">
                 <MessageSquare className="w-3 h-3 text-yellow-400" />
                 {storyboard.lines.length} Baris
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-paper tracking-tight font-display">
               {storyboard.title || 'Studio Motion Reel'}
             </h1>
           </div>
@@ -385,7 +385,7 @@ export default function StudioPage() {
             <button
               type="button"
               onClick={() => setIsVaultOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-bold text-zinc-300 flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-tile hover:bg-tile-2 border border-edge text-xs font-bold text-fg-2 flex items-center gap-1.5 transition-colors active:scale-95"
               title="Buka daftar video yang pernah dirender"
             >
               <FolderOpen className="w-3.5 h-3.5 text-cyan-400" />
@@ -394,15 +394,15 @@ export default function StudioPage() {
 
             <Link
               href={`/prompts?format=${selectedFormat}`}
-              className="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-bold text-zinc-300 flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-tile hover:bg-tile-2 border border-edge text-xs font-bold text-fg-2 flex items-center gap-1.5 transition-colors active:scale-95"
             >
               <span>Hub Prompt</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-dim" />
             </Link>
 
             <button
               onClick={() => setIsExportModalOpen(true)}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-black text-xs uppercase tracking-wider shadow-brutal flex items-center gap-2 border-2 border-black transition-transform active:translate-y-0.5"
+              className="btn-primary px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-2 transition-transform active:translate-y-0.5"
             >
               <Award className="w-4 h-4" />
               <span>Export MP4</span>
