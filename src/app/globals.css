@@ -3,14 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --background: #0e0e11;
-  --foreground: #f4f3f0;
+  --color-ink: #0f0d0b;
+  --color-paper: #f5efe6;
+  --color-accent: #ff6a2a;
+  --color-card: #171512;
+  --color-tile: #1b1916;
+  --color-tile-2: #211e1a;
+  --color-line: #2a2621;
+  --color-line-strong: #35302a;
+  --color-line-soft: #221f1b;
+  --color-edge: #4a443b;
+  --color-fg-2: #e7e0d4;
+  --color-fg-3: #cfc6b8;
+  --color-muted: #a89f91;
+  --color-dim: #8c8376;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--color-paper);
+  background: var(--color-ink);
   overflow-x: hidden;
 }
 
@@ -20,14 +31,49 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #141413;
+  background: var(--color-ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: var(--color-edge);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--color-muted);
+}
+
+/* Button & Card Micro-Interactions */
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-outline {
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-card);
+  color: var(--color-paper);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  transition: all 0.15s ease-in-out;
+}
+.btn-outline:hover {
+  border-color: var(--color-edge);
+  background: var(--color-tile);
+  color: #ffffff;
 }
 
 /* Marquee Keyframes for Breaking News */
@@ -39,4 +85,3 @@ body {
     transform: translateX(-100%);
   }
 }
-

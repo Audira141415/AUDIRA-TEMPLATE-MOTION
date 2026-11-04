@@ -10,6 +10,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        ink: "#0f0d0b",
+        paper: "#f5efe6",
+        accent: "#ff6a2a",
+        card: "#171512",
+        tile: "#1b1916",
+        "tile-2": "#211e1a",
+        line: "#2a2621",
+        "line-strong": "#35302a",
+        "line-soft": "#221f1b",
+        edge: "#4a443b",
+        "fg-2": "#e7e0d4",
+        "fg-3": "#cfc6b8",
+        muted: "#a89f91",
+        dim: "#8c8376",
         canvas: "#0e0e11",
         surface: "#18181b",
         banter: {
@@ -31,10 +45,11 @@ const config: Config = {
         "brutal-sm": "2px 2px 0px 0px rgba(0,0,0,1)",
         "brutal-orange": "4px 4px 0px 0px #c2410c",
         "brutal-cyan": "4px 4px 0px 0px #06b6d4",
+        "card-warm": "0 10px 30px -10px rgba(0,0,0,0.8)",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "Inter", "sans-serif"],
-        mono: ["var(--font-mono)", "var(--font-geist-mono)", "JetBrains Mono", "monospace"],
+        sans: ["var(--font-sans)", "Inter", "sans-serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
         display: ["var(--font-display)", "Inter", "sans-serif"],
       },
     },
@@ -42,4 +57,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-
