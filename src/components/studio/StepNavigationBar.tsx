@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { StudioWorkflowStep, WORKFLOW_STEPS } from './WorkflowStepper';
-import { ChevronLeft, ChevronRight, Sparkles, Video } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { browserAudio } from '@/lib/browser-audio';
 
 interface Props {
   currentStep: StudioWorkflowStep;
@@ -26,35 +27,41 @@ export const StepNavigationBar: React.FC<Props> = ({
   const prevMeta = !isFirst ? WORKFLOW_STEPS[currentIndex - 1] : null;
 
   return (
-    <div className="flex items-center justify-between gap-3 p-3 sm:p-4 rounded-2xl bg-[#141413] border-2 border-zinc-800 shadow-brutal mt-2">
+    <div className="flex items-center justify-between gap-3 p-3 sm:p-4 rounded-2xl bg-card border border-line shadow-card mt-2">
       {/* Previous Step Button */}
       {!isFirst ? (
         <button
           type="button"
-          onClick={onPrev}
-          className="px-3 sm:px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 text-xs font-bold flex items-center gap-1.5 transition-colors"
+          onClick={() => {
+            browserAudio.playClick('soft');
+            onPrev();
+          }}
+          className="min-h-[44px] px-4 py-2.5 rounded-xl bg-tile hover:bg-tile-2 text-muted hover:text-paper border border-edge text-xs font-bold flex items-center gap-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-accent"
         >
-          <ChevronLeft className="w-4 h-4 text-zinc-400" />
+          <ChevronLeft className="w-4 h-4 text-muted" />
           <span className="hidden sm:inline">Kembali:</span>
           <span className="truncate max-w-[120px]">{prevMeta?.label || 'Kembali'}</span>
         </button>
       ) : (
-        <div className="text-[10px] font-mono text-zinc-500 uppercase px-2">
+        <div className="text-[10px] font-mono text-dim uppercase px-2">
           • Mulai Langkah 1 •
         </div>
       )}
 
       {/* Step Indicator */}
-      <div className="text-center font-mono text-xs text-zinc-400 hidden xs:block">
-        <span className="font-bold text-orange-400">{currentMeta.stepNum}</span> / {WORKFLOW_STEPS.length}
+      <div className="text-center font-mono text-xs text-muted hidden xs:block">
+        <span className="font-bold text-accent">{currentMeta.stepNum}</span> / {WORKFLOW_STEPS.length}
       </div>
 
       {/* Next Step Button */}
       {!isLast ? (
         <button
           type="button"
-          onClick={onNext}
-          className="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white text-xs font-black uppercase tracking-wider shadow-brutal flex items-center gap-2 border border-black transition-transform active:translate-y-0.5 ml-auto"
+          onClick={() => {
+            browserAudio.playClick('normal');
+            onNext();
+          }}
+          className="min-h-[44px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent via-amber-500 to-accent hover:opacity-95 text-ink text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-2 border border-accent/40 transition-transform active:translate-y-0.5 ml-auto focus-visible:ring-2 focus-visible:ring-accent"
         >
           <span>{currentMeta.nextText}</span>
           <ChevronRight className="w-4 h-4" />
@@ -62,8 +69,11 @@ export const StepNavigationBar: React.FC<Props> = ({
       ) : (
         <button
           type="button"
-          onClick={onOpenExport}
-          className="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider shadow-brutal flex items-center gap-2 border border-black transition-transform active:translate-y-0.5 ml-auto"
+          onClick={() => {
+            browserAudio.playClick('sharp');
+            onOpenExport && onOpenExport();
+          }}
+          className="min-h-[44px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-2 border border-black transition-transform active:translate-y-0.5 ml-auto focus-visible:ring-2 focus-visible:ring-accent"
         >
           <Sparkles className="w-4 h-4" />
           <span>Buka Studio Render MP4 🎬</span>
@@ -72,4 +82,3 @@ export const StepNavigationBar: React.FC<Props> = ({
     </div>
   );
 };
-

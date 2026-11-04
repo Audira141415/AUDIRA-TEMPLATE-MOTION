@@ -5,8 +5,7 @@ import { Storyboard, StoryboardLine, SpeakerEmotion, VisualLayoutConfig } from '
 import { 
   Edit3, MessageSquare, Clock, Plus, Trash2, ArrowUpDown, 
   ChevronUp, ChevronDown, User, Bot, Type, MapPin, Volume2, Square, 
-  Loader2, Zap, Sparkles, Undo2, Redo2, Image as ImageIcon, CheckCircle2,
-  Wand2, Music, UploadCloud
+  Loader2, Zap, Sparkles, Undo2, Redo2, Image as ImageIcon, CheckCircle2
 } from 'lucide-react';
 import { browserAudio } from '@/lib/browser-audio';
 import { MediaUploaderModal } from './MediaUploaderModal';
@@ -77,8 +76,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
   canUndo = false,
   canRedo = false,
 }) => {
-  const charA = storyboard.characters.characterA.name;
-  const charB = storyboard.characters.characterB.name;
+  const charA = storyboard.characters?.characterA?.name || 'Ash';
 
   const [playingLineId, setPlayingLineId] = useState<string | null>(null);
   const [loadingLineId, setLoadingLineId] = useState<string | null>(null);
@@ -96,17 +94,20 @@ export const ScriptEditorPanel: React.FC<Props> = ({
         if (e.shiftKey) {
           if (onRedo && canRedo) {
             e.preventDefault();
+            browserAudio.playClick('soft');
             onRedo();
           }
         } else {
           if (onUndo && canUndo) {
             e.preventDefault();
+            browserAudio.playClick('soft');
             onUndo();
           }
         }
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
         if (onRedo && canRedo) {
           e.preventDefault();
+          browserAudio.playClick('soft');
           onRedo();
         }
       }
@@ -116,6 +117,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
   }, [onUndo, onRedo, canUndo, canRedo]);
 
   const handleAuditionLine = async (line: StoryboardLine) => {
+    browserAudio.playClick('normal');
     if (playingLineId === line.id && audioPreviewRef.current) {
       audioPreviewRef.current.pause();
       setPlayingLineId(null);
@@ -151,6 +153,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
   // 1-Click Batch Voice Sync & Exact Timestamps Calibration
   const handleBatchVoiceSync = async () => {
     if (!onBatchUpdateLines || isBatchSyncing) return;
+    browserAudio.playClick('sharp');
     setIsBatchSyncing(true);
     setSyncProgress({ cur: 0, total: storyboard.lines.length });
 
@@ -187,6 +190,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
   // 1-Click Magic Auto-Emoji Injector
   const handleAutoEmoji = () => {
     if (!onBatchUpdateLines) return;
+    browserAudio.playClick('soft');
     const updated = storyboard.lines.map((line) => {
       let text = line.text;
       Object.entries(VIRAL_EMOJI_MAP).forEach(([keyword, emoji]) => {
@@ -198,33 +202,8 @@ export const ScriptEditorPanel: React.FC<Props> = ({
     onBatchUpdateLines(updated, storyboard.durationSec);
   };
 
-  // Custom Media / Screenshot Upload
-  const handleMediaUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (file.size > 8 * 1024 * 1024) {
-      alert('Ukuran file maksimal 8MB.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      if (onUpdateVisualLayout) {
-        onUpdateVisualLayout({
-          ...(storyboard.visualLayout || {}),
-          customMediaUrl: result,
-          customMediaLabel: file.name,
-        });
-        setMediaNotice(`File ${file.name} berhasil disematkan ke canvas.`);
-        setTimeout(() => setMediaNotice(null), 3500);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-
   const handleRemoveMedia = () => {
+    browserAudio.playClick('soft');
     if (onUpdateVisualLayout) {
       onUpdateVisualLayout({
         ...(storyboard.visualLayout || {}),
@@ -235,34 +214,37 @@ export const ScriptEditorPanel: React.FC<Props> = ({
   };
 
   return (
-    <div className="bg-zinc-900/90 p-4 sm:p-5 rounded-3xl border-2 border-zinc-800 shadow-brutal flex flex-col gap-4">
+    <div className="bg-card p-4 sm:p-5 rounded-3xl border border-line shadow-card flex flex-col gap-4">
       {/* Top Header & Fast Action Toolbar */}
-      <div className="flex items-center justify-between pb-3 border-b border-zinc-800 flex-wrap gap-2">
+      <div className="flex items-center justify-between pb-3 border-b border-line flex-wrap gap-2">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-orange-600/20 text-orange-400 border border-orange-500/30 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-accent/15 text-accent border border-accent/30 flex items-center justify-center">
             <Edit3 className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-xs font-black uppercase tracking-wider text-white flex items-center gap-1.5">
+            <h3 className="text-xs font-black uppercase tracking-wider text-paper flex items-center gap-1.5 font-display">
               <span>Editor Naskah & Beat</span>
-              <span className="text-[10px] text-zinc-400 font-mono font-normal">
+              <span className="text-[10px] text-muted font-mono font-normal">
                 ({storyboard.lines.length} Baris • {storyboard.durationSec.toFixed(1)}s)
               </span>
             </h3>
-            <p className="text-[11px] text-zinc-400">
+            <p className="text-[11px] text-muted">
               Edit naskah, kalibrasi suara AI, dan tambahkan media visual
             </p>
           </div>
         </div>
 
         {/* Undo / Redo Buttons */}
-        <div className="flex items-center gap-1 bg-[#141413] p-1 rounded-xl border border-zinc-800">
+        <div className="flex items-center gap-1 bg-tile p-1 rounded-xl border border-edge">
           <button
             type="button"
-            onClick={onUndo}
+            onClick={() => {
+              browserAudio.playClick('soft');
+              onUndo && onUndo();
+            }}
             disabled={!canUndo}
-            className={`p-1.5 rounded-lg text-xs transition-colors flex items-center gap-1 ${
-              canUndo ? 'text-zinc-200 hover:bg-zinc-800 hover:text-white' : 'text-zinc-600 cursor-not-allowed'
+            className={`p-2 rounded-lg text-xs transition-colors flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-accent ${
+              canUndo ? 'text-paper hover:bg-tile-2' : 'text-dim cursor-not-allowed opacity-40'
             }`}
             title="Urungkan Perubahan (Ctrl+Z)"
           >
@@ -270,10 +252,13 @@ export const ScriptEditorPanel: React.FC<Props> = ({
           </button>
           <button
             type="button"
-            onClick={onRedo}
+            onClick={() => {
+              browserAudio.playClick('soft');
+              onRedo && onRedo();
+            }}
             disabled={!canRedo}
-            className={`p-1.5 rounded-lg text-xs transition-colors flex items-center gap-1 ${
-              canRedo ? 'text-zinc-200 hover:bg-zinc-800 hover:text-white' : 'text-zinc-600 cursor-not-allowed'
+            className={`p-2 rounded-lg text-xs transition-colors flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-accent ${
+              canRedo ? 'text-paper hover:bg-tile-2' : 'text-dim cursor-not-allowed opacity-40'
             }`}
             title="Ulangi Perubahan (Ctrl+Y)"
           >
@@ -283,16 +268,16 @@ export const ScriptEditorPanel: React.FC<Props> = ({
       </div>
 
       {/* QUICK POWER TOOLS: BATCH VOICE SYNC + AUTO-EMOJI + B-ROLL UPLOAD */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-[#141413] p-2.5 rounded-2xl border border-zinc-800">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-tile p-2.5 rounded-2xl border border-line">
         {/* Tool 1: Batch Voice Sync */}
         <button
           type="button"
           onClick={handleBatchVoiceSync}
           disabled={isBatchSyncing}
-          className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center justify-center gap-1.5 ${
+          className={`min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center justify-center gap-1.5 focus-visible:ring-2 focus-visible:ring-accent ${
             isBatchSyncing
-              ? 'bg-orange-600/30 text-orange-300 border-orange-500 animate-pulse'
-              : 'bg-orange-600/15 hover:bg-orange-600/25 text-orange-400 border-orange-500/40 hover:border-orange-500'
+              ? 'bg-accent/25 text-accent border-accent animate-pulse'
+              : 'bg-accent/15 hover:bg-accent/25 text-accent border-accent/40 hover:border-accent'
           }`}
           title="Otomatis hasilkan suara Cartesia untuk semua baris dan sesuaikan durasi tepat sesuai audio"
         >
@@ -303,7 +288,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
             </>
           ) : (
             <>
-              <Zap className="w-3.5 h-3.5 text-orange-400" />
+              <Zap className="w-3.5 h-3.5 text-accent" />
               <span>Sync Suara AI</span>
             </>
           )}
@@ -313,7 +298,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
         <button
           type="button"
           onClick={handleAutoEmoji}
-          className="px-3 py-2 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 hover:border-amber-500 transition-all flex items-center justify-center gap-1.5"
+          className="min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 hover:border-amber-500 transition-all flex items-center justify-center gap-1.5 focus-visible:ring-2 focus-visible:ring-accent"
           title="Otomatis tambahkan emoji kinetik viral di kata-kata penting"
         >
           <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -324,8 +309,11 @@ export const ScriptEditorPanel: React.FC<Props> = ({
         <div>
           <button
             type="button"
-            onClick={() => setIsMediaModalOpen(true)}
-            className="w-full px-3 py-2 rounded-xl text-xs font-bold bg-cyan-600/15 hover:bg-cyan-600/25 text-cyan-300 border border-cyan-500/40 hover:border-cyan-500 transition-all flex items-center justify-center gap-1.5 truncate"
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setIsMediaModalOpen(true);
+            }}
+            className="w-full min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold bg-cyan-600/15 hover:bg-cyan-600/25 text-cyan-300 border border-cyan-500/40 hover:border-cyan-500 transition-all flex items-center justify-center gap-1.5 truncate focus-visible:ring-2 focus-visible:ring-accent"
             title="Buka pengunggah bukti screenshot chat, logo, atau grafik b-roll"
           >
             <ImageIcon className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
@@ -338,7 +326,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
 
       {/* Notice & Active Custom Media Pill */}
       {storyboard.visualLayout?.customMediaUrl && (
-        <div className="flex items-center justify-between p-2 rounded-xl bg-cyan-950/40 border border-cyan-800 text-xs">
+        <div className="flex items-center justify-between p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-800 text-xs">
           <div className="flex items-center gap-2 truncate">
             <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
             <span className="text-cyan-200 truncate font-mono text-[11px]">
@@ -348,7 +336,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
           <button
             type="button"
             onClick={handleRemoveMedia}
-            className="text-zinc-400 hover:text-red-400 text-[10px] font-bold px-2 py-0.5 rounded border border-zinc-700 shrink-0 ml-2"
+            className="text-muted hover:text-red-400 text-[10px] font-bold px-2 py-1 rounded border border-line shrink-0 ml-2"
           >
             Hapus
           </button>
@@ -362,10 +350,10 @@ export const ScriptEditorPanel: React.FC<Props> = ({
       )}
 
       {/* Editable Title & Location Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#141413] p-3 rounded-2xl border border-zinc-800">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-tile p-3 rounded-2xl border border-line">
         <div className="flex flex-col gap-1">
-          <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1">
-            <Type className="w-3 h-3 text-orange-400" />
+          <label className="text-[10px] font-black uppercase tracking-wider text-muted flex items-center gap-1 font-mono">
+            <Type className="w-3 h-3 text-accent" />
             <span>Judul Utama / Headline Reel</span>
           </label>
           <input
@@ -373,12 +361,12 @@ export const ScriptEditorPanel: React.FC<Props> = ({
             value={storyboard.title}
             onChange={(e) => onUpdateTitle && onUpdateTitle(e.target.value)}
             placeholder="Masukkan judul reel..."
-            className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-1.5 text-xs text-white font-bold focus:outline-none focus:border-orange-500"
+            className="w-full bg-ink border border-line rounded-xl px-3 py-2 text-xs text-paper font-bold focus:outline-none focus:border-accent focus-visible:ring-1 focus-visible:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+          <label className="text-[10px] font-black uppercase tracking-wider text-muted flex items-center gap-1 font-mono">
             <MapPin className="w-3 h-3 text-cyan-400" />
             <span>Lokasi Liputan / Scene</span>
           </label>
@@ -387,21 +375,26 @@ export const ScriptEditorPanel: React.FC<Props> = ({
             value={storyboard.locationName || ''}
             onChange={(e) => onUpdateLocation && onUpdateLocation(e.target.value)}
             placeholder="Contoh: News Studio Live, Cafe Jakarta..."
-            className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-1.5 text-xs text-cyan-300 font-mono focus:outline-none focus:border-cyan-400"
+            className="w-full bg-ink border border-line rounded-xl px-3 py-2 text-xs text-cyan-300 font-mono focus:outline-none focus:border-cyan-400 focus-visible:ring-1 focus-visible:ring-cyan-400"
           />
         </div>
       </div>
 
       {/* Script Lines List */}
-      <div className="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1">
+      <div className="flex flex-col gap-3 max-h-[420px] overflow-y-auto pr-1">
         {storyboard.lines.map((line, idx) => {
           const isCharA = line.speaker === charA;
+          const isPlayingThisLine = playingLineId === line.id;
 
           return (
             <div
               key={line.id || idx}
-              className={`p-3.5 rounded-2xl bg-[#141413] border-2 transition-all flex flex-col gap-2.5 ${
-                isCharA ? 'border-orange-950/80 hover:border-orange-800/80' : 'border-cyan-950/80 hover:border-cyan-800/80'
+              className={`p-3.5 rounded-2xl transition-all flex flex-col gap-2.5 border ${
+                isPlayingThisLine
+                  ? 'border-accent shadow-[0_0_20px_rgba(255,106,42,0.25)] ring-1 ring-accent/60 bg-tile-2'
+                  : isCharA
+                  ? 'bg-tile border-accent/20 hover:border-accent/40'
+                  : 'bg-tile border-cyan-500/20 hover:border-cyan-500/40'
               }`}
             >
               {/* Header: Speaker Toggle + Timestamp + Emotion + Actions */}
@@ -410,12 +403,15 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                   {/* Speaker Badge & Swap Button */}
                   <button
                     type="button"
-                    onClick={() => onSwapSpeaker && onSwapSpeaker(idx)}
+                    onClick={() => {
+                      browserAudio.playClick('soft');
+                      onSwapSpeaker && onSwapSpeaker(idx);
+                    }}
                     title="Klik untuk ganti pembicara"
-                    className={`px-2.5 py-0.5 rounded-full font-black text-[11px] border flex items-center gap-1 transition-all active:scale-95 ${
+                    className={`min-h-[28px] px-2.5 py-1 rounded-full font-black text-[11px] border flex items-center gap-1 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-accent ${
                       isCharA
-                        ? 'bg-orange-600/20 text-orange-400 border-orange-500/40 hover:bg-orange-600/30'
-                        : 'bg-cyan-600/20 text-cyan-400 border-cyan-500/40 hover:bg-cyan-600/30'
+                        ? 'bg-accent/15 text-accent border-accent/40 hover:bg-accent/25'
+                        : 'bg-cyan-600/15 text-cyan-400 border-cyan-500/40 hover:bg-cyan-600/25'
                     }`}
                   >
                     {isCharA ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
@@ -424,7 +420,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                   </button>
 
                   {/* Timing indicator */}
-                  <span className="text-[10px] text-zinc-500 font-mono flex items-center gap-1 ml-1">
+                  <span className="text-[10px] text-muted font-mono flex items-center gap-1 ml-1">
                     <Clock className="w-3 h-3" />
                     {line.startSec.toFixed(1)}s - {(line.startSec + line.durationSec).toFixed(1)}s
                   </span>
@@ -436,22 +432,22 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                     type="button"
                     onClick={() => handleAuditionLine(line)}
                     disabled={loadingLineId === line.id}
-                    className={`px-2 py-0.5 rounded-lg border text-[10px] font-bold flex items-center gap-1 transition-all ${
-                      playingLineId === line.id
-                        ? 'bg-orange-600 text-white border-orange-400 shadow-sm animate-pulse'
-                        : 'bg-zinc-800 text-zinc-300 border-zinc-700 hover:text-white hover:border-zinc-500'
+                    className={`min-h-[28px] px-2.5 py-1 rounded-lg border text-[10px] font-bold flex items-center gap-1 transition-all focus-visible:ring-2 focus-visible:ring-accent ${
+                      isPlayingThisLine
+                        ? 'bg-accent text-ink border-accent font-black shadow-sm animate-pulse'
+                        : 'bg-ink text-muted border-line hover:text-paper hover:border-edge'
                     }`}
                     title="Dengarkan suara Cartesia AI untuk baris ini"
                   >
                     {loadingLineId === line.id ? (
-                      <Loader2 className="w-3 h-3 animate-spin text-orange-400" />
-                    ) : playingLineId === line.id ? (
-                      <Square className="w-3 h-3 fill-white" />
+                      <Loader2 className="w-3 h-3 animate-spin text-accent" />
+                    ) : isPlayingThisLine ? (
+                      <Square className="w-3 h-3 fill-ink text-ink" />
                     ) : (
-                      <Volume2 className="w-3 h-3 text-orange-400" />
+                      <Volume2 className="w-3 h-3 text-accent" />
                     )}
                     <span className="hidden sm:inline">
-                      {loadingLineId === line.id ? 'Memuat' : playingLineId === line.id ? 'Stop' : 'Suara'}
+                      {loadingLineId === line.id ? 'Memuat' : isPlayingThisLine ? 'Stop' : 'Suara'}
                     </span>
                   </button>
 
@@ -459,7 +455,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                   <select
                     value={line.emotion}
                     onChange={(e) => onUpdateLine(idx, line.text, e.target.value as SpeakerEmotion)}
-                    className="bg-zinc-800 text-zinc-300 text-[10px] font-bold px-2 py-0.5 rounded-lg border border-zinc-700 focus:outline-none"
+                    className="min-h-[28px] bg-ink text-muted text-[10px] font-bold px-2 py-1 rounded-lg border border-line focus:outline-none focus:border-accent cursor-pointer"
                   >
                     {EMOTIONS.map((em) => (
                       <option key={em} value={em}>
@@ -474,8 +470,11 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                       <button
                         type="button"
                         disabled={idx === 0}
-                        onClick={() => onMoveLine(idx, 'up')}
-                        className="p-1 rounded text-zinc-500 hover:text-zinc-200 disabled:opacity-20"
+                        onClick={() => {
+                          browserAudio.playClick('soft');
+                          onMoveLine(idx, 'up');
+                        }}
+                        className="p-1.5 rounded text-muted hover:text-paper disabled:opacity-20 transition-colors"
                         title="Geser ke atas"
                       >
                         <ChevronUp className="w-3.5 h-3.5" />
@@ -483,8 +482,11 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                       <button
                         type="button"
                         disabled={idx === storyboard.lines.length - 1}
-                        onClick={() => onMoveLine(idx, 'down')}
-                        className="p-1 rounded text-zinc-500 hover:text-zinc-200 disabled:opacity-20"
+                        onClick={() => {
+                          browserAudio.playClick('soft');
+                          onMoveLine(idx, 'down');
+                        }}
+                        className="p-1.5 rounded text-muted hover:text-paper disabled:opacity-20 transition-colors"
                         title="Geser ke bawah"
                       >
                         <ChevronDown className="w-3.5 h-3.5" />
@@ -497,8 +499,11 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                     <button
                       type="button"
                       disabled={storyboard.lines.length <= 2}
-                      onClick={() => onDeleteLine(idx)}
-                      className="p-1 rounded text-zinc-600 hover:text-red-400 disabled:opacity-20 transition-colors"
+                      onClick={() => {
+                        browserAudio.playClick('soft');
+                        onDeleteLine(idx);
+                      }}
+                      className="p-1.5 rounded text-muted hover:text-red-400 disabled:opacity-20 transition-colors"
                       title={storyboard.lines.length <= 2 ? 'Minimal 2 baris dialog' : 'Hapus baris ini'}
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -513,7 +518,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
                 value={line.text}
                 onChange={(e) => onUpdateLine(idx, e.target.value)}
                 placeholder="Ketik baris dialog di sini..."
-                className="w-full bg-transparent text-sm text-zinc-200 focus:outline-none resize-none font-medium leading-relaxed border-t border-zinc-900 pt-1.5"
+                className="w-full bg-transparent text-sm text-paper placeholder:text-muted/50 focus:outline-none resize-none font-medium leading-relaxed border-t border-line/50 pt-2"
               />
             </div>
           );
@@ -524,17 +529,20 @@ export const ScriptEditorPanel: React.FC<Props> = ({
       {onAddLine && (
         <button
           type="button"
-          onClick={onAddLine}
-          className="w-full py-2.5 px-4 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-300 hover:text-white border-2 border-dashed border-zinc-700 hover:border-orange-500 text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+          onClick={() => {
+            browserAudio.playClick('normal');
+            onAddLine();
+          }}
+          className="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-tile hover:bg-tile-2 text-muted hover:text-paper border border-dashed border-edge hover:border-accent text-xs font-bold flex items-center justify-center gap-1.5 transition-all focus-visible:ring-2 focus-visible:ring-accent"
         >
-          <Plus className="w-4 h-4 text-orange-500" />
+          <Plus className="w-4 h-4 text-accent" />
           <span>Tambah Baris Dialog Baru</span>
         </button>
       )}
 
       {/* Comment Magnet Hook Outro Input */}
-      <div className="pt-3 border-t border-zinc-800 flex flex-col gap-1.5">
-        <label className="text-xs font-black uppercase tracking-wider text-orange-400 flex items-center gap-1.5">
+      <div className="pt-3 border-t border-line flex flex-col gap-1.5">
+        <label className="text-xs font-black uppercase tracking-wider text-accent flex items-center gap-1.5 font-display">
           <MessageSquare className="w-3.5 h-3.5" />
           <span>Kalimat Pemancing Komentar (Outro Magnet)</span>
         </label>
@@ -542,7 +550,7 @@ export const ScriptEditorPanel: React.FC<Props> = ({
           type="text"
           value={storyboard.commentMagnetHook}
           onChange={(e) => onUpdateHook(e.target.value)}
-          className="w-full bg-[#141413] text-sm text-white px-3.5 py-2.5 rounded-xl border border-zinc-800 focus:border-orange-500 focus:outline-none font-medium"
+          className="w-full bg-tile text-sm text-paper px-3.5 py-2.5 rounded-xl border border-line focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 focus:outline-none font-medium"
         />
       </div>
 

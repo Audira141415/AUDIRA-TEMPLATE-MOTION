@@ -384,17 +384,18 @@ export const MotionStage: React.FC<Props> = ({
       <div className="w-full flex items-center justify-between pb-3 text-xs flex-wrap gap-2">
         <div className="flex items-center gap-1.5 flex-wrap">
           {/* Mode Switcher: Interactive vs GSAP Engine */}
-          <div className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800">
+          <div className="flex items-center p-1 rounded-xl bg-card border border-line">
             <button
               type="button"
               onClick={() => {
+                browserAudio.playClick('soft');
                 handleUnlockAudio();
                 setEngineMode('interactive');
               }}
-              className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-accent ${
                 engineMode === 'interactive' && hasNativeTemplate
-                  ? 'bg-orange-600 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-accent text-ink shadow-sm'
+                  : 'text-muted hover:text-paper'
               }`}
               title="Mode Interaktif (DOM, Blinking & Voiceover)"
             >
@@ -404,13 +405,14 @@ export const MotionStage: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => {
+                browserAudio.playClick('soft');
                 handleUnlockAudio();
                 setEngineMode('gsap');
               }}
-              className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-accent ${
                 engineMode === 'gsap' || !hasNativeTemplate
-                  ? 'bg-orange-600 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-accent text-ink shadow-sm'
+                  : 'text-muted hover:text-paper'
               }`}
               title="Mode Mesin Render GSAP (Output Persis MP4)"
             >
@@ -420,16 +422,19 @@ export const MotionStage: React.FC<Props> = ({
           </div>
 
           {/* Aspek Rasio Switcher */}
-          <div className="flex items-center p-0.5 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono">
+          <div className="flex items-center p-0.5 rounded-xl bg-card border border-line text-[10px] font-mono">
             {(['9:16', '1:1', '16:9'] as const).map((r) => (
               <button
                 key={r}
                 type="button"
-                onClick={() => updateLayout({ aspectRatio: r })}
-                className={`px-1.5 py-0.5 rounded-lg font-bold transition-all ${
+                onClick={() => {
+                  browserAudio.playClick('soft');
+                  updateLayout({ aspectRatio: r });
+                }}
+                className={`px-2 py-0.5 rounded-lg font-bold transition-all focus-visible:ring-2 focus-visible:ring-accent ${
                   currentRatio === r
-                    ? 'bg-orange-600 text-white shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-accent text-ink shadow-sm font-black'
+                    : 'text-muted hover:text-paper'
                 }`}
                 title={`Ubah Aspek Rasio Kanvas ke ${r}`}
               >
@@ -441,8 +446,11 @@ export const MotionStage: React.FC<Props> = ({
           {/* Vault Riwayat Render Button */}
           <button
             type="button"
-            onClick={() => setIsHistoryOpen(true)}
-            className="px-2 py-1 rounded-xl border text-[10px] font-bold bg-zinc-900 hover:bg-zinc-800 text-amber-300 border-amber-500/40 hover:border-amber-400 transition-all flex items-center gap-1 shadow-sm"
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setIsHistoryOpen(true);
+            }}
+            className="px-2.5 py-1 rounded-xl border text-[10px] font-bold bg-card hover:bg-tile text-amber-300 border-amber-500/40 hover:border-amber-400 transition-all flex items-center gap-1 shadow-sm focus-visible:ring-2 focus-visible:ring-accent"
             title="Buka Vault Arsip Hasil Render MP4"
           >
             <FolderOpen className="w-3 h-3 text-amber-400" />
@@ -455,11 +463,14 @@ export const MotionStage: React.FC<Props> = ({
           {/* Phone Frame vs Minimal Frame */}
           <button
             type="button"
-            onClick={() => setFrameMode(frameMode === 'phone' ? 'minimal' : 'phone')}
-            className={`p-1.5 rounded-lg border text-xs transition-colors ${
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setFrameMode(frameMode === 'phone' ? 'minimal' : 'phone');
+            }}
+            className={`p-1.5 rounded-lg border text-xs transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
               frameMode === 'phone'
-                ? 'bg-zinc-800 border-zinc-600 text-white'
-                : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+                ? 'bg-tile border-edge text-paper'
+                : 'bg-card border-line text-muted hover:text-paper'
             }`}
             title={frameMode === 'phone' ? 'Beralih ke Borderless' : 'Beralih ke Mockup HP'}
           >
@@ -469,11 +480,14 @@ export const MotionStage: React.FC<Props> = ({
           {/* Social Mockup (TikTok/Reels UI) */}
           <button
             type="button"
-            onClick={() => setShowSocialOverlay(!showSocialOverlay)}
-            className={`px-2 py-1 rounded-lg border text-[10px] font-bold transition-colors ${
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setShowSocialOverlay(!showSocialOverlay);
+            }}
+            className={`px-2 py-1 rounded-lg border text-[10px] font-bold transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
               showSocialOverlay
                 ? 'bg-cyan-600 text-white border-cyan-500'
-                : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+                : 'bg-card border-line text-muted hover:text-paper'
             }`}
             title="Simulasi UI TikTok/Reels"
           >
@@ -483,11 +497,14 @@ export const MotionStage: React.FC<Props> = ({
           {/* Safe Area Guide */}
           <button
             type="button"
-            onClick={() => setShowSafeZone(!showSafeZone)}
-            className={`p-1.5 rounded-lg border text-xs transition-colors ${
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setShowSafeZone(!showSafeZone);
+            }}
+            className={`p-1.5 rounded-lg border text-xs transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
               showSafeZone
                 ? 'bg-red-600 text-white border-red-500'
-                : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+                : 'bg-card border-line text-muted hover:text-paper'
             }`}
             title="Safe Zone 9:16 (S)"
           >
@@ -502,16 +519,45 @@ export const MotionStage: React.FC<Props> = ({
         onClick={handleUnlockAudio}
         className={`relative w-full ${aspectClass} bg-black overflow-hidden transition-all duration-300 cursor-pointer ${
           frameMode === 'phone' && currentRatio === '9:16'
-            ? 'rounded-[44px] border-[10px] border-[#202022] ring-1 ring-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
-            : 'rounded-3xl border-4 border-zinc-800 shadow-2xl'
+            ? 'rounded-[46px] border-[10px] border-[#1e1c1a] ring-1 ring-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
+            : 'rounded-3xl border-4 border-line shadow-2xl'
         }`}
       >
-        {/* Phone Dynamic Island Notch */}
+        {/* Realistic iOS Status Bar */}
         {frameMode === 'phone' && currentRatio === '9:16' && (
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-50 flex items-center justify-between px-2.5 pointer-events-none shadow-md">
-            <div className="w-2 h-2 rounded-full bg-[#111] ring-1 ring-white/10" />
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 animate-pulse" />
+          <div className="absolute top-2 inset-x-0 px-6 flex items-center justify-between z-50 pointer-events-none text-white text-[11px] font-semibold tracking-tight">
+            <span className="font-mono text-[11px] drop-shadow-sm font-bold pl-1">9:41</span>
+            
+            {/* Dynamic Island in the middle */}
+            <div className="w-24 h-5 bg-black rounded-full flex items-center justify-between px-2.5 shadow-md ring-1 ring-white/5">
+              <div className="w-2 h-2 rounded-full bg-[#181818] ring-1 ring-white/10" />
+              {isPlaying && (
+                <div className="flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                  <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                </div>
+              )}
+            </div>
+
+            {/* Signal & Battery Icons */}
+            <div className="flex items-center gap-1.5 drop-shadow-sm pr-1">
+              <div className="flex items-end gap-0.5 h-2.5">
+                <span className="w-0.5 h-1 bg-white rounded-xs" />
+                <span className="w-0.5 h-1.5 bg-white rounded-xs" />
+                <span className="w-0.5 h-2 bg-white rounded-xs" />
+                <span className="w-0.5 h-2.5 bg-white rounded-xs" />
+              </div>
+              <span className="text-[9px] font-mono font-bold">5G</span>
+              <div className="w-4 h-2.5 border border-white/80 rounded-[3px] p-0.5 flex items-center">
+                <div className="w-full h-full bg-emerald-400 rounded-xs" />
+              </div>
+            </div>
           </div>
+        )}
+
+        {/* Diagonal Screen Glass Glare Reflection */}
+        {frameMode === 'phone' && (
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.015] to-white/[0.06] z-40" />
         )}
 
         {/* Live Subtitle Height Guide Line when adjusting Subtitle */}
@@ -616,31 +662,37 @@ export const MotionStage: React.FC<Props> = ({
       </div>
 
       {/* CANVAS DOCK SELECTOR BAR (PROMINENT RIGHT UNDER PHONE) */}
-      <div className="w-full mt-3 flex items-center justify-between p-1.5 rounded-2xl bg-[#141417] border-2 border-zinc-800 shadow-md">
+      <div className="w-full mt-3 flex items-center justify-between p-1.5 rounded-2xl bg-card border border-line shadow-card">
         <div className="flex items-center gap-1.5 flex-wrap">
           <button
             type="button"
-            onClick={() => setActiveHudTab(activeHudTab === 'subtitle' ? 'none' : 'subtitle')}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all ${
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setActiveHudTab(activeHudTab === 'subtitle' ? 'none' : 'subtitle');
+            }}
+            className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all focus-visible:ring-2 focus-visible:ring-accent ${
               activeHudTab === 'subtitle'
-                ? 'bg-orange-600 text-white shadow-md'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                ? 'bg-accent text-ink shadow-md font-black'
+                : 'text-muted hover:text-paper hover:bg-tile'
             }`}
           >
-            <Sliders className="w-3.5 h-3.5 text-orange-400" />
+            <Sliders className="w-3.5 h-3.5 text-accent" />
             <span>Subtitle & Font</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-black/50 text-orange-300">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/40 text-paper font-bold">
               {currentSubConfig.enabled ? `${currentSubConfig.customY ?? 68}%` : 'OFF'}
             </span>
           </button>
 
           <button
             type="button"
-            onClick={() => setActiveHudTab(activeHudTab === 'layers' ? 'none' : 'layers')}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all ${
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setActiveHudTab(activeHudTab === 'layers' ? 'none' : 'layers');
+            }}
+            className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all focus-visible:ring-2 focus-visible:ring-accent ${
               activeHudTab === 'layers'
-                ? 'bg-cyan-600 text-white shadow-md'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                ? 'bg-cyan-600 text-white shadow-md font-black'
+                : 'text-muted hover:text-paper hover:bg-tile'
             }`}
           >
             <Layers className="w-3.5 h-3.5 text-cyan-400" />
@@ -649,11 +701,14 @@ export const MotionStage: React.FC<Props> = ({
 
           <button
             type="button"
-            onClick={() => setActiveHudTab(activeHudTab === 'audio' ? 'none' : 'audio')}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all ${
+            onClick={() => {
+              browserAudio.playClick('soft');
+              setActiveHudTab(activeHudTab === 'audio' ? 'none' : 'audio');
+            }}
+            className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all focus-visible:ring-2 focus-visible:ring-accent ${
               activeHudTab === 'audio'
-                ? 'bg-emerald-600 text-white shadow-md'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                ? 'bg-emerald-600 text-white shadow-md font-black'
+                : 'text-muted hover:text-paper hover:bg-tile'
             }`}
           >
             <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
@@ -663,8 +718,11 @@ export const MotionStage: React.FC<Props> = ({
 
         <button
           type="button"
-          onClick={() => setActiveHudTab(activeHudTab === 'none' ? 'subtitle' : 'none')}
-          className="text-zinc-500 hover:text-zinc-300 p-1.5 rounded-lg text-[10px] font-bold flex items-center gap-1"
+          onClick={() => {
+            browserAudio.playClick('soft');
+            setActiveHudTab(activeHudTab === 'none' ? 'subtitle' : 'none');
+          }}
+          className="text-muted hover:text-paper p-2 rounded-lg text-[10px] font-bold flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-accent"
           title={activeHudTab === 'none' ? 'Buka Pengaturan Canvas' : 'Tutup Pengaturan Canvas'}
         >
           <span>{activeHudTab === 'none' ? 'Buka' : 'Tutup'}</span>
@@ -1264,7 +1322,7 @@ export const MotionStage: React.FC<Props> = ({
                 handleUnlockAudio();
                 browserAudio.playPop();
               }}
-              className="px-2.5 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold border border-zinc-700 flex items-center gap-1"
+              className="px-3 py-1.5 rounded-xl bg-tile hover:bg-tile-2 text-paper text-xs font-bold border border-edge flex items-center gap-1 transition-colors active:scale-95"
             >
               <span>🔊 Tes SFX Pop</span>
             </button>
@@ -1273,10 +1331,10 @@ export const MotionStage: React.FC<Props> = ({
       )}
 
       {/* TIMELINE SCRUBBER & DOCK CONTROLS */}
-      <div className="w-full mt-4 bg-zinc-900/90 backdrop-blur-md p-3.5 sm:p-4 rounded-3xl border-2 border-zinc-800 shadow-brutal flex flex-col gap-2.5">
+      <div className="w-full mt-4 bg-card backdrop-blur-md p-3.5 sm:p-4 rounded-3xl border border-line shadow-card flex flex-col gap-2.5">
         {/* Progress Bar Scrubber */}
         <div className="flex items-center gap-2.5">
-          <span className="text-[11px] font-mono font-bold text-zinc-400 w-10 text-right">
+          <span className="text-[11px] font-mono font-bold text-muted w-10 text-right">
             {currentTime.toFixed(1)}s
           </span>
           <input
@@ -1291,9 +1349,9 @@ export const MotionStage: React.FC<Props> = ({
               if (isPlaying) setIsPlaying(false);
               browserAudio.stopSpeech();
             }}
-            className="flex-1 h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-orange-600 focus:outline-none"
+            className="flex-1 h-2 bg-tile rounded-lg appearance-none cursor-pointer accent-accent focus:outline-none"
           />
-          <span className="text-[11px] font-mono font-bold text-zinc-400 w-10">
+          <span className="text-[11px] font-mono font-bold text-muted w-10">
             {duration.toFixed(1)}s
           </span>
         </div>
@@ -1304,24 +1362,26 @@ export const MotionStage: React.FC<Props> = ({
             {/* Play/Pause */}
             <button
               onClick={() => {
+                browserAudio.playClick('normal');
                 handleUnlockAudio();
                 setIsPlaying(!isPlaying);
               }}
-              className="p-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-black shadow-brutal-sm transition-transform active:translate-y-0.5"
+              className="min-h-[38px] px-3.5 py-2 rounded-xl bg-accent hover:opacity-90 text-ink font-black shadow-md transition-transform active:translate-y-0.5 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent"
               title="Play/Pause (Space)"
             >
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
+              {isPlaying ? <Pause className="w-4 h-4 fill-ink" /> : <Play className="w-4 h-4 fill-ink" />}
             </button>
 
             {/* Replay */}
             <button
               onClick={() => {
+                browserAudio.playClick('soft');
                 handleUnlockAudio();
                 setCurrentTime(0);
                 lastLineIdRef.current = null;
                 browserAudio.stopSpeech();
               }}
-              className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 transition-colors"
+              className="min-h-[38px] px-3 py-2 rounded-xl bg-tile hover:bg-tile-2 text-muted hover:text-paper border border-edge transition-colors active:scale-95 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent"
               title="Replay dari awal (R)"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -1329,15 +1389,18 @@ export const MotionStage: React.FC<Props> = ({
 
             {/* Audio Voiceover Toggle */}
             <button
-              onClick={toggleMute}
-              className={`px-2.5 py-1.5 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-colors ${
+              onClick={() => {
+                browserAudio.playClick('soft');
+                toggleMute();
+              }}
+              className={`min-h-[38px] px-3 py-1.5 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
                 !isMuted
-                  ? 'bg-orange-600/20 border-orange-500/50 text-orange-400'
-                  : 'bg-zinc-800 border-zinc-700 text-zinc-500'
+                  ? 'bg-accent/15 border-accent/40 text-accent font-black'
+                  : 'bg-tile border-edge text-dim'
               }`}
               title="Suara Voiceover & SFX (M)"
             >
-              {isMuted ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3 text-orange-400" />}
+              {isMuted ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3 text-accent" />}
               <span className="hidden sm:inline">{isMuted ? 'Muted' : 'Audio'}</span>
             </button>
 
@@ -1346,10 +1409,11 @@ export const MotionStage: React.FC<Props> = ({
               <button
                 type="button"
                 onClick={() => {
+                  browserAudio.playClick('soft');
                   handleUnlockAudio();
                   setShowBgmMenu(!showBgmMenu);
                 }}
-                className="px-2 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 text-[11px] font-bold flex items-center gap-1 transition-colors"
+                className="min-h-[38px] px-3 py-1.5 rounded-xl bg-tile hover:bg-tile-2 text-paper border border-edge text-[11px] font-bold flex items-center gap-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-accent"
                 title="Pilih Musik Latar (BGM)"
               >
                 <Music className="w-3 h-3 text-cyan-400" />
@@ -1359,8 +1423,8 @@ export const MotionStage: React.FC<Props> = ({
               </button>
 
               {showBgmMenu && (
-                <div className="absolute bottom-full mb-2 left-0 w-44 bg-[#141413] border-2 border-zinc-800 rounded-2xl shadow-2xl p-2 z-50 flex flex-col gap-1 text-xs">
-                  <div className="text-[10px] font-black uppercase text-zinc-500 px-2 py-1">
+                <div className="absolute bottom-full mb-2 left-0 w-48 bg-card border border-line rounded-2xl shadow-2xl p-2 z-50 flex flex-col gap-1 text-xs">
+                  <div className="text-[10px] font-black uppercase text-muted font-mono px-2 py-1">
                     Pilih Musik Latar:
                   </div>
                   {[
@@ -1373,9 +1437,12 @@ export const MotionStage: React.FC<Props> = ({
                     <button
                       key={track.id}
                       type="button"
-                      onClick={() => handleSelectBgm(track.id as BGMTrack)}
-                      className={`text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                        bgmTrack === track.id ? 'bg-cyan-600 text-white font-bold' : 'text-zinc-300 hover:bg-zinc-800'
+                      onClick={() => {
+                        browserAudio.playClick('normal');
+                        handleSelectBgm(track.id as BGMTrack);
+                      }}
+                      className={`text-left px-2.5 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                        bgmTrack === track.id ? 'bg-accent text-ink font-black' : 'text-paper hover:bg-tile'
                       }`}
                     >
                       {track.label}
@@ -1387,19 +1454,25 @@ export const MotionStage: React.FC<Props> = ({
 
             {/* Speed Toggle */}
             <button
-              onClick={() => setSpeed(speed === 1 ? 1.25 : speed === 1.25 ? 1.5 : 1)}
-              className="px-2 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 text-[10px] font-mono font-bold flex items-center gap-1"
+              onClick={() => {
+                browserAudio.playClick('soft');
+                setSpeed(speed === 1 ? 1.25 : speed === 1.25 ? 1.5 : 1);
+              }}
+              className="min-h-[38px] px-3 py-1.5 rounded-xl bg-tile hover:bg-tile-2 text-paper border border-edge text-[10px] font-mono font-bold flex items-center gap-1 transition-colors active:scale-95 focus-visible:ring-2 focus-visible:ring-accent"
               title="Kecepatan Video"
             >
-              <Gauge className="w-3 h-3" />
+              <Gauge className="w-3.5 h-3.5 text-accent" />
               {speed}x
             </button>
           </div>
 
           {/* Export MP4 Button */}
           <button
-            onClick={onExportClick}
-            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-black text-xs shadow-brutal-sm flex items-center gap-1.5 border border-black transition-transform active:translate-y-0.5 ml-auto"
+            onClick={() => {
+              browserAudio.playClick('sharp');
+              onExportClick && onExportClick();
+            }}
+            className="min-h-[38px] px-4 py-2 rounded-xl bg-gradient-to-r from-accent via-amber-500 to-accent hover:opacity-95 text-ink font-black text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 border border-accent/40 transition-transform active:translate-y-0.5 ml-auto focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export</span>
@@ -1407,11 +1480,11 @@ export const MotionStage: React.FC<Props> = ({
         </div>
 
         {/* Shortcuts & Auto-Ducking Indicator */}
-        <div className="flex items-center justify-between text-[9px] text-zinc-500 font-mono pt-1 border-t border-zinc-800/80">
+        <div className="flex items-center justify-between text-[9px] text-muted font-mono pt-1.5 border-t border-line/60">
           <span>[Space] Play • [R] Reset • [M] Mute</span>
           {!isMuted && isPlaying && (
-            <span className="text-orange-400 flex items-center gap-1 font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+            <span className="text-accent flex items-center gap-1 font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
               Auto-Ducking Active
             </span>
           )}

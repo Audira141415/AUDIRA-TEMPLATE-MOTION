@@ -5,6 +5,7 @@ import {
   Palette, Wand2, FileText, Sliders, Share2, 
   CheckCircle2, ChevronRight, ChevronLeft, Sparkles, Layers, Award
 } from 'lucide-react';
+import { browserAudio } from '@/lib/browser-audio';
 
 export type StudioWorkflowStep = 'format' | 'idea' | 'script' | 'visual' | 'social';
 
@@ -26,7 +27,7 @@ export const WORKFLOW_STEPS: StepMeta[] = [
     label: 'Format & Cast',
     shortLabel: '1. Format',
     badge: 'Desain & Karakter',
-    desc: 'Tentukan gaya template video (25 Archetypes) dan karakter pemeran / pembicara.',
+    desc: 'Tentukan gaya template video (21 Format) dan karakter pemeran / pembicara.',
     nextText: 'Lanjut: Tulis Ide & Prompt AI',
     icon: <Palette className="w-3.5 h-3.5" />,
   },
@@ -89,9 +90,9 @@ export const WorkflowStepper: React.FC<Props> = ({
   const progressPercent = Math.round((currentMeta.stepNum / WORKFLOW_STEPS.length) * 100);
 
   return (
-    <div className="flex flex-col gap-3 bg-[#141413] p-3 sm:p-4 rounded-3xl border-2 border-zinc-800 shadow-brutal">
+    <div className="flex flex-col gap-3 bg-card p-3 sm:p-4 rounded-3xl border border-line shadow-card">
       {/* Top Stepper Timeline Bar */}
-      <div className="flex items-center justify-between gap-1 sm:gap-2 pb-3 border-b border-zinc-800">
+      <div className="flex items-center justify-between gap-1 sm:gap-2 pb-3 border-b border-line">
         <div className="flex items-center gap-1 sm:gap-1.5 flex-1 overflow-x-auto py-1 scrollbar-none">
           {WORKFLOW_STEPS.map((step, idx) => {
             const isActive = currentStep === step.id && !expandAllPanels;
@@ -101,22 +102,25 @@ export const WorkflowStepper: React.FC<Props> = ({
               <React.Fragment key={step.id}>
                 <button
                   type="button"
-                  onClick={() => onSelectStep(step.id)}
-                  className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+                  onClick={() => {
+                    browserAudio.playClick('soft');
+                    onSelectStep(step.id);
+                  }}
+                  className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-accent ${
                     isActive
-                      ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-brutal-orange scale-102 ring-2 ring-orange-500/50'
+                      ? 'bg-accent text-ink font-black shadow-md ring-2 ring-accent/40'
                       : isCompleted
-                      ? 'bg-zinc-900 border border-emerald-600/40 text-emerald-400 hover:text-white hover:bg-zinc-800'
-                      : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800'
+                      ? 'bg-tile border border-emerald-500/30 text-emerald-400 hover:text-paper hover:bg-tile-2'
+                      : 'bg-tile border border-line text-muted hover:text-paper hover:bg-tile-2'
                   }`}
                   title={`${step.label}: ${step.desc}`}
                 >
                   <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${
                     isActive
-                      ? 'bg-black text-orange-400'
+                      ? 'bg-ink text-accent'
                       : isCompleted
                       ? 'bg-emerald-500/20 text-emerald-300'
-                      : 'bg-zinc-800 text-zinc-400'
+                      : 'bg-ink text-muted'
                   }`}>
                     {isCompleted ? '✓' : step.stepNum}
                   </span>
@@ -126,7 +130,7 @@ export const WorkflowStepper: React.FC<Props> = ({
 
                 {/* Connector Arrow */}
                 {idx < WORKFLOW_STEPS.length - 1 && (
-                  <ChevronRight className="w-3.5 h-3.5 text-zinc-700 shrink-0 hidden md:inline" />
+                  <ChevronRight className="w-3.5 h-3.5 text-edge shrink-0 hidden md:inline" />
                 )}
               </React.Fragment>
             );
@@ -136,11 +140,14 @@ export const WorkflowStepper: React.FC<Props> = ({
         {/* View Mode Toggle: Stepper Mode vs Expand All */}
         <button
           type="button"
-          onClick={onToggleExpandAll}
-          className={`shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[10px] font-bold border transition-colors ${
+          onClick={() => {
+            browserAudio.playClick('soft');
+            onToggleExpandAll();
+          }}
+          className={`shrink-0 flex items-center gap-1 min-h-[36px] px-2.5 py-1.5 rounded-xl text-[10px] font-bold border transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
             expandAllPanels
-              ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-              : 'text-zinc-500 border-zinc-800 hover:text-zinc-300'
+              ? 'bg-amber-500/15 text-amber-300 border-amber-500/40'
+              : 'text-muted border-line hover:text-paper hover:bg-tile'
           }`}
           title="Buka semua modul sekaligus tanpa alur step"
         >
@@ -154,28 +161,28 @@ export const WorkflowStepper: React.FC<Props> = ({
         <div className="flex flex-col gap-2 pt-0.5">
           <div className="flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded-md bg-orange-600/20 text-orange-400 border border-orange-500/30 text-[10px] font-black uppercase font-mono tracking-wider">
+              <span className="px-2 py-0.5 rounded-md bg-accent/15 text-accent border border-accent/30 text-[10px] font-black uppercase font-mono tracking-wider">
                 Langkah {currentMeta.stepNum} dari 5
               </span>
-              <span className="font-extrabold text-white text-xs sm:text-sm">
+              <span className="font-extrabold text-paper text-xs sm:text-sm font-display">
                 {currentMeta.label}
               </span>
             </div>
-            <span className="text-[11px] font-mono text-zinc-400">
-              Progres: <strong className="text-orange-400">{progressPercent}%</strong>
+            <span className="text-[11px] font-mono text-muted">
+              Progres: <strong className="text-accent">{progressPercent}%</strong>
             </span>
           </div>
 
           {/* Micro Progress Bar */}
-          <div className="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden border border-zinc-800">
+          <div className="w-full bg-ink h-1.5 rounded-full overflow-hidden border border-line">
             <div
-              className="bg-gradient-to-r from-orange-600 via-amber-500 to-emerald-400 h-full transition-all duration-300"
+              className="bg-gradient-to-r from-accent via-amber-400 to-emerald-400 h-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
 
           {/* Actionable Micro-Guidance */}
-          <p className="text-[11px] text-zinc-400 leading-relaxed">
+          <p className="text-[11px] text-muted leading-relaxed">
             💡 {currentMeta.desc}
           </p>
         </div>

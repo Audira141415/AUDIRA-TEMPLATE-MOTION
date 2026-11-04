@@ -26,7 +26,7 @@ export const RenderLaunchpad: React.FC<Props> = ({
   return (
     <div className="flex flex-col gap-4 animate-in fade-in duration-200">
       {/* CARD 1: LAUNCHPAD RENDER GATEWAY */}
-      <div className="bg-gradient-to-br from-[#181816] to-[#121211] p-5 sm:p-6 rounded-3xl border-2 border-orange-500/40 shadow-brutal-orange flex flex-col gap-4 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-card to-card/90 p-5 sm:p-6 rounded-3xl border-2 border-accent/40 shadow-card flex flex-col gap-4 relative overflow-hidden">
         {/* Ambient Top Glow */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-orange-600/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -37,15 +37,15 @@ export const RenderLaunchpad: React.FC<Props> = ({
                 <CheckCircle2 className="w-3 h-3" />
                 Langkah 5: Siap Render
               </span>
-              <span className="text-zinc-500 text-xs">•</span>
-              <span className="text-[10px] font-mono text-zinc-400 uppercase">
+              <span className="text-dim text-xs">•</span>
+              <span className="text-[10px] font-mono text-muted uppercase">
                 {aspectRatio} Aspect
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
               {storyboard.title || 'Studio Motion Reel'}
             </h3>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-xs text-muted mt-1">
               Semua elemen naskah, suara AI Cartesia, dan animasi telah terkalibrasi.
             </p>
           </div>
@@ -56,9 +56,9 @@ export const RenderLaunchpad: React.FC<Props> = ({
         </div>
 
         {/* PRE-FLIGHT SPECS CHECKLIST */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-[#0e0e11] p-3 rounded-2xl border border-zinc-800 text-xs relative z-10">
-          <div className="flex flex-col gap-0.5 p-2 bg-zinc-900/60 rounded-xl">
-            <span className="text-[10px] text-zinc-400 font-mono flex items-center gap-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-ink p-3 rounded-2xl border border-line text-xs relative z-10">
+          <div className="flex flex-col gap-0.5 p-2 bg-tile rounded-xl">
+            <span className="text-[10px] text-muted font-mono flex items-center gap-1">
               <Layers className="w-3 h-3 text-cyan-400" />
               Format
             </span>
@@ -67,8 +67,8 @@ export const RenderLaunchpad: React.FC<Props> = ({
             </span>
           </div>
 
-          <div className="flex flex-col gap-0.5 p-2 bg-zinc-900/60 rounded-xl">
-            <span className="text-[10px] text-zinc-400 font-mono flex items-center gap-1">
+          <div className="flex flex-col gap-0.5 p-2 bg-tile rounded-xl">
+            <span className="text-[10px] text-muted font-mono flex items-center gap-1">
               <Clock className="w-3 h-3 text-orange-400" />
               Durasi
             </span>
@@ -77,8 +77,8 @@ export const RenderLaunchpad: React.FC<Props> = ({
             </span>
           </div>
 
-          <div className="flex flex-col gap-0.5 p-2 bg-zinc-900/60 rounded-xl">
-            <span className="text-[10px] text-zinc-400 font-mono flex items-center gap-1">
+          <div className="flex flex-col gap-0.5 p-2 bg-tile rounded-xl">
+            <span className="text-[10px] text-muted font-mono flex items-center gap-1">
               <Volume2 className="w-3 h-3 text-emerald-400" />
               Suara AI
             </span>
@@ -87,8 +87,8 @@ export const RenderLaunchpad: React.FC<Props> = ({
             </span>
           </div>
 
-          <div className="flex flex-col gap-0.5 p-2 bg-zinc-900/60 rounded-xl">
-            <span className="text-[10px] text-zinc-400 font-mono flex items-center gap-1">
+          <div className="flex flex-col gap-0.5 p-2 bg-tile rounded-xl">
+            <span className="text-[10px] text-muted font-mono flex items-center gap-1">
               <Type className="w-3 h-3 text-amber-400" />
               Subtitle
             </span>
@@ -114,7 +114,7 @@ export const RenderLaunchpad: React.FC<Props> = ({
             <button
               type="button"
               onClick={onOpenVault}
-              className="w-full sm:w-auto py-3.5 px-5 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border-2 border-zinc-700 text-xs font-bold flex items-center justify-center gap-2 transition-colors shrink-0"
+              className="w-full sm:w-auto py-3.5 px-5 rounded-2xl bg-tile hover:bg-zinc-800 text-paper hover:text-white border-2 border-edge text-xs font-bold flex items-center justify-center gap-2 transition-colors shrink-0"
             >
               <FolderOpen className="w-4 h-4 text-cyan-400" />
               <span>Buka Render Vault</span>
@@ -127,27 +127,27 @@ export const RenderLaunchpad: React.FC<Props> = ({
       <ViralToolkit storyboard={storyboard} />
 
       {/* CARD 3: RETENTION BLUEPRINT */}
-      <div className="bg-[#141413] p-5 rounded-3xl border-2 border-zinc-800 flex flex-col gap-3">
+      <div className="bg-card p-5 rounded-3xl border border-line shadow-card flex flex-col gap-3">
         <h4 className="text-xs font-black uppercase text-orange-400 tracking-wider flex items-center gap-2">
           <Zap className="w-4 h-4" />
           Rahasia Retensi BanterReels (Under The Hood)
         </h4>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-zinc-300">
-          <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-paper">
+          <div className="bg-tile p-3 rounded-xl border border-line">
             <span className="font-mono font-bold text-orange-400 block mb-1">00:00.4 Detik</span>
-            <p className="text-[11px] text-zinc-400 leading-relaxed">
+            <p className="text-[11px] text-muted leading-relaxed">
               Hook audio pembuka meledak dalam 0.4s pertama untuk mengunci jempol penonton.
             </p>
           </div>
-          <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
+          <div className="bg-tile p-3 rounded-xl border border-line">
             <span className="font-mono font-bold text-yellow-400 block mb-1">Word Pop Captions</span>
-            <p className="text-[11px] text-zinc-400 leading-relaxed">
+            <p className="text-[11px] text-muted leading-relaxed">
               Teks menyala per kata tepat saat diucapkan untuk menjaga fokus mata penonton.
             </p>
           </div>
-          <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800">
+          <div className="bg-tile p-3 rounded-xl border border-line">
             <span className="font-mono font-bold text-cyan-400 block mb-1">Comment Magnet</span>
-            <p className="text-[11px] text-zinc-400 leading-relaxed">
+            <p className="text-[11px] text-muted leading-relaxed">
               Outro diakhiri pertanyaan pemicu debat agar algoritma melipatgandakan views.
             </p>
           </div>

@@ -8,6 +8,7 @@ import {
   ListOrdered, HelpCircle, Mic, BookOpen, Terminal, Swords, Map, 
   ChefHat, AtSign, Receipt, Tv, StickyNote, Box, Search, Sparkles
 } from 'lucide-react';
+import { browserAudio } from '@/lib/browser-audio';
 
 interface Props {
   selectedFormat: MotionFormat;
@@ -94,24 +95,24 @@ export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) =>
   }, [activeCategory, searchQuery]);
 
   return (
-    <div className="flex flex-col gap-3 bg-[#141413] p-4 sm:p-5 rounded-3xl border-2 border-zinc-800 shadow-xl">
+    <div className="flex flex-col gap-3.5 bg-card p-4 sm:p-5 rounded-3xl border border-line shadow-card">
       {/* Header with Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800">
-        <label className="text-xs font-black uppercase tracking-wider text-zinc-300 flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-orange-500" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-line">
+        <label className="text-xs font-black uppercase tracking-wider text-paper flex items-center gap-2 font-display">
+          <Sparkles className="w-3.5 h-3.5 text-accent" />
           <span>Pilih Desain & Format Video</span>
-          <span className="text-orange-500 font-mono">({FORMAT_CATALOG.length} Archetypes)</span>
+          <span className="text-accent font-mono font-normal">({FORMAT_CATALOG.length} Format)</span>
         </label>
 
         {/* Quick Search */}
         <div className="relative min-w-[200px]">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-500" />
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari format..."
-            className="w-full pl-8 pr-2.5 py-1.5 rounded-xl border border-zinc-700 bg-zinc-900 text-xs text-white placeholder:text-zinc-500 focus:border-orange-500 focus:outline-none"
+            className="w-full pl-8 pr-2.5 py-1.5 rounded-xl border border-line bg-tile text-xs text-paper placeholder:text-muted/60 focus:border-accent focus-visible:ring-1 focus-visible:ring-accent focus:outline-none"
           />
         </div>
       </div>
@@ -124,15 +125,18 @@ export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) =>
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveCategory(tab.id)}
-              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+              onClick={() => {
+                browserAudio.playClick('soft');
+                setActiveCategory(tab.id);
+              }}
+              className={`min-h-[36px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 focus-visible:ring-2 focus-visible:ring-accent ${
                 isActive
-                  ? 'bg-orange-600 text-white shadow-sm'
-                  : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
+                  ? 'bg-accent text-ink font-black shadow-md'
+                  : 'bg-tile border border-line text-muted hover:text-paper hover:border-edge'
               }`}
             >
               <span>{tab.label}</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-black/30' : 'bg-zinc-800'}`}>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isActive ? 'bg-black/30 text-ink font-bold' : 'bg-ink text-muted'}`}>
                 {tab.count}
               </span>
             </button>
@@ -141,7 +145,7 @@ export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) =>
       </div>
 
       {/* Grid of Format Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[420px] overflow-y-auto pr-1">
         {filteredCatalog.map((f) => {
           const isSelected = selectedFormat === f.id;
           const isRoblox = f.id === 'roblox_story';
@@ -149,39 +153,42 @@ export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) =>
             <button
               key={f.id}
               type="button"
-              onClick={() => onSelect(f.id)}
-              className={`p-3 rounded-2xl text-left border-2 transition-all flex flex-col justify-between gap-2 relative ${
+              onClick={() => {
+                browserAudio.playClick('normal');
+                onSelect(f.id);
+              }}
+              className={`p-3.5 rounded-2xl text-left border transition-all flex flex-col justify-between gap-2.5 relative active:scale-98 focus-visible:ring-2 focus-visible:ring-accent ${
                 isSelected
-                  ? 'bg-zinc-900 border-orange-500 ring-2 ring-orange-500/30 shadow-brutal-orange translate-y-[-2px]'
-                  : 'bg-zinc-900/60 hover:bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+                  ? 'bg-tile-2 border-accent ring-2 ring-accent/40 shadow-[0_0_20px_rgba(255,106,42,0.18)] translate-y-[-2px]'
+                  : 'bg-tile hover:bg-tile-2 border-line hover:border-edge text-paper'
               }`}
             >
               {isRoblox && (
-                <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-yellow-400 text-black text-[9px] font-black uppercase">
+                <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-amber-400 text-ink text-[9px] font-black uppercase tracking-wider">
                   NEW
                 </span>
               )}
 
               <div className="flex items-start justify-between">
                 <div
-                  className={`p-1.5 rounded-xl text-white ${
-                    isSelected ? 'bg-orange-600' : 'bg-zinc-800 text-zinc-300'
+                  className={`p-2 rounded-xl transition-colors ${
+                    isSelected ? 'bg-accent text-ink' : 'bg-ink text-muted border border-line'
                   }`}
                 >
                   {iconMap[f.iconName] || <Users className="w-4 h-4" />}
                 </div>
                 {!isRoblox && (
-                  <span className="text-[9px] font-black uppercase px-1.5 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700 truncate max-w-[90px]">
+                  <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-ink text-muted border border-line truncate max-w-[90px] font-mono">
                     {f.badge}
                   </span>
                 )}
               </div>
 
               <div>
-                <h4 className="font-black text-xs text-white tracking-tight leading-tight">
+                <h4 className="font-black text-xs text-paper tracking-tight leading-tight font-display">
                   {f.name}
                 </h4>
-                <p className="text-[10px] text-zinc-400 mt-0.5 line-clamp-1 leading-relaxed">
+                <p className="text-[10px] text-muted mt-1 line-clamp-1 leading-relaxed">
                   {f.tagline}
                 </p>
               </div>
@@ -191,7 +198,7 @@ export const FormatSelector: React.FC<Props> = ({ selectedFormat, onSelect }) =>
       </div>
 
       {filteredCatalog.length === 0 && (
-        <div className="p-4 text-center text-xs text-zinc-500 border border-dashed border-zinc-800 rounded-xl">
+        <div className="p-6 text-center text-xs text-muted border border-dashed border-line rounded-2xl">
           Format tidak ditemukan dengan kata kunci &quot;{searchQuery}&quot;.
         </div>
       )}

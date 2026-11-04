@@ -97,6 +97,36 @@ class BrowserAudioEngine {
     return this.isMuted;
   }
 
+  // Tactile Mechanical Click SFX for Buttons & Toggles
+  public playClick(pitch: 'normal' | 'soft' | 'sharp' = 'normal') {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const t = ctx.currentTime;
+
+      osc.type = 'triangle';
+      const baseFreq = pitch === 'sharp' ? 1200 : pitch === 'soft' ? 700 : 950;
+      osc.frequency.setValueAtTime(baseFreq, t);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.45, t + 0.022);
+
+      const vol = (pitch === 'soft' ? 0.03 : 0.045) * this.sfxVolume;
+      gain.gain.setValueAtTime(vol, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.022);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.022);
+    } catch {
+      // ignore
+    }
+  }
+
   // Pop SFX for word captions
   public playPop() {
     if (this.isMuted) return;
