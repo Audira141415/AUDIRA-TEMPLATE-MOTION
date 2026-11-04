@@ -2,59 +2,38 @@
 
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { Play, ArrowRight, Sparkles, Gamepad2, FileText, Film, Box } from 'lucide-react';
-import { REELS, ReelSample, GalleryCategory } from './reels';
+import { Play, ArrowRight, Gamepad2, FileText, Film } from 'lucide-react';
+import { REELS, GalleryCategory } from './reels';
 
 interface CategoryItem {
   id: GalleryCategory;
   label: string;
   count: number;
   icon: React.ReactNode;
-  badge?: string;
-  sectionTitle?: string;
-  sectionDesc?: string;
 }
 
 const CATEGORIES: CategoryItem[] = [
-  {
-    id: '3d',
-    label: 'Motion 3D & Simulasi',
-    count: 4,
-    icon: <Box className="w-4 h-4" />,
-    badge: 'LONG-FORM 3D FILMS',
-    sectionTitle: 'Long-Form 3D Films & Simulation',
-    sectionDesc: 'Perjalanan 3D kosmis sinematik, arsitektur cross-section presisi, dan simulasi partikel absurd dengan skala astronomi.',
-  },
   {
     id: 'gaming',
     label: 'Gaming & Skits',
     count: 7,
     icon: <Gamepad2 className="w-4 h-4" />,
-    badge: 'CREATOR & SKITS',
-    sectionTitle: 'Roblox Obby, RPG & Host Banter',
-    sectionDesc: 'Karakter 3D berkicau, obby lava parkour Roblox, breaking news heboh, dan pixel battle 16-bit.',
   },
   {
     id: 'explainer',
     label: 'Edukasi & Data',
     count: 7,
     icon: <FileText className="w-4 h-4" />,
-    badge: 'MOTION GRAPHICS & DATA',
-    sectionTitle: 'Explainer, Whiteboard & Typography',
-    sectionDesc: 'Data metrik algoritma bergerak, whiteboard tangan menggambar live, dan kinetic typography berenergi tinggi.',
   },
   {
     id: 'story',
     label: 'Story & Drama',
     count: 7,
     icon: <Film className="w-4 h-4" />,
-    badge: 'NARRATIVE & DOCUMENTARY',
-    sectionTitle: 'Dokumenter Arsip, Chat & Podcast',
-    sectionDesc: 'Kisah nyata bernada emosional, drama chat WhatsApp seru, rute GPS liburan, dan rekaman nostalgia retro VHS.',
   },
 ];
 
-export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ activeTab = '3d' }) => {
+export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ activeTab = 'gaming' }) => {
   const [currentTab, setCurrentTab] = useState<GalleryCategory>(activeTab);
   const [activeVideoFile, setActiveVideoFile] = useState<string | null>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
@@ -69,7 +48,6 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
     });
   };
 
-  const currentCategory = CATEGORIES.find((c) => c.id === currentTab) || CATEGORIES[0];
   const items = REELS.filter((r) => r.category === currentTab);
 
   return (
@@ -126,22 +104,6 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
           );
         })}
       </div>
-
-      {/* Featured Section Header for Current Category */}
-      {currentCategory.badge && (
-        <div className="mb-8 rounded-2xl border border-line/60 bg-gradient-to-r from-card to-tile p-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-accent">
-            <Sparkles className="w-3 h-3" />
-            <span>{currentCategory.badge}</span>
-          </div>
-          <h3 className="mt-3 font-display text-2xl sm:text-3xl font-bold tracking-tight text-paper">
-            {currentCategory.sectionTitle}
-          </h3>
-          <p className="mt-1.5 max-w-3xl text-sm sm:text-base leading-relaxed text-muted">
-            {currentCategory.sectionDesc}
-          </p>
-        </div>
-      )}
 
       {/* Grid of Video Cards (Voynan Exact Layout) */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

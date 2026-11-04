@@ -287,3 +287,4 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
     </section>
   );
 };
+

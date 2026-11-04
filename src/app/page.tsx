@@ -22,7 +22,7 @@ export default function LandingPage() {
         <ProductPackages />
 
         {/* 4. Interactive Video Gallery (#hasil) - Voynan-Grade Cards, 3 Tags, Quote Snippet, Single Play Lock */}
-        <GallerySection activeTab="3d" />
+        <GallerySection activeTab="gaming" />
 
         {/* 5. How It Works (#cara-kerja) - 3 Steps (Ketik -> Suarakan -> Render) + Live Demo */}
         <HowItWorksSection />

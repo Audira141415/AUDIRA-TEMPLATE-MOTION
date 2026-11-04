@@ -1,6 +1,6 @@
 import { MotionFormat, MoodType } from '@/types/motion';
 
-export type GalleryCategory = '3d' | 'gaming' | 'explainer' | 'story';
+export type GalleryCategory = 'gaming' | 'explainer' | 'story';
 
 export type ReelSample = {
   file: string;
@@ -10,58 +10,10 @@ export type ReelSample = {
   quote: string;
   tags: [string, string, string];
   category: GalleryCategory;
-  categoryLabel?: string;
-  categoryDesc?: string;
 };
 
 export const REELS: ReelSample[] = [
-  // 1. 3D Films & World Simulation
-  {
-    file: 'how_its_built',
-    format: 'docu_story',
-    kind: 'Architecture 3D',
-    title: 'Bunker Rumah Kaca 3D',
-    quote: 'tanah: rumah dibelah mengungkap bunker hidroponik rahasia.',
-    tags: ['Architecture 3D', 'Underground Bunker', 'Step by Step'],
-    category: '3d',
-    categoryLabel: 'Long-Form 3D Films',
-    categoryDesc: 'Arsitektur cross-section 3D presisi: mengiris lapisan tanah mengungkap struktur rahasia bawah tanah.',
-  },
-  {
-    file: 'what_if_3d',
-    format: 'versus',
-    kind: 'Crowd Physics',
-    title: 'Kentut 8.2 Miliar Manusia',
-    quote: 'simulasi fisika jutaan orang berkumpul di tebing pantai atmosferik raksasa.',
-    tags: ['Crowd Physics', 'Global What-If', 'Disaster Scale'],
-    category: '3d',
-    categoryLabel: 'Simulation & Physics',
-    categoryDesc: 'Kalkulasi fenomena global absurd dengan simulasi partikel dan massa masif realtime.',
-  },
-  {
-    file: 'zombie_survival',
-    format: 'pixel_rpg',
-    kind: 'Survival Base',
-    title: 'Hari ke-42 Zombie Farm',
-    quote: 'radar pertahanan pangkalan melingkar di tengah hutan pohon pelindung.',
-    tags: ['Survival Base', 'Radar Defense', 'Day by Day'],
-    category: '3d',
-    categoryLabel: 'Survival Sim',
-    categoryDesc: 'Taktik pertahanan pangkalan hari demi hari dengan visualisasi radar terintegrasi.',
-  },
-  {
-    file: 'cosmic_voyage',
-    format: 'clean_explainer',
-    kind: 'Planetary 3D',
-    title: 'Mengelilingi Khatulistiwa',
-    quote: 'Perjalanan 3D kosmis sinematik: planet bumi berputar megah di ruang hampa dengan skala astronomi.',
-    tags: ['Planetary Science', 'Space Odyssey', 'Cinematic Earth'],
-    category: '3d',
-    categoryLabel: 'Long-Form 3D Films',
-    categoryDesc: 'Perjalanan 3D kosmis sinematik: planet bumi berputar megah di ruang hampa dengan skala astronomi.',
-  },
-
-  // 2. Gaming, Skits & Obby
+  // 1. Gaming, Skits & Obby (7 gaya)
   {
     file: 'roblox_story',
     format: 'roblox_story',
@@ -126,7 +78,7 @@ export const REELS: ReelSample[] = [
     category: 'gaming',
   },
 
-  // 3. Edukasi & Data Explainer
+  // 2. Edukasi & Data Explainer (7 gaya)
   {
     file: 'clean_explainer',
     format: 'clean_explainer',
@@ -191,7 +143,7 @@ export const REELS: ReelSample[] = [
     category: 'explainer',
   },
 
-  // 4. Story, Drama & Dokumenter
+  // 3. Story, Drama & Dokumenter (7 gaya)
   {
     file: 'chat_story',
     format: 'chat_story',
@@ -259,56 +211,56 @@ export const REELS: ReelSample[] = [
 
 export const FORMAT_CARDS: Array<{ reel: ReelSample; name: string; pitch: string; topics: string[] }> = [
   {
-    reel: REELS[5], // banter
+    reel: REELS[1], // banter
     name: 'Character reel',
     pitch: 'Dua tokoh mendebat ide kamu. Cepat, lucu, gampang dibagikan.',
     topics: ['Satu orang', 'Dua teman', 'Manusia vs AI'],
   },
   {
-    reel: REELS[12], // whiteboard
+    reel: REELS[8], // whiteboard
     name: 'Whiteboard',
     pitch: 'Topik apa pun digambar spidol secara live sambil narator bercerita.',
     topics: ['Sains', 'Produk kamu', 'Sejarah'],
   },
   {
-    reel: REELS[6], // pixel_rpg
+    reel: REELS[2], // pixel_rpg
     name: 'Life as a game',
     pitch: 'Harimu jadi RPG 16-bit: musuh, HP, serangan, boss, lalu level up.',
     topics: ['Kerja kantor', 'Pindah kos', 'Belajar nyetir'],
   },
   {
-    reel: REELS[7], // breaking_news
+    reel: REELS[3], // breaking_news
     name: 'Breaking news',
     pitch: 'Drama kecilmu dilaporkan seperti berita utama. Lengkap dengan chat dan ticker.',
     topics: ['Grup WA keluarga', 'Rebutan kulkas'],
   },
   {
-    reel: REELS[11], // clean_explainer
+    reel: REELS[7], // clean_explainer
     name: 'Explainer',
     pitch: 'Topik rumit dibedah langkah demi langkah, dengan angka yang bisa dicek.',
     topics: ['Dengan presenter', 'Grafik saja'],
   },
   {
-    reel: REELS[20], // docu_story
+    reel: REELS[16], // docu_story
     name: 'Dokumenter',
     pitch: 'Kisah nyata bergaya dokumenter: foto arsip, narator, dan twist di akhir.',
     topics: ['Sejarah', 'Tokoh lokal'],
   },
-  { reel: REELS[13], name: 'Kinetic type', pitch: 'Kata-kata raksasa menghantam layar mengikuti suara. Paling cocok untuk opini dan quote.', topics: ['Opini', 'Motivasi', 'Quote'] },
-  { reel: REELS[18], name: 'Chat story', pitch: 'Cerita lewat layar chat: pesan masuk satu per satu, lengkap dengan "sedang mengetik".', topics: ['Drama teman', 'Mantan', 'Grup keluarga'] },
-  { reel: REELS[14], name: 'Top list', pitch: 'Hitung mundur dari nomor terbesar ke juara, dengan angka raksasa.', topics: ['Tips', 'Rekomendasi', 'Fakta'] },
-  { reel: REELS[15], name: 'Kuis', pitch: 'Pertanyaan, pilihan, timer, lalu jawaban dengan confetti. Penonton menebak di komentar.', topics: ['Trivia', 'Sains', 'Geografi'] },
-  { reel: REELS[21], name: 'Podcast clip', pitch: 'Potongan obrolan dua host dengan avatar menyala, waveform, dan caption besar.', topics: ['Talk show', 'Wawancara'] },
-  { reel: REELS[8], name: 'Komik', pitch: 'Panel ala webtoon yang bergulir, balon dialog, dan efek suara di momen kaget.', topics: ['Lucu', 'Slice of life'] },
-  { reel: REELS[10], name: 'Terminal', pitch: 'Layar terminal hijau yang menjawab masalah sehari-hari dengan gaya komputer.', topics: ['Tech', 'Mahasiswa', 'Kantor'] },
-  { reel: REELS[9], name: 'Versus', pitch: 'Layar terbelah dua, dua kubu adu argumen dengan skor yang terus bertambah.', topics: ['Debat', 'Pilihan', 'Selera'] },
-  { reel: REELS[19], name: 'Rute perjalanan', pitch: 'Peta ilustrasi dengan rute yang tergambar dan pin di setiap tempat.', topics: ['Travel', 'Kuliner', 'Road trip'] },
-  { reel: REELS[22], name: 'Resep / tutorial', pitch: 'Langkah demi langkah dengan kartu besar dan bar progres.', topics: ['Masak', 'DIY', 'Beres-beres'] },
-  { reel: REELS[23], name: 'Utas sosmed', pitch: 'Cerita sebagai utas postingan, jumlah suka naik terus.', topics: ['Storytime', 'Curhat'] },
-  { reel: REELS[16], name: 'Struk belanja', pitch: 'Struk tercetak baris demi baris, total dihitung otomatis.', topics: ['Keuangan', 'Belanja'] },
-  { reel: REELS[24], name: 'Retro VHS', pitch: 'Rekaman rumahan era 90-an: PLAY, jam berjalan, subtitle kuning.', topics: ['Nostalgia', 'Kenangan'] },
-  { reel: REELS[17], name: 'Papan catatan', pitch: 'Catatan tempel dipaku ke papan gabus, satu catatan per tips.', topics: ['Tips', 'Checklist'] },
-  { reel: REELS[4], name: 'Roblox Obby & Skits', pitch: 'Karakter Noob vs Pro di lintasan obby parkour, dilengkapi bubble chat Roblox, Robux R$, dan efek suara OOF!', topics: ['Obby Parkour', 'Noob vs Pro', 'Robux Drama'] },
+  { reel: REELS[9], name: 'Kinetic type', pitch: 'Kata-kata raksasa menghantam layar mengikuti suara. Paling cocok untuk opini dan quote.', topics: ['Opini', 'Motivasi', 'Quote'] },
+  { reel: REELS[14], name: 'Chat story', pitch: 'Cerita lewat layar chat: pesan masuk satu per satu, lengkap dengan "sedang mengetik".', topics: ['Drama teman', 'Mantan', 'Grup keluarga'] },
+  { reel: REELS[10], name: 'Top list', pitch: 'Hitung mundur dari nomor terbesar ke juara, dengan angka raksasa.', topics: ['Tips', 'Rekomendasi', 'Fakta'] },
+  { reel: REELS[11], name: 'Kuis', pitch: 'Pertanyaan, pilihan, timer, lalu jawaban dengan confetti. Penonton menebak di komentar.', topics: ['Trivia', 'Sains', 'Geografi'] },
+  { reel: REELS[17], name: 'Podcast clip', pitch: 'Potongan obrolan dua host dengan avatar menyala, waveform, dan caption besar.', topics: ['Talk show', 'Wawancara'] },
+  { reel: REELS[4], name: 'Komik', pitch: 'Panel ala webtoon yang bergulir, balon dialog, dan efek suara di momen kaget.', topics: ['Lucu', 'Slice of life'] },
+  { reel: REELS[6], name: 'Terminal', pitch: 'Layar terminal hijau yang menjawab masalah sehari-hari dengan gaya komputer.', topics: ['Tech', 'Mahasiswa', 'Kantor'] },
+  { reel: REELS[5], name: 'Versus', pitch: 'Layar terbelah dua, dua kubu adu argumen dengan skor yang terus bertambah.', topics: ['Debat', 'Pilihan', 'Selera'] },
+  { reel: REELS[15], name: 'Rute perjalanan', pitch: 'Peta ilustrasi dengan rute yang tergambar dan pin di setiap tempat.', topics: ['Travel', 'Kuliner', 'Road trip'] },
+  { reel: REELS[18], name: 'Resep / tutorial', pitch: 'Langkah demi langkah dengan kartu besar dan bar progres.', topics: ['Masak', 'DIY', 'Beres-beres'] },
+  { reel: REELS[19], name: 'Utas sosmed', pitch: 'Cerita sebagai utas postingan, jumlah suka naik terus.', topics: ['Storytime', 'Curhat'] },
+  { reel: REELS[12], name: 'Struk belanja', pitch: 'Struk tercetak baris demi baris, total dihitung otomatis.', topics: ['Keuangan', 'Belanja'] },
+  { reel: REELS[20], name: 'Retro VHS', pitch: 'Rekaman rumahan era 90-an: PLAY, jam berjalan, subtitle kuning.', topics: ['Nostalgia', 'Kenangan'] },
+  { reel: REELS[13], name: 'Papan catatan', pitch: 'Catatan tempel dipaku ke papan gabus, satu catatan per tips.', topics: ['Tips', 'Checklist'] },
+  { reel: REELS[0], name: 'Roblox Obby & Skits', pitch: 'Karakter Noob vs Pro di lintasan obby parkour, dilengkapi bubble chat Roblox, Robux R$, dan efek suara OOF!', topics: ['Obby Parkour', 'Noob vs Pro', 'Robux Drama'] },
 ];
 
 export const MOOD_SAMPLES: Record<MoodType, { line: string; verdict: string }> = {
