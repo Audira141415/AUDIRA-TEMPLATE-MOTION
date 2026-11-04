@@ -6,7 +6,13 @@
     "dev": "next dev -p 3788",
     "build": "next build",
     "start": "next start -p 3788",
-    "lint": "next lint"
+    "lint": "next lint",
+    "remotion:dev": "npm --prefix audira-skill-motion/starter run dev",
+    "remotion:smoke": "npm --prefix audira-skill-motion/starter run smoke",
+    "remotion:check": "node audira-skill-motion/starter/scripts/check-env.mjs",
+    "remotion:stills": "npm --prefix audira-skill-motion/starter run stills",
+    "remotion:vo": "npm --prefix audira-skill-motion/starter run vo",
+    "remotion:render": "npm --prefix audira-skill-motion/starter run render:final"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

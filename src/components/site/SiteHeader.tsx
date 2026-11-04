@@ -7,6 +7,7 @@ import { LogOut, Menu, ShieldCheck, X, Sparkles } from 'lucide-react';
 
 export const NAV_LINKS = [
   { href: '/#produk', label: 'Paket' },
+  { href: '/#remotion-3d', label: '3D Remotion' },
   { href: '/#hasil', label: 'Hasil video' },
   { href: '/#cara-kerja', label: 'Cara kerja' },
   { href: '/#bundle', label: 'Creator Lab' },

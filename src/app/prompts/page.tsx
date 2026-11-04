@@ -45,6 +45,7 @@ import {
 } from '@/lib/script-prompts';
 import { generateStoryboardFromIdea } from '@/lib/script-generator';
 import { FORMAT_CARDS } from '@/components/landing/reels';
+import { ALL_20_KITS, KitCatalogItem } from '@/components/landing/Remotion3DShowcase';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { PasteChecker } from '@/components/site/PasteChecker';
@@ -133,8 +134,10 @@ export default function PromptsPage() {
   const [isSynthesizing, setIsSynthesizing] = useState(false);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
-  // Dual-Pass Engine: 'script' (LLM Storyboard) vs 'visual' (Video AI Prompt for Kling/Runway/Midjourney/Sora)
-  const [promptTab, setPromptTab] = useState<'script' | 'visual'>('script');
+  // Dual-Pass Engine: 'script' (LLM Storyboard) vs 'visual' (Video AI Prompt) vs 'remotion3d' (Remotion 3D Engine)
+  const [promptTab, setPromptTab] = useState<'script' | 'visual' | 'remotion3d'>('script');
+  const [selected3DKitId, setSelected3DKitId] = useState<string>('buildforge');
+  const [copy3DStatus, setCopy3DStatus] = useState<string | null>(null);
   const [visualPlatform, setVisualPlatform] = useState<VideoAIPlatform>('kling');
   const [cameraMovement, setCameraMovement] = useState<CameraMovement>('drone_orbit');
   const [visualAesthetic, setVisualAesthetic] = useState<VisualAesthetic>('octane_3d_render');
@@ -630,7 +633,7 @@ export default function PromptsPage() {
         {/* 4. Generated Prompt Console & Action Bar (Dual-Pass Engine) */}
         <section className="mt-8 rounded-3xl border-2 border-line bg-card p-6 sm:p-8 shadow-xl">
           {/* Dual-Pass Tab Switcher */}
-          <div className="flex border-b border-line pb-4 mb-6 gap-3">
+          <div className="flex flex-wrap border-b border-line pb-4 mb-6 gap-3">
             <button
               type="button"
               onClick={() => setPromptTab('script')}
@@ -656,6 +659,21 @@ export default function PromptsPage() {
               <span>2. Visual Video Prompt (AI Video 9:16)</span>
               <span className="px-2 py-0.5 rounded-full bg-cyan-400/20 text-cyan-200 text-[10px] uppercase font-mono hidden sm:inline">
                 Kling / Runway / Sora
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setPromptTab('remotion3d')}
+              className={`px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm tracking-tight flex items-center gap-2 transition-all ${
+                promptTab === 'remotion3d'
+                  ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-md'
+                  : 'bg-tile border border-line text-dim hover:text-fg-2'
+              }`}
+            >
+              <Box className="w-4 h-4 text-amber-300" />
+              <span>3. Remotion 3D Engine</span>
+              <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-200 text-[10px] uppercase font-mono hidden sm:inline">
+                20 Signature 3D Kits
               </span>
             </button>
           </div>
@@ -732,7 +750,7 @@ export default function PromptsPage() {
                 </pre>
               </div>
             </div>
-          ) : (
+          ) : promptTab === 'visual' ? (
             /* TAB 2: VISUAL VIDEO AI PROMPT (KLING, RUNWAY, MIDJOURNEY, SORA) */
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
@@ -923,6 +941,128 @@ export default function PromptsPage() {
                   Buka Studio Live
                 </Link>
               </div>
+            </div>
+          ) : (
+            /* TAB 3: REMOTION 3D CINEMATIC PROMPTS */
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-ink font-bold text-xs">
+                    4C
+                  </span>
+                  <div>
+                    <h2 className="text-[20px] font-black tracking-[-0.02em] text-paper">
+                      Prompt Remotion 3D untuk Claude Code / Cursor
+                    </h2>
+                    <p className="text-xs text-dim">
+                      20 Signature 3D Kits · React Three Fiber + Three.js · Soft shadows & kamera terarah
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const currentKit = ALL_20_KITS.find((k: KitCatalogItem) => k.id === selected3DKitId) || ALL_20_KITS[0];
+                      await navigator.clipboard.writeText(currentKit.promptExample);
+                      setCopy3DStatus('Prompt 3D Tersalin!');
+                      setTimeout(() => setCopy3DStatus(null), 2000);
+                    }}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-accent px-4 py-2.5 text-xs font-black text-ink shadow-md hover:bg-orange-500 transition-transform active:translate-y-0.5"
+                  >
+                    {copy3DStatus ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    <span>{copy3DStatus ? copy3DStatus : 'Salin Prompt 3D'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 20 Kits Grid Selector */}
+              <div>
+                <label className="text-xs font-mono uppercase text-accent font-bold mb-3 block">
+                  Pilih dari 20 Gaya Sinematik 3D:
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2.5 max-h-[300px] overflow-y-auto p-1">
+                  {ALL_20_KITS.map((k: KitCatalogItem) => {
+                    const isSelected = selected3DKitId === k.id;
+                    return (
+                      <button
+                        key={k.id}
+                        type="button"
+                        onClick={() => setSelected3DKitId(k.id)}
+                        className={`p-2.5 rounded-xl border text-left transition-all flex flex-col gap-1 ${
+                          isSelected
+                            ? 'border-accent bg-accent/15 text-white ring-1 ring-accent'
+                            : 'border-line bg-card text-muted hover:border-line-strong hover:text-paper'
+                        }`}
+                      >
+                        <span className="font-mono text-xs font-black uppercase text-paper truncate">
+                          {k.name}
+                        </span>
+                        <span className="text-[10px] text-dim line-clamp-1 leading-tight">
+                          {k.character}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Selected 3D Kit Detail Card */}
+              {(() => {
+                const k = ALL_20_KITS.find((item: KitCatalogItem) => item.id === selected3DKitId) || ALL_20_KITS[0];
+                return (
+                  <div className="rounded-2xl border border-line bg-tile p-5 space-y-4">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="px-2.5 py-0.5 rounded bg-accent text-ink font-mono text-[10px] font-black uppercase">
+                            {k.name}
+                          </span>
+                          <span className="text-xs font-mono text-dim">
+                            Composition: <strong>{k.previewId}</strong>
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted mt-1">{k.character}</p>
+                      </div>
+
+                      <span className="text-xs font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 px-2.5 py-1 rounded-lg">
+                        Ready in audira-skill-motion/
+                      </span>
+                    </div>
+
+                    {/* Prompt Box */}
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-xs font-mono uppercase text-accent font-bold">
+                          Contoh Prompt Claude Code / Cursor:
+                        </span>
+                        <span className="text-[11px] text-dim">Tulis di terminal Claude</span>
+                      </div>
+                      <pre className="max-h-[140px] overflow-auto whitespace-pre-wrap rounded-xl border border-line bg-ink p-3.5 font-mono text-xs text-paper selection:bg-accent selection:text-ink">
+                        {k.promptExample}
+                      </pre>
+                    </div>
+
+                    {/* Render Commands Box */}
+                    <div className="pt-2 border-t border-line space-y-2">
+                      <span className="text-xs font-mono uppercase text-dim font-bold block">
+                        Perintah Terminal Render Headless:
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                        <div className="p-2.5 rounded-xl bg-ink border border-line flex items-center justify-between">
+                          <span className="text-cyan-400 truncate">npm run remotion:smoke</span>
+                          <span className="text-[10px] text-dim ml-2 shrink-0">Test Stills</span>
+                        </div>
+                        <div className="p-2.5 rounded-xl bg-ink border border-line flex items-center justify-between">
+                          <span className="text-emerald-400 truncate">npm run remotion:dev</span>
+                          <span className="text-[10px] text-dim ml-2 shrink-0">Studio Port 3000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           )}
         </section>

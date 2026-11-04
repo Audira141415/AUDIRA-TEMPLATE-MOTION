@@ -1,0 +1,35 @@
+# Node Dependencies
+node_modules/
+*/node_modules/
+
+# Remotion & Build Outputs
+out/
+*/out/
+build/
+*/build/
+dist/
+*/dist/
+.gl-mode
+.remotion/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment & Local Secrets
+.env
+.env.local
+.env.*.local
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Settings
+.vscode/
+.idea/
+

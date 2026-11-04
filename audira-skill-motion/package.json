@@ -1,0 +1,43 @@
+{
+  "name": "audira-skill-motion",
+  "version": "3.0.0",
+  "private": true,
+  "description": "The Premier Autonomous 3D Cinematic Motion Director for Claude Code & Remotion. By Agus Dwi Rianto (AUDIRA MDA).",
+  "author": "Agus Dwi Rianto <agus@audira.dev>",
+  "license": "Proprietary",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "workspaces": [
+    "starter"
+  ],
+  "scripts": {
+    "setup": "npm install && cd starter && npm install",
+    "dev": "npm --prefix starter run dev",
+    "check-env": "node starter/scripts/check-env.mjs",
+    "smoke": "npm --prefix starter run smoke",
+    "stills": "npm --prefix starter run stills",
+    "vo": "npm --prefix starter run vo",
+    "render:final": "npm --prefix starter run render:final",
+    "typecheck": "npm --prefix starter run typecheck"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@remotion/cli": "4.0.539",
+    "@remotion/google-fonts": "4.0.539",
+    "@remotion/three": "4.0.539",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.539",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "@types/react": "19.2.7",
+    "@types/three": "0.186.0",
+    "typescript": "5.9.3"
+  }
+}
+
