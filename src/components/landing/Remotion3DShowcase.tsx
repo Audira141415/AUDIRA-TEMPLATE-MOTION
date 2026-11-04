@@ -33,48 +33,48 @@ interface SignatureCard {
 
 const SIGNATURE_CARDS: SignatureCard[] = [
   {
-    id: 'bunker',
+    id: 'buildforge',
     kit: 'BUILDFORGE',
     badge: 'ARCHITECTURE 3D',
-    title: 'Bunker Rumah Kaca 3D',
-    quote: 'tanah: rumah dibelah mengungkap bunker hidroponik rahasia.',
+    title: 'Perakitan Rumah Modern 3D',
+    quote: 'animasi perakitan bertahap: pondasi struktur, rangka baja, hingga finishing kaca modern.',
     image: '/3d-kits/buildforge.jpg',
-    tags: ['Architecture 3D', 'Underground Bunker', 'Step by Step'],
-    command: 'npx remotion still starter/src/index.ts ShowcasePreview out/bunker.png',
-    prompt: '/audira-motion Rumah dua lantai dibelah vertikal, tanah terbuka memperlihatkan bunker hidroponik rahasia dan instalasi pipa air modern.'
+    tags: ['Architecture 3D', 'Modular Assembly', 'Pondasi Baja'],
+    command: 'npx remotion still starter/src/index.ts BuildforgePreview out/buildforge.png',
+    prompt: '/audira-motion Rumah dua lantai dirakit bertahap dari pondasi semen, tiang baja ringan, hingga instalasi kaca panorama modern.'
   },
   {
-    id: 'kentut',
-    kit: 'WORLDFORGE',
-    badge: 'CROWD PHYSICS',
-    title: 'Kentut 8.2 Miliar Manusia',
-    quote: 'simulasi fisika jutaan orang berkumpul di tebing pantai atmosferik raksasa.',
-    image: '/3d-kits/worldforge.jpg',
-    tags: ['Crowd Physics', 'Global What-If', 'Disaster Scale'],
-    command: 'npx remotion still starter/src/index.ts ShowcasePreview out/crowd.png',
-    prompt: '/audira-motion Simulasi kerumunan jutaan manusia di tepi pantai atmosferik, awan gas raksasa memicu gelombang kejut fisika.'
+    id: 'precision',
+    kit: 'PRECISION',
+    badge: 'PRODUCT CMF 3D',
+    title: 'Exploded View Jam Titanium',
+    quote: 'iklan produk mewah komersial: roda gigi mekanik dan casing titanium terurai melayang presisi.',
+    image: '/3d-kits/precision.jpg',
+    tags: ['Exploded View', 'CMF Titanium', 'Studio Lighting'],
+    command: 'npx remotion still starter/src/index.ts PrecisionPreview out/precision.png',
+    prompt: '/audira-motion Jam tangan kronograf titanium mewah 3D meledak terurai memperlihatkan susunan roda gigi mesin dan dial safir.'
   },
   {
-    id: 'zombie',
-    kit: 'VOXELVERSE',
-    badge: 'SURVIVAL BASE',
-    title: 'Hari ke-42 Zombie Farm',
-    quote: 'radar pertahanan pangkalan melingkar di tengah hutan pohon pelindung.',
-    image: '/3d-kits/voxelverse.jpg',
-    tags: ['Survival Base', 'Radar Defense', 'Day by Day'],
-    command: 'npx remotion still starter/src/index.ts ShowcasePreview out/zombie.png',
-    prompt: '/audira-motion Pangkalan survival voxel di tengah hutan, radar pertahanan menyala melingkar dengan perimeter dinding pelindung.'
+    id: 'pixelstory',
+    kit: 'PIXELSTORY',
+    badge: 'CINEMATIC 2.5D',
+    title: 'Mercusuar Badai Malam 2.5D',
+    quote: 'sinematik pixel-art atmosferik: sorotan lampu mercusuar menembus badai ombak malam hari.',
+    image: '/3d-kits/pixelstory.jpg',
+    tags: ['Pixel Art 2.5D', 'Point Lighting', 'Badai Laut'],
+    command: 'npx remotion still starter/src/index.ts PixelstoryPreview out/pixelstory.png',
+    prompt: '/audira-motion Mercusuar pixel-art di atas tebing karang saat badai malam, lampu sorot berputar dengan partikel hujan dinamis.'
   },
   {
-    id: 'khatulistiwa',
-    kit: 'WORLDFORGE',
-    badge: 'PLANETARY 3D',
-    title: 'Mengelilingi Khatulistiwa',
-    quote: 'Perjalanan 3D kosmis sinematik: planet bumi berputar megah di ruang hampa...',
-    image: '/3d-kits/worldforge-roma.jpg',
-    tags: ['Planetary Science', 'Space Odyssey', 'Cinematic Earth'],
-    command: 'npx remotion still starter/src/index.ts ShowcasePreview out/earth.png',
-    prompt: '/audira-motion Planet bumi 3D berputar megah di ruang angkasa, garis atmosfer berpendar biru saat matahari terbit di atas khatulistiwa.'
+    id: 'cyberforge',
+    kit: 'CYBERFORGE',
+    badge: 'SCI-FI HOLOGRAM 3D',
+    title: 'Hologram Inti Kuantum AI',
+    quote: 'proyeksi telemetri sci-fi 3D: cincin HUD berputar mengelilingi inti reaktor kuantum.',
+    image: '/3d-kits/showcase_hero.png',
+    tags: ['Sci-Fi Hologram', 'HUD Telemetry', 'Grid Neon'],
+    command: 'npx remotion still starter/src/index.ts CyberforgePreview out/cyberforge.png',
+    prompt: '/audira-motion Inti reaktor AI kuantum holografik 3D melayang di ruang gelap dengan cincin data telemetri berputar cepat.'
   }
 ];
 
@@ -359,10 +359,10 @@ export const Remotion3DShowcase: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/35" />
 
-                  {/* Play / Inspect Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
-                    <span className="inline-flex size-13 items-center justify-center rounded-full bg-accent/90 text-ink shadow-xl shadow-orange-950/50 backdrop-blur-sm transition-transform duration-200 group-hover:scale-110">
-                      <Box className="w-6 h-6 stroke-[2.2]" />
+                  {/* Play / Inspect Overlay matching user mockup */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-85 group-hover:opacity-100 transition-opacity">
+                    <span className="inline-flex size-14 items-center justify-center rounded-full border border-white/40 bg-black/40 text-white backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:border-white group-hover:bg-accent group-hover:text-ink">
+                      <Play className="w-6 h-6 fill-current translate-x-0.5" />
                     </span>
                   </div>
 
@@ -396,25 +396,25 @@ export const Remotion3DShowcase: React.FC = () => {
                     {card.title}
                   </h4>
 
-                  {/* Quick Copy / Action Link */}
+                  {/* Quick Action Link: "Buat yang seperti ini ->" matching screenshot */}
                   <div className="mt-3 flex items-center justify-between border-t border-line-soft pt-3">
+                    <Link
+                      href={`/studio?kit=${card.kit.toLowerCase()}&prompt=${encodeURIComponent(card.prompt)}`}
+                      className="group/link inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-fg-2 hover:text-accent transition-colors"
+                    >
+                      <span>Buat yang seperti ini</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+                    </Link>
+
                     <button
                       type="button"
                       onClick={() => handleCopyPrompt(card.prompt, card.id)}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-fg-2 hover:text-accent transition-colors"
-                      title="Salin prompt 3D siap pakai"
+                      className="inline-flex items-center gap-1 text-[11px] font-medium text-muted hover:text-accent transition-colors"
+                      title="Salin prompt 3D"
                     >
-                      {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-accent" />}
-                      <span>{isCopied ? 'Tersalin ✓' : 'Salin Prompt 3D'}</span>
+                      {isCopied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-dim hover:text-accent" />}
+                      <span className="hidden sm:inline">{isCopied ? 'Tersalin' : 'Prompt'}</span>
                     </button>
-
-                    <Link
-                      href={`/prompts?kit=${card.kit.toLowerCase()}`}
-                      className="group/link inline-flex items-center gap-1 text-xs font-semibold text-muted hover:text-paper"
-                    >
-                      <span>Detail</span>
-                      <ArrowRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5" />
-                    </Link>
                   </div>
                 </div>
               </div>

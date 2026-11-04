@@ -137,7 +137,7 @@ Engine 3D Remotion diciptakan khusus untuk kebutuhan video motion 3D berkualitas
 
 | No | Nama Kit | Grup Kategori | Karakter Visual 3D | Contoh Prompt Siap Pakai |
 |:---:|:---|:---|:---|:---|
-| 01 | **BUILDFORGE** | Arsitektur | Bangunan dirakit tahap demi tahap dari tanah, pondasi, struktur baja, hingga interior cutaway. | `"/audira-motion Rumah dua lantai dibelah vertikal mengungkap bunker hidroponik rahasia dan instalasi pipa modern."` |
+| 01 | **BUILDFORGE** | Arsitektur | Bangunan dirakit tahap demi tahap dari tanah, pondasi, struktur baja, hingga interior modern. | `"/audira-motion Rumah dua lantai dirakit bertahap dari pondasi semen, struktur baja ringan, hingga instalasi kaca panorama modern."` |
 | 02 | **WORLDFORGE** | Kosmik | Bola bumi 3D berputar megah di ruang hampa, atmosfer pendar biru, simulasi kerumunan, dan fisika skala global. | `"/audira-motion Simulasi fisika jutaan orang berkumpul di tebing pantai atmosferik raksasa dengan gelombang kejut."` |
 | 03 | **VOXELVERSE** | Kosmik | Miniatur dunia 3D dari balok voxel, pangkalan survival, radar pertahanan perimeter, dan cuaca dinamis. | `"/audira-motion Pangkalan survival voxel di tengah hutan, radar pertahanan menyala melingkar dengan dinding pelindung."` |
 | 04 | **PRECISION** | Sains | Iklan produk mewah industri / exploded view titanium, roda gigi meledak terurai lalu menyatu presisi. | `"/audira-motion Iklan 3D jam tangan mekanik mewah, close-up titanium dan roda gigi meledak terurai lalu menyatu lagi."` |
@@ -334,7 +334,7 @@ npm run remotion:smoke
 f:/AUDIRA-TEMPLATE-MOTION/
 ├── audira-skill-motion/             # ENGINE 2: 3D REMOTION CINEMATIC ENGINE
 │   ├── kits/                        # 20 Signature 3D Kits
-│   │   ├── buildforge/              # 01. Konstruksi bertahap & bunker cutaway
+│   │   ├── buildforge/              # 01. Konstruksi & perakitan arsitektur bertahap
 │   │   ├── worldforge/              # 02. Fisika bola bumi & kerumunan atmosfer
 │   │   ├── voxelverse/              # 03. Voxel sandbox & radar pertahanan base
 │   │   ├── precision/               # 04. Industrial exploded view luxury product
