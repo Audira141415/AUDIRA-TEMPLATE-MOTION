@@ -2,11 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  Layout, 
   Sparkles, 
   DollarSign, 
   Video, 
-  MessageSquare, 
   HelpCircle, 
   Megaphone, 
   Eye, 
@@ -23,10 +21,11 @@ import {
   Star,
   Zap,
   Clock,
-  Layers,
-  Phone,
-  CreditCard,
-  Sliders
+  Sliders,
+  Smartphone,
+  Monitor,
+  CheckCircle2,
+  X
 } from 'lucide-react';
 import { LandingConfig, TestimonialItem, FaqItem, DEFAULT_LANDING_CONFIG } from '@/types/landing';
 
@@ -34,10 +33,13 @@ type SubTab = 'hero' | 'pricing' | 'dfy' | 'testimonials' | 'faq' | 'contact' | 
 
 export const LandingPageManagerTab: React.FC = () => {
   const [config, setConfig] = useState<LandingConfig | null>(null);
+  const [initialConfig, setInitialConfig] = useState<LandingConfig | null>(null);
   const [activeSubTab, setActiveSubTab] = useState<SubTab>('hero');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<{ tone: 'ok' | 'error'; text: string } | null>(null);
+  const [showLivePreview, setShowLivePreview] = useState(false);
+  const [previewDevice, setPreviewDevice] = useState<'desktop' | 'mobile'>('desktop');
 
   const fetchConfig = async () => {
     setLoading(true);
@@ -46,6 +48,7 @@ export const LandingPageManagerTab: React.FC = () => {
       const data = await res.json();
       if (res.ok && data.config) {
         setConfig(data.config);
+        setInitialConfig(data.config);
       }
     } catch (e) {
       console.error('Error fetching landing config:', e);
@@ -57,6 +60,10 @@ export const LandingPageManagerTab: React.FC = () => {
   useEffect(() => {
     fetchConfig();
   }, []);
+
+  const hasUnsavedChanges = Boolean(
+    config && initialConfig && JSON.stringify(config) !== JSON.stringify(initialConfig)
+  );
 
   const handleSave = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -72,6 +79,7 @@ export const LandingPageManagerTab: React.FC = () => {
       });
       const data = await res.json();
       if (res.ok) {
+        setInitialConfig(config);
         setToast({ tone: 'ok', text: data.message || 'Perubahan landing page berhasil disimpan dan langsung aktif!' });
       } else {
         setToast({ tone: 'error', text: data.error || 'Gagal menyimpan perubahan.' });
@@ -80,6 +88,13 @@ export const LandingPageManagerTab: React.FC = () => {
       setToast({ tone: 'error', text: 'Koneksi ke server gagal. Coba lagi.' });
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleDiscardChanges = () => {
+    if (initialConfig) {
+      setConfig(JSON.parse(JSON.stringify(initialConfig)));
+      setToast({ tone: 'ok', text: 'Perubahan dibatalkan, kembali ke konfigurasi tersimpan.' });
     }
   };
 
@@ -97,6 +112,7 @@ export const LandingPageManagerTab: React.FC = () => {
       const data = await res.json();
       if (res.ok && data.config) {
         setConfig(data.config);
+        setInitialConfig(data.config);
         setToast({ tone: 'ok', text: 'Landing page berhasil direset ke pengaturan default!' });
       }
     } catch {
@@ -175,34 +191,52 @@ export const LandingPageManagerTab: React.FC = () => {
     );
   }
 
+  const activeSectionCount = Object.values(config.sectionVisibility).filter(Boolean).length;
+
   return (
     <div className="space-y-6 font-display">
       {/* Top Banner Control & Save Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-3xl border border-line bg-card shadow-2xl">
-        <div>
-          <div className="inline-flex items-center gap-2 mb-1">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 sm:p-6 rounded-3xl border border-line bg-gradient-to-br from-card via-[#161514] to-ink shadow-2xl">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-2">
             <span className="flex size-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
-              AUDIRA LANDING PAGE CMS
+              AUDIRA MASTER CMS V3.0
+            </span>
+            <span className="rounded-full bg-tile border border-line px-2 py-0.5 text-[10px] font-mono text-muted">
+              {activeSectionCount}/10 Section Aktif
             </span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-black text-paper">
+          <h3 className="text-xl sm:text-2xl font-black text-paper tracking-tight">
             Pusat Kendali Landing Page &amp; Tampilan Publik
           </h3>
-          <p className="text-xs text-muted">
-            Kelola teks hero, paket harga, jasa terima beres, testimoni pembeli, FAQ, hingga saklar visibilitas.
+          <p className="text-xs text-muted max-w-xl">
+            Kelola judul hero, harga 3 lisensi, jasa terima beres (DFY), review pembeli, accordion FAQ, dan saklar visibilitas.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={() => setShowLivePreview(!showLivePreview)}
+            className={`py-2.5 px-3.5 text-xs font-bold rounded-xl border transition-all inline-flex items-center gap-1.5 ${
+              showLivePreview
+                ? 'bg-accent text-ink border-accent shadow-md'
+                : 'border-line bg-tile text-muted hover:text-paper hover:border-line-strong'
+            }`}
+          >
+            {showLivePreview ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5 text-accent" />}
+            <span>{showLivePreview ? 'Tutup Preview' : 'Live Preview'}</span>
+          </button>
+
           <a
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline py-2.5 px-3.5 text-xs font-semibold inline-flex items-center gap-1.5"
+            className="btn-outline py-2.5 px-3 text-xs font-semibold inline-flex items-center gap-1.5"
             title="Buka Landing Page di Tab Baru"
           >
-            <span>Buka Website</span>
+            <span>Buka Web</span>
             <ExternalLink className="w-3.5 h-3.5 text-dim" />
           </a>
 
@@ -239,38 +273,108 @@ export const LandingPageManagerTab: React.FC = () => {
         </div>
       </div>
 
+      {/* Toast Alert */}
       {toast && (
         <div
-          className={`p-4 rounded-2xl border text-xs font-bold flex items-center justify-between gap-2 shadow-lg ${
+          className={`p-4 rounded-2xl border text-xs font-bold flex items-center justify-between gap-2 shadow-lg animate-fade-in ${
             toast.tone === 'ok'
-              ? 'bg-emerald-950/50 border-emerald-800 text-emerald-300'
-              : 'bg-red-950/50 border-red-800 text-red-300'
+              ? 'bg-emerald-950/60 border-emerald-800 text-emerald-300'
+              : 'bg-red-950/60 border-red-800 text-red-300'
           }`}
         >
-          <div className="flex items-center gap-2">
-            {toast.tone === 'ok' ? <Check className="w-4 h-4 text-emerald-400" /> : <AlertCircle className="w-4 h-4 text-red-400" />}
+          <div className="flex items-center gap-2.5">
+            {toast.tone === 'ok' ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            ) : (
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+            )}
             <span>{toast.text}</span>
           </div>
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="text-dim hover:text-paper text-xs"
+            className="text-dim hover:text-paper text-xs p-1"
           >
-            Tutup
+            <X className="w-4 h-4" />
           </button>
+        </div>
+      )}
+
+      {/* Embedded Live Preview Modal / Drawer */}
+      {showLivePreview && (
+        <div className="rounded-3xl border-2 border-accent/40 bg-ink p-4 space-y-3 shadow-2xl animate-fade-in">
+          <div className="flex items-center justify-between border-b border-line pb-3">
+            <div className="flex items-center gap-2">
+              <span className="flex size-2 rounded-full bg-accent animate-ping" />
+              <span className="font-bold text-paper text-xs flex items-center gap-1.5">
+                <Eye className="w-3.5 h-3.5 text-accent" />
+                Live Preview Tampilan Publik
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <div className="flex items-center bg-tile rounded-xl border border-line p-1 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setPreviewDevice('desktop')}
+                  className={`px-2.5 py-1 rounded-lg inline-flex items-center gap-1 transition-all ${
+                    previewDevice === 'desktop' ? 'bg-accent text-ink font-bold' : 'text-muted hover:text-paper'
+                  }`}
+                >
+                  <Monitor className="w-3.5 h-3.5" />
+                  <span>Desktop</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPreviewDevice('mobile')}
+                  className={`px-2.5 py-1 rounded-lg inline-flex items-center gap-1 transition-all ${
+                    previewDevice === 'mobile' ? 'bg-accent text-ink font-bold' : 'text-muted hover:text-paper'
+                  }`}
+                >
+                  <Smartphone className="w-3.5 h-3.5" />
+                  <span>Mobile 9:16</span>
+                </button>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowLivePreview(false)}
+                className="text-muted hover:text-paper p-1.5 rounded-lg hover:bg-tile"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-center bg-zinc-950/80 p-2 rounded-2xl border border-line-soft overflow-hidden">
+            <div
+              className={`transition-all duration-300 overflow-hidden rounded-2xl border border-line shadow-2xl bg-black ${
+                previewDevice === 'mobile' ? 'w-[390px] h-[720px]' : 'w-full h-[620px]'
+              }`}
+            >
+              <iframe
+                src="/"
+                title="AUDIRA Live Landing Page Preview"
+                className="w-full h-full border-0"
+              />
+            </div>
+          </div>
+          <p className="text-[11px] text-muted text-center">
+            Tips: Simpan perubahan terlebih dahulu untuk melihat pembaruan teks dan harga di live preview.
+          </p>
         </div>
       )}
 
       {/* Sub-Tab Navigation Bar */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 bg-ink p-1.5 rounded-2xl border border-line text-xs font-bold">
         {[
-          { id: 'hero' as const, label: 'Hero & Headline', icon: <Sparkles className="w-3.5 h-3.5" /> },
-          { id: 'pricing' as const, label: 'Paket Lisensi 3D', icon: <DollarSign className="w-3.5 h-3.5" /> },
-          { id: 'dfy' as const, label: 'Jasa Terima Beres (DFY)', icon: <Video className="w-3.5 h-3.5" /> },
-          { id: 'testimonials' as const, label: 'Testimoni & Review', icon: <Star className="w-3.5 h-3.5" /> },
-          { id: 'faq' as const, label: 'FAQ Accordion', icon: <HelpCircle className="w-3.5 h-3.5" /> },
-          { id: 'contact' as const, label: 'Kontak & Banner Promo', icon: <Megaphone className="w-3.5 h-3.5" /> },
-          { id: 'visibility' as const, label: 'Visibilitas Section', icon: <Sliders className="w-3.5 h-3.5" /> },
+          { id: 'hero' as const, label: 'Hero & Headline', count: null, icon: <Sparkles className="w-3.5 h-3.5" /> },
+          { id: 'pricing' as const, label: 'Paket Lisensi', count: '3 Tier', icon: <DollarSign className="w-3.5 h-3.5" /> },
+          { id: 'dfy' as const, label: 'Jasa Terima Beres', count: '3 Paket', icon: <Video className="w-3.5 h-3.5" /> },
+          { id: 'testimonials' as const, label: 'Testimoni', count: `${config.testimonials.length}`, icon: <Star className="w-3.5 h-3.5" /> },
+          { id: 'faq' as const, label: 'FAQ Accordion', count: `${config.faqs.length}`, icon: <HelpCircle className="w-3.5 h-3.5" /> },
+          { id: 'contact' as const, label: 'Kontak & Promo', count: null, icon: <Megaphone className="w-3.5 h-3.5" /> },
+          { id: 'visibility' as const, label: 'Visibilitas Section', count: `${activeSectionCount}/10`, icon: <Sliders className="w-3.5 h-3.5" /> },
         ].map((st) => (
           <button
             key={st.id}
@@ -284,25 +388,32 @@ export const LandingPageManagerTab: React.FC = () => {
           >
             {st.icon}
             <span>{st.label}</span>
+            {st.count && (
+              <span className={`px-1.5 py-0.2 rounded-full font-mono text-[9px] ${
+                activeSubTab === st.id ? 'bg-black/30 text-ink' : 'bg-tile border border-line text-dim'
+              }`}>
+                {st.count}
+              </span>
+            )}
           </button>
         ))}
       </div>
 
       {/* SUB-TAB 1: HERO & HEADLINE */}
       {activeSubTab === 'hero' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-line pb-4">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
             <div>
               <h4 className="font-bold text-base text-paper flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-accent" />
                 <span>Pengaturan Bagian Atas (Hero Section)</span>
               </h4>
               <p className="text-xs text-muted">
-                Atur headline utama, kalimat pemanis, tombol aksi utama, dan kotak generator ide.
+                Atur headline utama, sorotan warna oranye, paragraf deskripsi, tombol CTA, dan kotak generator ide.
               </p>
             </div>
             
-            <label className="flex items-center gap-2 cursor-pointer text-xs">
+            <label className="flex items-center gap-2 cursor-pointer text-xs self-start sm:self-center">
               <span className="text-dim">Generator Ide Cepat:</span>
               <input
                 type="checkbox"
@@ -452,11 +563,11 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
 
               {/* Preview Box */}
-              <div className="p-4 rounded-2xl bg-ink border border-line-soft">
+              <div className="p-4 rounded-2xl bg-ink border border-line-soft shadow-inner">
                 <span className="font-mono text-[10px] text-accent uppercase font-bold block mb-1">
                   Preview Headline:
                 </span>
-                <p className="text-sm font-bold text-white leading-snug">
+                <p className="text-base font-bold text-white leading-snug">
                   {config.hero.titleLine1}{' '}
                   <span className="text-accent">{config.hero.titleHighlight}</span>
                 </p>
@@ -466,25 +577,27 @@ export const LandingPageManagerTab: React.FC = () => {
         </div>
       )}
 
-      {/* SUB-TAB 2: PRICING TIERS (SOURCE CODE) */}
+      {/* SUB-TAB 2: PRICING TIERS */}
       {activeSubTab === 'pricing' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
           <div className="border-b border-line pb-4">
             <h4 className="font-bold text-base text-paper flex items-center gap-2">
               <DollarSign className="w-4 h-4 text-accent" />
               <span>Manajemen Harga Lisensi Source Code (#produk)</span>
             </h4>
             <p className="text-xs text-muted">
-              Ubah harga diskon, harga coret, nama paket, dan badge untuk 3 tingkatan lisensi komersial.
+              Ubah harga diskon, harga coret, nama paket, dan tagline untuk 3 tingkatan lisensi komersial.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
             {/* 1. Starter */}
-            <div className="p-4 rounded-2xl bg-tile border border-line space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-line space-y-3 shadow-md">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] font-bold text-dim uppercase">Tier 1</span>
-                <span className="text-[10px] text-accent font-bold">{config.pricingTiers.starter.badge}</span>
+                <span className="text-[10px] text-accent font-bold px-2 py-0.5 rounded bg-accent/10 border border-accent/30">
+                  {config.pricingTiers.starter.badge}
+                </span>
               </div>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Nama Paket</label>
@@ -498,12 +611,12 @@ export const LandingPageManagerTab: React.FC = () => {
                       starter: { ...config.pricingTiers.starter, name: e.target.value }
                     }
                   })}
-                  className="w-full rounded-xl border border-line bg-ink px-3 py-1.5 text-paper font-bold"
+                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-paper font-bold"
                 />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-muted mb-1 text-[10px]">Harga (Rp)</label>
+                  <label className="block text-muted mb-1 text-[10px]">Harga Jual</label>
                   <input
                     type="text"
                     value={config.pricingTiers.starter.price}
@@ -535,8 +648,8 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Tagline / Deskripsi Singkat</label>
-                <input
-                  type="text"
+                <textarea
+                  rows={2}
                   value={config.pricingTiers.starter.tagline}
                   onChange={(e) => setConfig({
                     ...config,
@@ -551,10 +664,12 @@ export const LandingPageManagerTab: React.FC = () => {
             </div>
 
             {/* 2. Master */}
-            <div className="p-4 rounded-2xl bg-tile border border-cyan-800/60 space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-cyan-800/60 space-y-3 shadow-md">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] font-bold text-cyan-400 uppercase">Tier 2</span>
-                <span className="text-[10px] text-cyan-400 font-bold">{config.pricingTiers.master.badge}</span>
+                <span className="text-[10px] text-cyan-400 font-bold px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-800/50">
+                  {config.pricingTiers.master.badge}
+                </span>
               </div>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Nama Paket</label>
@@ -568,12 +683,12 @@ export const LandingPageManagerTab: React.FC = () => {
                       master: { ...config.pricingTiers.master, name: e.target.value }
                     }
                   })}
-                  className="w-full rounded-xl border border-line bg-ink px-3 py-1.5 text-cyan-300 font-bold"
+                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-cyan-300 font-bold"
                 />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-muted mb-1 text-[10px]">Harga (Rp)</label>
+                  <label className="block text-muted mb-1 text-[10px]">Harga Jual</label>
                   <input
                     type="text"
                     value={config.pricingTiers.master.price}
@@ -605,8 +720,8 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Tagline / Deskripsi Singkat</label>
-                <input
-                  type="text"
+                <textarea
+                  rows={2}
                   value={config.pricingTiers.master.tagline}
                   onChange={(e) => setConfig({
                     ...config,
@@ -621,10 +736,12 @@ export const LandingPageManagerTab: React.FC = () => {
             </div>
 
             {/* 3. Creator Lab */}
-            <div className="p-4 rounded-2xl bg-tile border border-accent/60 space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-accent/60 space-y-3 shadow-md">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] font-bold text-accent uppercase">Tier 3 (Ultimate)</span>
-                <span className="text-[10px] text-accent font-bold">{config.pricingTiers.lab.badge}</span>
+                <span className="text-[10px] text-accent font-bold px-2 py-0.5 rounded bg-orange-950/40 border border-orange-800/50">
+                  {config.pricingTiers.lab.badge}
+                </span>
               </div>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Nama Paket</label>
@@ -638,12 +755,12 @@ export const LandingPageManagerTab: React.FC = () => {
                       lab: { ...config.pricingTiers.lab, name: e.target.value }
                     }
                   })}
-                  className="w-full rounded-xl border border-line bg-ink px-3 py-1.5 text-accent font-bold"
+                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-accent font-bold"
                 />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-muted mb-1 text-[10px]">Harga (Rp)</label>
+                  <label className="block text-muted mb-1 text-[10px]">Harga Jual</label>
                   <input
                     type="text"
                     value={config.pricingTiers.lab.price}
@@ -675,8 +792,8 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Tagline / Deskripsi Singkat</label>
-                <input
-                  type="text"
+                <textarea
+                  rows={2}
                   value={config.pricingTiers.lab.tagline}
                   onChange={(e) => setConfig({
                     ...config,
@@ -695,20 +812,20 @@ export const LandingPageManagerTab: React.FC = () => {
 
       {/* SUB-TAB 3: JASA TERIMA BERES (DFY) */}
       {activeSubTab === 'dfy' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
           <div className="border-b border-line pb-4">
             <h4 className="font-bold text-base text-paper flex items-center gap-2">
               <Video className="w-4 h-4 text-emerald-400" />
-              <span>Manajemen Jasa Terima Beres (#jasa)</span>
+              <span>Manajemen Jasa Terima Beres DFY (#jasa)</span>
             </h4>
             <p className="text-xs text-muted">
-              Sesuaikan harga, teks tombol, SLA, dan keterangan hemat untuk 3 kartu penawaran DFY Agency.
+              Sesuaikan harga, teks tombol WhatsApp, SLA pengerjaan, dan catatan hemat untuk 3 kartu penawaran DFY Agency.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
             {/* Single */}
-            <div className="p-4 rounded-2xl bg-tile border border-line space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-line space-y-3">
               <span className="font-mono text-[10px] text-accent uppercase font-bold block">1. Paket Satuan</span>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Harga Jual</label>
@@ -758,7 +875,7 @@ export const LandingPageManagerTab: React.FC = () => {
             </div>
 
             {/* Bundle 5 */}
-            <div className="p-4 rounded-2xl bg-tile border border-[#ff6a2a] space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-[#ff6a2a] space-y-3 shadow-lg shadow-orange-950/20">
               <span className="font-mono text-[10px] text-[#ff6a2a] uppercase font-bold block">2. Paket 5 Video (Best Seller)</span>
               <div className="grid grid-cols-2 gap-2">
                 <div>
@@ -825,7 +942,7 @@ export const LandingPageManagerTab: React.FC = () => {
             </div>
 
             {/* Retainer */}
-            <div className="p-4 rounded-2xl bg-tile border border-purple-800/60 space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-purple-800/60 space-y-3">
               <span className="font-mono text-[10px] text-purple-400 uppercase font-bold block">3. Monthly Retainer</span>
               <div>
                 <label className="block text-muted mb-1 font-semibold">Harga / Bulan</label>
@@ -879,15 +996,15 @@ export const LandingPageManagerTab: React.FC = () => {
 
       {/* SUB-TAB 4: TESTIMONIALS & TRUST STATS */}
       {activeSubTab === 'testimonials' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
             <div>
               <h4 className="font-bold text-base text-paper flex items-center gap-2">
                 <Star className="w-4 h-4 text-amber-400" />
-                <span>Testimoni Klien &amp; 4 Angka Statistik Trust (#testimoni)</span>
+                <span>Testimoni Kreator &amp; Angka Bukti Sosial (#testimoni)</span>
               </h4>
               <p className="text-xs text-muted">
-                Tambahkan review asli pembeli lisensi dan sesuaikan angka pembuktian kualitas.
+                Tambahkan review asli dari pembeli lisensi atau klien jasa untuk membangun reputasi tinggi.
               </p>
             </div>
 
@@ -897,80 +1014,73 @@ export const LandingPageManagerTab: React.FC = () => {
               className="btn-outline py-2 px-3.5 text-xs font-bold inline-flex items-center gap-1.5 self-start"
             >
               <Plus className="w-3.5 h-3.5 text-accent" />
-              <span>Tambah Testimoni Baru</span>
+              <span>Tambah Review Baru</span>
             </button>
           </div>
 
-          {/* 4 Trust Stats Matrix */}
+          {/* 4 Trust Stats Bar */}
           <div>
-            <span className="font-mono text-xs uppercase font-bold text-accent block mb-3">
-              4 Angka Statistik Trust:
-            </span>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+            <h5 className="font-bold text-xs uppercase font-mono text-dim mb-3">
+              4 Angka Pembuktian (Trust Cards)
+            </h5>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
               {config.trustStats.map((stat, sIdx) => (
-                <div key={sIdx} className="p-3.5 rounded-2xl bg-tile border border-line space-y-2">
-                  <div>
-                    <label className="block text-[10px] text-dim font-mono">Nilai Angka</label>
-                    <input
-                      type="text"
-                      value={stat.value}
-                      onChange={(e) => {
-                        const nextStats = [...config.trustStats];
-                        nextStats[sIdx].value = e.target.value;
-                        setConfig({ ...config, trustStats: nextStats });
-                      }}
-                      className="w-full rounded-lg border border-line bg-ink px-2.5 py-1 text-accent font-bold font-mono text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-dim font-mono">Label Judul</label>
-                    <input
-                      type="text"
-                      value={stat.label}
-                      onChange={(e) => {
-                        const nextStats = [...config.trustStats];
-                        nextStats[sIdx].label = e.target.value;
-                        setConfig({ ...config, trustStats: nextStats });
-                      }}
-                      className="w-full rounded-lg border border-line bg-ink px-2.5 py-1 text-paper font-semibold"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-dim font-mono">Subteks</label>
-                    <input
-                      type="text"
-                      value={stat.desc}
-                      onChange={(e) => {
-                        const nextStats = [...config.trustStats];
-                        nextStats[sIdx].desc = e.target.value;
-                        setConfig({ ...config, trustStats: nextStats });
-                      }}
-                      className="w-full rounded-lg border border-line bg-ink px-2.5 py-1 text-muted text-[11px]"
-                    />
-                  </div>
+                <div key={sIdx} className="p-3.5 rounded-xl bg-tile border border-line space-y-2">
+                  <input
+                    type="text"
+                    value={stat.value}
+                    onChange={(e) => {
+                      const next = [...config.trustStats];
+                      next[sIdx].value = e.target.value;
+                      setConfig({ ...config, trustStats: next });
+                    }}
+                    className="w-full rounded-lg border border-line bg-ink px-2 py-1 text-accent font-bold font-mono text-sm"
+                  />
+                  <input
+                    type="text"
+                    value={stat.label}
+                    onChange={(e) => {
+                      const next = [...config.trustStats];
+                      next[sIdx].label = e.target.value;
+                      setConfig({ ...config, trustStats: next });
+                    }}
+                    className="w-full rounded-lg border border-line bg-ink px-2 py-1 text-paper font-semibold text-xs"
+                  />
+                  <input
+                    type="text"
+                    value={stat.desc}
+                    onChange={(e) => {
+                      const next = [...config.trustStats];
+                      next[sIdx].desc = e.target.value;
+                      setConfig({ ...config, trustStats: next });
+                    }}
+                    className="w-full rounded-lg border border-line bg-ink px-2 py-1 text-dim text-[11px]"
+                  />
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Testimonial Cards Editor */}
+          {/* Reviews List */}
           <div className="space-y-4 pt-2">
-            <span className="font-mono text-xs uppercase font-bold text-paper block">
-              Daftar Testimoni ({config.testimonials.length} Review):
-            </span>
+            <h5 className="font-bold text-xs uppercase font-mono text-dim">
+              Daftar Review Klien ({config.testimonials.length})
+            </h5>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {config.testimonials.map((t, idx) => (
-                <div key={t.id} className="p-4 rounded-2xl bg-tile border border-line space-y-3 relative group text-xs">
+                <div key={t.id} className="p-4 rounded-2xl bg-tile border border-line space-y-3 text-xs relative">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-dim font-bold">Review #{idx + 1}</span>
+                    <span className="font-mono text-accent font-bold text-[11px]">
+                      Review 0{idx + 1}
+                    </span>
                     <button
                       type="button"
                       onClick={() => handleRemoveTestimonial(t.id)}
-                      className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-red-950/40"
-                      title="Hapus testimoni ini"
+                      className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-red-950/40 inline-flex items-center gap-1 text-[11px]"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
+                      <span>Hapus</span>
                     </button>
                   </div>
 
@@ -1065,7 +1175,7 @@ export const LandingPageManagerTab: React.FC = () => {
 
       {/* SUB-TAB 5: FAQ ACCORDION */}
       {activeSubTab === 'faq' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
             <div>
               <h4 className="font-bold text-base text-paper flex items-center gap-2">
@@ -1073,7 +1183,7 @@ export const LandingPageManagerTab: React.FC = () => {
                 <span>Manajemen Pertanyaan Umum (FAQ Accordion)</span>
               </h4>
               <p className="text-xs text-muted">
-                Tambahkan pertanyaan baru atau perjelas jawaban teknis agar closing pembeli makin tinggi.
+                Tambahkan pertanyaan baru atau perjelas jawaban teknis agar calon pembeli makin yakin.
               </p>
             </div>
 
@@ -1135,7 +1245,7 @@ export const LandingPageManagerTab: React.FC = () => {
 
       {/* SUB-TAB 6: CONTACT & PROMO BANNER */}
       {activeSubTab === 'contact' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
           <div className="border-b border-line pb-4">
             <h4 className="font-bold text-base text-paper flex items-center gap-2">
               <Megaphone className="w-4 h-4 text-accent" />
@@ -1148,13 +1258,13 @@ export const LandingPageManagerTab: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
             {/* Promo Banner Card */}
-            <div className="p-4 rounded-2xl bg-tile border border-line space-y-3">
+            <div className="p-5 rounded-2xl bg-tile border border-line space-y-3">
               <div className="flex items-center justify-between border-b border-line pb-2">
                 <span className="font-bold text-paper flex items-center gap-1.5">
                   <Megaphone className="w-3.5 h-3.5 text-accent" />
                   Banner Pengumuman Paling Atas
                 </span>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer text-xs">
                   <input
                     type="checkbox"
                     checked={config.promoBanner.enabled}
@@ -1171,7 +1281,7 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-muted mb-1 font-semibold">Teks Badge Promo</label>
+                <label className="block text-muted mb-1 font-semibold">Teks Badge Pengumuman</label>
                 <input
                   type="text"
                   value={config.promoBanner.badge}
@@ -1179,14 +1289,14 @@ export const LandingPageManagerTab: React.FC = () => {
                     ...config,
                     promoBanner: { ...config.promoBanner, badge: e.target.value }
                   })}
-                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-paper font-mono text-[11px]"
+                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-accent font-bold"
                 />
               </div>
 
               <div>
-                <label className="block text-muted mb-1 font-semibold">Isi Pesan Promo</label>
+                <label className="block text-muted mb-1 font-semibold">Isi Teks Pengumuman</label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={config.promoBanner.text}
                   onChange={(e) => setConfig({
                     ...config,
@@ -1197,7 +1307,7 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-muted mb-1 font-semibold">Link Target Tombol / Banner</label>
+                <label className="block text-muted mb-1 font-semibold">Link Tujuan (Opsional)</label>
                 <input
                   type="text"
                   value={config.promoBanner.link}
@@ -1210,15 +1320,14 @@ export const LandingPageManagerTab: React.FC = () => {
               </div>
             </div>
 
-            {/* WhatsApp & Bank BCA Card */}
-            <div className="p-4 rounded-2xl bg-tile border border-line space-y-3">
-              <span className="font-bold text-paper block border-b border-line pb-2 flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                Kontak CS Tanya AUDIRA &amp; Rekening BCA
+            {/* Official Support & BCA */}
+            <div className="p-5 rounded-2xl bg-tile border border-line space-y-3">
+              <span className="font-bold text-paper block border-b border-line pb-2">
+                Kontak Bantuan &amp; Rekening Bank
               </span>
 
               <div>
-                <label className="block text-muted mb-1 font-semibold">Nomor WhatsApp Resmi (Tanya AUDIRA)</label>
+                <label className="block text-muted mb-1 font-semibold">Nomor WhatsApp Resmi (Tanpa tanda +)</label>
                 <input
                   type="text"
                   value={config.contact.whatsappNumber}
@@ -1226,14 +1335,12 @@ export const LandingPageManagerTab: React.FC = () => {
                     ...config,
                     contact: { ...config.contact, whatsappNumber: e.target.value }
                   })}
-                  placeholder="6285709666240"
-                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-paper font-mono font-bold"
+                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-paper font-mono"
                 />
-                <span className="text-[10px] text-dim">*Gunakan format 62 tanpa tanda + atau spasi.</span>
               </div>
 
               <div>
-                <label className="block text-muted mb-1 font-semibold">Label CS / Support</label>
+                <label className="block text-muted mb-1 font-semibold">Label Tombol Bantuan</label>
                 <input
                   type="text"
                   value={config.contact.csLabel}
@@ -1241,7 +1348,7 @@ export const LandingPageManagerTab: React.FC = () => {
                     ...config,
                     contact: { ...config.contact, csLabel: e.target.value }
                   })}
-                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-paper font-bold"
+                  className="w-full rounded-xl border border-line bg-ink px-3 py-2 text-paper"
                 />
               </div>
 
@@ -1278,7 +1385,7 @@ export const LandingPageManagerTab: React.FC = () => {
 
       {/* SUB-TAB 7: SECTION VISIBILITY TOGGLES */}
       {activeSubTab === 'visibility' && (
-        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-7 space-y-6 shadow-xl animate-fade-in">
           <div className="border-b border-line pb-4">
             <h4 className="font-bold text-base text-paper flex items-center gap-2">
               <Sliders className="w-4 h-4 text-accent" />
@@ -1313,25 +1420,64 @@ export const LandingPageManagerTab: React.FC = () => {
                       [item.key]: !isVisible
                     }
                   })}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-start justify-between gap-3 ${
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                     isVisible
-                      ? 'border-emerald-800/80 bg-emerald-950/20 shadow-md'
-                      : 'border-line bg-tile opacity-60'
+                      ? 'border-emerald-800/80 bg-emerald-950/20 shadow-md hover:border-emerald-700'
+                      : 'border-line bg-tile opacity-60 hover:opacity-80'
                   }`}
                 >
-                  <div>
-                    <span className="font-bold text-paper block text-sm mb-0.5">{item.label}</span>
+                  <div className="min-w-0 flex-1">
+                    <span className="font-bold text-paper block text-sm mb-0.5 truncate">{item.label}</span>
                     <span className="text-[11px] text-muted leading-tight block">{item.desc}</span>
                   </div>
 
-                  <span className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold uppercase shrink-0 ${
-                    isVisible ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-600/40' : 'bg-tile text-dim border border-line'
+                  {/* Modern Toggle Pill */}
+                  <div className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                    isVisible ? 'bg-emerald-500' : 'bg-zinc-800'
                   }`}>
-                    {isVisible ? 'Aktif' : 'Off'}
-                  </span>
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none inline-block size-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${
+                        isVisible ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </div>
                 </div>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Sticky Action Bar when Unsaved Changes exist */}
+      {hasUnsavedChanges && (
+        <div className="sticky bottom-6 z-40 mx-auto max-w-2xl p-4 rounded-2xl bg-zinc-950/95 border-2 border-accent text-paper shadow-2xl backdrop-blur-md flex items-center justify-between gap-4 animate-fade-in">
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-2.5 rounded-full bg-accent animate-ping shrink-0" />
+            <div>
+              <p className="text-xs font-bold text-paper">Ada perubahan yang belum disimpan!</p>
+              <p className="text-[10px] text-muted">Klik simpan agar perubahan langsung aktif di landing page.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={handleDiscardChanges}
+              disabled={saving}
+              className="px-3 py-1.5 rounded-xl border border-line bg-tile text-xs text-muted hover:text-paper transition-colors"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSave()}
+              disabled={saving}
+              className="btn-primary px-4 py-1.5 text-xs font-black inline-flex items-center gap-1.5 shadow-md shadow-orange-950/50"
+            >
+              <Save className="w-3.5 h-3.5" />
+              <span>{saving ? 'Menyimpan...' : 'Simpan Sekarang'}</span>
+            </button>
           </div>
         </div>
       )}

@@ -66,6 +66,25 @@ export const IdeaForm: React.FC<{ variant?: number }> = ({ variant = 0 }) => {
           </button>
         </div>
       </div>
+      <div className="flex flex-wrap items-center gap-1.5 px-1 pt-1">
+        <span className="font-mono text-[10px] text-dim font-semibold mr-1">Contoh Cepat:</span>
+        {[
+          { label: 'Villa Arsitektur', text: 'Rumah villa minimalis 2 lantai dirakit bertahap dari pondasi baja ringan hingga kaca' },
+          { label: 'Exploded Titanium', text: 'Exploded view jam tangan kronograf titanium terurai memperlihatkan roda gigi presisi' },
+          { label: 'Hologram Reaktor', text: 'Hologram 3D inti reaktor AI kuantum melayang di ruang gelap dengan cincin HUD' },
+          { label: 'Kota Voxel', text: 'Kota mini voxel malam hari, robot pengantar membawa lentera bersinar di jalanan basah' },
+        ].map((chip, cIdx) => (
+          <button
+            key={cIdx}
+            type="button"
+            onClick={() => setIdea(chip.text)}
+            className="rounded-lg border border-line bg-tile/70 px-2 py-0.5 text-[11px] text-muted hover:text-accent hover:border-accent/40 transition-colors"
+          >
+            {chip.label}
+          </button>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-[11px] text-muted">
         <span>Otomatis menambahkan format <code className="text-accent bg-ink px-1.5 py-0.5 rounded border border-line font-mono text-[10px]">/audira-motion</code></span>
         <a href="#produk" className="text-accent hover:underline font-semibold flex items-center gap-1">

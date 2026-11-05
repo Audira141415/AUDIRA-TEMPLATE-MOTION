@@ -8,3 +8,4 @@ export async function GET() {
   const config = readLandingConfig();
   return NextResponse.json({ config });
 }
+

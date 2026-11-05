@@ -298,3 +298,4 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
   },
   updatedAt: new Date().toISOString()
 };
+

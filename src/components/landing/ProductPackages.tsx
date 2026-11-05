@@ -101,7 +101,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                   : 'text-muted hover:text-paper hover:bg-tile/50'
               }`}
             >
-              1. Starter (149k)
+              1. Starter ({pricingConfig?.starter.price ?? '149k'})
             </button>
             <button
               type="button"
@@ -112,7 +112,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                   : 'text-muted hover:text-paper hover:bg-tile/50'
               }`}
             >
-              2. Master (299k)
+              2. Master ({pricingConfig?.master.price ?? '299k'})
             </button>
             <button
               type="button"
@@ -123,7 +123,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                   : 'text-muted hover:text-paper hover:bg-tile/50'
               }`}
             >
-              3. Lab (499k)
+              3. Lab ({pricingConfig?.lab.price ?? '499k'})
             </button>
           </div>
 
@@ -201,13 +201,22 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
 
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
-                Starter 3D Pack
+                {pricingConfig?.starter.name ?? 'Starter 3D Pack'}
               </h3>
-              <p className="font-display text-[22px] font-bold text-accent">{pricingConfig?.starter.price ?? 'Rp149.000'}</p>
+              <div className="flex items-baseline gap-2">
+                {pricingConfig?.starter.originalPrice && (
+                  <span className="text-xs text-dim line-through font-mono">
+                    {pricingConfig.starter.originalPrice}
+                  </span>
+                )}
+                <p className="font-display text-[22px] font-bold text-accent">
+                  {pricingConfig?.starter.price ?? 'Rp149.000'}
+                </p>
+              </div>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              Cocok untuk kreator yang ingin mulai membuat video 3D: pilih 5 gaya utama (BUILDFORGE, PRECISION, PIXELSTORY, VOXELVERSE, INNERWORKS).
+              {pricingConfig?.starter.tagline ?? 'Cocok untuk kreator yang ingin mulai membuat video 3D: pilih 5 gaya utama (BUILDFORGE, PRECISION, PIXELSTORY, VOXELVERSE, INNERWORKS).'}
             </p>
           </div>
 
@@ -248,7 +257,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                   : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
               }`}
             >
-              {selectedTier === 'starter' ? 'Beli Starter (Rp149.000) ➔' : 'Pilih Starter 3D Pack'}
+              {selectedTier === 'starter' ? `Beli Starter (${pricingConfig?.starter.price ?? 'Rp149.000'}) ➔` : 'Pilih Starter 3D Pack'}
             </button>
             <div className="flex items-center justify-between px-1">
               <a
@@ -335,13 +344,22 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
 
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
-                Master Director Pack
+                {pricingConfig?.master.name ?? 'Master Director Pack'}
               </h3>
-              <p className="font-display text-[22px] font-bold text-cyan-400">{pricingConfig?.master.price ?? 'Rp299.000'}</p>
+              <div className="flex items-baseline gap-2">
+                {pricingConfig?.master.originalPrice && (
+                  <span className="text-xs text-dim line-through font-mono">
+                    {pricingConfig.master.originalPrice}
+                  </span>
+                )}
+                <p className="font-display text-[22px] font-bold text-cyan-400">
+                  {pricingConfig?.master.price ?? 'Rp299.000'}
+                </p>
+              </div>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              Seluruh 29 gaya 3D mandiri: Arsitektur, Taktil, Origami, Claymation, Voxel, Low-Poly, Mikroskop Cryo-EM, Kaligrafi Ink, hingga Sirkuit PCB.
+              {pricingConfig?.master.tagline ?? 'Seluruh 29 gaya 3D mandiri: Arsitektur, Taktil, Origami, Claymation, Voxel, Low-Poly, Mikroskop Cryo-EM, Kaligrafi Ink, hingga Sirkuit PCB.'}
             </p>
           </div>
 
@@ -382,7 +400,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                   : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
               }`}
             >
-              {selectedTier === 'master' ? 'Beli Master Pack (Rp299.000) ➔' : 'Pilih Master Director Pack'}
+              {selectedTier === 'master' ? `Beli Master Pack (${pricingConfig?.master.price ?? 'Rp299.000'}) ➔` : 'Pilih Master Director Pack'}
             </button>
             <div className="flex items-center justify-between px-1">
               <a
@@ -467,13 +485,22 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
 
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
-                Creator Lab Ultimate
+                {pricingConfig?.lab.name ?? 'Creator Lab Ultimate'}
               </h3>
-              <p className="font-display text-[22px] font-bold text-amber-400">{pricingConfig?.lab.price ?? 'Rp499.000'}</p>
+              <div className="flex items-baseline gap-2">
+                {pricingConfig?.lab.originalPrice && (
+                  <span className="text-xs text-dim line-through font-mono">
+                    {pricingConfig.lab.originalPrice}
+                  </span>
+                )}
+                <p className="font-display text-[22px] font-bold text-amber-400">
+                  {pricingConfig?.lab.price ?? 'Rp499.000'}
+                </p>
+              </div>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              Seluruh 29 Gaya 3D + Starter Repo Codebase + Brand Kit (`audira-brand.json`) + Integrasi AI Lokal Bebas Kuota + VIP Support 1-on-1.
+              {pricingConfig?.lab.tagline ?? 'Seluruh 29 Gaya 3D + Starter Repo Codebase + Brand Kit (`audira-brand.json`) + Integrasi AI Lokal Bebas Kuota + VIP Support 1-on-1.'}
             </p>
           </div>
 
@@ -514,7 +541,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                   : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
               }`}
             >
-              {selectedTier === 'lab' ? 'Beli Creator Lab (Rp499.000) ➔' : 'Pilih Creator Lab Ultimate'}
+              {selectedTier === 'lab' ? `Beli Creator Lab (${pricingConfig?.lab.price ?? 'Rp499.000'}) ➔` : 'Pilih Creator Lab Ultimate'}
             </button>
             <div className="flex items-center justify-between px-1">
               <a

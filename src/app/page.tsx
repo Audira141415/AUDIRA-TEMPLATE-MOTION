@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { PromoBanner } from '@/components/landing/PromoBanner';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { ProductPackages } from '@/components/landing/ProductPackages';
@@ -48,6 +49,11 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-ink font-display text-paper antialiased selection:bg-accent selection:text-ink">
+      {/* 0. Top Promo Announcement Banner */}
+      {config.promoBanner?.enabled && (
+        <PromoBanner {...config.promoBanner} />
+      )}
+
       {/* 1. Header Navigation */}
       <SiteHeader />
 
