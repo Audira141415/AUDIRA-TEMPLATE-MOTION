@@ -10,7 +10,7 @@ export const NAV_LINKS = [
   { href: '/#produk', label: 'Lisensi' },
   { href: '/#jasa', label: 'Jasa DFY' },
   { href: '/#testimoni', label: 'Testimoni' },
-  { href: '/prompts', label: 'Prompt AI' },
+  { href: '/#cara-kerja', label: 'Cara Kerja' },
   { href: '/#faq', label: 'FAQ' },
 ];
 
@@ -21,7 +21,6 @@ export const ALL_NAV_LINKS = [
   { href: '/#testimoni', label: 'Testimoni & Studi Kasus' },
   { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
   { href: '/#bundle', label: 'Creator Lab Ultimate' },
-  { href: '/prompts', label: 'Katalog Prompt AI' },
   { href: '/#faq', label: 'FAQ & Spek Hardware' },
 ];
 

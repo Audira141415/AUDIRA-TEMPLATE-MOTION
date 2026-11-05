@@ -14,6 +14,7 @@ export type ReelSample = {
   prompt: string;
   engine: string;
   author: string;
+  suitableFor: string;
 };
 
 export const REELS: ReelSample[] = [
@@ -32,6 +33,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Potongan mesin transparan: pin silinder kotak musik memetik sisir baja bergetar.',
     engine: 'Three.js PBR Transparent Depth',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Bedah produk teknik, gadget, jam mekanik, otomotif, & video edukasi cara kerja mesin.',
   },
   {
     file: 'buildforge',
@@ -45,6 +47,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Rumah panggung kayu dirakit tahap demi tahap dari tiang pancang, geladak, hingga atap sirap.',
     engine: 'Orthogonal Clash Detection System',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Promo properti, arsitektur, real estate, progres konstruksi, interior design, & renovasi rumah.',
   },
   {
     file: 'timeforge',
@@ -58,6 +61,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Evolusi fisik radio dari tabung kayu 1930-an, transistor 1954, hingga smart speaker modern.',
     engine: 'Studio Chrono Interpolator',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Storytelling sejarah brand, evolusi gadget/produk dari masa ke masa, milestone perusahaan, & konten nostalgia.',
   },
   {
     file: 'draftforge',
@@ -71,6 +75,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Cetak biru teknik 3D turbin angin pembangkit listrik, garis ukuran ISO lalu exploded view.',
     engine: 'Vector Edge Contour Renderer',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Startup manufaktur, periklanan produk teknik, hardware showcase, industrial design, & paten teknologi.',
   },
   {
     file: 'urbanforge',
@@ -84,6 +89,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Maket arsitektur putih kota masa depan, bayangan matahari bergerak dari fajar ke senja dengan proyeksi zonasi.',
     engine: 'Dynamic Solar Shadow Projection',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Master plan tata kota, lanskap real estate megah, smart city, survei lingkungan, & analisis kawasan bisnis.',
   },
   {
     file: 'isocraft',
@@ -97,6 +103,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Diagram isometrik 3D mesin kopi espreso: pompa air bertekanan, boiler pemanas, dan tetesan kopi kental.',
     engine: 'Isometric Technical Flow Engine',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Alur kerja SaaS / software, infografis logistik, supply chain, SOP bisnis, & edukasi step-by-step.',
   },
   {
     file: 'vintageforge',
@@ -110,6 +117,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Animasi gravir manuskrip Renaisans sekrup udara Da Vinci berputar dengan tekstur kertas perkamen kuno.',
     engine: 'Historical Etching Shading Rig',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Kisah sejarah, filosofi, buku/literatur klasik, sejarah kopi/minuman warisan, & dokumenter era lampau.',
   },
   {
     file: 'chalkcraft',
@@ -123,6 +131,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Simulasi papan tulis kapur: persamaan fisika dan garis ruang waktu melengkung di sekitar bintang masif.',
     engine: 'Particle Chalk & Blackboard Shader',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Edukasi sains, matematika, kursus online, bimbingan belajar/edtech, teori ilmiah, & konten guru/dosen.',
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -140,6 +149,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Pixel art 2.5D: seorang anak membuka buku tua di malam hari, kawanan kunang-kunang berpendar keluar.',
     engine: 'Cinematic Pixel Depth Rig',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Gaming review, konten retro nostalgia, cerita drama indie, vibe lofi chill, & crypto/web3 gaming.',
   },
   {
     file: 'paperworld',
@@ -153,6 +163,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Diorama kertas lipat: surat terbang jatuh ke tanah lapang, memicu pop-up lipatan rumah dan kincir origami.',
     engine: 'Rigid Hinge Origami Kinematics',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Undangan pernikahan/event, brand ramah anak/keluarga, storytelling hangat, produk eco-friendly, & kerajinan.',
   },
   {
     file: 'clayworld',
@@ -166,6 +177,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Stop-motion animasi plastisin tanah liat kenyal: monster mungil menemukan spora jamur dan bergoyang riang.',
     engine: 'Plasticine 15 FPS Stepper Engine',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Konten komedi, animasi maskot brand, produk anak, snack & makanan manis, & reels santai berkarakter.',
   },
   {
     file: 'toonforge',
@@ -179,6 +191,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Aksi anime 3D cel-shaded: pesawat kurir gesit menukik tajam melewati cincin pulau awan.',
     engine: 'Inverted-Hull Contour Shading',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Konten kreator anime, tim esports, fashion streetwear, aksi energik, & peluncuran produk anak muda.',
   },
   {
     file: 'brickcraft',
@@ -192,6 +205,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Stop-motion balok mainan plastik di atas meja belajar: roket mini terpasang modul demi modul lalu meluncur.',
     engine: 'Interlocking Stud Snap Engine',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Edukasi STEM anak, perakitan modular produk, unboxing kreatif, & promosi produk kreatif / mainan.',
   },
   {
     file: 'kintsugi',
@@ -205,6 +219,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Filosofi Kintsugi Jepang: mangkuk teh keramik retak perlahan menyatu dengan aliran cairan emas berkilau.',
     engine: 'Subsurface Ceramic & Gold Leaf Shader',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Konten self-improvement, kesehatan mental, brand keramik/porselen, filosofi hidup, spa/wellness, & perhiasan.',
   },
   {
     file: 'audirabot',
@@ -218,6 +233,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Maskot robot 3D AUDIRA menyala di ruang gelap, cincin holografik 29 nama gaya sinematik berputar di sekitarnya.',
     engine: 'Studio Character Rig & Ambient Lighting',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Branding agensi, maskot AI, pembuka podcast / YouTube channel, & video intro perusahaan modern.',
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -235,6 +251,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Kota pasar malam miniatur voxel 3D saat senja: lentera hangat menyala di atas gerobak kayu.',
     engine: 'Raytraced Voxel Chunk Engine',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Metaverse, konten ala Minecraft/Roblox, periklanan festival/event, virtual merchandise, & kuliner malam.',
   },
   {
     file: 'worldforge',
@@ -248,6 +265,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Eksplorasi lanskap pegunungan 3D sinematik: observatorium bintang di tebing batu menghadap kaldera magma.',
     engine: 'Cinematic Orbit Trajectory Engine',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Travel & tourism, eksplorasi alam, outdoor equipment, geosains, & video opening sinematik megah.',
   },
   {
     file: 'polyverse',
@@ -261,6 +279,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Kepulauan melayang low-poly minimalis bernuansa pastel: balon udara melintas di atas air terjun kabut.',
     engine: 'Faceted Flat-Shading Lighting',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Game mobile kasual, aplikasi edukasi geografi, kampanye lingkungan hidup, & ilustrasi lanskap minimalis.',
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -278,6 +297,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Visual mikroskopik Cryo-EM: molekul enzim helikase membuka pilinan rantai heliks ganda DNA secara presisi.',
     engine: 'Brownian Molecular Simulation',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Suplemen kesehatan, skincare & kosmetik (efek serum masuk pori-pori), farmasi, bioteknologi, & riset medis.',
   },
   {
     file: 'inkstory',
@@ -291,6 +311,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Lukisan kaligrafi tinta Cina 3D di atas kertas beras tua: perahu nelayan melintas di danau tenang berkabut.',
     engine: 'Dynamic Ink Ribbon Shading',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Brand teh/herbal, meditasi & mindfulness, restoran oriental/fusion, seni kaligrafi, & video quotes mendalam.',
   },
   {
     file: 'lidarforge',
@@ -304,6 +325,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Survei drone LiDAR 3D jutaan titik elevasi: laser menyapu hutan tropis lebat hingga menyingkap struktur purba.',
     engine: 'Geospatial Point Cloud Colormap',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Otomotif ADAS/self-driving, survei drone, kehutanan & tambang, pemetaan topografi, & dokumenter investigasi.',
   },
   {
     file: 'thermalforge',
@@ -317,6 +339,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Pandangan termal inframerah FLIR: prosesor rak server berpendar kuning merah panas lalu mendingin ke biru pekat.',
     engine: 'Thermal Gradient LUT Shader',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Review performa gadget/laptop (suhu pendingin), audit kelistrikan industri, keamanan server, & tips efisiensi energi.',
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -334,6 +357,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Inti reaktor AI kuantum holografik 3D melayang dengan cincin telemetri HUD berputar menahan paket serangan.',
     engine: 'Additive Emissive Shader Core',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Cybersecurity, AI & Cloud Computing, fintech crypto/web3, peluncuran software enterprise, & event tech expo.',
   },
   {
     file: 'precision',
@@ -347,6 +371,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Iklan produk mewah 3D: perangkat audio portabel titanium terurai memperlihatkan modul mikrofon dan tombol putar kuningan.',
     engine: 'Hard-Surface CMF Studio Rig',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Iklan produk mewah (luxury goods), smartphone, jam tangan mekanik, audio headphone, & otomotif premium.',
   },
   {
     file: 'glasscraft',
@@ -360,6 +385,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Spatial computing glassmorphism: kartu kaca buram melayang dengan refraksi prisma spektrum pelangi dan tetesan cairan kristal.',
     engine: 'Physical Transmission & Dispersion',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Demo aplikasi iOS / visionOS, portofolio desainer UI/UX, SaaS dashboard premium, & mobile banking modern.',
   },
   {
     file: 'circuitforge',
@@ -373,6 +399,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Sirkuit motherboard PCB 3D makro: daya masuk dari konektor USB-C, pulsa elektron amber menyala ke inti silikon.',
     engine: 'Octilinear PCB Trace Engine',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Hardware startup, IoT device, semikonduktor, komponen PC gaming, & edukasi elektronika / robotik.',
   },
   {
     file: 'brutalforge',
@@ -386,6 +413,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Grafis neo-brutalisme 3D berani: tombol kuning raksasa tertekan mantap mengikuti dentuman tempo musik.',
     engine: 'Neo-Brutalist Mechanical Physics',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Brand clothing gen-Z, festival musik, diskon/flash sale e-commerce, promo berani, & konten viral bertempo cepat.',
   },
   {
     file: 'retrowave',
@@ -399,6 +427,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Nostalgia synthwave 80-an: mobil sport futuristik melaju kencang di atas grid neon kawat dengan matahari senja terik.',
     engine: 'CRT Scanline & Bloom Post-Processing',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Musik synthwave/lofi, aksesoris otomotif retro, arcade gaming bar, & promo bertema nostalgia 80an/90an.',
   },
   {
     file: 'textvoyage',
@@ -412,6 +441,7 @@ export const REELS: ReelSample[] = [
     prompt: '/audira-motion Kamera sinematik 3D terbang cepat menembus celah huruf monolitik raksasa yang menyala dramatis.',
     engine: 'Volumetric Text Geometry Traverser',
     author: 'Agus Dwi Rianto (AUDIRA MDA)',
+    suitableFor: 'Video motivasi / manifesto brand, lirik lagu kinetik, pidato inspiratif, teaser event, & opening presentasi agensi.',
   },
 ];
 

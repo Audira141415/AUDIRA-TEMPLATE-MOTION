@@ -12,7 +12,8 @@ import {
   Cpu, 
   Layers, 
   Check, 
-  Copy 
+  Copy,
+  Target
 } from 'lucide-react';
 import { REELS, GalleryCategory } from './reels';
 
@@ -111,13 +112,13 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
           </p>
         </div>
 
-        <Link
-          href="/prompts"
+        <a
+          href="#jasa"
           className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-4 py-2.5 text-sm font-semibold text-fg-2 hover:bg-tile-2 hover:border-line-strong hover:text-paper transition-all"
         >
-          <span>Katalog Prompt 3D</span>
+          <span>Pesan Jasa Terima Beres</span>
           <ArrowRight className="h-4 w-4 text-accent" />
-        </Link>
+        </a>
       </div>
 
       {/* Category Tabs (5 Industrial Pillars + All) */}
@@ -242,6 +243,17 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
                 <h4 className="font-display text-[15px] sm:text-[16px] font-bold leading-tight text-paper line-clamp-1">
                   {reel.title}
                 </h4>
+
+                {/* Cocok Untuk Box */}
+                <div className="mt-2.5 rounded-xl border border-line bg-tile/70 p-2.5 text-left">
+                  <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-accent">
+                    <Target className="w-3 h-3 text-accent shrink-0" />
+                    <span>Cocok Untuk:</span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-muted leading-relaxed mt-1">
+                    {reel.suitableFor}
+                  </p>
+                </div>
 
                 {/* Action Row: Link + Copy Prompt */}
                 <div className="mt-3 flex items-center justify-between border-t border-line-soft pt-3">

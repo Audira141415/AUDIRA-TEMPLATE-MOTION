@@ -16,8 +16,10 @@ import {
   Flame, 
   Building2, 
   Activity,
-  Play
+  Play,
+  Target
 } from 'lucide-react';
+import { REELS } from './reels';
 
 interface SignatureCard {
   id: string;
@@ -29,6 +31,7 @@ interface SignatureCard {
   tags: [string, string, string];
   command: string;
   prompt: string;
+  suitableFor: string;
 }
 
 const SIGNATURE_CARDS: SignatureCard[] = [
@@ -41,7 +44,8 @@ const SIGNATURE_CARDS: SignatureCard[] = [
     image: '/3d-kits/buildforge.jpg',
     tags: ['Architecture 3D', 'Modular Assembly', 'Pondasi Baja'],
     command: 'npx remotion still starter/src/index.ts BuildforgePreview out/buildforge.png',
-    prompt: '/audira-motion Rumah dua lantai dirakit bertahap dari pondasi semen, tiang baja ringan, hingga instalasi kaca panorama modern.'
+    prompt: '/audira-motion Rumah dua lantai dirakit bertahap dari pondasi semen, tiang baja ringan, hingga instalasi kaca panorama modern.',
+    suitableFor: 'Promo properti, arsitektur, real estate, progres konstruksi, & interior rumah.',
   },
   {
     id: 'precision',
@@ -52,7 +56,8 @@ const SIGNATURE_CARDS: SignatureCard[] = [
     image: '/3d-kits/precision.jpg',
     tags: ['Exploded View', 'CMF Titanium', 'Studio Lighting'],
     command: 'npx remotion still starter/src/index.ts PrecisionPreview out/precision.png',
-    prompt: '/audira-motion Jam tangan kronograf titanium mewah 3D meledak terurai memperlihatkan susunan roda gigi mesin dan dial safir.'
+    prompt: '/audira-motion Jam tangan kronograf titanium mewah 3D meledak terurai memperlihatkan susunan roda gigi mesin dan dial safir.',
+    suitableFor: 'Iklan produk mewah (luxury goods), gadget, jam tangan mekanik, audio & elektronik premium.',
   },
   {
     id: 'pixelstory',
@@ -63,7 +68,8 @@ const SIGNATURE_CARDS: SignatureCard[] = [
     image: '/3d-kits/pixelstory.jpg',
     tags: ['Pixel Art 2.5D', 'Point Lighting', 'Badai Laut'],
     command: 'npx remotion still starter/src/index.ts PixelstoryPreview out/pixelstory.png',
-    prompt: '/audira-motion Mercusuar pixel-art di atas tebing karang saat badai malam, lampu sorot berputar dengan partikel hujan dinamis.'
+    prompt: '/audira-motion Mercusuar pixel-art di atas tebing karang saat badai malam, lampu sorot berputar dengan partikel hujan dinamis.',
+    suitableFor: 'Gaming review, konten retro nostalgia, cerita drama indie, & reels bertema lofi chill.',
   },
   {
     id: 'cyberforge',
@@ -74,7 +80,8 @@ const SIGNATURE_CARDS: SignatureCard[] = [
     image: '/3d-kits/cyberforge.jpg',
     tags: ['Sci-Fi Hologram', 'HUD Telemetry', 'Grid Neon'],
     command: 'npx remotion still starter/src/index.ts CyberforgePreview out/cyberforge.png',
-    prompt: '/audira-motion Inti reaktor AI kuantum holografik 3D melayang di ruang gelap dengan cincin data telemetri berputar cepat.'
+    prompt: '/audira-motion Inti reaktor AI kuantum holografik 3D melayang di ruang gelap dengan cincin data telemetri berputar cepat.',
+    suitableFor: 'Cybersecurity, AI & Cloud Computing, fintech crypto/web3, & peluncuran software enterprise.',
   }
 ];
 
@@ -399,13 +406,13 @@ export const Remotion3DShowcase: React.FC = () => {
             <span>{activeTab === 'featured' ? 'Jelajahi Semua 29 Gaya 3D' : 'Tampilkan 4 Unggulan'}</span>
           </button>
           
-          <Link
-            href="/prompts"
+          <a
+            href="#produk"
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-ink shadow-md hover:bg-orange-500 transition-colors"
           >
-            <span>Katalog Prompt 3D</span>
+            <span>Beli Lisensi 3D</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -477,6 +484,17 @@ export const Remotion3DShowcase: React.FC = () => {
                     {card.title}
                   </h4>
 
+                  {/* Cocok Untuk Box */}
+                  <div className="mt-2.5 rounded-xl border border-line bg-tile/70 p-2.5 text-left">
+                    <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-accent">
+                      <Target className="w-3 h-3 text-accent shrink-0" />
+                      <span>Cocok Untuk:</span>
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-muted leading-relaxed mt-1">
+                      {card.suitableFor}
+                    </p>
+                  </div>
+
                   {/* Quick Action Link: "Pilih Gaya Ini ->" pointing to license packages */}
                   <div className="mt-3 flex items-center justify-between border-t border-line-soft pt-3">
                     <a
@@ -536,6 +554,8 @@ export const Remotion3DShowcase: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredKits.map((kit) => {
               const isCopied = copiedKit === kit.id;
+              const matchingReel = REELS.find((r) => r.file === kit.id);
+              const suitableForText = matchingReel?.suitableFor || kit.character;
 
               return (
                 <div
@@ -560,9 +580,20 @@ export const Remotion3DShowcase: React.FC = () => {
                     <h4 className="font-display font-bold text-sm text-paper mb-1">
                       {kit.name}
                     </h4>
-                    <p className="text-xs text-muted leading-relaxed line-clamp-2 mb-3">
+                    <p className="text-xs text-muted leading-relaxed line-clamp-2 mb-2">
                       {kit.character}
                     </p>
+
+                    {/* Cocok Untuk Box */}
+                    <div className="mb-3 rounded-lg border border-line bg-tile/70 p-2 text-left">
+                      <div className="flex items-center gap-1 font-mono text-[9px] font-bold uppercase tracking-wider text-accent">
+                        <Target className="w-2.5 h-2.5 text-accent shrink-0" />
+                        <span>Cocok Untuk:</span>
+                      </div>
+                      <p className="text-[11px] text-muted/90 leading-tight mt-0.5 line-clamp-2">
+                        {suitableForText}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="pt-3 border-t border-line-soft space-y-2">
