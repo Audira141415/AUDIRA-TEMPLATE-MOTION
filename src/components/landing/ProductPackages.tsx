@@ -225,6 +225,10 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+              <span>Buku Panduan Instalasi Lengkap &amp; CLI Runner</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
               <span>Lisensi komersial seumur hidup bebas royalti</span>
             </li>
           </ul>
@@ -343,19 +347,23 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           <ul className="flex flex-col gap-3 text-[14px] text-fg-2">
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Akses penuh 29 Kit Gaya 3D Signature</span>
+              <span>Akses penuh seluruh 29 Kit Gaya 3D Signature</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Autonomous Director Claude Code (pilih gaya otomatis)</span>
+              <span><strong>Termasuk AUDIRA Skill Mesh (MCP Config)</strong> untuk Claude Code &amp; Cursor</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Audio Sync presisi & normalisasi EBU R128 (-14 LUFS)</span>
+              <span>Audio Sync presisi &amp; normalisasi siaran (-14 LUFS)</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Multi-resolution render: smoke preview & final 60 FPS</span>
+              <span>Buku Panduan Instalasi Step-by-Step (/panduan)</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+              <span>Multi-resolution render: smoke test &amp; final 60 FPS</span>
             </li>
           </ul>
 
@@ -475,6 +483,10 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <span><strong>FULL ACTIVE AUDIRA SKILL MESH (MCP Suite)</strong>: Auto-Orchestrate, Voiceover &amp; Social Captions</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <span>Brand Kit Configurator (`audira-brand.json`)</span>
             </li>
             <li className="flex items-start gap-2.5">
@@ -483,7 +495,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <span>VIP 1-on-1 WhatsApp Support langsung dari creator</span>
+              <span><strong>Buku Panduan + Garansi Setup 1-on-1 Mas Agus</strong> sampai jalan di PC Anda</span>
             </li>
           </ul>
 

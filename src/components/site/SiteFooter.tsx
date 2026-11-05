@@ -8,7 +8,6 @@ const COLUMNS = [
     links: [
       { href: '/#produk', label: 'Paket Lisensi 3D' },
       { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },
-      { href: '/prompts', label: 'Katalog Prompt AI' },
       { href: '/#bundle', label: 'Creator Lab Ultimate' },
       { href: '/#hasil', label: 'Galeri 29 Gaya 3D' },
     ],
@@ -16,6 +15,7 @@ const COLUMNS = [
   {
     title: 'Panduan & Bantuan',
     links: [
+      { href: '/panduan', label: 'Panduan Instalasi & Setup' },
       { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
       { href: '/#faq', label: 'FAQ & Spek Hardware' },
       { href: 'https://wa.me/6285709666240', label: 'WhatsApp Support (+62 857-0966-6240)' },

@@ -9,8 +9,8 @@ export const NAV_LINKS = [
   { href: '/#hasil', label: '29 Gaya 3D' },
   { href: '/#produk', label: 'Lisensi' },
   { href: '/#jasa', label: 'Jasa DFY' },
-  { href: '/#testimoni', label: 'Testimoni' },
   { href: '/#cara-kerja', label: 'Cara Kerja' },
+  { href: '/panduan', label: 'Panduan' },
   { href: '/#faq', label: 'FAQ' },
 ];
 
@@ -20,6 +20,7 @@ export const ALL_NAV_LINKS = [
   { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },
   { href: '/#testimoni', label: 'Testimoni & Studi Kasus' },
   { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
+  { href: '/panduan', label: 'Buku Panduan Instalasi' },
   { href: '/#bundle', label: 'Creator Lab Ultimate' },
   { href: '/#faq', label: 'FAQ & Spek Hardware' },
 ];

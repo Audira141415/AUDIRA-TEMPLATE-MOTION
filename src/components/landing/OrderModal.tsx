@@ -48,7 +48,7 @@ const TIERS: Record<ProductTier, TierInfo> = {
     highlights: [
       '5 Kit Gaya 3D Signature Pilihan',
       'Perintah Claude Code /audira-motion',
-      'Ekspor MP4 1080×1920 60 FPS Tanpa Watermark',
+      'Buku Panduan Instalasi Lengkap (/panduan)',
       'Lisensi Komersial Seumur Hidup (Bebas Royalti)'
     ]
   },
@@ -61,9 +61,9 @@ const TIERS: Record<ProductTier, TierInfo> = {
     accentColor: 'text-cyan-400 border-cyan-400',
     highlights: [
       'Semua 29 Gaya 3D Sinematik Lengkap',
+      'Bundling AUDIRA Skill Mesh (MCP Server)',
       'Autonomous Director Claude Code (Pilih Gaya Otomatis)',
-      'Audio Sync Presisi & Normalisasi -14 LUFS',
-      'Multi-Resolution Render: Smoke Test & Final 60 FPS'
+      'Buku Panduan Lengkap (/panduan) + Audio Sync Presisi'
     ]
   },
   lab: {
@@ -75,9 +75,9 @@ const TIERS: Record<ProductTier, TierInfo> = {
     accentColor: 'text-amber-400 border-amber-400',
     highlights: [
       'Semua 29 Gaya 3D + Full Source Codebase Remotion',
-      'Brand Kit Configurator (audira-brand.json)',
-      'AI Lokal Offline Gateway (Ollama 4B 3D-Coder)',
-      'Konsultasi WhatsApp 1-on-1 Langsung Mas Agus'
+      'AUDIRA Skill Mesh (Full Agentic Director Engine)',
+      'Buku Panduan Lengkap (/panduan) + Video Walkthrough',
+      'Garansi Setup 1-on-1 WhatsApp Langsung Mas Agus'
     ]
   },
   dfy: {
@@ -209,7 +209,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
       `📱 WhatsApp: ${wa}\n` +
       `📧 Email: ${email}\n` +
       `💳 Metode Bayar: ${paymentMethod.toUpperCase()}\n\n` +
-      `Mohon info rekening/QRIS dan konfirmasi pengerjaan / akses digital saya. Terima kasih!`;
+      `Mohon info pengiriman file, konfigurasi AUDIRA Skill Mesh (MCP), dan akses buku panduan instalasi (/panduan). Terima kasih!`;
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -356,6 +356,24 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             )}
           </div>
         </div>
+
+        {/* Guide & Skill Mesh Info Pill for License Packages */}
+        {!isDfy && (
+          <div className="mb-5 -mt-3 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-accent/10 border border-accent/25 text-xs">
+            <span className="text-muted flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-accent shrink-0" />
+              <span>Termasuk <strong>AUDIRA Skill Mesh (MCP)</strong> &amp; Panduan 5 Langkah</span>
+            </span>
+            <a 
+              href="/panduan" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-accent font-bold hover:underline inline-flex items-center gap-1 text-[11px] shrink-0"
+            >
+              Buka Panduan ➔
+            </a>
+          </div>
+        )}
 
         {/* Buyer Information Inputs */}
         <div className="mb-6 space-y-3">
