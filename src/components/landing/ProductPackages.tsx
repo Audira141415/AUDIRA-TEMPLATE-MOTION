@@ -35,12 +35,18 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
           {/* Card Video Header */}
           <div className="rounded-2xl border border-line bg-ink p-2 sm:p-2.5">
             <figure className="relative m-0 overflow-hidden border border-line aspect-[16/10] rounded-xl bg-tile-2">
-              <img
+              <video
                 className="absolute inset-0 size-full object-cover"
-                src="/3d-kits/buildforge.jpg"
-                alt="Starter 3D Pack"
+                src="/3d-kits/buildforge.mp4"
+                poster="/3d-kits/buildforge.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Starter 3D Pack Preview: Buildforge"
               />
-              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-accent text-ink font-mono text-[10px] font-bold uppercase">
+              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-accent text-ink font-mono text-[10px] font-bold uppercase z-10">
                 STARTER 5 GAYA
               </span>
             </figure>
@@ -114,13 +120,19 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
           {/* Card Video Header */}
           <div className="rounded-2xl border border-line bg-ink p-2 sm:p-2.5">
             <figure className="relative m-0 overflow-hidden border border-line aspect-[16/10] rounded-xl bg-tile-2">
-              <img
+              <video
                 className="absolute inset-0 size-full object-cover"
-                src="/3d-kits/cyberforge.jpg"
-                alt="Master Director Pack"
+                src="/3d-kits/cyberforge.mp4"
+                poster="/3d-kits/cyberforge.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Master Director Pack Preview: Cyberforge"
               />
-              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-cyan-400 text-black font-mono text-[10px] font-bold uppercase">
-                SEMUA 20 GAYA 3D
+              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-cyan-400 text-black font-mono text-[10px] font-bold uppercase z-10">
+                SEMUA 29 GAYA 3D
               </span>
             </figure>
           </div>
@@ -143,7 +155,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              Seluruh 20 gaya 3D mandiri: Arsitektur, Taktil, Origami, Claymation, Voxel, Low-Poly, Mikroskop Cryo-EM, Kaligrafi Ink, hingga Sirkuit PCB.
+              Seluruh 29 gaya 3D mandiri: Arsitektur, Taktil, Origami, Claymation, Voxel, Low-Poly, Mikroskop Cryo-EM, Kaligrafi Ink, hingga Sirkuit PCB.
             </p>
           </div>
 
@@ -151,7 +163,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
           <ul className="flex flex-col gap-3 text-[14px] text-fg-2">
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Akses penuh 20 Kit Gaya 3D Signature</span>
+              <span>Akses penuh 29 Kit Gaya 3D Signature</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
@@ -173,7 +185,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
               onClick={() => onSelectTab && onSelectTab('all')}
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
             >
-              Jelajahi seluruh 20 gaya 3D ➔
+              Jelajahi seluruh 29 gaya 3D ➔
             </a>
             <Link
               href="/studio?kit=cyberforge"
@@ -189,12 +201,18 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
           {/* Card Video Header */}
           <div className="rounded-2xl border border-line bg-ink p-2 sm:p-2.5">
             <figure className="relative m-0 overflow-hidden border border-line aspect-[16/10] rounded-xl bg-tile-2">
-              <img
+              <video
                 className="absolute inset-0 size-full object-cover"
-                src="/3d-kits/precision.jpg"
-                alt="Creator Lab Ultimate"
+                src="/3d-kits/precision.mp4"
+                poster="/3d-kits/precision.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Creator Lab Ultimate Preview: Precision"
               />
-              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-amber-500 text-black font-mono text-[10px] font-bold uppercase">
+              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-amber-500 text-black font-mono text-[10px] font-bold uppercase z-10">
                 COMPLETE BUNDLE
               </span>
             </figure>
@@ -218,7 +236,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              Seluruh 20 Gaya 3D + Starter Repo Codebase + Brand Kit (`audira-brand.json`) + Integrasi AI Lokal Bebas Kuota + VIP Support 1-on-1.
+              Seluruh 29 Gaya 3D + Starter Repo Codebase + Brand Kit (`audira-brand.json`) + Integrasi AI Lokal Bebas Kuota + VIP Support 1-on-1.
             </p>
           </div>
 
@@ -226,7 +244,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
           <ul className="flex flex-col gap-3 text-[14px] text-fg-2">
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <span>Semua 20 Gaya 3D + Full Source Codebase Remotion</span>
+              <span>Semua 29 Gaya 3D + Full Source Codebase Remotion</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
@@ -263,7 +281,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-line-strong bg-card px-6 py-5 sm:px-8">
         <div className="max-w-[680px]">
           <p className="text-[16px] sm:text-[17px] leading-normal text-fg-2 font-medium">
-            Mau semua 20 gaya sinematik 3D, starter codebase Remotion, dan AI lokal tanpa batas?
+            Mau semua 29 gaya sinematik 3D, starter codebase Remotion, dan AI lokal tanpa batas?
           </p>
           <p className="text-xs text-muted mt-1">
             Ambil <span className="text-accent font-bold">AUDIRA Creator Lab Ultimate</span> cuma tambah Rp30.000 dari Master Director Pack!

@@ -77,11 +77,10 @@ export const FaqSection: React.FC = () => {
           return (
             <div
               key={faq.question}
-              className={`overflow-hidden rounded-2xl border transition-colors ${
-                isOpen
+              className={`overflow-hidden rounded-2xl border transition-colors ${isOpen
                   ? 'border-line-strong bg-card'
                   : 'border-line bg-tile hover:border-line-strong hover:bg-card'
-              }`}
+                }`}
             >
               <button
                 type="button"

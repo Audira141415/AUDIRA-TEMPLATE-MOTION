@@ -681,7 +681,7 @@ export default function PromptsPage() {
               <Box className="w-4 h-4 text-amber-300" />
               <span>3. Remotion 3D Engine</span>
               <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-200 text-[10px] uppercase font-mono hidden sm:inline">
-                20 Signature 3D Kits
+                29 Signature 3D Kits
               </span>
             </button>
           </div>
@@ -985,10 +985,10 @@ export default function PromptsPage() {
                 </div>
               </div>
 
-              {/* 20 Kits Grid Selector */}
+              {/* 29 Kits Grid Selector */}
               <div>
                 <label className="text-xs font-mono uppercase text-accent font-bold mb-3 block">
-                  Pilih dari 20 Gaya Sinematik 3D:
+                  Pilih dari 29 Gaya Sinematik 3D:
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2.5 max-h-[300px] overflow-y-auto p-1">
                   {ALL_20_KITS.map((k: KitCatalogItem) => {

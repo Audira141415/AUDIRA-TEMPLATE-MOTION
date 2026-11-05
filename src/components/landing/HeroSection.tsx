@@ -22,7 +22,7 @@ export const HeroSection: React.FC = () => {
 
         <p className="max-w-[560px] text-[16px] sm:text-[17px] leading-[1.65] text-muted">
           Platform sutradara gerak 3D otonom berbasis <strong>Claude Code</strong>, <strong>Remotion</strong>, dan <strong>React Three Fiber</strong>. 
-          Pilih dari <strong>20 Signature 3D Styles</strong>: arsitektur CAD, exploded view titanium, miniatur voxel, hingga origami kertas. Render MP4 vertikal 1080×1920 @ 60 FPS bebas watermark.
+          Pilih dari <strong>29 Signature 3D Styles</strong>: arsitektur CAD, exploded view titanium, miniatur voxel, hingga origami kertas. Render MP4 vertikal 1080×1920 @ 60 FPS bebas watermark.
         </p>
 
         {/* Action Buttons */}
@@ -51,7 +51,7 @@ export const HeroSection: React.FC = () => {
         <div className="flex flex-wrap items-center gap-4 pt-2 font-mono text-xs text-dim">
           <span className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            20 Gaya 3D Prosedural
+            29 Gaya 3D Sinematik 60 FPS
           </span>
           <span>•</span>
           <span className="flex items-center gap-1.5">

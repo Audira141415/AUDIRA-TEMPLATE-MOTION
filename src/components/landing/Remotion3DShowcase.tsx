@@ -268,6 +268,87 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     promptExample: '/audira-motion Maket arsitektur putih monokrom kota futuristik, bayangan matahari bergerak presisi.',
     previewId: 'UrbanforgePreview',
     sampleImg: '/3d-kits/urbanforge.jpg'
+  },
+  {
+    id: 'isocraft',
+    name: 'ISOCRAFT',
+    group: 'arsitektur',
+    character: 'Diorama isometrik cross-section 3D & potong silang sudut 45°',
+    promptExample: '/audira-motion Diorama isometrik arsitektur perkotaan mini potong silang sudut 45 derajat.',
+    previewId: 'IsocraftPreview',
+    sampleImg: '/3d-kits/isocraft.jpg'
+  },
+  {
+    id: 'vintageforge',
+    name: 'VINTAGEFORGE',
+    group: 'arsitektur',
+    character: 'Teknik blueprint retro 1920-an & drafting sepia',
+    promptExample: '/audira-motion Skema drafting arsitektur klasik tahun 1920-an di atas kertas linen sepia.',
+    previewId: 'VintageforgePreview',
+    sampleImg: '/3d-kits/vintageforge.jpg'
+  },
+  {
+    id: 'chalkcraft',
+    name: 'CHALKCRAFT',
+    group: 'arsitektur',
+    character: 'Animasi gambar kapur papan tulis sekolah & diagram',
+    promptExample: '/audira-motion Ilustrasi kapur putih dan pastel di papan tulis hitam bertekstur kasar.',
+    previewId: 'ChalkcraftPreview',
+    sampleImg: '/3d-kits/chalkcraft.jpg'
+  },
+  {
+    id: 'kintsugi',
+    name: 'KINTSUGI',
+    group: 'taktil',
+    character: 'Seni retakan emas keramik Jepang 3D & rekonstruksi porselen',
+    promptExample: '/audira-motion Mangkuk keramik hitam pecah terbelah dan menyatu kembali dengan garis emas berkilau.',
+    previewId: 'KintsugiPreview',
+    sampleImg: '/3d-kits/kintsugi.jpg'
+  },
+  {
+    id: 'audirabot',
+    name: 'AUDIRABOT',
+    group: 'taktil',
+    character: 'Maskot robot AUDIRA 3D metalik & artikulasi sendi presisi',
+    promptExample: '/audira-motion Karakter robot AUDIRA mini dengan mata LED biru bercahaya dan artikulasi sendi presisi.',
+    previewId: 'AudirabotPreview',
+    sampleImg: '/3d-kits/audirabot.jpg'
+  },
+  {
+    id: 'thermalforge',
+    name: 'THERMALFORGE',
+    group: 'sains',
+    character: 'Visual pencitraan termal inframerah FLIR 3D & gradien panas',
+    promptExample: '/audira-motion Pemindaian termal inframerah spektrum FLIR suhu panas merah dan dingin biru tua.',
+    previewId: 'ThermalforgePreview',
+    sampleImg: '/3d-kits/thermalforge.jpg'
+  },
+  {
+    id: 'brutalforge',
+    name: 'BRUTALFORGE',
+    group: 'kosmik',
+    character: 'Monolit beton brutalist monokrom & arsitektur masif',
+    promptExample: '/audira-motion Monolit beton brutalist raksasa monokrom dengan sudut geometris tajam.',
+    previewId: 'BrutalforgePreview',
+    sampleImg: '/3d-kits/brutalforge.jpg'
+  },
+  {
+    id: 'retrowave',
+    name: 'RETROWAVE',
+    group: 'kosmik',
+    character: 'Dunia synthwave retro 80-an, grid kawat ungu & sunset neon',
+    promptExample: '/audira-motion Pemandangan synthwave retrowave jalanan neon tanpa batas dengan matahari terbenam kawat 3D.',
+    previewId: 'RetrowavePreview',
+    sampleImg: '/3d-kits/retrowave.jpg'
+  },
+  {
+    id: 'textvoyage',
+    name: 'TEXTVOYAGE',
+    group: 'kosmik',
+    character: 'Tipografi kinetik 3D sinematik & teks ekspresif melayang',
+    promptExample: '/audira-motion Tipografi kinetik 3D huruf tebal meluncur di ruang gelap dengan partikel debu.',
+    previewId: 'TextvoyagePreview',
+    sampleImg: '/3d-kits/textvoyage.jpg'
   }
 ];
 
@@ -299,7 +380,7 @@ export const Remotion3DShowcase: React.FC = () => {
             </p>
           </div>
           <h2 className="font-display text-[32px] sm:text-[46px] font-bold leading-[1.06] tracking-[-0.03em] text-paper">
-            20 Gaya Sinematik 3D Nyata. <br className="hidden sm:inline" />
+            29 Gaya Sinematik 3D Nyata. <br className="hidden sm:inline" />
             <span className="text-accent">Bukan AI Halusinasi, Ini Simulasi Fisika.</span>
           </h2>
           <p className="text-sm sm:text-base text-muted leading-relaxed">
@@ -315,7 +396,7 @@ export const Remotion3DShowcase: React.FC = () => {
             className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-4 py-2.5 text-xs font-bold text-fg-2 hover:bg-tile-2 hover:border-line-strong hover:text-paper transition-all"
           >
             <Compass className="w-4 h-4 text-accent" />
-            <span>{activeTab === 'featured' ? 'Jelajahi Semua 20 Gaya 3D' : 'Tampilkan 4 Unggulan'}</span>
+            <span>{activeTab === 'featured' ? 'Jelajahi Semua 29 Gaya 3D' : 'Tampilkan 4 Unggulan'}</span>
           </button>
           
           <Link
@@ -429,11 +510,11 @@ export const Remotion3DShowcase: React.FC = () => {
           {/* Sub-group Filters */}
           <div className="flex flex-wrap gap-2 pb-2">
             {[
-              { id: 'all', label: 'Semua 20 Gaya', count: 20 },
-              { id: 'arsitektur', label: 'Arsitektur & Mesin', count: 5 },
-              { id: 'taktil', label: 'Taktil & Stop-Motion', count: 5 },
-              { id: 'sains', label: 'Sains, Medis & Sirkuit', count: 5 },
-              { id: 'kosmik', label: 'Dunia Luas & Kosmik', count: 5 },
+              { id: 'all', label: 'Semua 29 Gaya', count: 29 },
+              { id: 'arsitektur', label: 'Arsitektur & Mesin', count: 8 },
+              { id: 'taktil', label: 'Taktil & Stop-Motion', count: 7 },
+              { id: 'sains', label: 'Sains & Medis', count: 4 },
+              { id: 'kosmik', label: 'Dunia & Komersial', count: 10 },
             ].map((g) => (
               <button
                 key={g.id}

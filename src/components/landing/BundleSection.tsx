@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { ArrowRight, Check, Sparkles, Box, Terminal } from 'lucide-react';
 
 const COMPARISON_ROWS = [
-  { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 20 Gaya', lab: 'Semua 20 Gaya Penuh' },
-  { feature: 'Remotion Studio & Web Runner', starter: '5 Gaya', master: 'Semua 20 Gaya', lab: 'Semua 20 Gaya' },
+  { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya Penuh' },
+  { feature: 'Remotion Studio & Web Runner', starter: '5 Gaya', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya' },
   { feature: 'Perintah Claude Code (/audira-motion)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
   { feature: 'Normalisasi Audio Siaran (-14 LUFS)', starter: 'Standar', master: 'Presisi Milidetik', lab: 'Presisi Milidetik' },
   { feature: 'Smoke Preview (540×960 @ 30 FPS)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
@@ -28,12 +28,12 @@ export const BundleSection: React.FC = () => {
 
         {/* Heading */}
         <h2 className="max-w-[780px] font-display text-[32px] sm:text-[48px] font-extrabold leading-[1.05] tracking-tight text-paper">
-          20 Signature 3D Styles. <br className="hidden sm:inline" />
+          29 Signature 3D Styles. <br className="hidden sm:inline" />
           Satu Ekosistem Sutradara Gerak Otonom.
         </h2>
 
         <p className="max-w-[580px] text-[16px] sm:text-[17px] leading-relaxed text-muted">
-          <strong>AUDIRA Creator Lab Ultimate</strong> menyatukan seluruh 20 gaya 3D prosedural, starter codebase Remotion, integrasi AI lokal bebas kuota, serta template prompt eksklusif dalam satu lisensi permanen.
+          <strong>AUDIRA Creator Lab Ultimate</strong> menyatukan seluruh 29 gaya 3D prosedural, starter codebase Remotion, integrasi AI lokal bebas kuota, serta template prompt eksklusif dalam satu lisensi permanen.
         </p>
 
         {/* Included Items Pills */}

@@ -26,20 +26,20 @@ interface CategoryItem {
 const CATEGORIES: CategoryItem[] = [
   {
     id: 'all',
-    label: 'Semua 20 Gaya',
-    count: 20,
+    label: 'Semua 29 Gaya',
+    count: 29,
     icon: <Layers className="w-4 h-4" />,
   },
   {
     id: 'arsitektur',
     label: 'Edukasi & Arsitektur',
-    count: 5,
+    count: 8,
     icon: <Building2 className="w-4 h-4" />,
   },
   {
     id: 'taktil',
     label: 'Karakter & Taktil',
-    count: 5,
+    count: 7,
     icon: <Sparkles className="w-4 h-4" />,
   },
   {
@@ -51,13 +51,13 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: 'sains',
     label: 'Sains & Medis',
-    count: 3,
+    count: 4,
     icon: <Activity className="w-4 h-4" />,
   },
   {
     id: 'komersial',
     label: 'Teknologi & Komersial',
-    count: 4,
+    count: 7,
     icon: <Cpu className="w-4 h-4" />,
   },
 ];
@@ -100,14 +100,14 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
           <div className="inline-flex items-center gap-2">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent font-bold">
-              GALERI 20 GAYA 3D SINEMATIK
+              GALERI 29 GAYA 3D SINEMATIK
             </p>
           </div>
           <h2 className="font-display text-[32px] sm:text-[44px] font-bold leading-[1.08] tracking-[-0.03em] text-paper">
             Hasil Video Nyata. Dirender Langsung Pakai Mesin 3D Ini.
           </h2>
           <p className="text-sm sm:text-base text-muted leading-relaxed">
-            Digerakkan oleh Three.js, React Three Fiber, dan Remotion 4.0 di folder <code className="text-xs bg-tile px-2 py-0.5 rounded border border-line text-accent">audira-skill-motion/</code>. Bukan AI halusinasi murahan, setiap frame memiliki pencahayaan fisik PBR, depth of field, dan simulasi gerak terarah.
+            Digerakkan oleh Three.js, React Three Fiber, dan Remotion 4.0 di folder <code className="text-xs bg-tile px-2 py-0.5 rounded border border-line text-accent">audira-skill-motion/</code>. Bukan AI halusinasi murahan, setiap frame memiliki pencahayaan fisik PBR, depth of field, dan simulasi gerak terarah 60 FPS.
           </p>
         </div>
 
@@ -152,7 +152,7 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
         })}
       </div>
 
-      {/* Grid of 20 3D Video Cards */}
+      {/* Grid of 29 3D Video Cards */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {items.map((reel) => {
           const isPlaying = activeVideoFile === reel.file;

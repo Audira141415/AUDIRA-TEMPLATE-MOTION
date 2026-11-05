@@ -1,7 +1,7 @@
 # 🎬 AUDIRA TEMPLATE MOTION & 3D CINEMATIC REMOTION ENGINE
 
 > **Commercial Release v3.0.0 — Unified Dual-Engine Architecture**  
-> Platform Generator Video Motion Vertikal (9:16) Otomatis Berbasis AI — Menggabungkan **AUDIRA Web Studio** (Next.js 15, React 19, Multi-Model LLM, Cartesia Indonesian TTS, Kinetic Captions, B-Roll Upload) dan **AUDIRA 3D Remotion Cinematic Engine** (Remotion 4.0, React Three Fiber 9.8, Three.js 0.186, 20 Signature 3D Styles, PBR Shaders, Kamera Terarah, & Headless MP4 Renderer).  
+> Platform Generator Video Motion Vertikal (9:16) Otomatis Berbasis AI — Menggabungkan **AUDIRA Web Studio** (Next.js 15, React 19, Multi-Model LLM, Cartesia Indonesian TTS, Kinetic Captions, B-Roll Upload) dan **AUDIRA 3D Remotion Cinematic Engine** (Remotion 4.0, React Three Fiber 9.8, Three.js 0.186, 29 Signature 3D Styles, PBR Shaders, Kamera Terarah, & Headless MP4 Renderer).  
 > **Arsitek & Founder**: Agus Dwi Rianto (AUDIRA MDA / Audira Sukses Mandiri)
 
 ---
@@ -11,8 +11,8 @@
 1. [Ringkasan Arsitektur Dual-Engine](#-ringkasan-arsitektur-dual-engine)
 2. [Spesifikasi Lengkap Teknologi (Tech Stack)](#-spesifikasi-lengkap-teknologi-tech-stack)
 3. [Engine 1: AUDIRA Web Studio (Port 3788)](#-engine-1-audira-web-studio-port-3788)
-4. [Engine 2: AUDIRA 3D Remotion Cinematic Engine (20 Gaya 3D)](#-engine-2-audira-3d-remotion-cinematic-engine-20-gaya-3d)
-5. [Tabel 20 Signature 3D Styles](#-tabel-20-signature-3d-styles)
+4. [Engine 2: AUDIRA 3D Remotion Cinematic Engine (29 Gaya 3D)](#-engine-2-audira-3d-remotion-cinematic-engine-29-gaya-3d)
+5. [Tabel 29 Signature 3D Styles](#-tabel-29-signature-3d-styles)
 6. [Sistem Unggah Media & B-Roll Bukti Visual](#-sistem-unggah-media--b-roll-bukti-visual)
 7. [Integrasi AI Multi-Model (Ollama Offline + Cloud API)](#-integrasi-ai-multi-model-ollama-offline--cloud-api)
 8. [Voiceover AI Bahasa Indonesia (Cartesia TTS)](#-voiceover-ai-bahasa-indonesia-cartesia-tts)
@@ -41,7 +41,7 @@ Sistem ini menggabungkan dua engine rendering video terpisah dalam satu reposito
 +-----------------------------------------+      +--------------------------------------------------+
 | • Next.js 15.5 App Router + React 19    |      | • Remotion 4.0.539 + React Three Fiber 9.8.2     |
 | • 21 Format Gerak Vertikal 9:16         |      | • Three.js 0.186.1 + Chromium Headless Shell     |
-| • Multi-LLM (Ollama, Gemini, Claude)    |      | • 20 Signature 3D Kits (PBR & Prosedural)        |
+| • Multi-LLM (Ollama, Gemini, Claude)    |      | • 29 Signature 3D Kits (PBR & Prosedural)        |
 | • Cartesia Indonesian Voiceover 24kHz   |      | • Kamera Direksi C1 Keyframes (Spherical Rig)    |
 | • Kinetic Captions ($10%-$85% Y-Slider) |      | • Post-Processing: MSAA, AO, Bloom, DoF, Grade   |
 | • Upload Media & Bukti B-Roll (10MB)    |      | • Headless Stills QA & Render MP4 4K 60FPS       |
@@ -116,7 +116,7 @@ Lihat detail lengkap di bagian [Sistem Unggah Media](#-sistem-unggah-media--b-ro
 
 ---
 
-## 🪐 Engine 2: AUDIRA 3D Remotion Cinematic Engine (20 Gaya 3D)
+## 🪐 Engine 2: AUDIRA 3D Remotion Cinematic Engine (29 Gaya 3D)
 
 Direktori: `audira-skill-motion/`  
 Akses Remotion Studio: `start_remotion.bat` atau `npm run remotion:dev` (Port 3000)
@@ -133,7 +133,7 @@ Engine 3D Remotion diciptakan khusus untuk kebutuhan video motion 3D berkualitas
 
 ---
 
-## 🌟 Tabel 20 Signature 3D Styles
+## 🌟 Tabel 29 Signature 3D Styles
 
 | No | Nama Kit | Grup Kategori | Karakter Visual 3D | Contoh Prompt Siap Pakai |
 |:---:|:---|:---|:---|:---|
@@ -157,6 +157,15 @@ Engine 3D Remotion diciptakan khusus untuk kebutuhan video motion 3D berkualitas
 | 18 | **BRICKCRAFT** | Taktil | Balok mainan plastik 3D interlocking stud, snap presisi per blok, dan stop-motion meja kayu. | `"/audira-motion Animasi stop-motion balok plastik di atas meja kayu, potongan balok terbang dan snap membentuk rumah."` |
 | 19 | **URBANFORGE** | Arsitektur | Maket arsitektur putih monokrom kota futuristik, bayangan matahari bergerak, dan proyeksi zonasi neon. | `"/audira-motion Maket arsitektur putih monokrom kota futuristik, bayangan matahari bergerak, proyeksi data zonasi neon."` |
 | 20 | **TIMEFORGE** | Arsitektur | Evolusi satu objek atau lanskap arsitektur melintasi berabad-abad dalam satu sapuan waktu mulus. | `"/audira-motion Evolusi telepon genggam dari era batu bata analog 90-an sampai smartphone lipat masa kini."` |
+| 21 | **ISOCRAFT** | Arsitektur | Diorama isometrik cross-section 3D, potong silang sudut 45 derajat interior modern. | `"/audira-motion Diorama isometrik arsitektur perkotaan mini potong silang sudut 45 derajat."` |
+| 22 | **VINTAGEFORGE** | Arsitektur | Teknik blueprint retro 1920-an, drafting sepia di atas linen tua dengan tekstur kertas patina. | `"/audira-motion Skema drafting arsitektur klasik tahun 1920-an di atas kertas linen sepia."` |
+| 23 | **CHALKCRAFT** | Arsitektur | Animasi kapur papan tulis sekolah, partikel debu kapur bertebaran, dan diagram sketsa edukatif. | `"/audira-motion Ilustrasi kapur putih dan pastel di papan tulis hitam bertekstur kasar."` |
+| 24 | **KINTSUGI** | Taktil | Seni keramik Jepang retak menyatu kembali dengan lelehan emas cair berkilau. | `"/audira-motion Mangkuk keramik hitam pecah terbelah dan menyatu kembali dengan garis emas berkilau."` |
+| 25 | **AUDIRABOT** | Taktil | Karakter maskot robot AUDIRA 3D metalik dengan artikulasi sendi presisi dan mata LED cyan. | `"/audira-motion Karakter robot AUDIRA mini dengan mata LED biru bercahaya dan artikulasi sendi presisi."` |
+| 26 | **THERMALFORGE** | Sains | Visual termal inframerah FLIR 3D gradien suhu panas merah menyala dan dingin biru tua. | `"/audira-motion Pemindaian termal inframerah spektrum FLIR suhu panas merah dan dingin biru tua."` |
+| 27 | **BRUTALFORGE** | Kosmik | Monolit beton brutalist monokrom dengan sudut geometris masif dan pencahayaan dramatis. | `"/audira-motion Monolit beton brutalist raksasa monokrom dengan sudut geometris tajam."` |
+| 28 | **RETROWAVE** | Kosmik | Dunia synthwave retro 80-an, grid kawat ungu bergelombang dan matahari neon terbenam. | `"/audira-motion Pemandangan synthwave retrowave jalanan neon tanpa batas dengan matahari terbenam kawat 3D."` |
+| 29 | **TEXTVOYAGE** | Kosmik | Tipografi kinetik 3D sinematik, huruf balok raksasa melayang di ruang angkasa berdebu. | `"/audira-motion Tipografi kinetik 3D huruf tebal meluncur di ruang gelap dengan partikel debu."` |
 
 ---
 
@@ -363,9 +372,9 @@ f:/AUDIRA-TEMPLATE-MOTION/
 │   └── SKILL.md                     # Protokol agen Claude untuk /audira-motion
 │
 ├── public/                          # ASSET PUBLIK & STATIC HOSTING
-│   ├── 3d-kits/                     # Gambar referensi visual 20 gaya 3D
+│   ├── 3d-kits/                     # Gambar referensi visual & video sinematik 29 gaya 3D
 │   ├── audio/                       # SFX tombol haptik & musik latar (BGM)
-│   ├── reels/                       # Video & poster bawaan 21 format motion
+│   ├── reels/                       # Video & poster vertikal 9:16 resolusi tinggi
 │   └── uploads/                     # Direktori penyimpanan unggahan B-Roll (10MB)
 │
 ├── src/                             # ENGINE 1: AUDIRA WEB STUDIO (NEXT.JS 15)
@@ -376,7 +385,7 @@ f:/AUDIRA-TEMPLATE-MOTION/
 │   │   │   ├── upload/              # Endpoint Multipart Media Upload & Gallery
 │   │   │   └── voiceover/           # Endpoint Cartesia TTS suara Indonesia
 │   │   ├── studio/                  # Halaman 5-Step Workspace Kreator
-│   │   ├── prompts/                 # Hub Prompt Multi-Model & 20 Gaya 3D
+│   │   ├── prompts/                 # Hub Prompt Multi-Model & 29 Gaya 3D
 │   │   ├── admin/                   # Panel pengaturan API Keys & render logs
 │   │   ├── login/ & register/       # Autentikasi pengguna
 │   │   ├── layout.tsx               # Root layout font & styling
