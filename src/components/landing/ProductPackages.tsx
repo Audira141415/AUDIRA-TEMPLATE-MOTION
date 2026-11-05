@@ -1,8 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check, Sparkles, Box, Cpu, Crown, Layers, ShoppingBag } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Check, 
+  Sparkles, 
+  Box, 
+  Cpu, 
+  Crown, 
+  Layers, 
+  ShoppingBag,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  Circle,
+  Star
+} from 'lucide-react';
 import { ProductTier } from './OrderModal';
 
 interface Props {
@@ -11,10 +25,31 @@ interface Props {
 }
 
 export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => {
+  const [selectedTier, setSelectedTier] = useState<ProductTier>('master');
+
+  const tierOrder: ProductTier[] = ['starter', 'master', 'lab'];
+
+  const handlePrevTier = () => {
+    const idx = tierOrder.indexOf(selectedTier);
+    const prev = (idx - 1 + tierOrder.length) % tierOrder.length;
+    setSelectedTier(tierOrder[prev]);
+  };
+
+  const handleNextTier = () => {
+    const idx = tierOrder.indexOf(selectedTier);
+    const next = (idx + 1) % tierOrder.length;
+    setSelectedTier(tierOrder[next]);
+  };
+
+  const handleBuy = (tier: ProductTier) => {
+    setSelectedTier(tier);
+    if (onBuyTier) onBuyTier(tier);
+  };
+
   return (
     <section id="produk" className="mx-auto max-w-[1240px] px-4 py-16 md:px-8 md:py-24">
       {/* Section Header */}
-      <div className="mb-12 flex max-w-[760px] flex-col gap-3">
+      <div className="mb-10 flex max-w-[760px] flex-col gap-3">
         <div className="inline-flex items-center gap-2">
           <span className="flex h-2 w-2 rounded-full bg-accent" />
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent font-bold">
@@ -30,10 +65,97 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
         </p>
       </div>
 
+      {/* Interactive Plan Selector Bar (Pilih Kiri, Tengah, atau Kanan) */}
+      <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-line bg-card p-3 sm:p-4 shadow-card-warm">
+        <div className="flex items-center gap-2.5">
+          <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
+          <span className="font-mono text-xs uppercase tracking-wider text-paper font-bold">
+            Pilih Lisensi: <span className="text-accent">
+              {selectedTier === 'starter' ? 'Kiri (Starter 149k)' : selectedTier === 'master' ? 'Tengah (Master 299k)' : 'Kanan (Creator Lab 499k)'}
+            </span>
+          </span>
+        </div>
+
+        {/* Segmented Control with Left and Right Arrows */}
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-center">
+          <button
+            type="button"
+            onClick={handlePrevTier}
+            aria-label="Pilih lisensi sebelumnya (geser ke kiri)"
+            className="flex items-center gap-1 px-2.5 py-2 rounded-xl border border-edge bg-tile text-xs font-bold text-muted hover:text-paper hover:border-line-strong transition-colors"
+            title="Pilih lisensi sebelah kiri"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span className="hidden md:inline font-mono text-[11px]">Kiri</span>
+          </button>
+
+          <div className="grid grid-cols-3 gap-1 bg-ink p-1 rounded-xl border border-line text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => setSelectedTier('starter')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                selectedTier === 'starter'
+                  ? 'bg-accent text-ink shadow-md font-black'
+                  : 'text-muted hover:text-paper hover:bg-tile/50'
+              }`}
+            >
+              1. Starter (149k)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedTier('master')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                selectedTier === 'master'
+                  ? 'bg-cyan-400 text-black shadow-md font-black'
+                  : 'text-muted hover:text-paper hover:bg-tile/50'
+              }`}
+            >
+              2. Master (299k)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedTier('lab')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                selectedTier === 'lab'
+                  ? 'bg-amber-400 text-black shadow-md font-black'
+                  : 'text-muted hover:text-paper hover:bg-tile/50'
+              }`}
+            >
+              3. Lab (499k)
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleNextTier}
+            aria-label="Pilih lisensi berikutnya (geser ke kanan)"
+            className="flex items-center gap-1 px-2.5 py-2 rounded-xl border border-edge bg-tile text-xs font-bold text-muted hover:text-paper hover:border-line-strong transition-colors"
+            title="Pilih lisensi sebelah kanan"
+          >
+            <span className="hidden md:inline font-mono text-[11px]">Kanan</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
       {/* 3 Product Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* TIER 1: STARTER 3D PACK */}
-        <article className="flex flex-col gap-6 rounded-3xl border border-line bg-card p-6 sm:p-7 shadow-card-warm transition-transform hover:-translate-y-1">
+        {/* TIER 1: STARTER 3D PACK (KIRI) */}
+        <article 
+          onClick={() => setSelectedTier('starter')}
+          className={`flex flex-col gap-6 rounded-3xl p-6 sm:p-7 transition-all cursor-pointer relative ${
+            selectedTier === 'starter'
+              ? 'border-2 border-accent bg-card shadow-2xl ring-2 ring-accent/50 scale-[1.02] z-10'
+              : 'border border-line bg-card shadow-card-warm hover:border-line-strong hover:bg-tile/20'
+          }`}
+        >
+          {selectedTier === 'starter' && (
+            <span className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-accent text-ink font-mono text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1">
+              <Star className="w-3 h-3 fill-ink" />
+              PAKET TERPILIH (KIRI)
+            </span>
+          )}
+
           {/* Card Video Header */}
           <div className="rounded-2xl border border-line bg-ink p-2 sm:p-2.5">
             <figure className="relative m-0 overflow-hidden border border-line aspect-[16/10] rounded-xl bg-tile-2">
@@ -59,9 +181,20 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <p className="font-mono text-xs tracking-wider text-accent font-semibold uppercase">
                 GAYA 3D PILIHAN
               </p>
-              <span className="px-2.5 py-0.5 rounded-full border border-edge bg-tile font-mono text-[10px] text-fg-2">
-                PEMULA 3D
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="px-2.5 py-0.5 rounded-full border border-edge bg-tile font-mono text-[10px] text-fg-2">
+                  PEMULA 3D
+                </span>
+                {selectedTier === 'starter' ? (
+                  <span className="text-accent font-bold text-[11px] font-mono flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 fill-accent text-ink" /> Terpilih
+                  </span>
+                ) : (
+                  <span className="text-dim text-[11px] font-mono flex items-center gap-1">
+                    <Circle className="w-3.5 h-3.5" /> Pilih
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -99,15 +232,25 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           <div className="mt-auto flex flex-col gap-2.5 pt-2">
             <button
               type="button"
-              onClick={() => onBuyTier && onBuyTier('starter')}
-              className="btn-primary w-full py-3 text-sm font-bold justify-center shadow-lg shadow-orange-950/20"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBuy('starter');
+              }}
+              className={`w-full py-3.5 text-sm font-bold justify-center rounded-2xl transition-all ${
+                selectedTier === 'starter'
+                  ? 'btn-primary shadow-lg shadow-orange-950/40'
+                  : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
+              }`}
             >
-              Beli Starter (Rp149.000) ➔
+              {selectedTier === 'starter' ? 'Beli Starter (Rp149.000) ➔' : 'Pilih Starter 3D Pack'}
             </button>
             <div className="flex items-center justify-between px-1">
               <a
                 href="#hasil"
-                onClick={() => onSelectTab && onSelectTab('arsitektur')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelectTab && onSelectTab('arsitektur');
+                }}
                 className="text-xs font-semibold text-muted hover:text-accent transition-colors"
               >
                 Lihat contoh ➔
@@ -116,6 +259,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
                 href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Starter%203D%20(Rp149.000)"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="text-xs font-semibold text-muted hover:text-paper transition-colors"
               >
                 Tanya via WA
@@ -124,10 +268,22 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           </div>
         </article>
 
-        {/* TIER 2: MASTER DIRECTOR PACK (RECOMMENDED) */}
-        <article className="flex flex-col gap-6 rounded-3xl border-2 border-accent bg-card p-6 sm:p-7 shadow-card-warm relative transition-transform hover:-translate-y-1">
-          <span className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-accent text-ink font-mono text-[10px] font-black uppercase tracking-wider shadow">
-            PALING POPULER
+        {/* TIER 2: MASTER DIRECTOR PACK (TENGAH - RECOMMENDED) */}
+        <article 
+          onClick={() => setSelectedTier('master')}
+          className={`flex flex-col gap-6 rounded-3xl p-6 sm:p-7 transition-all cursor-pointer relative ${
+            selectedTier === 'master'
+              ? 'border-2 border-cyan-400 bg-card shadow-2xl ring-2 ring-cyan-500/50 scale-[1.02] z-10'
+              : 'border border-line bg-card shadow-card-warm hover:border-line-strong hover:bg-tile/20'
+          }`}
+        >
+          <span className={`absolute -top-3.5 right-6 px-3 py-1 rounded-full font-mono text-[10px] font-black uppercase tracking-wider shadow flex items-center gap-1 ${
+            selectedTier === 'master'
+              ? 'bg-cyan-400 text-black shadow-md'
+              : 'bg-cyan-400/80 text-black'
+          }`}>
+            <Star className="w-3 h-3 fill-black" />
+            {selectedTier === 'master' ? 'PALING POPULER • TERPILIH' : 'PALING POPULER'}
           </span>
 
           {/* Card Video Header */}
@@ -155,9 +311,20 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <p className="font-mono text-xs tracking-wider text-cyan-400 font-semibold uppercase">
                 LENGKAP 5 PILAR INDUSTRI
               </p>
-              <span className="px-2.5 py-0.5 rounded-full border border-edge bg-tile font-mono text-[10px] text-fg-2">
-                UNRESTRICTED
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="px-2.5 py-0.5 rounded-full border border-edge bg-tile font-mono text-[10px] text-fg-2">
+                  UNRESTRICTED
+                </span>
+                {selectedTier === 'master' ? (
+                  <span className="text-cyan-400 font-bold text-[11px] font-mono flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 fill-cyan-400 text-black" /> Terpilih
+                  </span>
+                ) : (
+                  <span className="text-dim text-[11px] font-mono flex items-center gap-1">
+                    <Circle className="w-3.5 h-3.5" /> Pilih
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -195,15 +362,25 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           <div className="mt-auto flex flex-col gap-2.5 pt-2">
             <button
               type="button"
-              onClick={() => onBuyTier && onBuyTier('master')}
-              className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-cyan-400 px-4 py-3 text-sm font-bold text-black shadow-lg shadow-cyan-950/30 hover:bg-cyan-300 transition-all active:scale-[0.99]"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBuy('master');
+              }}
+              className={`w-full inline-flex items-center justify-center gap-1.5 rounded-2xl px-4 py-3.5 text-sm font-bold transition-all active:scale-[0.99] ${
+                selectedTier === 'master'
+                  ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-950/40 hover:bg-cyan-300'
+                  : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
+              }`}
             >
-              Beli Master Pack (Rp299.000) ➔
+              {selectedTier === 'master' ? 'Beli Master Pack (Rp299.000) ➔' : 'Pilih Master Director Pack'}
             </button>
             <div className="flex items-center justify-between px-1">
               <a
                 href="#hasil"
-                onClick={() => onSelectTab && onSelectTab('all')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelectTab && onSelectTab('all');
+                }}
                 className="text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
               >
                 Jelajahi 29 gaya ➔
@@ -212,6 +389,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
                 href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
               >
                 Tanya via WA
@@ -220,8 +398,22 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           </div>
         </article>
 
-        {/* TIER 3: CREATOR LAB ULTIMATE */}
-        <article className="flex flex-col gap-6 rounded-3xl border border-line bg-card p-6 sm:p-7 shadow-card-warm transition-transform hover:-translate-y-1">
+        {/* TIER 3: CREATOR LAB ULTIMATE (KANAN) */}
+        <article 
+          onClick={() => setSelectedTier('lab')}
+          className={`flex flex-col gap-6 rounded-3xl p-6 sm:p-7 transition-all cursor-pointer relative ${
+            selectedTier === 'lab'
+              ? 'border-2 border-amber-400 bg-card shadow-2xl ring-2 ring-amber-500/50 scale-[1.02] z-10'
+              : 'border border-line bg-card shadow-card-warm hover:border-line-strong hover:bg-tile/20'
+          }`}
+        >
+          {selectedTier === 'lab' && (
+            <span className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-amber-400 text-black font-mono text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1">
+              <Star className="w-3 h-3 fill-black" />
+              PAKET TERPILIH (KANAN)
+            </span>
+          )}
+
           {/* Card Video Header */}
           <div className="rounded-2xl border border-line bg-ink p-2 sm:p-2.5">
             <figure className="relative m-0 overflow-hidden border border-line aspect-[16/10] rounded-xl bg-tile-2">
@@ -247,9 +439,20 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <p className="font-mono text-xs tracking-wider text-amber-400 font-semibold uppercase">
                 SUITE PROFESIONAL
               </p>
-              <span className="px-2.5 py-0.5 rounded-full border border-edge bg-tile font-mono text-[10px] text-fg-2">
-                FULL ECOSYSTEM
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="px-2.5 py-0.5 rounded-full border border-edge bg-tile font-mono text-[10px] text-fg-2">
+                  FULL ECOSYSTEM
+                </span>
+                {selectedTier === 'lab' ? (
+                  <span className="text-amber-400 font-bold text-[11px] font-mono flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 fill-amber-400 text-black" /> Terpilih
+                  </span>
+                ) : (
+                  <span className="text-dim text-[11px] font-mono flex items-center gap-1">
+                    <Circle className="w-3.5 h-3.5" /> Pilih
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -287,14 +490,22 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           <div className="mt-auto flex flex-col gap-2.5 pt-2">
             <button
               type="button"
-              onClick={() => onBuyTier && onBuyTier('lab')}
-              className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-400 px-4 py-3 text-sm font-bold text-black shadow-lg shadow-amber-950/30 hover:bg-amber-300 transition-all active:scale-[0.99]"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBuy('lab');
+              }}
+              className={`w-full inline-flex items-center justify-center gap-1.5 rounded-2xl px-4 py-3.5 text-sm font-bold transition-all active:scale-[0.99] ${
+                selectedTier === 'lab'
+                  ? 'bg-amber-400 text-black shadow-lg shadow-amber-950/40 hover:bg-amber-300'
+                  : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
+              }`}
             >
-              Beli Creator Lab (Rp499.000) ➔
+              {selectedTier === 'lab' ? 'Beli Creator Lab (Rp499.000) ➔' : 'Pilih Creator Lab Ultimate'}
             </button>
             <div className="flex items-center justify-between px-1">
               <a
                 href="#bundle"
+                onClick={(e) => e.stopPropagation()}
                 className="text-xs font-semibold text-muted hover:text-amber-400 transition-colors"
               >
                 Detail ekosistem ➔
@@ -303,6 +514,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
                 href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Creator%20Lab%20Ultimate%20(Rp499.000)"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="text-xs font-semibold text-muted hover:text-amber-400 transition-colors"
               >
                 Tanya via WA

@@ -13,8 +13,10 @@ import {
   ArrowRight,
   Lock,
   Zap,
-  CheckCircle2
+  CheckCircle2,
+  Star
 } from 'lucide-react';
+import { DfyPlanId } from './DoneForYouSection';
 
 export type ProductTier = 'starter' | 'master' | 'lab' | 'dfy';
 
@@ -22,6 +24,7 @@ export interface OrderModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultTier?: ProductTier;
+  defaultDfyPlan?: DfyPlanId;
 }
 
 interface TierInfo {
@@ -93,14 +96,61 @@ const TIERS: Record<ProductTier, TierInfo> = {
   }
 };
 
+const DFY_SUB_PLANS: Record<DfyPlanId, {
+  name: string;
+  price: string;
+  originalPrice: string;
+  badge: string;
+  highlights: string[];
+}> = {
+  single: {
+    name: 'Jasa DFY : Paket Satuan (1 Video)',
+    price: 'Rp349.000',
+    originalPrice: 'Rp550.000',
+    badge: '1 VIDEO REEL (24 JAM)',
+    highlights: [
+      '1 Video 9:16 Durasi 30-60 Detik Beres 24 Jam',
+      'Naskah Hook Viral & Suara Jernih Cartesia AI',
+      'Animasi 3D Sinematik / Kinetic Subtitle',
+      'Garansi 1x Revisi Minor Naskah & Visual'
+    ]
+  },
+  bundle: {
+    name: 'Jasa DFY : Paket 5 Video Reels',
+    price: 'Rp1.399.000',
+    originalPrice: 'Rp1.745.000',
+    badge: '5 VIDEO REELS (HEMAT 20%)',
+    highlights: [
+      '5 Video Reels/Shorts 9:16 Siap Tayang',
+      'Bebas Campur Format (3D, Explainer, Skit)',
+      'Termasuk SFX, BGM & Rekomendasi Caption',
+      'Garansi 2x Revisi per Video'
+    ]
+  },
+  retainer: {
+    name: 'Jasa DFY : Monthly Retainer (15 Video)',
+    price: 'Rp3.490.000',
+    originalPrice: 'Rp5.500.000',
+    badge: '15 VIDEO / BULAN (DOMINASI)',
+    highlights: [
+      '15 Video Reels/Shorts Distribusi 1 Bulan',
+      'Jadwal Konten Rapi 3-4 Video per Minggu',
+      'Custom Watermark Logo & Brand Kit',
+      'Direct Line Konsultasi WhatsApp Mas Agus'
+    ]
+  }
+};
+
 const WHATSAPP_NUMBER = '6285709666240';
 
 export const OrderModal: React.FC<OrderModalProps> = ({
   isOpen,
   onClose,
-  defaultTier = 'lab'
+  defaultTier = 'lab',
+  defaultDfyPlan = 'bundle'
 }) => {
   const [selectedTier, setSelectedTier] = useState<ProductTier>(defaultTier);
+  const [selectedDfyPlan, setSelectedDfyPlan] = useState<DfyPlanId>(defaultDfyPlan);
   const [buyerName, setBuyerName] = useState('');
   const [buyerWhatsApp, setBuyerWhatsApp] = useState('');
   const [buyerEmail, setBuyerEmail] = useState('');
@@ -110,6 +160,12 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   useEffect(() => {
     setSelectedTier(defaultTier);
   }, [defaultTier]);
+
+  useEffect(() => {
+    if (defaultDfyPlan) {
+      setSelectedDfyPlan(defaultDfyPlan);
+    }
+  }, [defaultDfyPlan]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -122,7 +178,15 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
   if (!isOpen) return null;
 
-  const currentTier = TIERS[selectedTier];
+  // Active display calculation (specialized for DFY sub-plans)
+  const isDfy = selectedTier === 'dfy';
+  const currentPlan = isDfy ? DFY_SUB_PLANS[selectedDfyPlan] : TIERS[selectedTier];
+
+  const displayName = currentPlan.name;
+  const displayPrice = currentPlan.price;
+  const displayOriginalPrice = currentPlan.originalPrice;
+  const displayBadge = currentPlan.badge;
+  const displayHighlights = currentPlan.highlights;
 
   const handleCopy = async (text: string, label: string) => {
     try {
@@ -138,14 +202,14 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     const name = buyerName.trim() || 'Kreator';
     const wa = buyerWhatsApp.trim() || '-';
     const email = buyerEmail.trim() || '-';
-    const msg = `Halo Mas Agus (AUDIRA MDA), saya ingin memesan Lisensi Resmi:\n\n` +
-      `📦 Paket: *${currentTier.name}*\n` +
-      `💰 Harga: *${currentTier.price}*\n` +
+    const msg = `Halo Mas Agus (AUDIRA MDA), saya ingin memesan Lisensi Resmi / Jasa:\n\n` +
+      `📦 Paket: *${displayName}*\n` +
+      `💰 Harga: *${displayPrice}*\n` +
       `👤 Nama: ${name}\n` +
       `📱 WhatsApp: ${wa}\n` +
       `📧 Email: ${email}\n` +
       `💳 Metode Bayar: ${paymentMethod.toUpperCase()}\n\n` +
-      `Mohon info rekening/QRIS dan konfirmasi akses lisensi digital saya. Terima kasih!`;
+      `Mohon info rekening/QRIS dan konfirmasi pengerjaan / akses digital saya. Terima kasih!`;
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -167,14 +231,16 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             <div className="inline-flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
               <p className="font-mono text-[11px] uppercase tracking-wider text-accent font-bold">
-                FORMULIR PEMESANAN LISENSI RESMI
+                FORMULIR PEMESANAN RESMI
               </p>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-paper">
-              Beli Lisensi AUDIRA Skill Motion 3D
+              {isDfy ? 'Pesan Jasa Terima Beres AUDIRA' : 'Beli Lisensi AUDIRA Skill Motion 3D'}
             </h3>
             <p className="text-xs text-muted">
-              Sekali bayar · Lisensi seumur hidup · Bebas watermark untuk klien dan monetisasi.
+              {isDfy 
+                ? 'Pengerjaan kilat 24 jam · Video 1080p 60 FPS bebas watermark siap posting.' 
+                : 'Sekali bayar · Lisensi seumur hidup · Bebas royalti untuk klien dan monetisasi.'}
             </p>
           </div>
 
@@ -189,9 +255,9 @@ export const OrderModal: React.FC<OrderModalProps> = ({
         </div>
 
         {/* Tier Selector Chips */}
-        <div className="mb-5">
+        <div className="mb-4">
           <label className="block text-xs font-mono uppercase text-dim font-bold mb-2">
-            Pilih Paket Lisensi:
+            Pilih Kategori:
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {(Object.keys(TIERS) as ProductTier[]).map((tierKey) => {
@@ -223,19 +289,57 @@ export const OrderModal: React.FC<OrderModalProps> = ({
           </div>
         </div>
 
+        {/* DFY Sub-Plan Selector (Pilih Kiri, Tengah, atau Kanan) */}
+        {isDfy && (
+          <div className="mb-5 p-3.5 rounded-2xl bg-emerald-950/20 border border-emerald-500/40 animate-fade-in">
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-[11px] font-mono uppercase text-emerald-400 font-bold flex items-center gap-1.5">
+                <Star className="w-3 h-3 fill-emerald-400" />
+                Pilih Opsi Paket Terima Beres:
+              </label>
+              <span className="text-[10px] font-mono text-emerald-300">Pilih Kiri, Tengah, atau Kanan</span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2">
+              {(['single', 'bundle', 'retainer'] as DfyPlanId[]).map((planKey) => {
+                const sub = DFY_SUB_PLANS[planKey];
+                const active = selectedDfyPlan === planKey;
+                const labelPos = planKey === 'single' ? 'Kiri' : planKey === 'bundle' ? 'Tengah' : 'Kanan';
+
+                return (
+                  <button
+                    key={planKey}
+                    type="button"
+                    onClick={() => setSelectedDfyPlan(planKey)}
+                    className={`p-2.5 rounded-xl border text-center transition-all ${
+                      active
+                        ? 'border-emerald-400 bg-emerald-500/25 text-white ring-2 ring-emerald-400/50 shadow-md font-bold'
+                        : 'border-line bg-tile text-muted hover:border-line-strong hover:text-paper'
+                    }`}
+                  >
+                    <span className="block text-[10px] font-mono text-dim">{labelPos}:</span>
+                    <span className="block text-xs font-bold text-paper truncate">{sub.name.replace('Jasa DFY : ', '')}</span>
+                    <span className="block text-[12px] font-black text-emerald-400 mt-0.5">{sub.price}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Selected Tier Summary Box */}
         <div className="mb-6 rounded-2xl border border-line bg-ink p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="font-display font-extrabold text-lg text-paper">
-                {currentTier.name}
+                {displayName}
               </span>
               <span className="rounded bg-accent/20 border border-accent/40 px-2 py-0.5 font-mono text-[10px] font-bold text-accent">
-                {currentTier.badge}
+                {displayBadge}
               </span>
             </div>
             <ul className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-muted">
-              {currentTier.highlights.map((h, i) => (
+              {displayHighlights.map((h, i) => (
                 <li key={i} className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-accent shrink-0" />
                   <span>{h}</span>
@@ -246,9 +350,9 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
           <div className="flex flex-col items-start sm:items-end shrink-0 border-t sm:border-t-0 sm:border-l border-line sm:pl-4 pt-3 sm:pt-0">
             <span className="text-[11px] text-dim">Total Investasi:</span>
-            <span className="text-2xl font-black text-accent">{currentTier.price}</span>
-            {currentTier.originalPrice && (
-              <span className="text-xs text-dim line-through">{currentTier.originalPrice}</span>
+            <span className="text-2xl font-black text-accent">{displayPrice}</span>
+            {displayOriginalPrice && (
+              <span className="text-xs text-dim line-through">{displayOriginalPrice}</span>
             )}
           </div>
         </div>
@@ -256,7 +360,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
         {/* Buyer Information Inputs */}
         <div className="mb-6 space-y-3">
           <label className="block text-xs font-mono uppercase text-accent font-bold">
-            Data Penerima Lisensi Digital:
+            Data Penerima {isDfy ? 'Layanan Video' : 'Lisensi Digital'}:
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
@@ -346,7 +450,6 @@ export const OrderModal: React.FC<OrderModalProps> = ({
         {paymentMethod === 'qris' && (
           <div className="mb-6 rounded-2xl border border-line bg-ink p-4 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
             <div className="p-3 bg-white rounded-xl shrink-0 shadow-md">
-              {/* QRIS Visual Mock */}
               <div className="size-28 flex flex-col items-center justify-center border-2 border-dashed border-zinc-400 text-zinc-800">
                 <QrCode className="w-12 h-12 text-zinc-900" />
                 <span className="font-mono text-[9px] font-black uppercase tracking-wider text-black mt-1">
@@ -391,7 +494,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             </div>
             <div className="flex flex-wrap items-baseline justify-between gap-2 pt-1 border-t border-line-soft">
               <span className="text-dim">Nominal Transfer:</span>
-              <span className="text-accent font-bold text-sm">{currentTier.price}</span>
+              <span className="text-accent font-bold text-sm">{displayPrice}</span>
             </div>
           </div>
         )}
@@ -416,7 +519,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm sm:text-base font-bold text-ink shadow-xl shadow-orange-950/40 hover:bg-orange-500 transition-all active:scale-[0.99]"
           >
             <MessageCircle className="w-5 h-5 fill-ink" />
-            <span>Konfirmasi &amp; Dapatkan Akses via WhatsApp ➔</span>
+            <span>Konfirmasi {displayName} via WhatsApp ➔</span>
           </button>
 
           {/* Guarantee Microcopy */}
@@ -431,11 +534,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               Garansi Setup 1-on-1 Sampai Beres
             </span>
             <span>•</span>
-            <span>Lisensi Seumur Hidup</span>
+            <span>{isDfy ? 'Garansi SLA 24 Jam' : 'Lisensi Seumur Hidup'}</span>
           </div>
         </div>
       </div>
     </div>
   );
 };
-

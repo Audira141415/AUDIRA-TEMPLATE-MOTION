@@ -13,15 +13,18 @@ import { BundleSection } from '@/components/landing/BundleSection';
 import { FaqSection } from '@/components/landing/FaqSection';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { OrderModal, ProductTier } from '@/components/landing/OrderModal';
+import { DfyPlanId } from '@/components/landing/DoneForYouSection';
 import { StickyCtaBar } from '@/components/landing/StickyCtaBar';
 import { WhatsAppFloatingWidget } from '@/components/landing/WhatsAppFloatingWidget';
 
 export default function LandingPage() {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedTier, setSelectedTier] = useState<ProductTier>('lab');
+  const [selectedDfyPlan, setSelectedDfyPlan] = useState<DfyPlanId>('bundle');
 
-  const handleOpenOrderModal = (tier: ProductTier = 'lab') => {
+  const handleOpenOrderModal = (tier: ProductTier = 'lab', dfyPlan: DfyPlanId = 'bundle') => {
     setSelectedTier(tier);
+    setSelectedDfyPlan(dfyPlan);
     setIsOrderModalOpen(true);
   };
 
@@ -50,7 +53,9 @@ export default function LandingPage() {
         <GallerySection activeTab="all" />
 
         {/* 6. VIP Done-For-You Agency Service (#jasa) - Terima Beres 24 Jam by AUDIRA Studio */}
-        <DoneForYouSection />
+        <DoneForYouSection 
+          onBuyPlan={(planId) => handleOpenOrderModal('dfy', planId)} 
+        />
 
         {/* 7. Social Proof & Case Studies (#testimoni) - Kreator, Arsitek, & Agensi */}
         <TestimonialsSection />
@@ -81,6 +86,7 @@ export default function LandingPage() {
         isOpen={isOrderModalOpen}
         onClose={handleCloseOrderModal}
         defaultTier={selectedTier}
+        defaultDfyPlan={selectedDfyPlan}
       />
     </div>
   );
