@@ -71,7 +71,7 @@ const SIGNATURE_CARDS: SignatureCard[] = [
     badge: 'SCI-FI HOLOGRAM 3D',
     title: 'Hologram Inti Kuantum AI',
     quote: 'proyeksi telemetri sci-fi 3D: cincin HUD berputar mengelilingi inti reaktor kuantum.',
-    image: '/3d-kits/showcase_hero.png',
+    image: '/3d-kits/cyberforge.jpg',
     tags: ['Sci-Fi Hologram', 'HUD Telemetry', 'Grid Neon'],
     command: 'npx remotion still starter/src/index.ts CyberforgePreview out/cyberforge.png',
     prompt: '/audira-motion Inti reaktor AI kuantum holografik 3D melayang di ruang gelap dengan cincin data telemetri berputar cepat.'
@@ -168,7 +168,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Hologram 3D sci-fi, cincin telemetri HUD & grid neon',
     promptExample: '/audira-motion Animasi hologram 3D inti kuantum AI dengan lingkaran telemetri HUD berputar.',
     previewId: 'CyberforgePreview',
-    sampleImg: '/3d-kits/showcase_hero.png'
+    sampleImg: '/3d-kits/cyberforge.jpg'
   },
   {
     id: 'draftforge',
@@ -177,7 +177,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Cetak biru arsitektur CAD & skema dimensi ISO presisi',
     promptExample: '/audira-motion Skema cetak biru 3D mesin roket pendorong, garis ukuran dimensi presisi ISO exploded view.',
     previewId: 'DraftforgePreview',
-    sampleImg: '/3d-kits/buildforge.jpg'
+    sampleImg: '/3d-kits/draftforge.jpg'
   },
   {
     id: 'clayworld',
@@ -186,7 +186,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Animasi stop-motion tanah liat plastisin & karakter kenyal',
     promptExample: '/audira-motion Cerita stop-motion monster kecil yang melompat kenyal di dunia jamur plastisin.',
     previewId: 'ClayworldPreview',
-    sampleImg: '/3d-kits/paperworld.jpg'
+    sampleImg: '/3d-kits/clayworld.jpg'
   },
   {
     id: 'polyverse',
@@ -195,7 +195,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Pulau melayang low-poly minimalis dengan fajar pastel',
     promptExample: '/audira-motion Pulau melayang low-poly minimalis dengan pohon pinus bergoyang dan air terjun kristal.',
     previewId: 'PolyversePreview',
-    sampleImg: '/3d-kits/voxelverse.jpg'
+    sampleImg: '/3d-kits/polyverse.jpg'
   },
   {
     id: 'toonforge',
@@ -204,7 +204,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Aksi anime cel-shaded 3D, manga speed lines & semburan plasma',
     promptExample: '/audira-motion Aksi robot mecha tempur meluncur cepat dengan garis kecepatan manga dan plasma kembar.',
     previewId: 'ToonforgePreview',
-    sampleImg: '/3d-kits/pixelstory.jpg'
+    sampleImg: '/3d-kits/toonforge.jpg'
   },
   {
     id: 'glasscraft',
@@ -213,7 +213,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Spatial computing glassmorphism, prisma spektrum & cairan',
     promptExample: '/audira-motion Kartu kaca buram melayang, pembiasan prisma spektrum pelangi, dan tetesan kristal cair.',
     previewId: 'GlasscraftPreview',
-    sampleImg: '/3d-kits/precision.jpg'
+    sampleImg: '/3d-kits/glasscraft.jpg'
   },
   {
     id: 'nanoforge',
@@ -222,7 +222,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Mikroskop Cryo-EM & DNA heliks ganda bersinar',
     promptExample: '/audira-motion Sains mikroskopis 3D heliks ganda DNA bersinar dengan pasangan basa berputar.',
     previewId: 'NanoforgePreview',
-    sampleImg: '/3d-kits/showcase_hero.png'
+    sampleImg: '/3d-kits/nanoforge.jpg'
   },
   {
     id: 'inkstory',
@@ -231,7 +231,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Lukisan tinta Timur (Sumi-e), Shan Shui & kaligrafi',
     promptExample: '/audira-motion Lukisan kaligrafi tinta Cina 3D di atas kertas beras tua dengan pegunungan Shan Shui.',
     previewId: 'InkstoryPreview',
-    sampleImg: '/3d-kits/paperworld.jpg'
+    sampleImg: '/3d-kits/inkstory.jpg'
   },
   {
     id: 'lidarforge',
@@ -240,7 +240,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Survei drone LiDAR 3D, elevasi titik awan & tirai laser',
     promptExample: '/audira-motion Survei drone LiDAR 3D titik awan ketinggian tanah, tirai laser menyapu lembah.',
     previewId: 'LidarforgePreview',
-    sampleImg: '/3d-kits/showcase_hero.png'
+    sampleImg: '/3d-kits/lidarforge.jpg'
   },
   {
     id: 'circuitforge',
@@ -249,7 +249,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Motherboard PCB 3D makro, jalur tembaga & arus elektron',
     promptExample: '/audira-motion Sirkuit motherboard PCB 3D makro dengan jalur tembaga presisi dan aliran pulsa listrik.',
     previewId: 'CircuitforgePreview',
-    sampleImg: '/3d-kits/showcase_hero.png'
+    sampleImg: '/3d-kits/circuitforge.jpg'
   },
   {
     id: 'brickcraft',
@@ -258,7 +258,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Balok mainan plastik 3D interlocking stud & snap diorama',
     promptExample: '/audira-motion Animasi stop-motion balok plastik di atas meja kayu, potongan balok terbang merakit rumah.',
     previewId: 'BrickcraftPreview',
-    sampleImg: '/3d-kits/voxelverse.jpg'
+    sampleImg: '/3d-kits/brickcraft.jpg'
   },
   {
     id: 'urbanforge',
@@ -267,7 +267,7 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     character: 'Maket arsitektur putih monokrom & proyeksi zonasi neon',
     promptExample: '/audira-motion Maket arsitektur putih monokrom kota futuristik, bayangan matahari bergerak presisi.',
     previewId: 'UrbanforgePreview',
-    sampleImg: '/3d-kits/buildforge.jpg'
+    sampleImg: '/3d-kits/urbanforge.jpg'
   }
 ];
 

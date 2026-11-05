@@ -1,3 +1,27 @@
+// 20 Audira Skill Motion 3D Signature Styles (v3.0.0 Commercial Release)
+export type Motion3DFormat = 
+  | 'innerworks'
+  | 'buildforge'
+  | 'timeforge'
+  | 'draftforge'
+  | 'urbanforge'
+  | 'pixelstory'
+  | 'paperworld'
+  | 'clayworld'
+  | 'toonforge'
+  | 'brickcraft'
+  | 'voxelverse'
+  | 'worldforge'
+  | 'polyverse'
+  | 'nanoforge'
+  | 'inkstory'
+  | 'lidarforge'
+  | 'cyberforge'
+  | 'precision'
+  | 'glasscraft'
+  | 'circuitforge';
+
+// Web Studio & Legacy Motion Formats
 export type MotionFormat = 
   | 'character_banter'
   | 'whiteboard'
@@ -20,6 +44,8 @@ export type MotionFormat =
   | 'retro_vhs'
   | 'sticky_notes'
   | 'roblox_story';
+
+export type AnyMotionStyle = MotionFormat | Motion3DFormat;
 
 export type CharacterArchetype =
   | 'roblox_blocky'

@@ -2,55 +2,53 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check, Sparkles, X } from 'lucide-react';
+import { ArrowRight, Check, Sparkles, Box, Terminal } from 'lucide-react';
 
 const COMPARISON_ROWS = [
-  { feature: 'Format Video Motion', single: 'Sesuai paket (7 gaya)', bundle: 'Semua 21 Format Aktif' },
-  { feature: 'Web Studio Browser Interaktif', single: 'Format Terpilih Saja', bundle: 'Akses Penuh Tanpa Batas' },
-  { feature: 'Suara AI Indonesia (Cartesia)', single: 'Maksimal 3 render / hari', bundle: '1-Klik Batch Voice Sync' },
-  { feature: 'Integrasi AI Lokal Bebas Kuota (Ollama)', single: '-', bundle: 'Termasuk (Offline Gateway)' },
-  { feature: 'Kustomisasi Subtitle & Safe Zone', single: 'Standar', bundle: 'Lengkap 5 Gaya Kinetik & 5 Font' },
-  { feature: 'B-Roll & Screenshot Evidence Upload', single: '-', bundle: 'Termasuk (Ken Burns & Chat Leaks)' },
-  { feature: 'Download Prompt Pack (Claude/Cursor)', single: '-', bundle: 'Semua 21 Template Prompt' },
-  { feature: 'Ekspor MP4 1080×1920 Tanpa Watermark', single: 'Termasuk', bundle: 'Termasuk' },
-  { feature: 'Bantuan Prioritas via WhatsApp', single: '-', bundle: 'Dukungan Langsung 1-on-1' },
+  { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 20 Gaya', lab: 'Semua 20 Gaya Penuh' },
+  { feature: 'Remotion Studio & Web Runner', starter: '5 Gaya', master: 'Semua 20 Gaya', lab: 'Semua 20 Gaya' },
+  { feature: 'Perintah Claude Code (/audira-motion)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
+  { feature: 'Normalisasi Audio Siaran (-14 LUFS)', starter: 'Standar', master: 'Presisi Milidetik', lab: 'Presisi Milidetik' },
+  { feature: 'Smoke Preview (540×960 @ 30 FPS)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
+  { feature: 'Final Cinema Render (1080×1920 @ 60 FPS)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
+  { feature: 'Starter Repo Codebase Remotion', starter: '-', master: '-', lab: 'Full Source Code' },
+  { feature: 'Brand Kit Configurator (audira-brand.json)', starter: '-', master: '-', lab: 'Termasuk' },
+  { feature: 'AI Lokal Bebas Kuota (Ollama 4B 3D-Coder)', starter: '-', master: '-', lab: 'Termasuk (Offline)' },
+  { feature: 'Prioritas Konsultasi WhatsApp 1-on-1', starter: '-', master: '-', lab: 'Langsung ke Creator' },
 ];
 
 export const BundleSection: React.FC = () => {
   return (
-    <section id="bundle" className="mx-auto max-w-[1200px] scroll-mt-6 px-4 py-16 md:px-8 md:py-24">
-      <div className="flex flex-col items-center gap-6 rounded-[28px] border-2 border-line-strong bg-card px-6 py-12 sm:px-12 sm:py-16 text-center shadow-card-warm">
+    <section id="bundle" className="mx-auto max-w-[1240px] scroll-mt-6 px-4 py-16 md:px-8 md:py-24">
+      <div className="flex flex-col items-center gap-6 rounded-[28px] border-2 border-accent bg-card px-6 py-12 sm:px-12 sm:py-16 text-center shadow-card-warm">
         {/* Best Value Badge */}
         <span className="rounded-full bg-accent px-3.5 py-1.5 font-mono text-xs font-bold tracking-widest text-ink uppercase shadow">
-          BEST VALUE · CREATOR LAB
+          BEST VALUE · CREATOR LAB ULTIMATE
         </span>
 
         {/* Heading */}
-        <h2 className="max-w-[760px] font-display text-[32px] sm:text-[48px] font-extrabold leading-[1.05] tracking-tight text-paper">
-          Tiga paket. 21 Archetypes. Satu creative workflow.
+        <h2 className="max-w-[780px] font-display text-[32px] sm:text-[48px] font-extrabold leading-[1.05] tracking-tight text-paper">
+          20 Signature 3D Styles. <br className="hidden sm:inline" />
+          Satu Ekosistem Sutradara Gerak Otonom.
         </h2>
 
-        <p className="max-w-[560px] text-[16px] sm:text-[17px] leading-relaxed text-muted">
-          AUDIRA Creator Lab: gabungan seluruh format motion, akses Web Studio Pro, integrasi AI lokal Ollama, plus template prompt eksklusif.
+        <p className="max-w-[580px] text-[16px] sm:text-[17px] leading-relaxed text-muted">
+          <strong>AUDIRA Creator Lab Ultimate</strong> menyatukan seluruh 20 gaya 3D prosedural, starter codebase Remotion, integrasi AI lokal bebas kuota, serta template prompt eksklusif dalam satu lisensi permanen.
         </p>
 
         {/* Included Items Pills */}
         <ul className="flex flex-wrap justify-center gap-2 pt-1">
           <li className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink px-4 py-2 text-xs font-semibold text-fg-2">
             <Check className="w-3.5 h-3.5 text-accent" />
-            Explainer &amp; Data · Rp29.000
+            5 Ranah Industri (Arsitektur, Taktil, Voxel, Sains, Komersial)
           </li>
-          <li className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink px-4 py-2 text-xs font-semibold text-fg-2">
+          <li className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink px-4 py-2 text-xs font-semibold text-cyan-400">
             <Check className="w-3.5 h-3.5 text-cyan-400" />
-            Skits &amp; Gaming · Rp49.000
-          </li>
-          <li className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink px-4 py-2 text-xs font-semibold text-fg-2">
-            <Check className="w-3.5 h-3.5 text-amber-400" />
-            Story &amp; Docu · Rp69.000
+            Remotion 4.0 + Three.js PBR Engine
           </li>
           <li className="inline-flex items-center gap-2 rounded-full border border-accent/60 bg-accent/10 px-4 py-2 text-xs font-bold text-paper">
             <Sparkles className="w-3.5 h-3.5 text-accent" />
-            BONUS: Web Studio Pro + Offline Ollama AI Gateway
+            BONUS: Full Starter Repo + Brand Kit + Offline AI Gateway
           </li>
         </ul>
 
@@ -60,12 +58,12 @@ export const BundleSection: React.FC = () => {
             Rp109.000
           </p>
           <p className="text-xl sm:text-2xl text-dim line-through">
-            Rp147.000
+            Rp178.000
           </p>
         </div>
 
         <p className="text-[14px] font-semibold text-accent -mt-2">
-          Hemat Rp38.000 (26%), atau cuma tambah Rp40.000 dari harga Skits.
+          Hemat Rp69.000 (39%), miliki seluruh ekosistem tanpa biaya langganan bulanan.
         </p>
 
         {/* Primary CTA */}
@@ -73,30 +71,32 @@ export const BundleSection: React.FC = () => {
           href="/studio"
           className="btn-primary min-h-14 px-8 text-[16px] font-bold shadow-xl shadow-orange-950/30"
         >
-          Buka Akses Creator Lab di Studio
+          Buka Akses Creator Lab di Web Studio
           <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
 
         <p className="font-mono text-xs text-dim">
-          Sekali bayar · Akses langsung ke seluruh 21 archetype motion
+          Sekali bayar · Lisensi komersial seumur hidup · Ekspor MP4 60 FPS bebas watermark
         </p>
 
-        {/* Feature Comparison Table (Voynan Style) */}
-        <div className="mt-8 w-full max-w-[700px] overflow-hidden rounded-2xl border border-line text-left bg-ink">
+        {/* Feature Comparison Table */}
+        <div className="mt-8 w-full max-w-[760px] overflow-hidden rounded-2xl border border-line text-left bg-ink">
           <table className="w-full table-fixed border-collapse text-xs sm:text-sm">
             <caption className="border-b border-line bg-tile px-4 py-3 text-left font-bold text-fg-2">
-              Perbedaan Paket Satuan vs AUDIRA Creator Lab
+              Perbandingan Paket Lisensi Audira Skill Motion 3D
             </caption>
             <colgroup>
-              <col className="w-[50%]" />
-              <col className="w-[25%]" />
-              <col className="w-[25%]" />
+              <col className="w-[43%]" />
+              <col className="w-[19%]" />
+              <col className="w-[19%]" />
+              <col className="w-[19%]" />
             </colgroup>
             <thead>
               <tr className="bg-tile-2 text-xs text-muted border-b border-line">
-                <th scope="col" className="px-4 py-3 font-semibold">Fitur</th>
-                <th scope="col" className="px-3 py-3 text-center font-normal">Satuan</th>
-                <th scope="col" className="px-3 py-3 text-center font-bold text-accent">Creator Lab</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Fitur &amp; Kemampuan</th>
+                <th scope="col" className="px-2.5 py-3 text-center font-normal">Starter (49k)</th>
+                <th scope="col" className="px-2.5 py-3 text-center font-normal text-cyan-400">Master (79k)</th>
+                <th scope="col" className="px-2.5 py-3 text-center font-bold text-accent">Creator Lab (109k)</th>
               </tr>
             </thead>
             <tbody>
@@ -105,20 +105,29 @@ export const BundleSection: React.FC = () => {
                   <th scope="row" className="px-4 py-3 font-normal text-fg-2 text-left">
                     {row.feature}
                   </th>
-                  <td className="px-3 py-3 text-center text-muted">
-                    {row.single === 'Termasuk' ? (
+                  <td className="px-2.5 py-3 text-center text-muted">
+                    {row.starter === 'Termasuk' ? (
                       <Check className="w-4 h-4 text-accent mx-auto" />
-                    ) : row.single === '-' ? (
+                    ) : row.starter === '-' ? (
                       <span className="text-dim">-</span>
                     ) : (
-                      row.single
+                      <span className="text-xs">{row.starter}</span>
                     )}
                   </td>
-                  <td className="px-3 py-3 text-center text-paper font-semibold">
-                    {row.bundle === 'Termasuk' ? (
+                  <td className="px-2.5 py-3 text-center text-muted">
+                    {row.master === 'Termasuk' ? (
+                      <Check className="w-4 h-4 text-cyan-400 mx-auto" />
+                    ) : row.master === '-' ? (
+                      <span className="text-dim">-</span>
+                    ) : (
+                      <span className="text-xs text-paper font-semibold">{row.master}</span>
+                    )}
+                  </td>
+                  <td className="px-2.5 py-3 text-center text-paper font-semibold">
+                    {row.lab === 'Termasuk' ? (
                       <Check className="w-4 h-4 text-accent mx-auto" />
                     ) : (
-                      row.bundle
+                      <span className="text-xs text-accent font-bold">{row.lab}</span>
                     )}
                   </td>
                 </tr>
@@ -130,4 +139,3 @@ export const BundleSection: React.FC = () => {
     </section>
   );
 };
-

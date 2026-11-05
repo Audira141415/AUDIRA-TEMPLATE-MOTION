@@ -28,7 +28,7 @@ const CameraController: React.FC<{ progress: number }> = ({ progress }) => {
 
 export const BrickcraftExample: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames, width, height } = useVideoConfig();
 
   // Remotion 60 FPS normalized clock
   const f = (frame / fps) * 60;
@@ -55,6 +55,8 @@ export const BrickcraftExample: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#1e2124" }}>
       <ThreeCanvas
+        width={width}
+        height={height}
         shadows={{ type: THREE.PCFSoftShadowMap }}
         camera={{ position: [2, 3, 6], fov: 38 }}
       >

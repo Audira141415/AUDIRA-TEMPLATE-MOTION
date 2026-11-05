@@ -2,42 +2,47 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, FileEdit, Mic, Video, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Terminal, Cpu, Video, Sparkles, CheckCircle2 } from 'lucide-react';
 
-const SCRIPT_PREVIEW = [
-  { who: 'Ash', me: false, text: 'Audira, gue mau resign besok. Gue mau full-time streaming game!' },
-  { who: 'Audira', me: true, text: 'Pertanyaan cepat: followers lo sekarang berapa?' },
-  { who: 'Ash', me: false, text: 'Empat puluh orang. Tapi mereka loyal banget!' },
-  { who: 'Audira', me: true, text: 'Tiga puluh sembilan itu akun bot. Satunya lagi nyokap lo.' },
+const PIPELINE_LOGS = [
+  { role: 'SYSTEM', text: 'Mengurai ide cerita & naskah: "Perakitan rumah modern bertahap"' },
+  { role: 'DIRECTOR', text: 'Otomatis memilih Gaya 08: BUILDFORGE (3D Architecture Modular)' },
+  { role: 'AUDIO SYNC', text: 'Panjang VO terukur 8.00 detik (480 frames @ 60 FPS). EBU R128: -14.0 LUFS' },
+  { role: 'RENDERER', text: 'Remotion 4.0 + Three.js WebGL Web Worker render selesai dalam 4.2 detik' },
 ];
 
 export const HowItWorksSection: React.FC = () => {
   return (
-    <section id="cara-kerja" className="mx-auto max-w-[1200px] scroll-mt-6 px-4 py-16 md:px-8 md:py-24">
+    <section id="cara-kerja" className="mx-auto max-w-[1240px] scroll-mt-6 px-4 py-16 md:px-8 md:py-24">
       {/* Header */}
-      <div className="mb-12 flex max-w-[680px] flex-col gap-3">
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent">Cara kerja</p>
+      <div className="mb-12 flex max-w-[720px] flex-col gap-3">
+        <div className="inline-flex items-center gap-2">
+          <span className="flex h-2 w-2 rounded-full bg-accent" />
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent font-bold">
+            ALUR KERJA SUTRADARA AI
+          </p>
+        </div>
         <h2 className="font-display text-[34px] sm:text-[46px] font-bold leading-[1.05] tracking-[-0.03em] text-paper">
-          Dari satu ide sampai reel siap upload.
+          Dari Satu Baris Perintah Sampai Render 60 FPS.
         </h2>
         <p className="text-[16px] text-muted leading-relaxed">
-          Kamu ketik satu premis atau upload footage. AI kami menulis naskah, mengisi suara per karakter, dan merender video 1080×1920.
+          Tidak perlu coding shader Three.js manual atau keyframe kamera berjam-jam. Claude Code dan mesin Remotion mengurus seluruh tahapan matematika gerak 3D untuk Anda.
         </p>
       </div>
 
-      {/* 3 Step Cards (Voynan Style) */}
+      {/* 3 Step Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Step 1 */}
         <div className="flex flex-col gap-4 rounded-3xl border border-line bg-card p-7 shadow-card-warm">
           <div className="flex items-center justify-between">
             <span className="font-mono text-sm font-black text-accent">01</span>
-            <FileEdit className="w-5 h-5 text-fg-3" />
+            <Terminal className="w-5 h-5 text-accent" />
           </div>
           <h3 className="font-display text-xl font-bold text-paper">
-            Ketik Ide atau Prompt AI
+            Pasang Skill ke Claude Code
           </h3>
           <p className="text-[14px] leading-relaxed text-muted">
-            Tulis satu kalimat di web studio kami, atau gunakan prompt generator untuk Claude, ChatGPT, Gemini, dan Ollama lokal. Naskah berstruktur hook, eskalasi, dan punchline tersusun otomatis.
+            Salin folder <code className="text-xs bg-ink px-1 rounded text-accent">audira-skill-motion/</code> ke direktori skill agen Anda, atau buka antarmuka Web Studio langsung dari peramban web.
           </p>
         </div>
 
@@ -45,13 +50,13 @@ export const HowItWorksSection: React.FC = () => {
         <div className="flex flex-col gap-4 rounded-3xl border border-line bg-card p-7 shadow-card-warm">
           <div className="flex items-center justify-between">
             <span className="font-mono text-sm font-black text-accent">02</span>
-            <Mic className="w-5 h-5 text-fg-3" />
+            <Cpu className="w-5 h-5 text-cyan-400" />
           </div>
           <h3 className="font-display text-xl font-bold text-paper">
-            Suarakan &amp; Kustomisasi
+            Ketik Perintah /audira-motion
           </h3>
           <p className="text-[14px] leading-relaxed text-muted">
-            1-klik Sync Suara Cartesia AI Bahasa Indonesia. Pilih gaya caption kinetik (Bounce Pop MrBeast, Karaoke Sweep Ali Abdaal), dan atur letak teks bebas tabrakan safe zone.
+            Ketik ide cerita atau lampirkan file narasi suara (MP3). Agen otomatis menganalisis tempo dan memilih gaya 3D paling tepat dari 20 Signature Styles.
           </p>
         </div>
 
@@ -59,13 +64,13 @@ export const HowItWorksSection: React.FC = () => {
         <div className="flex flex-col gap-4 rounded-3xl border border-line bg-card p-7 shadow-card-warm">
           <div className="flex items-center justify-between">
             <span className="font-mono text-sm font-black text-accent">03</span>
-            <Video className="w-5 h-5 text-fg-3" />
+            <Video className="w-5 h-5 text-emerald-400" />
           </div>
           <h3 className="font-display text-xl font-bold text-paper">
-            Render 1080p &amp; Upload
+            Review Smoke &amp; Render 60 FPS
           </h3>
           <p className="text-[14px] leading-relaxed text-muted">
-            Preview di browser secara interaktif, lalu ekspor video MP4 vertikal 1080×1920 60fps kualitas studio. Download instan, bebas watermark, siap viral di TikTok, Reels, dan Shorts.
+            Tinjau pratinjau kilat (540×960 @ 30 FPS) untuk revisi visual seketika, lalu render video final 1080×1920 @ 60 FPS berkualitas bioskop media sosial.
           </p>
         </div>
       </div>
@@ -75,53 +80,52 @@ export const HowItWorksSection: React.FC = () => {
         {/* Step 1 Visual */}
         <div className="flex flex-col justify-between gap-6 rounded-2xl border border-line bg-ink p-5">
           <span className="font-mono text-[10px] uppercase tracking-wider text-accent font-bold">
-            01 · Input Ide
+            01 · Perintah Instan Claude Code
           </span>
-          <p className="text-[20px] sm:text-[24px] font-extrabold leading-snug tracking-tight text-paper">
-            Ash mau resign jadi streamer padahal followers-nya baru 40
-            <span className="ml-1 inline-block h-[1em] w-[2.5px] translate-y-1 bg-accent animate-pulse" />
-          </p>
-          <span className="font-mono text-[11px] text-dim">
-            Mood · Nyolot &amp; Roasting
-          </span>
+          <div className="font-mono text-xs sm:text-[13px] text-paper space-y-2 bg-tile p-3.5 rounded-xl border border-line">
+            <p className="text-accent font-bold">/audira-motion</p>
+            <p className="text-fg-2 leading-relaxed">
+              &quot;Rumah dua lantai dibangun dari tanah kosong, pondasi semen, rangka baja, dinding bata, hingga taman asri modern.&quot;
+            </p>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-[11px] text-dim">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Mode: Autonomous Motion Director</span>
+          </div>
         </div>
 
         {/* Step 2 Visual */}
-        <div className="flex flex-col gap-3 rounded-2xl border border-line bg-ink p-5">
+        <div className="flex flex-col justify-between gap-3 rounded-2xl border border-line bg-ink p-5">
           <span className="font-mono text-[10px] uppercase tracking-wider text-accent font-bold">
-            02 · Naskah &amp; Voiceover Sync
+            02 · AI Orchestrator Telemetri
           </span>
-          <div className="flex flex-col gap-2.5 overflow-hidden">
-            {SCRIPT_PREVIEW.map((m, i) => (
+          <div className="flex flex-col gap-2 overflow-hidden">
+            {PIPELINE_LOGS.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[88%] rounded-xl px-3.5 py-2.5 text-[13px] leading-snug ${
-                  m.me
-                    ? 'self-end bg-accent text-ink font-semibold'
-                    : 'bg-card border border-line text-paper'
-                }`}
+                className="rounded-xl border border-line bg-tile p-3 text-xs leading-snug"
               >
-                <span className="mb-0.5 block font-mono text-[9px] uppercase tracking-wider opacity-70">
-                  {m.who}
+                <span className="mb-0.5 block font-mono text-[9px] uppercase tracking-wider text-accent font-bold">
+                  {m.role}
                 </span>
-                {m.text}
+                <p className="text-fg-2">{m.text}</p>
               </div>
             ))}
           </div>
           <p className="font-mono text-[10px] text-dim">
-            + Hook penutup: &quot;Ketik di komentar: apakah 40 followers cukup buat resign?&quot;
+            Normalisasi siaran: EBU R128 (-14.0 LUFS / -1.0 dBTP)
           </p>
         </div>
 
         {/* Step 3 Visual */}
         <div className="flex flex-col gap-3 rounded-2xl border border-line bg-ink p-5">
           <span className="font-mono text-[10px] uppercase tracking-wider text-accent font-bold">
-            03 · Video Jadi
+            03 · Video Hasil 3D
           </span>
           <div className="relative mx-auto w-full max-w-[210px] overflow-hidden rounded-xl border border-line bg-black aspect-[9/16] shadow-xl">
             <video
-              src="/reels/banter-voice.mp4"
-              poster="/reels/banter.jpg"
+              src="/3d-kits/buildforge.mp4"
+              poster="/3d-kits/buildforge.jpg"
               controls
               playsInline
               preload="metadata"
@@ -129,11 +133,10 @@ export const HowItWorksSection: React.FC = () => {
             />
           </div>
           <p className="text-center font-mono text-[11px] text-dim">
-            Putar dengan audio · 14 detik MP4
+            BUILDFORGE 3D · 1080×1920 60 FPS
           </p>
         </div>
       </div>
     </section>
   );
 };
-

@@ -26,8 +26,8 @@ export default function LandingPage() {
         {/* 4. AUDIRA Remotion 3D Engine Showcase (#remotion-3d) - 20 Signature Styles, 4-Card Row */}
         <Remotion3DShowcase />
 
-        {/* 5. Interactive Video Gallery (#hasil) - Voynan-Grade Cards, 3 Tags, Quote Snippet, Single Play Lock */}
-        <GallerySection activeTab="gaming" />
+        {/* 5. Interactive Video Gallery (#hasil) - 20 Signature 3D Styles, 5 Pillars, Single Play Lock */}
+        <GallerySection activeTab="all" />
 
         {/* 6. VIP Done-For-You Agency Service (#jasa) - Terima Beres 24 Jam by AUDIRA Studio */}
         <DoneForYouSection />

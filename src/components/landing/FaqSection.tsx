@@ -17,7 +17,7 @@ const FAQS: FaqItem[] = [
   {
     question: 'Berapa spesifikasi laptop / PC yang dibutuhkan?',
     answer:
-      'Untuk menggunakan Web Studio di browser dan merender format 2D (Explainer, Whiteboard, Kinetic Type, Chat, dll.), laptop standar dengan RAM 8GB sudah sangat lancar. Jika Anda ingin menjalankan model AI lokal Ollama 4B (Qwen3.5-4B-3D-Coder) secara offline, disarankan RAM 16GB dengan prosesor modern atau kartu grafis (NVIDIA GTX/RTX atau Apple Silicon M-series).',
+      'Untuk menjalankan Remotion 3D dan Web Studio di browser, komputer atau laptop dengan RAM 8GB–16GB sudah sangat lancar. Mesin 3D Three.js dan WebGL memanfaatkan akselerasi GPU perangkat keras Anda (NVIDIA GeForce, AMD Radeon, Intel Iris/Arc, atau Apple Silicon M-series). Untuk menjalankan model AI lokal Ollama (Qwen3.5-4B 3D-Coder) secara offline tanpa kuota, disarankan minimal RAM 16GB.',
   },
   {
     question: 'Apakah video hasilnya boleh dipakai untuk komersial dan proyek klien?',

@@ -28,7 +28,7 @@ const CameraController: React.FC<{ progress: number }> = ({ progress }) => {
 
 export const UrbanforgeExample: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames, width, height } = useVideoConfig();
 
   // Remotion 60 FPS normalized clock
   const f = (frame / fps) * 60;
@@ -52,6 +52,8 @@ export const UrbanforgeExample: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#0a0a0c" }}>
       <ThreeCanvas
+        width={width}
+        height={height}
         shadows={{ type: THREE.PCFSoftShadowMap }}
         camera={{ position: [4, 8, 8], fov: 40 }}
       >

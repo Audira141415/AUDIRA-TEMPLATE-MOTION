@@ -30,7 +30,7 @@ import {
   Wand2,
   Zap,
 } from 'lucide-react';
-import { MoodType, MotionFormat } from '@/types/motion';
+import { MoodType, MotionFormat, Motion3DFormat } from '@/types/motion';
 import { MOODS, moodById } from '@/lib/moods';
 import {
   buildAdvancedPrompt,
@@ -147,7 +147,9 @@ export default function PromptsPage() {
   // Filtered formats
   const filteredCards = useMemo(() => {
     return FORMAT_CARDS.filter((card) => {
-      const cardCat = FORMAT_CATEGORY_MAP[card.reel.format];
+      const cardCat = (card.reel.format in FORMAT_CATEGORY_MAP)
+        ? FORMAT_CATEGORY_MAP[card.reel.format as MotionFormat]
+        : 'gaming';
       const matchCat = category === 'all' || cardCat === category;
       const query = searchQuery.toLowerCase().trim();
       const matchQuery =
@@ -155,7 +157,7 @@ export default function PromptsPage() {
         card.name.toLowerCase().includes(query) ||
         card.pitch.toLowerCase().includes(query) ||
         card.reel.format.toLowerCase().includes(query) ||
-        card.topics.some((t) => t.toLowerCase().includes(query));
+        card.topics.some((t: string) => t.toLowerCase().includes(query));
       return matchCat && matchQuery;
     });
   }, [category, searchQuery]);
@@ -204,19 +206,26 @@ export default function PromptsPage() {
 
   const command = 'node engine/build-reel.mjs reel.json --out renders/reel-saya';
 
-  const pickFormat = (f: MotionFormat) => {
-    setFormat(f);
-    const starters = IDEA_STARTERS[f] || IDEA_STARTERS.character_banter;
-    setIdea(starters[0] || 'Ide konten viral');
-    if (f === 'roblox_story') {
-      setCharA('Noob Blox');
-      setCharB('Pro Bacon');
-    } else if (f === 'pixel_rpg') {
-      setCharA('Player 1');
-      setCharB('Reality Boss');
+  const pickFormat = (f: MotionFormat | Motion3DFormat) => {
+    if (f in IDEA_STARTERS) {
+      const validF = f as MotionFormat;
+      setFormat(validF);
+      const starters = IDEA_STARTERS[validF] || IDEA_STARTERS.character_banter;
+      setIdea(starters[0] || 'Ide konten viral');
+      if (validF === 'roblox_story') {
+        setCharA('Noob Blox');
+        setCharB('Pro Bacon');
+      } else if (validF === 'pixel_rpg') {
+        setCharA('Player 1');
+        setCharB('Reality Boss');
+      } else {
+        setCharA('');
+        setCharB('');
+      }
     } else {
-      setCharA('');
-      setCharB('');
+      // 3D Remotion Kit selected
+      setSelected3DKitId(f);
+      setPromptTab('remotion3d');
     }
   };
 
