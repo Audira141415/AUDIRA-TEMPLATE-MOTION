@@ -25,10 +25,10 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs: customFaqs }) => {
           <span>Pertanyaan Umum</span>
         </div>
         <h2 className="mt-4 font-display text-[32px] sm:text-[44px] font-bold tracking-[-0.03em] text-paper">
-          Sebelum kamu mulai bikin video.
+          Tanya Jawab Seputar Skill Claude &amp; 29 Gaya 3D
         </h2>
         <p className="mt-2 text-sm sm:text-base text-muted max-w-xl mx-auto">
-          Semua hal penting seputar cara pakai, lisensi komersial, spek hardware, dan dukungan teknis.
+          Semua hal penting seputar cara install Skill Claude, 29 preset gaya 3D Remotion, lisensi komersial, dan garansi pendampingan.
         </p>
       </div>
 
@@ -83,7 +83,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs: customFaqs }) => {
         </div>
 
         <a
-          href="https://wa.me/6285709666240?text=Halo%20AUDIRA%2C%20saya%20mau%20tanya%20seputar%20AUDIRA%20Template%20Motion"
+          href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA%2C%20saya%20mau%20tanya%20seputar%20Skill%20Claude%20dan%20Lisensi%2029%20Gaya%203D%20Remotion"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-bold text-ink hover:brightness-110 shadow-lg shadow-emerald-950/40 transition-all"

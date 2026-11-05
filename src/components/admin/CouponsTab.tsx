@@ -394,3 +394,4 @@ export const CouponsTab: React.FC = () => {
     </div>
   );
 };
+

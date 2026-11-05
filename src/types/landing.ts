@@ -249,39 +249,44 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
   ],
   faqs: [
     {
-      id: 'faq-1',
-      question: 'Apakah harus punya Claude Pro atau bayar langganan bulanan?',
-      answer: 'Tidak perlu langganan bulanan. AUDIRA Motion adalah aset sekali bayar untuk seumur hidup. Anda bisa menjalankannya di laptop/PC dengan Remotion CLI / Claude Code (/audira-motion), menghubungkannya ke Ollama AI lokal di laptop (100% gratis & offline tanpa batas kuota), atau memasukkan API key Anda sendiri (Claude 3.5 Sonnet, OpenAI GPT-4o, Google Gemini, atau DeepSeek R1).'
+      "id": "faq-1",
+      "question": "Apa sebenarnya yang saya dapatkan saat membeli produk ini?",
+      "answer": "Anda membeli Paket Lengkap AI Creative Suite yang terdiri dari: (1) Skill Resmi Claude Code (AUDIRA Motion Director & MCP Mesh) yang melatih Claude bertindak sebagai sutradara gerak 3D otonom di terminal/editor Anda, (2) Koleksi 29 Signature Styles & Source Code 3D Remotion 4.0 berbasis React Three Fiber 60 FPS, (3) Buku Panduan Instalasi Lengkap 5 Langkah (/panduan) dari nol sampai video pertama Anda berhasil dirender, dan (4) Lisensi Komersial Seumur Hidup (Lifetime) bebas royalti."
     },
     {
-      id: 'faq-2',
-      question: 'Berapa spesifikasi laptop / PC yang dibutuhkan?',
-      answer: 'Untuk menjalankan Remotion 3D di komputer atau laptop, RAM 8GB–16GB sudah sangat lancar. Mesin 3D Three.js dan WebGL memanfaatkan akselerasi GPU perangkat keras Anda (NVIDIA GeForce, AMD Radeon, Intel Iris/Arc, atau Apple Silicon M-series). Untuk menjalankan model AI lokal Ollama (Qwen3.5-4B 3D-Coder) secara offline tanpa kuota, disarankan minimal RAM 16GB.'
+      "id": "faq-2",
+      "question": "Bagaimana cara menginstal dan mengaktifkan Skill ini ke Claude Code?",
+      "answer": "Sangat praktis dan cepat! Buka terminal di laptop/PC Anda pada folder proyek, lalu daftarkan MCP Server ke Claude Code dengan perintah: claude mcp add audira-motion [lokasi-folder]. Seketika Claude akan mengenali 29 gaya visual 3D, arsitektur Remotion, dan perintah /audira-motion untuk meriset naskah, menyusun storyboard Three.js, serta merender video secara otomatis. Panduan visual lengkap tersedia di /panduan."
     },
     {
-      id: 'faq-3',
-      question: 'Apakah video hasilnya boleh dipakai untuk komersial dan proyek klien?',
-      answer: '100% Boleh dan bebas royalti! Seluruh video MP4 1080p yang Anda render menjadi hak milik Anda sepenuhnya. Anda bebas memonetisasinya di TikTok, YouTube Shorts, Instagram Reels, akun afiliasi, hingga menjual jasa pembuatan video ke klien agensi.'
+      "id": "faq-3",
+      "question": "Apakah saya harus bisa coding atau paham Three.js untuk memakainya?",
+      "answer": "Sama sekali tidak wajib! Itulah tujuan utama Skill Claude ini diciptakan. Claude yang akan menulis komponen Three.js, mengatur pencahayaan PBR, memposisikan kamera 3D, menyinkronkan audio, dan memicu perintah render Remotion untuk Anda. Anda cukup mengetikkan ide produk atau naskah dalam Bahasa Indonesia biasa, dan Claude yang mengurus seluruh eksekusi teknisnya."
     },
     {
-      id: 'faq-4',
-      question: 'Bagaimana cara kerja suara voiceover Bahasa Indonesia di AUDIRA?',
-      answer: 'AUDIRA dilengkapi integrasi mesin suara vokal Bahasa Indonesia (Cartesia Sonic AI & Browser Speech Engine) dengan 7 pilihan mood karakter: Kalem, Hangat, Motivasi, Hyped, Frustrasi, Marah, hingga Nyolot. Setiap kata yang diucapkan otomatis tersinkronisasi presisi milidetik dengan animasi subtitel karaoke di layar.'
+      "id": "faq-4",
+      "question": "Apa saja 29 gaya visual 3D yang didapatkan dan bagaimana Claude memilihnya?",
+      "answer": "Claude dibekali logika cerdas untuk menganalisis topik naskah Anda dan otomatis memilihkan gaya visual paling menjual dari 29 preset: Arsitektur & CAD (BUILDFORGE & DRAFTFORGE), Taktil & Stop-Motion (CLAYFORGE lempung, PAPERFORGE origami, KNITFORGE rajutan), Teknologi & Hardware (PRECISION exploded view titanium, CYBERFORGE hologram Matrix, CHIPFORGE PCB), serta Sains (GEOFORGE lapisan tanah, COSMOFORGE antariksa). Anda juga bisa meminta gaya spesifik langsung ke Claude."
     },
     {
-      id: 'faq-5',
-      question: 'Apa bedanya AUDIRA dengan prompt tool biasa yang ada di internet?',
-      answer: 'Tool biasa hanya memberikan teks prompt polos yang harus Anda copy-paste ke After Effects atau Premiere Pro secara manual berjam-jam. AUDIRA adalah ekosistem video engine lengkap: naskah ditulis otomatis oleh AI, disuarakan oleh vokal AI bahasa Indonesia, ditata ke canvas vertikal 9:16, dan dirender jadi file MP4 1080p 60 FPS siap upload.'
+      "id": "faq-5",
+      "question": "Apakah harus berlangganan Claude Pro atau bisa pakai model AI lain?",
+      "answer": "Skill ini dirancang optimal untuk Claude 3.5 Sonnet / 3.7 Sonnet melalui Claude Code CLI atau Claude Desktop. Namun, arsitektur MCP kami juga kompatibel dengan Cursor IDE, Windsurf, VS Code (ekstensi Cline / Roo Code), serta dapat dikombinasikan dengan API OpenAI GPT-4o, Google Gemini, atau model AI offline lokal (Ollama Qwen-Coder) tanpa biaya langganan bulanan ke AUDIRA."
     },
     {
-      id: 'faq-6',
-      question: 'Bisa dibuatkan video terima beres kalau saya tidak punya waktu edit sendiri?',
-      answer: 'Bisa banget! Kami menyediakan layanan VIP Done-For-You (Jasa Terima Beres 24 Jam). Anda cukup mengirimkan materi atau link produk di WhatsApp, tim AUDIRA yang akan meriset angle viral, menyusun naskah persuasif, mengisi suara AI jernih, dan menganimasikan videonya hingga siap upload. Harga mulai Rp349.000 per video atau Rp1.399.000 untuk paket 5 video.'
+      "id": "faq-6",
+      "question": "Apakah video hasil rendernya boleh dipakai untuk komersial dan dijual ke klien?",
+      "answer": "100% Boleh dan Bebas Royalti! Seluruh video MP4 resolusi 1080×1920 60 FPS yang Anda render adalah hak milik Anda sepenuhnya. Anda bebas menggunakannya untuk monetisasi di TikTok, YouTube Shorts, Instagram Reels, iklan berbayar (Meta/TikTok Ads), maupun menjual jasa pembuatan video motion graphic seharga jutaan rupiah ke klien agensi."
     },
     {
-      id: 'faq-7',
-      question: 'Bagaimana jika saya bingung atau butuh panduan langsung?',
-      answer: 'Tim pengembang AUDIRA menyediakan layanan support cepat melalui WhatsApp resmi di 0857-0966-6240. Kami siap membantu membimbing instalasi skill, konfigurasi AI lokal, hingga video pertama Anda berhasil dirender.'
+      "id": "faq-7",
+      "question": "Bagaimana jika saya gaptek atau butuh bantuan saat proses instalasi?",
+      "answer": "Anda tidak sendirian. Kami menyediakan Garansi Pendampingan 1-on-1 via WhatsApp Resmi Tim AUDIRA (+62 857-0966-6240). Selain itu, Anda mendapatkan akses ke portal pelanggan (/pesanan) dan buku panduan instalasi 5 langkah (/panduan). Tim teknis kami siap memandu via chat atau remote screen sharing sampai video pertama Anda berhasil dirender di laptop Anda."
+    },
+    {
+      "id": "faq-8",
+      "question": "Bisa dibuatkan video terima beres kalau saya tidak punya waktu operasikan Claude sendiri?",
+      "answer": "Tentu saja bisa! Kami menyediakan layanan VIP Done-For-You (Jasa Terima Beres 24 Jam). Anda cukup mengirimkan materi atau link produk di WhatsApp, tim kreator AUDIRA yang akan meriset angle viral, menyusun naskah persuasif, memilihkan style 3D terbaik, menyinkronkan audio suara AI jernih, dan mengirimkan file video MP4 siap posting dalam waktu 24 jam."
     }
   ],
   contact: {
