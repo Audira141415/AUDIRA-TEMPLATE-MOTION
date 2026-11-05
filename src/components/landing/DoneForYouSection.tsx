@@ -5,16 +5,12 @@ import {
   Check, 
   MessageCircle, 
   Clock, 
-  Sparkles, 
-  ShieldCheck, 
-  ArrowRight, 
   Zap, 
   Star,
   ChevronLeft,
   ChevronRight,
   CheckCircle2,
-  Circle,
-  Video
+  Circle
 } from 'lucide-react';
 
 export type DfyPlanId = 'single' | 'bundle' | 'retainer';
@@ -29,11 +25,12 @@ interface DfyPlan {
   badge: string;
   countBadge: string;
   price: string;
-  originalPrice: string;
+  originalPrice?: string;
   priceSubtitle: string;
   savingsNote?: string;
   desc: string;
   deliverables: Array<{ text: React.ReactNode; isCyan?: boolean; isYellow?: boolean }>;
+  buttonText: string;
   waMessage: string;
   popular?: boolean;
 }
@@ -45,9 +42,10 @@ const DFY_PLANS: DfyPlan[] = [
     badge: 'UJI COBA',
     countBadge: '1 Video',
     price: 'Rp349.000',
-    originalPrice: 'Rp550.000',
+    originalPrice: '',
     priceSubtitle: '/ video reel',
     desc: 'Pilihan ideal untuk menguji kualitas video AUDIRA atau promo kilat campaign produk Anda.',
+    buttonText: 'Order Video Satuan',
     deliverables: [
       { text: <span><strong>1 Video Reel/Shorts 9:16</strong> (durasi 30–60 detik)</span> },
       { text: <span>Naskah diracik tim AUDIRA dengan formula viral hook</span> },
@@ -55,7 +53,7 @@ const DFY_PLANS: DfyPlan[] = [
       { text: <span>Kinetic subtitle (MrBeast / Ali Abdaal style)</span> },
       { text: <span>Bebas pilih gaya (Explainer, Roblox, Banter, atau 3D)</span> },
       { text: <span>1x garansi revisi minor naskah & visual</span> },
-      { text: <span className="text-cyan-300 font-semibold">Pengerjaan kilat 24 jam</span>, isCyan: true },
+      { text: <span className="text-[#38bdf8] font-semibold">Pengerjaan kilat 24 jam</span>, isCyan: true },
     ],
     waMessage: 'Halo Mas Agus AUDIRA, saya ingin order Paket Satuan Video Motion Terima Beres (Rp349.000). Mohon info langkah selanjutnya.',
   },
@@ -66,10 +64,11 @@ const DFY_PLANS: DfyPlan[] = [
     countBadge: '5 Video Reels',
     price: 'Rp1.399.000',
     originalPrice: 'Rp1.745.000',
-    priceSubtitle: '/ paket 5 video',
+    priceSubtitle: '',
     savingsNote: 'Hanya ~Rp279.000 per video (Hemat Rp346.000)',
     desc: 'Sempurna untuk mengisi feed selama 1–2 minggu penuh. Menguji variasi angle dan format konten berbeda.',
     popular: true,
+    buttonText: 'Pesan Paket 5 Video Sekarang',
     deliverables: [
       { text: <span><strong>5 Video Reels/Shorts 9:16</strong> siap tayang</span> },
       { text: <span>Bebas campur format (contoh: 2 Explainer + 2 Skits + 1 3D)</span> },
@@ -77,7 +76,7 @@ const DFY_PLANS: DfyPlan[] = [
       { text: <span>Sound effect (SFX) & BGM berlisensi komersial aman</span> },
       { text: <span>Termasuk caption teks & rekomendasi hashtag postingan</span> },
       { text: <span>2x garansi revisi per video</span> },
-      { text: <span className="text-cyan-300 font-semibold">Penyelesaian bertahap 2–4 hari kerja</span>, isCyan: true },
+      { text: <span className="text-[#38bdf8] font-semibold">Penyelesaian bertahap 2–4 hari kerja</span>, isCyan: true },
     ],
     waMessage: 'Halo Mas Agus AUDIRA, saya ingin order Paket Starter 5 Video Reels (Rp1.399.000). Saya mau diskusi konsep untuk akun sosmed/bisnis saya.',
   },
@@ -87,10 +86,11 @@ const DFY_PLANS: DfyPlan[] = [
     badge: 'DOMINASI BULANAN',
     countBadge: '15 Video / Bulan',
     price: 'Rp3.490.000',
-    originalPrice: 'Rp5.500.000',
+    originalPrice: '',
     priceSubtitle: '/ bulan',
     savingsNote: 'Hanya ~Rp232.000 per video (Hemat Rp1.745.000)',
     desc: 'Untuk bisnis, agency, atau personal brand yang ingin konsisten upload 1 video tiap 2 hari tanpa repot punya karyawan video editor.',
+    buttonText: 'Konsultasi Retainer Bulanan',
     deliverables: [
       { text: <span><strong>15 Video Reels/Shorts 9:16</strong> terdistribusi sebulan</span> },
       { text: <span>Jadwal konten rapi (3–4 video per minggu)</span> },
@@ -98,7 +98,7 @@ const DFY_PLANS: DfyPlan[] = [
       { text: <span>Custom watermark logo & warna brand Anda</span> },
       { text: <span>Prioritas antrean pengerjaan kilat VIP</span> },
       { text: <span>Revisi bebas sampai cocok dengan visi Anda</span> },
-      { text: <span className="text-yellow-300 font-semibold">Direct line konsultasi WhatsApp pribadi Mas Agus</span>, isYellow: true },
+      { text: <span className="text-[#facc15] font-semibold">Direct line konsultasi WhatsApp pribadi Mas Agus</span>, isYellow: true },
     ],
     waMessage: 'Halo Mas Agus AUDIRA, saya tertarik berlangganan Monthly Retainer 15 Video (Rp3.490.000/bln) untuk brand saya. Bisa kita jadwalkan konsultasi brief?',
   }
@@ -163,7 +163,7 @@ export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan 
         </div>
       </div>
 
-      {/* Interactive Plan Selector Bar (Pilih Kiri, Tengah, atau Kanan) */}
+      {/* Interactive Plan Selector Bar */}
       <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-line bg-card p-3 sm:p-4 shadow-card-warm">
         <div className="flex items-center gap-2.5">
           <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
@@ -234,10 +234,12 @@ export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan 
         </div>
       </div>
 
-      {/* 3 Pricing & Service Tiers Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {DFY_PLANS.map((plan, idx) => {
+      {/* 3 Pricing & Service Tiers Grid matching Screenshot */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 items-stretch">
+        {DFY_PLANS.map((plan) => {
           const isSelected = selectedPlan === plan.id;
+          const isSingle = plan.id === 'single';
+          const isBundle = plan.id === 'bundle';
           const isRetainer = plan.id === 'retainer';
 
           return (
@@ -245,93 +247,74 @@ export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan 
               key={plan.id}
               onClick={() => setSelectedPlan(plan.id)}
               className={`relative flex flex-col justify-between rounded-3xl p-6 sm:p-7 transition-all cursor-pointer ${
-                isSelected
-                  ? isRetainer
-                    ? 'border-2 border-purple-400 bg-card shadow-2xl ring-2 ring-purple-500/40 scale-[1.02] z-10'
-                    : 'border-2 border-accent bg-card shadow-2xl ring-2 ring-accent/50 scale-[1.02] z-10'
-                  : 'border border-line bg-card shadow-card-warm hover:border-line-strong hover:bg-tile/20'
-              }`}
+                isBundle
+                  ? 'border-2 border-[#ff6a2a] bg-[#161514] shadow-2xl shadow-orange-950/20'
+                  : isRetainer
+                  ? 'border border-[#2a2636] bg-[#151419] shadow-xl hover:border-purple-800/60'
+                  : 'border border-[#272624] bg-[#161514] shadow-xl hover:border-neutral-700'
+              } ${isSelected ? 'ring-2 ring-accent/40 scale-[1.01]' : ''}`}
             >
-              {/* Top Floating Badge for Selected or Popular */}
-              {isSelected ? (
-                <span className={`absolute -top-3.5 right-6 rounded-full px-3 py-1 font-mono text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1 ${
-                  isRetainer ? 'bg-purple-400 text-black' : 'bg-accent text-ink'
-                }`}>
-                  <Star className="w-3 h-3 fill-current" />
-                  {plan.id === 'bundle'
-                    ? 'PALING LARIS • TERPILIH'
-                    : plan.id === 'single'
-                    ? 'PAKET TERPILIH'
-                    : 'PAKET TERPILIH • DOMINASI'}
-                </span>
-              ) : plan.popular ? (
-                <span className="absolute -top-3.5 right-6 rounded-full bg-accent/70 px-3 py-1 font-mono text-[10px] font-black uppercase tracking-wider text-ink shadow flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-ink" />
-                  PALING LARIS
-                </span>
-              ) : null}
+              {/* Top Center Floating Badge for Bundle (Paling Laris • Hemat 20%) */}
+              {isBundle && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#ff6a2a] px-3.5 py-0.5 font-mono text-[10px] font-black uppercase tracking-wider text-black shadow flex items-center gap-1.5 whitespace-nowrap">
+                  <span>★</span>
+                  <span>PALING LARIS</span>
+                  <span>•</span>
+                  <span>HEMAT 20%</span>
+                </div>
+              )}
 
               <div>
                 {/* Header row with badges and Radio Selector */}
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <div className="flex items-center gap-2">
-                    <span className={`font-mono text-xs font-semibold uppercase tracking-wider ${
-                      isRetainer ? 'text-purple-400' : 'text-accent'
+                    <span className={`font-mono text-xs font-bold uppercase tracking-wider ${
+                      isRetainer ? 'text-[#c084fc]' : 'text-[#ff6a2a]'
                     }`}>
                       {plan.badge}
                     </span>
-                    <span className="rounded-full border border-edge bg-tile px-2.5 py-0.5 font-mono text-[10px] text-fg-2">
-                      {plan.countBadge}
-                    </span>
                   </div>
 
-                  {/* Radio Choice Indicator */}
-                  <div className="flex items-center gap-1.5 font-mono text-[11px]">
-                    {isSelected ? (
-                      <span className={`inline-flex items-center gap-1 font-bold ${
-                        isRetainer ? 'text-purple-300' : 'text-accent'
-                      }`}>
-                        <CheckCircle2 className="w-4 h-4 fill-current text-ink" />
-                        <span>Terpilih</span>
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1 text-dim hover:text-paper">
-                        <Circle className="w-3.5 h-3.5" />
-                        <span>Pilih</span>
-                      </span>
-                    )}
-                  </div>
+                  <span className={`rounded-full px-2.5 py-0.5 font-mono text-[11px] ${
+                    isRetainer
+                      ? 'bg-[#3b1754] text-[#d8b4fe] border border-purple-800/50'
+                      : isBundle
+                      ? 'bg-[#29160d] text-[#ff8e54] border border-[#ff6a2a]/40'
+                      : 'border border-neutral-800 bg-[#21201d] text-neutral-300'
+                  }`}>
+                    {plan.countBadge}
+                  </span>
                 </div>
 
-                <h3 className="font-display text-2xl font-bold tracking-tight text-paper mb-1">
+                <h3 className="font-display text-2xl font-bold tracking-tight text-white mb-1.5">
                   {plan.name}
                 </h3>
-                <p className="text-xs text-muted mb-4 leading-relaxed">
+                <p className="text-xs text-[#9d9990] mb-5 leading-relaxed min-h-[38px]">
                   {plan.desc}
                 </p>
 
                 {/* Price Display */}
                 <div className="mb-6 flex flex-col">
-                  <div className="flex items-baseline gap-2">
-                    <span className={`font-display text-3xl font-extrabold ${
-                      isSelected 
-                        ? isRetainer ? 'text-purple-300' : 'text-accent' 
-                        : 'text-paper'
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className={`font-display text-[32px] sm:text-[34px] font-extrabold tracking-tight ${
+                      isBundle ? 'text-[#ff6a2a]' : 'text-white'
                     }`}>
                       {plan.price}
                     </span>
                     {plan.originalPrice && (
-                      <span className="text-xs text-muted line-through font-mono">
+                      <span className="text-xs text-neutral-500 line-through font-mono">
                         {plan.originalPrice}
                       </span>
                     )}
-                    <span className="text-xs text-muted">
-                      {plan.priceSubtitle}
-                    </span>
+                    {plan.priceSubtitle && (
+                      <span className="text-xs text-neutral-400">
+                        {plan.priceSubtitle}
+                      </span>
+                    )}
                   </div>
                   {plan.savingsNote && (
-                    <span className={`text-[11px] font-mono font-semibold mt-0.5 ${
-                      isRetainer ? 'text-purple-300' : 'text-emerald-400'
+                    <span className={`text-[11px] font-mono font-semibold mt-1 ${
+                      isRetainer ? 'text-[#c084fc]' : 'text-[#34d399]'
                     }`}>
                       {plan.savingsNote}
                     </span>
@@ -339,17 +322,15 @@ export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan 
                 </div>
 
                 {/* Deliverables List */}
-                <ul className="flex flex-col gap-3 text-xs sm:text-[13px] text-fg-2 mb-6 border-t border-line-soft pt-5">
+                <ul className="flex flex-col gap-3 text-xs sm:text-[13px] text-[#d4d1c9] mb-8 border-t border-neutral-800/80 pt-5">
                   {plan.deliverables.map((d, dIdx) => (
                     <li key={dIdx} className="flex items-start gap-2.5">
                       {d.isCyan ? (
-                        <Clock className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                        <Clock className="w-4 h-4 text-[#38bdf8] shrink-0 mt-0.5" />
                       ) : d.isYellow ? (
-                        <Zap className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
+                        <Zap className="w-4 h-4 text-[#facc15] shrink-0 mt-0.5" />
                       ) : (
-                        <Check className={`w-4 h-4 shrink-0 mt-0.5 ${
-                          isRetainer ? 'text-purple-400' : 'text-accent'
-                        }`} />
+                        <Check className="w-4 h-4 shrink-0 mt-0.5 text-[#ff6a2a]" />
                       )}
                       <span>{d.text}</span>
                     </li>
@@ -357,7 +338,7 @@ export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan 
                 </ul>
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Button matching screenshot */}
               <div className="mt-auto flex flex-col gap-2 pt-2">
                 <button
                   type="button"
@@ -365,29 +346,23 @@ export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan 
                     e.stopPropagation();
                     handleOrder(plan);
                   }}
-                  className={`w-full inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3.5 text-sm font-bold transition-all active:scale-[0.99] ${
-                    isSelected
-                      ? isRetainer
-                        ? 'bg-purple-400 text-black shadow-lg shadow-purple-950/40 hover:bg-purple-300'
-                        : 'bg-accent text-ink shadow-lg shadow-orange-950/40 hover:bg-orange-500'
-                      : 'border border-edge bg-tile text-paper hover:bg-tile-2 hover:border-line-strong'
+                  className={`w-full inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all active:scale-[0.99] ${
+                    isBundle
+                      ? 'bg-[#ff6a2a] text-black hover:bg-[#ff7d42] shadow-lg shadow-orange-950/40 font-black'
+                      : isRetainer
+                      ? 'border border-[#581c87] bg-transparent text-[#e9d5ff] hover:bg-[#3b1754]/30 hover:border-[#7e22ce]'
+                      : 'border border-neutral-800 bg-transparent text-neutral-200 hover:bg-neutral-800/40 hover:border-neutral-700'
                   }`}
                 >
-                  <MessageCircle className={`w-4 h-4 ${isSelected ? 'fill-current' : 'text-emerald-400'}`} />
-                  <span>
-                    {isSelected ? `Pesan ${plan.name} Sekarang ➔` : `Pilih & Pesan ${plan.name}`}
-                  </span>
+                  <MessageCircle className={`w-4 h-4 ${
+                    isBundle 
+                      ? 'fill-black text-black' 
+                      : isRetainer 
+                      ? 'text-[#c084fc]' 
+                      : 'text-[#34d399]'
+                  }`} />
+                  <span>{plan.buttonText}</span>
                 </button>
-
-                <a
-                  href={`${WHATSAPP_BASE}?text=${encodeURIComponent(plan.waMessage)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-1 text-center text-xs font-semibold text-dim hover:text-accent transition-colors"
-                >
-                  <span>Atau konsultasi brief via WhatsApp ➔</span>
-                </a>
               </div>
             </div>
           );

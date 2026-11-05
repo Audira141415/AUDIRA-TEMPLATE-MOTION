@@ -86,3 +86,4 @@ export function writeSiteConfig(config: SiteConfig): SiteConfig {
   renameSync(tmp, CONFIG_FILE);
   return updated;
 }
+

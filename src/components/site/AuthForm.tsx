@@ -57,7 +57,10 @@ export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
         setError(data.error ?? 'Terjadi kesalahan. Coba lagi.');
         return;
       }
-      router.push(next);
+      const targetPath = params.get('next')?.startsWith('/')
+        ? params.get('next')!
+        : (data.user?.role === 'superadmin' ? '/admin' : '/studio');
+      router.push(targetPath);
       router.refresh();
     } catch {
       setError('Tidak bisa terhubung ke server.');
@@ -88,14 +91,14 @@ export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
           </label>
         )}
         <label className="flex flex-col gap-2">
-          <span className="text-[13px] font-semibold text-[#d6d3cc]">Email</span>
+          <span className="text-[13px] font-semibold text-[#d6d3cc]">{mode === 'register' ? 'Email' : 'Email atau Username'}</span>
           <input
-            type="email"
+            type={mode === 'register' ? 'email' : 'text'}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
+            autoComplete={mode === 'register' ? 'email' : 'username'}
             required
-            placeholder="nama@email.com"
+            placeholder={mode === 'register' ? 'nama@email.com' : 'audira atau nama@email.com'}
             className={inputClass}
           />
         </label>
