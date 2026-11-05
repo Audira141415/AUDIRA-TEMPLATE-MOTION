@@ -35,6 +35,11 @@ const FAQS: FaqItem[] = [
       'Tool biasa hanya memberikan teks prompt polos yang harus Anda copy-paste ke After Effects atau Premiere Pro secara manual berjam-jam. AUDIRA adalah ekosistem video engine lengkap: naskah ditulis otomatis oleh AI, disuarakan oleh vokal AI bahasa Indonesia, ditata ke canvas vertikal 9:16, dan dirender jadi file MP4 1080p 60 FPS siap upload.',
   },
   {
+    question: 'Bisa dibuatkan video terima beres kalau saya tidak punya waktu edit sendiri?',
+    answer:
+      'Bisa banget! Kami menyediakan layanan VIP Done-For-You (Jasa Terima Beres 24 Jam). Anda cukup mengirimkan materi atau link produk di WhatsApp, tim AUDIRA yang akan meriset angle viral, menyusun naskah persuasif, mengisi suara AI jernih, dan menganimasikan videonya hingga siap upload. Harga mulai Rp199.000 per video atau Rp799.000 untuk paket 5 video.',
+  },
+  {
     question: 'Bagaimana jika saya bingung atau butuh panduan langsung?',
     answer:
       'Tim pengembang AUDIRA menyediakan layanan support cepat melalui WhatsApp resmi di 0857-0966-6240. Kami siap membantu membimbing instalasi skill, konfigurasi AI lokal, hingga video pertama Anda berhasil dirender.',

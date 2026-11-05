@@ -23,3 +23,4 @@ if not exist "%~dp0audira-skill-motion\starter\node_modules" (
 echo [*] Menjalankan Remotion Studio 3D...
 cd /d "%~dp0audira-skill-motion\starter"
 call npm run dev
+

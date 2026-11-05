@@ -284,6 +284,23 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
           <ArrowRight className="ml-2 h-4 w-4" />
         </a>
       </div>
+
+      {/* Done-For-You Alternative Callout */}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-tile px-6 py-4">
+        <div className="flex items-center gap-3">
+          <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          <p className="text-xs sm:text-sm text-fg-2 font-medium">
+            <strong>Malas edit sendiri atau butuh hasil cepat?</strong> Serahkan ke tim AUDIRA. Terima video 1080p beres dalam 24 jam.
+          </p>
+        </div>
+        <a
+          href="#jasa"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-orange-400 transition-colors"
+        >
+          <span>Pilih Jasa Terima Beres (Mulai Rp199k)</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
     </section>
   );
 };

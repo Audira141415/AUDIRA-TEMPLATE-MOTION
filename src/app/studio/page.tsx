@@ -355,6 +355,25 @@ export default function StudioPage() {
 
       {/* Main Studio Workspace */}
       <main className="flex-1 max-w-[1400px] w-full mx-auto p-4 sm:p-6 lg:p-8">
+        {/* Done-For-You VIP Agency Callout Banner */}
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-line bg-gradient-to-r from-card via-tile to-ink px-4 py-2.5 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-semibold text-fg-2">
+              Malas ngetik atau butuh video custom kelas agensi tanpa repot edit sendiri?
+            </span>
+          </div>
+          <a
+            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus%20AUDIRA%2C%20saya%20tertarik%20dengan%20Jasa%20Terima%20Beres%20Pembuatan%20Video%20Motion%20untuk%20kebutuhan%20saya."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 px-3 py-1 font-bold text-emerald-300 hover:bg-emerald-500 hover:text-black transition-all"
+          >
+            <span>Serahkan ke Tim AUDIRA (Terima Beres 24 Jam)</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
         {/* Top Control Bar with Quick Metadata */}
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
           <div>

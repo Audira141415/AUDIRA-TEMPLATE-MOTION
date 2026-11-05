@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/landing/HeroSection';
 import { ProductPackages } from '@/components/landing/ProductPackages';
 import { Remotion3DShowcase } from '@/components/landing/Remotion3DShowcase';
 import { GallerySection } from '@/components/landing/GallerySection';
+import { DoneForYouSection } from '@/components/landing/DoneForYouSection';
 import { HowItWorksSection } from '@/components/landing/HowItWorksSection';
 import { BundleSection } from '@/components/landing/BundleSection';
 import { FaqSection } from '@/components/landing/FaqSection';
@@ -28,7 +29,10 @@ export default function LandingPage() {
         {/* 5. Interactive Video Gallery (#hasil) - Voynan-Grade Cards, 3 Tags, Quote Snippet, Single Play Lock */}
         <GallerySection activeTab="gaming" />
 
-        {/* 6. How It Works (#cara-kerja) - 3 Steps (Ketik -> Suarakan -> Render) + Live Demo */}
+        {/* 6. VIP Done-For-You Agency Service (#jasa) - Terima Beres 24 Jam by AUDIRA Studio */}
+        <DoneForYouSection />
+
+        {/* 7. How It Works (#cara-kerja) - 3 Steps (Ketik -> Suarakan -> Render) + Live Demo */}
         <HowItWorksSection />
 
         {/* 7. Bundle Creator Lab (#bundle) - Best Value Rp109k + Feature Comparison Table */}

@@ -6,7 +6,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LogOut, Menu, ShieldCheck, X, Sparkles } from 'lucide-react';
 
 export const NAV_LINKS = [
-  { href: '/#produk', label: 'Paket' },
+  { href: '/#produk', label: 'Paket DIY' },
+  { href: '/#jasa', label: 'Jasa Terima Beres' },
   { href: '/#remotion-3d', label: '3D Remotion' },
   { href: '/#hasil', label: 'Hasil video' },
   { href: '/#cara-kerja', label: 'Cara kerja' },
