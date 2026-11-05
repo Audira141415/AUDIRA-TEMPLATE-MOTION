@@ -1,60 +1,18 @@
 'use client';
 
 import React from 'react';
-import { Star, ShieldCheck, TrendingUp, Award, Quote, CheckCircle2 } from 'lucide-react';
+import { Star, Award, CheckCircle2 } from 'lucide-react';
+import { TestimonialItem, TrustStatItem, DEFAULT_LANDING_CONFIG } from '@/types/landing';
 
-interface TestimonialItem {
-  id: string;
-  name: string;
-  role: string;
-  avatarText: string;
-  metric: string;
-  metricLabel: string;
-  kitUsed: string;
-  quote: string;
+export interface TestimonialsSectionProps {
+  items?: TestimonialItem[];
+  stats?: TrustStatItem[];
 }
 
-const TESTIMONIALS: TestimonialItem[] = [
-  {
-    id: '1',
-    name: 'Budi Santoso',
-    role: 'Principal Architect & 3D Visualizer, Surabaya',
-    avatarText: 'BS',
-    metric: '15 Menit',
-    metricLabel: 'Dari biasanya 3 hari render',
-    kitUsed: 'BUILDFORGE & DRAFTFORGE',
-    quote: 'Format BUILDFORGE dan DRAFTFORGE benar-benar memangkas waktu bikin video animasi presentasi arsitektur. Klien properti saya kagum melihat perakitan struktur baja bertahap 60 FPS yang mulus tanpa perlu render berjam-jam di software 3D berat.'
-  },
-  {
-    id: '2',
-    name: 'Rian Pratama',
-    role: 'Tech Creator & Gadget Reviewer, Jakarta',
-    avatarText: 'RP',
-    metric: '480k Views',
-    metricLabel: 'Dalam 2 minggu penayangan',
-    kitUsed: 'PRECISION & CYBERFORGE',
-    quote: 'Exploded view jam tangan titanium di kit PRECISION membuat video komersial brand gadget saya tampak sekelas iklan Apple. Ditambah normalisasi vokal Cartesia Indonesia, retensi penonton di Reels naik drastis.'
-  },
-  {
-    id: '3',
-    name: 'Sarah Melati',
-    role: 'Managing Director Agensi Kreatif, Bandung',
-    avatarText: 'SM',
-    metric: '5 Klien UMKM',
-    metricLabel: 'Balik modal di hari pertama',
-    kitUsed: 'CREATOR LAB ULTIMATE',
-    quote: 'Paket Creator Lab seharga Rp499.000 adalah investasi digital terbaik tahun ini. Sekali bayar, kami punya 29 variasi gaya 3D dan full codebase Remotion untuk melayani video reels puluhan klien tanpa bayar royalti bulanan.'
-  }
-];
+export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ items, stats }) => {
+  const testimonials = items && items.length > 0 ? items : DEFAULT_LANDING_CONFIG.testimonials;
+  const trustStats = stats && stats.length > 0 ? stats : DEFAULT_LANDING_CONFIG.trustStats;
 
-const TRUST_STATS = [
-  { value: '29', label: 'Gaya 3D Sinematik', desc: 'Arsitektur, Taktil, Sains & Komersial' },
-  { value: '60 FPS', label: 'Fluid Motion', desc: '1080×1920 Vertikal Ultra-Smooth' },
-  { value: '100%', label: 'Bebas Royalti', desc: 'Hak Cipta Penuh untuk Klien & Iklan' },
-  { value: '< 24 Jam', label: 'SLA Terima Beres', desc: 'Pengerjaan Kilat Studio AUDIRA' }
-];
-
-export const TestimonialsSection: React.FC = () => {
   return (
     <section id="testimoni" className="mx-auto max-w-[1240px] px-4 py-16 md:px-8 md:py-24 border-t border-line">
       {/* Header */}
@@ -76,7 +34,7 @@ export const TestimonialsSection: React.FC = () => {
 
       {/* 4 Stat Badges Grid */}
       <div className="mb-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {TRUST_STATS.map((stat, i) => (
+        {trustStats.map((stat, i) => (
           <div
             key={i}
             className="flex flex-col items-center text-center p-5 rounded-2xl border border-line bg-card shadow-card-warm"
@@ -94,9 +52,9 @@ export const TestimonialsSection: React.FC = () => {
         ))}
       </div>
 
-      {/* 3 Testimonials Cards Grid */}
+      {/* Testimonials Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {TESTIMONIALS.map((t) => (
+        {testimonials.map((t) => (
           <div
             key={t.id}
             className="flex flex-col justify-between rounded-3xl border border-line bg-card p-6 sm:p-7 shadow-card-warm transition-transform hover:-translate-y-1 hover:border-line-strong"
@@ -157,4 +115,3 @@ export const TestimonialsSection: React.FC = () => {
     </section>
   );
 };
-

@@ -18,13 +18,15 @@ import {
   Star
 } from 'lucide-react';
 import { ProductTier } from './OrderModal';
+import { LandingConfig } from '@/types/landing';
 
 interface Props {
   onSelectTab?: (tabKey: string) => void;
   onBuyTier?: (tier: ProductTier) => void;
+  pricingConfig?: LandingConfig['pricingTiers'];
 }
 
-export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => {
+export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, pricingConfig }) => {
   const [selectedTier, setSelectedTier] = useState<ProductTier>('master');
 
   const tierOrder: ProductTier[] = ['starter', 'master', 'lab'];
@@ -201,7 +203,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                 Starter 3D Pack
               </h3>
-              <p className="font-display text-[22px] font-bold text-accent">Rp149.000</p>
+              <p className="font-display text-[22px] font-bold text-accent">{pricingConfig?.starter.price ?? 'Rp149.000'}</p>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
@@ -260,7 +262,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
                 Lihat contoh ➔
               </a>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Starter%203D%20(Rp149.000)"
+                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Starter%203D%20(Rp149.000)"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
@@ -335,7 +337,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                 Master Director Pack
               </h3>
-              <p className="font-display text-[22px] font-bold text-cyan-400">Rp299.000</p>
+              <p className="font-display text-[22px] font-bold text-cyan-400">{pricingConfig?.master.price ?? 'Rp299.000'}</p>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
@@ -394,7 +396,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
                 Jelajahi 29 gaya ➔
               </a>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
+                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
@@ -467,7 +469,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                 Creator Lab Ultimate
               </h3>
-              <p className="font-display text-[22px] font-bold text-amber-400">Rp499.000</p>
+              <p className="font-display text-[22px] font-bold text-amber-400">{pricingConfig?.lab.price ?? 'Rp499.000'}</p>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
@@ -523,7 +525,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
                 Detail ekosistem ➔
               </a>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Creator%20Lab%20Ultimate%20(Rp499.000)"
+                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Creator%20Lab%20Ultimate%20(Rp499.000)"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}

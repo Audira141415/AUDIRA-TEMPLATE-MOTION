@@ -31,9 +31,10 @@ import { VoiceOverTab } from '@/components/admin/VoiceOverTab';
 import { OrdersTab } from '@/components/admin/OrdersTab';
 import { SiteSettingsTab } from '@/components/admin/SiteSettingsTab';
 import { CatalogTab } from '@/components/admin/CatalogTab';
+import { LandingPageManagerTab } from '@/components/admin/LandingPageManagerTab';
 import { OrderRecord } from '@/lib/orders';
 
-type AdminTab = 'overview' | 'orders' | 'site' | 'catalog' | 'ai' | 'voice' | 'users' | 'renders';
+type AdminTab = 'overview' | 'landing' | 'orders' | 'catalog' | 'site' | 'ai' | 'voice' | 'users' | 'renders';
 
 type AdminUser = {
   id: string;
@@ -210,6 +211,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         <div role="tablist" className="flex flex-wrap gap-1 rounded-2xl border border-line bg-card p-1.5 shadow-xl">
           {[
             { id: 'overview' as const, label: 'Overview', icon: <LayoutDashboard className="h-4 w-4" /> },
+            { id: 'landing' as const, label: 'CMS Landing Page', icon: <Sparkles className="h-4 w-4 text-accent" /> },
             { id: 'orders' as const, label: 'Pesanan & Lisensi', icon: <ShoppingBag className="h-4 w-4" /> },
             { id: 'site' as const, label: 'Pengaturan & Harga', icon: <Settings className="h-4 w-4" /> },
             { id: 'catalog' as const, label: 'Katalog 29 Gaya 3D', icon: <Layers className="h-4 w-4" /> },
@@ -342,6 +344,18 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
               <div className="space-y-2 text-xs">
                 <button
                   type="button"
+                  onClick={() => setTab('landing')}
+                  className="w-full p-3 rounded-xl bg-accent/15 border border-accent/40 hover:bg-accent/25 flex items-center justify-between text-left group transition-all"
+                >
+                  <div>
+                    <span className="font-bold text-accent block">Kelola Konten &amp; Tampilan Landing Page</span>
+                    <span className="text-[11px] text-paper/80">Edit Hero, 3 Tier Lisensi, DFY, Testimoni, FAQ &amp; Toggles</span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
+                </button>
+
+                <button
+                  type="button"
                   onClick={() => setTab('orders')}
                   className="w-full p-3 rounded-xl bg-tile border border-line hover:border-accent flex items-center justify-between text-left group transition-all"
                 >
@@ -392,6 +406,11 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
 
           </div>
         </div>
+      )}
+
+      {/* TAB: CMS LANDING PAGE */}
+      {tab === 'landing' && (
+        <LandingPageManagerTab />
       )}
 
       {/* TAB 2: ORDERS MANAGEMENT */}
