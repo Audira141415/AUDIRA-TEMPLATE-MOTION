@@ -170,6 +170,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   const [couponLoading, setCouponLoading] = useState(false);
   const [couponError, setCouponError] = useState<string | null>(null);
 
+  // Submission state (moved to top to obey React Rules of Hooks)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedOrderId, setSubmittedOrderId] = useState<string | null>(null);
+
   useEffect(() => {
     setSelectedTier(defaultTier);
   }, [defaultTier]);
@@ -247,9 +251,6 @@ export const OrderModal: React.FC<OrderModalProps> = ({
       console.error(e);
     }
   };
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submittedOrderId, setSubmittedOrderId] = useState<string | null>(null);
 
   const handleWhatsAppCheckout = async () => {
     const name = buyerName.trim() || 'Kreator';
