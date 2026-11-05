@@ -38,22 +38,22 @@ const TIERS: Record<ProductTier, TierInfo> = {
   starter: {
     id: 'starter',
     name: 'Starter 3D Pack',
-    price: 'Rp49.000',
-    originalPrice: 'Rp79.000',
+    price: 'Rp149.000',
+    originalPrice: 'Rp299.000',
     badge: '5 GAYA PILIHAN',
     accentColor: 'text-accent border-accent',
     highlights: [
       '5 Kit Gaya 3D Signature Pilihan',
       'Perintah Claude Code /audira-motion',
       'Ekspor MP4 1080×1920 60 FPS Tanpa Watermark',
-      'Akses Web Studio Browser Runner'
+      'Lisensi Komersial Seumur Hidup (Bebas Royalti)'
     ]
   },
   master: {
     id: 'master',
     name: 'Master Director Pack',
-    price: 'Rp79.000',
-    originalPrice: 'Rp129.000',
+    price: 'Rp299.000',
+    originalPrice: 'Rp599.000',
     badge: 'SEMUA 29 GAYA 3D',
     accentColor: 'text-cyan-400 border-cyan-400',
     highlights: [
@@ -66,8 +66,8 @@ const TIERS: Record<ProductTier, TierInfo> = {
   lab: {
     id: 'lab',
     name: 'Creator Lab Ultimate',
-    price: 'Rp109.000',
-    originalPrice: 'Rp178.000',
+    price: 'Rp499.000',
+    originalPrice: 'Rp999.000',
     badge: 'PALING LARIS • FULL SUITE',
     accentColor: 'text-amber-400 border-amber-400',
     highlights: [
@@ -80,8 +80,8 @@ const TIERS: Record<ProductTier, TierInfo> = {
   dfy: {
     id: 'dfy',
     name: 'Jasa Terima Beres (DFY)',
-    price: 'Mulai Rp199.000',
-    originalPrice: 'Rp350.000',
+    price: 'Mulai Rp349.000',
+    originalPrice: 'Rp550.000',
     badge: 'SLA 24 JAM SELESAI',
     accentColor: 'text-emerald-400 border-emerald-400',
     highlights: [
@@ -438,3 +438,4 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     </div>
   );
 };
+

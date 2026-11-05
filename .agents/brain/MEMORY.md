@@ -64,13 +64,28 @@
 
 ---
 
-## 3. Commercial E-Commerce & Production Sales Release (v3.0.0 Ready-To-Sell)
+## 3. Commercial E-Commerce & Production Sales Release (v3.1.0 High-Conversion Showroom)
+- [x] **Indonesian Market Pricing Realignment (Anti-Underpricing)**:
+  - Riset pasar produk digital & motion studio di Indonesia diterapkan secara menyeluruh:
+    - **Starter 3D Pack (5 Gaya Pilihan)**: Rp149.000 (Coret: Rp299.000)
+    - **Master Director Pack (29 Gaya Lengkap)**: Rp299.000 (Coret: Rp599.000)
+    - **Creator Lab Ultimate (Full Codebase + Claude Skill + Asset 3D)**: Rp499.000 (Coret: Rp999.000, hemat 50%)
+    - **Jasa Terima Beres (1 Video 3D DFY 24 Jam)**: Rp349.000 (Coret: Rp550.000)
+    - **Jasa Terima Beres (5 Video Reels DFY)**: Rp1.399.000 (Coret: Rp1.745.000, ~Rp279.000/video)
+    - **Jasa Terima Beres (Monthly Retainer 15 Video DFY)**: Rp3.490.000 (Coret: Rp5.500.000, ~Rp232.000/video)
+  - Diupdate sinkron di `OrderModal.tsx`, `ProductPackages.tsx`, `BundleSection.tsx`, `DoneForYouSection.tsx`, `StickyCtaBar.tsx`, `FaqSection.tsx`, dan `TestimonialsSection.tsx`.
+- [x] **Public CTA Redirection & Elimination of 2D Studio Mismatch**:
+  - Menghapus tautan publik ke `/studio` (yang merupakan editor skit 2D) dari `SiteHeader.tsx`, `HeroSection.tsx`, `SiteFooter.tsx`, `GallerySection.tsx`, `Remotion3DShowcase.tsx`, dan `prompts/page.tsx`.
+  - Tombol header kanan atas diubah menjadi `[Beli Lisensi 3D]` mengarah langsung ke `/#produk`.
+  - Hero CTA 1 diubah menjadi `[Pilih Lisensi 3D (Mulai Rp149k)]` (`#produk`), dan CTA 2 ke `[Lihat 29 Gaya Sinematik]` (`#hasil`).
+  - Formulir ide di Hero dirombak menjadi `IdeaForm.tsx` berbasis prompt 3D Claude Code (`/audira-motion ...`) dengan 1-klik salin ke clipboard.
+  - CTA kartu galeri & showcase diarahkan ke pembelian lisensi dan konsultasi WhatsApp.
 - [x] **29 Signature 3D Cinematic Videos (1080×1920 @ 60 FPS)**:
   - Seluruh 29 gaya sinematik 3D terintegrasi dari `AUDIRA_STYLE_SHOWCASE_2026/deliver/` ke `public/3d-kits/` dan `public/reels/`.
   - Normalisasi audio broadcast -14.1 LUFS, 10.00 detik durasi, 0 broken media / 0 mock assets.
 - [x] **Interactive Order & Checkout Modal (`OrderModal.tsx`)**:
-  - Pilihan paket instan (Starter Rp49.000, Master Director Rp79.000, Creator Lab Rp109.000, DFY Rp199.000).
-  - Pilihan jalur pembayaran: QRIS Instan (BCA, Mandiri, BRI, GoPay, OVO, ShopeePay), Transfer Bank Manual BCA, dan 1-Klik WhatsApp Direct Checkout dengan template naskah pesanan otomatis.
+  - Pilihan paket instan (Starter Rp149.000, Master Director Rp299.000, Creator Lab Rp499.000, DFY Mulai Rp349.000).
+  - Pilihan jalur pembayaran: QRIS Instan (BCA, Mandiri, BRI, GoPay, OVO, ShopeePay), Transfer Bank Manual BCA (8691888291 an. Agus Dwi Rianto), dan 1-Klik WhatsApp Direct Checkout dengan template naskah pesanan otomatis.
 - [x] **Social Proof & Verified Testimonials (`TestimonialsSection.tsx`)**:
   - Studi kasus & ulasan dari arsitek 3D visualizer, tech reviewer YouTube/TikTok, dan pemilik agensi digital.
   - 4 pilar metrik: 29 Gaya 3D, 60 FPS Fluid Motion, 100% Bebas Royalti, < 24 Jam SLA DFY.
@@ -79,4 +94,4 @@
 - [x] **Direct WhatsApp VIP Support Widget (`WhatsAppFloatingWidget.tsx`)**:
   - Floating badge di kanan bawah dengan tooltip bantuan cepat untuk calon pembeli.
 - [x] **Production Build Clean**:
-  - `npm run build` sukses mengompilasi 12 rute statis/dinamis, 0 error. Server aktif di port 3788.
+  - `npm run build` dan `npx tsc --noEmit` lolos 100% tanpa error. Server aktif di port 3788.

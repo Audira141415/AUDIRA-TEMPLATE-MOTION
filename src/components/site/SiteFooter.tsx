@@ -4,13 +4,13 @@ import { ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
 
 const COLUMNS = [
   {
-    title: 'Produk',
+    title: 'Produk & Layanan',
     links: [
-      { href: '/studio', label: 'Web Studio Live' },
+      { href: '/#produk', label: 'Paket Lisensi 3D' },
+      { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },
       { href: '/prompts', label: 'Katalog Prompt AI' },
-      { href: '/#produk', label: '3 Paket Produk' },
-      { href: '/#bundle', label: 'Creator Lab Bundle' },
-      { href: '/#hasil', label: 'Galeri 21 Format' },
+      { href: '/#bundle', label: 'Creator Lab Ultimate' },
+      { href: '/#hasil', label: 'Galeri 29 Gaya 3D' },
     ],
   },
   {
@@ -54,15 +54,18 @@ export const SiteFooter: React.FC = () => (
             href="/#bundle"
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm sm:text-base font-bold text-ink shadow-lg shadow-orange-950/50 hover:bg-orange-500 transition-all"
           >
-            <span>Ambil Creator Lab : Rp109.000</span>
+            <span>Ambil Creator Lab : Rp499.000</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <Link
-            href="/studio"
+          <a
+            href="https://wa.me/6285709666240"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-6 py-3.5 text-sm sm:text-base font-semibold text-paper hover:bg-tile-2 hover:border-line-strong transition-all"
           >
-            <span>Coba di Web Studio</span>
-          </Link>
+            <MessageCircle className="w-4 h-4 text-emerald-400" />
+            <span>Konsultasi WhatsApp</span>
+          </a>
         </div>
       </div>
     </div>

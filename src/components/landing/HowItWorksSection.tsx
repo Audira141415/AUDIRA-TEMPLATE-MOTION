@@ -42,7 +42,7 @@ export const HowItWorksSection: React.FC = () => {
             Pasang Skill ke Claude Code
           </h3>
           <p className="text-[14px] leading-relaxed text-muted">
-            Salin folder <code className="text-xs bg-ink px-1 rounded text-accent">audira-skill-motion/</code> ke direktori skill agen Anda, atau buka antarmuka Web Studio langsung dari peramban web.
+            Salin folder <code className="text-xs bg-ink px-1 rounded text-accent">audira-skill-motion/</code> ke direktori skill agen Claude Code Anda, atau jalankan Remotion Studio langsung via file <code className="text-xs bg-ink px-1 rounded text-accent">start_remotion.bat</code>.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export const HowItWorksSection: React.FC = () => {
             Ketik Perintah /audira-motion
           </h3>
           <p className="text-[14px] leading-relaxed text-muted">
-            Ketik ide cerita atau lampirkan file narasi suara (MP3). Agen otomatis menganalisis tempo dan memilih gaya 3D paling tepat dari 20 Signature Styles.
+            Ketik ide cerita atau lampirkan file narasi suara (MP3). Agen otomatis menganalisis tempo dan memilih gaya 3D paling tepat dari 29 Signature Styles.
           </p>
         </div>
 

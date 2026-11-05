@@ -27,18 +27,18 @@ export const HeroSection: React.FC = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-3 pt-1">
-          <Link
-            href="/studio"
-            className="btn-primary min-h-12 px-6 text-[15px] font-bold shadow-lg shadow-orange-950/20"
-          >
-            Buka Web Studio 3D
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
           <a
             href="#produk"
+            className="btn-primary min-h-12 px-6 text-[15px] font-bold shadow-lg shadow-orange-950/20"
+          >
+            Pilih Lisensi 3D (Mulai Rp149k)
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </a>
+          <a
+            href="#hasil"
             className="btn-outline min-h-12 px-5 text-[15px] font-medium"
           >
-            Lihat Lisensi &amp; Paket
+            Lihat 29 Gaya Sinematik
           </a>
         </div>
 

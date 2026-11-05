@@ -72,7 +72,7 @@ export const DoneForYouSection: React.FC = () => {
             </p>
 
             <div className="mb-6 flex items-baseline gap-2">
-              <span className="font-display text-3xl font-extrabold text-paper">Rp199.000</span>
+              <span className="font-display text-3xl font-extrabold text-paper">Rp349.000</span>
               <span className="text-xs text-muted">/ video reel</span>
             </div>
 
@@ -110,7 +110,7 @@ export const DoneForYouSection: React.FC = () => {
           </div>
 
           <a
-            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Halo Mas Agus AUDIRA, saya ingin order Paket Satuan Video Motion Terima Beres (Rp199.000). Mohon info langkah selanjutnya.')}`}
+            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Halo Mas Agus AUDIRA, saya ingin order Paket Satuan Video Motion Terima Beres (Rp349.000). Mohon info langkah selanjutnya.')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-edge bg-tile px-4 py-3 text-sm font-bold text-fg-2 hover:bg-tile-2 hover:border-line-strong hover:text-paper transition-all"
@@ -146,11 +146,11 @@ export const DoneForYouSection: React.FC = () => {
 
             <div className="mb-6 flex flex-col">
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-extrabold text-accent">Rp799.000</span>
-                <span className="text-xs text-muted line-through font-mono">Rp995.000</span>
+                <span className="font-display text-3xl font-extrabold text-accent">Rp1.399.000</span>
+                <span className="text-xs text-muted line-through font-mono">Rp1.745.000</span>
               </div>
               <span className="text-[11px] text-emerald-400 font-mono font-semibold mt-0.5">
-                Hanya ~Rp159.000 per video (Hemat Rp196.000)
+                Hanya ~Rp279.000 per video (Hemat Rp346.000)
               </span>
             </div>
 
@@ -188,7 +188,7 @@ export const DoneForYouSection: React.FC = () => {
           </div>
 
           <a
-            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Halo Mas Agus AUDIRA, saya ingin order Paket Starter 5 Video Reels (Rp799.000). Saya mau diskusi konsep untuk akun sosmed/bisnis saya.')}`}
+            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Halo Mas Agus AUDIRA, saya ingin order Paket Starter 5 Video Reels (Rp1.399.000). Saya mau diskusi konsep untuk akun sosmed/bisnis saya.')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-4 py-3 text-sm font-bold text-ink shadow-lg shadow-orange-950/40 hover:bg-orange-500 transition-all"
@@ -219,11 +219,11 @@ export const DoneForYouSection: React.FC = () => {
 
             <div className="mb-6 flex flex-col">
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-extrabold text-paper">Rp1.999.000</span>
+                <span className="font-display text-3xl font-extrabold text-paper">Rp3.490.000</span>
                 <span className="text-xs text-muted">/ bulan</span>
               </div>
               <span className="text-[11px] text-purple-300 font-mono font-semibold mt-0.5">
-                Hanya ~Rp133.000 per video (Hemat Rp986.000)
+                Hanya ~Rp232.000 per video (Hemat Rp1.745.000)
               </span>
             </div>
 
@@ -261,7 +261,7 @@ export const DoneForYouSection: React.FC = () => {
           </div>
 
           <a
-            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Halo Mas Agus AUDIRA, saya tertarik berlangganan Monthly Retainer 15 Video (Rp1.999.000/bln) untuk brand saya. Bisa kita jadwalkan konsultasi brief?')}`}
+            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Halo Mas Agus AUDIRA, saya tertarik berlangganan Monthly Retainer 15 Video (Rp3.490.000/bln) untuk brand saya. Bisa kita jadwalkan konsultasi brief?')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-purple-500/50 bg-purple-950/40 px-4 py-3 text-sm font-bold text-purple-200 hover:bg-purple-900/50 hover:border-purple-400 transition-all"

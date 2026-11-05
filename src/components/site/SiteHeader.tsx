@@ -129,11 +129,11 @@ export const SiteHeader: React.FC = () => {
           )}
 
           <Link
-            href="/studio"
+            href="/#produk"
             className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-accent px-3.5 py-2 text-xs xl:text-sm font-bold text-ink shadow-md shadow-orange-950/40 hover:bg-orange-500 transition-all active:scale-95"
           >
             <Sparkles className="w-3.5 h-3.5 fill-ink" />
-            <span>Buka Studio</span>
+            <span>Beli Lisensi 3D</span>
           </Link>
 
           <button

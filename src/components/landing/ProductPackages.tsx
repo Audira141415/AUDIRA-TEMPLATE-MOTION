@@ -68,7 +68,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                 Starter 3D Pack
               </h3>
-              <p className="font-display text-[22px] font-bold text-accent">Rp49.000</p>
+              <p className="font-display text-[22px] font-bold text-accent">Rp149.000</p>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
@@ -92,7 +92,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-              <span>Akses Web Studio browser runner</span>
+              <span>Lisensi komersial seumur hidup bebas royalti</span>
             </li>
           </ul>
 
@@ -102,7 +102,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               onClick={() => onBuyTier && onBuyTier('starter')}
               className="btn-primary w-full py-3 text-sm font-bold justify-center shadow-lg shadow-orange-950/20"
             >
-              Beli Starter (Rp49.000) ➔
+              Beli Starter (Rp149.000) ➔
             </button>
             <div className="flex items-center justify-between px-1">
               <a
@@ -112,12 +112,14 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               >
                 Lihat contoh ➔
               </a>
-              <Link
-                href="/studio?kit=buildforge"
+              <a
+                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Starter%203D%20(Rp149.000)"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-xs font-semibold text-muted hover:text-paper transition-colors"
               >
-                Coba Demo Studio
-              </Link>
+                Tanya via WA
+              </a>
             </div>
           </div>
         </article>
@@ -162,7 +164,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                 Master Director Pack
               </h3>
-              <p className="font-display text-[22px] font-bold text-cyan-400">Rp79.000</p>
+              <p className="font-display text-[22px] font-bold text-cyan-400">Rp299.000</p>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
@@ -196,7 +198,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               onClick={() => onBuyTier && onBuyTier('master')}
               className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-cyan-400 px-4 py-3 text-sm font-bold text-black shadow-lg shadow-cyan-950/30 hover:bg-cyan-300 transition-all active:scale-[0.99]"
             >
-              Beli Master Pack (Rp79.000) ➔
+              Beli Master Pack (Rp299.000) ➔
             </button>
             <div className="flex items-center justify-between px-1">
               <a
@@ -206,12 +208,14 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               >
                 Jelajahi 29 gaya ➔
               </a>
-              <Link
-                href="/studio?kit=cyberforge"
-                className="text-xs font-semibold text-muted hover:text-paper transition-colors"
+              <a
+                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
               >
-                Coba Demo Studio
-              </Link>
+                Tanya via WA
+              </a>
             </div>
           </div>
         </article>
@@ -252,7 +256,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                 Creator Lab Ultimate
               </h3>
-              <p className="font-display text-[22px] font-bold text-amber-400">Rp109.000</p>
+              <p className="font-display text-[22px] font-bold text-amber-400">Rp499.000</p>
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
@@ -286,7 +290,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               onClick={() => onBuyTier && onBuyTier('lab')}
               className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-400 px-4 py-3 text-sm font-bold text-black shadow-lg shadow-amber-950/30 hover:bg-amber-300 transition-all active:scale-[0.99]"
             >
-              Beli Creator Lab (Rp109.000) ➔
+              Beli Creator Lab (Rp499.000) ➔
             </button>
             <div className="flex items-center justify-between px-1">
               <a
@@ -295,12 +299,14 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
               >
                 Detail ekosistem ➔
               </a>
-              <Link
-                href="/studio"
-                className="text-xs font-semibold text-muted hover:text-paper transition-colors"
+              <a
+                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20tertarik%20dengan%20Paket%20Creator%20Lab%20Ultimate%20(Rp499.000)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-muted hover:text-amber-400 transition-colors"
               >
-                Buka Full Suite
-              </Link>
+                Tanya via WA
+              </a>
             </div>
           </div>
         </article>
@@ -313,7 +319,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
             Mau semua 29 gaya sinematik 3D, starter codebase Remotion, dan AI lokal tanpa batas?
           </p>
           <p className="text-xs text-muted mt-1">
-            Ambil <span className="text-accent font-bold">AUDIRA Creator Lab Ultimate</span> cuma tambah Rp30.000 dari Master Director Pack!
+            Ambil <span className="text-accent font-bold">AUDIRA Creator Lab Ultimate</span> cuma tambah Rp200.000 dari Master Director Pack!
           </p>
         </div>
         <a
@@ -337,7 +343,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
           href="#jasa"
           className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-orange-400 transition-colors"
         >
-          <span>Pilih Jasa Terima Beres (Mulai Rp199k)</span>
+          <span>Pilih Jasa Terima Beres (Mulai Rp349k)</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </a>
       </div>

@@ -46,3 +46,4 @@ export const WhatsAppFloatingWidget: React.FC = () => {
     </div>
   );
 };
+

@@ -11,7 +11,7 @@ interface Props {
 
 const COMPARISON_ROWS = [
   { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya Penuh' },
-  { feature: 'Remotion Studio & Web Runner', starter: '5 Gaya', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya' },
+  { feature: 'Engine Remotion 4.0 & CLI Runner', starter: '5 Gaya', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya' },
   { feature: 'Perintah Claude Code (/audira-motion)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
   { feature: 'Normalisasi Audio Siaran (-14 LUFS)', starter: 'Standar', master: 'Presisi Milidetik', lab: 'Presisi Milidetik' },
   { feature: 'Smoke Preview (540×960 @ 30 FPS)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
@@ -60,15 +60,15 @@ export const BundleSection: React.FC<Props> = ({ onBuyTier }) => {
         {/* Pricing Anchor */}
         <div className="mt-2 flex flex-wrap items-baseline justify-center gap-3">
           <p className="font-display text-[44px] sm:text-[54px] font-black text-paper tracking-tight">
-            Rp109.000
+            Rp499.000
           </p>
           <p className="text-xl sm:text-2xl text-dim line-through">
-            Rp178.000
+            Rp999.000
           </p>
         </div>
 
         <p className="text-[14px] font-semibold text-accent -mt-2">
-          Hemat Rp69.000 (39%), miliki seluruh ekosistem tanpa biaya langganan bulanan.
+          Hemat Rp500.000 (50%), miliki seluruh ekosistem tanpa biaya langganan bulanan.
         </p>
 
         {/* Primary CTA Action Row */}
@@ -78,16 +78,18 @@ export const BundleSection: React.FC<Props> = ({ onBuyTier }) => {
             onClick={() => onBuyTier && onBuyTier('lab')}
             className="btn-primary min-h-14 px-8 text-[16px] font-bold shadow-xl shadow-orange-950/30"
           >
-            <span>Beli Creator Lab Ultimate (Rp109.000)</span>
+            <span>Beli Creator Lab Ultimate (Rp499.000)</span>
             <ArrowRight className="ml-2 h-4 w-4" />
           </button>
           
-          <Link
-            href="/studio"
+          <a
+            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20mau%20konsultasi%20Creator%20Lab%20Ultimate%20(Rp499.000)"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-outline min-h-14 px-6 text-[15px] font-semibold"
           >
-            <span>Coba di Web Studio</span>
-          </Link>
+            <span>Konsultasi via WhatsApp</span>
+          </a>
         </div>
 
         <p className="font-mono text-xs text-dim">
@@ -109,9 +111,9 @@ export const BundleSection: React.FC<Props> = ({ onBuyTier }) => {
             <thead>
               <tr className="bg-tile-2 text-xs text-muted border-b border-line">
                 <th scope="col" className="px-4 py-3 font-semibold">Fitur &amp; Kemampuan</th>
-                <th scope="col" className="px-2.5 py-3 text-center font-normal">Starter (49k)</th>
-                <th scope="col" className="px-2.5 py-3 text-center font-normal text-cyan-400">Master (79k)</th>
-                <th scope="col" className="px-2.5 py-3 text-center font-bold text-accent">Creator Lab (109k)</th>
+                <th scope="col" className="px-2.5 py-3 text-center font-normal">Starter (149k)</th>
+                <th scope="col" className="px-2.5 py-3 text-center font-normal text-cyan-400">Master (299k)</th>
+                <th scope="col" className="px-2.5 py-3 text-center font-bold text-accent">Creator Lab (499k)</th>
               </tr>
             </thead>
             <tbody>

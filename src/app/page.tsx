@@ -38,7 +38,7 @@ export default function LandingPage() {
         {/* 2. Hero Section (#top) - Dual 9:16 Video Reels, Headline, Value Prop & Idea Input */}
         <HeroSection />
 
-        {/* 3. Product Packages (#produk) - 3 Tiers (Starter Rp49k, Master Rp79k, Creator Lab Rp109k) */}
+        {/* 3. Product Packages (#produk) - 3 Tiers (Starter Rp149k, Master Rp299k, Creator Lab Rp499k) */}
         <ProductPackages 
           onBuyTier={handleOpenOrderModal} 
         />
@@ -58,7 +58,7 @@ export default function LandingPage() {
         {/* 8. How It Works (#cara-kerja) - 3 Steps (Ketik -> Suarakan -> Render) + Live Demo */}
         <HowItWorksSection />
 
-        {/* 9. Bundle Creator Lab (#bundle) - Best Value Rp109k + Feature Comparison Table */}
+        {/* 9. Bundle Creator Lab (#bundle) - Best Value Rp499k + Feature Comparison Table */}
         <BundleSection 
           onBuyTier={handleOpenOrderModal} 
         />

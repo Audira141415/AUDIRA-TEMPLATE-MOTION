@@ -12,12 +12,12 @@ const FAQS: FaqItem[] = [
   {
     question: 'Apakah harus punya Claude Pro atau bayar langganan bulanan?',
     answer:
-      'Tidak perlu. AUDIRA Template Motion dapat digunakan langsung di web browser tanpa langganan wajib. Anda bisa memakai mesin Web Studio langsung, menghubungkannya ke Ollama AI lokal di laptop (100% gratis & offline tanpa batas kuota), atau memasukkan API key Anda sendiri (Claude 3.5 Sonnet, OpenAI GPT-4o, Google Gemini, atau DeepSeek R1).',
+      'Tidak perlu langganan bulanan. AUDIRA Motion adalah aset sekali bayar untuk seumur hidup. Anda bisa menjalankannya di laptop/PC dengan Remotion CLI / Claude Code (/audira-motion), menghubungkannya ke Ollama AI lokal di laptop (100% gratis & offline tanpa batas kuota), atau memasukkan API key Anda sendiri (Claude 3.5 Sonnet, OpenAI GPT-4o, Google Gemini, atau DeepSeek R1).',
   },
   {
     question: 'Berapa spesifikasi laptop / PC yang dibutuhkan?',
     answer:
-      'Untuk menjalankan Remotion 3D dan Web Studio di browser, komputer atau laptop dengan RAM 8GB–16GB sudah sangat lancar. Mesin 3D Three.js dan WebGL memanfaatkan akselerasi GPU perangkat keras Anda (NVIDIA GeForce, AMD Radeon, Intel Iris/Arc, atau Apple Silicon M-series). Untuk menjalankan model AI lokal Ollama (Qwen3.5-4B 3D-Coder) secara offline tanpa kuota, disarankan minimal RAM 16GB.',
+      'Untuk menjalankan Remotion 3D di komputer atau laptop, RAM 8GB–16GB sudah sangat lancar. Mesin 3D Three.js dan WebGL memanfaatkan akselerasi GPU perangkat keras Anda (NVIDIA GeForce, AMD Radeon, Intel Iris/Arc, atau Apple Silicon M-series). Untuk menjalankan model AI lokal Ollama (Qwen3.5-4B 3D-Coder) secara offline tanpa kuota, disarankan minimal RAM 16GB.',
   },
   {
     question: 'Apakah video hasilnya boleh dipakai untuk komersial dan proyek klien?',
@@ -37,7 +37,7 @@ const FAQS: FaqItem[] = [
   {
     question: 'Bisa dibuatkan video terima beres kalau saya tidak punya waktu edit sendiri?',
     answer:
-      'Bisa banget! Kami menyediakan layanan VIP Done-For-You (Jasa Terima Beres 24 Jam). Anda cukup mengirimkan materi atau link produk di WhatsApp, tim AUDIRA yang akan meriset angle viral, menyusun naskah persuasif, mengisi suara AI jernih, dan menganimasikan videonya hingga siap upload. Harga mulai Rp199.000 per video atau Rp799.000 untuk paket 5 video.',
+      'Bisa banget! Kami menyediakan layanan VIP Done-For-You (Jasa Terima Beres 24 Jam). Anda cukup mengirimkan materi atau link produk di WhatsApp, tim AUDIRA yang akan meriset angle viral, menyusun naskah persuasif, mengisi suara AI jernih, dan menganimasikan videonya hingga siap upload. Harga mulai Rp349.000 per video atau Rp1.399.000 untuk paket 5 video.',
   },
   {
     question: 'Bagaimana jika saya bingung atau butuh panduan langsung?',

@@ -43,7 +43,7 @@ const TESTIMONIALS: TestimonialItem[] = [
     metric: '5 Klien UMKM',
     metricLabel: 'Balik modal di hari pertama',
     kitUsed: 'CREATOR LAB ULTIMATE',
-    quote: 'Paket Creator Lab seharga Rp109.000 adalah investasi digital terbaik tahun ini. Sekali bayar, kami punya 29 variasi gaya 3D dan full codebase Remotion untuk melayani video reels puluhan klien tanpa bayar royalti bulanan.'
+    quote: 'Paket Creator Lab seharga Rp499.000 adalah investasi digital terbaik tahun ini. Sekali bayar, kami punya 29 variasi gaya 3D dan full codebase Remotion untuk melayani video reels puluhan klien tanpa bayar royalti bulanan.'
   }
 ];
 
@@ -157,3 +157,4 @@ export const TestimonialsSection: React.FC = () => {
     </section>
   );
 };
+

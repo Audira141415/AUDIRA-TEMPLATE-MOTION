@@ -49,7 +49,7 @@ export const StickyCtaBar: React.FC<StickyCtaBarProps> = ({ onOpenOrderModal }) 
               </span>
             </div>
             <p className="text-[11px] text-muted">
-              Mulai <strong>Rp49.000</strong> · Sekali bayar seumur hidup · Bebas royalti komersial.
+              Mulai <strong>Rp149.000</strong> · Sekali bayar seumur hidup · Bebas royalti komersial.
             </p>
           </div>
         </div>
@@ -89,3 +89,4 @@ export const StickyCtaBar: React.FC<StickyCtaBarProps> = ({ onOpenOrderModal }) 
     </aside>
   );
 };
+

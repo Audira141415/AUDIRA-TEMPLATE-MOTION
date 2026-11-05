@@ -724,12 +724,12 @@ export default function PromptsPage() {
                     <Download className="h-3.5 w-3.5" /> Unduh .txt
                   </button>
 
-                  <Link
-                    href={`/studio?format=${format}&mood=${mood}&idea=${encodeURIComponent(idea)}`}
+                  <a
+                    href="/#produk"
                     className="inline-flex items-center gap-1.5 rounded-xl border border-orange-500/40 bg-orange-950/20 px-3.5 py-2.5 text-xs font-bold text-orange-300 hover:bg-orange-900/40 hover:text-white transition-colors"
                   >
-                    <Zap className="h-3.5 w-3.5" /> Buka di Studio
-                  </Link>
+                    <Zap className="h-3.5 w-3.5" /> Order Lisensi 3D
+                  </a>
 
                   <Link
                     href="/admin"
@@ -942,12 +942,12 @@ export default function PromptsPage() {
                     Render prompt di atas di Kling / Runway, unduh video 9:16 berdurasi 5s-10s, lalu letakkan di folder <code className="bg-black/40 px-1 py-0.5 rounded text-white font-mono">public/reels/{format}.mp4</code>. Mesin template akan otomatis memutar video tersebut sebagai background, lengkap dengan live HUD, simulasi, dan voiceover TTS!
                   </p>
                 </div>
-                <Link
-                  href={`/studio?format=${format}&mood=${mood}&idea=${encodeURIComponent(idea)}`}
+                <a
+                  href="/#produk"
                   className="shrink-0 px-3 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-md transition-colors"
                 >
-                  Buka Studio Live
-                </Link>
+                  Beli Lisensi 3D
+                </a>
               </div>
             </div>
           ) : (
@@ -1118,12 +1118,12 @@ export default function PromptsPage() {
 
         {/* Footer Navigation Link */}
         <div className="mt-8 flex items-center justify-between rounded-2xl bg-card p-4 border border-line text-xs text-dim">
-          <span>Ingin edit naskah langsung tanpa salin-tempel?</span>
+          <span>Tidak punya waktu utak-atik kode &amp; render sendiri?</span>
           <Link
-            href="/studio"
-            className="inline-flex items-center gap-1 font-bold text-orange-400 hover:text-orange-300 transition-colors"
+            href="/#jasa"
+            className="inline-flex items-center gap-1 font-bold text-accent hover:text-orange-300 transition-colors"
           >
-            <span>Buka AUDIRA Studio Editor</span>
+            <span>Pesan Jasa Terima Beres 24 Jam</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

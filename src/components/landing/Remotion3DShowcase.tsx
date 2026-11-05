@@ -477,15 +477,15 @@ export const Remotion3DShowcase: React.FC = () => {
                     {card.title}
                   </h4>
 
-                  {/* Quick Action Link: "Buat yang seperti ini ->" matching screenshot */}
+                  {/* Quick Action Link: "Pilih Gaya Ini ->" pointing to license packages */}
                   <div className="mt-3 flex items-center justify-between border-t border-line-soft pt-3">
-                    <Link
-                      href={`/studio?kit=${card.kit.toLowerCase()}&prompt=${encodeURIComponent(card.prompt)}`}
+                    <a
+                      href="#produk"
                       className="group/link inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-fg-2 hover:text-accent transition-colors"
                     >
-                      <span>Buat yang seperti ini</span>
+                      <span>Pilih Gaya Ini</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
-                    </Link>
+                    </a>
 
                     <button
                       type="button"
