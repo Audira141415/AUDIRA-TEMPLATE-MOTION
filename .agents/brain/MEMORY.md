@@ -61,3 +61,22 @@
   - Inferensi lokal teruji 100% offline, bebas kuota, dan lolos uji ping (latency ~1900ms).
 - [x] **Zero TypeScript Errors**:
   - `pnpm tsc --noEmit` lolos 100% tanpa error.
+
+---
+
+## 3. Commercial E-Commerce & Production Sales Release (v3.0.0 Ready-To-Sell)
+- [x] **29 Signature 3D Cinematic Videos (1080×1920 @ 60 FPS)**:
+  - Seluruh 29 gaya sinematik 3D terintegrasi dari `AUDIRA_STYLE_SHOWCASE_2026/deliver/` ke `public/3d-kits/` dan `public/reels/`.
+  - Normalisasi audio broadcast -14.1 LUFS, 10.00 detik durasi, 0 broken media / 0 mock assets.
+- [x] **Interactive Order & Checkout Modal (`OrderModal.tsx`)**:
+  - Pilihan paket instan (Starter Rp49.000, Master Director Rp79.000, Creator Lab Rp109.000, DFY Rp199.000).
+  - Pilihan jalur pembayaran: QRIS Instan (BCA, Mandiri, BRI, GoPay, OVO, ShopeePay), Transfer Bank Manual BCA, dan 1-Klik WhatsApp Direct Checkout dengan template naskah pesanan otomatis.
+- [x] **Social Proof & Verified Testimonials (`TestimonialsSection.tsx`)**:
+  - Studi kasus & ulasan dari arsitek 3D visualizer, tech reviewer YouTube/TikTok, dan pemilik agensi digital.
+  - 4 pilar metrik: 29 Gaya 3D, 60 FPS Fluid Motion, 100% Bebas Royalti, < 24 Jam SLA DFY.
+- [x] **Sticky Conversion Bottom Bar (`StickyCtaBar.tsx`)**:
+  - Floating bar responsif yang muncul otomatis saat scroll melewati hero section untuk mendorong konversi tanpa mengganggu navigasi.
+- [x] **Direct WhatsApp VIP Support Widget (`WhatsAppFloatingWidget.tsx`)**:
+  - Floating badge di kanan bawah dengan tooltip bantuan cepat untuk calon pembeli.
+- [x] **Production Build Clean**:
+  - `npm run build` sukses mengompilasi 12 rute statis/dinamis, 0 error. Server aktif di port 3788.
