@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createOrder } from '@/lib/orders';
 import { createUser, normalizeEmail } from '@/lib/auth';
+import { incrementCouponUsage } from '@/lib/coupons';
 import { randomBytes } from 'node:crypto';
 
 export const runtime = 'nodejs';
@@ -16,12 +17,20 @@ export async function POST(req: Request) {
     const tierName = (body.tierName || 'Starter 3D Pack').trim();
     const amount = (body.amount || 'Rp149.000').trim();
     const paymentMethod = (body.paymentMethod || 'QRIS').trim();
+    const couponCode = (body.couponCode || '').trim().toUpperCase();
+    const discountAmount = (body.discountAmount || '').trim();
 
     if (!customerName || !customerWhatsApp) {
       return NextResponse.json(
         { error: 'Nama dan nomor WhatsApp wajib diisi untuk konfirmasi pemesanan.' },
         { status: 400 }
       );
+    }
+
+    let notes = `Order via web checkout. Pembayaran: ${paymentMethod}`;
+    if (couponCode) {
+      notes += ` | Kupon diskon: ${couponCode} (${discountAmount})`;
+      incrementCouponUsage(couponCode);
     }
 
     // 1. Record customer order with pending status
@@ -34,7 +43,7 @@ export async function POST(req: Request) {
       amount,
       paymentMethod,
       status: 'pending',
-      notes: `Order via web checkout. Pembayaran: ${paymentMethod}`
+      notes
     });
 
     // 2. If valid customer email provided, ensure customer account exists with role 'customer'

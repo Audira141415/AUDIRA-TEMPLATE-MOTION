@@ -16,7 +16,8 @@ import {
   Lock,
   ArrowRight,
   MessageCircle,
-  BookOpen
+  BookOpen,
+  FileText
 } from 'lucide-react';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { SiteFooter } from '@/components/site/SiteFooter';
@@ -307,6 +308,15 @@ export default function PesananPage() {
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
                     <div className="flex flex-wrap items-center gap-2">
                       <Link
+                        href={`/invoice/${ord.id}`}
+                        target="_blank"
+                        className="px-3 py-2 rounded-xl bg-tile border border-line text-paper hover:border-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1.5 font-semibold transition-colors"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Cetak Faktur</span>
+                      </Link>
+
+                      <Link
                         href="/panduan"
                         className="px-3 py-2 rounded-xl bg-tile border border-line text-paper hover:border-accent inline-flex items-center gap-1.5 font-semibold transition-colors"
                       >
@@ -345,3 +355,4 @@ export default function PesananPage() {
     </div>
   );
 }
+

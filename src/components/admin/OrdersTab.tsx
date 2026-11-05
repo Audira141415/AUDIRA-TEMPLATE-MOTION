@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { 
   ShoppingBag, 
   Search, 
@@ -15,7 +16,8 @@ import {
   Check, 
   ExternalLink,
   Filter,
-  X
+  X,
+  FileText
 } from 'lucide-react';
 import { OrderRecord, OrderStatus } from '@/lib/orders';
 
@@ -284,7 +286,17 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ orders, onRefresh }) => {
                   </td>
 
                   <td className="px-4 py-3 text-right">
-                    <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center justify-end gap-1.5">
+                      <Link
+                        href={`/invoice/${order.id}`}
+                        target="_blank"
+                        className="inline-flex items-center gap-1 rounded-xl border border-line bg-tile px-2.5 py-1.5 font-bold text-paper hover:border-accent hover:text-accent transition-all text-[11px]"
+                        title="Lihat & Cetak Faktur (Invoice)"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-dim" />
+                        <span>Faktur</span>
+                      </Link>
+
                       <button
                         type="button"
                         onClick={() => handleSendWhatsAppAccess(order)}

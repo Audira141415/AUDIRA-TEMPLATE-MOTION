@@ -32,9 +32,12 @@ import { OrdersTab } from '@/components/admin/OrdersTab';
 import { SiteSettingsTab } from '@/components/admin/SiteSettingsTab';
 import { CatalogTab } from '@/components/admin/CatalogTab';
 import { LandingPageManagerTab } from '@/components/admin/LandingPageManagerTab';
+import { CouponsTab } from '@/components/admin/CouponsTab';
+import { SystemTab } from '@/components/admin/SystemTab';
 import { OrderRecord } from '@/lib/orders';
+import { Tag, Database } from 'lucide-react';
 
-type AdminTab = 'overview' | 'landing' | 'orders' | 'catalog' | 'site' | 'ai' | 'voice' | 'users' | 'renders';
+type AdminTab = 'overview' | 'landing' | 'orders' | 'coupons' | 'site' | 'catalog' | 'ai' | 'voice' | 'users' | 'renders' | 'system';
 
 type AdminUser = {
   id: string;
@@ -213,12 +216,14 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
             { id: 'overview' as const, label: 'Overview', icon: <LayoutDashboard className="h-4 w-4" /> },
             { id: 'landing' as const, label: 'CMS Landing Page', icon: <Sparkles className="h-4 w-4 text-accent" /> },
             { id: 'orders' as const, label: 'Pesanan & Lisensi', icon: <ShoppingBag className="h-4 w-4" /> },
+            { id: 'coupons' as const, label: 'Kupon Diskon', icon: <Tag className="h-4 w-4 text-emerald-400" /> },
             { id: 'site' as const, label: 'Pengaturan & Harga', icon: <Settings className="h-4 w-4" /> },
             { id: 'catalog' as const, label: 'Katalog 29 Gaya 3D', icon: <Layers className="h-4 w-4" /> },
             { id: 'ai' as const, label: 'Interkoneksi AI', icon: <Cpu className="h-4 w-4" /> },
             { id: 'voice' as const, label: 'Voiceover Cartesia', icon: <Mic className="h-4 w-4" /> },
-            { id: 'users' as const, label: 'Pengguna', icon: <Users className="h-4 w-4" /> },
+            { id: 'users' as const, label: 'Pengguna & Role', icon: <Users className="h-4 w-4" /> },
             { id: 'renders' as const, label: 'Vault Render', icon: <Video className="h-4 w-4" /> },
+            { id: 'system' as const, label: 'Cadangan & Sistem', icon: <Database className="h-4 w-4 text-cyan-400" /> },
           ].map((t) => (
             <button
               key={t.id}
@@ -421,6 +426,11 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         />
       )}
 
+      {/* TAB: COUPONS MANAGEMENT */}
+      {tab === 'coupons' && (
+        <CouponsTab />
+      )}
+
       {/* TAB 3: SITE SETTINGS & PRICING */}
       {tab === 'site' && (
         <SiteSettingsTab />
@@ -594,6 +604,11 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
             </tbody>
           </table>
         </div>
+      )}
+
+      {/* TAB: SYSTEM & BACKUP */}
+      {tab === 'system' && (
+        <SystemTab />
       )}
     </div>
   );

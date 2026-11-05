@@ -157,6 +157,19 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   const [paymentMethod, setPaymentMethod] = useState<'qris' | 'bca' | 'wa'>('qris');
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
+  // Coupon promo states
+  const [couponInput, setCouponInput] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+    code: string;
+    discount: number;
+    formattedDiscount: string;
+    finalAmount: number;
+    formattedFinalAmount: string;
+    description: string;
+  } | null>(null);
+  const [couponLoading, setCouponLoading] = useState(false);
+  const [couponError, setCouponError] = useState<string | null>(null);
+
   useEffect(() => {
     setSelectedTier(defaultTier);
   }, [defaultTier]);
@@ -188,6 +201,43 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   const displayBadge = currentPlan.badge;
   const displayHighlights = currentPlan.highlights;
 
+  const rawAmountNum = parseInt(displayPrice.replace(/\D/g, ''), 10) || 0;
+  const effectivePrice = appliedCoupon ? appliedCoupon.formattedFinalAmount : displayPrice;
+
+  const handleApplyCoupon = async () => {
+    if (!couponInput.trim()) return;
+    setCouponLoading(true);
+    setCouponError(null);
+    try {
+      const res = await fetch('/api/coupons/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: couponInput.trim(),
+          amount: rawAmountNum
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCouponError(data.error || 'Kupon tidak dapat digunakan.');
+        setAppliedCoupon(null);
+      } else {
+        setAppliedCoupon(data);
+        setCouponError(null);
+      }
+    } catch {
+      setCouponError('Gagal memvalidasi kupon. Cek koneksi Anda.');
+    } finally {
+      setCouponLoading(false);
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponInput('');
+    setCouponError(null);
+  };
+
   const handleCopy = async (text: string, label: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -218,8 +268,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
           customerEmail: email,
           tier: selectedTier,
           tierName: displayName,
-          amount: displayPrice,
+          amount: effectivePrice,
           paymentMethod: paymentMethod.toUpperCase(),
+          couponCode: appliedCoupon?.code,
+          discountAmount: appliedCoupon?.formattedDiscount,
         })
       });
       const data = await res.json();
@@ -235,7 +287,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
     const msg = `Halo Tim AUDIRA, saya ingin memesan Lisensi Resmi / Jasa:\n\n` +
       `📦 Paket: *${displayName}*\n` +
-      `💰 Harga: *${displayPrice}*\n` +
+      `💰 Total Bayar: *${effectivePrice}*` + (appliedCoupon ? ` (Diskon Kupon ${appliedCoupon.code} : -${appliedCoupon.formattedDiscount})` : '') + `\n` +
       (orderId ? `🆔 No. Pesanan: *${orderId}*\n` : '') +
       `👤 Nama: ${name}\n` +
       `📱 WhatsApp: ${wa}\n` +
@@ -382,11 +434,78 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
           <div className="flex flex-col items-start sm:items-end shrink-0 border-t sm:border-t-0 sm:border-l border-line sm:pl-4 pt-3 sm:pt-0">
             <span className="text-[11px] text-dim">Total Investasi:</span>
-            <span className="text-2xl font-black text-accent">{displayPrice}</span>
-            {displayOriginalPrice && (
-              <span className="text-xs text-dim line-through">{displayOriginalPrice}</span>
+            {appliedCoupon ? (
+              <div className="text-right">
+                <span className="text-xs text-dim line-through block">{displayPrice}</span>
+                <span className="text-2xl font-black text-emerald-400">{effectivePrice}</span>
+                <span className="text-[10px] font-mono text-emerald-300 font-bold block">
+                  Hemat {appliedCoupon.formattedDiscount}!
+                </span>
+              </div>
+            ) : (
+              <div>
+                <span className="text-2xl font-black text-accent">{displayPrice}</span>
+                {displayOriginalPrice && (
+                  <span className="text-xs text-dim line-through block">{displayOriginalPrice}</span>
+                )}
+              </div>
             )}
           </div>
+        </div>
+
+        {/* Coupon Code Section */}
+        <div className="mb-5 p-3.5 rounded-2xl border border-line bg-tile/70 space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-mono uppercase text-dim font-bold flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-accent" />
+              Punya Kode Promo / Kupon Diskon?
+            </label>
+            {appliedCoupon && (
+              <button
+                type="button"
+                onClick={handleRemoveCoupon}
+                className="text-[11px] text-red-400 hover:underline"
+              >
+                Hapus Kupon
+              </button>
+            )}
+          </div>
+
+          {appliedCoupon ? (
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="font-mono font-bold text-emerald-300 bg-emerald-900/60 px-2 py-0.5 rounded border border-emerald-700">
+                  {appliedCoupon.code}
+                </span>
+                <span className="text-emerald-200 text-[11px]">{appliedCoupon.description}</span>
+              </div>
+              <span className="font-bold text-emerald-400 font-mono">
+                -{appliedCoupon.formattedDiscount}
+              </span>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={couponInput}
+                onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
+                placeholder="Masukkan kode promo (cth: AUDIRABARU, PROMO3D)"
+                className="flex-1 rounded-xl border border-line bg-card px-3 py-1.5 font-mono text-xs uppercase text-paper placeholder:text-dim placeholder:normal-case focus:border-accent focus:outline-none"
+              />
+              <button
+                type="button"
+                onClick={handleApplyCoupon}
+                disabled={couponLoading || !couponInput.trim()}
+                className="rounded-xl bg-accent px-4 py-1.5 text-xs font-bold text-ink hover:bg-orange-500 transition-all disabled:opacity-50"
+              >
+                {couponLoading ? 'Memeriksa...' : 'Terapkan'}
+              </button>
+            </div>
+          )}
+
+          {couponError && (
+            <p className="text-[11px] text-red-400 font-medium">{couponError}</p>
+          )}
         </div>
 
         {/* Guide & Skill Mesh Info Pill for License Packages */}
@@ -544,7 +663,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             </div>
             <div className="flex flex-wrap items-baseline justify-between gap-2 pt-1 border-t border-line-soft">
               <span className="text-dim">Nominal Transfer:</span>
-              <span className="text-accent font-bold text-sm">{displayPrice}</span>
+              <span className="text-accent font-bold text-sm">{effectivePrice}</span>
             </div>
           </div>
         )}
