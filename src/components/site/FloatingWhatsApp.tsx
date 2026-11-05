@@ -47,3 +47,4 @@ export const FloatingWhatsApp: React.FC = () => {
     </aside>
   );
 };
+

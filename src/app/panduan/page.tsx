@@ -250,7 +250,7 @@ export default function InstallationGuidePage() {
               <nav className="space-y-1.5 text-xs font-medium">
                 {[
                   { href: '#langkah-1', step: '01', title: 'Prasyarat PC & Software' },
-                  { href: '#langkah-2', step: '02', title: 'Ekstrak & Struktur File' },
+                  { href: '#langkah-2', step: '02', title: 'Pasang Skill ke Claude' },
                   { href: '#langkah-3', step: '03', title: 'Aktivasi Otak AI (MCP Mesh)' },
                   { href: '#langkah-4', step: '04', title: 'Perintah & Render Pertama' },
                   { href: '#langkah-5', step: '05', title: 'Solusi Kendala (Troubleshooting)' },
@@ -296,7 +296,7 @@ export default function InstallationGuidePage() {
                 {[
                   { id: 'node', label: 'Node.js v20+ terpasang' },
                   { id: 'ffmpeg', label: 'FFmpeg aktif di terminal' },
-                  { id: 'extract', label: 'Folder diekstrak ke komputer' },
+                  { id: 'extract', label: 'Skill terpasang di Claude' },
                   { id: 'mcp', label: 'MCP Server terhubung ke AI' },
                   { id: 'render', label: 'Video uji coba berhasil dirender' },
                 ].map((chk) => (
@@ -458,24 +458,38 @@ export default function InstallationGuidePage() {
             </section>
 
 
-            {/* LANGKAH 02: EKSTRAK & STRUKTUR FILE */}
-            <section id="langkah-2" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
+            {/* LANGKAH 02: MEMASANG SKILL KE CLAUDE */}
+            <section id="langkah-2" className="scroll-mt-24 space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-ink font-mono text-xs font-black">
                   02
                 </span>
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
-                  LANGKAH 02 DARI 05
+                  LANGKAH 02 DARI 05 (INTI INSTALASI SKILL)
                 </span>
               </div>
 
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
-                  Ekstrak &amp; Menempatkan File Proyek
+                  Memasang Skill ke Claude (Claude Code CLI &amp; Claude Desktop)
                 </h2>
-                <p className="text-sm text-muted mt-1 leading-relaxed">
-                  Setelah menerima link download file ZIP, ekstrak folder ke komputer Anda. Folder ini berisi seluruh engine 3D dan kit gaya siap pakai.
+                <p className="text-sm text-muted mt-1.5 leading-relaxed">
+                  Agar Claude bertindak sebagai sutradara 3D otonom, file skill <strong>`SKILL.md`</strong> dan folder <strong>`kits/`</strong> harus didaftarkan ke sistem Claude Anda. Pilih salah satu cara berikut:
                 </p>
+              </div>
+
+              {/* Crucial Account Requirement Notice */}
+              <div className="rounded-2xl border border-amber-500/40 bg-amber-950/20 p-4 sm:p-5 flex items-start gap-3.5 text-xs text-amber-200">
+                <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                <div className="space-y-1">
+                  <h4 className="font-bold text-amber-300 text-sm">Penting: Kebutuhan Akun Claude Code</h4>
+                  <p className="leading-relaxed text-muted">
+                    Skill ini dirancang untuk dijalankan melalui <strong>Claude Code</strong> (agen coding terminal resmi dari Anthropic) atau aplikasi <strong>Claude Desktop</strong>. Anda memerlukan akun Claude berbayar (Claude Pro, Max, Team, Enterprise) atau akun Anthropic API Key (<code className="text-amber-300 font-mono">ANTHROPIC_API_KEY</code>).
+                  </p>
+                  <p className="text-[11px] text-dim">
+                    *Alasan: Obrolan web gratis di claude.ai tidak memiliki akses terminal lokal atau kartu grafis (GPU) laptop Anda untuk mengompilasi dan merender file video MP4 60 FPS.
+                  </p>
+                </div>
               </div>
 
               {/* Directory Tree Card */}
@@ -483,65 +497,167 @@ export default function InstallationGuidePage() {
                 <div className="flex items-center justify-between px-4 py-2.5 border-b border-line bg-tile-2 text-xs font-mono text-paper">
                   <span className="flex items-center gap-2">
                     <FolderTree className="w-4 h-4 text-accent" />
-                    <span>audira-skill-motion/ (Struktur Folder Proyek)</span>
+                    <span>audira-skill-motion/ (Struktur Paket Skill yang Anda Dapatkan)</span>
                   </span>
                   <span className="text-dim text-[11px]">29 Kit Gaya 3D</span>
                 </div>
                 <pre className="p-4 sm:p-5 font-mono text-xs text-muted leading-relaxed overflow-x-auto">
 {`audira-skill-motion/
-├── kits/                  # 29 Kit Gaya Sinematik 3D (Three.js + R3F Shaders)
-├── starter/               # Template proyek Remotion 4.0 siap render
-│   ├── src/               # Source code React Three Fiber & Komposisi
-│   ├── remotion.config.ts # Preset resolusi 1080x1920 60 FPS
+├── SKILL.md               # 🌟 FILE UTAMA: Doktrin sutradara otonom & instruksi Claude
+├── kits/                  # 29 Kit Gaya 3D (Buildforge, Precision, Cyberforge, dll.)
+├── starter/               # Template proyek Remotion 4.0 siap pakai
+│   ├── src/               # Source code React Three Fiber, Shaders & Camera rigs
+│   ├── remotion.config.ts # Konfigurasi resolusi 1080x1920 60 FPS
 │   └── package.json       # Dependensi Remotion 4.0 & Three.js
-├── audira-brand.json      # Konfigurasi watermark logo & warna brand Anda
-├── PANDUAN_INSTALASI.md   # Buku manual instalasi offline
-└── SKILL.md               # Aturan sutradara otonom untuk Claude Code`}
+├── audira-brand.json      # Konfigurasi logo watermark & palet warna brand Anda
+├── PANDUAN_INSTALASI.md   # Buku manual instalasi lengkap offline
+└── START_HERE.md          # Panduan kilat memulai 3 langkah`}
                 </pre>
               </div>
 
-              {/* Two Installation Workflows: Claude Code vs Cursor */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* 3 Step-by-Step Installation Methods */}
+              <div className="space-y-4">
                 
-                {/* Method A */}
-                <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-accent uppercase">PILIHAN A: CLAUDE CODE</span>
-                    <span className="text-[10px] font-mono text-accent bg-accent/15 px-2 py-0.5 rounded">Otonom</span>
+                {/* Method 1: Claude Code Global Skills Folder (RECOMMENDED) */}
+                <div className="rounded-2xl border-2 border-accent/40 bg-tile p-5 sm:p-6 space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded-full bg-accent text-ink font-mono text-[10px] font-black uppercase">
+                        METODE 1 (DIREKOMENDASIKAN)
+                      </span>
+                      <h4 className="font-bold text-base text-paper">
+                        Pasang ke Direktori Skill Global Claude Code CLI
+                      </h4>
+                    </div>
+                    <span className="text-xs font-mono text-accent font-bold">1 Kali Setup • Aktif di Mana Saja</span>
                   </div>
-                  <h4 className="font-bold text-sm text-paper">Pasang ke Folder Skill Claude</h4>
+
                   <p className="text-xs text-muted leading-relaxed">
-                    Salin folder <code>audira-skill-motion</code> ke folder skill Claude Anda agar perintah <code>/audira-motion</code> aktif di mana saja:
+                    Claude Code membaca semua skill kustom dari folder konfigurasi pengguna <code className="text-paper font-mono">.claude/skills/</code>. Cukup salin folder skill ke lokasi berikut:
                   </p>
-                  <div className="rounded-xl border border-line bg-ink p-2.5 font-mono text-[11px] text-paper break-all">
-                    {selectedOS === 'windows' 
-                      ? 'C:\\Users\\<NamaUser>\\.claude\\skills\\audira-motion\\' 
-                      : '~/.claude/skills/audira-motion/'}
+
+                  {/* OS Terminal Box */}
+                  <div className="rounded-xl border border-line bg-ink overflow-hidden">
+                    <div className="flex items-center justify-between px-3.5 py-2 border-b border-line bg-tile-2 text-xs text-dim font-mono">
+                      <div className="flex items-center gap-1.5">
+                        <span className="size-2.5 rounded-full bg-red-500/80 inline-block" />
+                        <span className="size-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                        <span className="size-2.5 rounded-full bg-green-500/80 inline-block" />
+                        <span className="ml-2 text-paper text-[11px]">
+                          {selectedOS === 'windows' ? 'PowerShell (Salin Otomatis ke Claude Skills)' : 'Terminal macOS / Linux (Salin ke Claude Skills)'}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleCopy(
+                          selectedOS === 'windows'
+                            ? `mkdir -p $HOME\\.claude\\skills\\audira-motion ; Copy-Item -Path "audira-skill-motion\\*" -Destination "$HOME\\.claude\\skills\\audira-motion\\" -Recurse -Force`
+                            : `mkdir -p ~/.claude/skills/audira-motion && cp -r audira-skill-motion/* ~/.claude/skills/audira-motion/`,
+                          'copy_skill_dir'
+                        )}
+                        className="inline-flex items-center gap-1 text-[11px] text-accent hover:underline font-bold"
+                      >
+                        <Copy className="w-3 h-3" />
+                        <span>{copiedKey === 'copy_skill_dir' ? 'Tersalin!' : 'Salin Perintah'}</span>
+                      </button>
+                    </div>
+                    <div className="p-3.5 font-mono text-xs text-emerald-400 overflow-x-auto">
+                      {selectedOS === 'windows' ? (
+                        <>
+                          <span className="text-dim"># 1. Buat folder skill &amp; salin file:</span><br />
+                          mkdir -p $HOME\.claude\skills\audira-motion<br />
+                          Copy-Item -Path &quot;audira-skill-motion\*&quot; -Destination &quot;$HOME\.claude\skills\audira-motion\&quot; -Recurse -Force
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-dim"># 1. Buat folder skill &amp; salin file:</span><br />
+                          mkdir -p ~/.claude/skills/audira-motion<br />
+                          cp -r audira-skill-motion/* ~/.claude/skills/audira-motion/
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Verification Check */}
+                  <div className="p-3.5 rounded-xl bg-ink/70 border border-line text-xs space-y-1">
+                    <span className="font-mono text-[11px] font-bold text-accent uppercase block">
+                      Pastikan Letak File SKILL.md Berada di:
+                    </span>
+                    <p className="font-mono text-paper text-[11px] break-all">
+                      {selectedOS === 'windows'
+                        ? 'C:\\Users\\<NamaUser>\\.claude\\skills\\audira-motion\\SKILL.md'
+                        : '~/.claude/skills/audira-motion/SKILL.md'}
+                    </p>
                   </div>
                 </div>
 
-                {/* Method B */}
-                <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-cyan-400 uppercase">PILIHAN B: CURSOR / VS CODE</span>
-                    <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded">IDE Workspace</span>
+                {/* Method 2: Claude Desktop App GUI */}
+                <div className="rounded-2xl border border-line bg-tile p-5 sm:p-6 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-300 font-mono text-[10px] font-bold uppercase border border-cyan-800">
+                      METODE 2 (ANTARMUKA GRAFIS)
+                    </span>
+                    <h4 className="font-bold text-base text-paper">
+                      Upload Skill di Aplikasi Claude Desktop
+                    </h4>
                   </div>
-                  <h4 className="font-bold text-sm text-paper">Buka Folder Starter di IDE</h4>
                   <p className="text-xs text-muted leading-relaxed">
-                    Buka folder <code>starter/</code> di Cursor atau VS Code, lalu instal dependensi dengan satu perintah terminal:
+                    Bagi Anda yang menggunakan aplikasi resmi Claude Desktop di Mac atau Windows:
                   </p>
-                  <div className="flex items-center justify-between rounded-xl border border-line bg-ink p-2.5 font-mono text-xs text-emerald-400">
-                    <span>pnpm install  (atau npm i)</span>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy('pnpm install', 'npm_inst')}
-                      className="text-[11px] text-dim hover:text-paper font-semibold"
-                    >
-                      {copiedKey === 'npm_inst' ? 'Tersalin' : 'Salin'}
-                    </button>
+                  <ol className="list-decimal list-inside text-xs text-muted space-y-2 leading-relaxed bg-ink p-4 rounded-xl border border-line">
+                    <li>Buka aplikasi <strong>Claude Desktop</strong>.</li>
+                    <li>Klik foto profil Anda di pojok kiri/kanan bawah → pilih <strong>Settings</strong> (atau <strong>Preferences</strong>).</li>
+                    <li>Pilih tab <strong>Capabilities</strong> atau <strong>Skills</strong> (atau menu <strong>Customize</strong> → <strong>Skills</strong>).</li>
+                    <li>Klik tombol <strong>+ Add Skill</strong> atau <strong>Upload a Skill</strong>.</li>
+                    <li>Pilih file arsip ZIP <code className="text-paper font-mono">audira-skill-motion.zip</code> (atau pilih folder yang memuat <code className="text-accent font-mono">SKILL.md</code>).</li>
+                    <li>Beri nama skill: <code className="text-paper font-mono">audira-motion</code>.</li>
+                    <li>Pastikan status skill berubah hijau <strong>Active</strong>.</li>
+                  </ol>
+                </div>
+
+                {/* Method 3: Workspace / Project-Level Skill */}
+                <div className="rounded-2xl border border-line bg-tile p-5 sm:p-6 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-tile-2 text-dim font-mono text-[10px] font-bold uppercase border border-line">
+                      METODE 3 (PROJECT-LEVEL)
+                    </span>
+                    <h4 className="font-bold text-base text-paper">
+                      Pasang di Folder Workspace Khusus Proyek Anda
+                    </h4>
+                  </div>
+                  <p className="text-xs text-muted leading-relaxed">
+                    Jika Anda ingin skill ini hanya aktif di dalam satu folder proyek video kerja tertentu:
+                  </p>
+                  <div className="text-xs text-muted space-y-1.5 bg-ink p-4 rounded-xl border border-line">
+                    <p>1. Buka folder kerja proyek Anda di terminal atau VS Code / Cursor.</p>
+                    <p>2. Buat folder <code className="text-paper font-mono">.claude/skills/audira-motion/</code> di dalam root folder proyek tersebut.</p>
+                    <p>3. Letakkan file <code className="text-accent font-mono">SKILL.md</code> dan folder <code className="text-paper font-mono">kits/</code> ke dalamnya.</p>
+                    <p>4. Saat Claude Code dibuka di folder proyek tersebut, Claude otomatis mengenali skill ini.</p>
                   </div>
                 </div>
 
+              </div>
+
+              {/* Verification & Smoke Test Step */}
+              <div className="rounded-2xl border-2 border-emerald-500/40 bg-gradient-to-r from-emerald-950/30 via-tile to-ink p-5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>CARA VERIFIKASI BAHWA SKILL SUDAH TERPASANG DI CLAUDE</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="p-3 rounded-xl bg-ink border border-line space-y-1">
+                    <span className="font-mono text-[11px] text-emerald-400 font-bold block">1. Cek Daftar Skill:</span>
+                    <p className="text-muted text-[11px]">Buka terminal, jalankan <code>claude</code> lalu ketik:</p>
+                    <code className="text-accent font-mono font-bold block">/skills</code>
+                    <p className="text-dim text-[10px]">*Pastikan `audira-motion` muncul di daftar skill aktif.</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-ink border border-line space-y-1">
+                    <span className="font-mono text-[11px] text-emerald-400 font-bold block">2. Uji Panggilan Sutradara:</span>
+                    <p className="text-muted text-[11px]">Ketik perintah uji coba:</p>
+                    <code className="text-accent font-mono font-bold block">/audira-motion halo</code>
+                    <p className="text-dim text-[10px]">*Claude akan langsung menyapa sebagai Sutradara 3D AUDIRA!</p>
+                  </div>
+                </div>
               </div>
             </section>
 

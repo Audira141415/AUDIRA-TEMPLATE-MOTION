@@ -45,37 +45,93 @@ Ekosistem AUDIRA Motion terdiri dari dua komponen utama yang saling melengkapi:
 
 ---
 
-## 📦 3. Memasang `audira-skill-motion` (Visual Engine)
+## 📦 3. Memasang Skill ke Claude (Claude Code CLI & Claude Desktop)
 
-Setelah membeli lisensi resmi, Anda menerima arsip ZIP atau akses repositori Git.
+Paket instalasi ini berisi file inti: **`SKILL.md`**, folder **`kits/`** (29 gaya 3D), dan template **`starter/`**.
 
-### Struktur Folder:
+> [!IMPORTANT]
+> **Kebutuhan Akun Claude Code**:
+> Skill ini dijalankan melalui **Claude Code** (CLI terminal resmi Anthropic) atau aplikasi **Claude Desktop**. Diperlukan akun Claude berbayar (Claude Pro, Max, Team, Enterprise) atau Anthropic API Key (`ANTHROPIC_API_KEY`).
+> *Catatan: Obrolan web biasa di browser (claude.ai) tidak memiliki akses terminal komputer lokal untuk merender video MP4 60 FPS.*
+
+### Struktur Folder Paket Skill:
 ```text
 audira-skill-motion/
-├── kits/                  # 29 Kit Gaya Sinematik 3D
-├── starter/               # Template proyek Remotion 4.0
+├── SKILL.md               # 🌟 FILE UTAMA: Doktrin sutradara otonom & instruksi Claude
+├── kits/                  # 29 Kit Gaya Sinematik 3D (Three.js + R3F Shaders)
+├── starter/               # Template proyek Remotion 4.0 siap pakai
 │   ├── src/               # Source code React Three Fiber & Shaders
-│   ├── remotion.config.ts # Konfigurasi 1080x1920 @ 60 FPS
+│   ├── remotion.config.ts # Preset resolusi 1080x1920 60 FPS
 │   └── package.json       # Dependensi proyek
 ├── audira-brand.json      # Konfigurasi logo watermark & brand
-└── SKILL.md               # Instruksi sutradara AI
+├── PANDUAN_INSTALASI.md   # Buku manual instalasi offline
+└── START_HERE.md          # Panduan kilat memulai 3 langkah
 ```
 
-### Opsi A — Pasang di Claude Code (Direkomendasikan)
-1. Salin folder `audira-skill-motion` ke direktori skill lokal Claude:
-   - **Windows:** `C:\Users\<Nama-User>\.claude\skills\audira-motion\`
-   - **macOS:** `~/.claude/skills/audira-motion/`
-2. Buka Claude Code, lalu jalankan perintah:
-   ```bash
-   /audira-motion
-   ```
+---
 
-### Opsi B — Pasang di Cursor / VS Code
-1. Buka folder `starter/` di Cursor atau VS Code.
-2. Buka Terminal terintegrasi, lalu pasang dependensi:
+### METODE A — Salin ke Direktori Skill Global Claude Code CLI (Paling Direkomendasikan)
+Claude Code membaca seluruh skill kustom dari folder konfigurasi pengguna `.claude/skills/`:
+
+#### 1. Untuk Pengguna Windows (PowerShell):
+Buka PowerShell, lalu jalankan dua baris perintah ini:
+```powershell
+# Buat folder skill di direktori profil pengguna
+mkdir -p $HOME\.claude\skills\audira-motion
+
+# Salin seluruh isi folder audira-skill-motion
+Copy-Item -Path "audira-skill-motion\*" -Destination "$HOME\.claude\skills\audira-motion\" -Recurse -Force
+```
+*Pastikan file `SKILL.md` berada di: `C:\Users\<NamaUser>\.claude\skills\audira-motion\SKILL.md`*
+
+#### 2. Untuk Pengguna macOS / Linux (Terminal):
+Buka Terminal, lalu jalankan:
+```bash
+# Buat folder skill di direktori home
+mkdir -p ~/.claude/skills/audira-motion
+
+# Salin file skill
+cp -r audira-skill-motion/* ~/.claude/skills/audira-motion/
+```
+*Pastikan file `SKILL.md` berada di: `~/.claude/skills/audira-motion/SKILL.md`*
+
+---
+
+### METODE B — Upload Skill di Aplikasi Claude Desktop (Antarmuka Grafis / GUI)
+1. Buka aplikasi **Claude Desktop**.
+2. Klik foto profil Anda di pojok bawah → pilih **Settings** (atau **Preferences**).
+3. Pilih menu **Capabilities** atau **Skills** (atau **Customize** → **Skills**).
+4. Klik tombol **+ Add Skill** atau **Upload a Skill**.
+5. Pilih file arsip ZIP `audira-skill-motion.zip` (atau pilih folder yang memuat `SKILL.md`).
+6. Beri nama skill: `audira-motion`.
+7. Pastikan toggle status skill menyala hijau (**Active**).
+
+---
+
+### METODE C — Pasang di Workspace Proyek Khusus (Project-Level)
+Jika ingin skill hanya aktif di dalam satu proyek tertentu:
+1. Buka folder proyek Anda di terminal atau Cursor / VS Code.
+2. Buat folder `.claude/skills/audira-motion/` di root proyek tersebut.
+3. Masukkan file `SKILL.md` dan folder `kits/` ke dalamnya.
+4. Buka terminal Claude Code di proyek tersebut, skill akan otomatis aktif secara lokal.
+
+---
+
+### ✅ Cara Verifikasi Bahwa Skill Sudah Aktif di Claude:
+1. Buka terminal, lalu jalankan Claude Code:
    ```bash
-   npm install
+   claude
    ```
+2. Ketik perintah:
+   ```text
+   /skills
+   ```
+   Pastikan skill `audira-motion` tercantum dalam daftar.
+3. Jalankan perintah tes pertama:
+   ```text
+   /audira-motion Halo! Tes aktivasi sutradara 3D AUDIRA
+   ```
+   Claude Code akan langsung membalas sebagai Sutradara 3D resmi AUDIRA!
 
 ---
 
