@@ -13,3 +13,4 @@ export default async function BeliRedirectPage({
   const qStr = qs.toString();
   redirect(`/order${qStr ? `?${qStr}` : ''}`);
 }
+

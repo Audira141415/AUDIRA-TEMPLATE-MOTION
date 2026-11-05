@@ -13,3 +13,4 @@ export default async function CheckoutRedirectPage({
   const qStr = qs.toString();
   redirect(`/order${qStr ? `?${qStr}` : ''}`);
 }
+
