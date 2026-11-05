@@ -183,13 +183,13 @@ export default function InstallationGuidePage() {
             </button>
 
             <a
-              href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20sudah%20beli%20lisensi%20dan%20ingin%20tanya%20panduan%20instalasi"
+              href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20sudah%20beli%20lisensi%20dan%20ingin%20tanya%20panduan%20instalasi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-950/30 px-3.5 py-2.5 font-bold text-emerald-300 hover:bg-emerald-500/20 transition-colors"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Bantuan 1-on-1 Mas Agus</span>
+              <span>Bantuan 1-on-1 Tim AUDIRA</span>
             </a>
           </div>
         </div>
@@ -325,16 +325,16 @@ export default function InstallationGuidePage() {
                 <span>GARANSI SETUP 1-ON-1 SAMPAI JADI</span>
               </div>
               <p className="text-xs text-muted leading-relaxed">
-                Pembeli lisensi resmi berhak meminta pendampingan langsung dari Mas Agus via WhatsApp atau remote desktop jika ada kendala instalasi.
+                Pembeli lisensi resmi berhak meminta pendampingan langsung dari Tim AUDIRA via WhatsApp atau remote desktop jika ada kendala instalasi.
               </p>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20pembeli%20lisensi%20Audira%20Motion%20dan%20membutuhkan%20bantuan%20setup%20instalasi"
+                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20pembeli%20lisensi%20Audira%20Motion%20dan%20membutuhkan%20bantuan%20setup%20instalasi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 py-2.5 text-xs font-bold text-black hover:bg-emerald-400 transition-all shadow-md active:scale-95"
               >
                 <MessageCircle className="w-4 h-4 fill-black" />
-                <span>Chat WhatsApp Mas Agus ➔</span>
+                <span>Tanya AUDIRA di WhatsApp ➔</span>
               </a>
             </div>
 
@@ -894,7 +894,7 @@ export default function InstallationGuidePage() {
 
                 {filteredTroubleshoot.length === 0 && (
                   <div className="p-6 text-center text-xs text-dim">
-                    Tidak ditemukan kendala dengan kata kunci &quot;{searchQuery}&quot;. Hubungi Mas Agus di WhatsApp jika ada pertanyaan lain.
+                    Tidak ditemukan kendala dengan kata kunci &quot;{searchQuery}&quot;. Hubungi Tim AUDIRA di WhatsApp jika ada pertanyaan lain.
                   </div>
                 )}
               </div>
@@ -904,17 +904,17 @@ export default function InstallationGuidePage() {
                 <div>
                   <h4 className="font-bold text-sm text-paper">Masih Menemukan Error Lain?</h4>
                   <p className="text-xs text-muted mt-0.5">
-                    Jangan buang waktu berjam-jam debugging sendiri. Hubungi Mas Agus langsung untuk pendampingan setup.
+                    Jangan buang waktu berjam-jam debugging sendiri. Hubungi Tim AUDIRA langsung untuk pendampingan setup.
                   </p>
                 </div>
                 <a
-                  href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20butuh%20bantuan%20instalasi%20Audira%20Motion%20di%20laptop%20saya"
+                  href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20butuh%20bantuan%20instalasi%20Audira%20Motion%20di%20laptop%20saya"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 btn-primary py-2.5 px-4 text-xs font-bold shadow-md"
                 >
                   <MessageCircle className="w-4 h-4 mr-1.5" />
-                  <span>Chat Mas Agus di WhatsApp ➔</span>
+                  <span>Tanya AUDIRA di WhatsApp ➔</span>
                 </a>
               </div>
             </section>
@@ -932,7 +932,7 @@ export default function InstallationGuidePage() {
           </Link>
 
           <a
-            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20ingin%20tanya%20seputar%20lisensi%20dan%20instalasi"
+            href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20ingin%20tanya%20seputar%20lisensi%20dan%20instalasi"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-orange-400 transition-colors"

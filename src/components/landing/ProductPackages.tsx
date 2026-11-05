@@ -495,7 +495,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => 
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <span><strong>Buku Panduan + Garansi Setup 1-on-1 Mas Agus</strong> sampai jalan di PC Anda</span>
+              <span><strong>Buku Panduan + Garansi Setup 1-on-1 Tim AUDIRA</strong> sampai jalan di PC Anda</span>
             </li>
           </ul>
 

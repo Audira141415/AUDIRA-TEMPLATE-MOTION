@@ -134,7 +134,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ orders, onRefresh }) => {
       `https://github.com/Audira141415/AUDIRA-TEMPLATE-MOTION/archive/refs/heads/master.zip\n\n` +
       `📖 Buku Panduan Instalasi & Aktivasi MCP Mesh:\n` +
       `http://localhost:3788/panduan\n\n` +
-      `Jika ada kendala instalasi di komputer Anda, silakan reply pesan ini. Tim Mas Agus siap mendampingi 1-on-1 sampai video pertama Anda berhasil dirender!`;
+      `Jika ada kendala instalasi di komputer Anda, silakan reply pesan ini. Tim AUDIRA siap mendampingi 1-on-1 sampai video pertama Anda berhasil dirender!`;
 
     const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');

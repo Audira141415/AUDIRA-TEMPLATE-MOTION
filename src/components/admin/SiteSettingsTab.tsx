@@ -119,7 +119,7 @@ export const SiteSettingsTab: React.FC = () => {
 
           <div className="space-y-3 text-xs">
             <div>
-              <label className="block text-muted mb-1">Nomor WhatsApp Resmi (CS Mas Agus)</label>
+              <label className="block text-muted mb-1">Nomor WhatsApp Resmi (CS AUDIRA)</label>
               <input
                 type="text"
                 value={config.whatsappNumber}

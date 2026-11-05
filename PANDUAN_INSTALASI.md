@@ -211,6 +211,6 @@ Video MP4 Full HD tanpa watermark akan otomatis tersedia di folder `out/`.
 ## 🤝 7. Garansi & Dukungan Teknis 1-on-1
 
 Jika Anda membutuhkan bantuan setup atau ingin dipandu langsung:
-- **WhatsApp Mas Agus:** [+62 857-0966-6240](https://wa.me/6285709666240)
+- **WhatsApp AUDIRA:** [+62 857-0966-6240](https://wa.me/6285709666240)
 - **Garansi:** Pendampingan 1-on-1 via remote desktop / video call hingga video pertama Anda berhasil dirender di komputer Anda!
 

@@ -15,7 +15,6 @@ import { SiteFooter } from '@/components/site/SiteFooter';
 import { OrderModal, ProductTier } from '@/components/landing/OrderModal';
 import { DfyPlanId } from '@/components/landing/DoneForYouSection';
 import { StickyCtaBar } from '@/components/landing/StickyCtaBar';
-import { WhatsAppFloatingWidget } from '@/components/landing/WhatsAppFloatingWidget';
 
 export default function LandingPage() {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -78,10 +77,7 @@ export default function LandingPage() {
       {/* 12. Sticky Floating Conversion Bar (Appears on Scroll) */}
       <StickyCtaBar onOpenOrderModal={handleOpenOrderModal} />
 
-      {/* 13. Direct WhatsApp Quick Support Floating Widget */}
-      <WhatsAppFloatingWidget />
-
-      {/* 14. Interactive Checkout & License Order Modal */}
+      {/* 13. Interactive Checkout & License Order Modal */}
       <OrderModal
         isOpen={isOrderModalOpen}
         onClose={handleCloseOrderModal}

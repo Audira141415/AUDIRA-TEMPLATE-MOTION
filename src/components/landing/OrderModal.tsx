@@ -77,7 +77,7 @@ const TIERS: Record<ProductTier, TierInfo> = {
       'Semua 29 Gaya 3D + Full Source Codebase Remotion',
       'AUDIRA Skill Mesh (Full Agentic Director Engine)',
       'Buku Panduan Lengkap (/panduan) + Video Walkthrough',
-      'Garansi Setup 1-on-1 WhatsApp Langsung Mas Agus'
+      'Garansi Setup 1-on-1 WhatsApp Tim AUDIRA'
     ]
   },
   dfy: {
@@ -136,7 +136,7 @@ const DFY_SUB_PLANS: Record<DfyPlanId, {
       '15 Video Reels/Shorts Distribusi 1 Bulan',
       'Jadwal Konten Rapi 3-4 Video per Minggu',
       'Custom Watermark Logo & Brand Kit',
-      'Direct Line Konsultasi WhatsApp Mas Agus'
+      'Direct Line Konsultasi WhatsApp Tim AUDIRA'
     ]
   }
 };
@@ -202,7 +202,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     const name = buyerName.trim() || 'Kreator';
     const wa = buyerWhatsApp.trim() || '-';
     const email = buyerEmail.trim() || '-';
-    const msg = `Halo Mas Agus (AUDIRA MDA), saya ingin memesan Lisensi Resmi / Jasa:\n\n` +
+    const msg = `Halo Tim AUDIRA, saya ingin memesan Lisensi Resmi / Jasa:\n\n` +
       `📦 Paket: *${displayName}*\n` +
       `💰 Harga: *${displayPrice}*\n` +
       `👤 Nama: ${name}\n` +
@@ -459,7 +459,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             >
               <MessageCircle className="w-5 h-5 text-emerald-400" />
               <span className="text-xs">WhatsApp Direct</span>
-              <span className="text-[10px] text-dim font-mono">Bicara Mas Agus</span>
+              <span className="text-[10px] text-dim font-mono">Tanya AUDIRA</span>
             </button>
           </div>
         </div>
@@ -521,7 +521,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
           <div className="mb-6 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4 text-xs text-muted flex items-start gap-3">
             <MessageCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
             <div>
-              <p className="font-bold text-paper mb-0.5">Pemesanan Langsung ke WhatsApp Mas Agus</p>
+              <p className="font-bold text-paper mb-0.5">Pemesanan Langsung ke WhatsApp AUDIRA</p>
               <p className="leading-relaxed">
                 Format naskah pemesanan akan otomatis tersusun rapi. Tim AUDIRA akan langsung membalas dalam hitungan menit untuk konfirmasi file dan aktivasi lisensi.
               </p>
