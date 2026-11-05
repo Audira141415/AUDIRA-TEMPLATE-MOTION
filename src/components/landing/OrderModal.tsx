@@ -25,6 +25,9 @@ export interface OrderModalProps {
   onClose: () => void;
   defaultTier?: ProductTier;
   defaultDfyPlan?: DfyPlanId;
+  initialCoupon?: string;
+  onTierChange?: (tier: ProductTier, dfyPlan?: DfyPlanId) => void;
+  standalone?: boolean;
 }
 
 interface TierInfo {
@@ -147,7 +150,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   isOpen,
   onClose,
   defaultTier = 'lab',
-  defaultDfyPlan = 'bundle'
+  defaultDfyPlan = 'bundle',
+  initialCoupon,
+  onTierChange,
+  standalone = false
 }) => {
   const [selectedTier, setSelectedTier] = useState<ProductTier>(defaultTier);
   const [selectedDfyPlan, setSelectedDfyPlan] = useState<DfyPlanId>(defaultDfyPlan);
@@ -158,7 +164,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   // Coupon promo states
-  const [couponInput, setCouponInput] = useState('');
+  const [couponInput, setCouponInput] = useState(initialCoupon ? initialCoupon.toUpperCase() : '');
   const [appliedCoupon, setAppliedCoupon] = useState<{
     code: string;
     discount: number;
@@ -185,15 +191,32 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   }, [defaultDfyPlan]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (initialCoupon) {
+      setCouponInput(initialCoupon.toUpperCase());
+    }
+  }, [initialCoupon]);
+
+  useEffect(() => {
+    if (!standalone && !isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, standalone, onClose]);
 
-  if (!isOpen) return null;
+  const shouldRender = standalone || isOpen;
+  if (!shouldRender) return null;
+
+  const handleSelectTier = (tierKey: ProductTier) => {
+    setSelectedTier(tierKey);
+    onTierChange?.(tierKey, selectedDfyPlan);
+  };
+
+  const handleSelectDfyPlan = (planKey: DfyPlanId) => {
+    setSelectedDfyPlan(planKey);
+    onTierChange?.('dfy', planKey);
+  };
 
   // Active display calculation (specialized for DFY sub-plans)
   const isDfy = selectedTier === 'dfy';
@@ -301,15 +324,36 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in font-display">
-      {/* Backdrop click to close */}
-      <div 
-        className="absolute inset-0" 
-        onClick={onClose} 
-        aria-hidden="true" 
-      />
+    <div className={standalone 
+      ? "w-full max-w-[760px] mx-auto animate-fade-in font-display" 
+      : "fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in font-display"
+    }>
+      {/* Backdrop click to close (only in modal mode) */}
+      {!standalone && (
+        <div 
+          className="absolute inset-0" 
+          onClick={onClose} 
+          aria-hidden="true" 
+        />
+      )}
 
-      <div className="relative w-full max-w-[720px] max-h-[92vh] overflow-y-auto rounded-3xl border-2 border-line-strong bg-card p-5 sm:p-7 shadow-2xl z-10 text-paper">
+      <div className={`relative w-full ${standalone ? 'max-w-[760px]' : 'max-w-[720px] max-h-[92vh] overflow-y-auto'} rounded-3xl border-2 border-line-strong bg-card p-5 sm:p-7 shadow-2xl z-10 text-paper`}>
+        {/* Standalone navigation breadcrumbs bar */}
+        {standalone && (
+          <div className="flex items-center justify-between border-b border-line pb-3 mb-4 text-xs">
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex items-center gap-1.5 text-accent hover:underline font-bold"
+            >
+              <span>← Kembali ke Katalog Utama</span>
+            </button>
+            <span className="text-[11px] font-mono text-dim flex items-center gap-1">
+              <Lock className="w-3 h-3 text-emerald-400" /> Checkout Resmi Terenkripsi
+            </span>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex items-start justify-between border-b border-line pb-4 mb-5">
           <div className="flex flex-col gap-1">
@@ -352,7 +396,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 <button
                   key={tierKey}
                   type="button"
-                  onClick={() => setSelectedTier(tierKey)}
+                  onClick={() => handleSelectTier(tierKey)}
                   className={`flex flex-col p-2.5 rounded-2xl border text-left transition-all ${
                     isSelected
                       ? 'border-accent bg-accent/15 ring-2 ring-accent/60 scale-[1.02] shadow-md'
@@ -395,7 +439,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   <button
                     key={planKey}
                     type="button"
-                    onClick={() => setSelectedDfyPlan(planKey)}
+                    onClick={() => handleSelectDfyPlan(planKey)}
                     className={`p-2.5 rounded-xl border text-center transition-all ${
                       active
                         ? 'border-emerald-400 bg-emerald-500/25 text-white ring-2 ring-emerald-400/50 shadow-md font-bold'

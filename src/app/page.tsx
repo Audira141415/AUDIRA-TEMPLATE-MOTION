@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PromoBanner } from '@/components/landing/PromoBanner';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { HeroSection } from '@/components/landing/HeroSection';
@@ -23,6 +23,7 @@ export default function LandingPage() {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedTier, setSelectedTier] = useState<ProductTier>('lab');
   const [selectedDfyPlan, setSelectedDfyPlan] = useState<DfyPlanId>('bundle');
+  const previousUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
     fetch('/api/landing-config')
@@ -37,14 +38,89 @@ export default function LandingPage() {
       });
   }, []);
 
+  // Synchronize modal state with URL deep-linking and browser navigation (Back / Forward)
+  useEffect(() => {
+    const parseUrlAndApply = () => {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(window.location.search);
+      const pathname = window.location.pathname;
+      const hash = window.location.hash;
+
+      const isOrderUrl = pathname === '/order' || params.get('order') === 'open' || params.get('order') === 'true' || hash === '#order';
+      const tierParam = params.get('tier') as ProductTier | null;
+      const planParam = params.get('plan') as DfyPlanId | null;
+
+      if (isOrderUrl || tierParam) {
+        if (tierParam && ['starter', 'master', 'lab', 'dfy'].includes(tierParam)) {
+          setSelectedTier(tierParam);
+        }
+        if (planParam && ['single', 'bundle', 'retainer'].includes(planParam)) {
+          setSelectedDfyPlan(planParam);
+        }
+        setIsOrderModalOpen(true);
+      } else {
+        setIsOrderModalOpen(false);
+      }
+    };
+
+    // Check on initial mount
+    parseUrlAndApply();
+
+    // Listen to browser Back / Forward events
+    const handlePopState = () => {
+      parseUrlAndApply();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const handleOpenOrderModal = (tier: ProductTier = 'lab', dfyPlan: DfyPlanId = 'bundle') => {
     setSelectedTier(tier);
     setSelectedDfyPlan(dfyPlan);
     setIsOrderModalOpen(true);
+
+    if (typeof window !== 'undefined') {
+      // Remember where the user was before opening the modal
+      if (window.location.pathname !== '/order') {
+        previousUrlRef.current = window.location.pathname + window.location.search + window.location.hash;
+      }
+
+      // Update URL to /order?tier=... cleanly without full page refresh
+      const search = new URLSearchParams();
+      search.set('tier', tier);
+      if (tier === 'dfy' && dfyPlan) {
+        search.set('plan', dfyPlan);
+      }
+      const newUrl = `/order?${search.toString()}`;
+      window.history.pushState({ modal: 'order', tier, dfyPlan }, '', newUrl);
+    }
+  };
+
+  const handleTierChange = (tier: ProductTier, dfyPlan?: DfyPlanId) => {
+    setSelectedTier(tier);
+    if (dfyPlan) setSelectedDfyPlan(dfyPlan);
+
+    if (typeof window !== 'undefined') {
+      const search = new URLSearchParams();
+      search.set('tier', tier);
+      if (tier === 'dfy' && (dfyPlan || selectedDfyPlan)) {
+        search.set('plan', dfyPlan || selectedDfyPlan);
+      }
+      const newUrl = `/order?${search.toString()}`;
+      window.history.replaceState({ modal: 'order', tier, dfyPlan }, '', newUrl);
+    }
   };
 
   const handleCloseOrderModal = () => {
     setIsOrderModalOpen(false);
+
+    if (typeof window !== 'undefined' && window.location.pathname === '/order') {
+      const returnTo = previousUrlRef.current && !previousUrlRef.current.startsWith('/order')
+        ? previousUrlRef.current
+        : '/#produk';
+      window.history.pushState({}, '', returnTo);
+    }
   };
 
   return (
@@ -129,6 +205,7 @@ export default function LandingPage() {
         onClose={handleCloseOrderModal}
         defaultTier={selectedTier}
         defaultDfyPlan={selectedDfyPlan}
+        onTierChange={handleTierChange}
       />
     </div>
   );
