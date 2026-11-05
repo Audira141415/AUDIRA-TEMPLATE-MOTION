@@ -25,6 +25,7 @@ const COLUMNS = [
     title: 'Ekosistem AUDIRA',
     links: [
       { href: 'https://audira.my.id', label: 'audira.my.id' },
+      { href: '/admin', label: 'Panel Kontrol Admin' },
       { href: 'mailto:official@audira.my.id', label: 'official@audira.my.id' },
       { href: 'https://github.com/Audira141415/AUDIRA-TEMPLATE-MOTION', label: 'GitHub Repository' },
     ],

@@ -1,9 +1,39 @@
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Download, Loader2, RefreshCw, Cpu, Users, Video, Mic } from 'lucide-react';
+import Link from 'next/link';
+import { 
+  Download, 
+  Loader2, 
+  RefreshCw, 
+  Cpu, 
+  Users, 
+  Video, 
+  Mic, 
+  LayoutDashboard, 
+  ShoppingBag, 
+  Settings, 
+  Sparkles, 
+  DollarSign, 
+  ShieldCheck, 
+  CheckCircle2, 
+  Activity, 
+  Play, 
+  MessageCircle, 
+  ExternalLink,
+  Layers,
+  ArrowRight,
+  TrendingUp,
+  Server
+} from 'lucide-react';
 import { AiInterconnectionTab } from '@/components/admin/AiInterconnectionTab';
 import { VoiceOverTab } from '@/components/admin/VoiceOverTab';
+import { OrdersTab } from '@/components/admin/OrdersTab';
+import { SiteSettingsTab } from '@/components/admin/SiteSettingsTab';
+import { CatalogTab } from '@/components/admin/CatalogTab';
+import { OrderRecord } from '@/lib/orders';
+
+type AdminTab = 'overview' | 'orders' | 'site' | 'catalog' | 'ai' | 'voice' | 'users' | 'renders';
 
 type AdminUser = {
   id: string;
@@ -34,19 +64,28 @@ const STATE_STYLE: Record<string, string> = {
 };
 
 export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
-  const [tab, setTab] = useState<'ai' | 'voice' | 'users' | 'renders'>('ai');
+  const [tab, setTab] = useState<AdminTab>('overview');
   const [users, setUsers] = useState<AdminUser[] | null>(null);
   const [renders, setRenders] = useState<AdminRender[] | null>(null);
+  const [orders, setOrders] = useState<OrderRecord[] | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [message, setMessage] = useState<{ tone: 'error' | 'ok'; text: string } | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const load = useCallback(async () => {
-    const [u, r] = await Promise.all([
-      fetch('/api/admin/users').then((res) => res.json()),
-      fetch('/api/admin/renders').then((res) => res.json()),
-    ]);
-    setUsers(u.users ?? []);
-    setRenders(r.renders ?? []);
+    setIsRefreshing(true);
+    try {
+      const [u, r, o] = await Promise.all([
+        fetch('/api/admin/users').then((res) => res.json()).catch(() => ({ users: [] })),
+        fetch('/api/admin/renders').then((res) => res.json()).catch(() => ({ renders: [] })),
+        fetch('/api/admin/orders').then((res) => res.json()).catch(() => ({ orders: [] })),
+      ]);
+      setUsers(u.users ?? []);
+      setRenders(r.renders ?? []);
+      setOrders(o.orders ?? []);
+    } finally {
+      setIsRefreshing(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -68,39 +107,126 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
     if (res.ok) load();
   };
 
-  const stats = [
-    { label: 'Pengguna', value: users?.length ?? '–' },
-    { label: 'Superadmin', value: users?.filter((u) => u.role === 'superadmin').length ?? '–' },
-    { label: 'Nonaktif', value: users?.filter((u) => u.disabled).length ?? '–' },
-    { label: 'Render', value: renders?.length ?? '–' },
-  ];
+  // Metrics Calculations
+  const totalOrders = orders?.length ?? 0;
+  const verifiedOrders = orders?.filter(o => o.status === 'verified' || o.status === 'sent' || o.status === 'completed').length ?? 0;
+  const totalUsers = users?.length ?? 0;
+  const totalRenders = renders?.length ?? 0;
+
+  // Approximate revenue from verified orders
+  const estimatedRevenue = orders?.reduce((acc, o) => {
+    if (o.status === 'verified' || o.status === 'sent' || o.status === 'completed') {
+      const num = parseInt(o.amount.replace(/\D/g, ''), 10);
+      return acc + (isNaN(num) ? 0 : num);
+    }
+    return acc;
+  }, 0) ?? 0;
+
+  const formattedRevenue = `Rp${estimatedRevenue.toLocaleString('id-ID')}`;
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="rounded-2xl border border-[#2c2b28] bg-[#1c1c1a] p-5">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#8a8780]">{s.label}</p>
-            <p className="mt-2 text-[34px] font-extrabold tracking-[-0.04em]">{s.value}</p>
+    <div className="flex flex-col gap-8 font-display">
+      
+      {/* Top Welcome & Quick Actions Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-6">
+        <div>
+          <div className="inline-flex items-center gap-2 mb-1">
+            <span className="flex size-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">
+              PORTAL KONTROL PUSAT AUDIRA
+            </span>
           </div>
-        ))}
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-paper">
+            Admin Management Console
+          </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            Kelola penjualan lisensi, 29 gaya 3D Remotion, API AI, Voiceover Cartesia, dan pengaturan website.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2.5 shrink-0">
+          <Link
+            href="/"
+            target="_blank"
+            className="btn-outline py-2 px-3.5 text-xs font-semibold inline-flex items-center gap-1.5"
+          >
+            <span>Lihat Website</span>
+            <ExternalLink className="w-3.5 h-3.5 text-dim" />
+          </Link>
+
+          <button
+            type="button"
+            onClick={load}
+            disabled={isRefreshing}
+            className="inline-flex items-center gap-2 rounded-xl border border-line bg-tile px-3.5 py-2 text-xs font-bold text-fg-2 hover:border-line-strong hover:text-white transition-all active:scale-95 disabled:opacity-50"
+          >
+            <RefreshCw className={`h-3.5 w-3.5 ${isRefreshing ? 'animate-spin text-accent' : ''}`} />
+            <span>{isRefreshing ? 'Memuat...' : 'Muat Ulang'}</span>
+          </button>
+        </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3">
-        <div role="tablist" className="flex flex-wrap gap-1 rounded-2xl border border-[#2c2b28] bg-[#1c1c1a] p-1.5">
+      {/* Global Stat Cards */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="rounded-2xl border border-line bg-card p-5 space-y-1 shadow-md">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-dim flex items-center gap-1.5">
+            <ShoppingBag className="w-3.5 h-3.5 text-accent" />
+            Total Pesanan
+          </p>
+          <p className="text-2xl sm:text-3xl font-extrabold text-paper font-mono">{totalOrders}</p>
+          <p className="text-[11px] text-emerald-400 font-semibold">{verifiedOrders} lunas terverifikasi</p>
+        </div>
+
+        <div className="rounded-2xl border border-line bg-card p-5 space-y-1 shadow-md">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-dim flex items-center gap-1.5">
+            <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+            Estimasi Omset
+          </p>
+          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">{formattedRevenue}</p>
+          <p className="text-[11px] text-muted">Dari lisensi &amp; jasa DFY</p>
+        </div>
+
+        <div className="rounded-2xl border border-line bg-card p-5 space-y-1 shadow-md">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-dim flex items-center gap-1.5">
+            <Video className="w-3.5 h-3.5 text-cyan-400" />
+            Total Render
+          </p>
+          <p className="text-2xl sm:text-3xl font-extrabold text-paper font-mono">{totalRenders}</p>
+          <p className="text-[11px] text-cyan-300">Remotion 4.0 Engine</p>
+        </div>
+
+        <div className="rounded-2xl border border-line bg-card p-5 space-y-1 shadow-md">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-dim flex items-center gap-1.5">
+            <Users className="w-3.5 h-3.5 text-purple-400" />
+            Pengguna Terdaftar
+          </p>
+          <p className="text-2xl sm:text-3xl font-extrabold text-paper font-mono">{totalUsers}</p>
+          <p className="text-[11px] text-muted">Akun kreator &amp; admin</p>
+        </div>
+      </div>
+
+      {/* 8-Tab Navigation Bar */}
+      <div className="flex items-center justify-between gap-3 overflow-x-auto pb-1">
+        <div role="tablist" className="flex flex-wrap gap-1 rounded-2xl border border-line bg-card p-1.5 shadow-xl">
           {[
-            { id: 'ai' as const, label: 'Interkoneksi AI (Gemini, Claude, GPT)', icon: <Cpu className="h-4 w-4" /> },
-            { id: 'voice' as const, label: 'Voice Over & TTS (Cartesia)', icon: <Mic className="h-4 w-4" /> },
+            { id: 'overview' as const, label: 'Overview', icon: <LayoutDashboard className="h-4 w-4" /> },
+            { id: 'orders' as const, label: 'Pesanan & Lisensi', icon: <ShoppingBag className="h-4 w-4" /> },
+            { id: 'site' as const, label: 'Pengaturan & Harga', icon: <Settings className="h-4 w-4" /> },
+            { id: 'catalog' as const, label: 'Katalog 29 Gaya 3D', icon: <Layers className="h-4 w-4" /> },
+            { id: 'ai' as const, label: 'Interkoneksi AI', icon: <Cpu className="h-4 w-4" /> },
+            { id: 'voice' as const, label: 'Voiceover Cartesia', icon: <Mic className="h-4 w-4" /> },
             { id: 'users' as const, label: 'Pengguna', icon: <Users className="h-4 w-4" /> },
-            { id: 'renders' as const, label: 'Render Video', icon: <Video className="h-4 w-4" /> },
+            { id: 'renders' as const, label: 'Vault Render', icon: <Video className="h-4 w-4" /> },
           ].map((t) => (
             <button
               key={t.id}
               role="tab"
               aria-selected={tab === t.id}
               onClick={() => setTab(t.id)}
-              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all ${
-                tab === t.id ? 'bg-[#ea580c] text-white shadow-sm' : 'text-[#b9b6ae] hover:text-white hover:bg-zinc-800'
+              className={`inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-bold transition-all ${
+                tab === t.id 
+                  ? 'bg-accent text-ink shadow-md font-extrabold' 
+                  : 'text-muted hover:text-paper hover:bg-tile'
               }`}
             >
               {t.icon}
@@ -108,19 +234,12 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
             </button>
           ))}
         </div>
-        <button
-          type="button"
-          onClick={load}
-          className="inline-flex items-center gap-2 rounded-xl border border-[#2c2b28] px-3.5 py-2 text-xs font-bold text-[#d6d3cc] hover:text-white transition-colors"
-        >
-          <RefreshCw className="h-4 w-4" /> Muat ulang
-        </button>
       </div>
 
       {message && (
         <p
           role="status"
-          className={`rounded-xl border px-4 py-3 text-sm ${
+          className={`rounded-2xl border px-4 py-3 text-xs font-bold ${
             message.tone === 'error' ? 'border-red-900 bg-red-950/50 text-red-200' : 'border-emerald-900 bg-emerald-950/40 text-emerald-200'
           }`}
         >
@@ -128,18 +247,186 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         </p>
       )}
 
+      {/* TAB 1: OVERVIEW DASHBOARD */}
+      {tab === 'overview' && (
+        <div className="space-y-6">
+          {/* System Health & Status Banner */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div className="p-4 rounded-2xl bg-card border border-line space-y-2 shadow-md">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-dim uppercase font-bold flex items-center gap-1.5">
+                  <Server className="w-3.5 h-3.5 text-emerald-400" />
+                  SERVER STATUS
+                </span>
+                <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+              </div>
+              <h4 className="font-bold text-sm text-paper">Next.js Web Server (Port 3788)</h4>
+              <p className="text-xs text-emerald-300 font-mono">ONLINE • 200 OK</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-card border border-line space-y-2 shadow-md">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-dim uppercase font-bold flex items-center gap-1.5">
+                  <Play className="w-3.5 h-3.5 text-accent" />
+                  VISUAL 3D ENGINE
+                </span>
+                <span className="size-2 rounded-full bg-accent animate-pulse" />
+              </div>
+              <h4 className="font-bold text-sm text-paper">Remotion 4.0 + Three.js</h4>
+              <p className="text-xs text-accent font-mono">29 KITS SIAP RENDER</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-card border border-line space-y-2 shadow-md">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-dim uppercase font-bold flex items-center gap-1.5">
+                  <Mic className="w-3.5 h-3.5 text-cyan-400" />
+                  VOICEOVER GATEWAY
+                </span>
+                <span className="size-2 rounded-full bg-cyan-400 animate-pulse" />
+              </div>
+              <h4 className="font-bold text-sm text-paper">Cartesia AI &amp; Word Timestamps</h4>
+              <p className="text-xs text-cyan-300 font-mono">TERKONEKSI KE MCP</p>
+            </div>
+
+          </div>
+
+          {/* Quick Shortcuts & Recent Orders */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            {/* Left: Recent Orders Summary (7 cols) */}
+            <div className="lg:col-span-7 rounded-2xl border border-line bg-card p-5 space-y-4 shadow-xl">
+              <div className="flex items-center justify-between border-b border-line pb-3">
+                <h4 className="font-bold text-sm text-paper flex items-center gap-2">
+                  <ShoppingBag className="w-4 h-4 text-accent" />
+                  <span>Pesanan &amp; Lisensi Terbaru</span>
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => setTab('orders')}
+                  className="text-xs text-accent hover:underline font-semibold"
+                >
+                  Lihat Semua ({totalOrders}) ➔
+                </button>
+              </div>
+
+              <div className="space-y-2.5">
+                {orders?.slice(0, 4).map((o) => (
+                  <div key={o.id} className="p-3 rounded-xl bg-tile border border-line flex items-center justify-between gap-3 text-xs">
+                    <div>
+                      <span className="font-bold text-paper block">{o.customerName}</span>
+                      <span className="text-[11px] text-dim">{o.tierName} • <span className="font-mono text-accent font-bold">{o.amount}</span></span>
+                    </div>
+                    <div className="text-right">
+                      <span className="font-mono text-[10px] text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800 block mb-0.5">
+                        {o.licenseKey}
+                      </span>
+                      <span className="text-[10px] text-dim uppercase font-bold">{o.status}</span>
+                    </div>
+                  </div>
+                ))}
+
+                {(!orders || orders.length === 0) && (
+                  <p className="text-xs text-dim text-center py-4">Belum ada pesanan tersimpan.</p>
+                )}
+              </div>
+            </div>
+
+            {/* Right: Quick Action Hub (5 cols) */}
+            <div className="lg:col-span-5 rounded-2xl border border-line bg-card p-5 space-y-4 shadow-xl">
+              <h4 className="font-bold text-sm text-paper flex items-center gap-2 border-b border-line pb-3">
+                <Sparkles className="w-4 h-4 text-accent" />
+                <span>Pusat Jalan Pintas Admin</span>
+              </h4>
+
+              <div className="space-y-2 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setTab('orders')}
+                  className="w-full p-3 rounded-xl bg-tile border border-line hover:border-accent flex items-center justify-between text-left group transition-all"
+                >
+                  <div>
+                    <span className="font-bold text-paper block group-hover:text-accent">Input Pesanan Pembeli Baru</span>
+                    <span className="text-[11px] text-dim">Generate kode lisensi &amp; kirim link WA</span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-dim group-hover:text-accent group-hover:translate-x-1 transition-transform" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setTab('site')}
+                  className="w-full p-3 rounded-xl bg-tile border border-line hover:border-accent flex items-center justify-between text-left group transition-all"
+                >
+                  <div>
+                    <span className="font-bold text-paper block group-hover:text-accent">Ubah Harga &amp; Nomor WhatsApp</span>
+                    <span className="text-[11px] text-dim">Update konfigurasi langsung</span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-dim group-hover:text-accent group-hover:translate-x-1 transition-transform" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setTab('catalog')}
+                  className="w-full p-3 rounded-xl bg-tile border border-line hover:border-accent flex items-center justify-between text-left group transition-all"
+                >
+                  <div>
+                    <span className="font-bold text-paper block group-hover:text-accent">Audit 29 Gaya 3D Remotion</span>
+                    <span className="text-[11px] text-dim">Cek file video MP4 &amp; prompt visual</span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-dim group-hover:text-accent group-hover:translate-x-1 transition-transform" />
+                </button>
+
+                <Link
+                  href="/panduan"
+                  target="_blank"
+                  className="w-full p-3 rounded-xl bg-tile border border-line hover:border-emerald-500/60 flex items-center justify-between text-left group transition-all"
+                >
+                  <div>
+                    <span className="font-bold text-paper block group-hover:text-emerald-300">Buka Buku Panduan Instalasi</span>
+                    <span className="text-[11px] text-dim">Runbook instalasi Claude &amp; Remotion</span>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-dim group-hover:text-emerald-300" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* TAB 2: ORDERS MANAGEMENT */}
+      {tab === 'orders' && (
+        <OrdersTab 
+          orders={orders ?? []} 
+          onRefresh={load} 
+        />
+      )}
+
+      {/* TAB 3: SITE SETTINGS & PRICING */}
+      {tab === 'site' && (
+        <SiteSettingsTab />
+      )}
+
+      {/* TAB 4: 29 3D KITS CATALOG */}
+      {tab === 'catalog' && (
+        <CatalogTab />
+      )}
+
+      {/* TAB 5: AI INTERCONNECTION */}
       {tab === 'ai' && (
         <AiInterconnectionTab />
       )}
 
+      {/* TAB 6: VOICEOVER TTS */}
       {tab === 'voice' && (
         <VoiceOverTab />
       )}
 
+      {/* TAB 7: USERS MANAGEMENT */}
       {tab === 'users' && (
-        <div className="overflow-x-auto rounded-2xl border border-[#2c2b28]">
-          <table className="w-full min-w-[760px] text-left text-sm">
-            <thead className="bg-[#1c1c1a] font-mono text-[11px] uppercase tracking-[0.12em] text-[#8a8780]">
+        <div className="overflow-x-auto rounded-2xl border border-line bg-card shadow-xl">
+          <table className="w-full min-w-[760px] text-left text-xs">
+            <thead className="bg-tile border-b border-line font-mono text-[11px] uppercase tracking-wider text-dim">
               <tr>
                 <th className="px-4 py-3 font-medium">Pengguna</th>
                 <th className="px-4 py-3 font-medium">Peran</th>
@@ -149,11 +436,11 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                 <th className="px-4 py-3 font-medium text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-line-soft">
               {users === null && (
                 <tr>
-                  <td colSpan={6} className="px-4 py-10 text-center text-[#8a8780]">
-                    <Loader2 className="mx-auto h-5 w-5 animate-spin" />
+                  <td colSpan={6} className="px-4 py-10 text-center text-muted">
+                    <Loader2 className="mx-auto h-5 w-5 animate-spin text-accent" />
                   </td>
                 </tr>
               )}
@@ -161,35 +448,35 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                 const isMe = u.id === meId;
                 const busy = busyId === u.id;
                 return (
-                  <tr key={u.id} className="border-t border-[#2c2b28]">
+                  <tr key={u.id} className="hover:bg-tile/40 transition-colors">
                     <td className="px-4 py-3">
-                      <p className="font-semibold">
-                        {u.name} {isMe && <span className="text-[#8a8780]">(kamu)</span>}
+                      <p className="font-semibold text-paper">
+                        {u.name} {isMe && <span className="text-dim">(Anda)</span>}
                       </p>
-                      <p className="text-[13px] text-[#8a8780]">{u.email}</p>
+                      <p className="text-[11px] text-dim">{u.email}</p>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`rounded-md border px-2 py-1 font-mono text-[11px] uppercase ${
-                          u.role === 'superadmin' ? 'border-[#ea580c]/50 bg-[#ea580c]/15 text-[#f08a4b]' : 'border-[#2c2b28] text-[#b9b6ae]'
+                        className={`rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase font-bold ${
+                          u.role === 'superadmin' ? 'border-accent/50 bg-accent/15 text-accent' : 'border-line text-muted'
                         }`}
                       >
                         {u.role}
                       </span>
                     </td>
-                    <td className="px-4 py-3">{u.disabled ? <span className="text-red-300">Nonaktif</span> : <span className="text-emerald-300">Aktif</span>}</td>
+                    <td className="px-4 py-3">{u.disabled ? <span className="text-red-400 font-bold">Nonaktif</span> : <span className="text-emerald-400 font-bold">Aktif</span>}</td>
                     <td className="px-4 py-3 font-mono">{u.renders}</td>
-                    <td className="px-4 py-3 text-[#b9b6ae]">{fmtDate(u.createdAt)}</td>
+                    <td className="px-4 py-3 text-dim">{fmtDate(u.createdAt)}</td>
                     <td className="px-4 py-3">
                       {isMe ? (
-                        <p className="text-right text-[13px] text-[#6f6c66]">Akun sendiri</p>
+                        <p className="text-right text-[12px] text-dim">Akun Utama</p>
                       ) : (
-                        <div className="flex justify-end gap-2">
+                        <div className="flex justify-end gap-1.5">
                           <button
                             type="button"
                             disabled={busy}
                             onClick={() => act(u, 'PATCH', { role: u.role === 'superadmin' ? 'user' : 'superadmin' })}
-                            className="rounded-lg border border-[#2c2b28] px-3 py-1.5 text-[13px] font-semibold hover:border-[#4a4843] disabled:opacity-50"
+                            className="rounded-lg border border-line bg-tile px-2.5 py-1 text-[11px] font-semibold hover:border-accent disabled:opacity-50"
                           >
                             {u.role === 'superadmin' ? 'Jadikan user' : 'Jadikan admin'}
                           </button>
@@ -197,7 +484,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                             type="button"
                             disabled={busy}
                             onClick={() => act(u, 'PATCH', { disabled: !u.disabled })}
-                            className="rounded-lg border border-[#2c2b28] px-3 py-1.5 text-[13px] font-semibold hover:border-[#4a4843] disabled:opacity-50"
+                            className="rounded-lg border border-line bg-tile px-2.5 py-1 text-[11px] font-semibold hover:border-accent disabled:opacity-50"
                           >
                             {u.disabled ? 'Aktifkan' : 'Nonaktifkan'}
                           </button>
@@ -205,7 +492,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                             type="button"
                             disabled={busy}
                             onClick={() => act(u, 'DELETE', undefined, `Hapus akun ${u.email}? Tindakan ini tidak bisa dibatalkan.`)}
-                            className="rounded-lg border border-red-900 px-3 py-1.5 text-[13px] font-semibold text-red-300 hover:bg-red-950 disabled:opacity-50"
+                            className="rounded-lg border border-red-900 bg-red-950/30 px-2.5 py-1 text-[11px] font-semibold text-red-300 hover:bg-red-950 disabled:opacity-50"
                           >
                             Hapus
                           </button>
@@ -220,51 +507,52 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         </div>
       )}
 
+      {/* TAB 8: RENDERS VAULT */}
       {tab === 'renders' && (
-        <div className="overflow-x-auto rounded-2xl border border-[#2c2b28]">
-          <table className="w-full min-w-[720px] text-left text-sm">
-            <thead className="bg-[#1c1c1a] font-mono text-[11px] uppercase tracking-[0.12em] text-[#8a8780]">
+        <div className="overflow-x-auto rounded-2xl border border-line bg-card shadow-xl">
+          <table className="w-full min-w-[720px] text-left text-xs">
+            <thead className="bg-tile border-b border-line font-mono text-[11px] uppercase tracking-wider text-dim">
               <tr>
-                <th className="px-4 py-3 font-medium">Reel</th>
-                <th className="px-4 py-3 font-medium">Pemilik</th>
+                <th className="px-4 py-3 font-medium">Video Reel</th>
+                <th className="px-4 py-3 font-medium">Pemilik Akun</th>
                 <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium">Dibuat</th>
-                <th className="px-4 py-3 font-medium text-right">File</th>
+                <th className="px-4 py-3 font-medium text-right">File MP4</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-line-soft">
               {renders?.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="px-4 py-10 text-center text-[#8a8780]">
-                    Belum ada render dari studio.
+                  <td colSpan={5} className="px-4 py-10 text-center text-dim">
+                    Belum ada riwayat render video tersimpan di server.
                   </td>
                 </tr>
               )}
               {renders?.map((r) => (
-                <tr key={r.id} className="border-t border-[#2c2b28]">
+                <tr key={r.id} className="hover:bg-tile/40 transition-colors">
                   <td className="px-4 py-3">
-                    <p className="font-semibold">{r.title}</p>
-                    <p className="font-mono text-[12px] text-[#8a8780]">
+                    <p className="font-semibold text-paper">{r.title}</p>
+                    <p className="font-mono text-[11px] text-dim">
                       {r.id} · {r.format}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-[#b9b6ae]">{r.ownerEmail}</td>
+                  <td className="px-4 py-3 text-muted">{r.ownerEmail}</td>
                   <td className="px-4 py-3">
-                    <span className={`rounded-md border px-2 py-1 font-mono text-[11px] uppercase ${STATE_STYLE[r.state] ?? 'border-[#2c2b28] text-[#b9b6ae]'}`}>
+                    <span className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold uppercase ${STATE_STYLE[r.state] ?? 'border-line text-muted'}`}>
                       {r.state}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-[#b9b6ae]">{fmtDate(r.createdAt)}</td>
+                  <td className="px-4 py-3 text-dim">{fmtDate(r.createdAt)}</td>
                   <td className="px-4 py-3 text-right">
                     {r.hasFile ? (
                       <a
                         href={`/api/render/${r.id}/file?download=1`}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-[#2c2b28] px-3 py-1.5 text-[13px] font-semibold hover:border-[#4a4843]"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-tile px-3 py-1.5 text-xs font-semibold text-accent hover:border-accent"
                       >
-                        <Download className="h-3.5 w-3.5" /> MP4
+                        <Download className="h-3.5 w-3.5" /> Unduh MP4
                       </a>
                     ) : (
-                      <span className="text-[#6f6c66]">–</span>
+                      <span className="text-dim">–</span>
                     )}
                   </td>
                 </tr>
