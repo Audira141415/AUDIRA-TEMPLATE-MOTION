@@ -367,12 +367,11 @@ export default function PromptsPage() {
                   )}
                   <div className="relative aspect-[9/12] w-full overflow-hidden bg-ink">
                     <img
-                      src={`/reels/${c.reel.file}.jpg`}
+                      src={`/3d-kits/${c.reel.file}.jpg`}
                       alt={c.name}
                       className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       onError={(e) => {
-                        // Fallback image if file not yet on disk
-                        (e.target as HTMLImageElement).src = '/reels/banter.jpg';
+                        (e.target as HTMLImageElement).src = '/3d-kits/buildforge.jpg';
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
