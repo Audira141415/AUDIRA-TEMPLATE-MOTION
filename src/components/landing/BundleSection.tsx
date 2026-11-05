@@ -2,7 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check, Sparkles, Box, Terminal } from 'lucide-react';
+import { ArrowRight, Check, Sparkles, Box, Terminal, ShoppingBag } from 'lucide-react';
+import { ProductTier } from './OrderModal';
+
+interface Props {
+  onBuyTier?: (tier: ProductTier) => void;
+}
 
 const COMPARISON_ROWS = [
   { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya Penuh' },
@@ -17,7 +22,7 @@ const COMPARISON_ROWS = [
   { feature: 'Prioritas Konsultasi WhatsApp 1-on-1', starter: '-', master: '-', lab: 'Langsung ke Creator' },
 ];
 
-export const BundleSection: React.FC = () => {
+export const BundleSection: React.FC<Props> = ({ onBuyTier }) => {
   return (
     <section id="bundle" className="mx-auto max-w-[1240px] scroll-mt-6 px-4 py-16 md:px-8 md:py-24">
       <div className="flex flex-col items-center gap-6 rounded-[28px] border-2 border-accent bg-card px-6 py-12 sm:px-12 sm:py-16 text-center shadow-card-warm">
@@ -66,14 +71,24 @@ export const BundleSection: React.FC = () => {
           Hemat Rp69.000 (39%), miliki seluruh ekosistem tanpa biaya langganan bulanan.
         </p>
 
-        {/* Primary CTA */}
-        <Link
-          href="/studio"
-          className="btn-primary min-h-14 px-8 text-[16px] font-bold shadow-xl shadow-orange-950/30"
-        >
-          Buka Akses Creator Lab di Web Studio
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Link>
+        {/* Primary CTA Action Row */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => onBuyTier && onBuyTier('lab')}
+            className="btn-primary min-h-14 px-8 text-[16px] font-bold shadow-xl shadow-orange-950/30"
+          >
+            <span>Beli Creator Lab Ultimate (Rp109.000)</span>
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </button>
+          
+          <Link
+            href="/studio"
+            className="btn-outline min-h-14 px-6 text-[15px] font-semibold"
+          >
+            <span>Coba di Web Studio</span>
+          </Link>
+        </div>
 
         <p className="font-mono text-xs text-dim">
           Sekali bayar · Lisensi komersial seumur hidup · Ekspor MP4 60 FPS bebas watermark

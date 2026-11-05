@@ -2,13 +2,15 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check, Sparkles, Box, Cpu, Crown, Layers } from 'lucide-react';
+import { ArrowRight, Check, Sparkles, Box, Cpu, Crown, Layers, ShoppingBag } from 'lucide-react';
+import { ProductTier } from './OrderModal';
 
 interface Props {
   onSelectTab?: (tabKey: string) => void;
+  onBuyTier?: (tier: ProductTier) => void;
 }
 
-export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
+export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier }) => {
   return (
     <section id="produk" className="mx-auto max-w-[1240px] px-4 py-16 md:px-8 md:py-24">
       {/* Section Header */}
@@ -94,20 +96,29 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
             </li>
           </ul>
 
-          <div className="mt-auto flex flex-col gap-3 pt-2">
-            <a
-              href="#hasil"
-              onClick={() => onSelectTab && onSelectTab('arsitektur')}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-accent transition-colors"
+          <div className="mt-auto flex flex-col gap-2.5 pt-2">
+            <button
+              type="button"
+              onClick={() => onBuyTier && onBuyTier('starter')}
+              className="btn-primary w-full py-3 text-sm font-bold justify-center shadow-lg shadow-orange-950/20"
             >
-              Lihat contoh gaya 3D ➔
-            </a>
-            <Link
-              href="/studio?kit=buildforge"
-              className="btn-outline w-full py-3 text-sm font-bold justify-center"
-            >
-              Coba Starter di Studio <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
+              Beli Starter (Rp49.000) ➔
+            </button>
+            <div className="flex items-center justify-between px-1">
+              <a
+                href="#hasil"
+                onClick={() => onSelectTab && onSelectTab('arsitektur')}
+                className="text-xs font-semibold text-muted hover:text-accent transition-colors"
+              >
+                Lihat contoh ➔
+              </a>
+              <Link
+                href="/studio?kit=buildforge"
+                className="text-xs font-semibold text-muted hover:text-paper transition-colors"
+              >
+                Coba Demo Studio
+              </Link>
+            </div>
           </div>
         </article>
 
@@ -179,20 +190,29 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
             </li>
           </ul>
 
-          <div className="mt-auto flex flex-col gap-3 pt-2">
-            <a
-              href="#hasil"
-              onClick={() => onSelectTab && onSelectTab('all')}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
+          <div className="mt-auto flex flex-col gap-2.5 pt-2">
+            <button
+              type="button"
+              onClick={() => onBuyTier && onBuyTier('master')}
+              className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-cyan-400 px-4 py-3 text-sm font-bold text-black shadow-lg shadow-cyan-950/30 hover:bg-cyan-300 transition-all active:scale-[0.99]"
             >
-              Jelajahi seluruh 29 gaya 3D ➔
-            </a>
-            <Link
-              href="/studio?kit=cyberforge"
-              className="btn-primary w-full py-3 text-sm font-bold justify-center"
-            >
-              Buka Master Pack di Studio <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
+              Beli Master Pack (Rp79.000) ➔
+            </button>
+            <div className="flex items-center justify-between px-1">
+              <a
+                href="#hasil"
+                onClick={() => onSelectTab && onSelectTab('all')}
+                className="text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
+              >
+                Jelajahi 29 gaya ➔
+              </a>
+              <Link
+                href="/studio?kit=cyberforge"
+                className="text-xs font-semibold text-muted hover:text-paper transition-colors"
+              >
+                Coba Demo Studio
+              </Link>
+            </div>
           </div>
         </article>
 
@@ -260,19 +280,28 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab }) => {
             </li>
           </ul>
 
-          <div className="mt-auto flex flex-col gap-3 pt-2">
-            <a
-              href="#bundle"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-amber-400 transition-colors"
+          <div className="mt-auto flex flex-col gap-2.5 pt-2">
+            <button
+              type="button"
+              onClick={() => onBuyTier && onBuyTier('lab')}
+              className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-400 px-4 py-3 text-sm font-bold text-black shadow-lg shadow-amber-950/30 hover:bg-amber-300 transition-all active:scale-[0.99]"
             >
-              Lihat detail Creator Lab ➔
-            </a>
-            <Link
-              href="/studio"
-              className="btn-outline w-full py-3 text-sm font-bold justify-center"
-            >
-              Buka Creator Lab di Studio <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
+              Beli Creator Lab (Rp109.000) ➔
+            </button>
+            <div className="flex items-center justify-between px-1">
+              <a
+                href="#bundle"
+                className="text-xs font-semibold text-muted hover:text-amber-400 transition-colors"
+              >
+                Detail ekosistem ➔
+              </a>
+              <Link
+                href="/studio"
+                className="text-xs font-semibold text-muted hover:text-paper transition-colors"
+              >
+                Buka Full Suite
+              </Link>
+            </div>
           </div>
         </article>
       </div>

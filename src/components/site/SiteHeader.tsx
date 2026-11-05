@@ -6,11 +6,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LogOut, Menu, ShieldCheck, X, Sparkles } from 'lucide-react';
 
 export const NAV_LINKS = [
-  { href: '/#produk', label: 'Paket DIY' },
+  { href: '/#produk', label: 'Paket Lisensi' },
   { href: '/#jasa', label: 'Jasa Terima Beres' },
   { href: '/#remotion-3d', label: '3D Remotion' },
-  { href: '/#hasil', label: 'Hasil video' },
-  { href: '/#cara-kerja', label: 'Cara kerja' },
+  { href: '/#hasil', label: 'Galeri 29 Gaya' },
+  { href: '/#testimoni', label: 'Testimoni' },
+  { href: '/#cara-kerja', label: 'Cara Kerja' },
   { href: '/#bundle', label: 'Creator Lab' },
   { href: '/prompts', label: 'Prompt' },
   { href: '/#faq', label: 'FAQ' },
