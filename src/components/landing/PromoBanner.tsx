@@ -58,3 +58,4 @@ export const PromoBanner: React.FC<PromoBannerProps> = ({
     </aside>
   );
 };
+

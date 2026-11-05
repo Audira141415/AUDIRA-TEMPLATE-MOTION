@@ -364,7 +364,7 @@ export default function StudioPage() {
             </span>
           </div>
           <a
-            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus%20AUDIRA%2C%20saya%20tertarik%20dengan%20Jasa%20Terima%20Beres%20Pembuatan%20Video%20Motion%20untuk%20kebutuhan%20saya."
+            href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA%2C%20saya%20tertarik%20dengan%20Jasa%20Terima%20Beres%20Pembuatan%20Video%20Motion%20untuk%20kebutuhan%20saya."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 px-3 py-1 font-bold text-emerald-300 hover:bg-emerald-500 hover:text-black transition-all"

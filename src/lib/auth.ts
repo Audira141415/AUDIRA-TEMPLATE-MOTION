@@ -14,7 +14,7 @@ const SECRET_FILE = path.join(DATA_DIR, '.auth-secret');
 export const SESSION_COOKIE = 'audira_session';
 const SESSION_DAYS = 30;
 
-export type Role = 'user' | 'superadmin';
+export type Role = 'customer' | 'user' | 'superadmin';
 
 type StoredUser = {
   id: string;
@@ -28,7 +28,12 @@ type StoredUser = {
 export type PublicUser = { id: string; name: string; email: string; role: Role };
 export type AdminUserView = PublicUser & { createdAt: string; disabled: boolean };
 
-const toPublic = ({ id, name, email, role }: StoredUser): PublicUser => ({ id, name, email, role: role ?? 'user' });
+const toPublic = ({ id, name, email, role }: StoredUser): PublicUser => ({ 
+  id, 
+  name, 
+  email, 
+  role: role === 'superadmin' ? 'superadmin' : (role === 'user' ? 'user' : 'customer') 
+});
 
 const DEFAULT_SUPERADMINS: StoredUser[] = [
   {
@@ -111,10 +116,28 @@ export function validateRegistration(input: { name?: string; email?: string; pas
   return { name, email, password };
 }
 
-export async function createUser(name: string, email: string, password: string): Promise<PublicUser | null> {
+export async function createUser(
+  name: string, 
+  email: string, 
+  password: string, 
+  role: Role = 'customer'
+): Promise<PublicUser | null> {
   const users = readUsers();
-  if (users.some((u) => u.email === email)) return null;
-  const user: StoredUser = { id: randomUUID(), name, email, passwordHash: await hashPassword(password), createdAt: new Date().toISOString() };
+  const norm = normalizeEmail(email);
+  if (users.some((u) => u.email === norm)) return null;
+
+  // Strict Security Gate: Public registration ALWAYS defaults to 'customer' (or 'user').
+  // Never allow public creation of 'superadmin'.
+  const safeRole: Role = role === 'superadmin' ? 'customer' : (role || 'customer');
+
+  const user: StoredUser = { 
+    id: randomUUID(), 
+    name, 
+    email: norm, 
+    passwordHash: await hashPassword(password), 
+    createdAt: new Date().toISOString(),
+    role: safeRole
+  };
   writeUsers([...users, user]);
   return toPublic(user);
 }
@@ -167,6 +190,14 @@ export async function currentUser(): Promise<PublicUser | null> {
 export async function currentAdmin(): Promise<PublicUser | null> {
   const user = await currentUser();
   return user?.role === 'superadmin' ? user : null;
+}
+
+export async function requireSuperadmin(): Promise<PublicUser> {
+  const admin = await currentAdmin();
+  if (!admin) {
+    throw new Error('Akses khusus superadmin. Akun Anda tidak memiliki izin mengelola sistem ini.');
+  }
+  return admin;
 }
 
 export function listUsers(): AdminUserView[] {

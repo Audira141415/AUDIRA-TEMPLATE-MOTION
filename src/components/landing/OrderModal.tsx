@@ -198,13 +198,45 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     }
   };
 
-  const handleWhatsAppCheckout = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedOrderId, setSubmittedOrderId] = useState<string | null>(null);
+
+  const handleWhatsAppCheckout = async () => {
     const name = buyerName.trim() || 'Kreator';
     const wa = buyerWhatsApp.trim() || '-';
     const email = buyerEmail.trim() || '-';
+
+    setIsSubmitting(true);
+    let orderId = '';
+    try {
+      const res = await fetch('/api/orders/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: name,
+          customerWhatsApp: wa,
+          customerEmail: email,
+          tier: selectedTier,
+          tierName: displayName,
+          amount: displayPrice,
+          paymentMethod: paymentMethod.toUpperCase(),
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.order?.id) {
+        orderId = data.order.id;
+        setSubmittedOrderId(orderId);
+      }
+    } catch (e) {
+      console.error('Gagal mencatat pesanan checkout:', e);
+    } finally {
+      setIsSubmitting(false);
+    }
+
     const msg = `Halo Tim AUDIRA, saya ingin memesan Lisensi Resmi / Jasa:\n\n` +
       `📦 Paket: *${displayName}*\n` +
       `💰 Harga: *${displayPrice}*\n` +
+      (orderId ? `🆔 No. Pesanan: *${orderId}*\n` : '') +
       `👤 Nama: ${name}\n` +
       `📱 WhatsApp: ${wa}\n` +
       `📧 Email: ${email}\n` +
@@ -531,14 +563,43 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
         {/* Primary Action Button */}
         <div className="flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={handleWhatsAppCheckout}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm sm:text-base font-bold text-ink shadow-xl shadow-orange-950/40 hover:bg-orange-500 transition-all active:scale-[0.99]"
-          >
-            <MessageCircle className="w-5 h-5 fill-ink" />
-            <span>Konfirmasi {displayName} via WhatsApp ➔</span>
-          </button>
+          {submittedOrderId ? (
+            <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/50 text-emerald-300 text-xs space-y-2 animate-fade-in">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm flex items-center gap-1.5 text-emerald-400">
+                  <CheckCircle2 className="w-4 h-4" />
+                  Pesanan Berhasil Dicatat!
+                </span>
+                <span className="font-mono text-[11px] font-bold bg-emerald-900/60 px-2 py-0.5 rounded border border-emerald-700">
+                  {submittedOrderId}
+                </span>
+              </div>
+              <p className="text-muted leading-relaxed">
+                WhatsApp Tim AUDIRA telah dibuka untuk konfirmasi. Anda dapat memantau status aktivasi lisensi di portal pelanggan.
+              </p>
+              <div className="flex items-center gap-3 pt-1">
+                <a
+                  href={`/pesanan?query=${submittedOrderId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-accent hover:underline inline-flex items-center gap-1"
+                >
+                  <span>Pantau di Portal Pesanan Saya</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              disabled={isSubmitting}
+              onClick={handleWhatsAppCheckout}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm sm:text-base font-bold text-ink shadow-xl shadow-orange-950/40 hover:bg-orange-500 transition-all active:scale-[0.99] disabled:opacity-50"
+            >
+              <MessageCircle className="w-5 h-5 fill-ink" />
+              <span>{isSubmitting ? 'Mencatat Pesanan...' : `Konfirmasi ${displayName} via WhatsApp ➔`}</span>
+            </button>
+          )}
 
           {/* Guarantee Microcopy */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-dim font-mono pt-1">

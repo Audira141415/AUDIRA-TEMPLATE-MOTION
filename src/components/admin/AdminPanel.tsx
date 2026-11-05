@@ -40,7 +40,7 @@ type AdminUser = {
   id: string;
   name: string;
   email: string;
-  role: 'user' | 'superadmin';
+  role: 'customer' | 'user' | 'superadmin';
   createdAt: string;
   disabled: boolean;
   renders: number;
@@ -477,7 +477,11 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                     <td className="px-4 py-3">
                       <span
                         className={`rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase font-bold ${
-                          u.role === 'superadmin' ? 'border-accent/50 bg-accent/15 text-accent' : 'border-line text-muted'
+                          u.role === 'superadmin' 
+                            ? 'border-accent/50 bg-accent/15 text-accent' 
+                            : u.role === 'customer'
+                            ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-400'
+                            : 'border-line text-muted'
                         }`}
                       >
                         {u.role}
@@ -490,20 +494,31 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                       {isMe ? (
                         <p className="text-right text-[12px] text-dim">Akun Utama</p>
                       ) : (
-                        <div className="flex justify-end gap-1.5">
-                          <button
-                            type="button"
-                            disabled={busy}
-                            onClick={() => act(u, 'PATCH', { role: u.role === 'superadmin' ? 'user' : 'superadmin' })}
-                            className="rounded-lg border border-line bg-tile px-2.5 py-1 text-[11px] font-semibold hover:border-accent disabled:opacity-50"
-                          >
-                            {u.role === 'superadmin' ? 'Jadikan user' : 'Jadikan admin'}
-                          </button>
+                        <div className="flex justify-end gap-1.5 flex-wrap">
+                          {u.role !== 'superadmin' ? (
+                            <button
+                              type="button"
+                              disabled={busy}
+                              onClick={() => act(u, 'PATCH', { role: 'superadmin' })}
+                              className="rounded-lg border border-accent/40 bg-accent/10 text-accent px-2 py-1 text-[11px] font-semibold hover:bg-accent/20 disabled:opacity-50"
+                            >
+                              Jadikan Admin
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              disabled={busy}
+                              onClick={() => act(u, 'PATCH', { role: 'customer' })}
+                              className="rounded-lg border border-line bg-tile px-2 py-1 text-[11px] font-semibold hover:border-accent disabled:opacity-50"
+                            >
+                              Jadikan Customer
+                            </button>
+                          )}
                           <button
                             type="button"
                             disabled={busy}
                             onClick={() => act(u, 'PATCH', { disabled: !u.disabled })}
-                            className="rounded-lg border border-line bg-tile px-2.5 py-1 text-[11px] font-semibold hover:border-accent disabled:opacity-50"
+                            className="rounded-lg border border-line bg-tile px-2 py-1 text-[11px] font-semibold hover:border-accent disabled:opacity-50"
                           >
                             {u.disabled ? 'Aktifkan' : 'Nonaktifkan'}
                           </button>

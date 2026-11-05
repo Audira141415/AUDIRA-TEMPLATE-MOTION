@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogOut, Menu, ShieldCheck, X, Sparkles } from 'lucide-react';
+import { LogOut, Menu, ShieldCheck, X, Sparkles, ShoppingBag } from 'lucide-react';
 
 export const NAV_LINKS = [
   { href: '/#hasil', label: '29 Gaya 3D' },
   { href: '/#produk', label: 'Lisensi' },
   { href: '/#jasa', label: 'Jasa DFY' },
-  { href: '/#cara-kerja', label: 'Cara Kerja' },
+  { href: '/pesanan', label: 'Pesanan Saya' },
   { href: '/panduan', label: 'Panduan' },
   { href: '/#faq', label: 'FAQ' },
 ];
@@ -18,6 +18,7 @@ export const ALL_NAV_LINKS = [
   { href: '/#hasil', label: '29 Gaya 3D Sinematik' },
   { href: '/#produk', label: 'Paket Lisensi Komersial' },
   { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },
+  { href: '/pesanan', label: 'Pesanan & Lisensi Saya' },
   { href: '/#testimoni', label: 'Testimoni & Studi Kasus' },
   { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
   { href: '/panduan', label: 'Buku Panduan Instalasi' },
@@ -100,7 +101,7 @@ export const SiteHeader: React.FC = () => {
 
           {user && (
             <div className="hidden lg:flex items-center gap-2">
-              {user.role === 'superadmin' && (
+              {user.role === 'superadmin' ? (
                 <Link
                   href="/admin"
                   className={`inline-flex items-center gap-1.5 rounded-xl border border-line bg-tile px-2.5 py-1.5 text-xs font-semibold hover:border-accent transition-colors whitespace-nowrap ${
@@ -110,10 +111,26 @@ export const SiteHeader: React.FC = () => {
                   <ShieldCheck className="h-3.5 w-3.5 text-accent" />
                   <span className="hidden xl:inline">Admin</span>
                 </Link>
+              ) : (
+                <Link
+                  href="/pesanan"
+                  className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
+                    pathname.startsWith('/pesanan') 
+                      ? 'border-emerald-500 bg-emerald-950/40 text-emerald-300' 
+                      : 'border-emerald-800/40 bg-emerald-950/20 text-emerald-400 hover:border-emerald-500'
+                  }`}
+                >
+                  <ShoppingBag className="h-3.5 w-3.5 text-emerald-400" />
+                  <span className="hidden xl:inline">Pesanan Saya</span>
+                </Link>
               )}
               <span
-                title={user.email}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-tile border border-line text-xs font-bold uppercase text-paper"
+                title={`${user.name} (${user.role.toUpperCase()}) · ${user.email}`}
+                className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs font-bold uppercase ${
+                  user.role === 'superadmin'
+                    ? 'border-accent/60 bg-accent/20 text-accent font-black'
+                    : 'border-emerald-600/50 bg-emerald-950/60 text-emerald-300 font-bold'
+                }`}
               >
                 {user.name.charAt(0)}
               </span>
@@ -187,14 +204,21 @@ export const SiteHeader: React.FC = () => {
             </div>
           )}
 
-          {user?.role === 'superadmin' && (
+          {user?.role === 'superadmin' ? (
             <Link
               href="/admin"
               className="mt-3 flex items-center gap-2 rounded-xl border border-line bg-tile p-3 text-[14px] font-semibold text-paper"
             >
-              <ShieldCheck className="h-4 w-4 text-accent" /> Panel admin
+              <ShieldCheck className="h-4 w-4 text-accent" /> Panel Admin
             </Link>
-          )}
+          ) : user ? (
+            <Link
+              href="/pesanan"
+              className="mt-3 flex items-center gap-2 rounded-xl border border-emerald-800/40 bg-emerald-950/20 p-3 text-[14px] font-semibold text-emerald-300"
+            >
+              <ShoppingBag className="h-4 w-4 text-emerald-400" /> Pesanan &amp; Lisensi Saya
+            </Link>
+          ) : null}
 
           {user && (
             <div className="mt-5 flex items-center justify-between gap-3 border-t border-line pt-4">

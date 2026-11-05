@@ -66,7 +66,7 @@ export const StickyCtaBar: React.FC<StickyCtaBarProps> = ({ onOpenOrderModal }) 
           </button>
 
           <a
-            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus%20AUDIRA,%20saya%20tertarik%20dengan%20Lisensi%20Motion%203D.%20Bisa%20info%20detailnya?"
+            href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Lisensi%20Motion%203D.%20Bisa%20info%20detailnya?"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-1 rounded-xl border border-line bg-tile px-3 py-2 text-xs font-semibold text-emerald-400 hover:border-emerald-500/60 hover:text-white transition-colors"

@@ -11,7 +11,7 @@ export async function PATCH(req: Request, { params }: Params) {
   const body = (await req.json().catch(() => ({}))) as { role?: string; disabled?: unknown };
 
   const change: { role?: Role; disabled?: boolean } = {};
-  if (body.role === 'user' || body.role === 'superadmin') change.role = body.role;
+  if (body.role === 'customer' || body.role === 'user' || body.role === 'superadmin') change.role = body.role;
   if (typeof body.disabled === 'boolean') change.disabled = body.disabled;
   if (!Object.keys(change).length) return NextResponse.json({ error: 'Tidak ada perubahan.' }, { status: 400 });
 
