@@ -46,7 +46,7 @@ export const SiteFooter: React.FC = () => (
         </h2>
 
         <p className="mt-4 max-w-2xl mx-auto text-sm sm:text-base text-muted leading-relaxed">
-          Ketik ide cerita atau naskah Anda, biarkan AI menyuarakan dalam vokal bahasa Indonesia yang luwes, dan render video 1080p 60 FPS langsung di browser atau offline lewat Ollama.
+          Ketik ide cerita atau naskah Anda, biarkan AI menyuarakan dalam vokal bahasa Indonesia yang luwes, dan render video 1080p 60 FPS secara lokal lewat Remotion 4.0 atau offline lewat Ollama.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

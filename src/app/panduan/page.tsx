@@ -22,16 +22,38 @@ import {
   CheckCircle2,
   Zap,
   MessageCircle,
-  FolderTree
+  FolderTree,
+  ChevronRight,
+  Monitor,
+  Apple,
+  Search,
+  BookOpen
 } from 'lucide-react';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { SiteFooter } from '@/components/site/SiteFooter';
 
-type StepTab = 'prasyarat' | 'motion' | 'mesh' | 'render' | 'troubleshooting';
+type OSType = 'windows' | 'mac';
 
 export default function InstallationGuidePage() {
-  const [activeTab, setActiveTab] = useState<StepTab>('prasyarat');
+  const [selectedOS, setSelectedOS] = useState<OSType>('windows');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  // Interactive checklist state
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
+    node: false,
+    ffmpeg: false,
+    extract: false,
+    mcp: false,
+    render: false
+  });
+
+  const toggleCheck = (id: string) => {
+    setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const completedCount = Object.values(checkedItems).filter(Boolean).length;
+  const progressPercent = Math.round((completedCount / 5) * 100);
 
   const handleCopy = async (text: string, key: string) => {
     try {
@@ -43,606 +65,749 @@ export default function InstallationGuidePage() {
     }
   };
 
-  const CLAUDE_MCP_CONFIG = `{
+  const CLAUDE_MCP_CONFIG_WIN = `{
   "mcpServers": {
     "audira": {
       "command": "node",
       "args": [
-        "F:/AUDIRA-ALL-SKILL/mcp-server/src/index.js"
+        "C:/audira-mesh/mcp-server/src/index.js"
       ]
     }
   }
 }`;
 
-  const CURSOR_MCP_CONFIG = `{
+  const CLAUDE_MCP_CONFIG_MAC = `{
   "mcpServers": {
-    "audira-skill-mesh": {
+    "audira": {
       "command": "node",
-      "args": ["C:/audira-mesh/mcp-server/src/index.js"]
+      "args": [
+        "/Users/USERNAME/audira-mesh/mcp-server/src/index.js"
+      ]
     }
   }
 }`;
+
+  const TROUBLESHOOTING_LIST = [
+    {
+      id: 'ffmpeg',
+      title: 'Pesan Error: "ffmpeg is not recognized as an internal or external command"',
+      cause: 'FFmpeg belum terinstal di laptop atau path direktori bin belum didaftarkan ke System PATH Windows.',
+      solutionWin: 'Jalankan di PowerShell Admin: winget install ffmpeg lalu restart terminal PowerShell / VS Code agar environment variable ter-refresh.',
+      solutionMac: 'Jalankan di Terminal: brew install ffmpeg'
+    },
+    {
+      id: 'node',
+      title: 'Pesan Error: "Node.js version is not supported (butuh v18+ atau v20+)"',
+      cause: 'Versi Node.js yang aktif di terminal terlalu lawas (v14/v16) atau versi ganjil eksperimental.',
+      solutionWin: 'Unduh installer Node.js v20 atau v22 LTS dari https://nodejs.org lalu pasang dan jalankan "node -v" untuk verifikasi.',
+      solutionMac: 'Jalankan "nvm install 20 && nvm use 20" atau instal via "brew install node@20".'
+    },
+    {
+      id: 'webgl',
+      title: 'Render 3D terasa lambat atau ada notifikasi WebGL Software Fallback',
+      cause: 'Remotion berjalan pada mode CPU software rendering karena driver GPU belum terdeteksi atau hardware acceleration mati di browser.',
+      solutionWin: 'Buka Chrome/Edge -> Settings -> System -> aktifkan "Use graphics acceleration when available", dan pastikan driver NVIDIA/AMD terbarui.',
+      solutionMac: 'Di Mac M1/M2/M3/M4 akselerasi GPU otomatis aktif secara native lewat Apple Metal.'
+    },
+    {
+      id: 'audio',
+      title: 'Suara narator tidak keluar atau Cartesia API error',
+      cause: 'Kunci API suara belum diisi di file .env atau gateway audio lokal sedang offline.',
+      solutionWin: 'Cek file .env di folder starter: isi CARTESIA_API_KEY=... atau gunakan mode Offline TTS lokal yang otomatis disediakan di paket Master & Lab.',
+      solutionMac: 'Pastikan file public/audio/ memuat file narasi .wav hasil sinkronisasi.'
+    }
+  ];
+
+  const filteredTroubleshoot = TROUBLESHOOTING_LIST.filter(item => 
+    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.cause.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-ink font-display text-paper antialiased selection:bg-accent selection:text-ink">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1180px] px-4 py-12 md:px-8 md:py-20">
-        {/* Breadcrumb & Top Label */}
-        <div className="mb-6 flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-          <Link href="/" className="hover:text-paper transition-colors">Beranda</Link>
-          <span>/</span>
-          <span className="text-accent font-bold">Buku Panduan Instalasi</span>
-          <span>•</span>
-          <span className="rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 text-[10px] text-emerald-400 font-bold">
-            Versi Resmi 3.0.0
-          </span>
-        </div>
-
-        {/* Hero Section Header */}
-        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-line pb-8">
-          <div className="max-w-[780px] space-y-3">
-            <div className="inline-flex items-center gap-2">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-accent animate-ping" />
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent font-bold">
-                PANDUAN LENGKAP PEMBELI LISENSI RESMI
-              </p>
-            </div>
-            <h1 className="font-display text-[34px] sm:text-[50px] font-extrabold leading-[1.05] tracking-tight text-paper">
-              Instalasi &amp; Menjalankan <br className="hidden sm:inline" />
-              <span className="text-accent">AUDIRA Skill Motion + Agentic Skill Mesh</span>
-            </h1>
-            <p className="text-sm sm:text-base text-muted leading-relaxed">
-              Panduan langkah demi langkah untuk menjalankan engine 3D Remotion dan mengaktifkan <strong>AUDIRA Skill Mesh (MCP Server)</strong> di Claude Code, Cursor, Windsurf, Antigravity, atau terminal laptop/PC Anda.
-            </p>
+      {/* Main Container */}
+      <div className="mx-auto max-w-[1240px] px-4 py-8 md:px-8 md:py-12">
+        
+        {/* Breadcrumb & Version Pill */}
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+            <Link href="/" className="hover:text-paper transition-colors">Beranda</Link>
+            <span>/</span>
+            <span className="text-accent font-bold">Buku Panduan Resmi</span>
+            <span>/</span>
+            <span className="text-fg-2">Instalasi &amp; Eksekusi</span>
           </div>
 
-          {/* Quick Direct Support Card */}
-          <div className="flex flex-col gap-2 rounded-2xl border border-line bg-card p-4 shrink-0 min-w-[240px]">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400">
-              <ShieldCheck className="w-4 h-4" />
-              <span>GARANSI SETUP 1-ON-1</span>
-            </div>
-            <p className="text-xs text-muted leading-relaxed">
-              Jika bingung atau ada kendala teknis, tim AUDIRA siap mendampingi lewat WhatsApp / remote desktop hingga video pertama Anda berhasil dirender.
-            </p>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 font-mono text-xs text-emerald-400 font-bold">
+              <span className="size-1.5 rounded-full bg-emerald-400 animate-ping" />
+              VERSI 3.0.0 PRODUKSI
+            </span>
+            <span className="hidden sm:inline text-xs text-dim font-mono">• Terverifikasi Maret 2026</span>
+          </div>
+        </div>
+
+        {/* Hero Section */}
+        <div className="mb-10 max-w-[900px] space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-lg bg-accent/15 border border-accent/30 px-3 py-1 text-xs font-mono font-bold text-accent">
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>DOKUMENTASI RESMI PEMBELI LISENSI</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight text-paper">
+            Buku Panduan Instalasi <br />
+            <span className="text-accent">AUDIRA Skill Motion + Agentic Skill Mesh</span>
+          </h1>
+          <p className="text-base sm:text-lg text-muted leading-relaxed">
+            Panduan lengkap langkah-demi-langkah memasang Visual Engine 3D Remotion 4.0 dan mengaktifkan <strong>Otak Sutradara AI (MCP Server)</strong> di komputer Anda. Ikuti 5 langkah di bawah untuk mulai merender video reels 1080p 60 FPS pertama Anda dalam 5 menit.
+          </p>
+
+          {/* Quick Action Badges */}
+          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
+            <a 
+              href="#langkah-1"
+              className="btn-primary py-2.5 px-5 font-bold text-xs inline-flex items-center gap-1.5 shadow-md"
+            >
+              <span>Mulai dari Langkah 1</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+
+            <button
+              type="button"
+              onClick={() => handleCopy(`https://github.com/Audira141415/AUDIRA-TEMPLATE-MOTION/blob/master/PANDUAN_INSTALASI.md`, 'doc_link')}
+              className="btn-outline py-2.5 px-4 font-semibold text-xs inline-flex items-center gap-1.5"
+            >
+              <FileCode className="w-3.5 h-3.5 text-accent" />
+              <span>{copiedKey === 'doc_link' ? '✓ Link Dokumen Tersalin' : 'Salin Link Dokumen Offline'}</span>
+            </button>
+
             <a
-              href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20sudah%20beli%20lisensi%20dan%20ingin%20konsultasi%20panduan%20instalasi"
+              href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20sudah%20beli%20lisensi%20dan%20ingin%20tanya%20panduan%20instalasi"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 py-2 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-950/30 px-3.5 py-2.5 font-bold text-emerald-300 hover:bg-emerald-500/20 transition-colors"
             >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>Bantuan WhatsApp Mas Agus</span>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Bantuan 1-on-1 Mas Agus</span>
             </a>
           </div>
         </div>
 
-        {/* 5-Step Tab Navigator */}
-        <div className="mb-8 grid grid-cols-2 sm:grid-cols-5 gap-2 bg-card p-1.5 rounded-2xl border border-line">
-          {[
-            { id: 'prasyarat', step: '01', title: 'Prasyarat PC', icon: Laptop },
-            { id: 'motion', step: '02', title: 'Skill Motion 3D', icon: Box },
-            { id: 'mesh', step: '03', title: 'MCP Skill Mesh', icon: Cpu },
-            { id: 'render', step: '04', title: 'Render Pertama', icon: Play },
-            { id: 'troubleshooting', step: '05', title: 'Solusi Kendala', icon: HelpCircle },
-          ].map((tab) => {
-            const isActive = activeTab === tab.id;
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id as StepTab)}
-                className={`flex flex-col items-center sm:items-start p-3 rounded-xl transition-all ${
-                  isActive
-                    ? 'bg-accent text-ink font-bold shadow-md'
-                    : 'text-muted hover:text-paper hover:bg-tile'
-                }`}
-              >
-                <div className="flex items-center gap-1.5">
-                  <span className={`font-mono text-[10px] uppercase font-black ${isActive ? 'text-ink/80' : 'text-accent'}`}>
-                    LANGKAH {tab.step}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <Icon className="w-3.5 h-3.5 shrink-0 hidden sm:inline" />
-                  <span className="text-xs sm:text-sm font-bold truncate">{tab.title}</span>
-                </div>
-              </button>
-            );
-          })}
+        {/* Global OS Selector Bar */}
+        <div className="mb-10 rounded-2xl border-2 border-line bg-card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+          <div className="space-y-1">
+            <span className="text-xs font-mono uppercase font-bold text-accent flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              PILIH SISTEM OPERASI KOMPUTER ANDA:
+            </span>
+            <p className="text-xs sm:text-sm text-muted">
+              Perintah terminal dan letak folder akan otomatis disesuaikan dengan sistem operasi yang Anda pilih.
+            </p>
+          </div>
+
+          <div className="inline-flex p-1 rounded-xl bg-ink border border-line shrink-0">
+            <button
+              type="button"
+              onClick={() => setSelectedOS('windows')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                selectedOS === 'windows'
+                  ? 'bg-accent text-ink shadow-md'
+                  : 'text-muted hover:text-paper'
+              }`}
+            >
+              <Monitor className="w-4 h-4" />
+              <span>Windows (PowerShell)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedOS('mac')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                selectedOS === 'mac'
+                  ? 'bg-accent text-ink shadow-md'
+                  : 'text-muted hover:text-paper'
+              }`}
+            >
+              <Apple className="w-4 h-4" />
+              <span>macOS / Linux (Terminal)</span>
+            </button>
+          </div>
         </div>
 
-        {/* Tab 1: Prasyarat Sistem */}
-        {activeTab === 'prasyarat' && (
-          <div className="space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 animate-fade-in">
-            <div>
-              <span className="font-mono text-xs font-bold text-accent uppercase">LANGKAH 01</span>
-              <h2 className="text-2xl font-bold tracking-tight text-paper mt-1">
-                Kebutuhan Sistem &amp; Software Pendukung
-              </h2>
-              <p className="text-sm text-muted mt-1 leading-relaxed">
-                Sebelum memulai, pastikan dua software gratis (Node.js dan ffmpeg) sudah terpasang di komputer Anda. Keduanya hanya perlu diinstal sekali saja.
-              </p>
+        {/* 2-Column Documentation Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* LEFT COLUMN: Sticky Table of Contents & Interactive Checklist (4 Cols) */}
+          <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-20 z-10">
+            
+            {/* Navigation Stepper Menu */}
+            <div className="rounded-2xl border border-line bg-card p-5 space-y-4">
+              <span className="text-[11px] font-mono uppercase font-bold tracking-wider text-dim block">
+                DAFTAR LANGKAH SETUP:
+              </span>
+
+              <nav className="space-y-1.5 text-xs font-medium">
+                {[
+                  { href: '#langkah-1', step: '01', title: 'Prasyarat PC & Software' },
+                  { href: '#langkah-2', step: '02', title: 'Ekstrak & Struktur File' },
+                  { href: '#langkah-3', step: '03', title: 'Aktivasi Otak AI (MCP Mesh)' },
+                  { href: '#langkah-4', step: '04', title: 'Perintah & Render Pertama' },
+                  { href: '#langkah-5', step: '05', title: 'Solusi Kendala (Troubleshooting)' },
+                ].map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="flex items-center justify-between p-2.5 rounded-xl border border-transparent hover:border-line hover:bg-tile text-muted hover:text-paper transition-all group"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-mono text-[11px] font-bold text-accent group-hover:text-orange-400">
+                        {item.step}
+                      </span>
+                      <span className="font-semibold">{item.title}</span>
+                    </div>
+                    <ChevronRight className="w-3.5 h-3.5 text-dim group-hover:text-accent transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                ))}
+              </nav>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Node.js Requirement */}
+            {/* Interactive Progress Checklist */}
+            <div className="rounded-2xl border border-line bg-card p-5 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase font-bold tracking-wider text-accent flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  CHECKLIST KESIAPAN SETUP
+                </span>
+                <span className="text-xs font-mono font-bold text-paper">
+                  {completedCount}/5 ({progressPercent}%)
+                </span>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="h-2 w-full rounded-full bg-ink overflow-hidden border border-line">
+                <div 
+                  className="h-full bg-accent transition-all duration-300 rounded-full" 
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+
+              <div className="space-y-2 text-xs">
+                {[
+                  { id: 'node', label: 'Node.js v20+ terpasang' },
+                  { id: 'ffmpeg', label: 'FFmpeg aktif di terminal' },
+                  { id: 'extract', label: 'Folder diekstrak ke komputer' },
+                  { id: 'mcp', label: 'MCP Server terhubung ke AI' },
+                  { id: 'render', label: 'Video uji coba berhasil dirender' },
+                ].map((chk) => (
+                  <label 
+                    key={chk.id} 
+                    className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-tile cursor-pointer transition-colors"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checkedItems[chk.id]}
+                      onChange={() => toggleCheck(chk.id)}
+                      className="size-4 rounded border-line bg-ink text-accent focus:ring-accent accent-[#ff6a2a]"
+                    />
+                    <span className={checkedItems[chk.id] ? 'line-through text-dim font-medium' : 'text-paper font-medium'}>
+                      {chk.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Direct 1-on-1 Support Card */}
+            <div className="rounded-2xl border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-950/40 via-tile to-card p-5 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
+                <span>GARANSI SETUP 1-ON-1 SAMPAI JADI</span>
+              </div>
+              <p className="text-xs text-muted leading-relaxed">
+                Pembeli lisensi resmi berhak meminta pendampingan langsung dari Mas Agus via WhatsApp atau remote desktop jika ada kendala instalasi.
+              </p>
+              <a
+                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20pembeli%20lisensi%20Audira%20Motion%20dan%20membutuhkan%20bantuan%20setup%20instalasi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 py-2.5 text-xs font-bold text-black hover:bg-emerald-400 transition-all shadow-md active:scale-95"
+              >
+                <MessageCircle className="w-4 h-4 fill-black" />
+                <span>Chat WhatsApp Mas Agus ➔</span>
+              </a>
+            </div>
+
+          </aside>
+
+          {/* RIGHT COLUMN: Continuous Step-by-Step Content (8 Cols) */}
+          <main className="lg:col-span-8 space-y-12">
+
+            {/* LANGKAH 01: PRASYARAT PC & SOFTWARE */}
+            <section id="langkah-1" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-ink font-mono text-xs font-black">
+                  01
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+                  LANGKAH 01 DARI 05
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
+                  Prasyarat Komputer &amp; Software Pendukung
+                </h2>
+                <p className="text-sm text-muted mt-1 leading-relaxed">
+                  Sebelum menjalankan engine 3D Remotion, pastikan komputer Anda memiliki dua perangkat lunak standar gratis berikut. Keduanya hanya perlu dipasang satu kali.
+                </p>
+              </div>
+
+              {/* Requirement 1: Node.js */}
               <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-accent uppercase">1. NODE.JS (VERSI LTS)</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs font-bold text-accent uppercase">SOFTWARE 1</span>
+                    <span className="text-dim">•</span>
+                    <span className="text-xs font-bold text-paper">Node.js (Versi LTS)</span>
+                  </div>
                   <span className="rounded bg-accent/20 px-2 py-0.5 font-mono text-[10px] text-accent font-bold">Wajib</span>
                 </div>
-                <h3 className="font-display font-bold text-lg text-paper">Node.js v20.x atau v22.x</h3>
+                <h3 className="font-bold text-base text-paper">Node.js v20.x atau v22.x LTS</h3>
                 <p className="text-xs text-muted leading-relaxed">
-                  Digunakan untuk menjalankan mesin compiler Remotion 4.0, Three.js, dan server lokal.
+                  Mesin runtime JavaScript untuk menjalankan compiler Remotion 4.0, Three.js, dan server lokal di komputer Anda.
                 </p>
-                <div className="pt-2">
+                <div className="flex flex-wrap items-center gap-3 pt-1">
                   <a
                     href="https://nodejs.org"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-xl bg-paper px-3.5 py-2 text-xs font-bold text-ink hover:bg-white transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-paper px-4 py-2 text-xs font-bold text-ink hover:bg-white transition-colors"
                   >
-                    <span>Unduh Node.js Resmi</span>
+                    <span>Unduh Node.js LTS Resmi (nodejs.org)</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
+                  <span className="text-xs text-dim font-mono">Pilih tombol &quot;LTS Recommended For Most Users&quot;</span>
                 </div>
               </div>
 
-              {/* FFmpeg Requirement */}
+              {/* Requirement 2: FFmpeg with OS-Specific Commands */}
               <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-cyan-400 uppercase">2. FFMPEG AUDIO/VIDEO</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs font-bold text-cyan-400 uppercase">SOFTWARE 2</span>
+                    <span className="text-dim">•</span>
+                    <span className="text-xs font-bold text-paper">FFmpeg &amp; FFprobe</span>
+                  </div>
                   <span className="rounded bg-cyan-400/20 px-2 py-0.5 font-mono text-[10px] text-cyan-300 font-bold">Wajib</span>
                 </div>
-                <h3 className="font-display font-bold text-lg text-paper">FFmpeg &amp; FFprobe CLI</h3>
+                <h3 className="font-bold text-base text-paper">FFmpeg Media Processor</h3>
                 <p className="text-xs text-muted leading-relaxed">
-                  Digunakan untuk sinkronisasi audio presisi sub-frame dan normalisasi audio broadcast (-14 LUFS).
+                  Digunakan oleh Remotion untuk menggabungkan frame gambar 3D menjadi file MP4 60 FPS dan menyeimbangkan volume audio ke standar siaran (-14 LUFS).
                 </p>
-                <div className="space-y-1.5 pt-1">
-                  <div className="flex items-center justify-between bg-ink border border-line rounded-lg p-2 font-mono text-xs">
-                    <span className="text-emerald-400">winget install ffmpeg</span>
+
+                {/* Terminal Box for FFmpeg */}
+                <div className="rounded-xl border border-line bg-ink overflow-hidden">
+                  <div className="flex items-center justify-between px-3.5 py-2 border-b border-line bg-tile-2 text-xs text-dim font-mono">
+                    <div className="flex items-center gap-1.5">
+                      <span className="size-2.5 rounded-full bg-red-500/80 inline-block" />
+                      <span className="size-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                      <span className="size-2.5 rounded-full bg-green-500/80 inline-block" />
+                      <span className="ml-2 text-paper text-[11px]">
+                        {selectedOS === 'windows' ? 'PowerShell (Run as Admin)' : 'Terminal (bash/zsh)'}
+                      </span>
+                    </div>
                     <button
                       type="button"
-                      onClick={() => handleCopy('winget install ffmpeg', 'ffmpeg_win')}
-                      className="text-[11px] text-dim hover:text-paper"
+                      onClick={() => handleCopy(selectedOS === 'windows' ? 'winget install ffmpeg' : 'brew install ffmpeg', 'ffmpeg_cmd')}
+                      className="inline-flex items-center gap-1 text-[11px] text-accent hover:underline font-bold"
                     >
-                      {copiedKey === 'ffmpeg_win' ? 'Tersalin' : 'Salin (Windows)'}
+                      <Copy className="w-3 h-3" />
+                      <span>{copiedKey === 'ffmpeg_cmd' ? 'Tersalin!' : 'Salin Perintah'}</span>
                     </button>
                   </div>
-                  <div className="flex items-center justify-between bg-ink border border-line rounded-lg p-2 font-mono text-xs">
-                    <span className="text-cyan-400">brew install ffmpeg</span>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy('brew install ffmpeg', 'ffmpeg_mac')}
-                      className="text-[11px] text-dim hover:text-paper"
-                    >
-                      {copiedKey === 'ffmpeg_mac' ? 'Tersalin' : 'Salin (Mac)'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Hardware Capability Info */}
-            <div className="rounded-2xl border border-line-soft bg-ink p-5 space-y-2">
-              <h4 className="font-mono text-xs font-bold text-paper uppercase flex items-center gap-2">
-                <Laptop className="w-4 h-4 text-accent" />
-                <span>Spesifikasi Komputer yang Direkomendasikan:</span>
-              </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-muted pt-1">
-                <li className="flex items-start gap-2">
-                  <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                  <span><strong>Apple Silicon:</strong> Mac M1 / M2 / M3 / M4 (Sangat lancar, render hardware GPU).</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                  <span><strong>Windows PC:</strong> GPU NVIDIA / AMD / Intel Arc dengan 4GB+ VRAM.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                  <span><strong>RAM &amp; Storage:</strong> Minimal RAM 8 GB (16 GB lebih baik) &amp; sisa ruang disk 5 GB.</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex justify-end pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab('motion')}
-                className="btn-primary py-3 px-6 text-sm font-bold"
-              >
-                <span>Lanjut ke Langkah 02 (Pasang Skill Motion)</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 2: Pasang audira-skill-motion */}
-        {activeTab === 'motion' && (
-          <div className="space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 animate-fade-in">
-            <div>
-              <span className="font-mono text-xs font-bold text-accent uppercase">LANGKAH 02</span>
-              <h2 className="text-2xl font-bold tracking-tight text-paper mt-1">
-                Memasang Paket Visual Engine (audira-skill-motion)
-              </h2>
-              <p className="text-sm text-muted mt-1 leading-relaxed">
-                Setelah pembayaran terverifikasi, Anda menerima link download file arsip ZIP atau repositori Git privat. Berikut cara menempatkan foldernya.
-              </p>
-            </div>
-
-            {/* Folder Structure Visualization */}
-            <div className="rounded-2xl border border-line bg-ink p-5">
-              <span className="font-mono text-xs font-bold text-dim uppercase mb-3 flex items-center gap-2">
-                <FolderTree className="w-4 h-4 text-accent" />
-                Struktur Folder audira-skill-motion:
-              </span>
-              <pre className="font-mono text-xs text-muted leading-relaxed overflow-x-auto">
-{`audira-skill-motion/
-├── kits/                  # 29 Kit Gaya Sinematik 3D (Buildforge, Precision, dll.)
-├── starter/               # Template proyek Remotion 4.0 siap render
-│   ├── src/               # Source code React Three Fiber & Shaders
-│   ├── remotion.config.ts # Konfigurasi resolusi 1080x1920 & 60 FPS
-│   └── package.json       # Dependensi Three.js, R3F & Remotion
-├── audira-brand.json      # Konfigurasi logo watermark & warna brand
-├── start_remotion.bat     # Shortcut 1-klik buka Studio 3D (Windows)
-└── SKILL.md               # Instruksi sutradara otonom Claude Code`}
-              </pre>
-            </div>
-
-            {/* 2 Ways to Install */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
-                <span className="font-mono text-xs font-bold text-accent uppercase">CARA A: DI CLAUDE CODE</span>
-                <h3 className="font-display font-bold text-base text-paper">Folder Skill Claude Pribadi</h3>
-                <p className="text-xs text-muted leading-relaxed">
-                  Salin folder <code className="text-accent bg-black/40 px-1 rounded font-mono">audira-skill-motion</code> ke direktori skill lokal Anda:
-                </p>
-                <div className="space-y-1.5 font-mono text-[11px] text-paper">
-                  <div className="bg-ink p-2 rounded border border-line">
-                    <span className="text-dim">Windows:</span> C:\Users\&lt;user&gt;\.claude\skills\audira-motion\
-                  </div>
-                  <div className="bg-ink p-2 rounded border border-line">
-                    <span className="text-dim">macOS:</span> ~/.claude/skills/audira-motion/
+                  <div className="p-3.5 font-mono text-xs text-emerald-400">
+                    {selectedOS === 'windows' ? 'winget install ffmpeg' : 'brew install ffmpeg'}
                   </div>
                 </div>
                 <p className="text-[11px] text-dim">
-                  Buka kembali terminal Claude Code, lalu ketik perintah <code className="text-accent">/audira-motion</code>.
+                  *Setelah instalasi selesai, tutup dan buka kembali terminal Anda agar perintah <code>ffmpeg -version</code> terdeteksi.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
-                <span className="font-mono text-xs font-bold text-cyan-400 uppercase">CARA B: DI CURSOR / VS CODE</span>
-                <h3 className="font-display font-bold text-base text-paper">Workspace Proyek Mandiri</h3>
-                <p className="text-xs text-muted leading-relaxed">
-                  Buka folder <code className="text-cyan-400 bg-black/40 px-1 rounded font-mono">starter/</code> langsung di Cursor atau VS Code, lalu buka Terminal:
+              {/* Hardware Specs Card */}
+              <div className="rounded-2xl border border-line-soft bg-ink p-4 space-y-2">
+                <span className="text-[11px] font-mono font-bold text-dim uppercase block">
+                  SPESIFIKASI KOMPUTER YANG DIREKOMENDASIKAN:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-muted pt-1">
+                  <div className="p-3 rounded-xl bg-tile border border-line">
+                    <span className="font-bold text-paper block">Apple Mac:</span>
+                    <span className="text-[11px]">Chip M1, M2, M3, atau M4 (sangat cepat dengan Metal GPU).</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-tile border border-line">
+                    <span className="font-bold text-paper block">Windows PC:</span>
+                    <span className="text-[11px]">GPU NVIDIA RTX / AMD Radeon dengan minimal 4 GB VRAM.</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-tile border border-line">
+                    <span className="font-bold text-paper block">RAM &amp; SSD:</span>
+                    <span className="text-[11px]">RAM 8 GB (16 GB disarankan) &amp; sisa ruang disk 5 GB.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+            {/* LANGKAH 02: EKSTRAK & STRUKTUR FILE */}
+            <section id="langkah-2" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-ink font-mono text-xs font-black">
+                  02
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+                  LANGKAH 02 DARI 05
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
+                  Ekstrak &amp; Menempatkan File Proyek
+                </h2>
+                <p className="text-sm text-muted mt-1 leading-relaxed">
+                  Setelah menerima link download file ZIP, ekstrak folder ke komputer Anda. Folder ini berisi seluruh engine 3D dan kit gaya siap pakai.
                 </p>
-                <div className="bg-ink p-3 rounded-xl border border-line font-mono text-xs text-emerald-400 flex items-center justify-between">
-                  <span>npm install</span>
+              </div>
+
+              {/* Directory Tree Card */}
+              <div className="rounded-2xl border border-line bg-ink overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-line bg-tile-2 text-xs font-mono text-paper">
+                  <span className="flex items-center gap-2">
+                    <FolderTree className="w-4 h-4 text-accent" />
+                    <span>audira-skill-motion/ (Struktur Folder Proyek)</span>
+                  </span>
+                  <span className="text-dim text-[11px]">29 Kit Gaya 3D</span>
+                </div>
+                <pre className="p-4 sm:p-5 font-mono text-xs text-muted leading-relaxed overflow-x-auto">
+{`audira-skill-motion/
+├── kits/                  # 29 Kit Gaya Sinematik 3D (Three.js + R3F Shaders)
+├── starter/               # Template proyek Remotion 4.0 siap render
+│   ├── src/               # Source code React Three Fiber & Komposisi
+│   ├── remotion.config.ts # Preset resolusi 1080x1920 60 FPS
+│   └── package.json       # Dependensi Remotion 4.0 & Three.js
+├── audira-brand.json      # Konfigurasi watermark logo & warna brand Anda
+├── PANDUAN_INSTALASI.md   # Buku manual instalasi offline
+└── SKILL.md               # Aturan sutradara otonom untuk Claude Code`}
+                </pre>
+              </div>
+
+              {/* Two Installation Workflows: Claude Code vs Cursor */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                {/* Method A */}
+                <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-accent uppercase">PILIHAN A: CLAUDE CODE</span>
+                    <span className="text-[10px] font-mono text-accent bg-accent/15 px-2 py-0.5 rounded">Otonom</span>
+                  </div>
+                  <h4 className="font-bold text-sm text-paper">Pasang ke Folder Skill Claude</h4>
+                  <p className="text-xs text-muted leading-relaxed">
+                    Salin folder <code>audira-skill-motion</code> ke folder skill Claude Anda agar perintah <code>/audira-motion</code> aktif di mana saja:
+                  </p>
+                  <div className="rounded-xl border border-line bg-ink p-2.5 font-mono text-[11px] text-paper break-all">
+                    {selectedOS === 'windows' 
+                      ? 'C:\\Users\\<NamaUser>\\.claude\\skills\\audira-motion\\' 
+                      : '~/.claude/skills/audira-motion/'}
+                  </div>
+                </div>
+
+                {/* Method B */}
+                <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-cyan-400 uppercase">PILIHAN B: CURSOR / VS CODE</span>
+                    <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded">IDE Workspace</span>
+                  </div>
+                  <h4 className="font-bold text-sm text-paper">Buka Folder Starter di IDE</h4>
+                  <p className="text-xs text-muted leading-relaxed">
+                    Buka folder <code>starter/</code> di Cursor atau VS Code, lalu instal dependensi dengan satu perintah terminal:
+                  </p>
+                  <div className="flex items-center justify-between rounded-xl border border-line bg-ink p-2.5 font-mono text-xs text-emerald-400">
+                    <span>pnpm install  (atau npm i)</span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopy('pnpm install', 'npm_inst')}
+                      className="text-[11px] text-dim hover:text-paper font-semibold"
+                    >
+                      {copiedKey === 'npm_inst' ? 'Tersalin' : 'Salin'}
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+
+            {/* LANGKAH 03: AKTIVASI MCP SKILL MESH */}
+            <section id="langkah-3" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-ink font-mono text-xs font-black">
+                  03
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+                  LANGKAH 03 DARI 05 (KUNCI PRESISI)
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
+                  Aktivasi AUDIRA Skill Mesh (MCP Server)
+                </h2>
+                <p className="text-sm text-muted mt-1 leading-relaxed">
+                  Inilah rahasia mengapa AI Anda tidak akan halusinasi kode atau timing audio: <strong>Model Context Protocol (MCP)</strong> menghubungkan AI langsung ke mesin sutradara video AUDIRA.
+                </p>
+              </div>
+
+              {/* The 3 Superpowers */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="p-4 rounded-2xl bg-tile border border-line space-y-1.5">
+                  <span className="font-mono text-[10px] text-accent font-bold uppercase">ALAT 1</span>
+                  <h4 className="font-bold text-sm text-paper">audira_auto_orchestrate</h4>
+                  <p className="text-xs text-muted leading-relaxed">
+                    Sutradara otonom yang otomatis memilihkan kit 3D terbaik dan angle kamera sesuai ide naskah Anda.
+                  </p>
+                </div>
+                <div className="p-4 rounded-2xl bg-tile border border-line space-y-1.5">
+                  <span className="font-mono text-[10px] text-cyan-400 font-bold uppercase">ALAT 2</span>
+                  <h4 className="font-bold text-sm text-paper">audira_generate_voiceover</h4>
+                  <p className="text-xs text-muted leading-relaxed">
+                    Memproduksi audio narator jernih Cartesia AI dan timestamp JSON per kata untuk sinkronisasi subtitle kinetik.
+                  </p>
+                </div>
+                <div className="p-4 rounded-2xl bg-tile border border-line space-y-1.5">
+                  <span className="font-mono text-[10px] text-emerald-400 font-bold uppercase">ALAT 3</span>
+                  <h4 className="font-bold text-sm text-paper">audira_validate_social_captions</h4>
+                  <p className="text-xs text-muted leading-relaxed">
+                    Menghasilkan paket caption viral lengkap dengan hashtag relevan untuk TikTok, Reels, dan Shorts.
+                  </p>
+                </div>
+              </div>
+
+              {/* Claude Config Box */}
+              <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold text-paper uppercase flex items-center gap-1.5">
+                    <Terminal className="w-4 h-4 text-purple-400" />
+                    Konfigurasi MCP di Claude Desktop / Claude Code
+                  </span>
                   <button
                     type="button"
-                    onClick={() => handleCopy('npm install', 'npm_inst')}
-                    className="text-[11px] text-dim hover:text-paper"
+                    onClick={() => handleCopy(selectedOS === 'windows' ? CLAUDE_MCP_CONFIG_WIN : CLAUDE_MCP_CONFIG_MAC, 'claude_mcp')}
+                    className="inline-flex items-center gap-1 text-xs font-mono font-bold text-accent hover:underline"
                   >
-                    {copiedKey === 'npm_inst' ? 'Tersalin' : 'Salin'}
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>{copiedKey === 'claude_mcp' ? 'Tersalin!' : 'Salin JSON'}</span>
+                  </button>
+                </div>
+                <p className="text-xs text-muted leading-relaxed">
+                  Buka file <code className="text-accent font-mono text-[11px] bg-black/40 px-1 rounded">
+                    {selectedOS === 'windows' 
+                      ? '%APPDATA%\\Claude\\claude_desktop_config.json' 
+                      : '~/Library/Application Support/Claude/claude_desktop_config.json'}
+                  </code> lalu masukkan blok berikut:
+                </p>
+                <div className="rounded-xl border border-line bg-ink overflow-hidden">
+                  <pre className="p-4 font-mono text-xs text-emerald-400 overflow-x-auto leading-relaxed">
+                    {selectedOS === 'windows' ? CLAUDE_MCP_CONFIG_WIN : CLAUDE_MCP_CONFIG_MAC}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Cursor Config Guide */}
+              <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
+                <span className="font-mono text-xs font-bold text-paper uppercase flex items-center gap-1.5">
+                  <Cpu className="w-4 h-4 text-cyan-400" />
+                  Cara Pasang di Cursor IDE (Antarmuka Grafis)
+                </span>
+                <ol className="list-decimal list-inside text-xs text-muted space-y-1.5 leading-relaxed">
+                  <li>Buka Cursor → klik menu <strong>Settings</strong> (ikon roda gigi) → <strong>Features</strong> → <strong>MCP Servers</strong>.</li>
+                  <li>Klik tombol <strong>+ Add New MCP Server</strong>.</li>
+                  <li>Isi <strong>Name</strong>: <code className="text-paper font-mono">audira</code></li>
+                  <li>Isi <strong>Type</strong>: pilih <code className="text-paper font-mono">command</code></li>
+                  <li>Isi <strong>Command</strong>: <code className="text-accent font-mono">node C:/audira-mesh/mcp-server/src/index.js</code> (sesuaikan path folder Anda).</li>
+                  <li>Status akan berubah hijau <em>Connected</em>. Cursor Anda siap menyutradarai video!</li>
+                </ol>
+              </div>
+            </section>
+
+
+            {/* LANGKAH 04: PERINTAH & RENDER PERTAMA */}
+            <section id="langkah-4" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-ink font-mono text-xs font-black">
+                  04
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+                  LANGKAH 04 DARI 05
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
+                  Perintah AI &amp; Render Video MP4 Pertama
+                </h2>
+                <p className="text-sm text-muted mt-1 leading-relaxed">
+                  Semua sistem sudah siap! Sekarang saatnya membuat video pertama Anda menggunakan satu baris perintah naskah.
+                </p>
+              </div>
+
+              {/* The Master Prompt Card */}
+              <div className="rounded-2xl border-2 border-accent/40 bg-tile p-5 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-accent text-ink font-mono text-[10px] font-black uppercase">
+                    CARA PALING PRAKTIS
+                  </span>
+                  <h4 className="font-bold text-sm text-paper">Perintah Otonom Claude Code / Cursor</h4>
+                </div>
+                <p className="text-xs text-muted leading-relaxed">
+                  Buka terminal AI Anda, lalu ketik prompt berikut:
+                </p>
+                <div className="rounded-xl border border-line bg-ink p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs">
+                  <span className="text-accent">
+                    /audira-motion Buatkan video 3D gaya Cyber Tech tentang tren AI 2026 dengan narasi suara jernih dan hook viral
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy('/audira-motion Buatkan video 3D gaya Cyber Tech tentang tren AI 2026 dengan narasi suara jernih dan hook viral', 'master_prompt')}
+                    className="shrink-0 btn-primary py-1.5 px-3 text-[11px] font-bold"
+                  >
+                    {copiedKey === 'master_prompt' ? 'Tersalin' : 'Salin Perintah'}
                   </button>
                 </div>
                 <p className="text-[11px] text-dim">
-                  Dependensi Remotion dan Three.js akan otomatis terpasang dalam 1-2 menit.
+                  AI akan otomatis membuat folder komposisi, menghasilkan audio suara jernih Cartesia, merakit scene 3D, dan merender frame pengujian.
                 </p>
               </div>
-            </div>
 
-            <div className="flex justify-between pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab('prasyarat')}
-                className="btn-outline py-2.5 px-5 text-xs font-semibold"
-              >
-                Kembali
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('mesh')}
-                className="btn-primary py-3 px-6 text-sm font-bold"
-              >
-                <span>Lanjut ke Langkah 03 (Aktivasi MCP Mesh)</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 3: Aktivasi audira-skill-mesh (MCP Server) */}
-        {activeTab === 'mesh' && (
-          <div className="space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 animate-fade-in">
-            <div>
-              <span className="font-mono text-xs font-bold text-purple-400 uppercase">LANGKAH 03 (KUNCI PRESISI)</span>
-              <h2 className="text-2xl font-bold tracking-tight text-paper mt-1">
-                Aktivasi AUDIRA Skill Mesh (MCP Server)
-              </h2>
-              <p className="text-sm text-muted mt-1 leading-relaxed">
-                Inilah rahasia mengapa hasil video AI bisa 100% presisi dan tidak halusinasi: <strong>Model Context Protocol (MCP)</strong> memberi AI Anda alat nyata untuk mengendalikan Three.js, membuat voiceover, dan menyusun audio sync.
-              </p>
-            </div>
-
-            {/* The 3 Active Superpowers */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-4 rounded-2xl bg-tile border border-line space-y-1">
-                <span className="font-mono text-[10px] text-accent font-bold uppercase">TOOL 1</span>
-                <h4 className="font-bold text-sm text-paper">audira_auto_orchestrate</h4>
-                <p className="text-xs text-muted">
-                  Sutradara otonom yang otomatis memilihkan kit 3D terbaik dan angle kamera sesuai ide naskah Anda.
-                </p>
-              </div>
-              <div className="p-4 rounded-2xl bg-tile border border-line space-y-1">
-                <span className="font-mono text-[10px] text-cyan-400 font-bold uppercase">TOOL 2</span>
-                <h4 className="font-bold text-sm text-paper">audira_generate_voiceover</h4>
-                <p className="text-xs text-muted">
-                  Memproduksi audio suara jernih Cartesia AI dan timestamp JSON per kata untuk sinkronisasi subtitle kinetik.
-                </p>
-              </div>
-              <div className="p-4 rounded-2xl bg-tile border border-line space-y-1">
-                <span className="font-mono text-[10px] text-emerald-400 font-bold uppercase">TOOL 3</span>
-                <h4 className="font-bold text-sm text-paper">audira_validate_social_captions</h4>
-                <p className="text-xs text-muted">
-                  Menghasilkan paket caption viral lengkap dengan hashtag untuk TikTok, Reels, Shorts, dan X.
-                </p>
-              </div>
-            </div>
-
-            {/* MCP Setup Guide for Claude Desktop / Claude Code */}
-            <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-paper uppercase flex items-center gap-1.5">
-                  <Terminal className="w-4 h-4 text-purple-400" />
-                  Konfigurasi 1-Klik di Claude Desktop / Claude Code
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleCopy(CLAUDE_MCP_CONFIG, 'claude_mcp')}
-                  className="inline-flex items-center gap-1 text-xs font-mono font-bold text-accent hover:underline"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>{copiedKey === 'claude_mcp' ? 'Tersalin!' : 'Salin JSON'}</span>
-                </button>
-              </div>
-              <p className="text-xs text-muted leading-relaxed">
-                Buka file konfigurasi Claude di <code className="text-accent font-mono text-[11px] bg-black/40 px-1 rounded">%APPDATA%\Claude\claude_desktop_config.json</code> (Windows) atau <code className="text-accent font-mono text-[11px] bg-black/40 px-1 rounded">~/Library/Application Support/Claude/claude_desktop_config.json</code> (macOS), lalu tambahkan blok berikut:
-              </p>
-              <pre className="p-4 rounded-xl bg-ink border border-line font-mono text-xs text-emerald-400 overflow-x-auto leading-relaxed">
-{CLAUDE_MCP_CONFIG}
-              </pre>
-            </div>
-
-            {/* MCP Setup Guide for Cursor */}
-            <div className="rounded-2xl border border-line bg-tile p-5 space-y-3">
-              <span className="font-mono text-xs font-bold text-paper uppercase flex items-center gap-1.5">
-                <Cpu className="w-4 h-4 text-cyan-400" />
-                Cara Pasang di Cursor IDE
-              </span>
-              <ol className="list-decimal list-inside text-xs text-muted space-y-1.5 leading-relaxed">
-                <li>Buka Cursor → klik menu <strong>Settings</strong> (ikon roda gigi) → <strong>Features</strong> → <strong>MCP Servers</strong>.</li>
-                <li>Klik tombol <strong>+ Add New MCP Server</strong>.</li>
-                <li>Isi <strong>Name</strong>: <code className="text-paper font-mono">audira</code></li>
-                <li>Isi <strong>Type</strong>: pilih <code className="text-paper font-mono">command</code></li>
-                <li>Isi <strong>Command</strong>: <code className="text-accent font-mono">node F:/AUDIRA-ALL-SKILL/mcp-server/src/index.js</code></li>
-                <li>Status akan berubah hijau <em>Connected</em>. Cursor Anda sekarang bisa memanggil seluruh fungsi sutradara AUDIRA!</li>
-              </ol>
-            </div>
-
-            <div className="flex justify-between pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab('motion')}
-                className="btn-outline py-2.5 px-5 text-xs font-semibold"
-              >
-                Kembali
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('render')}
-                className="btn-primary py-3 px-6 text-sm font-bold"
-              >
-                <span>Lanjut ke Langkah 04 (Render Video Pertama)</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 4: Render Video Pertama */}
-        {activeTab === 'render' && (
-          <div className="space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 animate-fade-in">
-            <div>
-              <span className="font-mono text-xs font-bold text-accent uppercase">LANGKAH 04</span>
-              <h2 className="text-2xl font-bold tracking-tight text-paper mt-1">
-                Menjalankan Perintah &amp; Render Video MP4 Pertama
-              </h2>
-              <p className="text-sm text-muted mt-1 leading-relaxed">
-                Pilih cara kerja yang paling nyaman untuk Anda: biarkan AI menyutradarai secara otonom, atau gunakan antarmuka Studio 3D interaktif.
-              </p>
-            </div>
-
-            {/* Workflow 1: AI Prompt Command */}
-            <div className="rounded-2xl border-2 border-accent/40 bg-tile p-5 space-y-3">
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-accent text-ink font-mono text-[10px] font-black uppercase">
-                  CARA UTAMA
-                </span>
-                <h3 className="font-display font-bold text-base text-paper">
-                  Perintah Otonom Claude Code / Cursor
-                </h3>
-              </div>
-              <p className="text-xs text-muted leading-relaxed">
-                Cukup ketik perintah naskah di terminal Claude Code. AI akan memanggil `audira-skill-mesh` dan menyusun video secara otomatis:
-              </p>
-              <div className="bg-ink p-4 rounded-xl border border-line font-mono text-xs text-paper flex items-center justify-between">
-                <span className="text-accent">
-                  /audira-motion Buatkan video 3D promosi jam tangan titanium dengan narasi suara jernih dan caption viral
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleCopy('/audira-motion Buatkan video 3D promosi jam tangan titanium dengan narasi suara jernih dan caption viral', 'cmd_prompt')}
-                  className="text-xs text-dim hover:text-paper font-semibold ml-2 shrink-0"
-                >
-                  {copiedKey === 'cmd_prompt' ? 'Tersalin' : 'Salin'}
-                </button>
-              </div>
-              <p className="text-[11px] text-dim">
-                Claude akan otomatis membuat folder komposisi, menghasilkan audio TTS, merakit scene 3D, dan merender tes tampilan.
-              </p>
-            </div>
-
-            {/* Workflow 2: Remotion Studio Web UI */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
-                <span className="font-mono text-[10px] text-cyan-400 font-bold uppercase">PREVIEW BROWSER</span>
-                <h4 className="font-bold text-sm text-paper">Remotion Studio UI</h4>
-                <p className="text-xs text-muted">
-                  Buka editor interaktif di browser (Port 3000) untuk scrubbing timeline per frame:
-                </p>
-                <div className="bg-ink p-2 rounded font-mono text-xs text-cyan-300">
-                  npm run remotion:dev
+              {/* 3 Render Commands: Studio, Smoke, Final */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                
+                <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
+                  <span className="font-mono text-[10px] text-cyan-400 font-bold uppercase">1. BROWSER STUDIO</span>
+                  <h4 className="font-bold text-sm text-paper">Remotion Studio UI</h4>
+                  <p className="text-xs text-muted">
+                    Buka timeline interaktif di browser (Port 3000):
+                  </p>
+                  <div className="bg-ink p-2 rounded font-mono text-xs text-cyan-300">
+                    pnpm remotion:dev
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
-                <span className="font-mono text-[10px] text-yellow-400 font-bold uppercase">UJI CEPAT</span>
-                <h4 className="font-bold text-sm text-paper">Smoke Test Visual</h4>
-                <p className="text-xs text-muted">
-                  Render 1 frame still gambar HD untuk memastikan tekstur dan pencahayaan pas:
-                </p>
-                <div className="bg-ink p-2 rounded font-mono text-xs text-yellow-300">
-                  npm run remotion:smoke
+                <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
+                  <span className="font-mono text-[10px] text-yellow-400 font-bold uppercase">2. UJI CEPAT</span>
+                  <h4 className="font-bold text-sm text-paper">Smoke Test Visual</h4>
+                  <p className="text-xs text-muted">
+                    Render 1 gambar still untuk cek lighting &amp; teks:
+                  </p>
+                  <div className="bg-ink p-2 rounded font-mono text-xs text-yellow-300">
+                    pnpm remotion:smoke
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
-                <span className="font-mono text-[10px] text-emerald-400 font-bold uppercase">EKSPOR FINAL</span>
-                <h4 className="font-bold text-sm text-paper">Render MP4 1080p 60FPS</h4>
-                <p className="text-xs text-muted">
-                  Render video vertikal 9:16 Full HD berkualitas siaran bebas watermark:
-                </p>
-                <div className="bg-ink p-2 rounded font-mono text-xs text-emerald-300">
-                  npm run remotion:render
+                <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
+                  <span className="font-mono text-[10px] text-emerald-400 font-bold uppercase">3. EKSPOR FINAL</span>
+                  <h4 className="font-bold text-sm text-paper">MP4 1080p 60 FPS</h4>
+                  <p className="text-xs text-muted">
+                    Render video vertikal 9:16 Full HD bebas watermark:
+                  </p>
+                  <div className="bg-ink p-2 rounded font-mono text-xs text-emerald-300">
+                    pnpm remotion:render
+                  </div>
                 </div>
+
               </div>
-            </div>
+            </section>
 
-            <div className="flex justify-between pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab('mesh')}
-                className="btn-outline py-2.5 px-5 text-xs font-semibold"
-              >
-                Kembali
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('troubleshooting')}
-                className="btn-primary py-3 px-6 text-sm font-bold"
-              >
-                <span>Lihat Solusi Kendala (Troubleshooting)</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
 
-        {/* Tab 5: Troubleshooting / Solusi Kendala */}
-        {activeTab === 'troubleshooting' && (
-          <div className="space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 animate-fade-in">
-            <div>
-              <span className="font-mono text-xs font-bold text-red-400 uppercase">LANGKAH 05</span>
-              <h2 className="text-2xl font-bold tracking-tight text-paper mt-1">
-                Solusi Kendala Teknis Populer (Troubleshooting Runbook)
-              </h2>
-              <p className="text-sm text-muted mt-1 leading-relaxed">
-                Jawaban praktis jika Anda menemui kendala saat pertama kali menjalankan proyek di komputer Anda.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {/* Issue 1 */}
-              <div className="rounded-2xl border border-line bg-tile p-4 space-y-2">
-                <h4 className="font-bold text-sm text-paper flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <span>1. Pesan: &quot;ffmpeg is not recognized as an internal or external command&quot;</span>
-                </h4>
-                <p className="text-xs text-muted leading-relaxed">
-                  <strong>Penyebab:</strong> FFmpeg belum terpasang atau belum masuk ke System Environment Variables (PATH).
-                  <br />
-                  <strong>Solusi:</strong> Buka PowerShell sebagai Administrator lalu jalankan <code className="text-accent font-mono">winget install ffmpeg</code>, kemudian tutup dan buka kembali terminal Anda agar PATH terbarui.
-                </p>
+            {/* LANGKAH 05: TROUBLESHOOTING & FAQ */}
+            <section id="langkah-5" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-ink font-mono text-xs font-black">
+                  05
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+                  LANGKAH 05 DARI 05
+                </span>
               </div>
 
-              {/* Issue 2 */}
-              <div className="rounded-2xl border border-line bg-tile p-4 space-y-2">
-                <h4 className="font-bold text-sm text-paper flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <span>2. Pesan: &quot;Node.js version is not supported&quot;</span>
-                </h4>
-                <p className="text-xs text-muted leading-relaxed">
-                  <strong>Penyebab:</strong> Menggunakan versi Node.js yang terlalu lawas (di bawah v18) atau versi bleeding-edge ganjil.
-                  <br />
-                  <strong>Solusi:</strong> Unduh dan pasang versi <strong>LTS (v20 atau v22)</strong> dari <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" className="text-accent underline">nodejs.org</a>.
-                </p>
-              </div>
-
-              {/* Issue 3 */}
-              <div className="rounded-2xl border border-line bg-tile p-4 space-y-2">
-                <h4 className="font-bold text-sm text-paper flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <span>3. Render terasa lambat atau ada peringatan WebGL</span>
-                </h4>
-                <p className="text-xs text-muted leading-relaxed">
-                  <strong>Penyebab:</strong> Render 3D berjalan pada mode software (CPU) karena GPU driver belum aktif.
-                  <br />
-                  <strong>Solusi:</strong> Pastikan driver grafis Anda (NVIDIA GeForce Experience atau AMD Software) terbarui, dan aktifkan <em>Hardware Acceleration</em> di browser Chrome/Edge Anda.
-                </p>
-              </div>
-
-              {/* Issue 4 */}
-              <div className="rounded-2xl border border-line bg-tile p-4 space-y-2">
-                <h4 className="font-bold text-sm text-paper flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <span>4. Suara narasi tidak bersuara saat render lokal</span>
-                </h4>
-                <p className="text-xs text-muted leading-relaxed">
-                  <strong>Penyebab:</strong> File audio `.wav` belum di-generate atau kunci Cartesia API belum terpasang.
-                  <br />
-                  <strong>Solusi:</strong> Di paket Master &amp; Creator Lab, tool MCP `audira_generate_voiceover` otomatis menggunakan gateway audio resmi. Periksa apakah folder <code className="text-accent font-mono">public/audio/</code> sudah memuat file audio naskah Anda.
-                </p>
-              </div>
-            </div>
-
-            {/* Direct Support CTA */}
-            <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-tile to-ink border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <h4 className="font-bold text-sm text-paper">Masih Mengalami Kendala? Jangan Ragu Hubungi Kami</h4>
-                <p className="text-xs text-muted mt-0.5">
-                  Sebagai pembeli lisensi resmi, Anda berhak mendapatkan bantuan teknis langsung dari kreator sistem (Mas Agus).
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
+                  Solusi Kendala Teknis Populer (Troubleshooting)
+                </h2>
+                <p className="text-sm text-muted mt-1 leading-relaxed">
+                  Kompilasi solusi praktis jika Anda menemukan pesan error atau kendala di sistem Anda.
                 </p>
               </div>
-              <a
-                href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20butuh%20bantuan%20setup%20instalasi%20Audira%20Motion"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 btn-primary py-3 px-5 text-xs font-bold shadow-lg"
-              >
-                <MessageCircle className="w-4 h-4 mr-1.5" />
-                <span>Chat Mas Agus di WhatsApp ➔</span>
-              </a>
-            </div>
-          </div>
-        )}
 
-        {/* Bottom Navigation & CTA */}
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
+              {/* Search Box */}
+              <div className="relative">
+                <Search className="absolute left-3.5 top-3 size-4 text-dim" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Cari solusi kendala (misal: ffmpeg, node, webgl, audio)..."
+                  className="w-full rounded-xl border border-line bg-tile pl-10 pr-4 py-2.5 text-xs sm:text-sm text-paper placeholder:text-dim focus:border-accent focus:outline-none"
+                />
+              </div>
+
+              {/* Troubleshooting Accordion / Cards */}
+              <div className="space-y-3">
+                {filteredTroubleshoot.map((item) => (
+                  <div key={item.id} className="rounded-2xl border border-line bg-tile p-5 space-y-2">
+                    <h4 className="font-bold text-sm text-paper flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                      <span>{item.title}</span>
+                    </h4>
+                    <p className="text-xs text-dim">
+                      <strong>Penyebab:</strong> {item.cause}
+                    </p>
+                    <div className="p-3 rounded-xl bg-ink border border-line text-xs text-emerald-400 font-mono">
+                      <strong>Solusi:</strong> {selectedOS === 'windows' ? item.solutionWin : item.solutionMac}
+                    </div>
+                  </div>
+                ))}
+
+                {filteredTroubleshoot.length === 0 && (
+                  <div className="p-6 text-center text-xs text-dim">
+                    Tidak ditemukan kendala dengan kata kunci &quot;{searchQuery}&quot;. Hubungi Mas Agus di WhatsApp jika ada pertanyaan lain.
+                  </div>
+                )}
+              </div>
+
+              {/* Still Need Help VIP Box */}
+              <div className="rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 via-tile to-ink p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <h4 className="font-bold text-sm text-paper">Masih Menemukan Error Lain?</h4>
+                  <p className="text-xs text-muted mt-0.5">
+                    Jangan buang waktu berjam-jam debugging sendiri. Hubungi Mas Agus langsung untuk pendampingan setup.
+                  </p>
+                </div>
+                <a
+                  href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20butuh%20bantuan%20instalasi%20Audira%20Motion%20di%20laptop%20saya"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 btn-primary py-2.5 px-4 text-xs font-bold shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4 mr-1.5" />
+                  <span>Chat Mas Agus di WhatsApp ➔</span>
+                </a>
+              </div>
+            </section>
+
+          </main>
+        </div>
+
+        {/* Bottom Navigation */}
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
           <Link
             href="/#produk"
             className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-accent transition-colors"
@@ -651,16 +816,17 @@ export default function InstallationGuidePage() {
           </Link>
 
           <a
-            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20ingin%20tanya-tanya%20seputar%20lisensi%20dan%20instalasi"
+            href="https://wa.me/6285709666240?text=Halo%20Mas%20Agus,%20saya%20ingin%20tanya%20seputar%20lisensi%20dan%20instalasi"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-orange-400 transition-colors"
           >
-            <span>Konsultasi Teknis Pra-Beli via WhatsApp</span>
+            <span>Konsultasi Pra-Beli via WhatsApp</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
-      </main>
+
+      </div>
 
       <SiteFooter />
     </div>

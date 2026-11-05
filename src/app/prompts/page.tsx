@@ -135,7 +135,7 @@ export default function PromptsPage() {
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
   // Dual-Pass Engine: 'script' (LLM Storyboard) vs 'visual' (Video AI Prompt) vs 'remotion3d' (Remotion 3D Engine)
-  const [promptTab, setPromptTab] = useState<'script' | 'visual' | 'remotion3d'>('script');
+  const [promptTab, setPromptTab] = useState<'script' | 'visual' | 'remotion3d'>('remotion3d');
   const [selected3DKitId, setSelected3DKitId] = useState<string>('buildforge');
   const [copy3DStatus, setCopy3DStatus] = useState<string | null>(null);
   const [visualPlatform, setVisualPlatform] = useState<VideoAIPlatform>('kling');

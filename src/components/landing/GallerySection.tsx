@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { 
   Play, 
@@ -13,9 +13,15 @@ import {
   Layers, 
   Check, 
   Copy,
-  Target
+  Target,
+  Search,
+  X,
+  Maximize2,
+  Film,
+  Zap,
+  MessageCircle
 } from 'lucide-react';
-import { REELS, GalleryCategory } from './reels';
+import { REELS, GalleryCategory, ReelSample } from './reels';
 
 interface CategoryItem {
   id: GalleryCategory;
@@ -63,13 +69,19 @@ const CATEGORIES: CategoryItem[] = [
   },
 ];
 
+const SEARCH_SUGGESTIONS = [
+  'Gadget', 'Fintech', 'Roblox', 'Properti', 'Anime', 'Minimalis', 'Medis', 'Vintage', 'Cyberpunk'
+];
+
 export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ activeTab = 'all' }) => {
   const [currentTab, setCurrentTab] = useState<GalleryCategory>(activeTab);
+  const [searchQuery, setSearchQuery] = useState('');
   const [activeVideoFile, setActiveVideoFile] = useState<string | null>(null);
   const [copiedFile, setCopiedFile] = useState<string | null>(null);
+  const [modalReel, setModalReel] = useState<ReelSample | null>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
-  // Single active video playback
+  // Single active video playback in inline cards
   const handlePlayVideo = (file: string) => {
     setActiveVideoFile(file);
     videoRefs.current.forEach((videoEl, key) => {
@@ -89,12 +101,24 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
     }
   };
 
-  const items = currentTab === 'all' 
-    ? REELS 
-    : REELS.filter((r) => r.category === currentTab);
+  // Filtered items based on active tab and search query
+  const items = useMemo(() => {
+    return REELS.filter((r) => {
+      const matchCategory = currentTab === 'all' || r.category === currentTab;
+      const q = searchQuery.toLowerCase().trim();
+      if (!q) return matchCategory;
+      const matchText = 
+        r.title.toLowerCase().includes(q) ||
+        r.kind.toLowerCase().includes(q) ||
+        r.quote.toLowerCase().includes(q) ||
+        r.suitableFor.toLowerCase().includes(q) ||
+        r.tags.some(t => t.toLowerCase().includes(q));
+      return matchCategory && matchText;
+    });
+  }, [currentTab, searchQuery]);
 
   return (
-    <section id="hasil" className="mx-auto max-w-[1240px] scroll-mt-8 px-4 py-16 md:px-8 md:py-24">
+    <section id="hasil" className="mx-auto max-w-[1240px] scroll-mt-8 px-4 py-16 md:px-8 md:py-24 font-display">
       {/* Header */}
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5 border-b border-line pb-8">
         <div className="flex max-w-[740px] flex-col gap-3">
@@ -108,17 +132,81 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
             Hasil Video Nyata. Dirender Langsung Pakai Mesin 3D Ini.
           </h2>
           <p className="text-sm sm:text-base text-muted leading-relaxed">
-            Digerakkan oleh Three.js, React Three Fiber, dan Remotion 4.0 di folder <code className="text-xs bg-tile px-2 py-0.5 rounded border border-line text-accent">audira-skill-motion/</code>. Bukan AI halusinasi murahan, setiap frame memiliki pencahayaan fisik PBR, depth of field, dan simulasi gerak terarah 60 FPS.
+            Digerakkan oleh Three.js, React Three Fiber, dan Remotion 4.0 di folder <code className="text-xs bg-tile px-2 py-0.5 rounded border border-line text-accent">audira-skill-motion/</code>. Bukan video animasi murahan, setiap frame memiliki pencahayaan fisik PBR, depth of field, dan simulasi gerak terarah 60 FPS.
           </p>
         </div>
 
-        <a
-          href="#jasa"
-          className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-4 py-2.5 text-sm font-semibold text-fg-2 hover:bg-tile-2 hover:border-line-strong hover:text-paper transition-all"
-        >
-          <span>Pesan Jasa Terima Beres</span>
-          <ArrowRight className="h-4 w-4 text-accent" />
-        </a>
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href="#jasa"
+            className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-4 py-2.5 text-sm font-semibold text-fg-2 hover:bg-tile-2 hover:border-line-strong hover:text-paper transition-all"
+          >
+            <span>Pesan Jasa Terima Beres</span>
+            <ArrowRight className="h-4 w-4 text-accent" />
+          </a>
+        </div>
+      </div>
+
+      {/* Interactive Search Bar & Filter Controls */}
+      <div className="mb-8 rounded-2xl border border-line bg-card p-4 sm:p-5 space-y-4 shadow-xl">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          {/* Search Input */}
+          <div className="relative flex-1">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dim" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Cari gaya... misal: Roblox, Gadget, Fintech, Properti, Medis, Minimalis"
+              className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-line bg-tile text-xs sm:text-sm text-paper placeholder:text-dim focus:border-accent focus:outline-none transition-colors"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-dim hover:text-paper"
+                aria-label="Bersihkan pencarian"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+
+          {/* Results Count Badge */}
+          <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0">
+            <span className="font-mono text-xs text-dim">
+              Menampilkan <strong className="text-accent font-bold">{items.length}</strong> dari 29 gaya
+            </span>
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => { setSearchQuery(''); setCurrentTab('all'); }}
+                className="text-xs text-accent hover:underline font-semibold"
+              >
+                Reset Filter
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Suggestion Chips */}
+        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          <span className="text-[11px] font-mono text-dim mr-1">Rekomendasi Niche:</span>
+          {SEARCH_SUGGESTIONS.map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              onClick={() => setSearchQuery(tag)}
+              className={`text-[11px] font-mono px-2.5 py-1 rounded-lg border transition-all ${
+                searchQuery.toLowerCase() === tag.toLowerCase()
+                  ? 'border-accent bg-accent/20 text-accent font-bold'
+                  : 'border-line bg-tile text-muted hover:border-line-strong hover:text-paper'
+              }`}
+            >
+              #{tag}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Category Tabs (5 Industrial Pillars + All) */}
@@ -219,6 +307,16 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
                   {reel.kind}
                 </span>
 
+                {/* Lightbox Trigger Button */}
+                <button
+                  type="button"
+                  onClick={() => setModalReel(reel)}
+                  title="Lihat Pratinjau Penuh"
+                  className="absolute top-3 right-3 z-10 rounded-md bg-black/70 border border-line/80 p-1.5 text-muted hover:text-paper hover:bg-black/90 transition-colors"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                </button>
+
                 {/* Bottom Engine Badge */}
                 <span className="pointer-events-none absolute bottom-3 right-3 z-10 rounded bg-black/80 px-2 py-0.5 font-mono text-[9px] text-accent border border-accent/40 font-bold uppercase">
                   {reel.format.toUpperCase()}
@@ -257,13 +355,14 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
 
                 {/* Action Row: Link + Copy Prompt */}
                 <div className="mt-3 flex items-center justify-between border-t border-line-soft pt-3">
-                  <a
-                    href="#produk"
-                    className="group/link inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-fg-2 hover:text-accent transition-colors"
+                  <button
+                    type="button"
+                    onClick={() => setModalReel(reel)}
+                    className="group/link inline-flex items-center gap-1 text-xs sm:text-[13px] font-semibold text-fg-2 hover:text-accent transition-colors"
                   >
-                    <span>Gunakan Gaya Ini</span>
+                    <span>Detail &amp; Player</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
-                  </a>
+                  </button>
 
                   <button
                     type="button"
@@ -280,6 +379,149 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
           );
         })}
       </div>
+
+      {items.length === 0 && (
+        <div className="rounded-3xl border border-line bg-card p-12 text-center space-y-3">
+          <p className="font-bold text-lg text-paper">Tidak ada gaya yang cocok dengan pencarian &quot;{searchQuery}&quot;</p>
+          <p className="text-xs text-muted">Coba gunakan kata kunci umum seperti &quot;Roblox&quot;, &quot;Fintech&quot;, &quot;Arsitektur&quot;, atau klik reset filter.</p>
+          <button
+            type="button"
+            onClick={() => { setSearchQuery(''); setCurrentTab('all'); }}
+            className="btn-primary py-2 px-5 text-xs font-bold"
+          >
+            Tampilkan Semua 29 Gaya
+          </button>
+        </div>
+      )}
+
+      {/* Video Lightbox Modal */}
+      {modalReel && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in"
+          onClick={() => setModalReel(null)}
+        >
+          <div 
+            className="relative w-full max-w-[820px] max-h-[92vh] overflow-y-auto rounded-3xl border-2 border-line-strong bg-card p-5 sm:p-7 shadow-2xl z-10 text-paper"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-start justify-between border-b border-line pb-4 mb-5">
+              <div>
+                <div className="inline-flex items-center gap-2 mb-1">
+                  <span className="rounded bg-accent/20 border border-accent/40 px-2.5 py-0.5 font-mono text-[10px] font-bold text-accent uppercase">
+                    {modalReel.kind}
+                  </span>
+                  <span className="text-xs font-mono text-dim">• {modalReel.engine}</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-paper">
+                  {modalReel.title}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setModalReel(null)}
+                className="rounded-xl border border-line bg-tile p-2 text-muted hover:border-line-strong hover:text-paper transition-colors"
+                aria-label="Tutup modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body: 2 Columns on desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
+              
+              {/* Video Player Column (5 cols) */}
+              <div className="sm:col-span-5">
+                <div className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden bg-ink border border-line shadow-2xl">
+                  <video
+                    src={`/3d-kits/${modalReel.file}.mp4`}
+                    poster={`/3d-kits/${modalReel.file}.jpg`}
+                    controls
+                    autoPlay
+                    playsInline
+                    className="size-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Details & Actions Column (7 cols) */}
+              <div className="sm:col-span-7 space-y-4">
+                
+                {/* Quote description */}
+                <div className="rounded-2xl border border-line bg-tile p-4">
+                  <span className="text-[10px] font-mono uppercase text-dim font-bold block mb-1">
+                    DESKRIPSI VISUAL 3D:
+                  </span>
+                  <p className="text-xs sm:text-sm text-paper italic leading-relaxed">
+                    &ldquo;{modalReel.quote}&rdquo;
+                  </p>
+                </div>
+
+                {/* Cocok Untuk Box */}
+                <div className="rounded-2xl border border-accent/30 bg-accent/10 p-4 space-y-1.5">
+                  <span className="text-xs font-mono uppercase font-bold text-accent flex items-center gap-1.5">
+                    <Target className="w-3.5 h-3.5" />
+                    COCOK UNTUK KEBUTUHAN:
+                  </span>
+                  <p className="text-xs text-paper leading-relaxed">
+                    {modalReel.suitableFor}
+                  </p>
+                </div>
+
+                {/* Prompt Example with Copy */}
+                <div className="rounded-2xl border border-line bg-ink p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-mono font-bold text-dim uppercase">
+                      Perintah Claude Code / Cursor:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyPrompt(modalReel.prompt, modalReel.file)}
+                      className="inline-flex items-center gap-1 text-xs text-accent hover:underline font-bold"
+                    >
+                      {copiedFile === modalReel.file ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      <span>{copiedFile === modalReel.file ? 'Tersalin' : 'Salin Perintah'}</span>
+                    </button>
+                  </div>
+                  <pre className="text-xs font-mono text-emerald-400 whitespace-pre-wrap break-all leading-relaxed max-h-24 overflow-y-auto">
+                    {modalReel.prompt}
+                  </pre>
+                </div>
+
+                {/* Tag Pills */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {modalReel.tags.map(t => (
+                    <span key={t} className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-tile border border-line text-muted">
+                      #{t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action CTA Buttons */}
+                <div className="pt-3 border-t border-line flex flex-col sm:flex-row gap-2.5">
+                  <a
+                    href="#jasa"
+                    onClick={() => setModalReel(null)}
+                    className="flex-1 btn-primary py-3 px-4 text-xs font-bold text-center shadow-md"
+                  >
+                    <span>Pesan Jasa Terima Beres ➔</span>
+                  </a>
+                  <a
+                    href="#produk"
+                    onClick={() => setModalReel(null)}
+                    className="btn-outline py-3 px-4 text-xs font-bold text-center"
+                  >
+                    <span>Beli Lisensi Paket 3D</span>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, DM_Mono, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import { FloatingWhatsApp } from '@/components/site/FloatingWhatsApp';
 
 const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
 const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="id" className={`${display.variable} ${sans.variable} ${mono.variable} scroll-smooth`}>
       <body className="min-h-screen bg-[#0f0d0b] text-[#f5efe6] font-sans antialiased">
         {children}
+        <FloatingWhatsApp />
       </body>
     </html>
   );
