@@ -4,6 +4,7 @@ import path from 'node:path';
 import { randomBytes, randomUUID } from 'node:crypto';
 
 export type OrderStatus = 'pending' | 'verified' | 'sent' | 'completed' | 'cancelled';
+export type LicenseStatus = 'pending_activation' | 'active' | 'suspended';
 
 export interface OrderRecord {
   id: string;
@@ -16,6 +17,10 @@ export interface OrderRecord {
   paymentMethod: string;
   status: OrderStatus;
   licenseKey: string;
+  isLicenseActive: boolean;
+  licenseStatus: LicenseStatus;
+  activatedAt?: string;
+  activatedBy?: string;
   createdAt: string;
   notes?: string;
 }
@@ -35,6 +40,10 @@ const INITIAL_ORDERS: OrderRecord[] = [
     paymentMethod: 'QRIS',
     status: 'verified',
     licenseKey: 'AUD-LAB-2026-9A82F1',
+    isLicenseActive: true,
+    licenseStatus: 'active',
+    activatedAt: '2026-11-04T10:20:00.000Z',
+    activatedBy: 'official@audira.my.id',
     createdAt: '2026-11-04T10:15:00.000Z',
     notes: 'Lisensi Creator Lab lengkap dengan source code + MCP Mesh'
   },
@@ -49,6 +58,10 @@ const INITIAL_ORDERS: OrderRecord[] = [
     paymentMethod: 'BCA Transfer',
     status: 'completed',
     licenseKey: 'AUD-DFY-2026-44B12C',
+    isLicenseActive: true,
+    licenseStatus: 'active',
+    activatedAt: '2026-11-05T08:35:00.000Z',
+    activatedBy: 'official@audira.my.id',
     createdAt: '2026-11-05T08:30:00.000Z',
     notes: '3 video explainer, 2 video 3D gadget, hasil sudah dikirim ke WA'
   },
@@ -63,6 +76,10 @@ const INITIAL_ORDERS: OrderRecord[] = [
     paymentMethod: 'QRIS',
     status: 'sent',
     licenseKey: 'AUD-MAS-2026-7E33D8',
+    isLicenseActive: true,
+    licenseStatus: 'active',
+    activatedAt: '2026-11-05T12:05:00.000Z',
+    activatedBy: 'official@audira.my.id',
     createdAt: '2026-11-05T12:00:00.000Z',
     notes: 'Akses 29 Kit + MCP Mesh terkirim'
   }
@@ -107,10 +124,16 @@ export function createOrder(data: {
   amount: string;
   paymentMethod: string;
   status?: OrderStatus;
+  isLicenseActive?: boolean;
+  licenseStatus?: LicenseStatus;
+  activatedBy?: string;
   notes?: string;
 }): OrderRecord {
   const orders = readOrders();
   const nextNum = (orders.length + 1).toString().padStart(3, '0');
+  const isLicenseActive = Boolean(data.isLicenseActive ?? false);
+  const licenseStatus: LicenseStatus = data.licenseStatus ?? (isLicenseActive ? 'active' : 'pending_activation');
+
   const newOrder: OrderRecord = {
     id: `ORD-2026-${nextNum}`,
     customerName: data.customerName.trim(),
@@ -122,12 +145,59 @@ export function createOrder(data: {
     paymentMethod: data.paymentMethod,
     status: data.status || 'pending',
     licenseKey: generateLicenseKey(data.tier),
+    isLicenseActive,
+    licenseStatus,
+    activatedAt: isLicenseActive ? new Date().toISOString() : undefined,
+    activatedBy: isLicenseActive ? (data.activatedBy || 'Superadmin AUDIRA') : undefined,
     createdAt: new Date().toISOString(),
     notes: data.notes
   };
 
   writeOrders([newOrder, ...orders]);
   return newOrder;
+}
+
+export function activateLicense(orderId: string, adminEmail: string = 'Superadmin AUDIRA'): OrderRecord | null {
+  const orders = readOrders();
+  const index = orders.findIndex(o => o.id === orderId);
+  if (index === -1) return null;
+
+  orders[index] = {
+    ...orders[index],
+    isLicenseActive: true,
+    licenseStatus: 'active',
+    status: orders[index].status === 'pending' ? 'verified' : orders[index].status,
+    activatedAt: new Date().toISOString(),
+    activatedBy: adminEmail
+  };
+
+  writeOrders(orders);
+  return orders[index];
+}
+
+export function suspendLicense(orderId: string, adminEmail: string = 'Superadmin AUDIRA'): OrderRecord | null {
+  const orders = readOrders();
+  const index = orders.findIndex(o => o.id === orderId);
+  if (index === -1) return null;
+
+  orders[index] = {
+    ...orders[index],
+    isLicenseActive: false,
+    licenseStatus: 'suspended',
+    notes: orders[index].notes
+      ? `${orders[index].notes} (Dinonaktifkan oleh ${adminEmail})`
+      : `Dinonaktifkan oleh ${adminEmail}`
+  };
+
+  writeOrders(orders);
+  return orders[index];
+}
+
+export function findOrderByLicense(licenseKey: string): OrderRecord | null {
+  if (!licenseKey) return null;
+  const clean = licenseKey.trim().toUpperCase();
+  const orders = readOrders();
+  return orders.find(o => o.licenseKey.trim().toUpperCase() === clean) || null;
 }
 
 export function updateOrder(id: string, updates: Partial<OrderRecord>): OrderRecord | null {

@@ -26,22 +26,26 @@ export default async function PanduanPage() {
   const userOrders = allOrders.filter(
     (o) => o.customerEmail.toLowerCase() === user.email.toLowerCase() && o.status !== 'cancelled'
   );
-  const hasPurchased = isSuperadmin || userOrders.length > 0;
+  
+  const activeOrder = isSuperadmin 
+    ? userOrders[0] || null 
+    : userOrders.find(o => o.isLicenseActive === true) || null;
+  const pendingOrder = userOrders.find(o => !o.isLicenseActive) || null;
+  const isAuthorized = isSuperadmin || Boolean(activeOrder);
 
-  if (!hasPurchased) {
+  if (!isAuthorized) {
     return (
       <div className="min-h-screen bg-ink font-display text-paper antialiased selection:bg-accent selection:text-ink">
         <SiteHeader />
         <main>
-          <PanduanLockedGate user={user} />
+          <PanduanLockedGate user={user} pendingOrder={pendingOrder} />
         </main>
         <SiteFooter />
       </div>
     );
   }
 
-  const primaryOrder = userOrders[0];
-  const initialLicense = primaryOrder?.licenseKey || (isSuperadmin ? 'AUD-MAS-2026-SUPER' : 'AUD-LAB-2026-9A82F1');
+  const initialLicense = activeOrder?.licenseKey || (isSuperadmin ? 'AUD-MAS-2026-SUPER' : 'AUD-LAB-2026-9A82F1');
 
   return (
     <div className="min-h-screen bg-ink font-display text-paper antialiased selection:bg-accent selection:text-ink">

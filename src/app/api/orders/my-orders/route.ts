@@ -55,10 +55,12 @@ export async function GET(req: Request) {
       tierName: o.tierName,
       amount: o.amount,
       status: o.status,
-      // Only show full licenseKey if status is verified, sent, or completed
-      licenseKey: (o.status === 'verified' || o.status === 'sent' || o.status === 'completed')
+      // Only show full licenseKey if status is verified and active
+      licenseKey: (o.isLicenseActive && (o.status === 'verified' || o.status === 'sent' || o.status === 'completed'))
         ? o.licenseKey
-        : 'Menunggu Verifikasi Pembayaran',
+        : 'Menunggu Aktivasi Superadmin',
+      isLicenseActive: Boolean(o.isLicenseActive),
+      licenseStatus: o.licenseStatus || (o.isLicenseActive ? 'active' : 'pending_activation'),
       createdAt: o.createdAt
     }));
 
