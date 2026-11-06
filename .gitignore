@@ -13,3 +13,6 @@ pnpm-debug.log*
 audira-skill-motion/**/node_modules/
 audira-skill-motion/**/out/
 audira-skill-motion/**/.remotion/
+public/panduan-videos/
+scratch/
+

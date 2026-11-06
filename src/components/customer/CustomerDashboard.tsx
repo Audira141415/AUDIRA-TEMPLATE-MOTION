@@ -380,6 +380,41 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
             </div>
 
           </div>
+
+          {/* Featured Video Tutorial Banner (EP 01 - 03) */}
+          <div className="rounded-3xl border border-accent/40 bg-gradient-to-r from-accent/15 via-card to-card p-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div className="flex items-start sm:items-center gap-4">
+              <div className="size-14 rounded-2xl bg-accent text-ink flex items-center justify-center shrink-0 shadow-lg shadow-accent/25">
+                <Play className="w-7 h-7 fill-ink" />
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-accent/20 text-accent border border-accent/40 flex items-center gap-1.5">
+                    <span className="size-1.5 rounded-full bg-red-500 animate-pulse" />
+                    PANDUAN VIDEO RESMI 3 LANGKAH
+                  </span>
+                  <span className="text-xs font-mono text-dim hidden sm:inline">EP 01 • EP 02 • EP 03 (~4.5 Menit)</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-extrabold text-paper">
+                  Tonton Video Step-by-Step Cara Pasang &amp; Render Motion 3D
+                </h3>
+                <p className="text-xs text-muted max-w-2xl leading-relaxed">
+                  Ikuti video resmi: <strong>01 Pasang Skill ke Claude</strong>, <strong>02 Sambungkan Otak Mesh (MCP)</strong>, dan <strong>03 Sutradarai &amp; Render Video MP4 1080p</strong> langsung di portal pelanggan Anda.
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => setTab('guide')}
+                className="btn-primary py-3 px-5 text-xs font-bold inline-flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95 transition-all"
+              >
+                <Play className="w-4 h-4 fill-ink" />
+                <span>Buka Video &amp; Panduan ➔</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

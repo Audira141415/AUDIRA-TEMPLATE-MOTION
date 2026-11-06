@@ -36,6 +36,7 @@ import {
   LayoutList
 } from 'lucide-react';
 import { ALL_20_KITS } from '@/components/landing/Remotion3DShowcase';
+import { VideoTutorialPlayer } from './VideoTutorialPlayer';
 
 export type OSType = 'windows' | 'mac';
 export type ViewMode = 'wizard' | 'full';
@@ -70,8 +71,22 @@ export const InteractiveGuideView: React.FC<InteractiveGuideViewProps> = ({
   const [selectedOS, setSelectedOS] = useState<OSType>('windows');
   const [viewMode, setViewMode] = useState<ViewMode>('full');
   const [activeWizardStep, setActiveWizardStep] = useState<number>(1);
+  const [activeVideoEpisode, setActiveVideoEpisode] = useState<'01' | '02' | '03'>('01');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  const handleJumpToVideo = (epId: '01' | '02' | '03') => {
+    setActiveVideoEpisode(epId);
+    if (viewMode === 'wizard') {
+      setActiveWizardStep(0);
+    }
+    setTimeout(() => {
+      const elem = document.getElementById('video-tutorial');
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 60);
+  };
 
   // Dynamic Customer Path & License Configurator
   const [customPathWin, setCustomPathWin] = useState('C:/audira-skill-motion');
@@ -587,21 +602,32 @@ npm run remotion:render</pre>
         <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs font-bold text-paper">
             <Wand2 className="w-4 h-4 text-accent" />
-            <span>MODE WIZARD AKTIF: Fokus menyelesaikan Langkah 0{activeWizardStep} dari 05</span>
+            <span>
+              {activeWizardStep === 0 
+                ? 'MODE WIZARD AKTIF: Menonton Video Tutorial Resmi (EP 01 - 03)' 
+                : `MODE WIZARD AKTIF: Fokus menyelesaikan Langkah 0${activeWizardStep} dari 05`}
+            </span>
           </div>
           <div className="flex items-center gap-1.5">
-            {[1, 2, 3, 4, 5].map((num) => (
+            {[
+              { num: 0, label: '🎬 Video' },
+              { num: 1, label: '01' },
+              { num: 2, label: '02' },
+              { num: 3, label: '03' },
+              { num: 4, label: '04' },
+              { num: 5, label: '05' },
+            ].map((step) => (
               <button
-                key={num}
+                key={step.num}
                 type="button"
-                onClick={() => setActiveWizardStep(num)}
+                onClick={() => setActiveWizardStep(step.num)}
                 className={`px-3 py-1.5 rounded-lg font-mono text-xs font-bold transition-all ${
-                  activeWizardStep === num
+                  activeWizardStep === step.num
                     ? 'bg-accent text-ink shadow'
                     : 'bg-ink text-muted hover:text-paper border border-line'
                 }`}
               >
-                0{num}
+                {step.label}
               </button>
             ))}
           </div>
@@ -622,6 +648,7 @@ npm run remotion:render</pre>
 
             <nav className="space-y-1.5 text-xs font-medium">
               {[
+                { num: 0, href: '#video-tutorial', step: '🎬', title: 'Video Panduan (EP 01 - 03)' },
                 { num: 1, href: '#langkah-1', step: '01', title: 'Prasyarat & Claude Code CLI' },
                 { num: 2, href: '#langkah-2', step: '02', title: 'Pasang Skill ke .claude/skills/' },
                 { num: 3, href: '#langkah-3', step: '03', title: 'Aktivasi Otak AI (MCP Mesh)' },
@@ -729,6 +756,43 @@ npm run remotion:render</pre>
         {/* RIGHT COLUMN: Continuous Step-by-Step Content (8 Cols) */}
         <main className="lg:col-span-8 space-y-12">
 
+          {/* SECTION VIDEO WALKTHROUGH RESMI (EPISODE 01, 02, 03) */}
+          {(viewMode === 'full' || activeWizardStep === 0) && (
+            <section id="video-tutorial" className="scroll-mt-24 space-y-4">
+              <div className="rounded-3xl border-2 border-accent/40 bg-gradient-to-r from-accent/15 via-card to-card p-5 sm:p-7 shadow-2xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line pb-4 mb-5">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="flex size-2 rounded-full bg-red-500 animate-pulse" />
+                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+                        VIDEO WALKTHROUGH RESMI AUDIRA (EPISODE 01 - 03)
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-black text-paper tracking-tight">
+                      Panduan Visual Step-by-Step dari Rekaman Asli
+                    </h3>
+                    <p className="text-xs text-muted mt-1 leading-relaxed">
+                      Tonton 3 episode berurutan: pasang skill, koneksi MCP mesh, dan praktik render video 3D 1080p 60 FPS.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+                    <span className="rounded-xl border border-line bg-tile px-3 py-1.5 font-mono text-[11px] text-paper font-semibold">
+                      1080p • 60 FPS
+                    </span>
+                    <span className="rounded-xl border border-accent/40 bg-accent/20 px-3 py-1.5 font-mono text-[11px] text-accent font-bold">
+                      3 Episode
+                    </span>
+                  </div>
+                </div>
+
+                <VideoTutorialPlayer 
+                  initialEpisodeId={activeVideoEpisode}
+                  onEpisodeChange={(ep) => setActiveVideoEpisode(ep)}
+                />
+              </div>
+            </section>
+          )}
+
           {/* LANGKAH 01: PRASYARAT PC, FFMPEG & CLAUDE CODE CLI */}
           {shouldShowStep(1) && (
             <section id="langkah-1" className="scroll-mt-24 space-y-5 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
@@ -751,6 +815,27 @@ npm run remotion:render</pre>
                 <p className="text-sm text-muted mt-1 leading-relaxed">
                   Sebelum memasang skill 3D, pastikan 3 komponen dasar gratis ini sudah aktif di komputer Anda. Ketiganya hanya perlu dipasang satu kali.
                 </p>
+              </div>
+
+              {/* In-Context Video Callout */}
+              <div className="rounded-2xl border border-accent/30 bg-accent/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-xl bg-accent/20 text-accent flex items-center justify-center shrink-0">
+                    <Play className="w-5 h-5 fill-accent" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-accent uppercase font-bold block">Video Terkait Langkah Ini</span>
+                    <span className="text-xs font-bold text-paper">Episode 01: Pasang Skill audira-motion ke Claude (98 Detik)</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleJumpToVideo('01')}
+                  className="btn-outline py-1.5 px-3 text-xs font-bold inline-flex items-center gap-1.5 shrink-0 hover:bg-accent hover:text-black"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>Tonton Video EP 01 ➔</span>
+                </button>
               </div>
 
               {/* Requirement 1: Node.js */}
@@ -887,6 +972,27 @@ node -v && ffmpeg -version && claude --version`}
                 <p className="text-sm text-muted mt-1.5 leading-relaxed">
                   Agar Claude mengenali perintah <strong><code>/audira-motion</code></strong> beserta 29 gaya visual 3D, salin file <strong><code>SKILL.md</code></strong> dan folder <strong><code>kits/</code></strong> ke direktori skill Claude Anda.
                 </p>
+              </div>
+
+              {/* In-Context Video Callout */}
+              <div className="rounded-2xl border border-accent/30 bg-accent/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-xl bg-accent/20 text-accent flex items-center justify-center shrink-0">
+                    <Play className="w-5 h-5 fill-accent" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-accent uppercase font-bold block">Video Terkait Langkah Ini</span>
+                    <span className="text-xs font-bold text-paper">Episode 01: Ekstrak ZIP &amp; Pasang SKILL.md ke ~/.claude/skills/ (Detik 00:46)</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleJumpToVideo('01')}
+                  className="btn-outline py-1.5 px-3 text-xs font-bold inline-flex items-center gap-1.5 shrink-0 hover:bg-accent hover:text-black"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>Tonton Video EP 01 ➔</span>
+                </button>
               </div>
 
               {/* Directory Tree Card */}
@@ -1060,6 +1166,27 @@ npm install`}
                 </p>
               </div>
 
+              {/* In-Context Video Callout */}
+              <div className="rounded-2xl border border-cyan-500/30 bg-cyan-950/20 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                    <Play className="w-5 h-5 fill-cyan-400" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-cyan-400 uppercase font-bold block">Video Terkait Langkah Ini</span>
+                    <span className="text-xs font-bold text-paper">Episode 02: Sambungkan audira-skill-mesh (MCP) ke Claude (90 Detik)</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleJumpToVideo('02')}
+                  className="btn-outline py-1.5 px-3 text-xs font-bold inline-flex items-center gap-1.5 shrink-0 text-cyan-400 border-cyan-500/40 hover:bg-cyan-500 hover:text-black"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>Tonton Video EP 02 ➔</span>
+                </button>
+              </div>
+
               {/* 1-Line CLI Registration (EASIEST WAY!) */}
               <div className="rounded-2xl border-2 border-emerald-500/40 bg-emerald-950/15 p-5 space-y-3">
                 <div className="flex items-center justify-between">
@@ -1164,6 +1291,27 @@ npm install`}
                 <p className="text-sm text-muted mt-1 leading-relaxed">
                   Pilih salah satu dari <strong>29 Gaya Visual 3D</strong> di bawah, masukkan ide topik Anda, lalu salin prompt sutradara yang dihasilkan secara otomatis!
                 </p>
+              </div>
+
+              {/* In-Context Video Callout */}
+              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                    <Play className="w-5 h-5 fill-emerald-400" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-emerald-400 uppercase font-bold block">Video Terkait Langkah Ini</span>
+                    <span className="text-xs font-bold text-paper">Episode 03: Pakai Keduanya Sampai Jadi AI Motion Remotion (91 Detik)</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleJumpToVideo('03')}
+                  className="btn-outline py-1.5 px-3 text-xs font-bold inline-flex items-center gap-1.5 shrink-0 text-emerald-400 border-emerald-500/40 hover:bg-emerald-500 hover:text-black"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>Tonton Video EP 03 ➔</span>
+                </button>
               </div>
 
               {/* INTERACTIVE PROMPT BUILDER ARTIFACT */}

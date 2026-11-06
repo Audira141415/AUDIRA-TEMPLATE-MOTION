@@ -17,7 +17,7 @@ export async function GET(req: Request) {
     if (!query) {
       return NextResponse.json({ orders: allOrders, role: 'superadmin' });
     }
-    const filtered = allOrders.filter(o => 
+    const filtered = allOrders.filter(o =>
       o.id.toLowerCase().includes(query) ||
       o.customerName.toLowerCase().includes(query) ||
       o.customerEmail.toLowerCase().includes(query) ||
@@ -29,20 +29,20 @@ export async function GET(req: Request) {
 
   // 2. If logged in as customer/user, return only their own orders
   if (user) {
-    const userOrders = allOrders.filter(o => 
+    const userOrders = allOrders.filter(o =>
       o.customerEmail.toLowerCase() === user.email.toLowerCase()
     );
-    return NextResponse.json({ 
-      orders: userOrders, 
-      role: user.role, 
-      user: { name: user.name, email: user.email } 
+    return NextResponse.json({
+      orders: userOrders,
+      role: user.role,
+      user: { name: user.name, email: user.email }
     });
   }
 
   // 3. If unauthenticated, allow tracking by exact order ID or WhatsApp
   if (query) {
     const cleanQuery = query.replace(/\D/g, '');
-    const found = allOrders.filter(o => 
+    const found = allOrders.filter(o =>
       o.id.toLowerCase() === query ||
       (cleanQuery.length >= 8 && o.customerWhatsApp.includes(cleanQuery)) ||
       (query.includes('@') && o.customerEmail.toLowerCase() === query)
