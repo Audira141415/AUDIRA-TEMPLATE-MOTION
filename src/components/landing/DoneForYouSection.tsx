@@ -39,7 +39,7 @@ interface DfyPlan {
 
 export const DoneForYouSection: React.FC<DoneForYouSectionProps> = ({ onBuyPlan, dfyConfig }) => {
   const [selectedPlan, setSelectedPlan] = useState<DfyPlanId>('bundle');
-  const WHATSAPP_BASE = 'https://wa.me/6285709666240';
+  const WHATSAPP_BASE = 'https://wa.me/6282112001600';
 
   const singleCfg = dfyConfig?.single;
   const bundleCfg = dfyConfig?.bundle;

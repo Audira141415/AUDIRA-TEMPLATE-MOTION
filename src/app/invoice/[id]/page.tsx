@@ -101,7 +101,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
               <div>
                 <p className="text-white/40 print:text-black/60 font-mono text-[10px] uppercase">Diterbitkan Oleh</p>
                 <p className="font-bold text-white print:text-black mt-0.5">AUDIRA MDA Studio</p>
-                <p className="text-white/70 print:text-black/70">WhatsApp: +62 857-0966-6240</p>
+                <p className="text-white/70 print:text-black/70">WhatsApp: +62 821-1200-1600</p>
                 <p className="text-white/70 print:text-black/70">official@audira.my.id</p>
               </div>
               <div className="text-right">

@@ -34,7 +34,7 @@ const DATA_DIR = path.join(process.cwd(), 'data');
 const CONFIG_FILE = path.join(DATA_DIR, 'site-config.json');
 
 const DEFAULT_CONFIG: SiteConfig = {
-  whatsappNumber: '6285709666240',
+  whatsappNumber: '6282112001600',
   ownerName: 'Agus Dwi Rianto (AUDIRA MDA)',
   bcaAccountNumber: '8691888291',
   bcaAccountName: 'Agus Dwi Rianto',

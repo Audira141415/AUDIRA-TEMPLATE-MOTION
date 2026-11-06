@@ -149,7 +149,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
             </div>
 
             <a
-              href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin mengonfirmasi aktivasi lisensi pesanan ${primaryOrder?.id || '-'} (${activeTier}) dengan kode lisensi ${activeLicense}. Bukti transfer sudah saya kirimkan.`)}`}
+              href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin mengonfirmasi aktivasi lisensi pesanan ${primaryOrder?.id || '-'} (${activeTier}) dengan kode lisensi ${activeLicense}. Bukti transfer sudah saya kirimkan.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary py-2.5 px-4 text-xs font-bold inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shrink-0"
@@ -315,7 +315,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
                 ) : (
                   <>
                     <a
-                      href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin aktivasi lisensi ${activeLicense} atas nama ${user.name}.`)}`}
+                      href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin aktivasi lisensi ${activeLicense} atas nama ${user.name}.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-primary py-2 px-4 text-xs font-bold inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-black shadow-md"
@@ -471,7 +471,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
                   <span>Prompt Claude Code terkunci. Harap tunggu Superadmin mengaktifkan lisensi Anda atau kirim bukti transfer ke WhatsApp.</span>
                 </div>
                 <a
-                  href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin aktivasi lisensi ${activeLicense} atas nama ${user.name}.`)}`}
+                  href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin aktivasi lisensi ${activeLicense} atas nama ${user.name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bold text-emerald-400 hover:underline shrink-0 flex items-center gap-1"
@@ -757,7 +757,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
               </p>
 
               <a
-                href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya pemilik lisensi resmi ${activeLicense} atas nama ${user.name}. Saya butuh bantuan teknis terkait template Remotion 3D.`)}`}
+                href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya pemilik lisensi resmi ${activeLicense} atas nama ${user.name}. Saya butuh bantuan teknis terkait template Remotion 3D.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary py-2.5 px-5 text-xs font-bold inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg"

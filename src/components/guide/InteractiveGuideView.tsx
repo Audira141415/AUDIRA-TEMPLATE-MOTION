@@ -358,7 +358,7 @@ npm run remotion:render</pre>
 
     <div class="card">
       <h2>Bantuan Teknis 1-on-1 Tim AUDIRA</h2>
-      <p>Jika ada kendala instalasi, hubungi WhatsApp Resmi Tim AUDIRA: <a href="https://wa.me/6285709666240" style="color:var(--green);font-weight:bold">+62 857-0966-6240</a></p>
+      <p>Jika ada kendala instalasi, hubungi WhatsApp Resmi Tim AUDIRA: <a href="https://wa.me/6282112001600" style="color:var(--green);font-weight:bold">+62 821-1200-1600</a></p>
     </div>
   </div>
 </body>
@@ -473,6 +473,69 @@ npm run remotion:render</pre>
             <Zap className="w-3.5 h-3.5" />
             <span>Auto-Installer ({selectedOS === 'windows' ? '.PS1' : '.SH'})</span>
           </button>
+        </div>
+      </div>
+
+      {/* Visual 3-Minute Quick Flow Blueprint */}
+      <div className="rounded-3xl border border-accent/40 bg-gradient-to-r from-accent/10 via-tile to-card p-5 sm:p-6 shadow-xl space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line pb-3">
+          <div className="flex items-center gap-2">
+            <span className="flex size-7 items-center justify-center rounded-xl bg-accent text-ink font-mono text-xs font-black">
+              ✦
+            </span>
+            <h3 className="font-bold text-sm sm:text-base text-paper">
+              Ringkasan Alur Cepat Instalasi (Hanya Butuh ~3-5 Menit)
+            </h3>
+          </div>
+          <span className="text-xs font-mono text-accent font-semibold">
+            Mudah • Pemula Friendly • Tanpa Coding Rumit
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="p-3.5 rounded-2xl bg-ink border border-line space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] text-accent font-bold">LANGKAH 01</span>
+              <span className="text-[10px] text-dim font-mono">~2 Menit</span>
+            </div>
+            <h4 className="font-bold text-paper text-xs">Pasang Prasyarat</h4>
+            <p className="text-[11px] text-muted">
+              Instal Node.js LTS, FFmpeg, dan Claude Code CLI di komputer.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-ink border border-line space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] text-accent font-bold">LANGKAH 02</span>
+              <span className="text-[10px] text-dim font-mono">~1 Menit</span>
+            </div>
+            <h4 className="font-bold text-paper text-xs">Pasang Folder Skill</h4>
+            <p className="text-[11px] text-muted">
+              Salin isi paket ZIP ke folder <code className="text-accent font-mono">~/.claude/skills/audira-motion/</code>.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-ink border border-cyan-500/40 bg-cyan-950/15 space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] text-cyan-400 font-bold">LANGKAH 03</span>
+              <span className="text-[10px] text-dim font-mono">~30 Detik</span>
+            </div>
+            <h4 className="font-bold text-paper text-xs">Hubungkan MCP Server</h4>
+            <p className="text-[11px] text-muted">
+              Jalankan 1 baris perintah <code className="text-cyan-300 font-mono">claude mcp add</code> untuk koneksi otak sutradara.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-ink border border-emerald-500/40 bg-emerald-950/20 space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] text-emerald-400 font-bold">LANGKAH 04</span>
+              <span className="text-[10px] text-emerald-400 font-mono">Selesai!</span>
+            </div>
+            <h4 className="font-bold text-paper text-xs">Sutradarai &amp; Render</h4>
+            <p className="text-[11px] text-emerald-200/80">
+              Ketik <code className="text-emerald-300 font-mono">/audira-motion</code> lalu tonton preview atau render MP4 1080p.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -740,14 +803,17 @@ npm run remotion:render</pre>
             <p className="text-xs text-muted leading-relaxed">
               Sebagai pemilik lisensi resmi, Anda berhak meminta pendampingan langsung dari Tim AUDIRA via WhatsApp atau remote desktop jika ada kendala instalasi.
             </p>
+            <div className="text-[11px] font-mono text-emerald-300 bg-black/40 px-3 py-1.5 rounded-lg border border-emerald-500/30">
+              WA Resmi: <strong>+62 821-1200-1600</strong>
+            </div>
             <a
-              href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya pembeli lisensi ${licenseInput} (${user.name}) dan membutuhkan pendampingan instalasi mandiri.`)}`}
+              href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya pembeli lisensi ${licenseInput} (${user.name}) dan membutuhkan pendampingan instalasi mandiri.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 py-2.5 text-xs font-bold text-black hover:bg-emerald-400 transition-all shadow-md active:scale-95"
             >
               <MessageCircle className="w-4 h-4 fill-black" />
-              <span>Tanya AUDIRA di WhatsApp ➔</span>
+              <span>Chat WhatsApp (+62 821-1200-1600) ➔</span>
             </a>
           </div>
 
@@ -900,6 +966,19 @@ node -v && ffmpeg -version && claude --version`}
                 <p className="text-[11px] text-dim">
                   *Setelah instalasi selesai, tutup dan buka kembali terminal Anda, lalu ketik <code>claude</code> untuk login ke akun Claude Anda.
                 </p>
+
+                {/* Expected Output Verification Box */}
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4 space-y-2 mt-2">
+                  <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>Ciri-ciri Instalasi Berhasil (Uji di Terminal):</span>
+                  </div>
+                  <div className="font-mono text-xs text-muted space-y-1 bg-ink p-3 rounded-lg border border-line">
+                    <p><span className="text-paper">&gt; node -v</span> ➔ <span className="text-emerald-400">v20.x.x atau v22.x.x</span> <span className="text-dim">(Muncul versi Node)</span></p>
+                    <p><span className="text-paper">&gt; ffmpeg -version</span> ➔ <span className="text-emerald-400">ffmpeg version 7.x...</span> <span className="text-dim">(Muncul info FFmpeg)</span></p>
+                    <p><span className="text-paper">&gt; claude --version</span> ➔ <span className="text-emerald-400">claude 0.x.x</span> <span className="text-dim">(Claude Code CLI siap)</span></p>
+                  </div>
+                </div>
               </div>
 
               {/* Wizard Footer Navigation */}
@@ -990,6 +1069,62 @@ node -v && ffmpeg -version && claude --version`}
 ├── audira-brand.json      # Konfigurasi logo watermark & palet warna brand Anda
 └── PANDUAN_INSTALASI.md   # Buku manual instalasi lengkap offline`}
                 </pre>
+              </div>
+
+              {/* Shortcut Cepat Buka Folder Skill */}
+              <div className="rounded-2xl border border-cyan-500/40 bg-cyan-950/20 p-4 sm:p-5 space-y-2.5">
+                <div className="flex items-center gap-2 text-xs font-bold text-cyan-300">
+                  <FolderTree className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>CARA PALING MUDAH BUKA FOLDER SKILL (TANPA PERLU HAFAL TERMINAL):</span>
+                </div>
+                <div className="text-xs text-muted leading-relaxed space-y-1.5">
+                  {selectedOS === 'windows' ? (
+                    <>
+                      <p>1. Tekan tombol <kbd className="px-2 py-0.5 rounded bg-black/60 border border-white/20 font-mono text-cyan-300 font-bold">Win + R</kbd> di keyboard Anda.</p>
+                      <p>2. Salin dan tempel: <code className="text-cyan-300 font-mono font-bold bg-black/60 px-2 py-0.5 rounded select-all">%USERPROFILE%\.claude\skills</code> lalu klik <strong>OK</strong>.</p>
+                      <p>3. Buat folder baru bernama <code className="text-emerald-400 font-mono font-bold">audira-motion</code>, lalu seret/ekstrak seluruh isi file ZIP ke dalam folder tersebut.</p>
+                    </>
+                  ) : (
+                    <>
+                      <p>1. Buka Finder, tekan <kbd className="px-2 py-0.5 rounded bg-black/60 border border-white/20 font-mono text-cyan-300 font-bold">Cmd + Shift + G</kbd>.</p>
+                      <p>2. Ketik <code className="text-cyan-300 font-mono font-bold bg-black/60 px-2 py-0.5 rounded">~/.claude/skills</code> lalu tekan Enter.</p>
+                      <p>3. Buat folder <code className="text-emerald-400 font-mono font-bold">audira-motion</code> lalu letakkan seluruh isi ZIP di dalamnya.</p>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Peringatan Anti-Gagal (Dobel Folder) */}
+              <div className="rounded-2xl border-2 border-amber-500/40 bg-amber-950/20 p-4 sm:p-5 space-y-2.5">
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
+                  <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>JEBAKAN PALING SERING: JANGAN SAMPAI FOLDER DOBEL (Video EP 01 - Detik 00:49)</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  <div className="p-3 rounded-xl bg-red-950/40 border border-red-500/40 space-y-1">
+                    <span className="font-mono text-red-400 font-bold flex items-center gap-1">
+                      ❌ CONTOH SALAH (Folder Terbungkus 2 Kali):
+                    </span>
+                    <p className="font-mono text-[11px] text-red-200/90 break-all">
+                      .../.claude/skills/audira-motion/<strong className="text-red-400 underline">audira-motion</strong>/SKILL.md
+                    </p>
+                    <p className="text-[11px] text-dim">
+                      *Jika terbungkus folder ganda seperti ini, Claude tidak akan mengenali perintah /audira-motion!
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 space-y-1">
+                    <span className="font-mono text-emerald-400 font-bold flex items-center gap-1">
+                      ✅ CONTOH BENAR (Langsung di Folder Utama):
+                    </span>
+                    <p className="font-mono text-[11px] text-emerald-200 break-all">
+                      .../.claude/skills/audira-motion/<strong className="text-emerald-400 underline">SKILL.md</strong>
+                    </p>
+                    <p className="text-[11px] text-emerald-300/80">
+                      *File SKILL.md dan folder kits/ harus langsung berada di dalam folder audira-motion.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Method 1: Terminal Copy */}
@@ -1214,6 +1349,35 @@ npm install`}
                 </div>
               </div>
 
+              {/* How to verify MCP Connection */}
+              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4 sm:p-5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>CARA MEMASTIKAN KONEKSI MCP BERHASIL (Video EP 02 - Detik 01:10):</span>
+                </div>
+                <p className="text-xs text-muted">
+                  Buka terminal lalu ketik perintah berikut:
+                </p>
+                <div className="p-3 rounded-xl bg-ink border border-line font-mono text-xs text-paper space-y-1">
+                  <p><span className="text-dim">&gt;</span> <span className="text-accent font-bold">claude mcp list</span></p>
+                  <p className="text-emerald-400 pt-1">✔ audira-skill-mesh: Connected</p>
+                  <p className="text-dim text-[11px] pt-1">
+                    *Jika status bertuliskan <span className="text-emerald-400 font-bold">&quot;Connected&quot;</span>, berarti Claude sudah 100% siap memanggil 925+ fungsi sutradara otonom!
+                  </p>
+                </div>
+              </div>
+
+              {/* Cartesia Voiceover Note */}
+              <div className="rounded-2xl border border-line bg-tile p-4 space-y-2 text-xs">
+                <div className="flex items-center gap-2 font-bold text-paper">
+                  <Sparkles className="w-4 h-4 text-accent" />
+                  <span>Fitur Suara Narator Otomatis (Cartesia AI):</span>
+                </div>
+                <p className="text-muted leading-relaxed">
+                  Jika Anda ingin video Anda bersuara narator otomatis bahasa Indonesia, daftar akun gratis di <a href="https://cartesia.ai" target="_blank" rel="noopener noreferrer" className="text-accent underline font-mono">cartesia.ai</a>, ambil API Key gratisnya, lalu sertakan flag <code className="text-paper bg-ink px-1 rounded">-e CARTESIA_API_KEY=kunci_anda</code> pada perintah <code>claude mcp add</code>. Jika tanpa voiceover, animasi visual 3D tetap bisa dirender 100% lancar.
+                </p>
+              </div>
+
               {/* Wizard Footer Navigation */}
               {viewMode === 'wizard' && (
                 <div className="pt-4 border-t border-line flex items-center justify-between">
@@ -1436,6 +1600,44 @@ npm install`}
                 </div>
               </div>
 
+              {/* Realistic Chat Simulation with Claude Code */}
+              <div className="rounded-2xl border-2 border-line bg-ink overflow-hidden space-y-0 shadow-lg">
+                <div className="flex items-center justify-between px-4 py-2.5 bg-tile border-b border-line text-xs font-mono">
+                  <span className="text-accent font-bold flex items-center gap-1.5">
+                    <Terminal className="w-3.5 h-3.5" />
+                    SIMULASI EKSEKUSI DI CLAUDE CODE CLI (Video EP 03):
+                  </span>
+                  <span className="text-dim text-[10px]">Cukup Pakai Bahasa Sehari-hari</span>
+                </div>
+
+                <div className="p-4 sm:p-5 space-y-3 font-mono text-xs leading-relaxed">
+                  {/* User Bubble */}
+                  <div className="p-3.5 rounded-xl bg-tile border border-line space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-accent block">ANDA (PRODUSER):</span>
+                    <p className="text-emerald-400">
+                      /audira-motion Buatkan video 9:16 durasi 30 detik tentang teknologi AI masa depan dengan gaya Cyberforge 3D dan suara vokal narator Indonesia.
+                    </p>
+                  </div>
+
+                  {/* Claude Code Response Bubble */}
+                  <div className="p-3.5 rounded-xl bg-accent/10 border border-accent/30 space-y-2">
+                    <span className="text-[10px] uppercase font-bold text-paper block flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-accent" />
+                      CLAUDE CODE (SUTRADARA OTONOM):
+                    </span>
+                    <div className="text-paper/90 space-y-1">
+                      <p>✔ 1. Memuat kit 3D Cyberforge &amp; rigging kamera Three.js (Rotasi Hologram 60 FPS)</p>
+                      <p>✔ 2. Menulis naskah narasi &amp; memanggil suara Cartesia AI (Audio tersimpan di public/)</p>
+                      <p>✔ 3. Menyusun subtitle kinetik per kata (Tersinkronisasi otomatis)</p>
+                      <p>✔ 4. Menyiapkan proyek Remotion 4.0 komposisi 1080x1920 60 FPS</p>
+                    </div>
+                    <p className="text-muted text-[11px] pt-1.5 border-t border-line">
+                      👉 Ketik <code className="text-accent font-bold">npm run remotion:dev</code> untuk tonton pratinjau di browser, atau ketik <code className="text-emerald-400 font-bold">npm run remotion:render</code> untuk mengekspor file MP4 final ke folder out/.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* 3 Render Commands: Studio, Smoke, Final */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="p-4 rounded-2xl bg-tile border border-line space-y-2">
@@ -1591,7 +1793,7 @@ npm install`}
                   </p>
                 </div>
                 <a
-                  href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya butuh bantuan instalasi Audira Motion untuk lisensi ${licenseInput}.`)}`}
+                  href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya butuh bantuan instalasi Audira Motion untuk lisensi ${licenseInput}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 btn-primary py-2.5 px-4 text-xs font-bold shadow-md"

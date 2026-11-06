@@ -83,13 +83,13 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs: customFaqs }) => {
         </div>
 
         <a
-          href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA%2C%20saya%20mau%20tanya%20seputar%20Skill%20Claude%20dan%20Lisensi%2029%20Gaya%203D%20Remotion"
+          href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA%2C%20saya%20mau%20tanya%20seputar%20Skill%20Claude%20dan%20Lisensi%2029%20Gaya%203D%20Remotion"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-bold text-ink hover:brightness-110 shadow-lg shadow-emerald-950/40 transition-all"
         >
           <MessageCircle className="h-4 w-4 fill-ink" />
-          <span>Chat WhatsApp (+62 857-0966-6240)</span>
+          <span>Chat WhatsApp (+62 821-1200-1600)</span>
         </a>
       </div>
     </section>

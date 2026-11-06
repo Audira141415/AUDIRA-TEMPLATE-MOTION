@@ -18,7 +18,7 @@ const COLUMNS = [
       { href: '/admin', label: 'Buku Panduan (Portal Pelanggan)' },
       { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
       { href: '/#faq', label: 'FAQ & Spek Hardware' },
-      { href: 'https://wa.me/6285709666240', label: 'WhatsApp Support (+62 857-0966-6240)' },
+      { href: 'https://wa.me/6282112001600', label: 'WhatsApp Support (+62 821-1200-1600)' },
     ],
   },
   {
@@ -59,7 +59,7 @@ export const SiteFooter: React.FC = () => (
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="https://wa.me/6285709666240"
+            href="https://wa.me/6282112001600"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-6 py-3.5 text-sm sm:text-base font-semibold text-paper hover:bg-tile-2 hover:border-line-strong transition-all"
@@ -82,13 +82,13 @@ export const SiteFooter: React.FC = () => (
         </p>
         <div className="mt-4">
           <a
-            href="https://wa.me/6285709666240"
+            href="https://wa.me/6282112001600"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:underline"
           >
             <MessageCircle className="w-3.5 h-3.5" />
-            <span>Support: +62 857-0966-6240</span>
+            <span>Support: +62 821-1200-1600</span>
           </a>
         </div>
       </div>

@@ -334,7 +334,7 @@ export default function PesananPage() {
                     </div>
 
                     <a
-                      href={`https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20ingin%20konfirmasi%20pesanan%20dengan%20No%20Pesanan%20*${ord.id}*%20(${ord.tierName})`}
+                      href={`https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20ingin%20konfirmasi%20pesanan%20dengan%20No%20Pesanan%20*${ord.id}*%20(${ord.tierName})`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold transition-colors"

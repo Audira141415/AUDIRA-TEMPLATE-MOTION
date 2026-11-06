@@ -85,7 +85,7 @@ export const BundleSection: React.FC<Props> = ({ onBuyTier }) => {
           </button>
           
           <a
-            href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20mau%20konsultasi%20Creator%20Lab%20Ultimate%20(Rp499.000)"
+            href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20mau%20konsultasi%20Creator%20Lab%20Ultimate%20(Rp499.000)"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline min-h-14 px-6 text-[15px] font-semibold"

@@ -144,7 +144,7 @@ const DFY_SUB_PLANS: Record<DfyPlanId, {
   }
 };
 
-const WHATSAPP_NUMBER = '6285709666240';
+const WHATSAPP_NUMBER = '6282112001600';
 
 export const OrderModal: React.FC<OrderModalProps> = ({
   isOpen,

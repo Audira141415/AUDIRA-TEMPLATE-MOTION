@@ -37,11 +37,11 @@ export const FloatingWhatsApp: React.FC = () => {
 
       {/* Floating Action Button */}
       <a
-        href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20layanan%20video%20dan%20lisensi%203D.%20Bisa%20konsultasi%20sebentar?"
+        href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20layanan%20video%20dan%20lisensi%203D.%20Bisa%20konsultasi%20sebentar?"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative flex size-13 sm:size-14 items-center justify-center rounded-2xl bg-emerald-500 text-black shadow-2xl shadow-emerald-950/60 hover:bg-emerald-400 hover:scale-105 active:scale-95 transition-all"
-        title="Tanya AUDIRA di WhatsApp (+62 857-0966-6240)"
+        title="Tanya AUDIRA di WhatsApp (+62 821-1200-1600)"
         aria-label="Tanya AUDIRA di WhatsApp"
       >
         <span className="absolute -top-1 -right-1 flex size-3.5 items-center justify-center rounded-full bg-accent ring-2 ring-ink">

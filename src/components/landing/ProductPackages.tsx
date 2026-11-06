@@ -271,7 +271,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                 Lihat contoh ➔
               </a>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Starter%203D%20(Rp149.000)"
+                href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Starter%203D%20(Rp149.000)"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
@@ -414,7 +414,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                 Jelajahi 29 gaya ➔
               </a>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
+                href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
@@ -552,7 +552,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                 Detail ekosistem ➔
               </a>
               <a
-                href="https://wa.me/6285709666240?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Creator%20Lab%20Ultimate%20(Rp499.000)"
+                href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Creator%20Lab%20Ultimate%20(Rp499.000)"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}

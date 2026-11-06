@@ -132,7 +132,7 @@ export const PanduanLockedGate: React.FC<PanduanLockedGateProps> = ({ user, pend
           {isPendingActivation ? (
             <>
               <a
-                href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin mengaktifkan lisensi pesanan ${pendingOrder?.id} (${pendingOrder?.tierName}) atas nama ${user.name} (${user.email}). Berikut saya lampirkan bukti pembayaran.`)}`}
+                href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya ingin mengaktifkan lisensi pesanan ${pendingOrder?.id} (${pendingOrder?.tierName}) atas nama ${user.name} (${user.email}). Berikut saya lampirkan bukti pembayaran.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto btn-primary py-3 px-6 text-xs sm:text-sm font-bold inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-950/40"
@@ -174,7 +174,7 @@ export const PanduanLockedGate: React.FC<PanduanLockedGateProps> = ({ user, pend
         <div className="border-t border-line pt-4 text-xs text-muted flex flex-col sm:flex-row items-center justify-center gap-2">
           <span>{isPendingActivation ? 'Butuh bantuan aktivasi cepat?' : 'Sudah melakukan transfer pembayaran?'}</span>
           <a
-            href={`https://wa.me/6285709666240?text=${encodeURIComponent(`Halo Tim AUDIRA, saya membutuhkan bantuan aktivasi untuk akun ${user.email} (${user.name}).`)}`}
+            href={`https://wa.me/6282112001600?text=${encodeURIComponent(`Halo Tim AUDIRA, saya membutuhkan bantuan aktivasi untuk akun ${user.email} (${user.name}).`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-emerald-400 font-bold hover:underline inline-flex items-center gap-1"

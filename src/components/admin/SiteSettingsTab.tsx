@@ -124,7 +124,7 @@ export const SiteSettingsTab: React.FC = () => {
                 type="text"
                 value={config.whatsappNumber}
                 onChange={(e) => setConfig({ ...config, whatsappNumber: e.target.value })}
-                placeholder="6285709666240"
+                placeholder="6282112001600"
                 className="w-full rounded-xl border border-line bg-tile px-3.5 py-2 text-paper focus:border-accent focus:outline-none font-mono"
               />
               <span className="text-[10px] text-dim">*Gunakan awalan 62 tanpa tanda + atau spasi.</span>

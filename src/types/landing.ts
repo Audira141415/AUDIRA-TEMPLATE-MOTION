@@ -281,7 +281,7 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     {
       "id": "faq-7",
       "question": "Bagaimana jika saya gaptek atau butuh bantuan saat proses instalasi?",
-      "answer": "Anda tidak sendirian. Kami menyediakan Garansi Pendampingan 1-on-1 via WhatsApp Resmi Tim AUDIRA (+62 857-0966-6240). Selain itu, Anda mendapatkan akses ke portal pelanggan (/admin & /pesanan) dan buku panduan instalasi 5 langkah. Tim teknis kami siap memandu via chat atau remote screen sharing sampai video pertama Anda berhasil dirender di laptop Anda."
+      "answer": "Anda tidak sendirian. Kami menyediakan Garansi Pendampingan 1-on-1 via WhatsApp Resmi Tim AUDIRA (+62 821-1200-1600). Selain itu, Anda mendapatkan akses ke portal pelanggan (/admin & /pesanan) dan buku panduan instalasi 5 langkah. Tim teknis kami siap memandu via chat atau remote screen sharing sampai video pertama Anda berhasil dirender di laptop Anda."
     },
     {
       "id": "faq-8",
@@ -290,7 +290,7 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     }
   ],
   contact: {
-    whatsappNumber: '6285709666240',
+    whatsappNumber: '6282112001600',
     csLabel: 'Tanya AUDIRA',
     bcaAccountNumber: '8691888291',
     bcaAccountName: 'Agus Dwi Rianto'
