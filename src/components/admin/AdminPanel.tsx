@@ -34,10 +34,11 @@ import { CatalogTab } from '@/components/admin/CatalogTab';
 import { LandingPageManagerTab } from '@/components/admin/LandingPageManagerTab';
 import { CouponsTab } from '@/components/admin/CouponsTab';
 import { SystemTab } from '@/components/admin/SystemTab';
+import { ServerMonitoringTab } from '@/components/admin/ServerMonitoringTab';
 import { OrderRecord } from '@/lib/orders';
 import { Tag, Database } from 'lucide-react';
 
-type AdminTab = 'overview' | 'landing' | 'orders' | 'coupons' | 'site' | 'catalog' | 'ai' | 'voice' | 'users' | 'renders' | 'system';
+type AdminTab = 'overview' | 'server' | 'landing' | 'orders' | 'coupons' | 'site' | 'catalog' | 'ai' | 'voice' | 'users' | 'renders' | 'system';
 
 type AdminUser = {
   id: string;
@@ -221,6 +222,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         <div role="tablist" className="flex flex-wrap gap-1 rounded-2xl border border-line bg-card p-1.5 shadow-xl">
           {[
             { id: 'overview' as const, label: 'Overview', icon: <LayoutDashboard className="h-4 w-4" /> },
+            { id: 'server' as const, label: 'Monitoring Server', icon: <Server className="h-4 w-4 text-emerald-400" /> },
             { id: 'landing' as const, label: 'CMS Landing Page', icon: <Sparkles className="h-4 w-4 text-accent" /> },
             { id: 'orders' as const, label: 'Pesanan & Lisensi', icon: <ShoppingBag className="h-4 w-4" /> },
             { id: 'coupons' as const, label: 'Kupon Diskon', icon: <Tag className="h-4 w-4 text-emerald-400" /> },
@@ -267,17 +269,24 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
           {/* System Health & Status Banner */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
-            <div className="p-4 rounded-2xl bg-card border border-line space-y-2 shadow-md">
+            <button
+              type="button"
+              onClick={() => setTab('server')}
+              className="p-4 rounded-2xl bg-card border border-line hover:border-emerald-500/50 space-y-2 shadow-md text-left transition-all group"
+            >
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-dim uppercase font-bold flex items-center gap-1.5">
+                <span className="font-mono text-xs text-dim uppercase font-bold flex items-center gap-1.5 group-hover:text-emerald-400">
                   <Server className="w-3.5 h-3.5 text-emerald-400" />
-                  SERVER STATUS
+                  SERVER MONITORING
                 </span>
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
               </div>
-              <h4 className="font-bold text-sm text-paper">Next.js Web Server (Port 3788)</h4>
-              <p className="text-xs text-emerald-300 font-mono">ONLINE • 200 OK</p>
-            </div>
+              <h4 className="font-bold text-sm text-paper group-hover:text-emerald-300">Next.js Web Server (Port 3788)</h4>
+              <p className="text-xs text-emerald-300 font-mono flex items-center justify-between">
+                <span>ONLINE • 200 OK</span>
+                <span className="text-[10px] text-dim group-hover:text-paper font-semibold">Pantau Server ➔</span>
+              </p>
+            </button>
 
             <div className="p-4 rounded-2xl bg-card border border-line space-y-2 shadow-md">
               <div className="flex items-center justify-between">
@@ -356,6 +365,18 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
               <div className="space-y-2 text-xs">
                 <button
                   type="button"
+                  onClick={() => setTab('server')}
+                  className="w-full p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/30 hover:border-emerald-500/60 flex items-center justify-between text-left group transition-all"
+                >
+                  <div>
+                    <span className="font-bold text-emerald-300 block">Monitoring &amp; Integrasi Server</span>
+                    <span className="text-[11px] text-paper/80">Pantau CPU, RAM, Disk, dan Remote Node Linux (192.168.100.168)</span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                </button>
+
+                <button
+                  type="button"
                   onClick={() => setTab('landing')}
                   className="w-full p-3 rounded-xl bg-accent/15 border border-accent/40 hover:bg-accent/25 flex items-center justify-between text-left group transition-all"
                 >
@@ -418,6 +439,11 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
 
           </div>
         </div>
+      )}
+
+      {/* TAB: SERVER MONITORING & INTEGRATION */}
+      {tab === 'server' && (
+        <ServerMonitoringTab />
       )}
 
       {/* TAB: CMS LANDING PAGE */}
