@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: 'Masuk · AUDIRA Motion' };
 export const dynamic = 'force-dynamic';
 
 export default async function Page() {
-  if (await currentUser()) redirect('/studio');
+  if (await currentUser()) redirect('/admin');
   return (
     <div className="flex min-h-screen flex-col bg-[#141413] font-display text-[#f4f3f0]">
       <SiteHeader />

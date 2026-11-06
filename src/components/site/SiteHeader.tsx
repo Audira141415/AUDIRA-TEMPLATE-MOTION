@@ -112,15 +112,15 @@ export const SiteHeader: React.FC = () => {
                 </Link>
               ) : (
                 <Link
-                  href="/pesanan"
+                  href="/admin"
                   className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
-                    pathname.startsWith('/pesanan') 
+                    pathname.startsWith('/admin') 
                       ? 'border-emerald-500 bg-emerald-950/40 text-emerald-300' 
                       : 'border-emerald-800/40 bg-emerald-950/20 text-emerald-400 hover:border-emerald-500'
                   }`}
                 >
                   <ShoppingBag className="h-3.5 w-3.5 text-emerald-400" />
-                  <span className="hidden xl:inline">Pesanan Saya</span>
+                  <span className="hidden xl:inline">Dashboard Saya</span>
                 </Link>
               )}
               <span

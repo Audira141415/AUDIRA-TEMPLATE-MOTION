@@ -9,16 +9,16 @@ type Mode = 'login' | 'register';
 
 const COPY: Record<Mode, { title: string; lead: string; submit: string; switchText: string; switchLink: string; switchHref: string }> = {
   login: {
-    title: 'Masuk',
-    lead: 'Lanjutkan bikin reel dari ide kamu.',
+    title: 'Masuk ke Portal',
+    lead: 'Akses lisensi 3D, panduan instalasi Claude Code, dan faktur resmi Anda.',
     submit: 'Masuk',
     switchText: 'Belum punya akun?',
-    switchLink: 'Daftar gratis',
+    switchLink: 'Daftar sekarang',
     switchHref: '/register',
   },
   register: {
-    title: 'Buat akun',
-    lead: 'Satu akun untuk menyimpan ide, naskah, dan reel kamu.',
+    title: 'Buat Akun Pelanggan',
+    lead: 'Satu akun untuk mengelola lisensi, unduhan file 3D, dan faktur pembelian.',
     submit: 'Daftar',
     switchText: 'Sudah punya akun?',
     switchLink: 'Masuk',
@@ -32,7 +32,8 @@ const inputClass =
 export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
   const router = useRouter();
   const params = useSearchParams();
-  const next = params.get('next')?.startsWith('/') ? params.get('next')! : '/studio';
+  const rawNext = params.get('next');
+  const next = rawNext?.startsWith('/') && !rawNext.startsWith('/studio') ? rawNext : '/admin';
   const copy = COPY[mode];
 
   const [name, setName] = useState('');
@@ -57,9 +58,10 @@ export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
         setError(data.error ?? 'Terjadi kesalahan. Coba lagi.');
         return;
       }
-      const targetPath = params.get('next')?.startsWith('/')
-        ? params.get('next')!
-        : (data.user?.role === 'superadmin' ? '/admin' : '/studio');
+      const rawTarget = params.get('next');
+      const targetPath = rawTarget?.startsWith('/') && !rawTarget.startsWith('/studio')
+        ? rawTarget
+        : '/admin';
       router.push(targetPath);
       router.refresh();
     } catch {
@@ -174,7 +176,7 @@ export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
       <p className="mt-6 text-center text-[14px] text-[#8a8780]">
         {copy.switchText}{' '}
         <Link
-          href={next === '/studio' ? copy.switchHref : `${copy.switchHref}?next=${encodeURIComponent(next)}`}
+          href={next === '/admin' ? copy.switchHref : `${copy.switchHref}?next=${encodeURIComponent(next)}`}
           className="font-semibold text-white underline underline-offset-2 hover:text-[#ea580c]"
         >
           {copy.switchLink}

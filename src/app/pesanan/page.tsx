@@ -170,7 +170,7 @@ export default function PesananPage() {
               </p>
               <p className="leading-relaxed">
                 Seluruh pelanggan dan kreator terdaftar memiliki role <strong>Customer / User Biasa</strong>. 
-                Anda memiliki hak akses penuh untuk mengunduh kode lisensi pribadi, membuka panduan instalasi, dan menggunakan studio render. 
+                Anda memiliki hak akses penuh untuk mengunduh kode lisensi pribadi, membuka panduan instalasi, dan mengunduh seluruh template Remotion 3D. 
                 Pengelolaan panel admin, perubahan harga, pengaturan CMS, dan database website dibatasi secara ketat hanya untuk <strong>Superadmin Resmi AUDIRA</strong>.
               </p>
             </div>
@@ -325,11 +325,11 @@ export default function PesananPage() {
                       </Link>
 
                       <Link
-                        href="/studio"
-                        className="px-3 py-2 rounded-xl bg-tile border border-line text-paper hover:border-accent inline-flex items-center gap-1.5 font-semibold transition-colors"
+                        href="/admin"
+                        className="px-3 py-2 rounded-xl bg-accent/15 border border-accent/40 text-accent hover:bg-accent/25 inline-flex items-center gap-1.5 font-bold transition-colors"
                       >
-                        <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Buka Studio Render</span>
+                        <Sparkles className="w-3.5 h-3.5 text-accent" />
+                        <span>Buka Dashboard Pelanggan</span>
                       </Link>
                     </div>
 

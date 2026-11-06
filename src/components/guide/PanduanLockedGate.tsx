@@ -104,3 +104,4 @@ export const PanduanLockedGate: React.FC<PanduanLockedGateProps> = ({ user }) =>
     </div>
   );
 };
+

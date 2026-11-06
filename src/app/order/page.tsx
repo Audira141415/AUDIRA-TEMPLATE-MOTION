@@ -3,12 +3,12 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { 
-  ShieldCheck, 
-  Lock, 
-  Sparkles, 
-  CheckCircle2, 
-  ArrowLeft, 
+import {
+  ShieldCheck,
+  Lock,
+  Sparkles,
+  CheckCircle2,
+  ArrowLeft,
   MessageCircle,
   HelpCircle,
   BookOpen
