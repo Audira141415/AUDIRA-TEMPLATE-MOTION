@@ -38,19 +38,24 @@ export const HoloCore: React.FC<HoloCoreProps> = ({ f, lockProgress = 0, coreOve
       {/* 1. Inner Faceted Energy Crystal */}
       <mesh rotation={[rotX1, rotY1, 0]} scale={[coreScale, coreScale, coreScale]}>
         <icosahedronGeometry args={[0.9, 0]} />
-        <meshPhysicalMaterial
+        {/* Flat-shaded facets with normal blending: additive blending plus high emissive clipped every face to white. */}
+        <meshStandardMaterial
           color={coreColor}
           emissive={coreColor}
-          emissiveIntensity={1.2 + coreOverload * 1.5}
-          roughness={0.1}
-          metalness={0.9}
-          transmission={0.65}
+          emissiveIntensity={0.35 + coreOverload * 0.6}
+          roughness={0.25}
+          metalness={0.4}
+          flatShading
           transparent
-          opacity={0.8}
-          blending={THREE.AdditiveBlending}
+          opacity={0.85}
           depthWrite={false}
           side={THREE.DoubleSide}
         />
+      </mesh>
+      {/* 1b. Facet edges, so the crystal reads as a hologram */}
+      <mesh rotation={[rotX1, rotY1, 0]} scale={[coreScale * 1.004, coreScale * 1.004, coreScale * 1.004]}>
+        <icosahedronGeometry args={[0.9, 0]} />
+        <meshBasicMaterial color={CYBER_PALETTE.hudCyan} wireframe transparent opacity={0.9} toneMapped={false} />
       </mesh>
 
       {/* 2. Outer Wireframe Cage around the Crystal */}
@@ -117,4 +122,3 @@ export const HoloCore: React.FC<HoloCoreProps> = ({ f, lockProgress = 0, coreOve
     </group>
   );
 };
-

@@ -1,7 +1,7 @@
 // INKSTORY Overlay — Vertical East Asian calligraphy, traditional verse & dynasty seal border.
 
 import React from "react";
-import { lerp, seg, ease } from "../core/motion";
+import { seg, ease } from "../core/motion";
 import { INK_PALETTE } from "../lib/palette";
 
 export interface InkOverlayProps {

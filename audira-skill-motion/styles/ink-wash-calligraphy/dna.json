@@ -1,0 +1,61 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "ink-wash-calligraphy",
+  "name": "East Asian Ink Wash (Sumi-e) & Misty Mountains",
+  "kit": "inkstory",
+  "category": "Traditional Asian Calligraphy",
+  "palette": {
+    "background": "#F5F2EB",
+    "primary": "#1A1817",
+    "secondary": "#4A4644",
+    "accent": "#C8322B",
+    "neutral": "#8A847F",
+    "text": "#1A1817"
+  },
+  "geometry": {
+    "type": "fluid_brush_stroke_extrusions",
+    "bevelRadius": 0.02,
+    "polyBudget": "spline_ribbons",
+    "silhouette": "flowing_shan_shui"
+  },
+  "materials": {
+    "type": "porous_rice_paper_soak",
+    "roughness": 0.98,
+    "metalness": 0,
+    "normalMap": "raw_xuan_paper"
+  },
+  "lighting": {
+    "archetype": "zen_mist_diffuse",
+    "keyLight": {
+      "kelvin": 4800,
+      "intensity": 1.1,
+      "angle": [
+        20,
+        60,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5200,
+      "intensity": 0.8
+    },
+    "rimLight": {
+      "kelvin": 4500,
+      "intensity": 0.3
+    }
+  },
+  "camera": {
+    "type": "horizontal_scroll_glide",
+    "focalLengthMm": 50,
+    "fovDeg": 35,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "shan_shui_unfurl"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "viscous_ink_capillary_flow",
+    "characterCadence": "poetic_qi_flow"
+  }
+}

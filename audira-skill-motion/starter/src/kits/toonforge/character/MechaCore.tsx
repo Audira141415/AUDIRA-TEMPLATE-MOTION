@@ -23,13 +23,13 @@ export const MechaCore: React.FC<MechaCoreProps> = ({
     <group rotation={[pitch, 0, roll]}>
       {/* 1. Main Fuselage (White Cel-Shaded Armor) */}
       <group>
-        <mesh castShadow>
-          <coneGeometry args={[0.55, 2.4, 4]} rotation={[Math.PI / 2, 0, 0]} />
+        <mesh rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <coneGeometry args={[0.55, 2.4, 4]} />
           <meshToonMaterial color={TOON_PALETTE.mechaArmor} />
         </mesh>
         {/* Inverted-Hull Ink Outline */}
-        <mesh scale={[1.08, 1.08, 1.04]}>
-          <coneGeometry args={[0.55, 2.4, 4]} rotation={[Math.PI / 2, 0, 0]} />
+        <mesh rotation={[Math.PI / 2, 0, 0]} scale={[1.08, 1.04, 1.08]}>
+          <coneGeometry args={[0.55, 2.4, 4]} />
           <meshBasicMaterial color={TOON_PALETTE.inkOutline} side={1} />
         </mesh>
       </group>

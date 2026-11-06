@@ -57,7 +57,7 @@ export const CyberGrid: React.FC<CyberGridProps> = ({ size = 40, divisions = 40,
       </lineSegments>
 
       {/* Outward Expanding Radar Wave */}
-      <line scale={[waveRadius, 1, waveRadius]}>
+      <threeLine scale={[waveRadius, 1, waveRadius]}>
         <bufferGeometry attach="geometry" {...waveGeo} />
         <lineBasicMaterial
           attach="material"
@@ -67,10 +67,10 @@ export const CyberGrid: React.FC<CyberGridProps> = ({ size = 40, divisions = 40,
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
-      </line>
+      </threeLine>
 
       {/* Secondary concentric floor circle */}
-      <line scale={[12, 1, 12]}>
+      <threeLine scale={[12, 1, 12]}>
         <bufferGeometry attach="geometry" {...waveGeo} />
         <lineBasicMaterial
           attach="material"
@@ -80,7 +80,7 @@ export const CyberGrid: React.FC<CyberGridProps> = ({ size = 40, divisions = 40,
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
-      </line>
+      </threeLine>
     </group>
   );
 };

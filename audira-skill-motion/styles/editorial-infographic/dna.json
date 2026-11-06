@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "editorial-infographic",
+  "name": "Architectural CAD Blueprint & Dimensioned Schematics",
+  "kit": "draftforge",
+  "category": "Engineering / Architectural Blueprint",
+  "palette": {
+    "background": "#0A192F",
+    "primary": "#64FFDA",
+    "secondary": "#172A45",
+    "accent": "#F5A623",
+    "neutral": "#8892B0",
+    "text": "#CCD6F6"
+  },
+  "geometry": {
+    "type": "orthographic_line_extrusions",
+    "bevelRadius": 0.005,
+    "polyBudget": "clean_cad_lines",
+    "silhouette": "dimensioned_exploded_assembly"
+  },
+  "materials": {
+    "type": "blueprint_vellum_matte",
+    "roughness": 0.9,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "grid_paper_ruled"
+  },
+  "lighting": {
+    "archetype": "drafting_table_overhead",
+    "keyLight": {
+      "kelvin": 5600,
+      "intensity": 1.5,
+      "angle": [
+        0,
+        90,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5600,
+      "intensity": 0.8
+    },
+    "rimLight": {
+      "kelvin": 5600,
+      "intensity": 0.2
+    }
+  },
+  "camera": {
+    "type": "precision_topdown_dolly",
+    "focalLengthMm": 70,
+    "fovDeg": 25,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "linear_axis_tracking"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "ruler_slide_damped",
+    "characterCadence": "typewriter_drafting_cad"
+  }
+}

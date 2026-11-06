@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import * as THREE from "three";
 import { createAbsPlasticMaterial } from "../lib/materials";
 import { BRICK_PALETTE } from "../lib/palette";
 

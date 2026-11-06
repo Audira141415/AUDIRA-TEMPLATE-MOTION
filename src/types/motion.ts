@@ -1,4 +1,4 @@
-// Audira Skill Motion 3D Signature Styles (v3.0.0 Commercial Release)
+// Audira Skill Motion 3D Signature Styles (v4.1.0, 43 kits)
 export type Motion3DFormat = 
   | 'innerworks'
   | 'buildforge'
@@ -29,7 +29,22 @@ export type Motion3DFormat =
   | 'kintsugi'
   | 'retrowave'
   | 'textvoyage'
-  | 'audirabot';
+  | 'audirabot'
+  // v4.x Styles
+  | 'devforge'
+  | 'toydiorama'
+  | 'filmnoir'
+  | 'watercolor'
+  | 'fluidforge'
+  | 'hd2d'
+  | 'memphisdiorama'
+  | 'dataphysical'
+  | 'satellitebriefing'
+  | 'backrooms'
+  | 'visualinvestigation'
+  | 'tradingterminal'
+  | 'historymap'
+  | 'islamicdocumentary';
 
 // Web Studio & Legacy Motion Formats
 export type MotionFormat = 

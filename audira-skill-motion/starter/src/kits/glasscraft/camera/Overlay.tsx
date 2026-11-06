@@ -49,8 +49,8 @@ export const GlassOverlay: React.FC<GlassOverlayProps> = ({ f }) => {
               width: 8,
               height: 8,
               borderRadius: "50%",
-              background: GLASS_PALETTE.prismaticCyan,
-              boxShadow: `0 0 10px ${GLASS_PALETTE.prismaticCyan}`,
+              background: GLASS_PALETTE.prismCyan,
+              boxShadow: `0 0 10px ${GLASS_PALETTE.prismCyan}`,
               opacity: pulse,
             }}
           />
@@ -78,7 +78,7 @@ export const GlassOverlay: React.FC<GlassOverlayProps> = ({ f }) => {
           }}
         >
           <div>IOR: 1.52 (BOROSILICATE)</div>
-          <div style={{ color: GLASS_PALETTE.prismaticViolet }}>DISPERSION: 0.045</div>
+          <div style={{ color: GLASS_PALETTE.prismMagenta }}>DISPERSION: 0.045</div>
         </div>
       </div>
 
@@ -98,7 +98,7 @@ export const GlassOverlay: React.FC<GlassOverlayProps> = ({ f }) => {
               fontWeight: 600,
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              color: GLASS_PALETTE.prismaticCyan,
+              color: GLASS_PALETTE.prismCyan,
               marginBottom: 6,
             }}
           >

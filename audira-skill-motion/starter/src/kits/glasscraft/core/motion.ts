@@ -39,6 +39,7 @@ export const ease = {
   /** Decisive glass card reveal */
   cardSnap: bezier(0.16, 1, 0.3, 1),
   sine: (t: number) => 0.5 - 0.5 * Math.cos(Math.PI * clamp(t)),
+  smooth: (t: number) => t * t * (3 - 2 * t),
 };
 
 /** Deterministic zero-gravity buoyancy bobbing */

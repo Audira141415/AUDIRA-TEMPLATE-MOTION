@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "circuit-electronics",
+  "name": "Macro 3D PCB Electronics & Electron Stream",
+  "kit": "circuitforge",
+  "category": "Hardware / Semiconductor",
+  "palette": {
+    "background": "#06130B",
+    "primary": "#00E676",
+    "secondary": "#B8860B",
+    "accent": "#FFAB00",
+    "neutral": "#0F2D1A",
+    "text": "#E8F5E9"
+  },
+  "geometry": {
+    "type": "fr4_pcb_smd_chips",
+    "bevelRadius": 0.01,
+    "polyBudget": "dense_trace_geometry",
+    "silhouette": "bga_silicon_die_tracks"
+  },
+  "materials": {
+    "type": "soldermask_green_copper",
+    "roughness": 0.35,
+    "metalness": 0.85,
+    "clearcoat": 0.4,
+    "normalMap": "etched_copper_traces"
+  },
+  "lighting": {
+    "archetype": "smt_inspection_ring_light",
+    "keyLight": {
+      "kelvin": 5600,
+      "intensity": 1.6,
+      "angle": [
+        0,
+        90,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6000,
+      "intensity": 0.5
+    },
+    "rimLight": {
+      "kelvin": 7000,
+      "intensity": 1.4
+    }
+  },
+  "camera": {
+    "type": "silicon_die_macro_dive",
+    "focalLengthMm": 100,
+    "fovDeg": 20,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.2
+    },
+    "motionConstraint": "copper_trace_follow"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "electron_pulse_speed",
+    "characterCadence": "bus_clock_transfer"
+  }
+}

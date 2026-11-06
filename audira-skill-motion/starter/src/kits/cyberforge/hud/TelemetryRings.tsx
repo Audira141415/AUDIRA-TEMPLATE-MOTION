@@ -77,10 +77,10 @@ export const TelemetryRings: React.FC<TelemetryRingsProps> = ({
   return (
     <group rotation={[tiltX, 0, tiltZ]}>
       {/* Outer ring */}
-      <line rotation={[0, 0, rotZ1]}>
+      <threeLine rotation={[0, 0, rotZ1]}>
         <bufferGeometry attach="geometry" {...outerCircleGeo} />
         <lineBasicMaterial attach="material" color={color} transparent opacity={0.65} blending={THREE.AdditiveBlending} />
-      </line>
+      </threeLine>
 
       {/* Middle tick ring */}
       <lineSegments rotation={[0, 0, rotZ2]}>
@@ -89,10 +89,10 @@ export const TelemetryRings: React.FC<TelemetryRingsProps> = ({
       </lineSegments>
 
       {/* Dynamic orbital arc */}
-      <line rotation={[0, 0, rotZ3]}>
+      <threeLine rotation={[0, 0, rotZ3]}>
         <bufferGeometry attach="geometry" {...arcGeo} />
         <lineBasicMaterial attach="material" color={CYBER_PALETTE.electricViolet} transparent opacity={0.7} blending={THREE.AdditiveBlending} />
-      </line>
+      </threeLine>
     </group>
   );
 };

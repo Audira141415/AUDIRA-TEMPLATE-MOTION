@@ -1,0 +1,61 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "thermal-infrared",
+  "name": "FLIR Infrared Thermal Heatmap & Hotspot Telemetry",
+  "kit": "thermalforge",
+  "category": "Thermal Imaging / Sensor Telemetry",
+  "palette": {
+    "background": "#02000A",
+    "primary": "#FF2A00",
+    "secondary": "#8A00FF",
+    "accent": "#FFF000",
+    "neutral": "#002B7F",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "thermal_gradient_mesh",
+    "bevelRadius": 0.02,
+    "polyBudget": "mid_poly_scanner",
+    "silhouette": "heat_signature_silhouette"
+  },
+  "materials": {
+    "type": "ironbow_false_color_gradient",
+    "roughness": 0.5,
+    "metalness": 0,
+    "normalMap": "flir_sensor_noise"
+  },
+  "lighting": {
+    "archetype": "zero_light_thermal_emission",
+    "keyLight": {
+      "kelvin": 6500,
+      "intensity": 1,
+      "angle": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0
+    },
+    "rimLight": {
+      "kelvin": 6500,
+      "intensity": 0
+    }
+  },
+  "camera": {
+    "type": "flir_recon_optical",
+    "focalLengthMm": 50,
+    "fovDeg": 35,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "target_lock_tracking"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "heat_dissipation_flow",
+    "characterCadence": "sensor_crosshair_pulse"
+  }
+}

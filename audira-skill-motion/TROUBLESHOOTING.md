@@ -1,6 +1,6 @@
 # Panduan Pemecahan Masalah (Troubleshooting) — Audira Skill Motion
 
-*Versi 3.0.0 Commercial Release — By Audira (Agus Dwi Rianto)*
+*Versi 4.1.0 Commercial Release — By AUDIRA (Agus Dwi R)*
 
 | Masalah | Penyebab Umum | Solusi Cepat |
 |---|---|---|
@@ -18,4 +18,5 @@
 ---
 
 Jika Anda menemukan kendala yang tidak tercantum di atas, hubungi dukungan teknis resmi:  
-**AUDIRA MDA Support:** `contact@audira.dev` / `agus@audira.dev`
+- **Website Resmi:** https://audira.my.id/  
+- **AUDIRA Support:** `contact@audira.my.id` / `info@audira.my.id`

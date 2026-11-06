@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "chibi-3d",
+  "name": "Chibi 3D Plastic Bricks & Tabletop Macro Stop-Motion",
+  "kit": "brickcraft",
+  "category": "Toy Assembly / Macro Stop-Motion",
+  "palette": {
+    "background": "#1A1D24",
+    "primary": "#D90429",
+    "secondary": "#EF233C",
+    "accent": "#FFD166",
+    "neutral": "#EDF2F4",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "interlocking_stud_bricks",
+    "bevelRadius": 0.03,
+    "polyBudget": "modular_primitives",
+    "silhouette": "blocky_stud_minifig"
+  },
+  "materials": {
+    "type": "glossy_abs_plastic",
+    "roughness": 0.2,
+    "metalness": 0,
+    "clearcoat": 0.6,
+    "normalMap": "molded_abs_seam"
+  },
+  "lighting": {
+    "archetype": "desk_lamp_macro_rig",
+    "keyLight": {
+      "kelvin": 3200,
+      "intensity": 1.6,
+      "angle": [
+        45,
+        45,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 4500,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 5500,
+      "intensity": 1
+    }
+  },
+  "camera": {
+    "type": "macro_tabletop_probe",
+    "focalLengthMm": 85,
+    "fovDeg": 24,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2
+    },
+    "motionConstraint": "stepped_stop_motion"
+  },
+  "motion": {
+    "fps": 24,
+    "physicsModel": "snap_fit_click",
+    "characterCadence": "click_stud_assembly"
+  }
+}

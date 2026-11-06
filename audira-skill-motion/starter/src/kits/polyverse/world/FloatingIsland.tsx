@@ -24,8 +24,8 @@ export const FloatingIsland: React.FC<FloatingIslandProps> = ({ f }) => {
       </mesh>
 
       {/* 2. Subterranean Inverted Rock Cone (Faceted Basalt Strata) */}
-      <mesh position={[0, -1.9, 0]} castShadow>
-        <coneGeometry args={[4.3, 3.4, 7]} rotation={[Math.PI, 0, 0]} />
+      <mesh position={[0, -1.9, 0]} rotation={[Math.PI, 0, 0]} castShadow>
+        <coneGeometry args={[4.3, 3.4, 7]} />
         <meshStandardMaterial color={POLY_PALETTE.rockSlate} roughness={0.9} flatShading />
       </mesh>
 

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "retro-synthwave",
+  "name": "80s Synthwave Outrun & Neon Horizon Grid",
+  "kit": "retrowave",
+  "category": "Retro Sci-Fi / 80s Cyber",
+  "palette": {
+    "background": "#0D0221",
+    "primary": "#FF007F",
+    "secondary": "#540D6E",
+    "accent": "#00F0FF",
+    "neutral": "#FFD166",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "wireframe_infinite_grid_sun",
+    "bevelRadius": 0,
+    "polyBudget": "retro_grid_lines",
+    "silhouette": "wireframe_grid_horizon"
+  },
+  "materials": {
+    "type": "neon_wireframe_emissive",
+    "roughness": 0.1,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "crt_scanline_phosphor"
+  },
+  "lighting": {
+    "archetype": "sunset_horizon_neon",
+    "keyLight": {
+      "kelvin": 2200,
+      "intensity": 2.5,
+      "angle": [
+        0,
+        5,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 9000,
+      "intensity": 0.5
+    },
+    "rimLight": {
+      "kelvin": 12000,
+      "intensity": 2
+    }
+  },
+  "camera": {
+    "type": "outrun_highway_dolly",
+    "focalLengthMm": 30,
+    "fovDeg": 60,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "infinite_forward_drive"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "grid_velocity_scroll",
+    "characterCadence": "synthwave_tempo"
+  }
+}

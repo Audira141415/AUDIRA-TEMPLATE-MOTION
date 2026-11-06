@@ -6,7 +6,7 @@ cd /d "%~dp0"
 
 echo ========================================================================
 echo   AUDIRA SKILL MOTION 3D - SETUP DEPENDENCIES ^& ENVIRONMENT
-echo   Created by: Agus Dwi Rianto (AUDIRA MDA)
+echo   Created by: AUDIRA (Agus Dwi R)
 echo ========================================================================
 echo.
 

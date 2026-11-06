@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "neo-brutalism",
+  "name": "3D Neo-Brutalism Pop & Electric Neon Shadows",
+  "kit": "brutalforge",
+  "category": "Modern Web / Neo-Brutalist",
+  "palette": {
+    "background": "#FFE600",
+    "primary": "#000000",
+    "secondary": "#FF0055",
+    "accent": "#00F0FF",
+    "neutral": "#FFFFFF",
+    "text": "#000000"
+  },
+  "geometry": {
+    "type": "chunky_offset_blocks",
+    "bevelRadius": 0.02,
+    "polyBudget": "low_chunky",
+    "silhouette": "unblurred_hard_shadow_slabs"
+  },
+  "materials": {
+    "type": "ultra_matte_paper_plastic",
+    "roughness": 0.9,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "flat_clean"
+  },
+  "lighting": {
+    "archetype": "noon_hard_sun_direct",
+    "keyLight": {
+      "kelvin": 5500,
+      "intensity": 2.5,
+      "angle": [
+        45,
+        45,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5500,
+      "intensity": 0
+    },
+    "rimLight": {
+      "kelvin": 5500,
+      "intensity": 0
+    }
+  },
+  "camera": {
+    "type": "isometric_pop_drop",
+    "focalLengthMm": 50,
+    "fovDeg": 35,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "kinetic_hard_snap"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "rigid_punch_overshoot",
+    "characterCadence": "high_conversion_punch"
+  }
+}

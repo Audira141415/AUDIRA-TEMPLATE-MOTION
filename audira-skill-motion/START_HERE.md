@@ -1,10 +1,10 @@
 # Audira Skill Motion 3D — Mulai di Sini
 
-*Versi 3.0.0 Commercial Release — By Audira (Agus Dwi Rianto)*
+*Versi 4.1.0 Commercial Release — By AUDIRA (Agus Dwi R)*
 
 **Audira Skill Motion** adalah *skill* cerdas untuk Claude Code yang menciptakan **video animasi 3D sinematik vertikal (9:16)** berkualitas tinggi dari ide cerita Anda, atau dari naskah + narasi audio (Voice-Over MP3). 
 
-Anda tidak perlu memiliki keahlian coding atau 3D modelling. Cukup deskripsikan ide Anda; Claude akan memilih gaya terbaik dari **20 signature styles**, menyiapkan panggung 3D, menyajikan preview cepat, lalu merender video final **1080×1920 pada 60 FPS**.
+Anda tidak perlu memiliki keahlian coding atau 3D modelling. Cukup deskripsikan ide Anda; Claude akan memilih gaya terbaik dari **43 signature styles**, menyiapkan panggung 3D, menyajikan preview cepat, lalu merender video final **1080×1920 pada 60 FPS**.
 
 ---
 
@@ -28,12 +28,12 @@ Claude akan menanyakan apakah Anda menggunakan rekaman suara (voice-over), lalu 
 
 | File | Isi & Tujuan |
 |---|---|
-| [`README.md`](README.md) | Ikhtisar produk, arsitektur, dan katalog 20 signature styles |
+| [`README.md`](README.md) | Ikhtisar produk, arsitektur, dan katalog 43 signature styles |
 | [`LICENSE.md`](LICENSE.md) | Lisensi perangkat lunak komersial berbayar resmi (By Agus Dwi Rianto) |
 | [`LICENSE_AND_REQUIREMENTS.md`](LICENSE_AND_REQUIREMENTS.md) | Persyaratan sistem, lisensi komersial, dan lisensi pihak ketiga |
 | [`INSTALLATION_GUIDE.md`](INSTALLATION_GUIDE.md) | Kebutuhan perangkat dan instruksi instalasi lengkap |
 | [`USER_GUIDE.md`](USER_GUIDE.md) | Alur kerja: pengajuan ide, review preview, revisi, dan render final |
-| [`EXAMPLE_PROMPTS.md`](EXAMPLE_PROMPTS.md) | Contoh ide prompt yang siap dijalankan untuk seluruh 20 gaya |
+| [`EXAMPLE_PROMPTS.md`](EXAMPLE_PROMPTS.md) | Contoh ide prompt yang siap dijalankan untuk seluruh 43 gaya |
 | [`BRAND_KIT.md`](BRAND_KIT.md) | Panduan penyelarasan identitas brand (`audira-brand.json`) |
 | [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md) | Panduan pemecahan masalah dan pesan error |
 | [`CHANGELOG.md`](CHANGELOG.md) | Riwayat pembaruan dan rilis versi |
@@ -49,16 +49,16 @@ Claude akan menanyakan apakah Anda menggunakan rekaman suara (voice-over), lalu 
 
 ---
 
-## Status 20 Signature Styles
+## Status 43 Signature Styles
 
-Seluruh **20 gaya kini memiliki mesin khusus dan kit mandiri lengkap** di dalam direktori `kits/<style>/` beserta contoh teknis Remotion 60 FPS:
+Seluruh **43 gaya kini memiliki mesin khusus dan kit mandiri lengkap** di dalam direktori `kits/<style>/` beserta contoh teknis Remotion 60 FPS:
 
-- **Edukasi, Arsitektur & Mesin:** `INNERWORKS`, `BUILDFORGE`, `TIMEFORGE`, `DRAFTFORGE`, `URBANFORGE`
-- **Karakter & Cerita Taktil:** `PIXELSTORY`, `PAPERWORLD`, `CLAYWORLD`, `TOONFORGE`, `BRICKCRAFT`
-- **Dunia Geometris & Alam:** `VOXELVERSE`, `WORLDFORGE`, `POLYVERSE`
-- **Sains, Medis & Geografi:** `NANOFORGE`, `INKSTORY`, `LIDARFORGE`
-- **Teknologi Tinggi & Komersial:** `CYBERFORGE`, `PRECISION`, `GLASSCRAFT`, `CIRCUITFORGE`
+- **Edukasi, Arsitektur, Investigasi & Sejarah:** `INNERWORKS`, `BUILDFORGE`, `TIMEFORGE`, `DRAFTFORGE`, `URBANFORGE`, `VINTAGEFORGE`, `CHALKCRAFT`, `FILMNOIR`, `MEMPHISDIORAMA`, `VISUALINVESTIGATION`, `HISTORYMAP`
+- **Karakter, Cerita Taktil & Peradaban:** `AUDIRABOT`, `TOYDIORAMA`, `WATERCOLOR`, `ISLAMICDOCUMENTARY`, `PIXELSTORY`, `HD2D`, `PAPERWORLD`, `CLAYWORLD`, `TOONFORGE`, `BRICKCRAFT`, `ISOCRAFT`, `RETROWAVE`
+- **Dunia Geometris, Liminal & Alam:** `VOXELVERSE`, `WORLDFORGE`, `POLYVERSE`, `BACKROOMS`
+- **Sains, Medis & Geospasial:** `NANOFORGE`, `INKSTORY`, `LIDARFORGE`, `THERMALFORGE`, `SATELLITEBRIEFING`
+- **Teknologi Tinggi, Pasar & Komersial:** `CYBERFORGE`, `PRECISION`, `GLASSCRAFT`, `FLUIDFORGE`, `DATAPHYSICAL`, `TRADINGTERMINAL`, `CIRCUITFORGE`, `BRUTALFORGE`, `KINTSUGI`, `TEXTVOYAGE`, `DEVFORGE`
 
 ---
 
-*Hak Cipta © 2026 Agus Dwi Rianto (AUDIRA MDA). Seluruh hak dilindungi undang-undang.*
+*Hak Cipta © 2026 AUDIRA (Agus Dwi R). Seluruh hak dilindungi undang-undang.*

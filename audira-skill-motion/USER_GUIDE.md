@@ -1,6 +1,6 @@
 # Panduan Penggunaan — Audira Skill Motion
 
-*Versi 3.0.0 Commercial Release — By Audira (Agus Dwi Rianto)*
+*Versi 4.1.0 Commercial Release — By Audira (Agus Dwi Rianto)*
 
 ## Alur Produksi Video
 
@@ -9,7 +9,7 @@
    ```bash
    /audira-motion Aku mau video yang memperlihatkan cara kerja mesin turbojet pesawat, casingnya terbuka dan bagian turbin berputar di dalamnya.
    ```
-   Anda tidak perlu menghafal nama gaya; Claude otomatis menganalisis dan memilih style terbaik dari 20 styles yang tersedia.
+   Anda tidak perlu menghafal nama gaya; Claude otomatis menganalisis dan memilih style terbaik dari 43 styles yang tersedia.
 
 2. **Jawab Pertanyaan Singkat:**
    Claude akan menanyakan satu per satu hal penting, terutama: **apakah Anda memiliki file rekaman suara narator (voice-over) atau ingin menggunakan musik/SFX saja?**

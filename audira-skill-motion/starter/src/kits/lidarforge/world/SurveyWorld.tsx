@@ -1,7 +1,7 @@
 // LIDARFORGE Survey World — Complete geospatial survey stage with point cloud, laser curtain & boundary frame.
 
-import React from "react";
-import * as THREE from "three";
+import React, { useMemo } from "react";
+import { BoxGeometry } from "three";
 import { PointCloudTerrain } from "../survey/PointCloudTerrain";
 import { LaserScanPlane } from "../survey/LaserScanPlane";
 import { LIDAR_PALETTE } from "../lib/palette";
@@ -11,6 +11,7 @@ interface SurveyWorldProps {
 }
 
 export const SurveyWorld: React.FC<SurveyWorldProps> = ({ f }) => {
+  const boundsGeo = useMemo(() => new BoxGeometry(12.4, 5, 15.4), []);
   return (
     <group>
       {/* 1. Point Cloud Terrain Mesh Returns */}
@@ -21,7 +22,7 @@ export const SurveyWorld: React.FC<SurveyWorldProps> = ({ f }) => {
 
       {/* 3. Bounding Survey Volume Box Frame */}
       <lineSegments>
-        <edgesGeometry args={[new THREE.BoxGeometry(12.4, 5, 15.4)]} />
+        <edgesGeometry args={[boundsGeo]} />
         <lineBasicMaterial color={LIDAR_PALETTE.gridWireframe} transparent opacity={0.6} />
       </lineSegments>
 

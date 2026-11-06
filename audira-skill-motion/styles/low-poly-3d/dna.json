@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "low-poly-3d",
+  "name": "Faceted Low-Poly Minimalist Worlds & Pastel Sanctuary",
+  "kit": "polyverse",
+  "category": "Minimalist Geometric / Floating Island",
+  "palette": {
+    "background": "#D8E2DC",
+    "primary": "#FFE5D9",
+    "secondary": "#FFCAD4",
+    "accent": "#F4ACB7",
+    "neutral": "#9D8189",
+    "text": "#3E343A"
+  },
+  "geometry": {
+    "type": "flat_shaded_polygons",
+    "bevelRadius": 0,
+    "polyBudget": "strictly_low_poly",
+    "silhouette": "faceted_gemstone_nature"
+  },
+  "materials": {
+    "type": "untextured_flat_diffuse",
+    "roughness": 0.85,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "faceted_face_normals"
+  },
+  "lighting": {
+    "archetype": "pastel_dawn_sky",
+    "keyLight": {
+      "kelvin": 3600,
+      "intensity": 1.3,
+      "angle": [
+        30,
+        60,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.6
+    },
+    "rimLight": {
+      "kelvin": 4200,
+      "intensity": 0.9
+    }
+  },
+  "camera": {
+    "type": "isometric_zen_orbit",
+    "focalLengthMm": 75,
+    "fovDeg": 28,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "slow_zen_rotation"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "gentle_breeze_sine",
+    "characterCadence": "tranquil_minimalist"
+  }
+}

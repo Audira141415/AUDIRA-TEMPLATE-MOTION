@@ -2,7 +2,7 @@
 
 ## v3.0.0 (Official Rebrand & Commercial Release)
 - **Transformasi & Rebranding Menjadi Audira Skill Motion (By Agus Dwi Rianto):**
-  - Rebranding resmi seluruh ekosistem animasi 3D sinematik dari VOYNANN Motion menjadi **Audira Skill Motion** di bawah kepemilikan dan arsitektur **Agus Dwi Rianto (AUDIRA MDA)**.
+  - Rebranding resmi seluruh ekosistem animasi 3D sinematik dari VOYNANN Motion menjadi **Audira Skill Motion** di bawah kepemilikan dan arsitektur **AUDIRA (Agus Dwi R)**.
   - Penerbitan **Lisensi Komersial Berbayar Resmi (EULA)** di `LICENSE.md` dan pembaruan `LICENSE_AND_REQUIREMENTS.md`. Memberikan hak penuh kepada pemegang lisensi berbayar untuk memproduksi dan memonetisasi video komersial tanpa batas, sekaligus menegakkan perlindungan hak cipta anti-resale dan anti-pembajakan.
   - Perintah pemanggilan skill resmi diperbarui ke `/audira-motion` (dengan dukungan backward compatibility alias `/voynann-motion`).
   - Pembaruan sistem identitas brand terintegrasi `audira-brand.json` (mendukung deteksi otomatis rasio kontras WCAG).

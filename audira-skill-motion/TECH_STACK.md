@@ -1,7 +1,7 @@
 # ⚡ AUDIRA SKILL MOTION 3D — Comprehensive Tech Stack Specification
 
-> **Version:** `3.0.0 Commercial Release`  
-> **Author & Creator:** Agus Dwi Rianto (AUDIRA MDA)  
+> **Version:** `4.1.0 Commercial Release`  
+> **Author & Creator:** AUDIRA (Agus Dwi R)  
 > **Repository:** [https://github.com/Audira141415/AUDIRA-SKILL-MOTION.git](https://github.com/Audira141415/AUDIRA-SKILL-MOTION.git)  
 > **Official License:** Proprietary Commercial License (By Audira)
 
@@ -22,7 +22,7 @@ AUDIRA SKILL MOTION 3D menggabungkan tiga pilar teknologi tingkat tinggi:
 ┌────────────────────────────────────────────────────────┐
 │    Claude Code Autonomous Director (SKILL.md)          │
 │    • Guided Brief Analysis                             │
-│    • Style Engine Selector (1 of 20 Kits)              │
+│    • Style Engine Selector (1 of 43 Kits)              │
 │    • Voice-Over (VO) Millisecond Waveform Sync         │
 └──────────────────────────┬─────────────────────────────┘
                            ▼
@@ -71,32 +71,55 @@ AUDIRA SKILL MOTION 3D menggabungkan tiga pilar teknologi tingkat tinggi:
 
 ---
 
-## 3. 🎨 20 Procedural Style Engines (Kits)
+## 3. 🎨 43 Procedural Style Engines (Kits)
 
-AUDIRA SKILL MOTION dilengkapi 20 modul gaya prosedural independen di direktori `/kits`:
+AUDIRA SKILL MOTION dilengkapi **43 modul gaya prosedural** independen di direktori `/kits`:
 
 | Kategori Industri | Style Engine | Karakteristik Visual & Implementasi Teknis |
 | :--- | :--- | :--- |
-| **1. Edukasi & Rekayasa** | `INNERWORKS` | X-Ray Cutaway, transmisi mekanika roda gigi transparan & exploded view. |
+| **1. Edukasi, Arsitektur & Investigasi** | `INNERWORKS` | X-Ray Cutaway, transmisi mekanika roda gigi transparan & exploded view. |
 | | `BUILDFORGE` | Simulasi perakitan konstruksi arsitektur bertahap (*piece-by-piece assembly*). |
 | | `TIMEFORGE` | Morfologi fisik benda bertransformasi melintasi era sejarah dengan penanda tahun. |
 | | `DRAFTFORGE` | Skema cetak biru (CAD Blueprint), garis dimensi teknis presisi & callout ISO. |
 | | `URBANFORGE` | Maket tata kota monokrom putih, kalkulasi bayangan matahari & proyeksi zonasi cyan. |
-| **2. Karakter & Taktil** | `PIXELSTORY` | Visual 2.5D pixel art dengan pencahayaan per-piksel dan tipografi retro 8-bit. |
+| | `VINTAGEFORGE`| Manuskrip Da Vinci, arsiran tinta ukir tembaga antik (*cross-hatching*) & patina emas. |
+| | `CHALKCRAFT` | Papan tulis batu tulis gelap berdebu kapur mikro, partikel 3D & persamaan kuantum. |
+| | `FILMNOIR` | Sinematik Film Noir 1940s, kontras chiaroscuro, aspal basah & bayangan tirai venetian. |
+| | `MEMPHISDIORAMA` | Maket arsitektur meja 1980s Ettore Sottsass, terrazzo & bayangan jatuh ungu keras. |
+| | `VISUALINVESTIGATION` | Meja forensik jurnalisme visual, denah ruang sidang berlabel, stabilo merah & Mute-Test. |
+| | `HISTORYMAP` | Peta perang & geopolitik sejarah, pergeseran batas wilayah kekaisaran & panah manuver taktis. |
+| **2. Karakter, Taktil & Peradaban** | `AUDIRABOT` | Maskot 3D resmi AUDIRA, visor ekspresif OLED, levitasi plasma pendorong, dan lengan artikulasi penunjuk komponen. |
+| | `TOYDIORAMA` | Panggung teater miniatur 3D, karakter toy blocky bermaterial matte plastic & soft clay, footlights hangat & anotasi kertas berselotip. |
+| | `WATERCOLOR` | Buku cerita anak cat air Eropa 3D, kertas 300gsm cold-press & sketsa garis pensil halus. |
+| | `ISLAMICDOCUMENTARY` | Folk Islam & era keemasan, pola bintang 8 Arabesque Girih, siluet kubah/menara masjid & oud akustik. |
+| | `PIXELSTORY` | Visual 2.5D pixel art dengan pencahayaan per-piksel dan tipografi retro 8-bit. |
+| | `HD2D` | Sprite pixel 2D di dalam diorama 3D pencahayaan fisik dengan lentera 2400K & DOF tilt-shift. |
 | | `PAPERWORLD` | Diorama origami lipatan kertas buatan tangan dengan tekstur serat kertas nyata. |
 | | `CLAYWORLD` | Stop-motion animasi plastisin / tanah liat dengan simulasi cap sidik jari (15 FPS). |
 | | `TOONFORGE` | Cel-shaded anime 3D, garis kontur tinta tebal, dan garis aksi manga dinamis (*speed lines*). |
 | | `BRICKCRAFT` | Simulasi balok mainan plastik ABS modular (stud geometry) & stop-motion macro meja. |
-| **3. Alam & Geometri** | `VOXELVERSE` | Miniatur dunia balok voxel 3D dengan pencahayaan ambient occlusion mikro. |
+| | `ISOCRAFT` | Isometrik komik tinta tebal, bayangan biru datar, dan mekanisme dalam *see-through*. |
+| | `RETROWAVE` | 80s Synthwave, horizon grid neon tak berujung & scanline tabung monitor CRT. |
+| **3. Alam, Liminal & Geometri** | `VOXELVERSE` | Miniatur dunia balok voxel 3D dengan pencahayaan ambient occlusion mikro. |
 | | `WORLDFORGE` | Eksplorasi lanskap lingkungan 3D sinematik dengan sapuan kamera dramatis. |
 | | `POLYVERSE` | Dunia low-poly minimalis, pulau melayang bertingkat, dan palet warna pastel Monument Valley. |
-| **4. Sains & Geografi** | `NANOFORGE` | Mikroskop biologi molekuler Cryo-EM, heliks ganda DNA bersinar & aliran vesikel sel. |
+| | `BACKROOMS` | Koridor liminal 3D kuning, lampu neon berkedip stokastik & guncangan kamera VHS 90-an. |
+| **4. Sains & Geospasial** | `NANOFORGE` | Mikroskop biologi molekuler Cryo-EM, heliks ganda DNA bersinar & aliran vesikel sel. |
 | | `INKSTORY` | Lukisan kaligrafi tinta Cina klasik (Sumi-e / Shan Shui), efek basah kertas beras & cap merah cinnabar. |
 | | `LIDARFORGE` | Titik awan data survei drone (point cloud), pemetaan elevasi warna & tirai pemindai laser. |
-| **5. Komersial & High-Tech** | `CYBERFORGE` | Hologram 3D futuristik, inti komputasi kuantum, kisi neon siber & telemetri HUD. |
+| | `THERMALFORGE`| Kamera termal FLIR, spektrum Ironbow suhu panas-dingin & hotspot telemetri. |
+| | `SATELLITEBRIEFING` | Rekognisi geospasial satelit OSINT 3D, zoom orbital logaritmik & retikel target amber. |
+| **5. Komersial, Pasar & High-Tech** | `CYBERFORGE` | Hologram 3D futuristik, inti komputasi kuantum, kisi neon siber & telemetri HUD. |
 | | `PRECISION` | Sinematografi iklan produk mewah 3D, material CMF fotorealistik & pergerakan makro studio. |
 | | `GLASSCRAFT` | Desain spatial computing dengan kartu kaca buram (*frosted glass*), refraksi prisma & cairan kristal. |
+| | `FLUIDFORGE` | Gerak cairan abstrak ferrofluid nol-gravitasi, bola logam krom iridescent & cincin kaustik. |
+| | `DATAPHYSICAL` | Fisikalisasi data 3D, patung statistik keping aluminium sikat, akrilik teal & kayu walnut. |
+| | `TRADINGTERMINAL` | Antarmuka terminal trading bursa finansial & crypto, candlestick 3D, order book depth wall & live price. |
 | | `CIRCUITFORGE` | Makroskopik motherboard PCB 3D, komponen SMT, dan aliran elektron bercahaya ke CPU. |
+| | `BRUTALFORGE` | 3D Neo-Brutalism pop, outline hitam 4px tegas, bayangan jatuh keras & warna neon menyengat. |
+| | `KINTSUGI` | Wabi-Sabi keramik porselen matte minimalis & lelehan urat emas bercahaya (*liquid gold*). |
+| | `TEXTVOYAGE` | Tipografi monolitik 3D spasial raksasa tempat kamera melesat menembus rongga huruf. |
+| | `DEVFORGE` | Jendela 3D spatial IDE, typewriter syntax code, game asset spawning, dan badge revenue kinetik. |
 
 ---
 
@@ -123,7 +146,19 @@ AUDIRA SKILL MOTION dilengkapi 20 modul gaya prosedural independen di direktori 
 
 ---
 
-## 6. 🚀 Rangkuman Perintah Produksi
+## 6. 🎬 Arsitektur Peningkatan Sinematik Komersial (Professional Core)
+
+Sistem ini dilengkapi rangkaian modul sinematik tingkat lanjut di `src/core/`:
+- **Secondary Motion & Spring Physics (`motion/spring.ts`):** Menggunakan diferensial pegas harmonik teredam *(damped harmonic oscillator)* deterministik untuk animasi *overshoot*, *rebound*, *wobble*, dan *anticipation* alami (12 Prinsip Animasi Disney).
+- **Organic Handheld Camera Kinematics (`camera/handheld.ts`):** Mensimulasikan *micro-drift* harmonik ($0.05^\circ$) dan efek kamera dinamis seperti *Hitchcock Dolly-Zoom (Vertigo effect)* serta *Whip-Pan* berkecepatan tinggi.
+- **3D World-Space Tracking Callouts (`hud/TrackedPin3D.tsx`):** Menancapkan pin radar bercahaya, garis siku presisi, dan kartu telemetri data langsung ke koordinat vertex 3D mesh $[X, Y, Z]$ yang auto-menghadap kamera (*billboarded*).
+- **PBR Realism & Shaders (`materials/fresnel.ts` & `materials/noiseTexture.ts`):** Shading Schlick Fresnel untuk rim kontur bercahaya tajam dan generator tekstur mikro (*micro-roughness / brushed metal* tanpa unduhan eksternal).
+- **Hollywood Finishing Profiles (`render/FinishingPresets.ts` & `render/Post.tsx`):** Grading warna kelas bioskop (`CINEMA_TEAL_ORANGE`, `APPLE_STUDIO_CLEAN`, `CYBER_NEON_VOID`) dilengkapi *chromatic aberration*, *optical vignette*, dan *micro film grain*.
+- **Automated Visual QC Gate (`scripts/visual-audit.mjs`):** Pengecekan otomatis *mobile safe-zone* (TikTok/Reels), rasio kontras teks WCAG AA ($\ge 4.5:1$), dan anggaran frame WebGL ($\le 120$ draw calls).
+
+---
+
+## 7. 🚀 Rangkuman Perintah Produksi
 
 ```bash
 # 1. Menyiapkan dependensi
@@ -132,16 +167,19 @@ npm run setup
 # 2. Cek kesiapan hardware dan WebGL GPU
 npm run check-env
 
-# 3. Uji coba render kilat (Smoke test)
+# 3. Audit visual mandiri (Safe-zone, Contrast WCAG, WebGL budget)
+npm run audit:visual
+
+# 4. Uji coba render kilat (Smoke test)
 npm run smoke
 
-# 4. Buka Remotion Studio visual di browser
+# 5. Buka Remotion Studio visual di browser
 npm run dev
 
-# 5. Analisis naskah suara (Voice-Over)
+# 6. Analisis naskah suara (Voice-Over)
 npm run vo -- public/audio/narasi.mp3
 
-# 6. Render final sinematik 1080x1920 60 FPS
+# 7. Render final sinematik 1080x1920 60 FPS
 npm run render:final -- --comp=ShowcaseFinal --vo=public/audio/narasi.mp3 --out=out/final.mp4
 ```
 

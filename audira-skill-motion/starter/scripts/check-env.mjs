@@ -13,7 +13,7 @@ const [maj, min] = process.versions.node.split(".").map(Number);
 add("Node.js ≥ 22.13", maj > 22 || (maj === 22 && min >= 13), `found ${process.versions.node}`);
 
 const has = (cmd, args = ["-version"]) => {
-  const r = spawnSync(cmd, args, { encoding: "utf8", shell: process.platform === "win32" });
+  const r = spawnSync(cmd, args, { encoding: "utf8", shell: true });
   return r.status === 0 ? (r.stdout || r.stderr).split("\n")[0].trim() : null;
 };
 const npmV = has(process.platform === "win32" ? "npm.cmd" : "npm", ["-v"]);
@@ -27,22 +27,19 @@ let freeGb = null;
 try {
   const st = fs.statfsSync(process.cwd());
   freeGb = (st.bavail * st.bsize) / 1e9;
-} catch {}
+} catch { }
 add("Free disk ≥ 5 GB", freeGb === null ? true : freeGb >= 5, freeGb === null ? "unknown" : `${freeGb.toFixed(1)} GB free`);
 add("RAM", true, `${(os.totalmem() / 1e9).toFixed(0)} GB total`, false);
 
 const plat = { darwin: "macOS (recommended)", win32: "Windows: run npm run smoke to confirm 3D rendering", linux: "Linux: run npm run smoke; without a GPU use GL=swangle (slow)" }[process.platform] ?? process.platform;
 add("Platform", true, plat, false);
 
-const deps =
-  (fs.existsSync("node_modules/remotion") || fs.existsSync("../node_modules/remotion")) &&
-  (fs.existsSync("node_modules/three") || fs.existsSync("../node_modules/three"));
-add("Project packages installed", deps, deps ? "ok" : "run: npm install", false);
+const deps = fs.existsSync("node_modules/remotion") && fs.existsSync("node_modules/three");
+add("Project packages installed (npm ci)", deps, deps ? "ok" : "run: npm ci", false);
 let browser = false;
 try {
-  const dir = fs.existsSync("node_modules/.remotion") ? "node_modules/.remotion" : "../node_modules/.remotion";
-  browser = fs.readdirSync(dir).some((d) => d.includes("chrome"));
-} catch {}
+  browser = fs.readdirSync("node_modules/.remotion").some((d) => d.includes("chrome"));
+} catch { }
 add("Remotion headless browser downloaded", browser, browser ? "ok" : "downloads automatically on first render (~100–200 MB)", false);
 
 for (const r of rows) console.log(`${r.ok ? "✓" : r.required ? "✗" : "!"} ${r.name}: ${r.detail}`);

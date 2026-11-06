@@ -1,7 +1,7 @@
 // CIRCUITFORGE Overlay — Hardware diagnostic telemetry, silicon clock indicators & PCB pinout status.
 
 import React from "react";
-import { lerp, seg, ease } from "../core/motion";
+import { seg, ease } from "../core/motion";
 import { CIRCUIT_PALETTE } from "../lib/palette";
 
 export interface CircuitOverlayProps {

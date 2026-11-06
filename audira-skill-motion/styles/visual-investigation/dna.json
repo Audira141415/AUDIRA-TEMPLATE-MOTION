@@ -1,0 +1,68 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "visual-investigation",
+  "styleNumber": 40,
+  "name": "Visual Journalism & Forensic Courtroom Desk",
+  "kit": "visualinvestigation",
+  "category": "Investigative Journalism / Legal Reconstruction",
+  "palette": {
+    "background": "#0B0C0E",
+    "panelCharcoal": "#141619",
+    "hairlineGrey": "#2E3238",
+    "evidenceRed": "#FF4A2E",
+    "telegramPaper": "#E4E0D4",
+    "inkBlack": "#1D1D1B",
+    "text": "#ECEAE4"
+  },
+  "geometry": {
+    "type": "flat_multi_panel_evidence_desk",
+    "bevelRadius": 0.01,
+    "polyBudget": "clean_2d_planes_in_3d_canvas",
+    "silhouette": "courtroom_plan_and_dossier"
+  },
+  "materials": {
+    "type": "scanned_archival_paper_and_highlighter",
+    "roughness": 0.95,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "document_crease_and_grain"
+  },
+  "lighting": {
+    "archetype": "forensic_desk_overhead_softbox",
+    "keyLight": {
+      "kelvin": 5000,
+      "intensity": 1.4,
+      "angle": [
+        0,
+        85,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5000,
+      "intensity": 0.6
+    },
+    "rimLight": {
+      "kelvin": 5000,
+      "intensity": 0.2
+    },
+    "ambientOcclusion": {
+      "intensity": 0.6,
+      "radius": 0.2
+    }
+  },
+  "camera": {
+    "type": "orthographic_forensic_desk_tracker",
+    "focalLengthMm": 55,
+    "fovDeg": 30,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "punch_zoom_to_highlight"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "cut_in_with_marker_wipe",
+    "characterCadence": "clock_synchronized_evidence"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "audirabot",
+  "name": "Audira-Bot 3D Companion Mascot & Futuristic Studio",
+  "kit": "audirabot",
+  "category": "Mascot 3D / Brand Companion",
+  "palette": {
+    "background": "#0D0E15",
+    "primary": "#00F0FF",
+    "secondary": "#141724",
+    "accent": "#FF5E3A",
+    "neutral": "#F0F4F8",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "rounded_chibi_mecha",
+    "bevelRadius": 0.08,
+    "polyBudget": "mid_to_high",
+    "silhouette": "friendly_floating_android"
+  },
+  "materials": {
+    "type": "pearlescent_ceramic_matte",
+    "roughness": 0.35,
+    "metalness": 0.1,
+    "clearcoat": 0.4,
+    "normalMap": "seamless_injection_mold"
+  },
+  "lighting": {
+    "archetype": "futuristic_brand_studio",
+    "keyLight": {
+      "kelvin": 5200,
+      "intensity": 1.5,
+      "angle": [
+        35,
+        45,
+        20
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 8500,
+      "intensity": 1.6
+    }
+  },
+  "camera": {
+    "type": "companion_eye_level_rig",
+    "focalLengthMm": 50,
+    "fovDeg": 35,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.8
+    },
+    "motionConstraint": "gentle_companion_tracking"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "plasma_levitation_sine",
+    "characterCadence": "emotive_expressive_gestures"
+  }
+}

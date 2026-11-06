@@ -4,7 +4,7 @@
 
 import React, { useLayoutEffect, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { type Camera, HalfFloatType, NeutralToneMapping, PerspectiveCamera, Vector2, WebGLRenderTarget } from "three";
+import { type Camera, HalfFloatType, NeutralToneMapping, PerspectiveCamera, Vector2, Vector3, WebGLRenderTarget } from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { GTAOPass } from "three/examples/jsm/postprocessing/GTAOPass.js";
@@ -13,6 +13,7 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import type { Pass } from "three/examples/jsm/postprocessing/Pass.js";
+import { COLOR_PROFILES, type ColorGradeProfile } from "./FinishingPresets";
 
 /**
  * Render layer for additive / volumetric effects (light shafts, glows, halos, beams). Put such
@@ -87,30 +88,65 @@ const GradeShader = {
     uTime: { value: 0 },
     uVignette: { value: 0.14 },
     uGrain: { value: 0.012 },
+    uAberration: { value: 0.002 },
+    uContrast: { value: 0.24 },
+    uHlTint: { value: new Vector3(0.002, 0.001, -0.003) },
+    uShTint: { value: new Vector3(-0.004, 0.0, 0.006) },
     uRes: { value: new Vector2(1080, 1920) },
   },
   vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
   fragmentShader: /* glsl */ `
-    uniform sampler2D tDiffuse; uniform float uTime; uniform float uVignette; uniform float uGrain; uniform vec2 uRes;
+    uniform sampler2D tDiffuse;
+    uniform float uTime;
+    uniform float uVignette;
+    uniform float uGrain;
+    uniform float uAberration;
+    uniform float uContrast;
+    uniform vec3 uHlTint;
+    uniform vec3 uShTint;
+    uniform vec2 uRes;
     varying vec2 vUv;
+
     float hash(vec2 p){ p = fract(p * vec2(443.897, 441.423)); p += dot(p, p.yx + 19.19); return fract((p.x + p.y) * p.x); }
+
     void main(){
-      vec4 c = texture2D(tDiffuse, vUv);
+      // 1. Chromatic lens aberration
+      vec2 dir = vUv - 0.5;
+      vec2 rUv = vUv + dir * uAberration;
+      vec2 bUv = vUv - dir * uAberration;
+      float r = texture2D(tDiffuse, rUv).r;
+      float g = texture2D(tDiffuse, vUv).g;
+      float b = texture2D(tDiffuse, bUv).b;
+      float a = texture2D(tDiffuse, vUv).a;
+      vec4 c = vec4(r, g, b, a);
+
+      // 2. Luminance & Tinting
       float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));
-      // ivory highlights, a breath of cool in the shadows
-      c.rgb += smoothstep(0.6, 1.0, l) * vec3(0.002, 0.001, -0.003);
-      c.rgb += (1.0 - smoothstep(0.0, 0.5, l)) * vec3(-0.004, 0.0, 0.006);
-      // gentle S-curve: deeper form shadows without crushing the whites
-      c.rgb = mix(c.rgb, c.rgb * c.rgb * (3.0 - 2.0 * c.rgb), 0.24);
+      c.rgb += smoothstep(0.6, 1.0, l) * uHlTint;
+      c.rgb += (1.0 - smoothstep(0.0, 0.5, l)) * uShTint;
+
+      // 3. Gentle S-curve contrast
+      c.rgb = mix(c.rgb, c.rgb * c.rgb * (3.0 - 2.0 * c.rgb), uContrast);
+
+      // 4. Optical vignette
       vec2 d = (vUv - 0.5) * vec2(1.0, 1.25);
       c.rgb *= 1.0 - uVignette * smoothstep(0.35, 0.95, length(d));
-      float g = hash(vUv * uRes + uTime * 17.0) - 0.5;
-      c.rgb += g * uGrain;
+
+      // 5. Micro film grain
+      float grainNoise = hash(vUv * uRes + uTime * 17.0) - 0.5;
+      c.rgb += grainNoise * uGrain;
+
       gl_FragColor = c;
     }`,
 };
 
-export const Post: React.FC<{ shot: Shot; frame: number; ao?: boolean; aoRadius?: number }> = ({ shot, frame, ao = true, aoRadius = 0.28 }) => {
+export const Post: React.FC<{
+  shot: Shot;
+  frame: number;
+  ao?: boolean;
+  aoRadius?: number;
+  profile?: ColorGradeProfile;
+}> = ({ shot, frame, ao = true, aoRadius = 0.28, profile = COLOR_PROFILES.CINEMA_TEAL_ORANGE }) => {
   const { gl, scene, camera, size } = useThree();
   const chain = useMemo(() => {
     const w = size.width, h = size.height;
@@ -145,7 +181,17 @@ export const Post: React.FC<{ shot: Shot; frame: number; ao?: boolean; aoRadius?
     u.maxblur.value = shot.maxBlur;
     chain.dof.enabled = shot.maxBlur > 0 && shot.aperture > 0;
     chain.grade.uniforms.uTime.value = frame % 997;
-  }, [frame, chain, shot]);
+
+    // Apply color grade profile parameters
+    if (profile) {
+      chain.grade.uniforms.uVignette.value = profile.vignette;
+      chain.grade.uniforms.uGrain.value = profile.grain;
+      chain.grade.uniforms.uAberration.value = profile.chromaticAberration;
+      chain.grade.uniforms.uContrast.value = profile.contrastCurve;
+      (chain.grade.uniforms.uHlTint.value as Vector3).set(...profile.highlightTint);
+      (chain.grade.uniforms.uShTint.value as Vector3).set(...profile.shadowTint);
+    }
+  }, [frame, chain, shot, profile]);
 
   useFrame(() => {
     chain.composer.render();

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "glassmorphism",
+  "name": "VisionOS Spatial Glassmorphism & Liquid Prisms",
+  "kit": "glasscraft",
+  "category": "Spatial UI / Iridescent Glass",
+  "palette": {
+    "background": "#030509",
+    "primary": "#7000FF",
+    "secondary": "#00F0FF",
+    "accent": "#FF007A",
+    "neutral": "#FFFFFF",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "rounded_dielectric_slabs",
+    "bevelRadius": 0.06,
+    "polyBudget": "mid_refractive",
+    "silhouette": "floating_glass_cards"
+  },
+  "materials": {
+    "type": "frosted_refractive_glass",
+    "roughness": 0.15,
+    "metalness": 0,
+    "transmission": 0.94,
+    "clearcoat": 1,
+    "normalMap": "liquid_dispersion_caustic"
+  },
+  "lighting": {
+    "archetype": "iridescent_chromatic_glow",
+    "keyLight": {
+      "kelvin": 6500,
+      "intensity": 2,
+      "angle": [
+        30,
+        45,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 8500,
+      "intensity": 0.6
+    },
+    "rimLight": {
+      "kelvin": 10000,
+      "intensity": 2.4
+    }
+  },
+  "camera": {
+    "type": "spatial_hover_cam",
+    "focalLengthMm": 35,
+    "fovDeg": 45,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.4
+    },
+    "motionConstraint": "fluid_parallax_float"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "viscous_fluid_damping",
+    "characterCadence": "prismatic_shimmer"
+  }
+}

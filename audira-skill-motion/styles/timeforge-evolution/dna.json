@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "timeforge-evolution",
+  "name": "Physical Object Historical Evolution Through Eras",
+  "kit": "timeforge",
+  "category": "Historical Evolution / Morphing Artifact",
+  "palette": {
+    "background": "#121214",
+    "primary": "#C5A059",
+    "secondary": "#2C2D35",
+    "accent": "#E0E2EC",
+    "neutral": "#606270",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "morphing_historical_topology",
+    "bevelRadius": 0.03,
+    "polyBudget": "matched_vertex_morph",
+    "silhouette": "era_specific_silhouette"
+  },
+  "materials": {
+    "type": "era_reactive_pbr",
+    "roughness": 0.5,
+    "metalness": 0.3,
+    "normalMap": "patina_aging_scratches"
+  },
+  "lighting": {
+    "archetype": "museum_exhibit_key",
+    "keyLight": {
+      "kelvin": 3200,
+      "intensity": 1.7,
+      "angle": [
+        35,
+        45,
+        10
+      ]
+    },
+    "fillLight": {
+      "kelvin": 4800,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 5200,
+      "intensity": 1.2
+    }
+  },
+  "camera": {
+    "type": "exhibit_turntable_360",
+    "focalLengthMm": 55,
+    "fovDeg": 32,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.8
+    },
+    "motionConstraint": "continuous_temporal_orbit"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "chronological_morph_spring",
+    "characterCadence": "dated_milestone_ticks"
+  }
+}

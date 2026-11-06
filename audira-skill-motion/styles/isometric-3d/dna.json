@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "isometric-3d",
+  "name": "Isometric Hand-Inked Cutaway Machinery & Diorama",
+  "kit": "isocraft",
+  "category": "Technical Illustration / Cross-Section",
+  "palette": {
+    "background": "#0E1017",
+    "primary": "#00B4D8",
+    "secondary": "#0077B6",
+    "accent": "#90E0EF",
+    "neutral": "#CAF0F8",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "cutaway_exploded_machine",
+    "bevelRadius": 0.02,
+    "polyBudget": "mid_precision",
+    "silhouette": "clean_isometric_schematic"
+  },
+  "materials": {
+    "type": "semi_matte_powdercoat",
+    "roughness": 0.55,
+    "metalness": 0.25,
+    "clearcoat": 0.1,
+    "normalMap": "fine_sandblast"
+  },
+  "lighting": {
+    "archetype": "shadowless_technical_studio",
+    "keyLight": {
+      "kelvin": 5000,
+      "intensity": 1.4,
+      "angle": [
+        35,
+        45,
+        30
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5000,
+      "intensity": 0.7
+    },
+    "rimLight": {
+      "kelvin": 6000,
+      "intensity": 0.5
+    }
+  },
+  "camera": {
+    "type": "true_isometric_axonometric",
+    "focalLengthMm": 90,
+    "fovDeg": 15,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "step_pan_dissect"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "precision_gears_clockwork",
+    "characterCadence": "mechanical_smooth"
+  }
+}

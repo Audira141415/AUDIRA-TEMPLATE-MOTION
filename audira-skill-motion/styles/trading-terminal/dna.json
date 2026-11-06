@@ -1,0 +1,68 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "trading-terminal",
+  "styleNumber": 41,
+  "name": "TRADINGTERMINAL — Institutional Financial Markets & Crypto Telemetry",
+  "kit": "tradingterminal",
+  "category": "Finance / Crypto Market Telemetry",
+  "palette": {
+    "background": "#06080B",
+    "panelDark": "#0E131A",
+    "bullGreen": "#00E676",
+    "bearRed": "#FF1744",
+    "neutralAmber": "#FFB300",
+    "cyanTelemetry": "#00E5FF",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "candlestick_and_depth_wall_boxes",
+    "bevelRadius": 0.005,
+    "polyBudget": "instanced_quads_and_bars",
+    "silhouette": "stepped_liquidity_and_ohlc"
+  },
+  "materials": {
+    "type": "emissive_neon_terminal_shaders",
+    "roughness": 0.15,
+    "metalness": 0.1,
+    "clearcoat": 0.2,
+    "normalMap": "terminal_grid_scanlines"
+  },
+  "lighting": {
+    "archetype": "dark_room_screen_emission",
+    "keyLight": {
+      "kelvin": 6500,
+      "intensity": 1.2,
+      "angle": [
+        0,
+        90,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 7500,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 8500,
+      "intensity": 0.8
+    },
+    "ambientOcclusion": {
+      "intensity": 0.5,
+      "radius": 0.2
+    }
+  },
+  "camera": {
+    "type": "horizontal_trendline_tracker",
+    "focalLengthMm": 50,
+    "fovDeg": 34,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "breakout_pan_and_snap_zoom"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "candlestick_pulse_and_shake",
+    "characterCadence": "ticker_tape_tick"
+  }
+}

@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 import { ThreeCanvas } from "@remotion/three";
+import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { ArchitecturalPlinth } from "../world/ArchitecturalPlinth";
 import { UrbanAtmosphere } from "../world/Atmosphere";
@@ -12,18 +13,17 @@ export const URBANFORGE_EXAMPLE_SECONDS = 8;
 
 const CameraController: React.FC<{ progress: number }> = ({ progress }) => {
   const cam = useMemo(() => getUrbanCamera(progress), [progress]);
+  const { camera } = useThree();
 
-  return (
-    <perspectiveCamera
-      makeDefault
-      position={cam.position}
-      fov={cam.fov}
-      onUpdate={(self) => {
-        self.lookAt(new THREE.Vector3(...cam.target));
-        self.updateProjectionMatrix();
-      }}
-    />
-  );
+  useLayoutEffect(() => {
+    const c = camera as THREE.PerspectiveCamera;
+    c.position.set(...cam.position);
+    c.fov = cam.fov;
+    c.lookAt(new THREE.Vector3(...cam.target));
+    c.updateProjectionMatrix();
+  }, [camera, cam]);
+
+  return null;
 };
 
 export const UrbanforgeExample: React.FC = () => {

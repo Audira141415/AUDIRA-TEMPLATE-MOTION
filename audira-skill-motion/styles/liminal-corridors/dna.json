@@ -1,0 +1,70 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "liminal-corridors",
+  "styleNumber": 39,
+  "name": "Liminal 3D Corridors & 90s Found Footage",
+  "kit": "backrooms",
+  "category": "Liminal Space / Psychological Mystery",
+  "palette": {
+    "background": "#0A0B09",
+    "wallpaperYellow": "#D5BD66",
+    "carpetOchre": "#8C763C",
+    "trimWood": "#4D3D26",
+    "fluorescentWhite": "#F5F2DC",
+    "alarmRed": "#FF2222",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "procedural_maze_corridors",
+    "bevelRadius": 0.005,
+    "polyBudget": "modular_office_panels",
+    "silhouette": "endless_orthogonal_hallways"
+  },
+  "materials": {
+    "type": "grimy_office_pbr",
+    "roughness": 0.75,
+    "metalness": 0.05,
+    "clearcoat": 0,
+    "normalMap": "carpet_weave_and_peeling_wallpaper"
+  },
+  "lighting": {
+    "archetype": "flat_fluorescent_array_with_flicker",
+    "keyLight": {
+      "kelvin": 4200,
+      "intensity": 1.2,
+      "angle": [
+        0,
+        90,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 4000,
+      "intensity": 0.7
+    },
+    "rimLight": {
+      "kelvin": 4200,
+      "intensity": 0
+    },
+    "ambientOcclusion": {
+      "intensity": 0.9,
+      "radius": 0.3
+    }
+  },
+  "camera": {
+    "type": "handheld_vhs_camcorder_rig",
+    "focalLengthMm": 28,
+    "fovDeg": 62,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.8,
+      "autofocusHunt": true
+    },
+    "motionConstraint": "handheld_walking_bob_with_tremor"
+  },
+  "motion": {
+    "fps": 30,
+    "physicsModel": "walking_gait_harmonic",
+    "characterCadence": "first_person_cautious_step"
+  }
+}

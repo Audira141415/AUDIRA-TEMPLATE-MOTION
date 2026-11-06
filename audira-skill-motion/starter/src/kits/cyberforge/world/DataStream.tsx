@@ -12,7 +12,7 @@ interface DataStreamProps {
 
 export const DataStream: React.FC<DataStreamProps> = ({ count = 180, f }) => {
   // Deterministic particle generation
-  const [positions, geo] = useMemo(() => {
+  const [positions] = useMemo(() => {
     const coords: number[] = [];
     for (let i = 0; i < count; i++) {
       const radius = 0.5 + hash(i * 1.3) * 6.5;

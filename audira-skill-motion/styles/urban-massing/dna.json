@@ -1,0 +1,61 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "urban-massing",
+  "name": "Architectural White Model City & Sun Shadow Studies",
+  "kit": "urbanforge",
+  "category": "Urban Planning / White Massing",
+  "palette": {
+    "background": "#0D0E11",
+    "primary": "#FFFFFF",
+    "secondary": "#E2E5EA",
+    "accent": "#00D2FF",
+    "neutral": "#2D323F",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "foam_board_white_massing",
+    "bevelRadius": 0.005,
+    "polyBudget": "clean_orthogonal_city",
+    "silhouette": "monochrome_skyline_blocks"
+  },
+  "materials": {
+    "type": "matte_architectural_plaster",
+    "roughness": 0.92,
+    "metalness": 0,
+    "normalMap": "plaster_styrofoam_grain"
+  },
+  "lighting": {
+    "archetype": "heliodon_solar_arc",
+    "keyLight": {
+      "kelvin": 4800,
+      "intensity": 2,
+      "angle": [
+        30,
+        45,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 5500,
+      "intensity": 0.6
+    }
+  },
+  "camera": {
+    "type": "heli_isometric_flyover",
+    "focalLengthMm": 65,
+    "fovDeg": 30,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "sweeping_skyline_dolly"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "sun_shadow_sweep_timeline",
+    "characterCadence": "timelapse_shadow_travel"
+  }
+}

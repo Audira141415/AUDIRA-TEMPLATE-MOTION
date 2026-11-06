@@ -4,10 +4,9 @@ import * as THREE from "three";
 import { TOON_PALETTE } from "./palette";
 
 /** Cel-shaded toon material with high diffuse contrast and sharp terminator */
-export const createCelMaterial = (color: string = TOON_PALETTE.mechaArmor, roughness = 0.3) => {
+export const createCelMaterial = (color: string = TOON_PALETTE.mechaArmor) => {
   return new THREE.MeshToonMaterial({
     color: new THREE.Color(color),
-    roughness,
   });
 };
 

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "data-physical",
+  "styleNumber": 37,
+  "name": "3D Data Physicalization & Sculptural Stats",
+  "kit": "dataphysical",
+  "category": "Information Sculpture / Commercial Luxury Data",
+  "palette": {
+    "background": "#C4BEB4",
+    "baseWalnut": "#2A1B14",
+    "primaryMetal": "#C8CCD1",
+    "acrylicTeal": "#9FD3D6",
+    "brassGold": "#D2B07A",
+    "accentOrange": "#D4521C",
+    "ink": "#1C1D20",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "stacked_countable_plates_and_bars",
+    "bevelRadius": 0.01,
+    "polyBudget": "instanced_precision_mesh",
+    "silhouette": "sculptural_data_monoliths"
+  },
+  "materials": {
+    "type": "luxury_pbr_transmission",
+    "roughness": 0.18,
+    "metalness": 0.88,
+    "clearcoat": 0.4,
+    "normalMap": "brushed_radial_aluminum"
+  },
+  "lighting": {
+    "archetype": "apple_commercial_macro_studio",
+    "keyLight": {
+      "kelvin": 3400,
+      "intensity": 1.8,
+      "angle": [
+        25,
+        40,
+        10
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5600,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 6500,
+      "intensity": 1.5
+    },
+    "ambientOcclusion": {
+      "intensity": 0.9,
+      "radius": 0.25
+    }
+  },
+  "camera": {
+    "type": "cinematic_macro_pull_back",
+    "focalLengthMm": 65,
+    "fovDeg": 26,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2
+    },
+    "motionConstraint": "continuous_macro_dolly_out"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "cascade_drop_assembly",
+    "characterCadence": "gravity_stack_damping"
+  }
+}

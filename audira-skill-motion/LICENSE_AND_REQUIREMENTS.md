@@ -1,14 +1,15 @@
 # Lisensi dan Persyaratan — Audira Skill Motion
 
 **Produk:** Audira Skill Motion (Audira Motion 3D)  
-**Versi:** 3.0.0 Commercial Edition  
-**Pencipta & Pemegang Lisensi:** Agus Dwi Rianto (AUDIRA MDA)  
+**Versi:** 4.1.0 Commercial Edition  
+**Pencipta & Pemegang Lisensi:** AUDIRA (Agus Dwi R)  
+**Website Resmi:** https://audira.my.id/  
 **Lisensi:** Lisensi Komersial Berbayar (Proprietary Paid Commercial Software License)  
-**Hak Cipta © 2026 Agus Dwi Rianto. Seluruh Hak Dilindungi Undang-Undang.**
+**Hak Cipta © 2026 AUDIRA (Agus Dwi R). Seluruh Hak Dilindungi Undang-Undang.**
 
 ---
 
-## 1. Lisensi Resmi Berbayar (By Audira / Agus Dwi Rianto)
+## 1. Lisensi Resmi Berbayar (By AUDIRA (Agus Dwi R))
 
 Audira Skill Motion adalah produk perangkat lunak komersial berbayar yang dilindungi oleh Undang-Undang Hak Cipta No. 28 Tahun 2014 dan konvensi hak cipta internasional.
 
@@ -18,9 +19,9 @@ Audira Skill Motion adalah produk perangkat lunak komersial berbayar yang dilind
 - **Instalasi Komputer:** Dipasang pada workstation pribadi pembeli sesuai lisensi per-kursi (seat) yang telah dibeli.
 
 ### Batasan & Larangan Keras:
-- **DILARANG MENJUAL KEMBALI (NO RESALE):** Anda dilarang mendistribusikan ulang, menjual kembali, menyewakan, atau membundel ulang source code, prompt `SKILL.md`, 20 kit procedural engine, atau dokumentasi Audira Skill Motion kepada pihak ketiga.
+- **DILARANG MENJUAL KEMBALI (NO RESALE):** Anda dilarang mendistribusikan ulang, menjual kembali, menyewakan, atau membundel ulang source code, prompt `SKILL.md`, 43 kit procedural engine, atau dokumentasi Audira Skill Motion kepada pihak ketiga.
 - **DILARANG BERBAGI PUBLIK:** Anda dilarang mengunggah file repositori atau paket instalasi ke repositori publik (GitHub, GitLab, Google Drive publik, forum, atau grup publik).
-- **HAK KEKAYAAN INTELEKTUAL:** Seluruh hak cipta arsitektur kode, generator matematika prosedural, dan instruksi AI tetap berada di tangan **Agus Dwi Rianto (Audira)**.
+- **HAK KEKAYAAN INTELEKTUAL:** Seluruh hak cipta arsitektur kode, generator matematika prosedural, dan instruksi AI tetap berada di tangan **AUDIRA (Agus Dwi R)**.
 
 *Untuk rincian teks hukum lengkap, lihat file `LICENSE.md`.*
 

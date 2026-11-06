@@ -1,0 +1,68 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "satellite-briefing",
+  "styleNumber": 38,
+  "name": "3D Satellite & OSINT Geospatial Reconnaissance",
+  "kit": "satellitebriefing",
+  "category": "Geospatial / OSINT Reconnaissance",
+  "palette": {
+    "background": "#070B0E",
+    "groundAnalyst": "#4A5358",
+    "primaryOcean": "#102A45",
+    "markWhite": "#F2F5F6",
+    "readingAmber": "#FFBE55",
+    "claimBlue": "#2E70CE",
+    "text": "#ECEFF4"
+  },
+  "geometry": {
+    "type": "nested_georeferenced_tiles",
+    "bevelRadius": 0,
+    "polyBudget": "multi_lod_planetary_tiles",
+    "silhouette": "planetary_to_street_mesh"
+  },
+  "materials": {
+    "type": "analyst_clarity_imagery",
+    "roughness": 0.8,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "topographic_elevation_relief"
+  },
+  "lighting": {
+    "archetype": "directional_orbital_sunlight",
+    "keyLight": {
+      "kelvin": 5800,
+      "intensity": 2.2,
+      "angle": [
+        45,
+        60,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.3
+    },
+    "rimLight": {
+      "kelvin": 9000,
+      "intensity": 1.6
+    },
+    "ambientOcclusion": {
+      "intensity": 0.5,
+      "radius": 0.5
+    }
+  },
+  "camera": {
+    "type": "logarithmic_orbit_to_ground_zoom",
+    "focalLengthMm": 35,
+    "fovDeg": 55,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "continuous_log_descent"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "logarithmic_altitude_decay",
+    "characterCadence": "radar_reticle_snap"
+  }
+}

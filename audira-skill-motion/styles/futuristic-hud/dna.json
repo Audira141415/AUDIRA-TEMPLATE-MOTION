@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "futuristic-hud",
+  "name": "Sci-Fi Quantum Hologram & Cybernetic HUD Telemetry",
+  "kit": "cyberforge",
+  "category": "Futuristic Sci-Fi UI / Hologram",
+  "palette": {
+    "background": "#040711",
+    "primary": "#00F0FF",
+    "secondary": "#0A2540",
+    "accent": "#7928CA",
+    "neutral": "#1F3A60",
+    "text": "#E0F7FF"
+  },
+  "geometry": {
+    "type": "holographic_wireframe_rings",
+    "bevelRadius": 0,
+    "polyBudget": "procedural_lines",
+    "silhouette": "concentric_telemetry_nested"
+  },
+  "materials": {
+    "type": "additive_glow_emissive",
+    "roughness": 0.1,
+    "metalness": 0,
+    "transmission": 0.95,
+    "normalMap": "fresnel_laser_diffraction"
+  },
+  "lighting": {
+    "archetype": "self_illuminated_neon_core",
+    "keyLight": {
+      "kelvin": 9000,
+      "intensity": 2.5,
+      "angle": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 8000,
+      "intensity": 0.2
+    },
+    "rimLight": {
+      "kelvin": 10000,
+      "intensity": 1.8
+    }
+  },
+  "camera": {
+    "type": "floating_orbital_dolly",
+    "focalLengthMm": 24,
+    "fovDeg": 72,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 4
+    },
+    "motionConstraint": "smooth_yaw_orbit"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "harmonic_spin_oscillation",
+    "characterCadence": "digital_pulse_telemetry"
+  }
+}

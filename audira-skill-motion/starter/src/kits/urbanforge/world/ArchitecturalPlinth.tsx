@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import * as THREE from "three";
 import { BuildingMassing } from "../city/BuildingMassing";
 import { DataProjection } from "../city/DataProjection";
 import { createObsidianPlinthMaterial, createWaterInlayMaterial } from "../lib/materials";

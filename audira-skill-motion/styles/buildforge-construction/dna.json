@@ -1,0 +1,61 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "buildforge-construction",
+  "name": "Architectural Construction Assembled Piece-by-Piece",
+  "kit": "buildforge",
+  "category": "Architecture / Step-by-Step Assembly",
+  "palette": {
+    "background": "#10141D",
+    "primary": "#FF9900",
+    "secondary": "#232F3E",
+    "accent": "#00A8E8",
+    "neutral": "#879596",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "structural_steel_concrete_slabs",
+    "bevelRadius": 0.02,
+    "polyBudget": "mid_modular_assembly",
+    "silhouette": "clean_bim_structural"
+  },
+  "materials": {
+    "type": "structural_concrete_matte_steel",
+    "roughness": 0.7,
+    "metalness": 0.4,
+    "normalMap": "formwork_concrete"
+  },
+  "lighting": {
+    "archetype": "construction_site_sun_overcast",
+    "keyLight": {
+      "kelvin": 5600,
+      "intensity": 1.6,
+      "angle": [
+        45,
+        55,
+        10
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.5
+    },
+    "rimLight": {
+      "kelvin": 5200,
+      "intensity": 0.8
+    }
+  },
+  "camera": {
+    "type": "architectural_rising_crane",
+    "focalLengthMm": 45,
+    "fovDeg": 38,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "elevation_rise_orbit"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "crane_drop_hydraulic_damp",
+    "characterCadence": "sequential_layer_assembly"
+  }
+}

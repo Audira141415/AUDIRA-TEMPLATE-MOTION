@@ -1,7 +1,6 @@
 // CLAYWORLD Clay Creature — expressive stop-motion plasticine character with squash-and-stretch and stepped blinking.
 
 import React from "react";
-import * as THREE from "three";
 import { CLAY_PALETTE } from "../lib/palette";
 import { stepFrame, squashScale } from "../core/motion";
 

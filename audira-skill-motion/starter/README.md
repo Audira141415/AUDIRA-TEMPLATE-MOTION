@@ -1,7 +1,7 @@
 # Audira Skill Motion — Project Starter
 
 Created by Claude from the `audira-motion` skill. Remotion 4 + React Three Fiber; 9:16 vertical 60 FPS.  
-Author: **Agus Dwi Rianto (AUDIRA MDA)**
+Author: **AUDIRA (Agus Dwi R)**
 
 ```bash
 npm ci                 # install dependencies (once)

@@ -65,7 +65,7 @@ if %errorlevel% neq 0 (
     echo ========================================================================
     echo [PERINGATAN] Push gagal atau ditolak oleh GitHub!
     echo Kemungkinan penyebab:
-    echo 1. Ada file di GitHub (misal README/License bawaan) yang belum ada di lokal.
+    echo 1. Ada file di GitHub [misal README/License bawaan] yang belum ada di lokal.
     echo 2. Belum login / otentikasi GitHub di Git Credential Manager.
     echo ========================================================================
     echo.

@@ -1,0 +1,16 @@
+export const DEVFORGE_PALETTE = {
+  editorBg: "#0D1117",
+  editorHeader: "#161B22",
+  editorBorder: "#30363D",
+  windowButtonRed: "#FF5F56",
+  windowButtonYellow: "#FFBD2E",
+  windowButtonGreen: "#27C93F",
+  codeKeyword: "#FF7B72",
+  codeFunc: "#D2A8FF",
+  codeString: "#A5D6FF",
+  codeComment: "#8B949E",
+  accentNeon: "#00F0FF",
+  metricProfit: "#25F482",
+  amberGold: "#FFB703",
+  ambientVoid: "#080B11",
+} as const;

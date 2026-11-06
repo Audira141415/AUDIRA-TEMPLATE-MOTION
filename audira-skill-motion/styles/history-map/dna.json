@@ -1,0 +1,68 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "history-map",
+  "styleNumber": 42,
+  "name": "HISTORYMAP — Geopolitical & War History Documentary Map Director",
+  "kit": "historymap",
+  "category": "Cartography / Geopolitical War Documentary",
+  "palette": {
+    "background": "#1B2028",
+    "romanCrimson": "#8B1E1E",
+    "daciaGold": "#C5A059",
+    "riverBlue": "#254B77",
+    "terrainNeutral": "#2E3642",
+    "arrowGlow": "#FF3344",
+    "text": "#ECEFF4"
+  },
+  "geometry": {
+    "type": "topographic_mesh_and_bezier_ribbons",
+    "bevelRadius": 0.01,
+    "polyBudget": "topographic_provinces",
+    "silhouette": "river_border_and_tactical_arrows"
+  },
+  "materials": {
+    "type": "matte_cartographic_paper_pbr",
+    "roughness": 0.88,
+    "metalness": 0.05,
+    "clearcoat": 0,
+    "normalMap": "parchment_topography_crease"
+  },
+  "lighting": {
+    "archetype": "tactical_situation_room_spot",
+    "keyLight": {
+      "kelvin": 4800,
+      "intensity": 1.8,
+      "angle": [
+        30,
+        60,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 5200,
+      "intensity": 0.6
+    },
+    "ambientOcclusion": {
+      "intensity": 0.7,
+      "radius": 0.3
+    }
+  },
+  "camera": {
+    "type": "continental_dive_and_tilt",
+    "focalLengthMm": 45,
+    "fovDeg": 36,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "tactical_chokepoint_glide"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "territorial_wipe_ease",
+    "characterCadence": "military_arrow_pulse"
+  }
+}

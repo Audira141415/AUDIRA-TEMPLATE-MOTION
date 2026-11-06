@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "molecular-nanotech",
+  "name": "Microscopic Molecular Biology & Cryo-EM DNA Core",
+  "kit": "nanoforge",
+  "category": "Scientific / Nanotechnology",
+  "palette": {
+    "background": "#020B14",
+    "primary": "#00FFA3",
+    "secondary": "#0077B6",
+    "accent": "#FF0055",
+    "neutral": "#90E0EF",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "procedural_dna_double_helix",
+    "bevelRadius": 0.02,
+    "polyBudget": "molecular_vesicles",
+    "silhouette": "cellular_capsid_spheres"
+  },
+  "materials": {
+    "type": "fluorescent_protein_sss",
+    "roughness": 0.4,
+    "metalness": 0,
+    "subsurfaceScatter": 0.35,
+    "normalMap": "electron_density_cloud"
+  },
+  "lighting": {
+    "archetype": "cryo_em_fluorescence",
+    "keyLight": {
+      "kelvin": 8000,
+      "intensity": 1.6,
+      "angle": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 7000,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 9500,
+      "intensity": 1.5
+    }
+  },
+  "camera": {
+    "type": "nanoscopic_probe",
+    "focalLengthMm": 120,
+    "fovDeg": 18,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 1.4
+    },
+    "motionConstraint": "brownian_depth_drift"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "molecular_thermal_vibration",
+    "characterCadence": "helical_rotation"
+  }
+}

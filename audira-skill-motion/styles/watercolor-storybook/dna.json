@@ -1,0 +1,49 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "watercolor-storybook",
+  "styleNumber": 33,
+  "name": "European Children's Tale & 3D Cold-Press Watercolor Diorama",
+  "version": "1.0.0",
+  "palette": {
+    "paperBase": "#F9F6EE",
+    "skyPale": "#E2EEF4",
+    "meadowGreen": "#B5C99A",
+    "softMoss": "#87986A",
+    "terracottaClay": "#D48C70",
+    "warmSun": "#F7D070",
+    "graphitePencil": "#3A3836",
+    "text": "#2C2A29"
+  },
+  "geometry": {
+    "type": "layered_paper_popup",
+    "bevelRadius": 0.02,
+    "polyBudget": "mid",
+    "silhouette": "organic_curvilinear"
+  },
+  "materials": {
+    "type": "cold_press_watercolor_paper",
+    "roughness": 0.96,
+    "metalness": 0.00,
+    "translucency": 0.08,
+    "normalMap": "cotton_paper_granulation"
+  },
+  "lighting": {
+    "archetype": "natural_morning_skylight",
+    "keyLight": { "kelvin": 3000, "intensity": 1.1, "angle": [22, 65, 0] },
+    "fillLight": { "kelvin": 6200, "intensity": 0.65 },
+    "ambientOcclusion": { "intensity": 0.4, "radius": 0.2 }
+  },
+  "camera": {
+    "type": "parallax_storybook",
+    "focalLengthMm": 55,
+    "fovDeg": 30,
+    "position": [0, 0.4, 3.8],
+    "motionConstraint": "gentle_parallax_drift"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "wind_sway_sine",
+    "characterCadence": "gentle_lullaby"
+  }
+}
+

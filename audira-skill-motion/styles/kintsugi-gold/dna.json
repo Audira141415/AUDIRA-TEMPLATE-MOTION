@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "kintsugi-gold",
+  "name": "Wabi-Sabi Matte Porcelain & Glowing Liquid Gold",
+  "kit": "kintsugi",
+  "category": "Philosophical Japanese Craft",
+  "palette": {
+    "background": "#121316",
+    "primary": "#D4AF37",
+    "secondary": "#24272E",
+    "accent": "#FFFFFF",
+    "neutral": "#E5E7EB",
+    "text": "#F3F4F6"
+  },
+  "geometry": {
+    "type": "fractured_ceramic_vessel",
+    "bevelRadius": 0.03,
+    "polyBudget": "high_shattered_edges",
+    "silhouette": "organic_vein_cracks"
+  },
+  "materials": {
+    "type": "matte_clay_porcelain_with_gold",
+    "roughness": 0.85,
+    "metalness": 0.02,
+    "clearcoat": 0,
+    "normalMap": "ceramic_fracture_seam"
+  },
+  "lighting": {
+    "archetype": "candlelit_wabi_sabi_zen",
+    "keyLight": {
+      "kelvin": 2800,
+      "intensity": 1.4,
+      "angle": [
+        35,
+        45,
+        10
+      ]
+    },
+    "fillLight": {
+      "kelvin": 4000,
+      "intensity": 0.3
+    },
+    "rimLight": {
+      "kelvin": 3200,
+      "intensity": 1.2
+    }
+  },
+  "camera": {
+    "type": "macro_crack_orbit",
+    "focalLengthMm": 70,
+    "fovDeg": 28,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2
+    },
+    "motionConstraint": "slow_meditative_orbit"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "liquid_gold_capillary_fill",
+    "characterCadence": "reverent_peace"
+  }
+}

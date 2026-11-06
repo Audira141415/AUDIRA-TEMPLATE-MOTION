@@ -1,0 +1,50 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "film-noir",
+  "styleNumber": 32,
+  "name": "Classic 1940s Film Noir & Chiaroscuro Detective Cinema",
+  "version": "1.0.0",
+  "palette": {
+    "background": "#050608",
+    "wetAsphalt": "#101216",
+    "brickShadow": "#1E2024",
+    "highlightWhite": "#FFFFFF",
+    "midToneSilver": "#88909A",
+    "amberNeon": "#FFB347",
+    "text": "#F0F2F5"
+  },
+  "geometry": {
+    "type": "architectural_sharp",
+    "bevelRadius": 0.01,
+    "polyBudget": "high",
+    "silhouette": "dramatic_angular"
+  },
+  "materials": {
+    "type": "wet_pbr_reflective",
+    "roughness": 0.18,
+    "metalness": 0.05,
+    "clearcoat": 0.85,
+    "normalMap": "wet_brick_asphalt"
+  },
+  "lighting": {
+    "archetype": "extreme_chiaroscuro",
+    "keyLight": { "kelvin": 5000, "intensity": 2.2, "gobo": "venetian_blinds" },
+    "fillLight": { "kelvin": 5000, "intensity": 0.10 },
+    "rimLight": { "kelvin": 5600, "intensity": 1.6 },
+    "contrastRatio": "12:1"
+  },
+  "camera": {
+    "type": "moody_tracking",
+    "focalLengthMm": 40,
+    "fovDeg": 38,
+    "dutchAngleDeg": -3.5,
+    "depthOfField": { "enabled": true, "fStop": 2.0 },
+    "motionConstraint": "slow_dolly_in"
+  },
+  "motion": {
+    "fps": 24,
+    "physicsModel": "fluid_drift_rain",
+    "characterCadence": "deliberate_tension"
+  }
+}
+

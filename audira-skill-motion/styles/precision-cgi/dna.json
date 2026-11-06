@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "precision-cgi",
+  "name": "Industrial Luxury CGI & Exploded Mechanism",
+  "kit": "precision",
+  "category": "Commercial Product Luxury CGI",
+  "palette": {
+    "background": "#0B0C0E",
+    "primary": "#D4AF37",
+    "secondary": "#1B1D22",
+    "accent": "#E5E9F0",
+    "neutral": "#4C566A",
+    "text": "#ECEFF4"
+  },
+  "geometry": {
+    "type": "nurbs_cad_assembly",
+    "bevelRadius": 0.015,
+    "polyBudget": "ultra_precision",
+    "silhouette": "streamlined_ergonomic"
+  },
+  "materials": {
+    "type": "anodized_machined_metal",
+    "roughness": 0.18,
+    "metalness": 0.92,
+    "clearcoat": 0.3,
+    "normalMap": "brushed_radial_aluminum"
+  },
+  "lighting": {
+    "archetype": "apple_commercial_softbox",
+    "keyLight": {
+      "kelvin": 5400,
+      "intensity": 1.8,
+      "angle": [
+        45,
+        60,
+        20
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5400,
+      "intensity": 0.5
+    },
+    "rimLight": {
+      "kelvin": 6000,
+      "intensity": 1.8
+    }
+  },
+  "camera": {
+    "type": "macro_turntable_glide",
+    "focalLengthMm": 90,
+    "fovDeg": 22,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2
+    },
+    "motionConstraint": "precision_exploded_glide"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "damped_subassembly_explosion",
+    "characterCadence": "hyper_calibrated"
+  }
+}

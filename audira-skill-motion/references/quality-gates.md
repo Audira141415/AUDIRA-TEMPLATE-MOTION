@@ -28,11 +28,18 @@
 
 1. Confirm exact dimensions, FPS, expected duration, audio sample timing, and scene bounds.
 2. Confirm external assets and fonts are available and permitted for use; document their provenance if any are used.
-3. Render a short lookdev segment before building the full film.
-4. Inspect stills at start, quarter, middle, three-quarter and final; for an approximately 20-second film also inspect around 0, 2, 5, 8, 12, 16 and 20 seconds.
-5. Check missing textures, WebGL errors, clipped silhouettes, flicker, black frames, text safe areas and exposure.
-6. Render a low-resolution test with sound, then the final 1080x1920 / 60 FPS deliverable.
-7. Report actual commands, outputs, and any failures. Never state a file exists without verifying it.
+3. Run automated visual audit (`npm run audit:visual`) to verify mobile safe-zones, WCAG AA color contrast (>= 4.5:1), and WebGL draw-call budget (< 120 calls/frame).
+4. Render a short lookdev segment before building the full film.
+5. Inspect stills at start, quarter, middle, three-quarter and final; for an approximately 20-second film also inspect around 0, 2, 5, 8, 12, 16 and 20 seconds.
+6. Check missing textures, WebGL errors, clipped silhouettes, flicker, black frames, text safe areas and exposure.
+7. Render a low-resolution test with sound, then the final 1080x1920 / 60 FPS deliverable.
+8. Report actual commands, outputs, and any failures. Never state a file exists without verifying it.
+
+## Professional Broadcast Modules (AUDIRA Core Enhancements)
+- **Kinematic Springs & Secondary Motion:** Use `src/core/motion/spring.ts` (`solveSpring`, `wobble`, `anticipation`) for organic overshoot and settling instead of rigid linear easing.
+- **Organic Handheld Camera:** Use `src/core/camera/handheld.ts` (`getHandheldDrift`) to add subtle micro-drift ($0.05^\circ$) so the shot feels captured by a human operator or stabilized gimbal.
+- **3D World-Space Callouts:** Use `src/core/hud/TrackedPin3D.tsx` to anchor telemetry cards, measurements, and pulse radar rings directly to 3D mesh vertices $[x, y, z]$.
+- **Optics & Hollywood Color Grading:** Use `src/core/render/FinishingPresets.ts` and `Post.tsx` for chromatic aberration, subtle grain, and calibrated S-curves (`CINEMA_TEAL_ORANGE`, `APPLE_STUDIO_CLEAN`, `CYBER_NEON_VOID`).
 
 ## Anti-slop diagnostic
 

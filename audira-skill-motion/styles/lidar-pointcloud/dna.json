@@ -1,0 +1,61 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "lidar-pointcloud",
+  "name": "3D LiDAR Laser Aerial Survey & Bathymetry",
+  "kit": "lidarforge",
+  "category": "Geospatial / Point Cloud Telemetry",
+  "palette": {
+    "background": "#05070A",
+    "primary": "#00F0FF",
+    "secondary": "#FFD700",
+    "accent": "#FF0055",
+    "neutral": "#1F2937",
+    "text": "#E5E7EB"
+  },
+  "geometry": {
+    "type": "dense_point_cloud_particles",
+    "bevelRadius": 0,
+    "polyBudget": "100k_point_buffer",
+    "silhouette": "topographic_scanned_mesh"
+  },
+  "materials": {
+    "type": "additive_elevation_color_ramp",
+    "roughness": 0.1,
+    "metalness": 0,
+    "normalMap": "none"
+  },
+  "lighting": {
+    "archetype": "laser_curtain_sweep",
+    "keyLight": {
+      "kelvin": 9000,
+      "intensity": 2,
+      "angle": [
+        90,
+        0,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 8000,
+      "intensity": 0.2
+    },
+    "rimLight": {
+      "kelvin": 10000,
+      "intensity": 1.2
+    }
+  },
+  "camera": {
+    "type": "drone_aerial_nadir",
+    "focalLengthMm": 28,
+    "fovDeg": 65,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "laser_sweep_glide"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "linear_scanner_curtain",
+    "characterCadence": "topographic_unveil"
+  }
+}

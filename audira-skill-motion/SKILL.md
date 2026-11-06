@@ -1,12 +1,12 @@
 ---
 name: audira-motion
-description: "Create original cinematic 3D/stylized vertical videos from an idea or a script + MP3 in 20 Audira styles: picks the style, previews, then renders 1080x1920 60fps with Remotion. By Agus Dwi Rianto (AUDIRA MDA)."
+description: "Create original cinematic 3D/stylized vertical videos from an idea or a script + MP3 in 43 Audira styles: picks the style, previews, then renders 1080x1920 60fps with Remotion. By AUDIRA (Agus Dwi R)."
 ---
 
 # Audira Skill Motion — Master Director
 
-Author & Creator: **Agus Dwi Rianto (AUDIRA MDA)**  
-Version: `3.0.0 Commercial Release`. Twenty signature styles (PIXELSTORY, VOXELVERSE, PRECISION, PAPERWORLD, INNERWORKS, WORLDFORGE, TIMEFORGE, BUILDFORGE, CYBERFORGE, DRAFTFORGE, CLAYWORLD, POLYVERSE, TOONFORGE, GLASSCRAFT, NANOFORGE, INKSTORY, LIDARFORGE, CIRCUITFORGE, BRICKCRAFT, URBANFORGE). The skill ships a production kit: a Remotion + React Three Fiber project starter with a shared core library and render/QA scripts (`starter/`), plus dedicated reusable style engines, each with a technical example and a `KIT.md`, for all twenty styles in `kits/<style>/`. Recommended hardware: a Mac with Apple Silicon or a PC with a GPU. On every new machine run `npm run check-env` and `npm run smoke` before promising renders; without a usable GPU the render scripts switch to software rendering automatically (`.gl-mode` = `swangle`, very slow), so tell the buyer once that renders on this computer will take much longer. Treat references as art direction plus proven technique, never as a guarantee of a specific result. (Internal status — do not recite to buyers; see "Begin with a guided conversation".) Buyer-facing guides live next to this file: README.md, START_HERE.md, INSTALLATION_GUIDE.md, USER_GUIDE.md, EXAMPLE_PROMPTS.md, BRAND_KIT.md, TROUBLESHOOTING.md, LICENSE.md, LICENSE_AND_REQUIREMENTS.md — read TROUBLESHOOTING.md when the buyer reports a problem.
+Author & Creator: **AUDIRA (Agus Dwi R)**  
+Version: `4.1.0 Commercial Release`. Forty-three signature styles (PIXELSTORY, VOXELVERSE, PRECISION, PAPERWORLD, INNERWORKS, WORLDFORGE, TIMEFORGE, BUILDFORGE, CYBERFORGE, DRAFTFORGE, CLAYWORLD, POLYVERSE, TOONFORGE, GLASSCRAFT, NANOFORGE, INKSTORY, LIDARFORGE, CIRCUITFORGE, BRICKCRAFT, URBANFORGE, ISOCRAFT, VINTAGEFORGE, BRUTALFORGE, THERMALFORGE, CHALKCRAFT, KINTSUGI, RETROWAVE, TEXTVOYAGE, AUDIRABOT, DEVFORGE, TOYDIORAMA, FILMNOIR, WATERCOLOR, FLUIDFORGE, HD2D, MEMPHISDIORAMA, DATAPHYSICAL, SATELLITEBRIEFING, BACKROOMS, VISUALINVESTIGATION, TRADINGTERMINAL, HISTORYMAP, ISLAMICDOCUMENTARY). The skill ships a production kit: a Remotion + React Three Fiber project starter with a shared core library and render/QA scripts (`starter/`), plus dedicated reusable style engines, each with a technical example and a `KIT.md`, for all forty-three styles in `kits/<style>/`. Recommended hardware: a Mac with Apple Silicon or a PC with a GPU. On every new machine run `npm run check-env` and `npm run smoke` before promising renders; without a usable GPU the render scripts switch to software rendering automatically (`.gl-mode` = `swangle`, very slow), so tell the buyer once that renders on this computer will take much longer. Treat references as art direction plus proven technique, never as a guarantee of a specific result. (Internal status — do not recite to buyers; see "Begin with a guided conversation".) Buyer-facing guides live next to this file: README.md, START_HERE.md, INSTALLATION_GUIDE.md, USER_GUIDE.md, EXAMPLE_PROMPTS.md, BRAND_KIT.md, TROUBLESHOOTING.md, LICENSE.md, LICENSE_AND_REQUIREMENTS.md — read TROUBLESHOOTING.md when the buyer reports a problem.
 
 ## Begin with a guided conversation
 
@@ -19,6 +19,69 @@ Make the default experience feel like a helpful creative assistant speaking to a
 - If the user asks to see all styles, describe them briefly across the 5 industrial pillars.
 - Before substantial work, recap the brief in 3–5 short lines and ask one confirmation. Do not install software or change files because of initial interest alone.
 - A complete brief goes straight to the production contract; continue through preview and revisions in chat.
+
+## Audira Motion Intelligence: Reference-Driven Pipeline & Style DNA Library
+
+Follow the 5-step Motion Intelligence pipeline (`core/`):
+1. **01. Visual Reference Analyzer** ([core/reference-analyzer.md](core/reference-analyzer.md)): Deconstructs reference images/videos into layout, anatomy, geometry, materials, lighting, and motion cadence.
+2. **02. Visual DNA Extractor & Style Lock** ([core/visual-dna-extractor.md](core/visual-dna-extractor.md), [core/style-lock-engine.md](core/style-lock-engine.md)): Serializes visual parameters into structured `dna.json` and locks character seed/palette to prevent hallucination.
+3. **03. Motion & Camera Director** ([core/motion-director.md](core/motion-director.md), [core/camera-director.md](core/camera-director.md)): Choreographs 5-beat storyboards, spring physics, and optical 9:16 safe-zone framing (1080×1920).
+4. **04. AI Motion Generator & Workflows** ([core/ai-motion-generator.md](core/ai-motion-generator.md), [workflows/](workflows/)): Compiles executable code for Remotion/Three.js or structured generative prompts for Kling AI 1.5, Runway Gen-3, and Midjourney v6.
+5. **05. Visual Quality Control & QA Gates** ([core/visual-qa.md](core/visual-qa.md), [qa/](qa/)): Enforces the 5-point quality scorecard, SSIM character continuity, and broadcast audio compliance (-14 LUFS).
+
+### Modular Style DNA Library (`styles/`)
+Never load all styles into a single prompt. Load only the specific modular DNA files needed for the task:
+- `styles/<style>/style.md` (Aesthetic essence, palette, positive/negative anchors)
+- `styles/<style>/geometry.md` (Mesh archetypes, bevels, poly budget, silhouette)
+- `styles/<style>/materials.md` (PBR roughness, metalness, clearcoat, normals)
+- `styles/<style>/lighting.md` (Studio rig, key/fill/rim kelvin & intensity)
+- `styles/<style>/camera.md` (Focal length, FOV, DOF, motion constraints)
+- `styles/<style>/motion.md` (Framerate, spring physics, gesture choreography)
+- `styles/<style>/dna.json` (Machine-readable JSON manifest)
+
+Production Workflows:
+- [Reference-to-Video](workflows/reference-to-video.md) (Replicate style from URL/image)
+- [Text-to-Video](workflows/text-to-video.md) (Script to 5-beat film)
+- [Image-to-Video](workflows/image-to-video.md) (Animate static product/art into 3D)
+- [Audio-to-Video](workflows/audio-to-video.md) (VO & musical beat synchronization)
+- [Multi-Scene Continuity](workflows/multi-scene-continuity.md) (Cross-cut asset persistence)
+
+Narrative & Storyboard Recipes (`recipes/`):
+- [Problem - Agitation - Solution (15s Hook)](recipes/recipe-pas-15s.md)
+- [Exploded Teardown & Internal Mechanics (30s)](recipes/recipe-exploded-teardown-30s.md)
+- [Historical Object Evolution Timeline (45s)](recipes/recipe-historical-evolution-45s.md)
+- [Storybook Parable & Philosophical Short (60s)](recipes/recipe-storybook-parable-60s.md)
+- [Game Dev & AI Coding Hustle (30s Code-to-Life)](recipes/recipe-ai-tutorial-hustle-30s.md)
+
+Multi-Model Prompt Compilers (`adapters/`):
+- [Kling AI 1.5 Professional Adapter](adapters/adapter-kling.md)
+- [Runway Gen-3 Alpha Adapter](adapters/adapter-runway-gen3.md)
+- [Midjourney v6.1 & Niji 6 Still Adapter](adapters/adapter-midjourney-v6.md)
+- [Luma Dream Machine Transition Adapter](adapters/adapter-luma-dream.md)
+- [Remotion + React Three Fiber Direct Code Adapter](adapters/adapter-remotion-r3f.md)
+
+Audio & Sound Design Engine (`audio/`):
+- [Foley & Sound Effects Catalog](audio/sfx-catalog.md)
+- [Audio-Clock & Silence Synchronization](audio/audio-clock-sync.md)
+- [Dynamic Ducking & Bus Balancing (-14dB)](audio/dynamic-ducking-rules.md)
+- [Mastering & EBU R128 (-14 LUFS) Protocol](audio/mastering-ebu-r128.md)
+
+Retention & Viral Hook Engine (`growth/`):
+- [50+ Visual & Auditory Hook Database](growth/hook-database.md)
+- [9:16 Vertical Safe-Zone Mask Standard](growth/safe-zone-overlay.md)
+- [5-Platform Social Copywriting Matrix](growth/social-copywriting-matrix.md)
+
+Procedural GLSL Shader Library (`shaders/`):
+- [Halftone Ben-Day Dots](shaders/halftone-ben-day.glsl)
+- [Frosted Glass Dispersion & Caustics](shaders/frosted-glass-dispersion.glsl)
+- [Clay Stipple & Thumbprint Normal](shaders/clay-stipple-normal.glsl)
+- [Retro CRT Scanlines & Screen Curvature](shaders/crt-scanline-phosphor.glsl)
+- [Sci-Fi Hologram Fresnel & Elevation Scan Beam](shaders/hologram-fresnel-scan.glsl)
+
+Quality Assurance Gates:
+- [Visual Checklist](qa/visual-checklist.md)
+- [Consistency Check](qa/consistency-check.md)
+- [Render Validation](qa/render-validation.md)
 
 ## Style selection
 
@@ -46,10 +109,33 @@ Read [references/style-registry.md](references/style-registry.md) first, then **
 | CIRCUITFORGE | [circuitforge.md](references/circuitforge.md) | `kits/circuitforge` |
 | BRICKCRAFT | [brickcraft.md](references/brickcraft.md) | `kits/brickcraft` |
 | URBANFORGE | [urbanforge.md](references/urbanforge.md) | `kits/urbanforge` |
+| ISOCRAFT | [isocraft.md](references/isocraft.md) | `kits/isocraft` |
+| VINTAGEFORGE | [vintageforge.md](references/vintageforge.md) | `kits/vintageforge` |
+| BRUTALFORGE | [brutalforge.md](references/brutalforge.md) | `kits/brutalforge` |
+| THERMALFORGE | [thermalforge.md](references/thermalforge.md) | `kits/thermalforge` |
+| CHALKCRAFT | [chalkcraft.md](references/chalkcraft.md) | `kits/chalkcraft` |
+| KINTSUGI | [kintsugi.md](references/kintsugi.md) | `kits/kintsugi` |
+| RETROWAVE | [retrowave.md](references/retrowave.md) | `kits/retrowave` |
+| TEXTVOYAGE | [textvoyage.md](references/textvoyage.md) | `kits/textvoyage` |
+| AUDIRABOT | [audirabot.md](references/audirabot.md) | `kits/audirabot` |
+| DEVFORGE | [devforge.md](references/devforge.md) | `kits/devforge` |
+| TOYDIORAMA | [toydiorama.md](references/toydiorama.md) | `kits/toydiorama` |
+| FILMNOIR | [filmnoir.md](references/filmnoir.md) | `kits/filmnoir` |
+| WATERCOLOR | [watercolor.md](references/watercolor.md) | `kits/watercolor` |
+| FLUIDFORGE | [fluidforge.md](references/fluidforge.md) | `kits/fluidforge` |
+| HD2D | [hd2d.md](references/hd2d.md) | `kits/hd2d` |
+| MEMPHISDIORAMA | [memphisdiorama.md](references/memphisdiorama.md) | `kits/memphisdiorama` |
+| DATAPHYSICAL | [dataphysical.md](references/dataphysical.md) | `kits/dataphysical` |
+| SATELLITEBRIEFING | [satellitebriefing.md](references/satellitebriefing.md) | `kits/satellitebriefing` |
+| BACKROOMS | [backrooms.md](references/backrooms.md) | `kits/backrooms` |
+| VISUALINVESTIGATION | [visualinvestigation.md](references/visualinvestigation.md) | `kits/visualinvestigation` |
+| TRADINGTERMINAL | [tradingterminal.md](references/tradingterminal.md) | `kits/tradingterminal` |
+| HISTORYMAP | [historymap.md](references/historymap.md) | `kits/historymap` |
+| ISLAMICDOCUMENTARY | [islamicdocumentary.md](references/islamicdocumentary.md) | `kits/islamicdocumentary` |
 
-Infer the style from the idea and describe the look in one sentence; do not make the buyer learn style names. PIXELSTORY = 2.5D pixel-art characters; VOXELVERSE = voxel miniature worlds; PRECISION = one product's premium CGI/exploded view; PAPERWORLD = handcrafted paper diorama stories; INNERWORKS = opening a machine to show how it works; WORLDFORGE = exploring a whole 3D environment/world; TIMEFORGE = **one object physically evolving through dated eras**; BUILDFORGE = **a structure assembled piece by piece**; CYBERFORGE = **holographic sci-fi 3D, cyber wireframe & HUD telemetry**; DRAFTFORGE = **architectural CAD blueprints, dimensional callouts & technical schematics**; CLAYWORLD = **tactile stop-motion claymation & plasticine diorama stories**; POLYVERSE = **faceted low-poly minimalist worlds & floating island dioramas**; TOONFORGE = **cel-shaded 3D anime, ink contours & manga speed lines**; GLASSCRAFT = **spatial glassmorphism, refractive liquid prisms & VisionOS acoustics**; NANOFORGE = **microscopic molecular biology, DNA double-helix & Cryo-EM nanotech**; INKSTORY = **East Asian ink wash, Shan Shui misty mountains & zen calligraphy**; LIDARFORGE = **3D point cloud aerial survey, laser scanning & elevation bathymetry**; CIRCUITFORGE = **3D PCB electronics, SMT microchips & copper electron streams**; BRICKCRAFT = **tactile plastic bricks, interlocking stud geometry & tabletop macro stop-motion**; URBANFORGE = **architectural white massing model, real sun shadow studies & projected data layers**. Prefer TIMEFORGE over PRECISION when changes between historical designs are the story; WORLDFORGE for inhabited environments; BUILDFORGE when construction itself is the subject; INNERWORKS for how a finished machine works inside; CYBERFORGE for futuristic technology, quantum computing, AI cores, cybersecurity, and sci-fi telemetry; DRAFTFORGE for engineering blueprints, CAD schematics, patent breakdowns, and architectural drawings; CLAYWORLD for charming, tactile, organic stop-motion character storytelling and diorama miniature worlds; POLYVERSE for minimalist polygonal nature, floating sanctuary islands, and pastel zen landscapes; TOONFORGE for high-energy mecha action, Japanese anime aesthetics, comic book speed lines, and ink-outlined character craft; GLASSCRAFT for luxury spatial computing interfaces, floating frosted glass cards, refractive liquid droplets, and iridescent optics; NANOFORGE for medical science, virology, genetic DNA sequencing, cellular vesicles, and microscopic drug delivery; INKSTORY for Asian calligraphy, misty mountain landscapes, traditional philosophy, tea culture, martial arts legends, and meditative ink paintings; LIDARFORGE for drone aerial surveying, archaeological terrain scans, autonomous vehicle vision, and point cloud geology; CIRCUITFORGE for microchip semiconductors, motherboard hardware, CPU/GPU architecture, and electric current flows; BRICKCRAFT for toy building assembly, playful startup pivots, and tabletop macro storytelling; URBANFORGE for smart cities, urban planning, real estate development, and solar shadow analysis.
+Infer the style from the idea and describe the look in one sentence; do not make the buyer learn style names. PIXELSTORY = 2.5D pixel-art characters; VOXELVERSE = voxel miniature worlds; PRECISION = one product's premium CGI/exploded view; PAPERWORLD = handcrafted paper diorama stories; INNERWORKS = opening a machine to show how it works; WORLDFORGE = exploring a whole 3D environment/world; TIMEFORGE = **one object physically evolving through dated eras**; BUILDFORGE = **a structure assembled piece by piece**; CYBERFORGE = **holographic sci-fi 3D, cyber wireframe & HUD telemetry**; DRAFTFORGE = **architectural CAD blueprints, dimensional callouts & technical schematics**; CLAYWORLD = **tactile stop-motion claymation & plasticine diorama stories**; POLYVERSE = **faceted low-poly minimalist worlds & floating island dioramas**; TOONFORGE = **cel-shaded 3D anime, ink contours & manga speed lines**; GLASSCRAFT = **spatial glassmorphism, refractive liquid prisms & VisionOS acoustics**; NANOFORGE = **microscopic molecular biology, DNA double-helix & Cryo-EM nanotech**; INKSTORY = **East Asian ink wash, Shan Shui misty mountains & zen calligraphy**; LIDARFORGE = **3D point cloud aerial survey, laser scanning & elevation bathymetry**; CIRCUITFORGE = **3D PCB electronics, SMT microchips & copper electron streams**; BRICKCRAFT = **tactile plastic bricks, interlocking stud geometry & tabletop macro stop-motion**; URBANFORGE = **architectural white massing model, real sun shadow studies & projected data layers**; ISOCRAFT = **isometric comic hand-inked machine, flat shadows & see-through mechanism**; VINTAGEFORGE = **Da Vinci antique manuscript, sepia parchment & copperplate engraving**; BRUTALFORGE = **3D Neo-Brutalism pop, hard unblurred drop-shadows & electric neon strobe**; THERMALFORGE = **FLIR infrared thermal heatmap, Ironbow spectrum & hotspot telemetry**; CHALKCRAFT = **quantum blackboard, dusty 3D chalk lines & theoretical physics**; KINTSUGI = **wabi-sabi matte porcelain, organic cracks & glowing liquid gold seams**; RETROWAVE = **80s synthwave, neon horizon grid & CRT scanlines**; TEXTVOYAGE = **spatial giant 3D kinetic typography & architectural monolith flight**; AUDIRABOT = **flagship 3D robot mascot companion, OLED emotive visor, plasma levitation & gesturing arm**; DEVFORGE = **3D spatial IDE, typewriter code stream, gamedev asset spawning & hustle metrics**; TOYDIORAMA = **commercial stylized 3D toy diorama, blocky characters, theatrical wooden stage, footlights & taped paper annotations**; FILMNOIR = **classic 1940s film noir, chiaroscuro contrast, wet street & venetian blinds shadows**; WATERCOLOR = **European children's tale, 3D cold-press paper diorama & soft watercolor washes**; FLUIDFORGE = **abstract fluid motion, zero-gravity ferrofluid & iridescent liquid chrome**; HD2D = **Octopath-style 2D pixel sprites in a physically lit 3D tilt-shift diorama with warm 2400K lanterns**; MEMPHISDIORAMA = **1980s Ettore Sottsass architectural tabletop model, terrazzo base & hard cool-purple shadows**; DATAPHYSICAL = **tactile 3D data physicalization, stacked aluminum & brass sculptures on walnut plinths**; SATELLITEBRIEFING = **3D satellite & OSINT geospatial reconnaissance with orbital zoom and amber reticles**; BACKROOMS = **liminal 3D yellow corridors, buzzing fluorescent tubes & 90s VHS camcorder found footage**; VISUALINVESTIGATION = **forensic courtroom desk, labeled speaker floorplan, archival document highlighter & Mute-Test clock**; TRADINGTERMINAL = **institutional financial terminal, procedural candlesticks, order book depth wall & live price lasers**; HISTORYMAP = **geopolitical & war history documentary map, dynamic territorial shifts & tactical pincer arrows**; ISLAMICDOCUMENTARY = **folk Islam & Islamic golden age, sacred 8-point stars, grand dome silhouettes & acoustic oud**. Prefer TIMEFORGE over PRECISION when changes between historical designs are the story; WORLDFORGE for inhabited environments; BUILDFORGE when construction itself is the subject; INNERWORKS for how a finished machine works inside; CYBERFORGE for futuristic technology, quantum computing, AI cores, cybersecurity, and sci-fi telemetry; DRAFTFORGE for engineering blueprints, CAD schematics, patent breakdowns, and architectural drawings; CLAYWORLD for charming, tactile, organic stop-motion character storytelling and diorama miniature worlds; POLYVERSE for minimalist polygonal nature, floating sanctuary islands, and pastel zen landscapes; TOONFORGE for high-energy mecha action, Japanese anime aesthetics, comic book speed lines, and ink-outlined character craft; GLASSCRAFT for luxury spatial computing interfaces, floating frosted glass cards, refractive liquid droplets, and iridescent optics; NANOFORGE for medical science, virology, genetic DNA sequencing, cellular vesicles, and microscopic drug delivery; INKSTORY for Asian calligraphy, misty mountain landscapes, traditional philosophy, tea culture, martial arts legends, and meditative ink paintings; LIDARFORGE for drone aerial surveying, archaeological terrain scans, autonomous vehicle vision, and point cloud geology; CIRCUITFORGE for microchip semiconductors, motherboard hardware, CPU/GPU architecture, and electric current flows; BRICKCRAFT for toy building assembly, playful startup pivots, and tabletop macro storytelling; URBANFORGE for smart cities, urban planning, real estate development, and solar shadow analysis; VISUALINVESTIGATION when reconstructing courtroom proceedings, legal timelines, or investigative dossiers with mandatory Mute-Test verification; TRADINGTERMINAL for finance, crypto trading, market technical analysis, and stock breakdowns; HISTORYMAP for geopolitical conflicts, empire history, and war battle maps; ISLAMICDOCUMENTARY for Islamic civilization history, prophetic parables, and sacred architectural heritage.
 
-**Outside the product's scope:** flat 2D explainers, infographics/data charts, kinetic-typography-only videos, slideshow edits of photos, live-action editing, talking heads. Say kindly that Audira Skill Motion makes cinematic 3D/stylized scenes; offer the closest style if one genuinely fits (e.g. an explainer about a machine → INNERWORKS), otherwise say it is not the right tool rather than forcing a style.
+**Outside the product's scope (STRICT ROUTING RULE):** flat 2D explainers, infographics/data charts, kinetic-typography-only videos, slideshow edits of photos, live-action editing, talking heads, **courtroom proceedings, political debates, investigative journalism, and human conflict trials**. For news, legal debates, or politics involving real figures (e.g. trials, political figures, sourced journalism), **DO NOT force `audira-motion` or abstract 3D metaphors** (gears, floating boxes, disembodied gloves). Instead, route immediately to **`audira-video-motion-graphic` + `media-use` + `hyperframes`** to display real photos, labeled courtroom maps, sourced news clippings, and legible quotes. Use `audira-motion` in such briefs ONLY as a 3–5 second technical forensic cutaway (e.g. 3D Error Level Analysis or digital photo forensics). If the brief does not fit 3D objects, say kindly and firmly that it is not the right tool rather than forcing a style. Enforce the **Mute Test** (`qa/visual-checklist.md`): if the viewer cannot tell who is speaking on mute, the composition is rejected.
 
 **Preview rounds (the one expectation you do set).** Every new idea is an original film, so say once, in one plain Indonesian sentence, that the first preview usually gets one or two rounds of refinement before the final (buyers see the same in START_HERE.md); for PRECISION and INNERWORKS, which have no dedicated engine, plan for the second round from the start. Do not repeat it or turn it into a technical report.
 
@@ -116,6 +202,16 @@ Read [references/production-kit.md](references/production-kit.md) before writing
 
 > `/audira-motion Bikin video maket arsitektur putih monokrom (white model) kota futuristik di atas meja obsidian, cahaya matahari bergerak memanjang bayangan gedung, lalu lapisan data zonasi kota diproyeksikan dengan cahaya cyan. Musik orkestra modern tenang.`
 
+> `/audira-motion Maskot 3D robot Audira-Bot melayang ramah di studio futuristik, mata visor OLED berkedip dan tangan menunjuk judul materi presentasi. Musik futuristik upbeat.`
+
+> `/audira-motion Bikin video edukasi cara buat game Roblox pakai AI, layar kode 3D melayang mengetik otomatis lalu koin dan karakter 3D melompat keluar ke depan layar. Musik lo-fi upbeat.`
+
+> `/audira-motion Buat animasi 3D toy diorama panggung teater miniatur dengan karakter mainan blocky lucu melambaikan tangan, lampu footlight kayu hangat menyala, dan catatan label kertas berselotip. Musik santai ceria.`
+
+> `/audira-motion Buat video sinematik detektif film noir 1940-an di lorong kota berkabut hujan, bayangan tirai venetian blinds di dinding bata dan siluet jas trench coat. Musik jazz moody sax.`
+
+> `/audira-motion Buat animasi buku dongeng anak bergaya cat air Eropa (watercolor storybook) dengan bukit pastel lembut, pohon ek bergoyang, dan karakter beruang kecil melambai. Musik akustik hangat.`
+
 Never require the buyer to understand internal files or paste a template prompt. Experience: install once, describe an idea, answer a few simple questions, confirm, approve setup, preview, refine, render.
 
 ## Brand kit
@@ -137,7 +233,7 @@ If the buyer asks you to create a kit, write `audira-brand.json` from their word
 
 ## Commercial License & Protection
 
-Audira Skill Motion is proprietary commercial software authored by **Agus Dwi Rianto (AUDIRA MDA)**. Buyers are granted a non-exclusive license to render unlimited commercial and personal videos. Resale, sublicensing, unauthorized distribution, public repository uploads, or extraction of prompt engines and 3D kits is strictly prohibited. See `LICENSE.md` for full legal terms.
+Audira Skill Motion is proprietary commercial software authored by **AUDIRA (Agus Dwi R)**. Buyers are granted a non-exclusive license to render unlimited commercial and personal videos. Resale, sublicensing, unauthorized distribution, public repository uploads, or extraction of prompt engines and 3D kits is strictly prohibited. See `LICENSE.md` for full legal terms.
 
 ## Never edit the installed skill
 

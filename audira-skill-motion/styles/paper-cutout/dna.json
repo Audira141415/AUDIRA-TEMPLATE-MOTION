@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "paper-cutout",
+  "name": "Handcrafted Paper Diorama & Tiered Kirigami Stories",
+  "kit": "paperworld",
+  "category": "Physical Craft / Paper Art",
+  "palette": {
+    "background": "#F4EAD4",
+    "primary": "#E76F51",
+    "secondary": "#2A9D8F",
+    "accent": "#E9C46A",
+    "neutral": "#264653",
+    "text": "#264653"
+  },
+  "geometry": {
+    "type": "creased_origami_sheets",
+    "bevelRadius": 0.01,
+    "polyBudget": "mid_folded_planes",
+    "silhouette": "layered_cutout_shadows"
+  },
+  "materials": {
+    "type": "matte_textured_cardstock",
+    "roughness": 0.95,
+    "metalness": 0,
+    "normalMap": "paper_fiber_texture"
+  },
+  "lighting": {
+    "archetype": "diorama_shadowbox_sun",
+    "keyLight": {
+      "kelvin": 4000,
+      "intensity": 1.5,
+      "angle": [
+        35,
+        45,
+        10
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5000,
+      "intensity": 0.5
+    },
+    "rimLight": {
+      "kelvin": 4500,
+      "intensity": 0.8
+    }
+  },
+  "camera": {
+    "type": "topdown_tilt_shift",
+    "focalLengthMm": 65,
+    "fovDeg": 30,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.8
+    },
+    "motionConstraint": "page_peel_reveal"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "paper_fold_curl",
+    "characterCadence": "delicate_kirigami"
+  }
+}

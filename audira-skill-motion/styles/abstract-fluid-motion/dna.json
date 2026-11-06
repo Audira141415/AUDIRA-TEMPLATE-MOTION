@@ -1,0 +1,69 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "abstract-fluid-motion",
+  "styleNumber": 34,
+  "id": "abstract-fluid-motion",
+  "name": "Abstract Fluid Motion & Iridescent Liquid Metal",
+  "kit": "fluidforge",
+  "category": "Abstract CGI / Iridescent Ferrofluid & Chrome",
+  "palette": {
+    "background": "#05060A",
+    "primary": "#00F0FF",
+    "secondary": "#FF007A",
+    "accent": "#7000FF",
+    "chromeSilver": "#E2E8F0",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "metaball_liquid_blobs_and_rings",
+    "bevelRadius": 0.08,
+    "polyBudget": "high_subdivision_smooth",
+    "silhouette": "flowing_ferrofluid_droplets"
+  },
+  "materials": {
+    "type": "iridescent_liquid_chrome",
+    "roughness": 0.06,
+    "metalness": 0.96,
+    "clearcoat": 1,
+    "normalMap": "rippling_surface_tension"
+  },
+  "lighting": {
+    "archetype": "chromatic_studio_softboxes",
+    "keyLight": {
+      "kelvin": 6500,
+      "intensity": 2.2,
+      "angle": [
+        35,
+        45,
+        15
+      ]
+    },
+    "fillLight": {
+      "kelvin": 8500,
+      "intensity": 0.8
+    },
+    "rimLight": {
+      "kelvin": 10000,
+      "intensity": 2.5
+    },
+    "ambientOcclusion": {
+      "intensity": 0.7,
+      "radius": 0.3
+    }
+  },
+  "camera": {
+    "type": "zero_gravity_orbital_glide",
+    "focalLengthMm": 50,
+    "fovDeg": 34,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2
+    },
+    "motionConstraint": "smooth_harmonic_orbit"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "surface_tension_harmonic_wave",
+    "characterCadence": "zero_g_coalescence"
+  }
+}

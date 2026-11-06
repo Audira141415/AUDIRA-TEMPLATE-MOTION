@@ -23,17 +23,18 @@ export const getCircuitCameraPose = (f: number, totalFrames = 480): CircuitCamer
   } else if (f < 320) {
     const t = seg(f, 140, 320, ease.smooth);
     return {
-      position: [lerp(-1.8, 2.6, t), lerp(0.9, 2.4, t), lerp(1.8, 3.8, t)],
+      // Wide enough for a 9:16 frame: the 3.2-unit BGA package plus nearby traces stay in view.
+      position: [lerp(-1.8, 4.2, t), lerp(0.9, 4.0, t), lerp(1.8, 6.4, t)],
       target: [0, 0.2, 0],
-      fov: 34,
+      fov: lerp(30, 38, t),
     };
   } else {
     const t = seg(f, 320, 480, ease.macroGlide);
     return {
-      position: [lerp(2.6, 0, t), lerp(2.4, 7.8, t), lerp(3.8, 2.2, t)],
-      target: [0, 0, 0],
-      fov: 36,
+      // Top-down engineering view; in 9:16 this frames about 6 units across (chip, traces, test pads).
+      position: [lerp(4.2, 0, t), lerp(4.0, 13.5, t), lerp(6.4, 4.0, t)],
+      target: [0, 0, lerp(0, 0.4, t)],
+      fov: lerp(38, 40, t),
     };
   }
 };
-

@@ -16,6 +16,21 @@ import { LidarforgeExample, LIDARFORGE_EXAMPLE_SECONDS } from "./kits/lidarforge
 import { CircuitforgeExample, CIRCUITFORGE_EXAMPLE_SECONDS } from "./kits/circuitforge/example/CircuitforgeExample.tsx";
 import { BrickcraftExample, BRICKCRAFT_EXAMPLE_SECONDS } from "./kits/brickcraft/example/BrickcraftExample.tsx";
 import { UrbanforgeExample, URBANFORGE_EXAMPLE_SECONDS } from "./kits/urbanforge/example/UrbanforgeExample.tsx";
+import { AudirabotExample, AUDIRABOT_EXAMPLE_SECONDS } from "./kits/audirabot/example/AudirabotExample.tsx";
+import { DevforgeExample, DEVFORGE_EXAMPLE_SECONDS } from "./kits/devforge/example/DevforgeExample.tsx";
+import { ToyDioramaExample, TOYDIORAMA_EXAMPLE_SECONDS } from "./kits/toydiorama/example/ToyDioramaExample.tsx";
+import { FilmNoirExample, FILMNOIR_EXAMPLE_SECONDS } from "./kits/filmnoir/example/FilmNoirExample.tsx";
+import { WatercolorExample, WATERCOLOR_EXAMPLE_SECONDS } from "./kits/watercolor/example/WatercolorExample.tsx";
+import { FluidforgeExample, FLUIDFORGE_EXAMPLE_SECONDS } from "./kits/fluidforge/example/FluidforgeExample.tsx";
+import { Hd2dExample, HD2D_EXAMPLE_SECONDS } from "./kits/hd2d/example/Hd2dExample.tsx";
+import { MemphisDioramaExample, MEMPHISDIORAMA_EXAMPLE_SECONDS } from "./kits/memphisdiorama/example/MemphisDioramaExample.tsx";
+import { DataPhysicalExample, DATAPHYSICAL_EXAMPLE_SECONDS } from "./kits/dataphysical/example/DataPhysicalExample.tsx";
+import { SatelliteBriefingExample, SATELLITEBRIEFING_EXAMPLE_SECONDS } from "./kits/satellitebriefing/example/SatelliteBriefingExample.tsx";
+import { BackroomsExample, BACKROOMS_EXAMPLE_SECONDS } from "./kits/backrooms/example/BackroomsExample.tsx";
+import { VisualInvestigationExample, VISUALINVESTIGATION_EXAMPLE_SECONDS } from "./kits/visualinvestigation/example/VisualInvestigationExample.tsx";
+import { TradingTerminalExample, TRADINGTERMINAL_EXAMPLE_SECONDS } from "./kits/tradingterminal/example/TradingTerminalExample.tsx";
+import { HistoryMapExample, HISTORYMAP_EXAMPLE_SECONDS } from "./kits/historymap/example/HistoryMapExample.tsx";
+import { IslamicDocumentaryExample, ISLAMICDOCUMENTARY_EXAMPLE_SECONDS } from "./kits/islamicdocumentary/example/IslamicDocumentaryExample.tsx";
 
 // Register each film twice: a preview (540 × 960 @ 30, for approval) and a final (1080 × 1920 @ 60).
 // The 3D renders natively at each size, so the preview is cheap and the final is sharp.
@@ -273,6 +288,276 @@ export const RemotionRoot: React.FC = () => (
       id="UrbanforgeFinal"
       component={UrbanforgeExample}
       durationInFrames={URBANFORGE_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 29: AUDIRABOT (Official 3D Mascot Companion & Telemetry Engine) */}
+    <Composition
+      id="AudirabotPreview"
+      component={AudirabotExample}
+      durationInFrames={AUDIRABOT_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="AudirabotFinal"
+      component={AudirabotExample}
+      durationInFrames={AUDIRABOT_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 30: DEVFORGE (3D Spatial IDE & Game Dev Hustle Engine) */}
+    <Composition
+      id="DevforgePreview"
+      component={DevforgeExample}
+      durationInFrames={DEVFORGE_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="DevforgeFinal"
+      component={DevforgeExample}
+      durationInFrames={DEVFORGE_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 31: TOYDIORAMA (Stylized 3D Toy Diorama & Miniature Theatrical Stage) */}
+    <Composition
+      id="ToyDioramaPreview"
+      component={ToyDioramaExample}
+      durationInFrames={TOYDIORAMA_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="ToyDioramaFinal"
+      component={ToyDioramaExample}
+      durationInFrames={TOYDIORAMA_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 32: FILMNOIR (Classic Cinematic Film Noir & Chiaroscuro) */}
+    <Composition
+      id="FilmNoirPreview"
+      component={FilmNoirExample}
+      durationInFrames={FILMNOIR_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="FilmNoirFinal"
+      component={FilmNoirExample}
+      durationInFrames={FILMNOIR_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 33: WATERCOLOR (European Children's Tale & Storybook Watercolor) */}
+    <Composition
+      id="WatercolorPreview"
+      component={WatercolorExample}
+      durationInFrames={WATERCOLOR_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="WatercolorFinal"
+      component={WatercolorExample}
+      durationInFrames={WATERCOLOR_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 34: FLUIDFORGE (Abstract Fluid Motion & Iridescent Liquid Metal) */}
+    <Composition
+      id="FluidforgePreview"
+      component={FluidforgeExample}
+      durationInFrames={FLUIDFORGE_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="FluidforgeFinal"
+      component={FluidforgeExample}
+      durationInFrames={FLUIDFORGE_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 35: HD2D (HD-2D Diorama & Tilt-Shift Pixel World) */}
+    <Composition
+      id="Hd2dPreview"
+      component={Hd2dExample}
+      durationInFrames={HD2D_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="Hd2dFinal"
+      component={Hd2dExample}
+      durationInFrames={HD2D_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 36: MEMPHISDIORAMA (1980s Ettore Sottsass Architectural Tabletop Model) */}
+    <Composition
+      id="MemphisDioramaPreview"
+      component={MemphisDioramaExample}
+      durationInFrames={MEMPHISDIORAMA_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="MemphisDioramaFinal"
+      component={MemphisDioramaExample}
+      durationInFrames={MEMPHISDIORAMA_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 37: DATAPHYSICAL (3D Data Physicalization & Sculptural Stats) */}
+    <Composition
+      id="DataPhysicalPreview"
+      component={DataPhysicalExample}
+      durationInFrames={DATAPHYSICAL_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="DataPhysicalFinal"
+      component={DataPhysicalExample}
+      durationInFrames={DATAPHYSICAL_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 38: SATELLITEBRIEFING (3D Satellite & OSINT Geospatial Reconnaissance) */}
+    <Composition
+      id="SatelliteBriefingPreview"
+      component={SatelliteBriefingExample}
+      durationInFrames={SATELLITEBRIEFING_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="SatelliteBriefingFinal"
+      component={SatelliteBriefingExample}
+      durationInFrames={SATELLITEBRIEFING_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 39: BACKROOMS (Liminal 3D Corridors & 90s Found Footage) */}
+    <Composition
+      id="BackroomsPreview"
+      component={BackroomsExample}
+      durationInFrames={BACKROOMS_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="BackroomsFinal"
+      component={BackroomsExample}
+      durationInFrames={BACKROOMS_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 40: VISUALINVESTIGATION (Visual Journalism & Forensic Courtroom Desk) */}
+    <Composition
+      id="VisualInvestigationPreview"
+      component={VisualInvestigationExample}
+      durationInFrames={VISUALINVESTIGATION_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="VisualInvestigationFinal"
+      component={VisualInvestigationExample}
+      durationInFrames={VISUALINVESTIGATION_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 41: TRADINGTERMINAL (Institutional Financial Markets & Crypto Telemetry) */}
+    <Composition
+      id="TradingTerminalPreview"
+      component={TradingTerminalExample}
+      durationInFrames={TRADINGTERMINAL_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="TradingTerminalFinal"
+      component={TradingTerminalExample}
+      durationInFrames={TRADINGTERMINAL_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 42: HISTORYMAP (Geopolitical & War History Documentary Map Director) */}
+    <Composition
+      id="HistoryMapPreview"
+      component={HistoryMapExample}
+      durationInFrames={HISTORYMAP_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="HistoryMapFinal"
+      component={HistoryMapExample}
+      durationInFrames={HISTORYMAP_EXAMPLE_SECONDS * final.fps}
+      fps={final.fps}
+      width={final.width}
+      height={final.height}
+    />
+
+    {/* Style 43: ISLAMICDOCUMENTARY (Folk Islam & Islamic Golden Age Motion Director) */}
+    <Composition
+      id="IslamicDocumentaryPreview"
+      component={IslamicDocumentaryExample}
+      durationInFrames={ISLAMICDOCUMENTARY_EXAMPLE_SECONDS * preview.fps}
+      fps={preview.fps}
+      width={preview.width}
+      height={preview.height}
+    />
+    <Composition
+      id="IslamicDocumentaryFinal"
+      component={IslamicDocumentaryExample}
+      durationInFrames={ISLAMICDOCUMENTARY_EXAMPLE_SECONDS * final.fps}
       fps={final.fps}
       width={final.width}
       height={final.height}

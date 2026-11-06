@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "claymation",
+  "name": "Tactile Stop-Motion Claymation & Plasticine Diorama",
+  "kit": "clayworld",
+  "category": "Handcrafted Physical Stop-Motion",
+  "palette": {
+    "background": "#141210",
+    "primary": "#E27D60",
+    "secondary": "#41B3A3",
+    "accent": "#E8A87C",
+    "neutral": "#F4ECE1",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "organic_plasticine_blob",
+    "bevelRadius": 0.15,
+    "polyBudget": "low_to_mid",
+    "silhouette": "chubby_tactile_charming"
+  },
+  "materials": {
+    "type": "clay_plasticine_sss",
+    "roughness": 0.88,
+    "metalness": 0,
+    "subsurfaceScatter": 0.22,
+    "normalMap": "fingerprint_clay_stipple"
+  },
+  "lighting": {
+    "archetype": "tabletop_macro_studio",
+    "keyLight": {
+      "kelvin": 3400,
+      "intensity": 1.3,
+      "angle": [
+        40,
+        40,
+        10
+      ]
+    },
+    "fillLight": {
+      "kelvin": 4800,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 5600,
+      "intensity": 0.9
+    }
+  },
+  "camera": {
+    "type": "stop_motion_macro_rig",
+    "focalLengthMm": 60,
+    "fovDeg": 30,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.4
+    },
+    "motionConstraint": "tabletop_steadycam"
+  },
+  "motion": {
+    "fps": 24,
+    "physicsModel": "squash_and_stretch_clay",
+    "characterCadence": "stepped_12fps_feel"
+  }
+}

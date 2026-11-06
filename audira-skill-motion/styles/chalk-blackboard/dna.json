@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "chalk-blackboard",
+  "name": "Quantum Blackboard & Dusty 3D Chalk Equations",
+  "kit": "chalkcraft",
+  "category": "Theoretical Physics / Education Chalk",
+  "palette": {
+    "background": "#1B2421",
+    "primary": "#FFFFFF",
+    "secondary": "#F4D06F",
+    "accent": "#39A9DB",
+    "neutral": "#839088",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "dusty_chalk_splines",
+    "bevelRadius": 0.01,
+    "polyBudget": "particle_splines",
+    "silhouette": "hand_drawn_tensor_equations"
+  },
+  "materials": {
+    "type": "slate_blackboard_chalk_dust",
+    "roughness": 0.98,
+    "metalness": 0,
+    "normalMap": "slate_rock_microtexture"
+  },
+  "lighting": {
+    "archetype": "lecture_hall_spotlight",
+    "keyLight": {
+      "kelvin": 4200,
+      "intensity": 1.4,
+      "angle": [
+        25,
+        45,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5000,
+      "intensity": 0.4
+    },
+    "rimLight": {
+      "kelvin": 4000,
+      "intensity": 0.5
+    }
+  },
+  "camera": {
+    "type": "chalk_macro_track",
+    "focalLengthMm": 60,
+    "fovDeg": 32,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 2.2
+    },
+    "motionConstraint": "stroke_tracing_glide"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "handwriting_velocity_ease",
+    "characterCadence": "chalk_dust_settle"
+  }
+}

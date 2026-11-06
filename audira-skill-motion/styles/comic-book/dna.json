@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "comic-book",
+  "name": "Comic Book Pop Art & Halftone Dot Action Graphics",
+  "kit": "polyverse",
+  "category": "Pop Art / Halftone Graphic Novel",
+  "palette": {
+    "background": "#FFFFFF",
+    "primary": "#ED1D24",
+    "secondary": "#002B49",
+    "accent": "#FFDE00",
+    "neutral": "#111111",
+    "text": "#000000"
+  },
+  "geometry": {
+    "type": "bold_ink_contour_faceted",
+    "bevelRadius": 0.04,
+    "polyBudget": "low_faceted",
+    "silhouette": "dramatic_comic_punch"
+  },
+  "materials": {
+    "type": "halftone_ben_day_dots",
+    "roughness": 0.95,
+    "metalness": 0,
+    "clearcoat": 0,
+    "normalMap": "newsprint_offset_press"
+  },
+  "lighting": {
+    "archetype": "graphic_hard_sun",
+    "keyLight": {
+      "kelvin": 5500,
+      "intensity": 2,
+      "angle": [
+        45,
+        45,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5500,
+      "intensity": 0.1
+    },
+    "rimLight": {
+      "kelvin": 6500,
+      "intensity": 1
+    }
+  },
+  "camera": {
+    "type": "comic_panel_snap",
+    "focalLengthMm": 45,
+    "fovDeg": 40,
+    "depthOfField": {
+      "enabled": false
+    },
+    "motionConstraint": "panel_transition_cut"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "comic_pop_overshoot",
+    "characterCadence": "punchy_sfx_burst"
+  }
+}

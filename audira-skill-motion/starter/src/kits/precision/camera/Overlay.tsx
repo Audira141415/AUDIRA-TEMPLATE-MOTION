@@ -1,7 +1,7 @@
 // PRECISION Overlay — Minimalist Swiss typography, CMF technical specifications & engineering callouts.
 
 import React from "react";
-import { lerp, seg, ease } from "../core/motion";
+import { seg, ease } from "../core/motion";
 import { PRECISION_PALETTE } from "../lib/palette";
 
 export interface PrecisionOverlayProps {

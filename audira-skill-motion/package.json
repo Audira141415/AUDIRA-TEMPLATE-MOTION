@@ -1,9 +1,10 @@
 {
   "name": "audira-skill-motion",
-  "version": "3.0.0",
+  "version": "4.1.0",
   "private": true,
-  "description": "The Premier Autonomous 3D Cinematic Motion Director for Claude Code & Remotion. By Agus Dwi Rianto (AUDIRA MDA).",
-  "author": "Agus Dwi Rianto <agus@audira.dev>",
+  "description": "The Premier Autonomous 3D Cinematic Motion Director for Claude Code & Remotion. By AUDIRA (Agus Dwi R).",
+  "homepage": "https://audira.my.id/",
+  "author": "AUDIRA (Agus Dwi R) <info@audira.my.id>",
   "license": "Proprietary",
   "type": "module",
   "engines": {
@@ -19,6 +20,7 @@
     "smoke": "npm --prefix starter run smoke",
     "stills": "npm --prefix starter run stills",
     "vo": "npm --prefix starter run vo",
+    "audit:visual": "node starter/scripts/visual-audit.mjs",
     "render:final": "npm --prefix starter run render:final",
     "typecheck": "npm --prefix starter run typecheck"
   },

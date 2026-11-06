@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import * as THREE from "three";
 import { createPlasterModelMaterial, createProjectedDataMaterial } from "../lib/materials";
 import { URBAN_PALETTE } from "../lib/palette";
 

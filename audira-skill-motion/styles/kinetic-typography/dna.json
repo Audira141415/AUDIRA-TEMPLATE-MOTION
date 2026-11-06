@@ -1,0 +1,63 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "kinetic-typography",
+  "name": "Spatial Giant 3D Kinetic Monolith Typography",
+  "kit": "textvoyage",
+  "category": "Motion Graphics / Giant Type",
+  "palette": {
+    "background": "#000000",
+    "primary": "#FFFFFF",
+    "secondary": "#FF3300",
+    "accent": "#7000FF",
+    "neutral": "#1C1C1E",
+    "text": "#FFFFFF"
+  },
+  "geometry": {
+    "type": "extruded_monolith_glyphs",
+    "bevelRadius": 0.05,
+    "polyBudget": "extruded_text",
+    "silhouette": "towering_monolithic_words"
+  },
+  "materials": {
+    "type": "brushed_titanium_concrete",
+    "roughness": 0.4,
+    "metalness": 0.5,
+    "clearcoat": 0.1,
+    "normalMap": "cast_concrete_texture"
+  },
+  "lighting": {
+    "archetype": "monolith_horizon_spot",
+    "keyLight": {
+      "kelvin": 5000,
+      "intensity": 2.2,
+      "angle": [
+        15,
+        30,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 5000,
+      "intensity": 0.2
+    },
+    "rimLight": {
+      "kelvin": 6500,
+      "intensity": 2
+    }
+  },
+  "camera": {
+    "type": "flythrough_glyph_canyon",
+    "focalLengthMm": 20,
+    "fovDeg": 78,
+    "depthOfField": {
+      "enabled": true,
+      "fStop": 4
+    },
+    "motionConstraint": "canyon_flythrough"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "heavy_monolith_tumble",
+    "characterCadence": "percussive_slam"
+  }
+}

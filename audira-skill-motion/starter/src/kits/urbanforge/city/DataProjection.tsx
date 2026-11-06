@@ -1,5 +1,4 @@
 import React from "react";
-import * as THREE from "three";
 import { URBAN_PALETTE } from "../lib/palette";
 
 interface DataProjectionProps {

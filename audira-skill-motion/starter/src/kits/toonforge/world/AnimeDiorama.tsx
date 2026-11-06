@@ -1,7 +1,6 @@
 // TOONFORGE Anime Diorama — stylized anime sky rings and high-speed cloud streaks.
 
 import React from "react";
-import * as THREE from "three";
 import { TOON_PALETTE } from "../lib/palette";
 
 export const AnimeDiorama: React.FC<{ f: number }> = ({ f }) => {
