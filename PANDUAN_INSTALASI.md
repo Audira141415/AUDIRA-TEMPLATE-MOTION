@@ -139,7 +139,13 @@ Jika ingin skill hanya aktif di dalam satu proyek tertentu:
 
 Agar AI Anda memiliki kapabilitas penuh sebagai sutradara otonom dan hasil render identik dengan video demo studio:
 
-### A. Konfigurasi Claude Desktop / Claude Code
+### A. Cara 1 Baris Cepat via Terminal (Claude Code CLI)
+Cukup jalankan satu baris perintah ini di terminal Anda:
+```bash
+claude mcp add audira -e AUDIRA_LICENSE_KEY=KODE_LISENSI_ANDA -- node "<PATH_FOLDER_PROYEK>/mcp-server/src/index.js"
+```
+
+### B. Konfigurasi Manual via File JSON (Claude Desktop / Claude Code)
 Buka file `claude_desktop_config.json`:
 - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
@@ -151,20 +157,23 @@ Tambahkan blok konfigurasi server MCP berikut:
     "audira": {
       "command": "node",
       "args": [
-        "F:/AUDIRA-ALL-SKILL/mcp-server/src/index.js"
-      ]
+        "C:/audira-skill-motion/mcp-server/src/index.js"
+      ],
+      "env": {
+        "AUDIRA_LICENSE_KEY": "AUD-LAB-2026-9A82F1"
+      }
     }
   }
 }
 ```
 
-### B. Konfigurasi di Cursor IDE
+### C. Konfigurasi di Cursor IDE
 1. Buka Cursor → **Settings** (Ikon roda gigi) → **Features** → **MCP Servers**.
 2. Klik **+ Add New MCP Server**.
 3. Masukkan data:
    - **Name:** `audira`
    - **Type:** `command`
-   - **Command:** `node F:/AUDIRA-ALL-SKILL/mcp-server/src/index.js`
+   - **Command:** `node C:/audira-skill-motion/mcp-server/src/index.js`
 4. Status akan berubah menjadi hijau (*Connected*).
 
 ---

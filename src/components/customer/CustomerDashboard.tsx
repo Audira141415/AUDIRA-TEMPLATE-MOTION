@@ -297,10 +297,20 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
         <div className="space-y-6">
           <div className="rounded-3xl border border-line bg-card p-6 space-y-5 shadow-xl">
             <div>
-              <h3 className="text-xl font-bold text-paper flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-accent" />
-                <span>Panduan Aktivasi Lisensi di Claude Code</span>
-              </h3>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h3 className="text-xl font-bold text-paper flex items-center gap-2">
+                  <Terminal className="w-5 h-5 text-accent" />
+                  <span>Panduan Aktivasi Lisensi di Claude Code &amp; 29 Gaya 3D</span>
+                </h3>
+                <Link
+                  href="/panduan"
+                  target="_blank"
+                  className="btn-primary py-1.5 px-3.5 text-xs font-bold inline-flex items-center gap-1.5 shadow-md"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Buka Artifact Panduan &amp; Prompt Studio ➔</span>
+                </Link>
+              </div>
               <p className="text-xs text-muted mt-1">
                 Gunakan kode lisensi ini langsung saat berinteraksi dengan asisten coding Claude Anda untuk mengotomasi pembuatan video 3D.
               </p>
