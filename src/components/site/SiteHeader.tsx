@@ -61,13 +61,20 @@ export const SiteHeader: React.FC = () => {
     <header className="sticky top-0 z-50 border-b border-line bg-ink/90 font-display text-paper backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between gap-4 px-4 md:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label="AUDIRA Motion, beranda">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-accent/40 bg-accent text-sm font-extrabold text-ink shadow-sm">
-            A
-          </span>
-          <span className="whitespace-nowrap text-[17px] font-extrabold tracking-[-0.02em] text-paper">
-            AUDIRA <span className="text-accent">Motion</span>
-          </span>
+        <Link href="/" className="flex items-center gap-3 shrink-0 group" aria-label="AUDIRA Motion, beranda">
+          <img
+            src="/brand/symbol-reversed.svg"
+            alt="Logo PT. AUDIRA MULTIMEDIA DIGITAL"
+            className="h-8 w-auto transition-transform group-hover:scale-105"
+          />
+          <div className="flex flex-col">
+            <span className="whitespace-nowrap text-[16px] sm:text-[17px] font-extrabold tracking-[-0.02em] text-paper leading-tight">
+              AUDIRA <span className="text-accent">Motion</span>
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-wider text-dim leading-none">
+              Multimedia Digital
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation Links */}

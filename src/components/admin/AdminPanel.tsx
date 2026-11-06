@@ -133,19 +133,26 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
       
       {/* Top Welcome & Quick Actions Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-6">
-        <div>
-          <div className="inline-flex items-center gap-2 mb-1">
-            <span className="flex size-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">
-              PORTAL KONTROL PUSAT AUDIRA
-            </span>
+        <div className="flex items-start gap-4">
+          <img
+            src="/brand/symbol-reversed.svg"
+            alt="PT. AUDIRA MULTIMEDIA DIGITAL"
+            className="h-12 w-auto shrink-0 mt-1"
+          />
+          <div>
+            <div className="inline-flex items-center gap-2 mb-1">
+              <span className="flex size-2 rounded-full bg-emerald-400 animate-ping" />
+              <span className="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">
+                PT. AUDIRA MULTIMEDIA DIGITAL • SUPERADMIN CONSOLE
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-paper">
+              Admin Management Console
+            </h2>
+            <p className="text-xs sm:text-sm text-muted">
+              Kelola penjualan lisensi, 29 gaya 3D Remotion, API AI, Voiceover Cartesia, dan pengaturan website.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-paper">
-            Admin Management Console
-          </h2>
-          <p className="text-xs sm:text-sm text-muted">
-            Kelola penjualan lisensi, 29 gaya 3D Remotion, API AI, Voiceover Cartesia, dan pengaturan website.
-          </p>
         </div>
 
         <div className="flex items-center gap-2.5 shrink-0">

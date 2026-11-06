@@ -356,21 +356,28 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
         {/* Header */}
         <div className="flex items-start justify-between border-b border-line pb-4 mb-5">
-          <div className="flex flex-col gap-1">
-            <div className="inline-flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
-              <p className="font-mono text-[11px] uppercase tracking-wider text-accent font-bold">
-                FORMULIR PEMESANAN RESMI
+          <div className="flex items-start gap-3.5">
+            <img
+              src="/brand/symbol-reversed.svg"
+              alt="AUDIRA"
+              className="h-10 w-auto shrink-0 mt-0.5"
+            />
+            <div className="flex flex-col gap-0.5">
+              <div className="inline-flex items-center gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
+                <p className="font-mono text-[10px] uppercase tracking-wider text-accent font-bold">
+                  PT. AUDIRA MULTIMEDIA DIGITAL • CHECKOUT RESMI
+                </p>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-paper">
+                {isDfy ? 'Pesan Jasa Terima Beres AUDIRA' : 'Beli Lisensi AUDIRA Skill Motion 3D'}
+              </h3>
+              <p className="text-xs text-muted">
+                {isDfy 
+                  ? 'Pengerjaan kilat 24 jam · Video 1080p 60 FPS bebas watermark siap posting.' 
+                  : 'Sekali bayar · Lisensi seumur hidup · Bebas royalti untuk klien dan monetisasi.'}
               </p>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-paper">
-              {isDfy ? 'Pesan Jasa Terima Beres AUDIRA' : 'Beli Lisensi AUDIRA Skill Motion 3D'}
-            </h3>
-            <p className="text-xs text-muted">
-              {isDfy 
-                ? 'Pengerjaan kilat 24 jam · Video 1080p 60 FPS bebas watermark siap posting.' 
-                : 'Sekali bayar · Lisensi seumur hidup · Bebas royalti untuk klien dan monetisasi.'}
-            </p>
           </div>
 
           <button

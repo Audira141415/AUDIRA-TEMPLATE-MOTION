@@ -73,7 +73,23 @@ export const AuthForm: React.FC<{ mode: Mode }> = ({ mode }) => {
 
   return (
     <div className="w-full max-w-[420px] rounded-3xl border border-[#2c2b28] bg-[#1c1c1a] p-6 sm:p-8">
-      <h1 className="text-[36px] font-extrabold leading-none tracking-[-0.045em]">{copy.title}</h1>
+      <Link href="/" className="mb-6 flex items-center gap-3 group" aria-label="Beranda AUDIRA">
+        <img
+          src="/brand/symbol-reversed.svg"
+          alt="AUDIRA Multimedia Digital"
+          className="h-10 w-auto transition-transform group-hover:scale-105"
+        />
+        <div className="flex flex-col">
+          <span className="font-extrabold text-base tracking-tight text-[#f4f3f0] leading-tight">
+            AUDIRA <span className="text-accent">Motion</span>
+          </span>
+          <span className="text-[10px] font-mono text-dim uppercase">
+            PT. Audira Multimedia Digital
+          </span>
+        </div>
+      </Link>
+
+      <h1 className="text-[34px] font-extrabold leading-none tracking-[-0.045em]">{copy.title}</h1>
       <p className="mt-3 text-[15px] text-[#b9b6ae]">{copy.lead}</p>
 
       <form onSubmit={submit} className="mt-8 flex flex-col gap-4" noValidate>

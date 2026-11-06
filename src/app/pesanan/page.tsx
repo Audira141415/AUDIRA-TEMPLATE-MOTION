@@ -130,24 +130,31 @@ export default function PesananPage() {
         {/* Top Header & Role Information Banner */}
         <div className="rounded-3xl border border-line bg-gradient-to-br from-card via-[#161514] to-ink p-6 sm:p-8 shadow-2xl space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-6">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-2">
-                <span className="flex size-2 rounded-full bg-emerald-400 animate-ping" />
-                <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
-                  PORTAL PELANGGAN RESMI
-                </span>
-                <span className="rounded-full bg-tile border border-emerald-800/40 px-2.5 py-0.5 text-[10px] font-mono text-emerald-300 font-bold">
-                  ROLE: {user?.role ? user.role.toUpperCase() : 'CUSTOMER / PEMBELI'}
-                </span>
+            <div className="flex items-start gap-4">
+              <img
+                src="/brand/symbol-reversed.svg"
+                alt="PT. AUDIRA MULTIMEDIA DIGITAL"
+                className="h-12 w-auto shrink-0 mt-1"
+              />
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2">
+                  <span className="flex size-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+                    PORTAL PELANGGAN RESMI
+                  </span>
+                  <span className="rounded-full bg-tile border border-emerald-800/40 px-2.5 py-0.5 text-[10px] font-mono text-emerald-300 font-bold">
+                    ROLE: {user?.role ? user.role.toUpperCase() : 'CUSTOMER / PEMBELI'}
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-paper">
+                  Pesanan &amp; Lisensi Digital Saya
+                </h1>
+                <p className="text-xs sm:text-sm text-muted">
+                  {user 
+                    ? `Masuk sebagai ${user.name} (${user.email}). Pantau lisensi aktif dan status pengerjaan video Anda.`
+                    : 'Lacak status pembelian lisensi atau paket video AUDIRA Anda dengan memasukkan No. Pesanan atau WhatsApp.'}
+                </p>
               </div>
-              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-paper">
-                Pesanan &amp; Lisensi Digital Saya
-              </h1>
-              <p className="text-xs sm:text-sm text-muted">
-                {user 
-                  ? `Masuk sebagai ${user.name} (${user.email}). Pantau lisensi aktif dan status pengerjaan video Anda.`
-                  : 'Lacak status pembelian lisensi atau paket video AUDIRA Anda dengan memasukkan No. Pesanan atau WhatsApp.'}
-              </p>
             </div>
 
             {user?.role === 'superadmin' && (

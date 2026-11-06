@@ -11,6 +11,18 @@ export const metadata: Metadata = {
   title: 'AUDIRA MOTION: Satu Ide Jadi Video Viral Siap Upload',
   description:
     'Edit video, motion graphic, sampai naskah viral. Cukup ketik satu ide di browser atau chat Claude, AUDIRA merender video vertikal 1080×1920 60fps dengan suara Indonesia.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({

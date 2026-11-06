@@ -73,14 +73,18 @@ export const SiteFooter: React.FC = () => (
 
     {/* Navigation Links Columns */}
     <div className="mx-auto grid max-w-[1240px] gap-10 px-4 py-14 sm:py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:px-8">
-      <div>
-        <p className="text-[18px] font-extrabold tracking-[-0.02em] text-paper">
-          AUDIRA <span className="text-accent">Motion</span>
-        </p>
-        <p className="mt-3 max-w-[280px] text-[14px] leading-relaxed text-muted">
+      <div className="space-y-3">
+        <Link href="/" className="inline-block group" aria-label="Beranda AUDIRA">
+          <img
+            src="/brand/horizontal-reversed.svg"
+            alt="PT. AUDIRA MULTIMEDIA DIGITAL"
+            className="h-10 w-auto transition-transform group-hover:scale-105"
+          />
+        </Link>
+        <p className="max-w-[280px] text-[13px] leading-relaxed text-muted">
           Ketik satu ide, dapat reel vertikal 9:16 yang sudah ditulis, disuarakan vokal Indonesia, dan dirender 1080p.
         </p>
-        <div className="mt-4">
+        <div>
           <a
             href="https://wa.me/6282112001600"
             target="_blank"

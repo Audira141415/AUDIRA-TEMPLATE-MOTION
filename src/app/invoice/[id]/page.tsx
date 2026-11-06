@@ -83,13 +83,20 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
 
           {/* Header */}
           <div className="border-b border-white/10 pb-8 mb-8 print:border-black/20">
-            <div className="flex items-center gap-2.5 mb-2">
-              <span className="flex size-7 items-center justify-center rounded-xl bg-accent text-ink font-black text-xs print:bg-black print:text-white">
-                AU
-              </span>
+            <div className="flex items-center gap-3.5 mb-2">
+              <img
+                src="/brand/symbol-reversed.svg"
+                alt="PT. AUDIRA MULTIMEDIA DIGITAL"
+                className="h-10 w-auto print:hidden"
+              />
+              <img
+                src="/brand/symbol.svg"
+                alt="PT. AUDIRA MULTIMEDIA DIGITAL"
+                className="h-10 w-auto hidden print:inline-block"
+              />
               <div>
                 <h1 className="font-extrabold text-xl tracking-tight text-white print:text-black">
-                  AUDIRA MULTIMEDIA DIGITAL
+                  PT. AUDIRA MULTIMEDIA DIGITAL
                 </h1>
                 <p className="font-mono text-[11px] text-white/50 print:text-black/60">
                   Official Creative Engine &amp; Commercial 3D Motion Licenses

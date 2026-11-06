@@ -82,23 +82,30 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
       
       {/* Top Welcome Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-6">
-        <div>
-          <div className="inline-flex items-center gap-2 mb-1.5">
-            <span className={`rounded-md border px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
-              isLicenseActive
-                ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-400'
-                : 'border-amber-500/50 bg-amber-950/40 text-amber-400'
-            }`}>
-              ROLE: PELANGGAN RESMI (CUSTOMER)
-            </span>
-            <span className="text-xs text-dim">• ID Akun: {user.id.slice(0, 8)}</span>
+        <div className="flex items-start gap-4">
+          <img
+            src="/brand/symbol-reversed.svg"
+            alt="PT. AUDIRA MULTIMEDIA DIGITAL"
+            className="h-12 w-auto shrink-0 mt-1"
+          />
+          <div>
+            <div className="inline-flex items-center gap-2 mb-1.5">
+              <span className={`rounded-md border px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
+                isLicenseActive
+                  ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-400'
+                  : 'border-amber-500/50 bg-amber-950/40 text-amber-400'
+              }`}>
+                ROLE: PELANGGAN RESMI (CUSTOMER)
+              </span>
+              <span className="text-xs text-dim">• ID Akun: {user.id.slice(0, 8)}</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-paper">
+              Area Pelanggan &amp; Lisensi Anda
+            </h2>
+            <p className="text-xs sm:text-sm text-muted">
+              Selamat datang, <strong className="text-paper">{user.name}</strong> ({user.email}). Kelola lisensi, file template 3D, faktur resmi, dan render video Anda di sini.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-paper">
-            Area Pelanggan &amp; Lisensi Anda
-          </h2>
-          <p className="text-xs sm:text-sm text-muted">
-            Selamat datang, <strong className="text-paper">{user.name}</strong> ({user.email}). Kelola lisensi, file template 3D, faktur resmi, dan render video Anda di sini.
-          </p>
         </div>
 
         <div className="flex items-center gap-2.5 shrink-0">
