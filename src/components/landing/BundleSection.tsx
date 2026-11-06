@@ -10,8 +10,8 @@ interface Props {
 }
 
 const COMPARISON_ROWS = [
-  { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya Penuh' },
-  { feature: 'Engine Remotion 4.0 & CLI Runner', starter: '5 Gaya', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya' },
+  { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Seluruh Gaya (+ Update)', lab: 'Seluruh Gaya Penuh (+ Update)' },
+  { feature: 'Engine Remotion 4.0 & CLI Runner', starter: '5 Gaya Pilihan', master: 'Seluruh Gaya Aktif', lab: 'Seluruh Gaya Aktif' },
   { feature: 'AUDIRA Skill Mesh (Active MCP Server)', starter: '-', master: 'Lite MCP Config', lab: 'Full MCP Suite (Auto-Orchestrate & VO)' },
   { feature: 'Buku Panduan Instalasi & Prompt Studio', starter: 'Termasuk di Akun', master: 'Termasuk di Akun', lab: 'Termasuk + Video Runbook' },
   { feature: 'Perintah Claude Code (/audira-motion)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
@@ -35,12 +35,12 @@ export const BundleSection: React.FC<Props> = ({ onBuyTier }) => {
 
         {/* Heading */}
         <h2 className="max-w-[780px] font-display text-[32px] sm:text-[48px] font-extrabold leading-[1.05] tracking-tight text-paper">
-          29 Signature 3D Styles. <br className="hidden sm:inline" />
+          Koleksi Gaya 3D Signature. <br className="hidden sm:inline" />
           Satu Ekosistem Sutradara Gerak Otonom.
         </h2>
 
         <p className="max-w-[580px] text-[16px] sm:text-[17px] leading-relaxed text-muted">
-          <strong>AUDIRA Creator Lab Ultimate</strong> menyatukan seluruh 29 gaya 3D prosedural, starter codebase Remotion, integrasi AI lokal bebas kuota, serta template prompt eksklusif dalam satu lisensi permanen.
+          <strong>AUDIRA Creator Lab Ultimate</strong> menyatukan seluruh koleksi gaya 3D prosedural, starter codebase Remotion, integrasi AI lokal bebas kuota, serta template prompt eksklusif dalam satu lisensi permanen.
         </p>
 
         {/* Included Items Pills */}

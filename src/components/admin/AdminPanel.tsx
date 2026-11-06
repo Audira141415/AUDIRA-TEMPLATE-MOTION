@@ -151,7 +151,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
               Admin Management Console
             </h2>
             <p className="text-xs sm:text-sm text-muted">
-              Kelola penjualan lisensi, 29 gaya 3D Remotion, API AI, Voiceover Cartesia, dan pengaturan website.
+              Kelola penjualan lisensi, koleksi gaya 3D Remotion, API AI, Voiceover Cartesia, dan pengaturan website.
             </p>
           </div>
         </div>
@@ -227,7 +227,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
             { id: 'orders' as const, label: 'Pesanan & Lisensi', icon: <ShoppingBag className="h-4 w-4" /> },
             { id: 'coupons' as const, label: 'Kupon Diskon', icon: <Tag className="h-4 w-4 text-emerald-400" /> },
             { id: 'site' as const, label: 'Pengaturan & Harga', icon: <Settings className="h-4 w-4" /> },
-            { id: 'catalog' as const, label: 'Katalog 29 Gaya 3D', icon: <Layers className="h-4 w-4" /> },
+            { id: 'catalog' as const, label: 'Katalog Gaya 3D', icon: <Layers className="h-4 w-4" /> },
             { id: 'ai' as const, label: 'Interkoneksi AI', icon: <Cpu className="h-4 w-4" /> },
             { id: 'voice' as const, label: 'Voiceover Cartesia', icon: <Mic className="h-4 w-4" /> },
             { id: 'users' as const, label: 'Pengguna & Role', icon: <Users className="h-4 w-4" /> },
@@ -297,7 +297,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                 <span className="size-2 rounded-full bg-accent animate-pulse" />
               </div>
               <h4 className="font-bold text-sm text-paper">Remotion 4.0 + Three.js</h4>
-              <p className="text-xs text-accent font-mono">29 KITS SIAP RENDER</p>
+              <p className="text-xs text-accent font-mono">MULTI-GAYA SIAP RENDER</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-card border border-line space-y-2 shadow-md">
@@ -417,7 +417,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
                   className="w-full p-3 rounded-xl bg-tile border border-line hover:border-accent flex items-center justify-between text-left group transition-all"
                 >
                   <div>
-                    <span className="font-bold text-paper block group-hover:text-accent">Audit 29 Gaya 3D Remotion</span>
+                    <span className="font-bold text-paper block group-hover:text-accent">Audit Koleksi Gaya 3D Remotion</span>
                     <span className="text-[11px] text-dim">Cek file video MP4 &amp; prompt visual</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-dim group-hover:text-accent group-hover:translate-x-1 transition-transform" />
@@ -469,7 +469,7 @@ export const AdminPanel: React.FC<{ meId: string }> = ({ meId }) => {
         <SiteSettingsTab />
       )}
 
-      {/* TAB 4: 29 3D KITS CATALOG */}
+      {/* TAB 4: 3D KITS CATALOG */}
       {tab === 'catalog' && (
         <CatalogTab />
       )}

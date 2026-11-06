@@ -33,38 +33,38 @@ interface CategoryItem {
 const CATEGORIES: CategoryItem[] = [
   {
     id: 'all',
-    label: 'Semua 29 Gaya',
-    count: 29,
+    label: 'Semua Gaya 3D',
+    count: REELS.length,
     icon: <Layers className="w-4 h-4" />,
   },
   {
     id: 'arsitektur',
     label: 'Edukasi & Arsitektur',
-    count: 8,
+    count: REELS.filter((r) => r.category === 'arsitektur').length,
     icon: <Building2 className="w-4 h-4" />,
   },
   {
     id: 'taktil',
     label: 'Karakter & Taktil',
-    count: 7,
+    count: REELS.filter((r) => r.category === 'taktil').length,
     icon: <Sparkles className="w-4 h-4" />,
   },
   {
     id: 'geometris',
     label: 'Dunia Geometris',
-    count: 3,
+    count: REELS.filter((r) => r.category === 'geometris').length,
     icon: <Box className="w-4 h-4" />,
   },
   {
     id: 'sains',
     label: 'Sains & Medis',
-    count: 4,
+    count: REELS.filter((r) => r.category === 'sains').length,
     icon: <Activity className="w-4 h-4" />,
   },
   {
     id: 'komersial',
     label: 'Teknologi & Komersial',
-    count: 7,
+    count: REELS.filter((r) => r.category === 'komersial').length,
     icon: <Cpu className="w-4 h-4" />,
   },
 ];
@@ -125,7 +125,7 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
           <div className="inline-flex items-center gap-2">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent font-bold">
-              GALERI 29 GAYA 3D SINEMATIK
+              GALERI GAYA 3D SINEMATIK
             </p>
           </div>
           <h2 className="font-display text-[32px] sm:text-[44px] font-bold leading-[1.08] tracking-[-0.03em] text-paper">
@@ -175,7 +175,7 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
           {/* Results Count Badge */}
           <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0">
             <span className="font-mono text-xs text-dim">
-              Menampilkan <strong className="text-accent font-bold">{items.length}</strong> dari 29 gaya
+              Menampilkan <strong className="text-accent font-bold">{items.length}</strong> Koleksi Gaya 3D
             </span>
             {searchQuery && (
               <button
@@ -241,7 +241,7 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
         })}
       </div>
 
-      {/* Grid of 29 3D Video Cards */}
+      {/* Grid of 3D Video Cards */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {items.map((reel) => {
           const isPlaying = activeVideoFile === reel.file;
@@ -389,7 +389,7 @@ export const GallerySection: React.FC<{ activeTab?: GalleryCategory }> = ({ acti
             onClick={() => { setSearchQuery(''); setCurrentTab('all'); }}
             className="btn-primary py-2 px-5 text-xs font-bold"
           >
-            Tampilkan Semua 29 Gaya
+            Tampilkan Semua Gaya 3D
           </button>
         </div>
       )}

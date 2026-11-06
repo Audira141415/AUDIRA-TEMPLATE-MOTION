@@ -76,7 +76,8 @@ export async function POST(req: Request) {
       const nodeVersion = process.version;
       const remotionInstalled = existsSync(path.join(cwd, 'audira-skill-motion', 'node_modules', 'remotion')) ||
                                 existsSync(path.join(cwd, 'node_modules', 'remotion'));
-      const kitsCount = 29;
+      const kitsDir = path.join(cwd, 'audira-skill-motion', 'kits');
+      const kitsCount = existsSync(kitsDir) ? readdirSync(kitsDir).filter(f => !f.startsWith('.')).length : 29;
 
       return NextResponse.json({
         ok: true,

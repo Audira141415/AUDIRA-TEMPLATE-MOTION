@@ -158,7 +158,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
                   <td className="py-3.5">
                     <p className="font-bold text-white print:text-black text-sm">{order.tierName}</p>
                     <p className="text-white/60 print:text-black/70 text-[11px] mt-0.5">
-                      Lisensi Komersial 29 Gaya 3D Remotion 4.0 + Source Code TypeScript + MCP Mesh Claude Code
+                      Lisensi Komersial Koleksi Gaya 3D Remotion 4.0 + Source Code TypeScript + MCP Mesh Claude Code
                     </p>
                     {order.notes && (
                       <p className="text-[11px] text-accent/90 print:text-black/70 mt-1 italic">

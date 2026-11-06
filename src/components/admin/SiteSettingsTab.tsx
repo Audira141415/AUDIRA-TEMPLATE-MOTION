@@ -285,7 +285,7 @@ export const SiteSettingsTab: React.FC = () => {
 
             {/* Master */}
             <div className="p-3 rounded-xl bg-tile border border-line space-y-2">
-              <span className="font-bold text-cyan-300 block">Master Director Pack (29 Gaya)</span>
+              <span className="font-bold text-cyan-300 block">Master Director Pack (Seluruh Gaya 3D)</span>
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <span className="text-[10px] text-dim block mb-0.5">Harga Diskon (Rp)</span>

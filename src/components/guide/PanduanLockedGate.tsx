@@ -58,7 +58,7 @@ export const PanduanLockedGate: React.FC<PanduanLockedGateProps> = ({ user, pend
             {isPendingActivation ? (
               <>Pesanan Anda untuk paket <strong className="text-accent">{pendingOrder?.tierName}</strong> telah kami terima. Namun, akses buku panduan dan prompt studio baru dapat dibuka setelah Superadmin AUDIRA mengaktifkan lisensi Anda.</>
             ) : (
-              <>Buku panduan instalasi Remotion, script auto-installer terminal, dan generator 29 gaya 3D adalah materi eksklusif untuk akun yang telah memiliki lisensi aktif.</>
+              <>Buku panduan instalasi Remotion, script auto-installer terminal, dan generator koleksi gaya 3D adalah materi eksklusif untuk akun yang telah memiliki lisensi aktif.</>
             )}
           </p>
         </div>
@@ -117,7 +117,7 @@ export const PanduanLockedGate: React.FC<PanduanLockedGateProps> = ({ user, pend
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-emerald-400 font-bold">✓</span>
-                <span>Interactive Prompt Studio untuk 29 gaya visual 3D sinematik</span>
+                <span>Interactive Prompt Studio untuk koleksi gaya visual 3D sinematik</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-emerald-400 font-bold">✓</span>

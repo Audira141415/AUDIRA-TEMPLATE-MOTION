@@ -81,7 +81,7 @@ const INITIAL_ORDERS: OrderRecord[] = [
     activatedAt: '2026-11-05T12:05:00.000Z',
     activatedBy: 'official@audira.my.id',
     createdAt: '2026-11-05T12:00:00.000Z',
-    notes: 'Akses 29 Kit + MCP Mesh terkirim'
+    notes: 'Akses Seluruh Kit + MCP Mesh terkirim'
   }
 ];
 

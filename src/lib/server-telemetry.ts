@@ -223,7 +223,7 @@ export async function gatherServerTelemetry(): Promise<ServerTelemetryReport> {
       name: 'Remotion 4.0 Visual 3D Engine',
       status: remotionInstalled ? 'healthy' : 'warning',
       label: remotionInstalled ? 'Ready & Armed' : 'Standalone Mode',
-      details: `29 Kit Gaya 3D terdaftar, ${jobs.length} reel pernah dirender`,
+      details: `Koleksi Kit Gaya 3D terdaftar, ${jobs.length} reel pernah dirender`,
       lastChecked: new Date().toISOString()
     },
     {

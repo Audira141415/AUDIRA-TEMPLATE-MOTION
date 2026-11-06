@@ -56,7 +56,7 @@ export const HowItWorksSection: React.FC = () => {
             Ketik Perintah /audira-motion
           </h3>
           <p className="text-[14px] leading-relaxed text-muted">
-            Ketik ide cerita atau lampirkan file narasi suara (MP3). Agen otomatis menganalisis tempo dan memilih gaya 3D paling tepat dari 29 Signature Styles.
+            Ketik ide cerita atau lampirkan file narasi suara (MP3). Agen otomatis menganalisis tempo dan memilih gaya 3D paling tepat dari seluruh Signature Styles.
           </p>
         </div>
 

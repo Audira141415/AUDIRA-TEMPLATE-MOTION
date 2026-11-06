@@ -387,7 +387,7 @@ export const Remotion3DShowcase: React.FC = () => {
             </p>
           </div>
           <h2 className="font-display text-[32px] sm:text-[46px] font-bold leading-[1.06] tracking-[-0.03em] text-paper">
-            29 Gaya Sinematik 3D Nyata. <br className="hidden sm:inline" />
+            Koleksi Gaya Sinematik 3D Nyata. <br className="hidden sm:inline" />
             <span className="text-accent">Bukan AI Halusinasi, Ini Simulasi Fisika.</span>
           </h2>
           <p className="text-sm sm:text-base text-muted leading-relaxed">
@@ -403,7 +403,7 @@ export const Remotion3DShowcase: React.FC = () => {
             className="inline-flex items-center gap-2 rounded-xl border border-edge bg-tile px-4 py-2.5 text-xs font-bold text-fg-2 hover:bg-tile-2 hover:border-line-strong hover:text-paper transition-all"
           >
             <Compass className="w-4 h-4 text-accent" />
-            <span>{activeTab === 'featured' ? 'Jelajahi Semua 29 Gaya 3D' : 'Tampilkan 4 Unggulan'}</span>
+            <span>{activeTab === 'featured' ? 'Jelajahi Seluruh Gaya 3D' : 'Tampilkan 4 Unggulan'}</span>
           </button>
           
           <a
@@ -528,7 +528,7 @@ export const Remotion3DShowcase: React.FC = () => {
           {/* Sub-group Filters */}
           <div className="flex flex-wrap gap-2 pb-2">
             {[
-              { id: 'all', label: 'Semua 29 Gaya', count: 29 },
+              { id: 'all', label: 'Semua Gaya 3D', count: ALL_20_KITS.length },
               { id: 'arsitektur', label: 'Arsitektur & Mesin', count: 8 },
               { id: 'taktil', label: 'Taktil & Stop-Motion', count: 7 },
               { id: 'sains', label: 'Sains & Medis', count: 4 },

@@ -819,7 +819,7 @@ export const ServerMonitoringTab: React.FC = () => {
                   Uji Engine Remotion 4.0
                 </span>
                 <span className="text-[11px] text-dim">
-                  Verifikasi compiler bundler &amp; kesiapan 29 gaya visual 3D
+                  Verifikasi compiler bundler &amp; kesiapan seluruh koleksi gaya visual 3D
                 </span>
               </div>
               <Play className="w-4 h-4 text-dim group-hover:text-accent group-hover:scale-110 transition-transform" />

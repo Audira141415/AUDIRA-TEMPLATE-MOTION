@@ -28,7 +28,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ items,
         </h2>
 
         <p className="mt-4 text-sm sm:text-base text-muted leading-relaxed">
-          Lihat bagaimana para profesional arsitektur, reviewer gadget, dan pemilik agensi memanfaatkan 29 kit 3D Remotion untuk mendongkrak omset dan visual brand mereka.
+          Lihat bagaimana para profesional arsitektur, reviewer gadget, dan pemilik agensi memanfaatkan koleksi kit 3D Remotion untuk mendongkrak omset dan visual brand mereka.
         </p>
       </div>
 

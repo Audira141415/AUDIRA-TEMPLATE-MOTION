@@ -1,4 +1,4 @@
-// 29 Audira Skill Motion 3D Signature Styles (v3.0.0 Commercial Release)
+// Audira Skill Motion 3D Signature Styles (v3.0.0 Commercial Release)
 export type Motion3DFormat = 
   | 'innerworks'
   | 'buildforge'

@@ -45,7 +45,7 @@ export const StickyCtaBar: React.FC<StickyCtaBarProps> = ({ onOpenOrderModal }) 
                 Audira Skill Motion 3D
               </span>
               <span className="rounded bg-accent/20 border border-accent/40 px-2 py-0.2 font-mono text-[9px] font-bold text-accent">
-                29 GAYA 60 FPS
+                MULTI-GAYA 3D 60 FPS
               </span>
             </div>
             <p className="text-[11px] text-muted">

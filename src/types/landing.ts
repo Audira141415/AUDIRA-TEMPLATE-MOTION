@@ -127,14 +127,14 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     badge: 'Audira Skill Motion 3D · Commercial Release',
     titleLine1: 'Video animasi 3D sinematik 60 FPS.',
     titleHighlight: 'Diarahkan otomatis oleh AI.',
-    description: 'Platform sutradara gerak 3D otonom berbasis Claude Code, Remotion, dan React Three Fiber. Pilih dari 29 Signature 3D Styles: arsitektur CAD, exploded view titanium, miniatur voxel, hingga origami kertas. Render MP4 vertikal 1080×1920 @ 60 FPS bebas watermark.',
+    description: 'Platform sutradara gerak 3D otonom berbasis Claude Code, Remotion, dan React Three Fiber. Pilih dari berbagai Signature 3D Styles: arsitektur CAD, exploded view titanium, miniatur voxel, hingga origami kertas. Render MP4 vertikal 1080×1920 @ 60 FPS bebas watermark.',
     primaryCtaText: 'Pilih Lisensi 3D (Mulai Rp149k)',
     primaryCtaLink: '#produk',
-    secondaryCtaText: 'Lihat 29 Gaya Sinematik',
+    secondaryCtaText: 'Lihat Koleksi Gaya 3D',
     secondaryCtaLink: '#hasil',
     showIdeaForm: true,
     statPills: [
-      '29 Gaya 3D Sinematik 60 FPS',
+      'Koleksi Gaya 3D Sinematik 60 FPS',
       'Remotion 4.0 + Three.js PBR',
       '1080×1920 60 FPS'
     ]
@@ -164,7 +164,7 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
       price: 'Rp299.000',
       originalPrice: 'Rp599.000',
       badge: 'PILIHAN UTAMA SUTRADARA',
-      tagline: 'Seluruh 29 Koleksi Signature 3D Lengkap'
+      tagline: 'Seluruh Koleksi Signature 3D Lengkap'
     },
     lab: {
       name: 'Creator Lab Ultimate',
@@ -238,11 +238,11 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
       metric: '5 Klien UMKM',
       metricLabel: 'Balik modal di hari pertama',
       kitUsed: 'CREATOR LAB ULTIMATE',
-      quote: 'Paket Creator Lab seharga Rp499.000 adalah investasi digital terbaik tahun ini. Sekali bayar, kami punya 29 variasi gaya 3D dan full codebase Remotion untuk melayani video reels puluhan klien tanpa bayar royalti bulanan.'
+      quote: 'Paket Creator Lab seharga Rp499.000 adalah investasi digital terbaik tahun ini. Sekali bayar, kami punya koleksi lengkap variasi gaya 3D dan full codebase Remotion untuk melayani video reels puluhan klien tanpa bayar royalti bulanan.'
     }
   ],
   trustStats: [
-    { value: '29', label: 'Gaya 3D Sinematik', desc: 'Arsitektur, Taktil, Sains & Komersial' },
+    { value: 'MULTI', label: 'Gaya 3D Sinematik', desc: 'Arsitektur, Taktil, Sains & Komersial' },
     { value: '60 FPS', label: 'Fluid Motion', desc: '1080×1920 Vertikal Ultra-Smooth' },
     { value: '100%', label: 'Bebas Royalti', desc: 'Hak Cipta Penuh untuk Klien & Iklan' },
     { value: '< 24 Jam', label: 'SLA Terima Beres', desc: 'Pengerjaan Kilat Studio AUDIRA' }
@@ -251,12 +251,12 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     {
       "id": "faq-1",
       "question": "Apa sebenarnya yang saya dapatkan saat membeli produk ini?",
-      "answer": "Anda membeli Paket Lengkap AI Creative Suite yang terdiri dari: (1) Skill Resmi Claude Code (AUDIRA Motion Director & MCP Mesh) yang melatih Claude bertindak sebagai sutradara gerak 3D otonom di terminal/editor Anda, (2) Koleksi 29 Signature Styles & Source Code 3D Remotion 4.0 berbasis React Three Fiber 60 FPS, (3) Buku Panduan Instalasi Lengkap 5 Langkah & Auto-Installer di portal pelanggan resmi dari nol sampai video pertama Anda berhasil dirender, dan (4) Lisensi Komersial Seumur Hidup (Lifetime) bebas royalti."
+      "answer": "Anda membeli Paket Lengkap AI Creative Suite yang terdiri dari: (1) Skill Resmi Claude Code (AUDIRA Motion Director & MCP Mesh) yang melatih Claude bertindak sebagai sutradara gerak 3D otonom di terminal/editor Anda, (2) Koleksi Lengkap Signature Styles & Source Code 3D Remotion 4.0 berbasis React Three Fiber 60 FPS, (3) Buku Panduan Instalasi Lengkap 5 Langkah & Auto-Installer di portal pelanggan resmi dari nol sampai video pertama Anda berhasil dirender, dan (4) Lisensi Komersial Seumur Hidup (Lifetime) bebas royalti."
     },
     {
       "id": "faq-2",
       "question": "Bagaimana cara menginstal dan mengaktifkan Skill ini ke Claude Code?",
-      "answer": "Sangat praktis dan cepat! Buka terminal di laptop/PC Anda pada folder proyek, lalu daftarkan MCP Server ke Claude Code dengan perintah satu baris. Seketika Claude akan mengenali 29 gaya visual 3D, arsitektur Remotion, dan perintah /audira-motion untuk meriset naskah, menyusun storyboard Three.js, serta merender video secara otomatis. Panduan visual lengkap terbuka otomatis di portal pelanggan Anda setelah pembelian."
+      "answer": "Sangat praktis dan cepat! Buka terminal di laptop/PC Anda pada folder proyek, lalu daftarkan MCP Server ke Claude Code dengan perintah satu baris. Seketika Claude akan mengenali seluruh gaya visual 3D, arsitektur Remotion, dan perintah /audira-motion untuk meriset naskah, menyusun storyboard Three.js, serta merender video secara otomatis. Panduan visual lengkap terbuka otomatis di portal pelanggan Anda setelah pembelian."
     },
     {
       "id": "faq-3",
@@ -265,8 +265,8 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     },
     {
       "id": "faq-4",
-      "question": "Apa saja 29 gaya visual 3D yang didapatkan dan bagaimana Claude memilihnya?",
-      "answer": "Claude dibekali logika cerdas untuk menganalisis topik naskah Anda dan otomatis memilihkan gaya visual paling menjual dari 29 preset: Arsitektur & CAD (BUILDFORGE & DRAFTFORGE), Taktil & Stop-Motion (CLAYFORGE lempung, PAPERFORGE origami, KNITFORGE rajutan), Teknologi & Hardware (PRECISION exploded view titanium, CYBERFORGE hologram Matrix, CHIPFORGE PCB), serta Sains (GEOFORGE lapisan tanah, COSMOFORGE antariksa). Anda juga bisa meminta gaya spesifik langsung ke Claude."
+      "question": "Apa saja koleksi gaya visual 3D yang didapatkan dan bagaimana Claude memilihnya?",
+      "answer": "Claude dibekali logika cerdas untuk menganalisis topik naskah Anda dan otomatis memilihkan gaya visual paling menjual dari berbagai preset: Arsitektur & CAD (BUILDFORGE & DRAFTFORGE), Taktil & Stop-Motion (CLAYFORGE lempung, PAPERFORGE origami, KNITFORGE rajutan), Teknologi & Hardware (PRECISION exploded view titanium, CYBERFORGE hologram Matrix, CHIPFORGE PCB), serta Sains (GEOFORGE lapisan tanah, COSMOFORGE antariksa). Anda juga bisa meminta gaya spesifik langsung ke Claude."
     },
     {
       "id": "faq-5",

@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LogOut, Menu, ShieldCheck, X, Sparkles, ShoppingBag } from 'lucide-react';
 
 export const NAV_LINKS = [
-  { href: '/#hasil', label: '29 Gaya 3D' },
+  { href: '/#hasil', label: 'Galeri Gaya 3D' },
   { href: '/#cara-kerja', label: 'Cara Kerja' },
   { href: '/#produk', label: 'Lisensi' },
   { href: '/#jasa', label: 'Jasa DFY' },
@@ -15,7 +15,7 @@ export const NAV_LINKS = [
 ];
 
 export const ALL_NAV_LINKS = [
-  { href: '/#hasil', label: '29 Gaya 3D Sinematik' },
+  { href: '/#hasil', label: 'Galeri Gaya 3D Sinematik' },
   { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
   { href: '/#produk', label: 'Paket Lisensi Komersial' },
   { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },

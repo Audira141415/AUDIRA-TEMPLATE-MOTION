@@ -147,12 +147,12 @@ export default function LandingPage() {
           />
         )}
 
-        {/* 4. AUDIRA Remotion 3D Engine Showcase (#remotion-3d) - 29 Signature Styles */}
+        {/* 4. AUDIRA Remotion 3D Engine Showcase (#remotion-3d) - Signature Styles */}
         {config.sectionVisibility.showcase3D && (
           <Remotion3DShowcase />
         )}
 
-        {/* 5. Interactive Video Gallery (#hasil) - 29 Signature 3D Styles, 5 Pillars, Single Play Lock */}
+        {/* 5. Interactive Video Gallery (#hasil) - Signature 3D Styles, 5 Pillars, Single Play Lock */}
         {config.sectionVisibility.gallery && (
           <GallerySection activeTab="all" />
         )}

@@ -74,7 +74,7 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) =>
   const claudePrompt = `Saya telah membeli lisensi resmi AUDIRA Motion 3D (Kode: ${activeLicense}).
 Tolong bantu saya setup proyek ini dengan Remotion 4.0:
 1. Hubungkan ke MCP Remotion di folder template
-2. Cek ketersediaan 29 gaya visual 3D
+2. Cek ketersediaan seluruh koleksi gaya visual 3D
 3. Pandu saya membuat video motion pertama saya berdurasi 30 detik format 1080x1920 (9:16).`;
 
   return (
@@ -354,7 +354,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
                   className="w-full p-3 rounded-xl bg-accent/10 border border-accent/40 hover:bg-accent/20 flex items-center justify-between text-left group transition-all"
                 >
                   <div>
-                    <span className="font-bold text-accent block group-hover:underline">Buku Panduan Instalasi &amp; Prompt 29 Gaya</span>
+                    <span className="font-bold text-accent block group-hover:underline">Buku Panduan Instalasi &amp; Prompt Studio 3D</span>
                     <span className="text-[11px] text-muted">Langkah install Remotion, MCP Mesh &amp; Claude Code</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
@@ -425,7 +425,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
         </div>
       )}
 
-      {/* TAB: GUIDE & 29 STYLES (EXCLUSIVE TO PURCHASERS WITH ACTIVE LICENSE) */}
+      {/* TAB: GUIDE & 3D STYLES (EXCLUSIVE TO PURCHASERS WITH ACTIVE LICENSE) */}
       {tab === 'guide' && (
         <div className="space-y-6">
           {!isLicenseActive ? (
@@ -448,7 +448,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h3 className="text-xl font-bold text-paper flex items-center gap-2">
                   <Terminal className="w-5 h-5 text-accent" />
-                  <span>Panduan Aktivasi Lisensi di Claude Code &amp; 29 Gaya 3D</span>
+                  <span>Panduan Aktivasi Lisensi di Claude Code &amp; Koleksi Gaya 3D</span>
                 </h3>
                 {isLicenseActive ? (
                   <button
@@ -614,7 +614,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
                 <span>Pusat Unduhan Asset &amp; Template 3D</span>
               </h3>
               <p className="text-xs text-muted">
-                Unduh file proyek lengkap, paket 29 gaya visual 3D Remotion, dan modul interkoneksi AI.
+                Unduh file proyek lengkap, paket koleksi gaya visual 3D Remotion, dan modul interkoneksi AI.
               </p>
             </div>
 
@@ -623,7 +623,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
                 <span className="font-mono text-[10px] text-accent font-bold uppercase block">FILE PROYEK LENGKAP (.ZIP)</span>
                 <h4 className="font-bold text-paper text-sm">AUDIRA Template Motion Master Bundle</h4>
                 <p className="text-muted text-[11px]">
-                  Berisi 29 komponen gaya 3D Remotion, script render CLI, konfigurasi Next.js, dan aset visual 60 FPS.
+                  Berisi seluruh komponen gaya 3D Remotion, script render CLI, konfigurasi Next.js, dan aset visual 60 FPS.
                 </p>
                 {isLicenseActive ? (
                   <a

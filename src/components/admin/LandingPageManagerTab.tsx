@@ -1401,7 +1401,7 @@ export const LandingPageManagerTab: React.FC = () => {
               { key: 'hero' as const, label: 'Hero Section (#top)', desc: 'Headline, video reels, dan form ide awal' },
               { key: 'pricing' as const, label: 'Paket Lisensi (#produk)', desc: '3 kartu lisensi Starter, Master, Creator Lab' },
               { key: 'showcase3D' as const, label: 'Remotion 3D Showcase (#remotion-3d)', desc: 'Showcase visual procedural Three.js' },
-              { key: 'gallery' as const, label: 'Galeri Video (#hasil)', desc: 'Katalog 29 video reel interaktif' },
+              { key: 'gallery' as const, label: 'Galeri Video (#hasil)', desc: 'Katalog galeri video reel interaktif' },
               { key: 'dfyService' as const, label: 'Jasa Terima Beres (#jasa)', desc: '3 paket DFY 24 jam & Monthly Retainer' },
               { key: 'testimonials' as const, label: 'Testimoni Pembeli (#testimoni)', desc: 'Review kepuasan kreator & 4 angka trust' },
               { key: 'howItWorks' as const, label: 'Cara Kerja (#cara-kerja)', desc: 'Langkah alur kerja 3 step & live demo' },

@@ -45,7 +45,7 @@ const CHECKLIST_STEPS = [
   { id: 'node', stepNum: 1, label: 'Node.js v20+ & FFmpeg aktif di terminal' },
   { id: 'claude_cli', stepNum: 1, label: 'Claude Code CLI / Desktop terinstal & login' },
   { id: 'extract', stepNum: 2, label: 'Folder audira-skill-motion diekstrak & npm install selesai' },
-  { id: 'skill_copy', stepNum: 2, label: 'File SKILL.md & 29 kits terpasang di .claude/skills/' },
+  { id: 'skill_copy', stepNum: 2, label: 'File SKILL.md & seluruh kits terpasang di .claude/skills/' },
   { id: 'mcp', stepNum: 3, label: 'MCP Server AUDIRA terhubung (/mcp status hijau)' },
   { id: 'render', stepNum: 4, label: 'Video MP4 1080p 60 FPS pertama berhasil dirender' },
 ];
@@ -99,7 +99,7 @@ export const InteractiveGuideView: React.FC<InteractiveGuideViewProps> = ({
     }
   }, [initialLicense]);
 
-  // Interactive Prompt Generator State (for all 29 3D styles)
+  // Interactive Prompt Generator State (for all 3D styles)
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedKitId, setSelectedKitId] = useState<string>('cyberforge');
   const [customTopic, setCustomTopic] = useState<string>(
@@ -303,7 +303,7 @@ echo "SELESAI! Ketik 'claude' lalu jalankan '/audira-motion halo' untuk mulai!"`
 <body>
   <div class="container">
     <span class="badge">OFFLINE ARTIFACT GUIDE • KHUSUS PEMBELI RESMI AUDIRA</span>
-    <h1>Panduan Instalasi Mandiri & Katalog 29 Gaya 3D</h1>
+    <h1>Panduan Instalasi Mandiri & Katalog Gaya 3D</h1>
     <p style="color: var(--muted)">Pemilik Lisensi: <strong>${user.name}</strong> (${user.email}) | Kode Lisensi: <code>${licenseInput}</code></p>
 
     <div class="card">
@@ -350,7 +350,7 @@ npm run remotion:render</pre>
     </div>
 
     <div class="card">
-      <h2>Katalog Lengkap 29 Gaya Visual 3D (Cheat Sheet Prompt)</h2>
+      <h2>Katalog Lengkap Gaya Visual 3D (Cheat Sheet Prompt)</h2>
       <div class="kit-grid">
         ${ALL_20_KITS.map((k) => `<div class="kit-item"><strong>${k.name}</strong><span>${k.character}</span></div>`).join('')}
       </div>
@@ -446,7 +446,7 @@ npm run remotion:render</pre>
             </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-paper tracking-tight">
-            Buku Panduan Instalasi Mandiri &amp; Prompt Studio 29 Gaya 3D
+            Buku Panduan Instalasi Mandiri &amp; Prompt Studio Gaya 3D
           </h2>
           <p className="text-xs sm:text-sm text-muted">
             Materi ini dikunci khusus untuk pembeli resmi. Ikuti 5 langkah mandiri di bawah atau unduh script auto-installer untuk merender video 3D pertama Anda.
@@ -715,7 +715,7 @@ npm run remotion:render</pre>
                 { num: 1, href: '#langkah-1', step: '01', title: 'Prasyarat & Claude Code CLI' },
                 { num: 2, href: '#langkah-2', step: '02', title: 'Pasang Skill ke .claude/skills/' },
                 { num: 3, href: '#langkah-3', step: '03', title: 'Aktivasi Otak AI (MCP Mesh)' },
-                { num: 4, href: '#langkah-4', step: '04', title: 'Generator Prompt 29 Gaya & Render' },
+                { num: 4, href: '#langkah-4', step: '04', title: 'Generator Prompt Gaya 3D & Render' },
                 { num: 5, href: '#langkah-5', step: '05', title: 'Diagnosa Kendala (Troubleshooting)' },
               ].map((item) => {
                 const isActive = viewMode === 'wizard' && activeWizardStep === item.num;
@@ -1022,7 +1022,7 @@ node -v && ffmpeg -version && claude --version`}
                   Ekstrak Paket &amp; Pasang Skill ke Claude (<code>.claude/skills/</code>)
                 </h2>
                 <p className="text-sm text-muted mt-1.5 leading-relaxed">
-                  Agar Claude mengenali perintah <strong><code>/audira-motion</code></strong> beserta 29 gaya visual 3D, salin file <strong><code>SKILL.md</code></strong> dan folder <strong><code>kits/</code></strong> ke direktori skill Claude Anda.
+                  Agar Claude mengenali perintah <strong><code>/audira-motion</code></strong> beserta seluruh koleksi gaya visual 3D, salin file <strong><code>SKILL.md</code></strong> dan folder <strong><code>kits/</code></strong> ke direktori skill Claude Anda.
                 </p>
               </div>
 
@@ -1054,12 +1054,12 @@ node -v && ffmpeg -version && claude --version`}
                     <FolderTree className="w-4 h-4 text-accent" />
                     <span>{normalizedMcpPath}/ (Isi Paket ZIP yang Anda Dapatkan)</span>
                   </span>
-                  <span className="text-dim text-[11px]">29 Kit Gaya 3D</span>
+                  <span className="text-dim text-[11px]">Koleksi Kit Gaya 3D</span>
                 </div>
                 <pre className="p-4 sm:p-5 font-mono text-xs text-muted leading-relaxed overflow-x-auto">
 {`${normalizedMcpPath}/
 ├── SKILL.md               # 🌟 FILE UTAMA: Doktrin sutradara otonom & instruksi Claude
-├── kits/                  # 29 Kit Gaya 3D (Buildforge, Precision, Cyberforge, dll.)
+├── kits/                  # Koleksi Kit Gaya 3D (Buildforge, Precision, Cyberforge, dll.)
 ├── mcp-server/            # Server MCP lokal (audira_auto_orchestrate & voiceover)
 ├── starter/               # Template proyek Remotion 4.0 siap pakai
 │   ├── src/               # Source code React Three Fiber, Shaders & Camera rigs
@@ -1397,7 +1397,7 @@ npm install`}
                     }}
                     className="btn-primary py-2.5 px-5 text-xs font-bold inline-flex items-center gap-2"
                   >
-                    <span>Tandai Selesai &amp; Buka Generator Prompt 29 Gaya</span>
+                    <span>Tandai Selesai &amp; Buka Generator Prompt Gaya 3D</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -1406,7 +1406,7 @@ npm install`}
           )}
 
 
-          {/* LANGKAH 04: INTERACTIVE PROMPT GENERATOR (29 GAYA 3D) & RENDER PERTAMA */}
+          {/* LANGKAH 04: INTERACTIVE PROMPT GENERATOR & RENDER PERTAMA */}
           {shouldShowStep(4) && (
             <section id="langkah-4" className="scroll-mt-24 space-y-6 rounded-3xl border border-line bg-card p-6 sm:p-8 shadow-xl">
               <div className="flex items-center justify-between gap-2">
@@ -1415,7 +1415,7 @@ npm install`}
                     04
                   </span>
                   <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
-                    LANGKAH 04 DARI 05 • STUDIO GENERATOR PROMPT 29 GAYA 3D
+                    LANGKAH 04 DARI 05 • STUDIO GENERATOR PROMPT GAYA 3D
                   </span>
                 </div>
                 <span className="font-mono text-[11px] text-emerald-400 font-bold">Siap Pakai!</span>
@@ -1423,10 +1423,10 @@ npm install`}
 
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-paper">
-                  Generator Prompt Interaktif (29 Gaya 3D) &amp; Render MP4
+                  Generator Prompt Interaktif &amp; Render MP4
                 </h2>
                 <p className="text-sm text-muted mt-1 leading-relaxed">
-                  Pilih salah satu dari <strong>29 Gaya Visual 3D</strong> di bawah, masukkan ide topik Anda, lalu salin prompt sutradara yang dihasilkan secara otomatis!
+                  Pilih salah satu dari <strong>Koleksi Gaya Visual 3D</strong> di bawah, masukkan ide topik Anda, lalu salin prompt sutradara yang dihasilkan secara otomatis!
                 </p>
               </div>
 
@@ -1457,14 +1457,14 @@ npm install`}
                   <div className="flex items-center gap-2">
                     <Wand2 className="w-4 h-4 text-accent" />
                     <h3 className="font-bold text-base text-paper">
-                      Interactive Prompt Builder • 29 Signature Styles
+                      Interactive Prompt Builder • Signature Styles
                     </h3>
                   </div>
 
                   {/* Category Filter Pills */}
                   <div className="flex flex-wrap gap-1">
                     {[
-                      { id: 'all', label: 'Semua (29)' },
+                      { id: 'all', label: 'Semua Gaya' },
                       { id: 'arsitektur', label: 'Arsitektur & Mesin' },
                       { id: 'taktil', label: 'Taktil & Karakter' },
                       { id: 'sains', label: 'Sains & Produk' },

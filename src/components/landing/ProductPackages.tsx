@@ -316,7 +316,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                 aria-label="Master Director Pack Preview: Cyberforge"
               />
               <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-cyan-400 text-black font-mono text-[10px] font-bold uppercase z-10">
-                SEMUA 29 GAYA 3D
+                SELURUH KOLEKSI GAYA 3D
               </span>
             </figure>
           </div>
@@ -359,7 +359,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              {pricingConfig?.master.tagline ?? 'Seluruh 29 gaya 3D mandiri: Arsitektur, Taktil, Origami, Claymation, Voxel, Low-Poly, Mikroskop Cryo-EM, Kaligrafi Ink, hingga Sirkuit PCB.'}
+              {pricingConfig?.master.tagline ?? 'Seluruh koleksi gaya 3D mandiri & update berkala: Arsitektur, Taktil, Origami, Claymation, Voxel, Low-Poly, Mikroskop Cryo-EM, Kaligrafi Ink, hingga Sirkuit PCB.'}
             </p>
           </div>
 
@@ -367,7 +367,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
           <ul className="flex flex-col gap-3 text-[14px] text-fg-2">
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Akses penuh seluruh 29 Kit Gaya 3D Signature</span>
+              <span>Akses penuh seluruh Kit Gaya 3D Signature &amp; Update Mendatang</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
@@ -411,7 +411,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
                 }}
                 className="text-xs font-semibold text-muted hover:text-cyan-400 transition-colors"
               >
-                Jelajahi 29 gaya ➔
+                Jelajahi seluruh gaya ➔
               </a>
               <a
                 href="https://wa.me/6282112001600?text=Halo%20Tim%20AUDIRA,%20saya%20tertarik%20dengan%20Paket%20Master%20Director%20(Rp299.000)"
@@ -500,7 +500,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
             </div>
 
             <p className="text-[14px] leading-relaxed text-muted">
-              {pricingConfig?.lab.tagline ?? 'Seluruh 29 Gaya 3D + Starter Repo Codebase + Brand Kit (`audira-brand.json`) + Integrasi AI Lokal Bebas Kuota + VIP Support 1-on-1.'}
+              {pricingConfig?.lab.tagline ?? 'Seluruh Koleksi Gaya 3D + Starter Repo Codebase + Brand Kit (`audira-brand.json`) + Integrasi AI Lokal Bebas Kuota + VIP Support 1-on-1.'}
             </p>
           </div>
 
@@ -508,7 +508,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
           <ul className="flex flex-col gap-3 text-[14px] text-fg-2">
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <span>Semua 29 Gaya 3D + Full Source Codebase Remotion</span>
+              <span>Seluruh Koleksi Gaya 3D + Full Source Codebase Remotion</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
@@ -569,7 +569,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-line-strong bg-card px-6 py-5 sm:px-8">
         <div className="max-w-[680px]">
           <p className="text-[16px] sm:text-[17px] leading-normal text-fg-2 font-medium">
-            Mau semua 29 gaya sinematik 3D, starter codebase Remotion, dan AI lokal tanpa batas?
+            Mau seluruh koleksi gaya sinematik 3D, starter codebase Remotion, dan AI lokal tanpa batas?
           </p>
           <p className="text-xs text-muted mt-1">
             Ambil <span className="text-accent font-bold">AUDIRA Creator Lab Ultimate</span> cuma tambah Rp200.000 dari Master Director Pack!

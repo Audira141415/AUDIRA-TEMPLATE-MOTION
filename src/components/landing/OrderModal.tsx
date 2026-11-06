@@ -60,10 +60,10 @@ const TIERS: Record<ProductTier, TierInfo> = {
     name: 'Master Director Pack',
     price: 'Rp299.000',
     originalPrice: 'Rp599.000',
-    badge: 'SEMUA 29 GAYA 3D',
+    badge: 'SELURUH KOLEKSI GAYA 3D',
     accentColor: 'text-cyan-400 border-cyan-400',
     highlights: [
-      'Semua 29 Gaya 3D Sinematik Lengkap',
+      'Seluruh Koleksi Gaya 3D Lengkap + Update',
       'Bundling AUDIRA Skill Mesh (MCP Server)',
       'Autonomous Director Claude Code (Pilih Gaya Otomatis)',
       'Buku Panduan Lengkap + Audio Sync (di Portal Pelanggan)'
@@ -77,7 +77,7 @@ const TIERS: Record<ProductTier, TierInfo> = {
     badge: 'PALING LARIS • FULL SUITE',
     accentColor: 'text-amber-400 border-amber-400',
     highlights: [
-      'Semua 29 Gaya 3D + Full Source Codebase Remotion',
+      'Seluruh Koleksi Gaya 3D + Full Source Codebase Remotion',
       'AUDIRA Skill Mesh (Full Agentic Director Engine)',
       'Buku Panduan Lengkap + Video Walkthrough (di Portal Pelanggan)',
       'Garansi Setup 1-on-1 WhatsApp Tim AUDIRA'

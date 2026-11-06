@@ -9,7 +9,7 @@ const COLUMNS = [
       { href: '/#produk', label: 'Paket Lisensi 3D' },
       { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },
       { href: '/#bundle', label: 'Creator Lab Ultimate' },
-      { href: '/#hasil', label: 'Galeri 29 Gaya 3D' },
+      { href: '/#hasil', label: 'Galeri Gaya 3D Sinematik' },
     ],
   },
   {

@@ -9,7 +9,7 @@ import { SiteFooter } from '@/components/site/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'Buku Panduan & Setup 3D · Khusus Pemilik Lisensi AUDIRA Motion',
-  description: 'Panduan mandiri instalasi Remotion 4.0, Claude Code Skill, aktivasi MCP mesh, dan studio prompt 29 gaya 3D khusus pembeli resmi.',
+  description: 'Panduan mandiri instalasi Remotion 4.0, Claude Code Skill, aktivasi MCP mesh, dan studio prompt koleksi gaya 3D khusus pembeli resmi.',
   robots: { index: false }
 };
 

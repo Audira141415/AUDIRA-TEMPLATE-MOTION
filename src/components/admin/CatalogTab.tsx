@@ -51,15 +51,15 @@ export const CatalogTab: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-xl font-bold text-paper">Katalog &amp; Manajemen 29 Gaya 3D Remotion</h3>
+          <h3 className="text-xl font-bold text-paper">Katalog &amp; Manajemen Koleksi Gaya 3D Remotion</h3>
           <p className="text-xs text-muted">
-            Pantau status file MP4, thumbnail, prompt sutradara, dan target industri untuk seluruh 29 signature kits.
+            Pantau status file MP4, thumbnail, prompt sutradara, dan target industri untuk seluruh signature kits.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/80 px-3 py-1.5 rounded-xl font-bold">
-            29/29 Kits Aktif &amp; Terverifikasi
+            Semua Kit Aktif &amp; Terus Bertambah
           </span>
         </div>
       </div>
@@ -68,12 +68,12 @@ export const CatalogTab: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 rounded-2xl border border-line bg-card">
         <div className="flex flex-wrap items-center gap-1.5">
           {[
-            { id: 'all' as GalleryCategory, label: 'Semua (29)' },
-            { id: 'arsitektur' as GalleryCategory, label: 'Arsitektur (8)' },
-            { id: 'taktil' as GalleryCategory, label: 'Taktil & Karakter (7)' },
-            { id: 'geometris' as GalleryCategory, label: 'Geometris (3)' },
-            { id: 'sains' as GalleryCategory, label: 'Sains & Medis (4)' },
-            { id: 'komersial' as GalleryCategory, label: 'Komersial & Tech (7)' },
+            { id: 'all' as GalleryCategory, label: 'Semua Gaya' },
+            { id: 'arsitektur' as GalleryCategory, label: 'Arsitektur' },
+            { id: 'taktil' as GalleryCategory, label: 'Taktil & Karakter' },
+            { id: 'geometris' as GalleryCategory, label: 'Geometris' },
+            { id: 'sains' as GalleryCategory, label: 'Sains & Medis' },
+            { id: 'komersial' as GalleryCategory, label: 'Komersial & Tech' },
           ].map((cat) => (
             <button
               key={cat.id}
@@ -102,7 +102,7 @@ export const CatalogTab: React.FC = () => {
         </div>
       </div>
 
-      {/* Grid of 29 Kits */}
+      {/* Grid of Kits */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredReels.map((reel) => {
           const isPlaying = activeVideo === reel.file;

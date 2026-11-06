@@ -152,7 +152,7 @@ export const SystemTab: React.FC = () => {
           <div className="p-3 rounded-xl bg-tile border border-line">
             <span className="text-dim font-mono text-[10px] uppercase block">Video Engine</span>
             <span className="font-bold text-paper mt-0.5 block">Remotion 4.0 + Three.js</span>
-            <span className="text-[10px] text-accent font-mono">29 Gaya Siap Render</span>
+            <span className="text-[10px] text-accent font-mono">Koleksi Gaya Siap Render</span>
           </div>
 
           <div className="p-3 rounded-xl bg-tile border border-line">
