@@ -17,7 +17,9 @@ import {
   Terminal,
   Zap,
   Layers,
-  Film
+  Film,
+  Smartphone,
+  Tv
 } from 'lucide-react';
 
 export interface VideoTutorialEpisode {
@@ -130,6 +132,7 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
   const [isMuted, setIsMuted] = useState(false);
   const [copiedCmd, setCopiedCmd] = useState(false);
+  const [playerSizeMode, setPlayerSizeMode] = useState<'split' | 'jumbo'>('split');
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -200,35 +203,69 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
   };
 
   return (
-    <div className="rounded-3xl border-2 border-line bg-card p-5 sm:p-7 shadow-2xl space-y-6 font-display text-paper">
+    <div className="rounded-3xl border-2 border-line bg-card p-4 sm:p-6 shadow-2xl space-y-5 font-display text-paper">
       
-      {/* Top Episode Selector Tabs */}
-      <div className="space-y-2">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line pb-3">
-          <div className="flex items-center gap-2">
-            <span className="flex size-7 items-center justify-center rounded-xl bg-accent/20 border border-accent/40 text-accent font-mono text-xs font-bold">
+      {/* Top Episode Selector Tabs & Layout Mode Switcher */}
+      <div className="space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line pb-3">
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-8 items-center justify-center rounded-xl bg-accent/20 border border-accent/40 text-accent font-mono text-xs font-bold shrink-0">
               <Film className="w-4 h-4" />
             </span>
             <div>
-              <h3 className="text-base sm:text-lg font-black text-paper tracking-tight flex items-center gap-2">
-                <span>Video Walkthrough Resmi: Seri Pasang AUDIRA</span>
-                <span className="rounded bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 font-mono text-[10px] font-bold text-emerald-400 uppercase">
-                  3 EPISODE LENGKAP
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="text-base sm:text-lg font-black text-paper tracking-tight">
+                  Video Walkthrough Resmi: Seri Pasang AUDIRA
+                </h3>
+                <span className="rounded-full bg-accent/20 border border-accent/40 px-2 py-0.5 font-mono text-[10px] font-bold text-accent uppercase">
+                  9:16 VERTICAL 1080P
                 </span>
-              </h3>
+              </div>
               <p className="text-xs text-muted">
-                Dibuat langsung oleh tim AUDIRA dengan visual resolusi tinggi dan panduan langkah per langkah.
+                Resolusi vertikal asli (1080x1920) sesuai format reels/shorts tutorial layar penuh.
               </p>
             </div>
           </div>
 
-          <div className="text-xs text-dim font-mono">
-            Episode Aktif: <strong className="text-accent">{activeEpisode.episodeNum} / 03</strong>
+          <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+            {/* Player View Mode Toggle */}
+            <div className="inline-flex items-center p-1 rounded-xl bg-ink border border-line text-xs font-mono">
+              <button
+                type="button"
+                onClick={() => setPlayerSizeMode('split')}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition-all ${
+                  playerSizeMode === 'split' 
+                    ? 'bg-accent text-ink shadow' 
+                    : 'text-dim hover:text-paper'
+                }`}
+                title="Tampilkan Berdampingan dengan Daftar Chapter"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Berdampingan</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setPlayerSizeMode('jumbo')}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition-all ${
+                  playerSizeMode === 'jumbo' 
+                    ? 'bg-accent text-ink shadow' 
+                    : 'text-dim hover:text-paper'
+                }`}
+                title="Tampilkan Video Ukuran Jumbo di Tengah"
+              >
+                <Tv className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Mode Jumbo</span>
+              </button>
+            </div>
+
+            <div className="text-xs text-dim font-mono hidden md:block">
+              Episode: <strong className="text-accent">{activeEpisode.episodeNum}/03</strong>
+            </div>
           </div>
         </div>
 
         {/* Episode Chips */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           {TUTORIAL_EPISODES.map((ep) => {
             const isSelected = selectedEpId === ep.id;
             return (
@@ -265,15 +302,28 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
       </div>
 
       {/* Main Video Cinema Box & Chapters */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className={`grid gap-6 items-start ${
+        playerSizeMode === 'split' 
+          ? 'grid-cols-1 lg:grid-cols-12' 
+          : 'grid-cols-1 max-w-2xl mx-auto'
+      }`}>
         
-        {/* Video Player Column (8 cols) */}
-        <div className="lg:col-span-8 space-y-3">
-          <div className="relative rounded-2xl overflow-hidden border border-line bg-black shadow-2xl aspect-video group">
+        {/* Video Player Column (Takes 5 cols on lg split mode, centered on mobile/jumbo) */}
+        <div className={`${
+          playerSizeMode === 'split' ? 'lg:col-span-5' : 'w-full'
+        } flex flex-col items-center space-y-3`}>
+          
+          {/* Vertical 9:16 Video Player Container (Strictly Matches Native 1080x1920 Resolution) */}
+          <div className={`relative rounded-3xl overflow-hidden border-2 border-accent/40 bg-black shadow-2xl aspect-[9/16] group ring-1 ring-white/10 w-full ${
+            playerSizeMode === 'split' 
+              ? 'max-w-[380px] sm:max-w-[410px]' 
+              : 'max-w-[440px] sm:max-w-[480px]'
+          } mx-auto transition-all`}>
+            
             <video
               ref={videoRef}
               src={activeEpisode.videoUrl}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain bg-black"
               playsInline
               onTimeUpdate={() => {
                 if (videoRef.current) {
@@ -288,25 +338,37 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
+              onClick={togglePlay}
             />
+
+            {/* Top Video Overlay Badge */}
+            <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none z-10">
+              <span className="px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold text-accent shadow">
+                EP {activeEpisode.episodeNum} • 9:16 VERTICAL 1080p
+              </span>
+              <span className="px-2 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[10px] font-mono text-paper font-semibold shadow">
+                {activeEpisode.durationLabel}
+              </span>
+            </div>
 
             {/* Big Play Overlay (when paused) */}
             {!isPlaying && (
               <div 
                 onClick={togglePlay}
-                className="absolute inset-0 bg-black/45 backdrop-blur-[2px] flex items-center justify-center cursor-pointer transition-opacity group-hover:bg-black/35"
+                className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center cursor-pointer transition-opacity group-hover:bg-black/30 z-10"
               >
-                <div className="flex size-16 sm:size-20 items-center justify-center rounded-3xl bg-accent text-ink shadow-2xl shadow-orange-950/60 transition-transform group-hover:scale-110">
+                <div className="flex size-16 sm:size-20 items-center justify-center rounded-3xl bg-accent text-ink shadow-2xl shadow-orange-950/80 transition-transform group-hover:scale-110">
                   <Play className="w-8 h-8 fill-ink ml-1" />
                 </div>
               </div>
             )}
 
             {/* Custom Bottom Control Bar */}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent p-3 pt-6 flex flex-col gap-2 opacity-95">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/85 to-transparent p-3 sm:p-4 pt-10 flex flex-col gap-2.5 z-20 opacity-95 group-hover:opacity-100 transition-opacity">
+              
               {/* Progress Slider */}
               <div 
-                className="relative h-2 w-full bg-white/20 rounded-full cursor-pointer overflow-hidden"
+                className="relative h-2 w-full bg-white/25 hover:bg-white/35 rounded-full cursor-pointer overflow-hidden transition-all"
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const pos = (e.clientX - rect.left) / rect.width;
@@ -320,13 +382,14 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
                 />
               </div>
 
-              {/* Control Buttons */}
+              {/* Control Buttons Row */}
               <div className="flex items-center justify-between text-xs text-white">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <button 
                     type="button" 
                     onClick={togglePlay}
                     className="p-1 text-white hover:text-accent transition-colors"
+                    title={isPlaying ? 'Jeda Video' : 'Putar Video'}
                   >
                     {isPlaying ? <Pause className="w-5 h-5 fill-white" /> : <Play className="w-5 h-5 fill-white" />}
                   </button>
@@ -335,7 +398,7 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
                     type="button"
                     onClick={() => handleSeek(0)}
                     className="p-1 text-white/70 hover:text-white transition-colors"
-                    title="Ulangi dari awal"
+                    title="Ulangi dari awal (00:00)"
                   >
                     <RotateCcw className="w-4 h-4" />
                   </button>
@@ -344,21 +407,22 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
                     type="button"
                     onClick={toggleMute}
                     className="p-1 text-white/70 hover:text-white transition-colors"
+                    title={isMuted ? 'Nyalakan Suara' : 'Bisukan Suara'}
                   >
-                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                    {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4" />}
                   </button>
 
-                  <span className="font-mono text-[11px] text-white/80">
+                  <span className="font-mono text-[10px] sm:text-[11px] text-white/90">
                     {fmtTime(currentTime)} / {fmtTime(duration || activeEpisode.durationSec)}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={cycleSpeed}
-                    className="font-mono text-[11px] font-bold px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 transition-colors"
-                    title="Kecepatan Video"
+                    className="font-mono text-[11px] font-bold px-2 py-0.5 rounded bg-white/15 hover:bg-white/25 transition-colors"
+                    title="Atur Kecepatan Putar"
                   >
                     {playbackSpeed}x
                   </button>
@@ -373,7 +437,7 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
                       }
                     }}
                     className="p-1 text-white/70 hover:text-white transition-colors"
-                    title="Layar Penuh"
+                    title="Layar Penuh (Fullscreen)"
                   >
                     <Maximize2 className="w-4 h-4" />
                   </button>
@@ -382,14 +446,24 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
             </div>
           </div>
 
-          {/* Episode Info & Quick Actions */}
-          <div className="rounded-2xl border border-line bg-tile p-4 space-y-2.5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <p className="text-[11px] font-mono text-dim text-center">
+            *Klik video untuk play/pause, klik tombol ⛶ untuk layar penuh monitor.
+          </p>
+        </div>
+
+        {/* Video Chapters & Timeline Column (Takes 7 cols on lg split mode) */}
+        <div className={`${
+          playerSizeMode === 'split' ? 'lg:col-span-7' : 'w-full'
+        } space-y-4`}>
+          
+          {/* Episode Info & Quick Actions Card */}
+          <div className="rounded-2xl border border-line bg-tile p-4 sm:p-5 space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
               <div>
-                <span className="font-mono text-[10px] uppercase font-bold text-accent">
-                  EPISODE {activeEpisode.episodeNum}: {activeEpisode.badge}
+                <span className="font-mono text-[10px] uppercase font-bold text-accent block">
+                  EPISODE {activeEpisode.episodeNum} • {activeEpisode.badge}
                 </span>
-                <h4 className="text-base font-bold text-paper">
+                <h4 className="text-base sm:text-lg font-bold text-paper">
                   {activeEpisode.title}
                 </h4>
               </div>
@@ -411,8 +485,8 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
               {activeEpisode.subtitle}
             </p>
 
-            <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-line-soft">
-              <span className="text-[11px] font-mono text-dim">Alat Terkait:</span>
+            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft">
+              <span className="text-[11px] font-mono text-dim">Alat / Komponen:</span>
               {activeEpisode.tools.map((tool, idx) => (
                 <span key={idx} className="rounded-md bg-ink border border-line px-2 py-0.5 font-mono text-[10px] text-paper/80">
                   {tool}
@@ -420,20 +494,18 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Video Chapters & Timeline Column (4 cols) */}
-        <div className="lg:col-span-4 space-y-3">
-          <div className="rounded-2xl border border-line bg-card p-4 space-y-3 shadow-lg">
+          {/* Interactive Chapters List */}
+          <div className="rounded-2xl border border-line bg-card p-4 sm:p-5 space-y-3 shadow-lg">
             <div className="flex items-center justify-between border-b border-line pb-2.5">
-              <span className="font-mono text-[11px] uppercase font-bold text-paper flex items-center gap-1.5">
-                <ListOrdered className="w-3.5 h-3.5 text-accent" />
-                <span>DAFTAR CHAPTER ({activeEpisode.chapters.length})</span>
+              <span className="font-mono text-xs uppercase font-bold text-paper flex items-center gap-1.5">
+                <ListOrdered className="w-4 h-4 text-accent" />
+                <span>DAFTAR CHAPTER EPISODE {activeEpisode.episodeNum} ({activeEpisode.chapters.length})</span>
               </span>
-              <span className="text-[10px] text-dim font-mono">Klik untuk lompat</span>
+              <span className="text-[10px] text-dim font-mono">Klik untuk lompat video</span>
             </div>
 
-            <div className="space-y-1.5 max-h-[340px] overflow-y-auto pr-1">
+            <div className="space-y-1.5 max-h-[380px] overflow-y-auto pr-1">
               {activeEpisode.chapters.map((ch, idx) => {
                 const isCurrent = currentTime >= ch.timeSec && (
                   idx === activeEpisode.chapters.length - 1 || currentTime < activeEpisode.chapters[idx + 1].timeSec
@@ -451,7 +523,7 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
                     }`}
                   >
                     <span className={`font-mono text-[11px] font-bold px-1.5 py-0.5 rounded shrink-0 ${
-                      isCurrent ? 'bg-accent text-ink' : 'bg-ink text-dim'
+                      isCurrent ? 'bg-accent text-ink font-black' : 'bg-ink text-dim'
                     }`}>
                       {ch.timeLabel}
                     </span>
@@ -468,10 +540,10 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
               })}
             </div>
 
-            {/* Takeaways Pill Box */}
-            <div className="pt-2 border-t border-line space-y-1.5 text-[11px]">
+            {/* Takeaways Box */}
+            <div className="pt-3 border-t border-line space-y-1.5 text-[11px]">
               <span className="font-mono text-[10px] uppercase font-bold text-dim block">
-                POIN PENTING EPISODE INI:
+                POIN PENTING &amp; KUNCI SUKSES:
               </span>
               <ul className="space-y-1 text-muted">
                 {activeEpisode.keyTakeaways.map((tip, i) => (
@@ -483,6 +555,7 @@ export const VideoTutorialPlayer: React.FC<VideoTutorialPlayerProps> = ({
               </ul>
             </div>
           </div>
+
         </div>
 
       </div>

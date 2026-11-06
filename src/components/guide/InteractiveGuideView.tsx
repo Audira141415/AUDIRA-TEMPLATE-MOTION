@@ -758,38 +758,11 @@ npm run remotion:render</pre>
 
           {/* SECTION VIDEO WALKTHROUGH RESMI (EPISODE 01, 02, 03) */}
           {(viewMode === 'full' || activeWizardStep === 0) && (
-            <section id="video-tutorial" className="scroll-mt-24 space-y-4">
-              <div className="rounded-3xl border-2 border-accent/40 bg-gradient-to-r from-accent/15 via-card to-card p-5 sm:p-7 shadow-2xl">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line pb-4 mb-5">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="flex size-2 rounded-full bg-red-500 animate-pulse" />
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
-                        VIDEO WALKTHROUGH RESMI AUDIRA (EPISODE 01 - 03)
-                      </span>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-black text-paper tracking-tight">
-                      Panduan Visual Step-by-Step dari Rekaman Asli
-                    </h3>
-                    <p className="text-xs text-muted mt-1 leading-relaxed">
-                      Tonton 3 episode berurutan: pasang skill, koneksi MCP mesh, dan praktik render video 3D 1080p 60 FPS.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
-                    <span className="rounded-xl border border-line bg-tile px-3 py-1.5 font-mono text-[11px] text-paper font-semibold">
-                      1080p • 60 FPS
-                    </span>
-                    <span className="rounded-xl border border-accent/40 bg-accent/20 px-3 py-1.5 font-mono text-[11px] text-accent font-bold">
-                      3 Episode
-                    </span>
-                  </div>
-                </div>
-
-                <VideoTutorialPlayer 
-                  initialEpisodeId={activeVideoEpisode}
-                  onEpisodeChange={(ep) => setActiveVideoEpisode(ep)}
-                />
-              </div>
+            <section id="video-tutorial" className="scroll-mt-24">
+              <VideoTutorialPlayer 
+                initialEpisodeId={activeVideoEpisode}
+                onEpisodeChange={(ep) => setActiveVideoEpisode(ep)}
+              />
             </section>
           )}
 
