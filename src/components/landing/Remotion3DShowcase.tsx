@@ -95,7 +95,7 @@ export interface KitCatalogItem {
   sampleImg: string;
 }
 
-export const ALL_20_KITS: KitCatalogItem[] = [
+export const ALL_3D_KITS: KitCatalogItem[] = [
   {
     id: 'pixelstory',
     name: 'PIXELSTORY',
@@ -356,6 +356,132 @@ export const ALL_20_KITS: KitCatalogItem[] = [
     promptExample: '/audira-motion Tipografi kinetik 3D huruf tebal meluncur di ruang gelap dengan partikel debu.',
     previewId: 'TextvoyagePreview',
     sampleImg: '/3d-kits/textvoyage.jpg'
+  },
+  {
+    id: 'devforge',
+    name: 'DEVFORGE',
+    group: 'kosmik',
+    character: 'IDE spasial 3D: kode diketik langsung jadi level game',
+    promptExample: '/audira-motion Panel IDE melayang di ruang gelap: kode diketik, lalu platform game 3D tersusun dan karakter mulai berlari.',
+    previewId: 'DevforgePreview',
+    sampleImg: '/3d-kits/devforge.jpg'
+  },
+  {
+    id: 'toydiorama',
+    name: 'TOYDIORAMA',
+    group: 'taktil',
+    character: 'Panggung teater mini dengan tokoh mainan plastik & lampu sorot',
+    promptExample: '/audira-motion Panggung teater kayu mini dengan footlight hangat: tokoh mainan plastik menjelaskan cara menabung.',
+    previewId: 'ToyDioramaPreview',
+    sampleImg: '/3d-kits/toydiorama.jpg'
+  },
+  {
+    id: 'filmnoir',
+    name: 'FILMNOIR',
+    group: 'kosmik',
+    character: 'Film noir 1940-an hitam-putih, bayangan kerai & aspal basah',
+    promptExample: '/audira-motion Detektif bermantel di bawah lampu jalan tungsten, bayangan kerai jatuh di dinding bata basah.',
+    previewId: 'FilmNoirPreview',
+    sampleImg: '/3d-kits/filmnoir.jpg'
+  },
+  {
+    id: 'watercolor',
+    name: 'WATERCOLOR',
+    group: 'taktil',
+    character: 'Diorama buku dongeng cat air & garis pensil',
+    promptExample: '/audira-motion Buku dongeng cat air terbuka: desa kecil di tepi danau terlukis lapis demi lapis.',
+    previewId: 'WatercolorPreview',
+    sampleImg: '/3d-kits/watercolor.jpg'
+  },
+  {
+    id: 'fluidforge',
+    name: 'FLUIDFORGE',
+    group: 'sains',
+    character: 'Bola krom ferrofluid tanpa gravitasi & cincin kaustik pelangi',
+    promptExample: '/audira-motion Bola ferrofluid krom melayang, membentuk duri magnetik yang berdenyut mengikuti irama bass.',
+    previewId: 'FluidforgePreview',
+    sampleImg: '/3d-kits/fluidforge.jpg'
+  },
+  {
+    id: 'hd2d',
+    name: 'HD2D',
+    group: 'kosmik',
+    character: 'Tokoh pixel-art 2D di kota kayu 3D berlentera & tilt-shift',
+    promptExample: '/audira-motion Tokoh pixel-art berjalan di gang kota kayu 3D saat malam, lentera hangat menyala.',
+    previewId: 'Hd2dPreview',
+    sampleImg: '/3d-kits/hd2d.jpg'
+  },
+  {
+    id: 'memphisdiorama',
+    name: 'MEMPHISDIORAMA',
+    group: 'arsitektur',
+    character: 'Arsitektur geometris gaya Memphis, terrazzo & bayangan ungu tegas',
+    promptExample: '/audira-motion Blok kuning dan koral gaya Memphis tersusun jadi kafe mungil di atas alas terrazzo.',
+    previewId: 'MemphisDioramaPreview',
+    sampleImg: '/3d-kits/memphisdiorama.jpg'
+  },
+  {
+    id: 'dataphysical',
+    name: 'DATAPHYSICAL',
+    group: 'sains',
+    character: 'Patung statistik museum dari aluminium, akrilik & kayu walnut',
+    promptExample: '/audira-motion Batang aluminium dan akrilik toska tumbuh menunjukkan kenaikan pengguna internet per tahun.',
+    previewId: 'DataPhysicalPreview',
+    sampleImg: '/3d-kits/dataphysical.jpg'
+  },
+  {
+    id: 'satellitebriefing',
+    name: 'SATELLITEBRIEFING',
+    group: 'sains',
+    character: 'Zoom orbit ke medan analis dengan label amber & skala jarak',
+    promptExample: '/audira-motion Kamera menukik dari orbit bumi ke sebuah pelabuhan, label amber menandai dermaga.',
+    previewId: 'SatelliteBriefingPreview',
+    sampleImg: '/3d-kits/satellitebriefing.jpg'
+  },
+  {
+    id: 'backrooms',
+    name: 'BACKROOMS',
+    group: 'kosmik',
+    character: 'Lorong kantor kuning liminal, lampu neon & kamera VHS genggam',
+    promptExample: '/audira-motion Rekaman VHS menyusuri lorong kantor kuning tanpa ujung, lampu neon berkedip.',
+    previewId: 'BackroomsPreview',
+    sampleImg: '/3d-kits/backrooms.jpg'
+  },
+  {
+    id: 'visualinvestigation',
+    name: 'VISUALINVESTIGATION',
+    group: 'arsitektur',
+    character: 'Meja bukti forensik, kutipan verbatim & jam kronologi',
+    promptExample: '/audira-motion Meja investigasi: dokumen, foto, dan kutipan saksi tersusun mengikuti jam kronologi.',
+    previewId: 'VisualInvestigationPreview',
+    sampleImg: '/3d-kits/visualinvestigation.jpg'
+  },
+  {
+    id: 'tradingterminal',
+    name: 'TRADINGTERMINAL',
+    group: 'kosmik',
+    character: 'Terminal trading 3D: candlestick, order book & ticker berjalan',
+    promptExample: '/audira-motion Grafik candlestick 3D naik tajam, dinding order book bergeser dan ticker harga berjalan.',
+    previewId: 'TradingTerminalPreview',
+    sampleImg: '/3d-kits/tradingterminal.jpg'
+  },
+  {
+    id: 'historymap',
+    name: 'HISTORYMAP',
+    group: 'sains',
+    character: 'Peta sejarah 3D: batas wilayah bergeser & panah militer',
+    promptExample: '/audira-motion Peta 3D Nusantara: batas kerajaan bergeser dari abad ke abad, panah ekspedisi melintasi laut.',
+    previewId: 'HistoryMapPreview',
+    sampleImg: '/3d-kits/historymap.jpg'
+  },
+  {
+    id: 'islamicdocumentary',
+    name: 'ISLAMICDOCUMENTARY',
+    group: 'arsitektur',
+    character: 'Dokumenter Islam: bintang arabesk, siluet kubah & daun emas',
+    promptExample: '/audira-motion Pola bintang arabesk berlapis emas terbuka, siluet kubah muncul di cakrawala senja.',
+    previewId: 'IslamicDocumentaryPreview',
+    sampleImg: '/3d-kits/islamicdocumentary.jpg'
   }
 ];
 
@@ -370,7 +496,7 @@ export const Remotion3DShowcase: React.FC = () => {
     setTimeout(() => setCopiedKit(null), 2000);
   };
 
-  const filteredKits = ALL_20_KITS.filter((kit) => {
+  const filteredKits = ALL_3D_KITS.filter((kit) => {
     if (selectedGroup === 'all') return true;
     return kit.group === selectedGroup;
   });
@@ -522,17 +648,17 @@ export const Remotion3DShowcase: React.FC = () => {
         </div>
       )}
 
-      {/* EXPANDED VIEW: All 20 Remotion 3D Signature Kits Catalog */}
+      {/* EXPANDED VIEW: All Remotion 3D Signature Kits Catalog */}
       {activeTab === 'all' && (
         <div className="space-y-6">
           {/* Sub-group Filters */}
           <div className="flex flex-wrap gap-2 pb-2">
             {[
-              { id: 'all', label: 'Semua Gaya 3D', count: ALL_20_KITS.length },
-              { id: 'arsitektur', label: 'Arsitektur & Mesin', count: 8 },
-              { id: 'taktil', label: 'Taktil & Stop-Motion', count: 7 },
-              { id: 'sains', label: 'Sains & Medis', count: 4 },
-              { id: 'kosmik', label: 'Dunia & Komersial', count: 10 },
+              { id: 'all', label: 'Semua Gaya 3D', count: ALL_3D_KITS.length },
+              { id: 'arsitektur', label: 'Arsitektur & Mesin', count: ALL_3D_KITS.filter((k) => k.group === 'arsitektur').length },
+              { id: 'taktil', label: 'Taktil & Stop-Motion', count: ALL_3D_KITS.filter((k) => k.group === 'taktil').length },
+              { id: 'sains', label: 'Sains & Medis', count: ALL_3D_KITS.filter((k) => k.group === 'sains').length },
+              { id: 'kosmik', label: 'Dunia & Komersial', count: ALL_3D_KITS.filter((k) => k.group === 'kosmik').length },
             ].map((g) => (
               <button
                 key={g.id}
@@ -550,7 +676,7 @@ export const Remotion3DShowcase: React.FC = () => {
             ))}
           </div>
 
-          {/* Grid of 20 Kits */}
+          {/* Grid of All Kits */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredKits.map((kit) => {
               const isCopied = copiedKit === kit.id;

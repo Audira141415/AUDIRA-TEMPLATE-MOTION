@@ -45,7 +45,7 @@ import {
 } from '@/lib/script-prompts';
 import { generateStoryboardFromIdea } from '@/lib/script-generator';
 import { FORMAT_CARDS } from '@/components/landing/reels';
-import { ALL_20_KITS, KitCatalogItem } from '@/components/landing/Remotion3DShowcase';
+import { ALL_3D_KITS, KitCatalogItem } from '@/components/landing/Remotion3DShowcase';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { PasteChecker } from '@/components/site/PasteChecker';
@@ -963,7 +963,7 @@ export default function PromptsPage() {
                       Prompt Remotion 3D untuk Claude Code / Cursor
                     </h2>
                     <p className="text-xs text-dim">
-                      20 Signature 3D Kits · React Three Fiber + Three.js · Soft shadows & kamera terarah
+                      {ALL_3D_KITS.length} Signature 3D Kits · React Three Fiber + Three.js · Soft shadows & kamera terarah
                     </p>
                   </div>
                 </div>
@@ -972,7 +972,7 @@ export default function PromptsPage() {
                   <button
                     type="button"
                     onClick={async () => {
-                      const currentKit = ALL_20_KITS.find((k: KitCatalogItem) => k.id === selected3DKitId) || ALL_20_KITS[0];
+                      const currentKit = ALL_3D_KITS.find((k: KitCatalogItem) => k.id === selected3DKitId) || ALL_3D_KITS[0];
                       await navigator.clipboard.writeText(currentKit.promptExample);
                       setCopy3DStatus('Prompt 3D Tersalin!');
                       setTimeout(() => setCopy3DStatus(null), 2000);
@@ -991,7 +991,7 @@ export default function PromptsPage() {
                   Pilih dari Koleksi Gaya Sinematik 3D:
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2.5 max-h-[300px] overflow-y-auto p-1">
-                  {ALL_20_KITS.map((k: KitCatalogItem) => {
+                  {ALL_3D_KITS.map((k: KitCatalogItem) => {
                     const isSelected = selected3DKitId === k.id;
                     return (
                       <button
@@ -1018,7 +1018,7 @@ export default function PromptsPage() {
 
               {/* Selected 3D Kit Detail Card */}
               {(() => {
-                const k = ALL_20_KITS.find((item: KitCatalogItem) => item.id === selected3DKitId) || ALL_20_KITS[0];
+                const k = ALL_3D_KITS.find((item: KitCatalogItem) => item.id === selected3DKitId) || ALL_3D_KITS[0];
                 return (
                   <div className="rounded-2xl border border-line bg-tile p-5 space-y-4">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">

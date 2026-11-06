@@ -35,7 +35,7 @@ import {
   ListChecks,
   LayoutList
 } from 'lucide-react';
-import { ALL_20_KITS } from '@/components/landing/Remotion3DShowcase';
+import { ALL_3D_KITS } from '@/components/landing/Remotion3DShowcase';
 import { VideoTutorialPlayer } from './VideoTutorialPlayer';
 
 export type OSType = 'windows' | 'mac';
@@ -176,12 +176,12 @@ export const InteractiveGuideView: React.FC<InteractiveGuideViewProps> = ({
   };
 
   const filteredKits = useMemo(() => {
-    if (selectedCategory === 'all') return ALL_20_KITS;
-    return ALL_20_KITS.filter((k) => k.group === selectedCategory);
+    if (selectedCategory === 'all') return ALL_3D_KITS;
+    return ALL_3D_KITS.filter((k) => k.group === selectedCategory);
   }, [selectedCategory]);
 
   const activeKit = useMemo(() => {
-    return ALL_20_KITS.find((k) => k.id === selectedKitId) || ALL_20_KITS[0];
+    return ALL_3D_KITS.find((k) => k.id === selectedKitId) || ALL_3D_KITS[0];
   }, [selectedKitId]);
 
   const activeDurationObj = useMemo(() => {
@@ -352,7 +352,7 @@ npm run remotion:render</pre>
     <div class="card">
       <h2>Katalog Lengkap Gaya Visual 3D (Cheat Sheet Prompt)</h2>
       <div class="kit-grid">
-        ${ALL_20_KITS.map((k) => `<div class="kit-item"><strong>${k.name}</strong><span>${k.character}</span></div>`).join('')}
+        ${ALL_3D_KITS.map((k) => `<div class="kit-item"><strong>${k.name}</strong><span>${k.character}</span></div>`).join('')}
       </div>
     </div>
 
