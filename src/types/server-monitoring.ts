@@ -108,3 +108,4 @@ export interface ServerTelemetryReport {
   activeAiProvider: string;
   activeRenderJobsCount: number;
 }
+

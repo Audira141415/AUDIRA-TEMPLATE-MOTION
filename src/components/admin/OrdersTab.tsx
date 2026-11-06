@@ -171,6 +171,8 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ orders, onRefresh }) => {
 
     const isActivated = order.isLicenseActive;
 
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3788';
+
     const message = isActivated
       ? `Halo Kak ${order.customerName},\n\n` +
         `Kabar baik! Lisensi resmi AUDIRA Motion Anda telah RESMI DIAKTIFKAN oleh Superadmin AUDIRA:\n\n` +
@@ -179,7 +181,9 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ orders, onRefresh }) => {
         `⚡ Status: *AKTIF & SIAP DIGUNAKAN*\n` +
         `💰 Total: *${order.amount}* (${order.paymentMethod})\n\n` +
         `📖 Akses Buku Panduan & Setup 3D Remotion (Khusus Pembeli):\n` +
-        `http://localhost:3788/admin\n\n` +
+        `${origin}/panduan\n\n` +
+        `👤 Dashboard Pelanggan Anda:\n` +
+        `${origin}/admin\n\n` +
         `📁 Link Download File Template Master (.ZIP):\n` +
         `https://github.com/Audira141415/AUDIRA-TEMPLATE-MOTION/archive/refs/heads/master.zip\n\n` +
         `Jika Anda butuh panduan setup atau integrasi Claude Code, reply pesan ini. Tim AUDIRA siap mendampingi 1-on-1!`
@@ -187,7 +191,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ orders, onRefresh }) => {
         `Pesanan Anda (*${order.tierName}* - ${order.amount}) dengan No: *${order.id}* telah kami terima.\n\n` +
         `🔑 Kode Lisensi: *${order.licenseKey}*\n` +
         `⚠️ Status: *MENUNGGU PEMBAYARAN & AKTIVASI SUPERADMIN*\n\n` +
-        `Harap selesaikan pembayaran dan kirim bukti transfer ke nomor WhatsApp ini. Superadmin AUDIRA akan langsung mengaktifkan lisensi Anda dalam hitungan menit agar dapat mengakses buku panduan teknis.\n\n` +
+        `Harap selesaikan pembayaran dan kirim bukti transfer ke nomor WhatsApp ini. Superadmin AUDIRA akan langsung mengaktifkan lisensi Anda dalam hitungan menit agar dapat mengakses buku panduan teknis di ${origin}/panduan.\n\n` +
         `Terima kasih!`;
 
     const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
