@@ -25,12 +25,13 @@ import {
 } from 'lucide-react';
 import { OrderRecord } from '@/lib/orders';
 import { PublicUser } from '@/lib/auth';
+import { InteractiveGuideView } from '@/components/guide/InteractiveGuideView';
 
 interface CustomerDashboardProps {
   user: PublicUser;
 }
 
-type CustomerTab = 'overview' | 'license' | 'orders' | 'renders' | 'downloads' | 'support';
+type CustomerTab = 'overview' | 'guide' | 'license' | 'orders' | 'renders' | 'downloads' | 'support';
 
 export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
   const [tab, setTab] = useState<CustomerTab>('overview');
@@ -94,14 +95,16 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
         </div>
 
         <div className="flex items-center gap-2.5 shrink-0">
-          <Link
-            href="/panduan"
-            target="_blank"
-            className="btn-outline py-2 px-3.5 text-xs font-semibold inline-flex items-center gap-1.5"
+          <button
+            type="button"
+            onClick={() => setTab('guide')}
+            className={`btn-outline py-2 px-3.5 text-xs font-semibold inline-flex items-center gap-1.5 ${
+              tab === 'guide' ? 'border-accent text-accent bg-accent/10' : ''
+            }`}
           >
-            <BookOpen className="w-3.5 h-3.5 text-dim" />
-            <span>Buku Panduan</span>
-          </Link>
+            <BookOpen className="w-3.5 h-3.5 text-accent" />
+            <span>Buku Panduan &amp; Setup</span>
+          </button>
 
           <button
             type="button"
@@ -158,6 +161,7 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
       <div className="flex items-center gap-1 rounded-2xl border border-line bg-card p-1.5 shadow-xl overflow-x-auto">
         {[
           { id: 'overview' as const, label: 'Overview', icon: <Sparkles className="w-4 h-4" /> },
+          { id: 'guide' as const, label: 'Buku Panduan & Setup 3D', icon: <BookOpen className="w-4 h-4" /> },
           { id: 'license' as const, label: 'Lisensi & Claude Code', icon: <Key className="w-4 h-4" /> },
           { id: 'orders' as const, label: 'Pesanan & Faktur (Invoice)', icon: <FileText className="w-4 h-4" /> },
           { id: 'downloads' as const, label: 'Download Asset 3D', icon: <Download className="w-4 h-4" /> },
@@ -251,16 +255,17 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
               </h4>
 
               <div className="space-y-2 text-xs">
-                <Link
-                  href="/panduan"
-                  className="w-full p-3 rounded-xl bg-tile border border-line hover:border-accent flex items-center justify-between text-left group transition-all"
+                <button
+                  type="button"
+                  onClick={() => setTab('guide')}
+                  className="w-full p-3 rounded-xl bg-accent/10 border border-accent/40 hover:bg-accent/20 flex items-center justify-between text-left group transition-all"
                 >
                   <div>
-                    <span className="font-bold text-paper block group-hover:text-accent">Buku Panduan Instalasi Lengkap</span>
-                    <span className="text-[11px] text-dim">Langkah install Remotion &amp; Claude Code</span>
+                    <span className="font-bold text-accent block group-hover:underline">Buku Panduan Instalasi &amp; Prompt 29 Gaya</span>
+                    <span className="text-[11px] text-muted">Langkah install Remotion, MCP Mesh &amp; Claude Code</span>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-dim group-hover:text-accent group-hover:translate-x-1 transition-transform" />
-                </Link>
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
+                </button>
 
                 <button
                   type="button"
@@ -292,6 +297,17 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
         </div>
       )}
 
+      {/* TAB: GUIDE & 29 STYLES (EXCLUSIVE TO PURCHASERS) */}
+      {tab === 'guide' && (
+        <div className="space-y-6">
+          <InteractiveGuideView
+            user={user}
+            initialLicense={activeLicense}
+            isInsideDashboard={true}
+          />
+        </div>
+      )}
+
       {/* TAB: LICENSE & CLAUDE CODE */}
       {tab === 'license' && (
         <div className="space-y-6">
@@ -302,14 +318,14 @@ Tolong bantu saya setup proyek ini dengan Remotion 4.0:
                   <Terminal className="w-5 h-5 text-accent" />
                   <span>Panduan Aktivasi Lisensi di Claude Code &amp; 29 Gaya 3D</span>
                 </h3>
-                <Link
-                  href="/panduan"
-                  target="_blank"
+                <button
+                  type="button"
+                  onClick={() => setTab('guide')}
                   className="btn-primary py-1.5 px-3.5 text-xs font-bold inline-flex items-center gap-1.5 shadow-md"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Buka Artifact Panduan &amp; Prompt Studio ➔</span>
-                </Link>
+                  <span>Buka Panduan &amp; Prompt Studio ➔</span>
+                </button>
               </div>
               <p className="text-xs text-muted mt-1">
                 Gunakan kode lisensi ini langsung saat berinteraksi dengan asisten coding Claude Anda untuk mengotomasi pembuatan video 3D.

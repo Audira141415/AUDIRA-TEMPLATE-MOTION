@@ -15,7 +15,7 @@ const COLUMNS = [
   {
     title: 'Panduan & Bantuan',
     links: [
-      { href: '/panduan', label: 'Panduan Instalasi & Setup' },
+      { href: '/admin', label: 'Buku Panduan (Portal Pelanggan)' },
       { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
       { href: '/#faq', label: 'FAQ & Spek Hardware' },
       { href: 'https://wa.me/6285709666240', label: 'WhatsApp Support (+62 857-0966-6240)' },

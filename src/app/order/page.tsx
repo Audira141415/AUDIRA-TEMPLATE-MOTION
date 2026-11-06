@@ -145,10 +145,10 @@ function OrderFormContent() {
           <div className="p-3.5 rounded-2xl border border-line bg-card flex flex-col gap-1.5">
             <div className="flex items-center gap-1.5 text-cyan-400 font-bold">
               <BookOpen className="w-4 h-4" />
-              <span>Buku Panduan</span>
+              <span>Buku Panduan Mandiri</span>
             </div>
             <p className="text-[11px] text-muted leading-relaxed">
-              Termasuk akses panduan instalasi 5 langkah di <Link href="/panduan" className="text-accent underline">/panduan</Link>.
+              Panduan instalasi 5 langkah &amp; auto-installer otomatis terbuka di dashboard setelah pembelian.
             </p>
           </div>
 

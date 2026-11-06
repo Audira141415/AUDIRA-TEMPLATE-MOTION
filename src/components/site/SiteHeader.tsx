@@ -7,21 +7,20 @@ import { LogOut, Menu, ShieldCheck, X, Sparkles, ShoppingBag } from 'lucide-reac
 
 export const NAV_LINKS = [
   { href: '/#hasil', label: '29 Gaya 3D' },
+  { href: '/#cara-kerja', label: 'Cara Kerja' },
   { href: '/#produk', label: 'Lisensi' },
   { href: '/#jasa', label: 'Jasa DFY' },
   { href: '/pesanan', label: 'Pesanan Saya' },
-  { href: '/panduan', label: 'Panduan' },
   { href: '/#faq', label: 'FAQ' },
 ];
 
 export const ALL_NAV_LINKS = [
   { href: '/#hasil', label: '29 Gaya 3D Sinematik' },
+  { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
   { href: '/#produk', label: 'Paket Lisensi Komersial' },
   { href: '/#jasa', label: 'Jasa Terima Beres (DFY)' },
   { href: '/pesanan', label: 'Pesanan & Lisensi Saya' },
   { href: '/#testimoni', label: 'Testimoni & Studi Kasus' },
-  { href: '/#cara-kerja', label: 'Cara Kerja 3 Langkah' },
-  { href: '/panduan', label: 'Buku Panduan Instalasi' },
   { href: '/#bundle', label: 'Creator Lab Ultimate' },
   { href: '/#faq', label: 'FAQ & Spek Hardware' },
 ];

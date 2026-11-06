@@ -251,12 +251,12 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     {
       "id": "faq-1",
       "question": "Apa sebenarnya yang saya dapatkan saat membeli produk ini?",
-      "answer": "Anda membeli Paket Lengkap AI Creative Suite yang terdiri dari: (1) Skill Resmi Claude Code (AUDIRA Motion Director & MCP Mesh) yang melatih Claude bertindak sebagai sutradara gerak 3D otonom di terminal/editor Anda, (2) Koleksi 29 Signature Styles & Source Code 3D Remotion 4.0 berbasis React Three Fiber 60 FPS, (3) Buku Panduan Instalasi Lengkap 5 Langkah (/panduan) dari nol sampai video pertama Anda berhasil dirender, dan (4) Lisensi Komersial Seumur Hidup (Lifetime) bebas royalti."
+      "answer": "Anda membeli Paket Lengkap AI Creative Suite yang terdiri dari: (1) Skill Resmi Claude Code (AUDIRA Motion Director & MCP Mesh) yang melatih Claude bertindak sebagai sutradara gerak 3D otonom di terminal/editor Anda, (2) Koleksi 29 Signature Styles & Source Code 3D Remotion 4.0 berbasis React Three Fiber 60 FPS, (3) Buku Panduan Instalasi Lengkap 5 Langkah & Auto-Installer di portal pelanggan resmi dari nol sampai video pertama Anda berhasil dirender, dan (4) Lisensi Komersial Seumur Hidup (Lifetime) bebas royalti."
     },
     {
       "id": "faq-2",
       "question": "Bagaimana cara menginstal dan mengaktifkan Skill ini ke Claude Code?",
-      "answer": "Sangat praktis dan cepat! Buka terminal di laptop/PC Anda pada folder proyek, lalu daftarkan MCP Server ke Claude Code dengan perintah: claude mcp add audira-motion [lokasi-folder]. Seketika Claude akan mengenali 29 gaya visual 3D, arsitektur Remotion, dan perintah /audira-motion untuk meriset naskah, menyusun storyboard Three.js, serta merender video secara otomatis. Panduan visual lengkap tersedia di /panduan."
+      "answer": "Sangat praktis dan cepat! Buka terminal di laptop/PC Anda pada folder proyek, lalu daftarkan MCP Server ke Claude Code dengan perintah satu baris. Seketika Claude akan mengenali 29 gaya visual 3D, arsitektur Remotion, dan perintah /audira-motion untuk meriset naskah, menyusun storyboard Three.js, serta merender video secara otomatis. Panduan visual lengkap terbuka otomatis di portal pelanggan Anda setelah pembelian."
     },
     {
       "id": "faq-3",
@@ -281,7 +281,7 @@ export const DEFAULT_LANDING_CONFIG: LandingConfig = {
     {
       "id": "faq-7",
       "question": "Bagaimana jika saya gaptek atau butuh bantuan saat proses instalasi?",
-      "answer": "Anda tidak sendirian. Kami menyediakan Garansi Pendampingan 1-on-1 via WhatsApp Resmi Tim AUDIRA (+62 857-0966-6240). Selain itu, Anda mendapatkan akses ke portal pelanggan (/pesanan) dan buku panduan instalasi 5 langkah (/panduan). Tim teknis kami siap memandu via chat atau remote screen sharing sampai video pertama Anda berhasil dirender di laptop Anda."
+      "answer": "Anda tidak sendirian. Kami menyediakan Garansi Pendampingan 1-on-1 via WhatsApp Resmi Tim AUDIRA (+62 857-0966-6240). Selain itu, Anda mendapatkan akses ke portal pelanggan (/admin & /pesanan) dan buku panduan instalasi 5 langkah. Tim teknis kami siap memandu via chat atau remote screen sharing sampai video pertama Anda berhasil dirender di laptop Anda."
     },
     {
       "id": "faq-8",

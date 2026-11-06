@@ -379,7 +379,7 @@ export const ProductPackages: React.FC<Props> = ({ onSelectTab, onBuyTier, prici
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span>Buku Panduan Instalasi Step-by-Step (/panduan)</span>
+              <span>Buku Panduan Instalasi &amp; Auto-Installer (di Portal Pelanggan)</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />

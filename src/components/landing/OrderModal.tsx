@@ -51,7 +51,7 @@ const TIERS: Record<ProductTier, TierInfo> = {
     highlights: [
       '5 Kit Gaya 3D Signature Pilihan',
       'Perintah Claude Code /audira-motion',
-      'Buku Panduan Instalasi Lengkap (/panduan)',
+      'Buku Panduan Instalasi Lengkap (di Portal Pelanggan)',
       'Lisensi Komersial Seumur Hidup (Bebas Royalti)'
     ]
   },
@@ -66,7 +66,7 @@ const TIERS: Record<ProductTier, TierInfo> = {
       'Semua 29 Gaya 3D Sinematik Lengkap',
       'Bundling AUDIRA Skill Mesh (MCP Server)',
       'Autonomous Director Claude Code (Pilih Gaya Otomatis)',
-      'Buku Panduan Lengkap (/panduan) + Audio Sync Presisi'
+      'Buku Panduan Lengkap + Audio Sync (di Portal Pelanggan)'
     ]
   },
   lab: {
@@ -79,7 +79,7 @@ const TIERS: Record<ProductTier, TierInfo> = {
     highlights: [
       'Semua 29 Gaya 3D + Full Source Codebase Remotion',
       'AUDIRA Skill Mesh (Full Agentic Director Engine)',
-      'Buku Panduan Lengkap (/panduan) + Video Walkthrough',
+      'Buku Panduan Lengkap + Video Walkthrough (di Portal Pelanggan)',
       'Garansi Setup 1-on-1 WhatsApp Tim AUDIRA'
     ]
   },
@@ -558,16 +558,11 @@ export const OrderModal: React.FC<OrderModalProps> = ({
           <div className="mb-5 -mt-3 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-accent/10 border border-accent/25 text-xs">
             <span className="text-muted flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-accent shrink-0" />
-              <span>Termasuk <strong>AUDIRA Skill Mesh (MCP)</strong> &amp; Panduan 5 Langkah</span>
+              <span>Termasuk <strong>AUDIRA Skill Mesh (MCP)</strong> &amp; Akses Buku Panduan Lengkap</span>
             </span>
-            <a 
-              href="/panduan" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-accent font-bold hover:underline inline-flex items-center gap-1 text-[11px] shrink-0"
-            >
-              Buka Panduan ➔
-            </a>
+            <span className="text-accent font-bold font-mono text-[10px] bg-accent/15 px-2 py-0.5 rounded border border-accent/30 shrink-0">
+              Aktif Otomatis di Portal Pembeli
+            </span>
           </div>
         )}
 

@@ -13,7 +13,7 @@ const COMPARISON_ROWS = [
   { feature: 'Koleksi Gaya Sinematik 3D', starter: '5 Gaya Pilihan', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya Penuh' },
   { feature: 'Engine Remotion 4.0 & CLI Runner', starter: '5 Gaya', master: 'Semua 29 Gaya', lab: 'Semua 29 Gaya' },
   { feature: 'AUDIRA Skill Mesh (Active MCP Server)', starter: '-', master: 'Lite MCP Config', lab: 'Full MCP Suite (Auto-Orchestrate & VO)' },
-  { feature: 'Buku Panduan Instalasi Lengkap (/panduan)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk + Video Runbook' },
+  { feature: 'Buku Panduan Instalasi & Prompt Studio', starter: 'Termasuk di Akun', master: 'Termasuk di Akun', lab: 'Termasuk + Video Runbook' },
   { feature: 'Perintah Claude Code (/audira-motion)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
   { feature: 'Normalisasi Audio Siaran (-14 LUFS)', starter: 'Standar', master: 'Presisi Milidetik', lab: 'Presisi Milidetik' },
   { feature: 'Smoke Preview (540×960 @ 30 FPS)', starter: 'Termasuk', master: 'Termasuk', lab: 'Termasuk' },
