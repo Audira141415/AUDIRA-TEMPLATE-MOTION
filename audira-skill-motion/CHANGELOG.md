@@ -1,5 +1,9 @@
 # Changelog — Audira Skill Motion 3D
 
+## v4.2.0 (68 Signature Styles)
+- **25 gaya baru (#44–#68):** MISTISFORGE, FOODFORGE, TACTICBOARD, WAYANGFORGE, DISASTERSIM, SCALEFORGE, SATISFYFORGE, COMICFORGE, ABYSSFORGE, RISOFORGE, Y2KCHROME, FELTCRAFT, ANATOMIX, UKIYOFORGE, STAINEDGLASS, SULAMFORGE, MOSAICFORGE, MARBLEMUSEUM, TERRARIUM, SKETCHFORGE, DREAMCORE, GACHAREVEAL, ARCADECRT, MANUSCRIPT, GLITCHFORGE. Setiap gaya punya kit lengkap di `kits/<id>/` dan `starter/src/kits/<id>/`, `KIT.md`, `references/<id>.md`, Style DNA di `styles/<slug>/`, dan composition Preview/Final di `Root.tsx`.
+- **14 kit lama kini terdaftar di `Root.tsx`:** PIXELSTORY, VOXELVERSE, PAPERWORLD, WORLDFORGE, TIMEFORGE, BUILDFORGE, ISOCRAFT, VINTAGEFORGE, BRUTALFORGE, THERMALFORGE, CHALKCRAFT, KINTSUGI, RETROWAVE, TEXTVOYAGE (sebelumnya perintah `remotion still` untuk kit ini gagal).
+
 ## v3.0.0 (Official Rebrand & Commercial Release)
 - **Transformasi & Rebranding Menjadi Audira Skill Motion (By Agus Dwi Rianto):**
   - Rebranding resmi seluruh ekosistem animasi 3D sinematik dari VOYNANN Motion menjadi **Audira Skill Motion** di bawah kepemilikan dan arsitektur **AUDIRA (Agus Dwi R)**.

@@ -2,11 +2,11 @@
 
 *Versi 4.1.0 Commercial Release — By Audira (Agus Dwi Rianto)*
 
-Ketik setelah perintah `/audira-motion`. Nama gaya tidak wajib Anda sebutkan; Claude otomatis memilihkan dari **43 Signature Styles** yang paling tepat.
+Ketik setelah perintah `/audira-motion`. Nama gaya tidak wajib Anda sebutkan; Claude otomatis memilihkan dari **68 Signature Styles** yang paling tepat.
 
 ---
 
-## 🌟 Tabel Prompt 43 Gaya Sinematik 3D
+## 🌟 Tabel Prompt 68 Gaya Sinematik 3D
 
 | No | Gaya | Karakter Visual | Contoh Prompt Siap Pakai |
 |:---:|:---|:---|:---|
@@ -53,6 +53,31 @@ Ketik setelah perintah `/audira-motion`. Nama gaya tidak wajib Anda sebutkan; Cl
 | 41 | **TRADINGTERMINAL** | Terminal trading pasar finansial & candlestick crypto 3D | `"/audira-motion Buat animasi grafik pasar BTC/USDT dengan lilin candlestick 3D hijau emerald melonjak menembus level resistensi, didukung dinding likuiditas order book dan garis harga laser cyan."` |
 | 42 | **HISTORYMAP** | Peta perang dokumenter geopolitik & ekspansi teritorial | `"/audira-motion Buat video peta sejarah ekspansi Kekaisaran Romawi melintasi Sungai Donau tahun 117 Masehi dengan panah manuver capit kepiting merah (pincer attack) dan wilayah yang meluas."` |
 | 43 | **ISLAMICDOCUMENTARY** | Dokumenter sejarah Islam & era keemasan sains (Baitul Hikmah) | `"/audira-motion Buat animasi pembuka dokumenter sejarah Baitul Hikmah Baghdad dengan bintang 8 Arabesque emas berputar anggun di atas latar biru lapis lazuli dan siluet menara masjid senja. Musik oud syahdu."` |
+| 44 | **MISTISFORGE** | Kampung malam berkabut dengan pelita, rumpun bambu, rumah panggung, dan beringin berakar gantung | `"/audira-motion buat video cerita horor kampung tentang pohon beringin tua di jalan setapak berkabut, suasana malam Jumat"` |
+| 45 | **FOODFORGE** | Hidangan hero di meja kayu gelap, uap bercahaya dari belakang, bahan jatuh gerak lambat | `"/audira-motion buat iklan 12 detik mie ramen dengan bahan-bahan jatuh slow motion dan uap mengepul"` |
+| 46 | **TACTICBOARD** | Papan taktik 3D dengan koin pemain bernomor, jalur umpan kuning, dan replay gol emas di stadion bokeh | `"/audira-motion jelaskan taktik overlap bek sayap dalam formasi 4-3-3 sampai terjadi gol"` |
+| 47 | **WAYANGFORGE** | Panggung wayang kulit dengan kelir bercahaya, blencong, gamelan, dan bingkai batik kawung | `"/audira-motion buat video cerita rakyat Jawa dituturkan seperti pertunjukan wayang kulit dengan gunungan dan blencong"` |
+| 48 | **DISASTERSIM** | Balok bumi terbelah dengan lempeng menunjam, cincin gempa, gelombang tsunami, dan kota pesisir mini | `"/audira-motion jelaskan bagaimana gempa di zona subduksi memicu tsunami dan kenapa harus lari ke dataran tinggi"` |
+| 49 | **SCALEFORGE** | Zoom out logaritmik tanpa putus di atas penggaris ukur, dari studio putih ke luar angkasa | `"/audira-motion bandingkan ukuran semut, manusia, gedung, gunung, Bumi, dan Matahari dalam satu zoom out"` |
+| 50 | **SATISFYFORGE** | Studio pastel mulus dengan aksi presisi: iris, tuang, dan masuk pas | `"/audira-motion buat video oddly satisfying pasir kinetik diiris dan cairan warna-warni mengisi bentuk hati"` |
+| 51 | **COMICFORGE** | Komik Barat 3D: garis tinta tebal, titik Ben-Day, warna CMYK, panel halaman yang ditembus kamera | `"/audira-motion buat video gaya komik superhero 3D tentang pahlawan kota yang menghentikan drone jahat, lengkap dengan balon kata dan ledakan tulisan"` |
+| 52 | **ABYSSFORGE** | Ubur-ubur berdenyut cyan-magenta, salju laut, dan meteran kedalaman sonar menuju predator bercahaya | `"/audira-motion jelaskan kenapa makhluk laut dalam bisa bercahaya, gaya menyelam ke palung gelap"` |
+| 53 | **RISOFORGE** | Zine cetak risograph: tinta spot overprint, butiran halftone, cetakan sedikit meleset, lapisan kertas pop-up | `"/audira-motion buat video gaya zine risograph tentang kota kecil yang tumbuh hijau, warna pink neon biru kuning"` |
+| 54 | **Y2KCHROME** | Gumpalan krom cair di atas awan aqua dengan gelembung pelangi dan kilau lensa | `"/audira-motion buat teaser rilis lagu bergaya Y2K dengan krom cair, gelembung, dan langit biru"` |
+| 55 | **FELTCRAFT** | Diorama wol dan flanel berjahit tangan dengan boneka berbulu halus yang bergerak patah-patah | `"/audira-motion buat cerita anak rubah wol lucu di bukit kain flanel bergaya stop-motion"` |
+| 56 | **ANATOMIX** | Jantung 3D transparan di atas proyektor hologram teal dengan aliran darah merah dan biru | `"/audira-motion jelaskan cara kerja jantung dan peredaran darah kecil dan besar"` |
+| 57 | **UKIYOFORGE** | Lapisan kertas cetak kayu dengan ombak bercakar, gunung kembar, perahu, dan matahari merah | `"/audira-motion buat video tentang kekuatan ombak samudra dalam gaya cetak kayu Jepang ukiyo-e"` |
+| 58 | **STAINEDGLASS** | Jendela lancet dan rose berwarna permata dengan bingkai timah, genangan cahaya warna di lantai batu | `"/audira-motion sejarah jendela kaca patri katedral Gotik, tersusun keping demi keping"` |
+| 59 | **SULAMFORGE** | Pemidangan kayu dengan tusuk satin sutra, jarum baja, dan kain songket bersulam emas | `"/audira-motion buat video proses menyulam bunga dengan benang emas di atas kain songket"` |
+| 60 | **MOSAICFORGE** | Ribuan tessera keramik dan emas berkilau tersusun mengikuti kontur gambar di atas nat kapur | `"/audira-motion lantai mosaik Romawi kuno terbentuk dari ribuan keping kecil"` |
+| 61 | **MARBLEMUSEUM** | Patung dada marmer bergaya Yunani-Romawi di galeri merah tua dengan pilar, bingkai emas, dan kartu label museum | `"/audira-motion pelajaran stoikisme dengan patung marmer di galeri museum klasik"` |
+| 62 | **TERRARIUM** | Toples kaca berisi lumut, pakis, jamur, dan siput dengan siklus siang-malam | `"/audira-motion buat video terrarium toples kaca dengan siklus air dari pagi sampai malam"` |
+| 63 | **SKETCHFORGE** | Sketsa pensil grafit di buku sketsa yang berubah jadi rangka, tanah liat, lalu objek berwarna satu aksen | `"/audira-motion buat video proses desain dari sketsa pensil menjadi model 3D rumah mungil"` |
+| 64 | **DREAMCORE** | Ruang kolam berubin dengan awan di dalam ruangan, pintu melayang di air, dan tangga menuju entah ke mana | `"/audira-motion kenapa kita bermimpi, visual ruang mimpi pastel yang ganjil"` |
+| 65 | **GACHAREVEAL** | Panggung summon gelap, kapsul bergetar naik kelas warna, kartu foil berputar dan terbuka | `"/audira-motion buat video pengumuman pemenang giveaway dengan kapsul bercahaya yang meledak jadi kartu hologram"` |
+| 66 | **ARCADECRT** | Ruang arcade malam, layar CRT melengkung dengan scanline dan glow, lalu menyelam ke dunia voxel | `"/audira-motion buat video nostalgia mesin arcade retro, kamera masuk ke layar CRT dan dunia game pixel jadi 3D"` |
+| 67 | **MANUSCRIPT** | Meja penyalin naskah bercahaya lilin dengan kitab beriluminasi emas dan lontar bertali | `"/audira-motion buat video sejarah naskah kuno dan lontar Bali sebelum ada mesin cetak"` |
+| 68 | **GLITCHFORGE** | Render studio bersih yang terkoyak glitch RGB, blok piksel, pixel sorting, layar no signal, lalu pulih | `"/audira-motion buat video glitch art produk di studio putih yang rusak oleh datamosh lalu kembali sempurna"` |
 
 ---
 

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "wayang-shadow-puppet",
+  "styleNumber": 47,
+  "name": "Wayang Kulit Shadow Puppet Screen & Batik",
+  "kit": "wayangforge",
+  "version": "1.0.0",
+  "palette": {
+    "background": "#120C1E",
+    "batikIndigo": "#1E2A5A",
+    "sogaBrown": "#6B3E1F",
+    "kelirCloth": "#F3E7CC",
+    "kelirGlow": "#FFB35C",
+    "blencongAmber": "#FF9E3D",
+    "pradaGold": "#D9A441",
+    "text": "#F6E8CC"
+  },
+  "geometry": {
+    "type": "shadow_theatre_stage",
+    "bevelRadius": 0.0,
+    "polyBudget": "low_planes_with_canvas_cutouts",
+    "silhouette": "perforated_leather_profile"
+  },
+  "materials": {
+    "type": "painted_rawhide_and_glowing_cloth",
+    "roughness": 0.5,
+    "metalness": 0.2,
+    "normalMap": "none_alpha_test_cutout"
+  },
+  "lighting": {
+    "archetype": "single_oil_lamp_through_screen",
+    "keyLight": { "kelvin": 1900, "intensity": 9.0, "decay": 1.5, "flicker": "value_noise" },
+    "fillLight": { "kelvin": 9000, "intensity": 0.35, "type": "ambient_indigo" },
+    "rimLight": { "kelvin": 8000, "intensity": 0.5, "side": "audience" }
+  },
+  "camera": {
+    "type": "orbit_through_screen_edge",
+    "focalLengthMm": 30,
+    "fovDeg": 50,
+    "position": [0.5, 2.05, 4.9],
+    "motionConstraint": "dalang_side_to_shadow_side_180deg"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "rod_puppet_bob_and_lamp_projection",
+    "characterCadence": "dalang_sabetan"
+  }
+}

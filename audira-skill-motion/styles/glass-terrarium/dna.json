@@ -1,0 +1,69 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "glass-terrarium",
+  "styleNumber": 62,
+  "name": "Living Glass-Jar Terrarium & Macro Day-Night Cycle",
+  "version": "1.0.0",
+  "palette": {
+    "mossA": "#5E8F3A",
+    "mossB": "#7DAA45",
+    "fern": "#4E8A3A",
+    "soil": "#3B2A1E",
+    "capOrange": "#D9773A",
+    "glow": "#B8FF9A",
+    "water": "#2B5E66",
+    "cork": "#A77B4F",
+    "wood": "#6B4A33",
+    "skyMorning": "#F2D3AE",
+    "skyNoon": "#CFE2EA",
+    "skyDusk": "#D98A57",
+    "skyNight": "#0D1426",
+    "text": "#F5F1E8"
+  },
+  "geometry": {
+    "type": "lathed_vessel_with_instanced_flora",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid",
+    "silhouette": "rounded_jar_with_organic_interior"
+  },
+  "materials": {
+    "type": "transmissive_glass_and_organic_matte",
+    "roughness": 0.03,
+    "metalness": 0.0,
+    "transmission": 1.0,
+    "ior": 1.5,
+    "normalMap": "none"
+  },
+  "lighting": {
+    "archetype": "moving_window_sun_day_night_cycle",
+    "keyLight": {
+      "kelvin": "3200→5600→2400→9000",
+      "intensity": "2.0→2.8→1.8→0.7",
+      "angle": "orbiting"
+    },
+    "fillLight": {
+      "kelvin": 7000,
+      "intensity": 0.6
+    },
+    "ambientOcclusion": {
+      "intensity": 0.0,
+      "radius": 0.0
+    }
+  },
+  "camera": {
+    "type": "macro_orbit_descending",
+    "focalLengthMm": 42,
+    "fovDeg": 34,
+    "position": [
+      2.8,
+      2.7,
+      5.7
+    ],
+    "motionConstraint": "continuous_orbit_push_in_to_subject"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "gentle_sway_and_slow_glide",
+    "characterCadence": "meditative"
+  }
+}

@@ -22,7 +22,7 @@ AUDIRA SKILL MOTION 3D menggabungkan tiga pilar teknologi tingkat tinggi:
 ┌────────────────────────────────────────────────────────┐
 │    Claude Code Autonomous Director (SKILL.md)          │
 │    • Guided Brief Analysis                             │
-│    • Style Engine Selector (1 of 43 Kits)              │
+│    • Style Engine Selector (1 of 68 Kits)              │
 │    • Voice-Over (VO) Millisecond Waveform Sync         │
 └──────────────────────────┬─────────────────────────────┘
                            ▼
@@ -71,9 +71,9 @@ AUDIRA SKILL MOTION 3D menggabungkan tiga pilar teknologi tingkat tinggi:
 
 ---
 
-## 3. 🎨 43 Procedural Style Engines (Kits)
+## 3. 🎨 68 Procedural Style Engines (Kits)
 
-AUDIRA SKILL MOTION dilengkapi **43 modul gaya prosedural** independen di direktori `/kits`:
+AUDIRA SKILL MOTION dilengkapi **68 modul gaya prosedural** independen di direktori `/kits`:
 
 | Kategori Industri | Style Engine | Karakteristik Visual & Implementasi Teknis |
 | :--- | :--- | :--- |
@@ -120,6 +120,31 @@ AUDIRA SKILL MOTION dilengkapi **43 modul gaya prosedural** independen di direkt
 | | `KINTSUGI` | Wabi-Sabi keramik porselen matte minimalis & lelehan urat emas bercahaya (*liquid gold*). |
 | | `TEXTVOYAGE` | Tipografi monolitik 3D spasial raksasa tempat kamera melesat menembus rongga huruf. |
 | | `DEVFORGE` | Jendela 3D spatial IDE, typewriter syntax code, game asset spawning, dan badge revenue kinetik. |
+| **6. Ekspansi v4.2** | `MISTISFORGE` | Kampung malam berkabut dengan pelita, rumpun bambu, rumah panggung, dan beringin berakar gantung. |
+|  | `FOODFORGE` | Hidangan hero di meja kayu gelap, uap bercahaya dari belakang, bahan jatuh gerak lambat. |
+|  | `TACTICBOARD` | Papan taktik 3D dengan koin pemain bernomor, jalur umpan kuning, dan replay gol emas di stadion bokeh. |
+|  | `WAYANGFORGE` | Panggung wayang kulit dengan kelir bercahaya, blencong, gamelan, dan bingkai batik kawung. |
+|  | `DISASTERSIM` | Balok bumi terbelah dengan lempeng menunjam, cincin gempa, gelombang tsunami, dan kota pesisir mini. |
+|  | `SCALEFORGE` | Zoom out logaritmik tanpa putus di atas penggaris ukur, dari studio putih ke luar angkasa. |
+|  | `SATISFYFORGE` | Studio pastel mulus dengan aksi presisi: iris, tuang, dan masuk pas. |
+|  | `COMICFORGE` | Komik Barat 3D: garis tinta tebal, titik Ben-Day, warna CMYK, panel halaman yang ditembus kamera. |
+|  | `ABYSSFORGE` | Ubur-ubur berdenyut cyan-magenta, salju laut, dan meteran kedalaman sonar menuju predator bercahaya. |
+|  | `RISOFORGE` | Zine cetak risograph: tinta spot overprint, butiran halftone, cetakan sedikit meleset, lapisan kertas pop-up. |
+|  | `Y2KCHROME` | Gumpalan krom cair di atas awan aqua dengan gelembung pelangi dan kilau lensa. |
+|  | `FELTCRAFT` | Diorama wol dan flanel berjahit tangan dengan boneka berbulu halus yang bergerak patah-patah. |
+|  | `ANATOMIX` | Jantung 3D transparan di atas proyektor hologram teal dengan aliran darah merah dan biru. |
+|  | `UKIYOFORGE` | Lapisan kertas cetak kayu dengan ombak bercakar, gunung kembar, perahu, dan matahari merah. |
+|  | `STAINEDGLASS` | Jendela lancet dan rose berwarna permata dengan bingkai timah, genangan cahaya warna di lantai batu. |
+|  | `SULAMFORGE` | Pemidangan kayu dengan tusuk satin sutra, jarum baja, dan kain songket bersulam emas. |
+|  | `MOSAICFORGE` | Ribuan tessera keramik dan emas berkilau tersusun mengikuti kontur gambar di atas nat kapur. |
+|  | `MARBLEMUSEUM` | Patung dada marmer bergaya Yunani-Romawi di galeri merah tua dengan pilar, bingkai emas, dan kartu label museum. |
+|  | `TERRARIUM` | Toples kaca berisi lumut, pakis, jamur, dan siput dengan siklus siang-malam. |
+|  | `SKETCHFORGE` | Sketsa pensil grafit di buku sketsa yang berubah jadi rangka, tanah liat, lalu objek berwarna satu aksen. |
+|  | `DREAMCORE` | Ruang kolam berubin dengan awan di dalam ruangan, pintu melayang di air, dan tangga menuju entah ke mana. |
+|  | `GACHAREVEAL` | Panggung summon gelap, kapsul bergetar naik kelas warna, kartu foil berputar dan terbuka. |
+|  | `ARCADECRT` | Ruang arcade malam, layar CRT melengkung dengan scanline dan glow, lalu menyelam ke dunia voxel. |
+|  | `MANUSCRIPT` | Meja penyalin naskah bercahaya lilin dengan kitab beriluminasi emas dan lontar bertali. |
+|  | `GLITCHFORGE` | Render studio bersih yang terkoyak glitch RGB, blok piksel, pixel sorting, layar no signal, lalu pulih. |
 
 ---
 

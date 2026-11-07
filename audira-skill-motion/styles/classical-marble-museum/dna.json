@@ -1,0 +1,51 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "classical-marble-museum",
+  "styleNumber": 61,
+  "name": "Classical Marble Sculpture & Museum Gallery",
+  "version": "1.0.0",
+  "palette": {
+    "marbleWarm": "#E9DFCF",
+    "veinGrey": "#7F858D",
+    "wallOxblood": "#5A1A17",
+    "wallDado": "#2E0E0C",
+    "gilt": "#C99A3E",
+    "floorDark": "#26221E",
+    "skylight": "#FFF2DC",
+    "text": "#F7F1E6"
+  },
+  "geometry": {
+    "type": "displaced_sculpture_and_architecture",
+    "bevelRadius": 0.0,
+    "polyBudget": "high_single_hero",
+    "silhouette": "bust_on_plinth_in_colonnade"
+  },
+  "materials": {
+    "type": "statuary_marble_world_space_veins",
+    "roughness": 0.3,
+    "metalness": 0.0,
+    "clearcoat": 0.25,
+    "sheen": 0.15,
+    "subsurfaceLift": 0.04
+  },
+  "lighting": {
+    "archetype": "museum_skylight",
+    "keyLight": { "kelvin": 5200, "intensity": 22, "angle": [70, 20, 0], "type": "spot_from_skylight" },
+    "rimLight": { "kelvin": 3300, "intensity": 1.3 },
+    "fillLight": { "kelvin": 4500, "intensity": 0.18 },
+    "environment": "procedural_room_environment_0.18",
+    "bloom": { "strength": 0.15, "radius": 0.5, "threshold": 0.95 }
+  },
+  "camera": {
+    "type": "reverent_orbit",
+    "focalLengthMm": 70,
+    "fovDeg": 30,
+    "position": [0.65, 2.63, 1.6],
+    "motionConstraint": "ease_in_out_orbit_pull_back"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "static_subject_moving_light",
+    "characterCadence": "slow_reverent"
+  }
+}

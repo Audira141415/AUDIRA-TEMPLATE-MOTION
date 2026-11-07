@@ -1,0 +1,51 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "mosaic-tiles",
+  "styleNumber": 60,
+  "name": "Tessellated Mosaic Tiles Assembling",
+  "version": "1.0.0",
+  "palette": {
+    "lapisDeep": "#1A2F78",
+    "lapis": "#2747A3",
+    "terracotta": "#B4532A",
+    "ochre": "#D69A3A",
+    "cream": "#EFE3C8",
+    "umber": "#2E1D14",
+    "gold": "#E6B54A",
+    "grout": "#8F806B",
+    "text": "#FBF1DF"
+  },
+  "geometry": {
+    "type": "instanced_tesserae_grid",
+    "bevelRadius": 0.0,
+    "polyBudget": "high_instance_count",
+    "silhouette": "bold_outlined_emblem"
+  },
+  "materials": {
+    "type": "glazed_ceramic_and_gold_smalti",
+    "roughness": 0.42,
+    "metalness": 0.0,
+    "clearcoat": 0.7,
+    "goldMetalness": 1.0,
+    "goldRoughness": 0.32
+  },
+  "lighting": {
+    "archetype": "raking_workshop_light",
+    "keyLight": { "kelvin": 3400, "intensity": 2.1, "angle": [12, -150, 0], "risesWithCamera": true },
+    "fillLight": { "kelvin": 7500, "intensity": 0.55 },
+    "environment": "procedural_room_environment_0.32",
+    "bloom": { "strength": 0.22, "radius": 0.35, "threshold": 0.95 }
+  },
+  "camera": {
+    "type": "low_glide_then_overhead_rise",
+    "focalLengthMm": 30,
+    "fovDeg": 52,
+    "position": [0.5, 0.6, 6.4],
+    "motionConstraint": "catmull_rom_keys_no_stops"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "drop_spin_single_hop_settle",
+    "characterCadence": "patient_wave"
+  }
+}

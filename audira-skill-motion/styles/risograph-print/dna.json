@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "risograph-print",
+  "styleNumber": 53,
+  "name": "Risograph Zine Print — Spot-Ink Overprint Pop-Up",
+  "kit": "risoforge",
+  "version": "1.0.0",
+  "palette": {
+    "fluoPink": "#FF48B0",
+    "blue": "#0078BF",
+    "yellow": "#FFE800",
+    "paper": "#F6F0E2",
+    "mat": "#7FA59A",
+    "ink": "#1D1A2A"
+  },
+  "geometry": {
+    "type": "hinged_flat_ink_cutouts",
+    "layerCount": 6,
+    "thickness": 0,
+    "silhouette": "stepped_skyline_and_monstera"
+  },
+  "materials": {
+    "type": "riso_multiply_ink",
+    "blending": "src*dst",
+    "halftoneDotPx@1920": 9,
+    "drumScreenAnglesRad": [
+      0.26,
+      1.31,
+      0.0
+    ],
+    "grainDropout": 0.07
+  },
+  "lighting": {
+    "archetype": "flat_paper_daylight",
+    "toneMapping": "none",
+    "ambient": 1.25,
+    "key": {
+      "intensity": 1.35,
+      "position": [
+        3.5,
+        8,
+        9
+      ],
+      "shadow": "PCFSoft radius 6"
+    }
+  },
+  "camera": {
+    "type": "topdown_to_popup_dolly",
+    "fovDeg": [
+      34,
+      40
+    ],
+    "upVectorBlend": "spine_to_world_up",
+    "motionConstraint": "continuous"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "paper_hinge_overshoot",
+    "misregistrationStepFps": 10,
+    "characterCadence": "calm_handmade"
+  }
+}

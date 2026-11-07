@@ -9,7 +9,7 @@
    ```bash
    /audira-motion Aku mau video yang memperlihatkan cara kerja mesin turbojet pesawat, casingnya terbuka dan bagian turbin berputar di dalamnya.
    ```
-   Anda tidak perlu menghafal nama gaya; Claude otomatis menganalisis dan memilih style terbaik dari 43 styles yang tersedia.
+   Anda tidak perlu menghafal nama gaya; Claude otomatis menganalisis dan memilih style terbaik dari 68 styles yang tersedia.
 
 2. **Jawab Pertanyaan Singkat:**
    Claude akan menanyakan satu per satu hal penting, terutama: **apakah Anda memiliki file rekaman suara narator (voice-over) atau ingin menggunakan musik/SFX saja?**

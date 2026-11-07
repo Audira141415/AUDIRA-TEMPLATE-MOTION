@@ -1,0 +1,50 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "stained-glass",
+  "styleNumber": 58,
+  "name": "Stained-Glass Leadlight & Cathedral Light Pools",
+  "version": "1.0.0",
+  "palette": {
+    "ruby": "#B3122E",
+    "amber": "#E0A526",
+    "sunGold": "#F6C445",
+    "sapphire": "#1C3F9E",
+    "azure": "#3C74D0",
+    "emerald": "#1F7A3E",
+    "lead": "#1A1B1E",
+    "stone": "#8C8274",
+    "text": "#FBF3E2"
+  },
+  "geometry": {
+    "type": "lancet_rose_leadlight",
+    "bevelRadius": 0.06,
+    "polyBudget": "mid",
+    "silhouette": "pointed_arch_with_rose"
+  },
+  "materials": {
+    "type": "backlit_pot_metal_glass",
+    "roughness": 0.0,
+    "metalness": 0.0,
+    "translucency": 1.0,
+    "normalMap": "seedy_glass_streak_texture"
+  },
+  "lighting": {
+    "archetype": "sun_through_glass",
+    "keyLight": { "kelvin": 4200, "intensity": 40, "angle": [55, 0, 0], "type": "spot_from_window" },
+    "fillLight": { "kelvin": 3600, "intensity": 0.25 },
+    "practicals": "ruby_azure_amber_points_at_glass",
+    "bloom": { "strength": 0.55, "radius": 0.5, "threshold": 0.82 }
+  },
+  "camera": {
+    "type": "reverent_pullback",
+    "focalLengthMm": 35,
+    "fovDeg": 38,
+    "position": [0.25, 2.7, 3.1],
+    "motionConstraint": "catmull_rom_keys_no_stops"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "fly_in_ease_out_back_seat",
+    "characterCadence": "measured_reverent"
+  }
+}

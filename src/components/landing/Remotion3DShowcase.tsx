@@ -482,6 +482,231 @@ export const ALL_3D_KITS: KitCatalogItem[] = [
     promptExample: '/audira-motion Pola bintang arabesk berlapis emas terbuka, siluet kubah muncul di cakrawala senja.',
     previewId: 'IslamicDocumentaryPreview',
     sampleImg: '/3d-kits/islamicdocumentary.jpg'
+  },
+  {
+    id: 'mistisforge',
+    name: 'MISTISFORGE',
+    group: 'arsitektur',
+    character: 'Kampung malam berkabut dengan pelita, rumpun bambu, rumah panggung, dan beringin berakar gantung',
+    promptExample: '/audira-motion kisah mistis jalan setapak kampung yang berkabut dan pelita yang padam sendiri',
+    previewId: 'MistisforgePreview',
+    sampleImg: '/3d-kits/mistisforge.jpg'
+  },
+  {
+    id: 'foodforge',
+    name: 'FOODFORGE',
+    group: 'taktil',
+    character: 'Hidangan hero di meja kayu gelap, uap bercahaya dari belakang, bahan jatuh gerak lambat',
+    promptExample: '/audira-motion video promo burger baru dengan saus menetes dan bahan jatuh slow motion',
+    previewId: 'FoodforgePreview',
+    sampleImg: '/3d-kits/foodforge.jpg'
+  },
+  {
+    id: 'tacticboard',
+    name: 'TACTICBOARD',
+    group: 'sains',
+    character: 'Papan taktik 3D dengan koin pemain bernomor, jalur umpan kuning, dan replay gol emas di stadion bokeh',
+    promptExample: '/audira-motion breakdown taktik gol tim fiktif dari umpan pendek sampai tembakan di tiang dekat',
+    previewId: 'TacticboardPreview',
+    sampleImg: '/3d-kits/tacticboard.jpg'
+  },
+  {
+    id: 'wayangforge',
+    name: 'WAYANGFORGE',
+    group: 'taktil',
+    character: 'Panggung wayang kulit dengan kelir bercahaya, blencong, gamelan, dan bingkai batik kawung',
+    promptExample: '/audira-motion kisah kebaikan melawan angkara murka dalam gaya pertunjukan wayang kulit',
+    previewId: 'WayangforgePreview',
+    sampleImg: '/3d-kits/wayangforge.jpg'
+  },
+  {
+    id: 'disastersim',
+    name: 'DISASTERSIM',
+    group: 'sains',
+    character: 'Balok bumi terbelah dengan lempeng menunjam, cincin gempa, gelombang tsunami, dan kota pesisir mini',
+    promptExample: '/audira-motion penampang lempeng tektonik saat gempa megathrust dan jalur evakuasi tsunami',
+    previewId: 'DisastersimPreview',
+    sampleImg: '/3d-kits/disastersim.jpg'
+  },
+  {
+    id: 'scaleforge',
+    name: 'SCALEFORGE',
+    group: 'kosmik',
+    character: 'Zoom out logaritmik tanpa putus di atas penggaris ukur, dari studio putih ke luar angkasa',
+    promptExample: '/audira-motion zoom out dari sel darah sampai galaksi dengan label 10 pangkat n meter',
+    previewId: 'ScaleforgePreview',
+    sampleImg: '/3d-kits/scaleforge.jpg'
+  },
+  {
+    id: 'satisfyforge',
+    name: 'SATISFYFORGE',
+    group: 'taktil',
+    character: 'Studio pastel mulus dengan aksi presisi: iris, tuang, dan masuk pas',
+    promptExample: '/audira-motion konten loop menenangkan tentang proses packing produk yang rapi',
+    previewId: 'SatisfyforgePreview',
+    sampleImg: '/3d-kits/satisfyforge.jpg'
+  },
+  {
+    id: 'comicforge',
+    name: 'COMICFORGE',
+    group: 'taktil',
+    character: 'Komik Barat 3D: garis tinta tebal, titik Ben-Day, warna CMYK, panel halaman yang ditembus kamera',
+    promptExample: '/audira-motion video komik 3D pahlawan menyelamatkan kota dengan efek BOOM dan balon kata',
+    previewId: 'ComicforgePreview',
+    sampleImg: '/3d-kits/comicforge.jpg'
+  },
+  {
+    id: 'abyssforge',
+    name: 'ABYSSFORGE',
+    group: 'sains',
+    character: 'Ubur-ubur berdenyut cyan-magenta, salju laut, dan meteran kedalaman sonar menuju predator bercahaya',
+    promptExample: '/audira-motion misteri zona tengah malam di laut dalam',
+    previewId: 'AbyssforgePreview',
+    sampleImg: '/3d-kits/abyssforge.jpg'
+  },
+  {
+    id: 'risoforge',
+    name: 'RISOFORGE',
+    group: 'taktil',
+    character: 'Zine cetak risograph: tinta spot overprint, butiran halftone, cetakan sedikit meleset, lapisan kertas pop-up',
+    promptExample: '/audira-motion video zine risograph kota dan tanaman dengan tinta pink biru kuning',
+    previewId: 'RisoforgePreview',
+    sampleImg: '/3d-kits/risoforge.jpg'
+  },
+  {
+    id: 'y2kchrome',
+    name: 'Y2KCHROME',
+    group: 'kosmik',
+    character: 'Gumpalan krom cair di atas awan aqua dengan gelembung pelangi dan kilau lensa',
+    promptExample: '/audira-motion intro channel ceria gaya Y2K dengan bintang krom dan gelembung mengilap',
+    previewId: 'Y2kchromePreview',
+    sampleImg: '/3d-kits/y2kchrome.jpg'
+  },
+  {
+    id: 'feltcraft',
+    name: 'FELTCRAFT',
+    group: 'taktil',
+    character: 'Diorama wol dan flanel berjahit tangan dengan boneka berbulu halus yang bergerak patah-patah',
+    promptExample: '/audira-motion ucapan selamat pagi yang hangat dengan boneka wol dan matahari kancing',
+    previewId: 'FeltcraftPreview',
+    sampleImg: '/3d-kits/feltcraft.jpg'
+  },
+  {
+    id: 'anatomix',
+    name: 'ANATOMIX',
+    group: 'sains',
+    character: 'Jantung 3D transparan di atas proyektor hologram teal dengan aliran darah merah dan biru',
+    promptExample: '/audira-motion anatomi paru-paru dan pertukaran oksigen dengan label dan hologram klinis',
+    previewId: 'AnatomixPreview',
+    sampleImg: '/3d-kits/anatomix.jpg'
+  },
+  {
+    id: 'ukiyoforge',
+    name: 'UKIYOFORGE',
+    group: 'taktil',
+    character: 'Lapisan kertas cetak kayu dengan ombak bercakar, gunung kembar, perahu, dan matahari merah',
+    promptExample: '/audira-motion kisah nelayan menghadapi ombak besar dalam gaya ukiyo-e berlapis kertas',
+    previewId: 'UkiyoforgePreview',
+    sampleImg: '/3d-kits/ukiyoforge.jpg'
+  },
+  {
+    id: 'stainedglass',
+    name: 'STAINEDGLASS',
+    group: 'arsitektur',
+    character: 'Jendela lancet dan rose berwarna permata dengan bingkai timah, genangan cahaya warna di lantai batu',
+    promptExample: '/audira-motion kisah harapan diceritakan lewat jendela kaca patri',
+    previewId: 'StainedglassPreview',
+    sampleImg: '/3d-kits/stainedglass.jpg'
+  },
+  {
+    id: 'sulamforge',
+    name: 'SULAMFORGE',
+    group: 'taktil',
+    character: 'Pemidangan kayu dengan tusuk satin sutra, jarum baja, dan kain songket bersulam emas',
+    promptExample: '/audira-motion proses pembuatan sulaman tangan bermotif bunga untuk promo produk bordir',
+    previewId: 'SulamforgePreview',
+    sampleImg: '/3d-kits/sulamforge.jpg'
+  },
+  {
+    id: 'mosaicforge',
+    name: 'MOSAICFORGE',
+    group: 'taktil',
+    character: 'Ribuan tessera keramik dan emas berkilau tersusun mengikuti kontur gambar di atas nat kapur',
+    promptExample: '/audira-motion ungkap logo topik dari ribuan keping mosaik',
+    previewId: 'MosaicforgePreview',
+    sampleImg: '/3d-kits/mosaicforge.jpg'
+  },
+  {
+    id: 'marblemuseum',
+    name: 'MARBLEMUSEUM',
+    group: 'arsitektur',
+    character: 'Patung dada marmer bergaya Yunani-Romawi di galeri merah tua dengan pilar, bingkai emas, dan kartu label museum',
+    promptExample: '/audira-motion siapa para filsuf Yunani dan apa yang mereka ajarkan',
+    previewId: 'MarblemuseumPreview',
+    sampleImg: '/3d-kits/marblemuseum.jpg'
+  },
+  {
+    id: 'terrarium',
+    name: 'TERRARIUM',
+    group: 'taktil',
+    character: 'Toples kaca berisi lumut, pakis, jamur, dan siput dengan siklus siang-malam',
+    promptExample: '/audira-motion ekosistem mini dalam toples kaca, embun, lumut, dan jamur yang menyala di malam hari',
+    previewId: 'TerrariumPreview',
+    sampleImg: '/3d-kits/terrarium.jpg'
+  },
+  {
+    id: 'sketchforge',
+    name: 'SKETCHFORGE',
+    group: 'arsitektur',
+    character: 'Sketsa pensil grafit di buku sketsa yang berubah jadi rangka, tanah liat, lalu objek berwarna satu aksen',
+    promptExample: '/audira-motion video sketsa pensil sepatu orisinal berubah jadi model 3D berwarna',
+    previewId: 'SketchforgePreview',
+    sampleImg: '/3d-kits/sketchforge.jpg'
+  },
+  {
+    id: 'dreamcore',
+    name: 'DREAMCORE',
+    group: 'kosmik',
+    character: 'Ruang kolam berubin dengan awan di dalam ruangan, pintu melayang di air, dan tangga menuju entah ke mana',
+    promptExample: '/audira-motion arti deja vu dalam ruang mimpi pastel',
+    previewId: 'DreamcorePreview',
+    sampleImg: '/3d-kits/dreamcore.jpg'
+  },
+  {
+    id: 'gachareveal',
+    name: 'GACHAREVEAL',
+    group: 'kosmik',
+    character: 'Panggung summon gelap, kapsul bergetar naik kelas warna, kartu foil berputar dan terbuka',
+    promptExample: '/audira-motion reveal edisi terbatas produk baru dengan efek kartu langka emas',
+    previewId: 'GacharevealPreview',
+    sampleImg: '/3d-kits/gachareveal.jpg'
+  },
+  {
+    id: 'arcadecrt',
+    name: 'ARCADECRT',
+    group: 'kosmik',
+    character: 'Ruang arcade malam, layar CRT melengkung dengan scanline dan glow, lalu menyelam ke dunia voxel',
+    promptExample: '/audira-motion video arcade CRT retro, game pixel orisinal berubah jadi dunia 3D',
+    previewId: 'ArcadecrtPreview',
+    sampleImg: '/3d-kits/arcadecrt.jpg'
+  },
+  {
+    id: 'manuscript',
+    name: 'MANUSCRIPT',
+    group: 'arsitektur',
+    character: 'Meja penyalin naskah bercahaya lilin dengan kitab beriluminasi emas dan lontar bertali',
+    promptExample: '/audira-motion kisah bagaimana pengetahuan dijaga lewat naskah tulisan tangan dan daun lontar',
+    previewId: 'ManuscriptPreview',
+    sampleImg: '/3d-kits/manuscript.jpg'
+  },
+  {
+    id: 'glitchforge',
+    name: 'GLITCHFORGE',
+    group: 'sains',
+    character: 'Render studio bersih yang terkoyak glitch RGB, blok piksel, pixel sorting, layar no signal, lalu pulih',
+    promptExample: '/audira-motion video glitch datamosh sebuah objek futuristik yang rusak lalu kembali bersih',
+    previewId: 'GlitchforgePreview',
+    sampleImg: '/3d-kits/glitchforge.jpg'
   }
 ];
 

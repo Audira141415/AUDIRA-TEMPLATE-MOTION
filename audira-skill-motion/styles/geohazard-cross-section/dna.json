@@ -1,0 +1,73 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "geohazard-cross-section",
+  "styleNumber": 48,
+  "name": "Geohazard Cross-Section & Calm Hazard Explainer",
+  "version": "1.0.0",
+  "palette": {
+    "void": "#0B141C",
+    "sediment": "#C9A877",
+    "granite": "#9C8C7E",
+    "basalt": "#3D4752",
+    "mantleHot": "#E0702F",
+    "sea": "#2E8FC0",
+    "sand": "#D9C8A0",
+    "land": "#6F8E5A",
+    "route": "#3DDC97",
+    "ring": "#9FE3FF",
+    "lvlInfo": "#4FC3D9",
+    "lvlAdvisory": "#F2C14E",
+    "lvlWarning": "#F28C38",
+    "lvlEvac": "#E5533D",
+    "text": "#EAF4F8"
+  },
+  "geometry": {
+    "type": "extruded_cross_section_block",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid",
+    "silhouette": "sliced_rectilinear_block_with_profiled_top"
+  },
+  "materials": {
+    "type": "canvas_strata_and_emissive_mantle",
+    "roughness": 0.85,
+    "metalness": 0.0,
+    "waterRoughness": 0.12,
+    "normalMap": "none"
+  },
+  "lighting": {
+    "archetype": "museum_lab_key_with_mantle_underglow",
+    "keyLight": {
+      "kelvin": 5200,
+      "intensity": 2.1,
+      "angle": [
+        50,
+        35,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 8000,
+      "intensity": 0.7
+    },
+    "ambientOcclusion": {
+      "intensity": 0.0,
+      "radius": 0.0
+    }
+  },
+  "camera": {
+    "type": "cut_face_to_coast_travel",
+    "focalLengthMm": 32,
+    "fovDeg": 40,
+    "position": [
+      1.6,
+      -0.8,
+      7.6
+    ],
+    "motionConstraint": "catmull_rom_keys_with_damped_rupture_shake"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "gaussian_pulse_shoaling_wave_and_elastic_rebound",
+    "characterCadence": "calm_documentary"
+  }
+}

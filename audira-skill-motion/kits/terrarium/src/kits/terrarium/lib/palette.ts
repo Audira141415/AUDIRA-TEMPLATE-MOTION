@@ -1,0 +1,30 @@
+// TERRARIUM palette — living glass jar: moss and fern greens, soil browns, glass, and a day-to-night sky ramp.
+export const TERRA_PALETTE = {
+  mossA: "#5E8F3A",
+  mossB: "#7DAA45",
+  mossC: "#3F6E2C",
+  fern: "#4E8A3A",
+  fernTip: "#8CC25A",
+  soil: "#3B2A1E",
+  soilTop: "#4A3424",
+  charcoal: "#1B1A1A",
+  gravel: "#8A8378",
+  pebble: "#B9B2A6",
+  capOrange: "#D9773A",
+  capCream: "#EAD9BE",
+  stem: "#F1E6D2",
+  glow: "#B8FF9A", // bioluminescent mushroom glow at night
+  water: "#2B5E66",
+  cork: "#A77B4F",
+  wood: "#6B4A33",
+  shell: "#B07A45",
+  shellBand: "#6E4526",
+  snailBody: "#9C8E78",
+  firefly: "#FFE58A",
+  // sky ramp behind the jar
+  skyMorning: "#F2D3AE",
+  skyNoon: "#CFE2EA",
+  skyDusk: "#D98A57",
+  skyNight: "#0D1426",
+  hud: "#F5F1E8",
+} as const;

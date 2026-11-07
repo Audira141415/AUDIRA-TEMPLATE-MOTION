@@ -19,7 +19,7 @@ Audira Skill Motion adalah produk perangkat lunak komersial berbayar yang dilind
 - **Instalasi Komputer:** Dipasang pada workstation pribadi pembeli sesuai lisensi per-kursi (seat) yang telah dibeli.
 
 ### Batasan & Larangan Keras:
-- **DILARANG MENJUAL KEMBALI (NO RESALE):** Anda dilarang mendistribusikan ulang, menjual kembali, menyewakan, atau membundel ulang source code, prompt `SKILL.md`, 43 kit procedural engine, atau dokumentasi Audira Skill Motion kepada pihak ketiga.
+- **DILARANG MENJUAL KEMBALI (NO RESALE):** Anda dilarang mendistribusikan ulang, menjual kembali, menyewakan, atau membundel ulang source code, prompt `SKILL.md`, 68 kit procedural engine, atau dokumentasi Audira Skill Motion kepada pihak ketiga.
 - **DILARANG BERBAGI PUBLIK:** Anda dilarang mengunggah file repositori atau paket instalasi ke repositori publik (GitHub, GitLab, Google Drive publik, forum, atau grup publik).
 - **HAK KEKAYAAN INTELEKTUAL:** Seluruh hak cipta arsitektur kode, generator matematika prosedural, dan instruksi AI tetap berada di tangan **AUDIRA (Agus Dwi R)**.
 

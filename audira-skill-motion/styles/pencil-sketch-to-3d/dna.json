@@ -1,0 +1,69 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "pencil-sketch-to-3d",
+  "styleNumber": 63,
+  "name": "Pencil Sketch to 3D — Graphite Lines Extrude into a Living Object",
+  "kit": "sketchforge",
+  "version": "1.0.0",
+  "palette": {
+    "graphite": "#2F3034",
+    "graphiteMid": "#5A5B61",
+    "clay": "#BDB8B0",
+    "paper": "#F3EBDD",
+    "paperWhite": "#FBF7EF",
+    "accent": "#F0532D",
+    "desk": "#26262A"
+  },
+  "geometry": {
+    "type": "stroke_model_to_box_primitives",
+    "strokeRadius": [
+      0.006,
+      0.013
+    ],
+    "polyBudget": "low",
+    "silhouette": "simple_readable_object"
+  },
+  "materials": {
+    "type": "graphite_lines_then_matte_clay_then_accent",
+    "clayRoughness": 0.82,
+    "hatchMapOpacity": 0.13,
+    "wireMetalness": 0.35
+  },
+  "lighting": {
+    "archetype": "warm_desk_key_cool_rim",
+    "toneMapping": "none",
+    "key": {
+      "intensity": 2.1,
+      "position": [
+        4.5,
+        8,
+        5.5
+      ]
+    },
+    "rim": {
+      "intensity": 0.9,
+      "color": "#DDE6FF"
+    },
+    "ambient": 0.75
+  },
+  "camera": {
+    "type": "topdown_to_orbit_hero",
+    "fovDeg": [
+      32,
+      36
+    ],
+    "motionConstraint": "continuous_orbit"
+  },
+  "motion": {
+    "fps": 60,
+    "phases": [
+      "draw",
+      "extrude",
+      "clay",
+      "colour",
+      "lift"
+    ],
+    "physicsModel": "paper_peel_arc_and_soft_overshoot",
+    "characterCadence": "calm_maker"
+  }
+}

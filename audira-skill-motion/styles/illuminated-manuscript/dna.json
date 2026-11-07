@@ -1,0 +1,50 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "illuminated-manuscript",
+  "styleNumber": 67,
+  "name": "Illuminated Manuscript & Lontar Palm-Leaf",
+  "kit": "manuscript",
+  "category": "Illuminated Codex & Nusantara Lontar",
+  "version": "2.0.0",
+  "palette": {
+    "background": "#0E0906",
+    "parchment": "#E8D5AC",
+    "ironGallInk": "#2A1A10",
+    "rubricRed": "#B0301E",
+    "lapis": "#24418C",
+    "goldLeaf": "#E6B94C",
+    "lontar": "#D9B97A",
+    "text": "#F3E4C4"
+  },
+  "geometry": {
+    "type": "lectern_codex_and_lontar_bundle",
+    "bevelRadius": 0.0,
+    "polyBudget": "low_mid",
+    "silhouette": "open_book_and_fanned_palm_leaves"
+  },
+  "materials": {
+    "type": "parchment_gold_leaf_palm_leaf",
+    "roughness": 0.85,
+    "metalness": 0.0,
+    "normalMap": "none_canvas_procedural"
+  },
+  "lighting": {
+    "archetype": "candlelight_scriptorium",
+    "keyLight": { "kelvin": 1900, "intensity": 2.6, "decay": 1.6, "flicker": "value_noise", "shadow": "pcf_soft_1024" },
+    "fillLight": { "kelvin": 4500, "intensity": 0.45, "type": "window_directional" },
+    "gleam": { "kelvin": 3200, "intensity": 1.6, "distance": 1.0 },
+    "environment": { "type": "pmrem_room", "intensity": 0.22 }
+  },
+  "camera": {
+    "type": "gold_macro_to_desk_reveal",
+    "focalLengthMm": 55,
+    "fovDeg": 34,
+    "position": [-0.33, 1.15, 0.27],
+    "motionConstraint": "initial_quill_lontar_reveal"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "quill_writing_and_leaf_fan",
+    "characterCadence": "scribe_patience"
+  }
+}

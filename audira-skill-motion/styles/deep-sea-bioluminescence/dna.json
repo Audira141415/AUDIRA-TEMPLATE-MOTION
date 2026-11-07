@@ -1,0 +1,49 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "deep-sea-bioluminescence",
+  "styleNumber": 52,
+  "name": "Bioluminescent Deep-Sea Descent & Sonar HUD",
+  "version": "1.0.0",
+  "palette": {
+    "surfaceTeal": "#0E4A6B",
+    "twilightBlue": "#06223A",
+    "midnightInk": "#020A14",
+    "lumenCyan": "#38F6FF",
+    "lumenMagenta": "#FF3FD2",
+    "lumenViolet": "#8A5CFF",
+    "lureWhite": "#D8FFFB",
+    "text": "#E6FBFF"
+  },
+  "geometry": {
+    "type": "organic_lathe_and_tube",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid",
+    "silhouette": "soft_translucent_bells_and_dark_predator"
+  },
+  "materials": {
+    "type": "translucent_emissive_gel",
+    "roughness": 0.15,
+    "metalness": 0.0,
+    "translucency": 0.68,
+    "normalMap": "none_procedural_hide_bumps"
+  },
+  "lighting": {
+    "archetype": "self_lit_darkness",
+    "keyLight": { "kelvin": 9000, "intensity": 2.4, "angle": [80, 20, 0], "fadesWithDepth": true },
+    "fillLight": { "kelvin": 12000, "intensity": 0.06 },
+    "practicals": "point_light_per_creature",
+    "bloom": { "strength": 0.8, "radius": 0.5, "threshold": 0.78 }
+  },
+  "camera": {
+    "type": "descending_helix",
+    "focalLengthMm": 32,
+    "fovDeg": 46,
+    "position": [0, 1.2, 5.4],
+    "motionConstraint": "continuous_descent_then_target_lock"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "jet_pulse_sharp_squeeze_slow_relax",
+    "characterCadence": "slow_hypnotic"
+  }
+}

@@ -1,4 +1,4 @@
-// Audira Skill Motion 3D Signature Styles (v4.1.0, 43 kits)
+// Audira Skill Motion 3D Signature Styles (v4.2.0, 68 kits)
 export type Motion3DFormat = 
   | 'innerworks'
   | 'buildforge'
@@ -44,7 +44,33 @@ export type Motion3DFormat =
   | 'visualinvestigation'
   | 'tradingterminal'
   | 'historymap'
-  | 'islamicdocumentary';
+  | 'islamicdocumentary'
+  // v4.2 Expansion
+  | 'mistisforge'
+  | 'foodforge'
+  | 'tacticboard'
+  | 'wayangforge'
+  | 'disastersim'
+  | 'scaleforge'
+  | 'satisfyforge'
+  | 'comicforge'
+  | 'abyssforge'
+  | 'risoforge'
+  | 'y2kchrome'
+  | 'feltcraft'
+  | 'anatomix'
+  | 'ukiyoforge'
+  | 'stainedglass'
+  | 'sulamforge'
+  | 'mosaicforge'
+  | 'marblemuseum'
+  | 'terrarium'
+  | 'sketchforge'
+  | 'dreamcore'
+  | 'gachareveal'
+  | 'arcadecrt'
+  | 'manuscript'
+  | 'glitchforge';
 
 // Web Studio & Legacy Motion Formats
 export type MotionFormat = 

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "nusantara-folk-horror",
+  "styleNumber": 44,
+  "name": "Nusantara Folk Horror & Misty Kampung Night",
+  "kit": "mistisforge",
+  "version": "1.0.0",
+  "palette": {
+    "background": "#0E1828",
+    "fogNight": "#24364F",
+    "fogVeil": "#A9BCD2",
+    "moonlight": "#8FAACC",
+    "lanternAmber": "#FFA94A",
+    "earth": "#2B2620",
+    "bamboo": "#55603E",
+    "text": "#E6ECF2"
+  },
+  "geometry": {
+    "type": "kampung_night_diorama",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid_instanced_vegetation",
+    "silhouette": "bamboo_verticals_and_hanging_roots"
+  },
+  "materials": {
+    "type": "matte_organic_night",
+    "roughness": 0.92,
+    "metalness": 0.0,
+    "normalMap": "canvas_procedural_weave_and_bark"
+  },
+  "lighting": {
+    "archetype": "moon_rim_vs_oil_lamp",
+    "keyLight": { "kelvin": 7500, "intensity": 1.6, "angle": [35, 200, 0] },
+    "fillLight": { "kelvin": 6500, "intensity": 0.9, "type": "hemisphere" },
+    "practicals": { "kelvin": 1900, "intensity": 5.5, "decay": 1.6, "flicker": "value_noise_2_octave" },
+    "fog": { "type": "exp2", "color": "#24364F", "density": 0.055 }
+  },
+  "camera": {
+    "type": "creeping_dolly",
+    "focalLengthMm": 28,
+    "fovDeg": 52,
+    "position": [0.25, 1.5, 8.6],
+    "motionConstraint": "slow_forward_handheld_breath"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "wind_sway_and_fog_drift",
+    "characterCadence": "slow_dread"
+  }
+}

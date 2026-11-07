@@ -1,0 +1,62 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "arcade-crt",
+  "styleNumber": 66,
+  "name": "Arcade Cabinet & CRT — Dive Through the Glass into the Pixel World",
+  "kit": "arcadecrt",
+  "version": "1.0.0",
+  "palette": {
+    "room": "#07060F",
+    "cabinet": "#141A3A",
+    "magenta": "#FF2E88",
+    "cyan": "#2EF2FF",
+    "yellow": "#FFD23F",
+    "orange": "#FF8A1F",
+    "gameSky": "#120A33",
+    "brick": "#7A2DFF"
+  },
+  "geometry": {
+    "type": "extruded_cabinet_profile_plus_voxels",
+    "voxelUnit": 1.0,
+    "spritePixel": 0.125,
+    "polyBudget": "mid",
+    "silhouette": "upright_arcade_cabinet"
+  },
+  "materials": {
+    "type": "crt_shader_and_emissive_neons",
+    "crt": {
+      "barrel": 0.09,
+      "rgbOffset": 0.0035,
+      "scanlines": 128,
+      "grille": 0.12,
+      "vignette": 0.45
+    },
+    "cabinetRoughness": 0.4
+  },
+  "lighting": {
+    "archetype": "dark_room_emitter_lit",
+    "ambient": 0.18,
+    "screenPointLight": {
+      "color": "#9EC9FF",
+      "intensity": 1.6
+    },
+    "topSpot": {
+      "intensity": 14,
+      "angle": 0.5
+    }
+  },
+  "camera": {
+    "type": "push_through_glass_then_side_tracking",
+    "fovDeg": [
+      34,
+      44
+    ],
+    "motionConstraint": "continuous_with_flash_masked_switch"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "scripted_platformer_parabolas",
+    "spriteWalkFps": 10,
+    "characterCadence": "arcade_snappy"
+  }
+}

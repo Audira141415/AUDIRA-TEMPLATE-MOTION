@@ -1,0 +1,68 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "medical-anatomy",
+  "styleNumber": 56,
+  "name": "Medical Anatomy Explainer & Clinical Hologram",
+  "version": "1.0.0",
+  "palette": {
+    "void": "#03141A",
+    "voidGlow": "#0B3A44",
+    "holo": "#3FE0D0",
+    "holoSoft": "#9FF5EC",
+    "tissue": "#C8475A",
+    "oxy": "#FF3B4A",
+    "deoxy": "#3B7BFF",
+    "vein": "#8B3A8F",
+    "valve": "#F4EDE4",
+    "text": "#E6FBF8"
+  },
+  "geometry": {
+    "type": "deformed_sphere_organ_with_tube_vessels",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid",
+    "silhouette": "organic_rounded_organ"
+  },
+  "materials": {
+    "type": "clearcoat_sheen_tissue_and_glass_vessels",
+    "roughness": 0.36,
+    "metalness": 0.0,
+    "translucency": 0.78,
+    "normalMap": "none"
+  },
+  "lighting": {
+    "archetype": "clinical_key_with_teal_rim_and_projector_underlight",
+    "keyLight": {
+      "kelvin": 5800,
+      "intensity": 2.2,
+      "angle": [
+        40,
+        30,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 9000,
+      "intensity": 1.4
+    },
+    "ambientOcclusion": {
+      "intensity": 0.0,
+      "radius": 0.0
+    }
+  },
+  "camera": {
+    "type": "clinical_orbit",
+    "focalLengthMm": 42,
+    "fovDeg": 34,
+    "position": [
+      -3.3,
+      0.95,
+      5.3
+    ],
+    "motionConstraint": "continuous_yaw_with_pull_back_and_push_in"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "lub_dub_envelope_72bpm_with_flow_surge",
+    "characterCadence": "resting_heart_rate"
+  }
+}

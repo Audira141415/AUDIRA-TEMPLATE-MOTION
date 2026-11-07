@@ -1,0 +1,70 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "glitch-datamosh",
+  "styleNumber": 68,
+  "name": "Glitch Art & Datamosh — A Clean Render that Corrupts and Snaps Back",
+  "kit": "glitchforge",
+  "version": "1.0.0",
+  "palette": {
+    "studio": "#E8E9EE",
+    "pearl": "#F6F4F1",
+    "chrome": "#D9DDE6",
+    "signalRed": "#FF1E56",
+    "signalGreen": "#2BFF88",
+    "signalBlue": "#1E6BFF",
+    "cyan": "#00E5FF",
+    "ink": "#0B0C10"
+  },
+  "geometry": {
+    "type": "clean_product_sculpture_with_clip_slices",
+    "slices": 6,
+    "polyBudget": "mid_high",
+    "silhouette": "torus_knot_on_plinth"
+  },
+  "materials": {
+    "type": "pearl_clearcoat_iridescent_plus_glitch_post",
+    "pearl": {
+      "roughness": 0.18,
+      "clearcoat": 1,
+      "iridescence": 0.6
+    },
+    "chrome": {
+      "metalness": 1,
+      "roughness": 0.08
+    }
+  },
+  "lighting": {
+    "archetype": "white_cyc_softbox_with_signal_kickers",
+    "key": {
+      "intensity": 2.2,
+      "position": [
+        4,
+        9,
+        5
+      ],
+      "shadowRadius": 8
+    },
+    "kickers": [
+      {
+        "color": "#00E5FF",
+        "intensity": 8
+      },
+      {
+        "color": "#FF1E56",
+        "intensity": 5
+      }
+    ],
+    "environment": "PMREM studio softboxes"
+  },
+  "camera": {
+    "type": "continuous_product_orbit",
+    "fovDeg": 36,
+    "motionConstraint": "smooth_camera_broken_image"
+  },
+  "motion": {
+    "fps": 60,
+    "glitchStepHz": 12,
+    "physicsModel": "seeded_stepped_corruption",
+    "characterCadence": "calm_then_violent_then_clean"
+  }
+}

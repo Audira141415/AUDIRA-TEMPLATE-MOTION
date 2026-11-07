@@ -1,6 +1,6 @@
 # Audira Skill Motion Style Registry
 
-What each of the 43 styles is, what this package includes for it, and its known limits. Author & Architect: **AUDIRA (Agus Dwi R)**. Read-only during buyer sessions.
+What each of the 68 styles is, what this package includes for it, and its known limits. Author & Architect: **AUDIRA (Agus Dwi R)**. Read-only during buyer sessions.
 
 | ID | Name | Direction | Engine in this package | Known limits |
 | --- | --- | --- | --- | --- |
@@ -47,7 +47,32 @@ What each of the 43 styles is, what this package includes for it, and its known 
 | 41 | TRADINGTERMINAL | Institutional financial markets, candlestick charts & order book depth | `kits/tradingterminal` | Keep candle body ratio clean; live price laser must remain within 9:16 safe zones |
 | 42 | HISTORYMAP | Geopolitical war history documentary, territorial shifts & pincer arrows | `kits/historymap` | Requires accurate geographic chokepoints; display year timestamp at all times |
 | 43 | ISLAMICDOCUMENTARY | Folk Islam & Islamic golden age, sacred 8-point stars & dome silhouettes | `kits/islamicdocumentary` | Strict reverence: no physical face depictions of holy figures; focus on light, geometry & calligraphy |
+| 44 | MISTISFORGE | Nusantara folk horror: foggy kampung night, pelita lamps, banyan roots & a suggestive pale presence | `kits/mistisforge` | Suggestive only, no gore; keep moon-blue vs lamp-amber and slow creeping dolly |
+| 45 | FOODFORGE | Macro food commercial: slow-motion ingredient drops, backlit steam, glossy drips on dark walnut | `kits/foodforge` | Keep the background dark and every falling item landing with bounce + ripple; food always warm and clearcoat-glossy |
+| 46 | TACTICBOARD | 3D football tactics board, puck tokens, draw-on passing lanes & goal replay | `kits/tacticboard` | Fictional teams only; max one lane + one run arrow drawing at once |
+| 47 | WAYANGFORGE | Wayang kulit: perforated leather puppets, glowing kelir, blencong lamp & batik stage, colour side to shadow side | `kits/wayangforge` | Original puppet designs only; one dominant blencong light, shadow side stays amber |
+| 48 | DISASTERSIM | Calm geohazard cross-section: subduction slip, seismic rings, shoaling tsunami & warning ramp | `kits/disastersim` | Educational and calm: no casualties; real events need sourced magnitude and timing |
+| 49 | SCALEFORGE | Continuous log zoom-out ant to Sun on a re-decading ruler, studio to deep space | `kits/scaleforge` | Sizes must be sourced; state that distances between subjects are not to scale |
+| 50 | SATISFYFORGE | Oddly-satisfying pastel studio loops: sand slicing, exact liquid fill, perfect-fit drops | `kits/satisfyforge` | Every action must end exactly on its mark with a tiny damped settle; pastel only, soft VSM shadows |
+| 51 | COMICFORGE | Western comic book 3D: halftone cel shading, ink hulls, panel flythrough & onomatopoeia | `kits/comicforge` | CMYK + newsprint only; every hero prop gets an ink hull; lettering and characters must be original |
+| 52 | ABYSSFORGE | Bioluminescent deep-sea descent, marine snow & sonar depth HUD | `kits/abyssforge` | Only living light may bloom; schedule a lit creature under the camera for every beat |
+| 53 | RISOFORGE | Risograph zine print: spot-ink multiply overprint, halftone grain & pop-up paper layers | `kits/risoforge` | Max three spot inks; inks must multiply (depthWrite off); misregistration < 0.04 units |
+| 54 | Y2KCHROME | Y2K / Frutiger-aero liquid chrome blobs, iridescent bubbles and aqua skies | `kits/y2kchrome` | Chrome must reflect the procedural sky env; no lettering on 3D objects, no ferrofluid spikes or neon grids |
+| 55 | FELTCRAFT | Needle-felted wool & stitched fabric diorama, stop-motion on twos | `kits/feltcraft` | Felt only (roughness 1 + sheen, no clay gloss); keep stitches visible; puppets step at 12 poses/s, camera smooth |
+| 56 | ANATOMIX | Stylised translucent heart, red/blue blood flow, clinical teal hologram & leader-line labels | `kits/anatomix` | Non-gory, stylised; always mark educational only, no medical advice |
+| 57 | UKIYOFORGE | Ukiyo-e woodblock print as layered 3D washi sheets: claw-foam waves, mountain, boats, flat ink & key-lines | `kits/ukiyoforge` | Original compositions only (never trace a famous print); NoToneMapping, pseudo-script cartouche |
+| 58 | STAINEDGLASS | Stained-glass leadlight window assembling, sun casting jewel light pools on stone | `kits/stainedglass` | One flat colour per pane in dark lead came; the window must stay the brightest object |
+| 59 | SULAMFORGE | Macro embroidery & tenun songket: satin stitches growing stitch by stitch in a hoop, gold threads catching light | `kits/sulamforge` | Stitches grow one at a time in real stitch order; gold stays metallic with env map, silk stays sheen |
+| 60 | MOSAICFORGE | Thousands of instanced tesserae raining down and settling into a mosaic image | `kits/mosaicforge` | Picture comes from per-tile colour only (no textures); terracotta/lapis/ochre/gold, dark outline row |
+| 61 | MARBLEMUSEUM | Classical marble bust in a skylit museum gallery with wall-label card | `kits/marblemuseum` | Stone stays still, light and camera move; never clip marble to pure white |
+| 62 | TERRARIUM | Living glass-jar terrarium, refractive glass, moss & ferns, day-night cycle, macro orbit | `kits/terrarium` | Keep it slow; show the whole jar before the macro push-in |
+| 63 | SKETCHFORGE | Pencil sketch to 3D: graphite lines extrude to wire, clay, colour and lift off the page | `kits/sketchforge` | Graphite + paper cream + ONE accent only; the sketch stays on the page; new objects need a new stroke model |
+| 64 | DREAMCORE | Pastel dreamcore: pool room, clouds indoors, floating doors, stairs to nowhere | `kits/dreamcore` | Pastel only, slow floating camera; keep exposure ≤ 0.7 and haze light so frames never go milky |
+| 65 | GACHAREVEAL | Capsule burst & holographic card reveal with blue→purple→gold rarity escalation | `kits/gachareveal` | No real game IP or ball-style capsules; escalate in clear tiers and settle front-on so the card art is fully readable |
+| 66 | ARCADECRT | Arcade cabinet & curved CRT, camera dives through the glass into a voxel game world | `kits/arcadecrt` | Original game IP only; raster <= 128 px tall with nearest filter; switch to the world only under the dive flash |
+| 67 | MANUSCRIPT | Illuminated codex & Balinese-style lontar by candlelight: gleaming gold-leaf initial, quill-written ink, fanning palm leaves | `kits/manuscript` | Pseudo-script only, never real text; candlelight key, distinct from VINTAGEFORGE engraving |
+| 68 | GLITCHFORGE | Glitch art & datamosh: a clean studio render corrupts (RGB split, blocks, pixel sort, no signal) then snaps back | `kits/glitchforge` | Seeded 12 Hz glitch only; start clean; no full-frame strobes faster than 3 Hz; signal-lost <= 1 s |
 
 ## What this package contains
 
-One installable `audira-motion` skill with 43 selectively loaded style references and modular Style DNA profiles. This package contains the generic production kit (starter, core library, dedicated style kits for all 43 styles with technical examples, scripts) and quality-bar stills. It does **not** contain or license third-party trademarked assets, stories, ElevenLabs recordings, or music. Buyers need Node.js, npm and (for audio work) ffmpeg; see `references/setup.md`.
+One installable `audira-motion` skill with 68 selectively loaded style references and modular Style DNA profiles. This package contains the generic production kit (starter, core library, dedicated style kits for all 68 styles with technical examples, scripts) and quality-bar stills. It does **not** contain or license third-party trademarked assets, stories, ElevenLabs recordings, or music. Buyers need Node.js, npm and (for audio work) ffmpeg; see `references/setup.md`.

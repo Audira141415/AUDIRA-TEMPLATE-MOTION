@@ -31,13 +31,13 @@ Pemegang Lisensi secara tegas dilarang keras untuk:
 1. **Dilarang Menjual Kembali (No Resale):** Menjual kembali, menyewakan, meminjamkan, mendistribusikan ulang, atau mengomersialkan kembali source code, skill prompt (`SKILL.md`), procedural engines (`kits/`), atau dokumentasi Audira Skill Motion dalam bentuk apa pun.
 2. **Dilarang Berbagi Publik (No Public Sharing):** Mengunggah, mempublikasikan, atau membagikan source code atau arsip instalasi Audira Skill Motion ke repositori publik (seperti GitHub publik, GitLab publik, forum umum, Torrent, Discord publik, atau situs download gratis).
 3. **Dilarang Menghapus Identitas Hak Cipta (No Tampering):** Menghapus, mengubah, atau menyamarkan tanda kepemilikan, metadata hak cipta, nama AUDIRA (Agus Dwi R), atau pernyataan lisensi yang tertera dalam kode sumber dan dokumentasi.
-4. **Dilarang Melakukan Derivative Skill Distribution:** Mengemas ulang sebagian atau seluruh struktur prompt, 43 signature kits, dan arsitektur internal menjadi produk skill atau plugin tandingan untuk dijual kepada pihak ketiga.
+4. **Dilarang Melakukan Derivative Skill Distribution:** Mengemas ulang sebagian atau seluruh struktur prompt, 68 signature kits, dan arsitektur internal menjadi produk skill atau plugin tandingan untuk dijual kepada pihak ketiga.
 
 ---
 
 ### PASAL 3 — HAK KEKAYAAN INTELEKTUAL (INTELLECTUAL PROPERTY)
 
-1. Semua hak cipta, paten, rahasia dagang, merek dagang, dan hak kekayaan intelektual lainnya dalam **Audira Skill Motion** (termasuk namun tidak terbatas pada kode sumber TypeScript, shader Three.js, matematika prosedural, struktur 43 kit, prompt engineering, dan materi tertulis) adalah dan akan tetap menjadi milik eksklusif **AUDIRA (Agus Dwi R)**.
+1. Semua hak cipta, paten, rahasia dagang, merek dagang, dan hak kekayaan intelektual lainnya dalam **Audira Skill Motion** (termasuk namun tidak terbatas pada kode sumber TypeScript, shader Three.js, matematika prosedural, struktur 68 kit, prompt engineering, dan materi tertulis) adalah dan akan tetap menjadi milik eksklusif **AUDIRA (Agus Dwi R)**.
 2. Perangkat lunak ini **dilisensikan, BUKAN dijual**. Tidak ada hak kepemilikan kode sumber yang dialihkan kepada Pemegang Lisensi melalui perjanjian ini.
 
 ---

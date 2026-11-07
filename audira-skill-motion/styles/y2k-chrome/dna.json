@@ -1,0 +1,48 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "y2k-chrome",
+  "styleNumber": 54,
+  "name": "Y2K Liquid Chrome & Frutiger Aero",
+  "version": "1.0.0",
+  "palette": {
+    "skyTop": "#1259E8",
+    "skyMid": "#3FB8FF",
+    "skyHorizon": "#E9FBFF",
+    "skyLow": "#7EE8D6",
+    "chrome": "#F2F6FA",
+    "iriPink": "#FF8AD8",
+    "iriLime": "#B8FF6A",
+    "text": "#06306E"
+  },
+  "geometry": {
+    "type": "displaced_sphere_blob_and_superellipse_sparkles",
+    "bevelRadius": 0.03,
+    "polyBudget": "mid",
+    "silhouette": "soft_liquid_rounded"
+  },
+  "materials": {
+    "type": "sky_reflecting_chrome_and_iridescent_bubble",
+    "roughness": 0.04,
+    "metalness": 1.0,
+    "iridescence": 0.35,
+    "normalMap": "none"
+  },
+  "lighting": {
+    "archetype": "sky_environment_reflection",
+    "keyLight": { "kelvin": 6500, "intensity": 1.6, "angle": [45, 30, 0] },
+    "rimLight": { "color": "#6AF5FF", "intensity": 0.8 },
+    "environment": "procedural_sky_scene_with_softboxes_and_iridescent_streaks"
+  },
+  "camera": {
+    "type": "playful_orbit_push",
+    "focalLengthMm": 58,
+    "fovDeg": 42,
+    "position": [0, 1.3, 8.6],
+    "motionConstraint": "bobbing_orbit_then_front_settle"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "squash_stretch_impact_and_elastic_morph",
+    "characterCadence": "bouncy_playful"
+  }
+}

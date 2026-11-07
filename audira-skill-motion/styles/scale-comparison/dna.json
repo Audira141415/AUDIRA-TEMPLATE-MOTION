@@ -1,0 +1,67 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "scale-comparison",
+  "styleNumber": 49,
+  "name": "Extreme Scale Comparison & Logarithmic Zoom",
+  "version": "1.0.0",
+  "palette": {
+    "studio": "#F2F4F7",
+    "studioFloor": "#E6EAF0",
+    "space": "#03050B",
+    "ink": "#141A22",
+    "inkLight": "#E8EEF6",
+    "accent": "#FF6B2C",
+    "accentCool": "#3AA8FF",
+    "ocean": "#1D5FA8",
+    "sunCore": "#FFE08A",
+    "sunEdge": "#FF7A1A"
+  },
+  "geometry": {
+    "type": "real_metre_models_under_log_transform",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid",
+    "silhouette": "single_subject_hero_per_decade"
+  },
+  "materials": {
+    "type": "product_cgi_and_procedural_planets",
+    "roughness": 0.55,
+    "metalness": 0.1,
+    "normalMap": "none"
+  },
+  "lighting": {
+    "archetype": "studio_key_to_solar_key",
+    "keyLight": {
+      "kelvin": 5600,
+      "intensity": 2.2,
+      "angle": [
+        45,
+        -35,
+        0
+      ]
+    },
+    "fillLight": {
+      "kelvin": 6500,
+      "intensity": 0.6
+    },
+    "ambientOcclusion": {
+      "intensity": 0.0,
+      "radius": 0.0
+    }
+  },
+  "camera": {
+    "type": "steady_orbit_world_zoom",
+    "focalLengthMm": 38,
+    "fovDeg": 36,
+    "position": [
+      0,
+      1.0,
+      10.4
+    ],
+    "motionConstraint": "camera_orbits_world_scales"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "log_exponent_smootherstep_holds",
+    "characterCadence": "decade_per_1_8_seconds"
+  }
+}

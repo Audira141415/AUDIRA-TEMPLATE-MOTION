@@ -1,0 +1,48 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "needle-felt-wool",
+  "styleNumber": 55,
+  "name": "Needle-Felt Wool & Stitched Fabric Diorama",
+  "version": "1.0.0",
+  "palette": {
+    "skyFelt": "#BFD9E6",
+    "hillFar": "#5E8A55",
+    "hillMid": "#86AE5E",
+    "hillNear": "#B5CF7A",
+    "ground": "#C8B48A",
+    "foxOrange": "#E37A2E",
+    "stitchCream": "#FFF6E3",
+    "text": "#4A2E1E"
+  },
+  "geometry": {
+    "type": "puffy_extruded_felt_and_primitive_puppets",
+    "bevelRadius": 0.1,
+    "polyBudget": "mid",
+    "silhouette": "soft_round_fuzzy"
+  },
+  "materials": {
+    "type": "felt_fibre_sheen_with_fuzz_shells",
+    "roughness": 1.0,
+    "metalness": 0.0,
+    "sheen": 1.0,
+    "normalMap": "fibre_stroke_bump"
+  },
+  "lighting": {
+    "archetype": "cosy_tabletop_warm",
+    "keyLight": { "kelvin": 3400, "intensity": 2.1, "angle": [45, 35, 0] },
+    "rimLight": { "kelvin": 3000, "intensity": 1.2 },
+    "fillLight": { "type": "hemisphere", "intensity": 0.9 }
+  },
+  "camera": {
+    "type": "motion_control_dolly",
+    "focalLengthMm": 55,
+    "fovDeg": 42,
+    "position": [-0.9, 2.4, 8.2],
+    "motionConstraint": "smooth_camera_stepped_puppets"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "stop_motion_on_twos_with_pose_jitter",
+    "characterCadence": "hoppy_gentle"
+  }
+}

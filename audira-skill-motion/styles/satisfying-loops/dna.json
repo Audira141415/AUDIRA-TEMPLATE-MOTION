@@ -1,0 +1,48 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "satisfying-loops",
+  "styleNumber": 50,
+  "name": "Oddly-Satisfying Pastel Studio Loops",
+  "version": "1.0.0",
+  "palette": {
+    "sweepFloor": "#F2C4B8",
+    "sweepWall": "#C9BBEE",
+    "pink": "#FF8DB6",
+    "butter": "#FFD96A",
+    "mint": "#6FD8B0",
+    "sky": "#7FC0F5",
+    "lilac": "#A98BF0",
+    "text": "#4B3F5C"
+  },
+  "geometry": {
+    "type": "precise_primitives_and_extruded_shapes",
+    "bevelRadius": 0.02,
+    "polyBudget": "low",
+    "silhouette": "clean_rounded_geometric"
+  },
+  "materials": {
+    "type": "pastel_clearcoat_plastic_and_matte_sand",
+    "roughness": 0.3,
+    "metalness": 0.0,
+    "clearcoat": 0.8,
+    "normalMap": "sand_grain_bump"
+  },
+  "lighting": {
+    "archetype": "overhead_softbox_cyclorama",
+    "keyLight": { "kelvin": 6000, "intensity": 1.45, "angle": [70, 20, 0] },
+    "fillLight": { "type": "hemisphere", "intensity": 0.55 },
+    "shadows": { "type": "VSM", "radius": 14 }
+  },
+  "camera": {
+    "type": "three_quarter_studio_dolly",
+    "focalLengthMm": 70,
+    "fovDeg": 36,
+    "position": [0, 3.5, 5.6],
+    "motionConstraint": "lateral_station_glide"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "eased_exact_target_damped_settle",
+    "characterCadence": "hypnotic_regular"
+  }
+}

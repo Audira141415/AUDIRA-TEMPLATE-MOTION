@@ -1,0 +1,57 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "comic-book-3d",
+  "styleNumber": 51,
+  "name": "Western Comic Book 3D — Cel-Shaded Ink, Ben-Day Halftone & Panel Flythrough",
+  "kit": "comicforge",
+  "version": "1.0.0",
+  "palette": {
+    "newsprint": "#FFF6E0",
+    "ink": "#121014",
+    "cyan": "#00A3E0",
+    "magenta": "#E5007D",
+    "yellow": "#FFE100",
+    "red": "#ED1C24",
+    "skyTop": "#2B2E8C",
+    "skyLow": "#FF6FB0"
+  },
+  "geometry": {
+    "type": "cel_shaded_primitives_with_inverted_hull",
+    "outlineThickness": 0.035,
+    "polyBudget": "mid",
+    "silhouette": "heroic_action_pose"
+  },
+  "materials": {
+    "type": "halftone_cel_shader",
+    "toneBands": 3,
+    "benDayDotPx@1920": 11,
+    "dotAngleDeg": 45,
+    "roughness": 1.0,
+    "metalness": 0
+  },
+  "lighting": {
+    "archetype": "single_graphic_key",
+    "keyDirection": [
+      0.55,
+      0.75,
+      0.45
+    ],
+    "bandThresholds": [
+      0.3,
+      -0.2
+    ],
+    "toonSpecular": 0.965
+  },
+  "camera": {
+    "type": "panel_flythrough_chase",
+    "fovDeg": 40,
+    "punchInFovDeg": 32,
+    "motionConstraint": "continuous_push_then_chase"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "comic_pop_overshoot",
+    "impactShakeDecay": 5.0,
+    "characterCadence": "punchy_action_beats"
+  }
+}

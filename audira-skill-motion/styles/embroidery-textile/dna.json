@@ -1,0 +1,50 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "embroidery-textile",
+  "styleNumber": 59,
+  "name": "Embroidery, Sulam & Woven Tenun Songket",
+  "kit": "sulamforge",
+  "version": "1.0.0",
+  "palette": {
+    "background": "#140A0E",
+    "linen": "#E4D6BC",
+    "threadCrimson": "#9E1B32",
+    "threadVermilion": "#D8432F",
+    "threadLeaf": "#3E7D4F",
+    "gold": "#E2B04A",
+    "songketPlum": "#4A0F24",
+    "text": "#F7EADB"
+  },
+  "geometry": {
+    "type": "macro_hoop_with_instanced_stitches",
+    "bevelRadius": 0.0,
+    "polyBudget": "mid_instanced_640_stitches",
+    "silhouette": "round_hoop_and_satin_fills"
+  },
+  "materials": {
+    "type": "silk_sheen_and_metallic_gold",
+    "roughness": 0.42,
+    "metalness": 0.0,
+    "normalMap": "linen_weave_bump"
+  },
+  "lighting": {
+    "archetype": "warm_studio_with_glint_sweep",
+    "keyLight": { "kelvin": 3600, "intensity": 1.55, "angle": [55, -45, 0], "shadow": "pcf_soft_2048" },
+    "fillLight": { "kelvin": 4200, "intensity": 0.4, "type": "hemisphere" },
+    "rimLight": { "kelvin": 8000, "intensity": 0.7 },
+    "sweep": { "kelvin": 4000, "intensity": 7, "travel": "x -2.2 to 2.2, 8.6-11.2 s" },
+    "environment": { "type": "pmrem_room", "intensity": 0.35 }
+  },
+  "camera": {
+    "type": "macro_needle_tracking_to_reveal",
+    "focalLengthMm": 70,
+    "fovDeg": 30,
+    "position": [0.45, 0.46, 0.4],
+    "motionConstraint": "track_tip_then_rise"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "stitch_by_stitch_growth",
+    "characterCadence": "patient_accelerating"
+  }
+}

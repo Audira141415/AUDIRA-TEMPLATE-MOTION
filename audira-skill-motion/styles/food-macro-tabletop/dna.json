@@ -1,0 +1,48 @@
+{
+  "$schema": "https://audira.io/schemas/visual-dna.v1.json",
+  "styleId": "food-macro-tabletop",
+  "styleNumber": 45,
+  "name": "Macro Food Commercial Tabletop",
+  "version": "1.0.0",
+  "palette": {
+    "backdrop": "#140C08",
+    "walnut": "#4A2A16",
+    "broth": "#C9852F",
+    "noodle": "#F2D27A",
+    "yolk": "#F59B1B",
+    "scallion": "#5FB43C",
+    "chiliOil": "#E0461B",
+    "text": "#FFF4E2"
+  },
+  "geometry": {
+    "type": "lathe_dishware_and_tube_food",
+    "bevelRadius": 0.01,
+    "polyBudget": "mid",
+    "silhouette": "round_organic"
+  },
+  "materials": {
+    "type": "glossy_food_pbr",
+    "roughness": 0.2,
+    "metalness": 0.0,
+    "clearcoat": 0.8,
+    "normalMap": "none_procedural_canvas_maps"
+  },
+  "lighting": {
+    "archetype": "tungsten_key_hot_backlight",
+    "keyLight": { "kelvin": 3200, "intensity": 2.3, "angle": [40, 40, 0] },
+    "rimLight": { "kelvin": 2800, "intensity": 34, "type": "spot_backlight" },
+    "fillLight": { "kelvin": 7000, "intensity": 0.35 }
+  },
+  "camera": {
+    "type": "slow_orbit_push_in",
+    "focalLengthMm": 65,
+    "fovDeg": 40,
+    "position": [0, 2.2, 4.4],
+    "motionConstraint": "orbit_then_push"
+  },
+  "motion": {
+    "fps": 60,
+    "physicsModel": "slow_motion_drop_damped_bounce",
+    "characterCadence": "luxurious_slow"
+  }
+}
